@@ -46,9 +46,9 @@ export default {
 };
 
 export const Contactpersons = () => {
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("v2/subscriptions/all").reply(200, []);
+    mock.onGet("subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("subscriptions/all").reply(200, []);
     mock.onGet(/crm\/contacts\/.*/).reply(200, contactPersons);
 
     const form = createForm({ organisation: Organisation, contact_persons: ContactPerson });
@@ -72,8 +72,8 @@ export const ServicePort = () => {
 };
 
 export const Corelink = () => {
-    mock.onGet("v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, allNodeSubscriptions);
-    mock.onGet("v2/subscriptions?filter=tags,Node,statuses,active-provisioning").reply(200, allNodeSubscriptions);
+    mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, allNodeSubscriptions);
+    mock.onGet("subscriptions?filter=tags,Node,statuses,active-provisioning").reply(200, allNodeSubscriptions);
     mock.onGet(/ims\/free_ports\/.*\/10000\/all/).reply(200, corelinkPorts10G);
 
     const form = createForm({
@@ -85,7 +85,7 @@ export const Corelink = () => {
 };
 
 export const CorelinkAddLink = () => {
-    mock.onGet("v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, allNodeSubscriptions);
+    mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, allNodeSubscriptions);
     mock.onGet(/ims\/free_ports\/.*\/10000\/all/).reply(200, freeCorelinkPorts);
 
     const form = createForm({
@@ -109,9 +109,9 @@ CorelinkAddLink.story = {
 };
 
 export const Nodes = () => {
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("v2/subscriptions/all").reply(200, allNodeSubscriptions);
+    mock.onGet("subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("subscriptions/all").reply(200, allNodeSubscriptions);
     mock.onGet("ims/nodes/MT001A/PL").reply(200, imsNodes);
 
     const form = createForm({
@@ -122,16 +122,16 @@ export const Nodes = () => {
 };
 
 export const Sn7PortselectAllOrganisations = () => {
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(
         200,
         SN7PortSubscriptions.filter(p => p.status === "active")
     );
-    mock.onGet("v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL,statuses,active").reply(
+    mock.onGet("subscriptions/ports?filter=tags,MSP-SSP-MSPNL,statuses,active").reply(
         200,
         SN7PortSubscriptions.filter(p => p.status === "active")
     );
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("v2/subscriptions/all").reply(200, []);
+    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("subscriptions/all").reply(200, []);
     mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
     loadVlanMocks();
 
@@ -149,12 +149,12 @@ Sn7PortselectAllOrganisations.story = {
 };
 
 export const Sn7PortselectMspOnly = () => {
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CMSP-MSPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("subscriptions/ports?filter=tags%2CMSP-MSPNL%2Cstatuses%2Cactive").reply(
         200,
         SN7PortSubscriptions.filter(p => p.status === "active").filter(p => ["MSP", "MSPNL"].includes(p.product.tag))
     );
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive", []);
-    mock.onGet("v2/subscriptions/all", []);
+    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive", []);
+    mock.onGet("subscriptions/all", []);
     mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
     loadVlanMocks();
 
@@ -172,12 +172,12 @@ Sn7PortselectMspOnly.story = {
 };
 
 export const Sn7PortselectSelectedOrganisation = () => {
-    mock.onGet("/api/v2/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("/api/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(
         200,
         SN7PortSubscriptions.filter(p => p.status === "active")
     );
-    mock.onGet("/api/v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("/api/v2/subscriptions/all").reply(200, []);
+    mock.onGet("/api/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("/api/subscriptions/all").reply(200, []);
     mock.onGet("glob:*/api/subscriptions/parent_subscriptions/*").reply(200, []);
     loadVlanMocks();
 
@@ -200,12 +200,12 @@ Sn7PortselectSelectedOrganisation.story = {
 };
 
 export const Sn7PortselectBandwidth = () => {
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(
         200,
         SN7PortSubscriptions.filter(p => p.status === "active")
     );
-    mock.onGet("/api/v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("/api/v2/subscriptions/all").reply(200, []);
+    mock.onGet("/api/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("/api/subscriptions/all").reply(200, []);
     mock.onGet("glob:*/api/subscriptions/parent_subscriptions/*").reply(200, []);
     mock.onGet(/fixed_inputs\/port_speed_by_subscription_id\/.*/).reply(200, [1000]);
     loadVlanMocks();
@@ -235,12 +235,12 @@ Sn7PortselectBandwidth.story = {
 };
 
 export const Sn8PortselectAllOrganisations = () => {
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
         200,
         SN8PortSubscriptions.filter(p => p.status === "active")
     );
-    mock.onGet("v2/subscriptions/all").reply(200, []);
+    mock.onGet("subscriptions/all").reply(200, []);
     mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
     loadVlanMocks();
 
@@ -262,13 +262,13 @@ Sn8PortselectAllOrganisations.story = {
 };
 
 export const Sn8PortselectTagged = () => {
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
         200,
         SN8PortSubscriptions.filter(p => p.status === "active")
             .filter(p => ["SP", "SPNL"].includes(p.product.tag))
             .filter(p => p.port_mode === "tagged")
     );
-    mock.onGet("v2/subscriptions/all").reply(200, []);
+    mock.onGet("subscriptions/all").reply(200, []);
     mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
     loadVlanMocks();
 
@@ -286,13 +286,13 @@ Sn8PortselectTagged.story = {
 };
 
 export const Sn8PortselectUntagged = () => {
-    mock.onGet("/api/v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("/api/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
         200,
         SN8PortSubscriptions.filter(p => p.status === "active")
             .filter(p => ["SP", "SPNL"].includes(p.product.tag))
             .filter(p => p.port_mode === "untagged")
     );
-    mock.onGet("/api/v2/subscriptions/all").reply(200, []);
+    mock.onGet("/api/subscriptions/all").reply(200, []);
     mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
     loadVlanMocks();
 
@@ -310,11 +310,11 @@ Sn8PortselectUntagged.story = {
 };
 
 export const Sn8PortselectSelectedOrganisation = () => {
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP%2Cstatuses%2Cactive").reply(
+    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP%2Cstatuses%2Cactive").reply(
         200,
         SN8PortSubscriptions.filter(p => p.status === "active")
     );
-    mock.onGet("v2/subscriptions/all").reply(200, []);
+    mock.onGet("subscriptions/all").reply(200, []);
     mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
     loadVlanMocks();
 

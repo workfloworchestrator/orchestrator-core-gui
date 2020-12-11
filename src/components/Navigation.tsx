@@ -41,7 +41,7 @@ const Navigation = () => {
     const location = useLocation();
     const spinnerTarget = useRef();
     const spinnerElement = useRef<Spinner>();
-    const navItems = ["processes", "subscriptions", "metadata", "validations", "tasks", "prefixes", "settings"];
+    const navItems = ["processes", "subscriptions", "metadata", "tasks", "prefixes", "settings"];
     const [isModalVisible, setIsModalVisible] = useState(false);
     const closeModal = () => setIsModalVisible(false);
     const showModal = () => setIsModalVisible(true);

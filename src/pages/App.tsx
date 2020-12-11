@@ -43,7 +43,6 @@ import SubscriptionDetailPage from "pages/SubscriptionDetailPage";
 import SubscriptionsPage from "pages/Subscriptions";
 import Tasks from "pages/Tasks";
 import TerminateSubscription from "pages/TerminateSubscription";
-import Validations from "pages/Validations";
 import React from "react";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { QueryParamProvider } from "use-query-params";
@@ -178,15 +177,6 @@ class App extends React.PureComponent<{}, IState> {
                             <Switch>
                                 <Route exact path="/authorize" render={() => <Redirect to="/" />} />
                                 <Route exact path="/" render={() => <Redirect to="/processes" />} />
-                                <Route
-                                    exact
-                                    path="/validations"
-                                    render={() => <Redirect to="/validations/workflows" />}
-                                />
-                                <ProtectedRoute
-                                    path="/validations/:type"
-                                    render={props => <Validations {...props} />}
-                                />
                                 <ProtectedRoute
                                     path="/new-process"
                                     render={props => (

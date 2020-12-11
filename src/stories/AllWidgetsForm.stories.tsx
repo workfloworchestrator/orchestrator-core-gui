@@ -38,43 +38,43 @@ function prepare() {
     mock.onGet("ipam/prefix_filters").reply(200, [{ id: 1, prefix: "10.0.0.0/8", version: 4 }]);
     mock.onGet("ipam/ip_blocks/1").reply(200, IP_BLOCKS);
     mock.onGet("ipam/free_subnets/10.0.0.0/24/25").reply(200, ["10.0.0.0/25"]);
-    mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, { allNodeSubscriptions });
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CMSP-MSPNL-SSP%2Cstatuses%2Cactive").reply(
+    mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, { allNodeSubscriptions });
+    mock.onGet("subscriptions/ports?filter=tags%2CMSP-MSPNL-SSP%2Cstatuses%2Cactive").reply(
         200,
         SN7PortSubscriptions.filter(p => p.status === "active").filter(p =>
             ["MSP", "MSPNL", "SSP"].includes(p.product.tag)
         )
     );
-    mock.onGet("v2/subscriptions?filter=tags%2CIP_PREFIX%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CMSP-MSPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("subscriptions?filter=tags%2CIP_PREFIX%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("subscriptions/ports?filter=tags%2CMSP-MSPNL%2Cstatuses%2Cactive").reply(
         200,
         SN7PortSubscriptions.filter(p => p.status === "active").filter(p => ["MSP", "MSPNL"].includes(p.product.tag))
     );
-    mock.onGet("v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive").reply(
+    mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive").reply(
         200,
         SN8PortSubscriptions.filter(p => ["active"].includes(p.status)).filter(p => ["Node"].includes(p.product.tag))
     );
-    mock.onGet("v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(
+    mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(
         200,
         SN8PortSubscriptions.filter(p => ["active", "provisioning"].includes(p.status)).filter(p =>
             ["Node"].includes(p.product.tag)
         )
     );
-    mock.onGet("v2/subscriptions?filter=tags%2CIPS%2Cstatuses%2Cactive-provisioning").reply(
+    mock.onGet("subscriptions?filter=tags%2CIPS%2Cstatuses%2Cactive-provisioning").reply(
         200,
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPS"].includes(p.product.tag))
     );
-    mock.onGet("v2/subscriptions?filter=tags%2CIPBGP%2Cstatuses%2Cactive-provisioning").reply(
+    mock.onGet("subscriptions?filter=tags%2CIPBGP%2Cstatuses%2Cactive-provisioning").reply(
         200,
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPBGP"].includes(p.product.tag))
     );
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP-AGGSPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP-AGGSPNL%2Cstatuses%2Cactive").reply(
         200,
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p =>
             ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"].includes(p.product.tag)
         )
     );
-    mock.onGet("v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
         200,
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["SP", "SPNL"].includes(p.product.tag))
     );
@@ -87,7 +87,7 @@ function prepare() {
     mock.onGet("ims/nodes/Asd001a/PL").reply(200, imsNodes);
     mock.onGet("subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653").reply(200, SUBSCRIPTION_JSON);
     mock.onGet("subscriptions/e89776be-16c3-4bee-af98-8e73bf6492a7").reply(200, SUBSCRIPTION_JSON);
-    mock.onGet("v2/subscriptions/workflows/e89776be-16c3-4bee-af98-8e73bf6492a7").reply(200, {
+    mock.onGet("subscriptions/workflows/e89776be-16c3-4bee-af98-8e73bf6492a7").reply(200, {
         create: [{ description: "Create SN8 IP BGP", name: "create_sn8_ip_bgp" }],
         modify: [
             { description: "Change port", name: "modify_sn8_ip_bgp_change_port" },

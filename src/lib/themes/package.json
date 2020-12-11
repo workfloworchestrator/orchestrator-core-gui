@@ -12,7 +12,7 @@
         "build:watch": "webpack --watch && rm main.js"
     },
     "devDependencies": {
-        "@elastic/eui": "^29.4.0",
+        "@elastic/eui": "^30.5.1",
         "dart-sass": "^1.25.0",
         "sass-loader": "^10.0.2",
         "webpack": "^4.44.1",

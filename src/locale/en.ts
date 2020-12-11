@@ -504,8 +504,6 @@ I18n.translations.en = {
         workflow: "Process instance of workflow {{name}}"
     },
     process_state: {
-        copy: "Copy to clipboard",
-        copied: "Copied",
         raw: "Show raw JSON",
         details: "Show details",
         stateChanges: "Show state input",
@@ -706,6 +704,7 @@ I18n.translations.en = {
         no_process_link_text: "This subscription has NOT been created by a workflow or the Process has been deleted.",
         ims_services: "IMS Services",
         link_subscription: "Show Subscription",
+        network_diagrams: "Network diagram",
         product: {
             name: "Name",
             description: "Description",
@@ -1114,6 +1113,7 @@ I18n.translations.en = {
         reset_subscription_description: "Reset description of a SURFnet7 subscription to default",
 
         validate_core_link: "Validate Core Link",
+        validate_firewall: "Validate Firewall",
         validate_ip_prefix: "Validate IP Prefix",
         validate_sn7_light_path: "Validate SN7 Light Path",
         validate_node: "Validate Node",
@@ -1140,7 +1140,7 @@ I18n.translations.en = {
         preferences: {
             edit: "Edit table preferences",
             reset: "Reset table preferences to defaults",
-            autorefresh: "Set autorefresh delay in milliseconds",
+            autorefresh: "Set autorefresh delay in milliseconds:",
             norefresh: "Autorefresh disabled",
             refresh: "Autorefresh for {{delay}}ms",
             hidden_columns: "Show/Hide columns:",

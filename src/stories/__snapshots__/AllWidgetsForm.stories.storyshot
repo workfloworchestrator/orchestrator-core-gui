@@ -12813,6 +12813,11 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
+                      style={
+                        Object {
+                          "minWidth": undefined,
+                        }
+                      }
                       type="button"
                     >
                       <span
@@ -12833,6 +12838,11 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                   <button
                     className="euiButton euiButton--primary euiButton--fill"
                     id="button-submit-form-submit"
+                    style={
+                      Object {
+                        "minWidth": undefined,
+                      }
+                    }
                     tabIndex={0}
                     type="submit"
                   >

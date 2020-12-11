@@ -14,15 +14,15 @@
  */
 
 import axios from "axios";
-import { ENV } from "env";
 import { User } from "oidc-client";
 
+import { ENV } from "../env";
 import mySpinner from "../lib/Spin";
 import { setFlash } from "../utils/Flash";
 
 let calls = 0;
-
 const apiPath = ENV.BACKEND_URL + "/api/";
+
 // basic configuration for axios.
 // the 'Authorization' header is set in
 // index.ts:setUser

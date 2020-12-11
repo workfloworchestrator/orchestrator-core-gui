@@ -350,7 +350,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                     columns={columns}
                     initialState={initialState as TableState<ProcessV2>}
                     persistSettings={persistSettings}
-                    endpoint={"processes"}
+                    endpoint={"processes/"}
                     initialTableSettings={initialTableSettings}
                     extraRowPropGetter={extraRowPropGetter}
                     renderSubComponent={renderSubComponent}

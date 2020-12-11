@@ -157,7 +157,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
         const { subscription_id } = row.values;
         return (
             <div className={"expanded-row"}>
-                <SubscriptionDetail subscriptionId={subscription_id}></SubscriptionDetail>
+                <SubscriptionDetail subscriptionId={subscription_id} />
             </div>
         );
     }, []);
@@ -296,7 +296,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                     columns={columns}
                     initialState={initialState as TableState<Subscription>}
                     persistSettings={persistSettings}
-                    endpoint={"subscriptions"}
+                    endpoint={"subscriptions/"}
                     initialTableSettings={initialTableSettings}
                     extraRowPropGetter={extraRowPropGetter}
                     renderSubComponent={renderSubComponent}

@@ -75,7 +75,7 @@ export const Settings: SFC = (props: IProps) => {
             title: I18n.t("settings.status.status"),
             description: engineStatus ? (
                 <>
-                    <EuiIcon type="dot" color={engineStatus?.global_status === "RUNNING" ? "#33cd2e" : "#da6903"} />
+                    <EuiIcon type="dot" color={engineStatus?.global_status === "RUNNING" ? "success" : "warning"} />
                     <span>{engineStatus?.global_status.toString() || ""}</span>
                 </>
             ) : (

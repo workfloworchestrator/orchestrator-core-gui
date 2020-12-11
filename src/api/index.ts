@@ -20,7 +20,6 @@ import {
     Dienstafname,
     EngineStatus,
     FixedInputConfiguration,
-    FixedInputValidation,
     IMSNode,
     IMSPort,
     IMSService,
@@ -104,7 +103,7 @@ function axiosFetch<R = {}>(
 
 //API metadata
 export function products(): Promise<Product[]> {
-    return fetchJson("products");
+    return fetchJson("products/");
 }
 
 export function productTags(): Promise<string[]> {
@@ -132,7 +131,7 @@ export function deleteProduct(id: string): Promise<null> {
 }
 
 export function productBlocks(): Promise<ProductBlock[]> {
-    return fetchJson("product_blocks");
+    return fetchJson("product_blocks/");
 }
 
 export function productBlockById(id: string): Promise<ProductBlock> {
@@ -154,7 +153,7 @@ export function deleteProductBlock(id: string) {
 }
 
 export function resourceTypes(): Promise<ResourceType[]> {
-    return fetchJson("resource_types");
+    return fetchJson("resource_types/");
 }
 
 export function resourceType(id: string) {
@@ -177,7 +176,7 @@ export function deleteResourceType(id: string) {
 
 //API
 export function allSubscriptions(): Promise<Subscription[]> {
-    return fetchJson(`v2/subscriptions/all`);
+    return fetchJson(`subscriptions/all`);
 }
 
 export function paginatedSubscriptions(
@@ -185,7 +184,7 @@ export function paginatedSubscriptions(
     sort = "start_date,desc",
     filter: string
 ): Promise<Subscription[]> {
-    return fetchJson(`v2/subscriptions?range=${range}&sort=${sort}&filter=${filter}`);
+    return fetchJson(`subscriptions?range=${range}&sort=${sort}&filter=${filter}`);
 }
 
 export function subscriptionsDetailWithModel(subscription_id: string): Promise<SubscriptionModel> {
@@ -219,7 +218,7 @@ export function portSubscriptions(
 
     if (filters.length) params.set("filter", filters.join(","));
 
-    return fetchJson(`v2/subscriptions/ports${filters.length ? "?" : ""}${params.toString()}`);
+    return fetchJson(`subscriptions/ports${filters.length ? "?" : ""}${params.toString()}`);
 }
 
 export function subscriptions(
@@ -239,19 +238,15 @@ export function subscriptions(
 
     if (filters.length) params.set("filter", filters.join(","));
 
-    return fetchJson(`v2/subscriptions${filters.length ? "?" : ""}${params.toString()}`);
-}
-
-export function subscriptionsByProductType(type: string) {
-    return fetchJson(`subscriptions/product_type/${type}`);
+    return fetchJson(`subscriptions${filters.length ? "?" : ""}${params.toString()}`);
 }
 
 export function subscriptionWorkflows(subscription_id: string): Promise<WorkflowReasons> {
-    return fetchJson(`v2/subscriptions/workflows/${subscription_id}`);
+    return fetchJson(`subscriptions/workflows/${subscription_id}`);
 }
 
 export function subscriptionsByProductId(productId: string): Promise<Subscription[]> {
-    return fetchJson(`subscriptions/product/${productId}`);
+    return fetchJson(`subscriptions/product${productId}`);
 }
 
 export function organisations(): Promise<Organization[] | undefined> {
@@ -349,11 +344,11 @@ export function locationCodes(): Promise<string[] | undefined> {
 }
 
 export function assignees(): Promise<string[]> {
-    return fetchJson("v2/processes/assignees");
+    return fetchJson("processes/assignees");
 }
 
 export function processStatuses(): Promise<string[]> {
-    return axiosFetch("v2/processes/statuses");
+    return axiosFetch("processes/statuses");
 }
 
 export function allWorkflows(): Promise<Workflow[]> {
@@ -370,18 +365,6 @@ export function allWorkflowsWithProductTags(): Promise<WorkflowWithProductTags[]
 
 export function workflowsByTarget(target: string): Promise<Workflow[]> {
     return fetchJson(`workflows?target=${target}`);
-}
-
-export function invalidSubscriptions(workflowKey: string): Promise<Subscription[]> {
-    return fetchJson(`subscriptions/invalid_subscriptions/${workflowKey}`);
-}
-
-export function fetchPortSpeedBySubscription(subscriptionId: string): Promise<string> {
-    return fetchJson(`fixed_inputs/port_speed_by_subscription_id/${subscriptionId}`);
-}
-
-export function fetchServiceSpeedByProduct(productId: string) {
-    return fetchJson(`fixed_inputs/service_speed_by_product_id/${productId}`);
 }
 
 export function deleteSubscription(subscriptionId: string) {
@@ -454,14 +437,6 @@ export function fixedInputConfiguration(): Promise<FixedInputConfiguration> {
     return fetchJson("fixed_inputs/configuration");
 }
 
-export function validations(): Promise<ProductValidation[]> {
-    return fetchJson("products/validations");
-}
-
-export function fixedInputValidations(): Promise<FixedInputValidation[]> {
-    return fetchJson("fixed_inputs/validations");
-}
-
 export function validation(productId: string): Promise<ProductValidation> {
     return fetchJson(`products/${productId}/validate`);
 }
@@ -477,27 +452,23 @@ export function reportError(error: {}) {
 }
 
 export function clearCache(name: string) {
-    return postPutJson(`v2/settings/cache/${name}`, {}, "delete", true, false);
+    return postPutJson(`settings/cache/${name}`, {}, "delete", true, false);
 }
 
 export function getGlobalStatus(): Promise<EngineStatus> {
-    return fetchJson("v2/settings/status", {}, {}, false, true);
+    return fetchJson("settings/status", {}, {}, false, true);
 }
 
 export function setGlobalStatus(new_global_lock: boolean) {
-    return postPutJson("v2/settings/status", { global_lock: new_global_lock }, "put");
+    return postPutJson("settings/status", { global_lock: new_global_lock }, "put");
 }
 
 export function logUserInfo(username: string, message: string) {
     return postPutJson(`user/log/${username}`, { message: message }, "post", true, false);
 }
 
-export function ping() {
-    return fetchJson("user/ping");
-}
-
 export function dienstafnameBySubscription(subscriptionId: string): Promise<Dienstafname | undefined> {
-    return fetchJson<Dienstafname>(`v2/crm/dienstafname/${subscriptionId}`, {}, {}, false).catch(err =>
+    return fetchJson<Dienstafname>(`crm/dienstafname/${subscriptionId}`, {}, {}, false).catch(err =>
         Promise.resolve(undefined)
     );
 }

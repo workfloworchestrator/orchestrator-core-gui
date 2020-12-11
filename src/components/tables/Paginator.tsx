@@ -16,7 +16,6 @@
 import "components/tables/Paginator.scss";
 
 import {
-    EuiButton,
     EuiButtonEmpty,
     EuiContextMenuItem,
     EuiContextMenuPanel,
@@ -51,9 +50,7 @@ function Paginator({
     setPageSize
 }: IPaginatorProps) {
     // page switchint
-    const [activePage, setActivePage] = useState(0);
     const switchPage = (pageNumber: number) => {
-        setActivePage(pageNumber);
         gotoPage(pageNumber);
     };
 
@@ -85,28 +82,6 @@ function Paginator({
 
     return (
         <EuiFlexGroup className="paginator">
-            <EuiFlexItem grow={1}>
-                <EuiFlexGroup>
-                    <EuiFlexItem>
-                        <EuiButton
-                            onClick={() => gotoPage(0)}
-                            color="primary"
-                            disabled={!canPreviousPage}
-                            fill
-                            iconType="sortLeft"
-                        />
-                    </EuiFlexItem>
-                    <EuiFlexItem>
-                        <EuiButton
-                            onClick={() => previousPage()}
-                            color="primary"
-                            disabled={!canPreviousPage}
-                            fill
-                            iconType="arrowLeft"
-                        />
-                    </EuiFlexItem>
-                </EuiFlexGroup>
-            </EuiFlexItem>
             <EuiFlexItem grow={10} className="paginator-center">
                 <EuiFlexGroup justifyContent="spaceAround">
                     <EuiFlexItem grow={false}>
@@ -115,7 +90,7 @@ function Paginator({
                                 <EuiPagination
                                     aria-label="pagination"
                                     pageCount={pageOptions.length}
-                                    activePage={activePage}
+                                    activePage={pageIndex}
                                     onPageClick={activePage => switchPage(activePage)}
                                 />
                             </EuiFlexItem>
@@ -130,28 +105,6 @@ function Paginator({
                                 </EuiPopover>
                             </EuiFlexItem>
                         </EuiFlexGroup>
-                    </EuiFlexItem>
-                </EuiFlexGroup>
-            </EuiFlexItem>
-            <EuiFlexItem grow={1}>
-                <EuiFlexGroup>
-                    <EuiFlexItem>
-                        <EuiButton
-                            onClick={() => nextPage()}
-                            color="primary"
-                            disabled={!canNextPage}
-                            fill
-                            iconType="arrowRight"
-                        />
-                    </EuiFlexItem>
-                    <EuiFlexItem>
-                        <EuiButton
-                            onClick={() => gotoPage(pageOptions.length - 1)}
-                            color="primary"
-                            disabled={!canNextPage}
-                            fill
-                            iconType="sortRight"
-                        />
                     </EuiFlexItem>
                 </EuiFlexGroup>
             </EuiFlexItem>

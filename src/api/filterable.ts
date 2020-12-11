@@ -14,12 +14,12 @@
  */
 
 import axios from "axios";
-import { ENV } from "env";
 import { SortingRule } from "react-table";
 import { setFlash } from "utils/Flash";
 import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";
 import { FilterArgument } from "utils/types";
 
+import { ENV } from "../env";
 import axiosInstance from "./axios";
 
 export const cancel = axios.CancelToken.source();
@@ -72,7 +72,7 @@ export function filterableEndpoint<T>(
     return axiosInstance
         .get(path, {
             headers: requestHeaders,
-            baseURL: ENV.BACKEND_URL + "/api/v2/",
+            baseURL: ENV.BACKEND_URL + "/api/",
             params,
             validateStatus: (status: number) => (status >= 200 && status < 300) || status === 304,
             cancelToken: cancel.token

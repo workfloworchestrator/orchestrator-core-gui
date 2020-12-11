@@ -26,7 +26,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
       </section>
       <section>
         <div
-          className="euiPanel euiPanel--paddingMedium"
+          className="euiPanel euiPanel--paddingMedium euiPanel--borderRadiusMedium euiPanel--plain euiPanel--shadow"
         >
           <section
             className="process-actions"
@@ -41,6 +41,11 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   className="euiButton euiButton--secondary euiButton--fill"
                   id="retry"
                   onClick={[Function]}
+                  style={
+                    Object {
+                      "minWidth": undefined,
+                    }
+                  }
                   type="button"
                 >
                   <span
@@ -76,6 +81,11 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   className="euiButton euiButton--danger euiButton--fill"
                   id="abort"
                   onClick={[Function]}
+                  style={
+                    Object {
+                      "minWidth": undefined,
+                    }
+                  }
                   type="button"
                 >
                   <span
@@ -110,6 +120,11 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <button
                   className="euiButton euiButton--primary"
                   onClick={[Function]}
+                  style={
+                    Object {
+                      "minWidth": undefined,
+                    }
+                  }
                   type="button"
                 >
                   <span
@@ -144,6 +159,11 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <button
                   className="euiButton euiButton--primary"
                   onClick={[Function]}
+                  style={
+                    Object {
+                      "minWidth": undefined,
+                    }
+                  }
                   type="button"
                 >
                   <span
@@ -179,6 +199,11 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <button
                   className="euiButton euiButton--primary"
                   onClick={[Function]}
+                  style={
+                    Object {
+                      "minWidth": undefined,
+                    }
+                  }
                   type="button"
                 >
                   <span
@@ -233,30 +258,24 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   className="toggle-details"
                 >
                   <div
-                    className="checkbox"
+                    className="euiCheckbox"
                   >
                     <input
+                      aria-label="toggle-details"
                       checked={true}
+                      className="euiCheckbox__input"
                       disabled={false}
-                      id="details"
+                      id="show-details-toggle"
                       name="details"
                       onChange={[Function]}
                       type="checkbox"
                     />
+                    <div
+                      className="euiCheckbox__square"
+                    />
                     <label
-                      htmlFor="details"
-                    >
-                      <span
-                        tabIndex={0}
-                      >
-                        <i
-                          className="fa fa-check"
-                        />
-                      </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="details"
+                      className="euiCheckbox__label"
+                      htmlFor="show-details-toggle"
                     >
                       Show details
                     </label>
@@ -266,30 +285,24 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   className="toggle-state-changes"
                 >
                   <div
-                    className="checkbox"
+                    className="euiCheckbox"
                   >
                     <input
+                      aria-label="toggle-state-delta"
                       checked={true}
+                      className="euiCheckbox__input"
                       disabled={false}
-                      id="state-changes"
+                      id="show-state-delta-toggle"
                       name="state-changes"
                       onChange={[Function]}
                       type="checkbox"
                     />
+                    <div
+                      className="euiCheckbox__square"
+                    />
                     <label
-                      htmlFor="state-changes"
-                    >
-                      <span
-                        tabIndex={0}
-                      >
-                        <i
-                          className="fa fa-check"
-                        />
-                      </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="state-changes"
+                      className="euiCheckbox__label"
+                      htmlFor="show-state-delta-toggle"
                     >
                       Show state input
                     </label>
@@ -297,30 +310,24 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 </li>
                 <li>
                   <div
-                    className="checkbox"
+                    className="euiCheckbox"
                   >
                     <input
+                      aria-label="toggle-raw-json"
                       checked={false}
+                      className="euiCheckbox__input"
                       disabled={false}
-                      id="raw"
+                      id="show-raw-json-toggle"
                       name="raw"
                       onChange={[Function]}
                       type="checkbox"
                     />
+                    <div
+                      className="euiCheckbox__square"
+                    />
                     <label
-                      htmlFor="raw"
-                    >
-                      <span
-                        tabIndex={0}
-                      >
-                        <i
-                          className="fa fa-check"
-                        />
-                      </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="raw"
+                      className="euiCheckbox__label"
+                      htmlFor="show-raw-json-toggle"
                     >
                       Show raw JSON
                     </label>
@@ -328,30 +335,24 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 </li>
                 <li>
                   <div
-                    className="checkbox"
+                    className="euiCheckbox"
                   >
                     <input
+                      aria-label="toggle-traceback"
                       checked={false}
+                      className="euiCheckbox__input"
                       disabled={false}
-                      id="traceback"
+                      id="show-traceback-toggle"
                       name="traceback"
                       onChange={[Function]}
                       type="checkbox"
                     />
+                    <div
+                      className="euiCheckbox__square"
+                    />
                     <label
-                      htmlFor="traceback"
-                    >
-                      <span
-                        tabIndex={0}
-                      >
-                        <i
-                          className="fa fa-check"
-                        />
-                      </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="traceback"
+                      className="euiCheckbox__label"
+                      htmlFor="show-traceback-toggle"
                     >
                       Show traceback
                     </label>
@@ -2358,7 +2359,7 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
       </section>
       <section>
         <div
-          className="euiPanel euiPanel--paddingMedium"
+          className="euiPanel euiPanel--paddingMedium euiPanel--borderRadiusMedium euiPanel--plain euiPanel--shadow"
         >
           <section
             className="header-info"
@@ -2413,6 +2414,11 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
                         className="euiButton euiButton--warning"
                         id="button-cancel-form-submit"
                         onClick={[Function]}
+                        style={
+                          Object {
+                            "minWidth": undefined,
+                          }
+                        }
                         type="button"
                       >
                         <span
@@ -2433,6 +2439,11 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
                     <button
                       className="euiButton euiButton--primary euiButton--fill"
                       id="button-submit-form-submit"
+                      style={
+                        Object {
+                          "minWidth": undefined,
+                        }
+                      }
                       tabIndex={0}
                       type="submit"
                     >
@@ -2540,7 +2551,7 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
       </section>
       <section>
         <div
-          className="euiPanel euiPanel--paddingMedium"
+          className="euiPanel euiPanel--paddingMedium euiPanel--borderRadiusMedium euiPanel--plain euiPanel--shadow"
         >
           <section
             className="header-info"
@@ -2595,6 +2606,11 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
                         className="euiButton euiButton--warning"
                         id="button-cancel-form-submit"
                         onClick={[Function]}
+                        style={
+                          Object {
+                            "minWidth": undefined,
+                          }
+                        }
                         type="button"
                       >
                         <span
@@ -2615,6 +2631,11 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
                     <button
                       className="euiButton euiButton--primary euiButton--fill"
                       id="button-submit-form-submit"
+                      style={
+                        Object {
+                          "minWidth": undefined,
+                        }
+                      }
                       tabIndex={0}
                       type="submit"
                     >
@@ -2715,7 +2736,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
       </section>
       <section>
         <div
-          className="euiPanel euiPanel--paddingMedium"
+          className="euiPanel euiPanel--paddingMedium euiPanel--borderRadiusMedium euiPanel--plain euiPanel--shadow"
         >
           <section
             className="process-actions"
@@ -2730,6 +2751,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   className="euiButton euiButton--secondary euiButton--fill"
                   id="retry"
                   onClick={[Function]}
+                  style={
+                    Object {
+                      "minWidth": undefined,
+                    }
+                  }
                   type="button"
                 >
                   <span
@@ -2765,6 +2791,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   className="euiButton euiButton--danger euiButton--fill"
                   id="abort"
                   onClick={[Function]}
+                  style={
+                    Object {
+                      "minWidth": undefined,
+                    }
+                  }
                   type="button"
                 >
                   <span
@@ -2799,6 +2830,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <button
                   className="euiButton euiButton--primary"
                   onClick={[Function]}
+                  style={
+                    Object {
+                      "minWidth": undefined,
+                    }
+                  }
                   type="button"
                 >
                   <span
@@ -2833,6 +2869,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <button
                   className="euiButton euiButton--primary"
                   onClick={[Function]}
+                  style={
+                    Object {
+                      "minWidth": undefined,
+                    }
+                  }
                   type="button"
                 >
                   <span
@@ -2868,6 +2909,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <button
                   className="euiButton euiButton--primary"
                   onClick={[Function]}
+                  style={
+                    Object {
+                      "minWidth": undefined,
+                    }
+                  }
                   type="button"
                 >
                   <span
@@ -2922,30 +2968,24 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   className="toggle-details"
                 >
                   <div
-                    className="checkbox"
+                    className="euiCheckbox"
                   >
                     <input
+                      aria-label="toggle-details"
                       checked={true}
+                      className="euiCheckbox__input"
                       disabled={false}
-                      id="details"
+                      id="show-details-toggle"
                       name="details"
                       onChange={[Function]}
                       type="checkbox"
                     />
+                    <div
+                      className="euiCheckbox__square"
+                    />
                     <label
-                      htmlFor="details"
-                    >
-                      <span
-                        tabIndex={0}
-                      >
-                        <i
-                          className="fa fa-check"
-                        />
-                      </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="details"
+                      className="euiCheckbox__label"
+                      htmlFor="show-details-toggle"
                     >
                       Show details
                     </label>
@@ -2955,30 +2995,24 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   className="toggle-state-changes"
                 >
                   <div
-                    className="checkbox"
+                    className="euiCheckbox"
                   >
                     <input
+                      aria-label="toggle-state-delta"
                       checked={true}
+                      className="euiCheckbox__input"
                       disabled={false}
-                      id="state-changes"
+                      id="show-state-delta-toggle"
                       name="state-changes"
                       onChange={[Function]}
                       type="checkbox"
                     />
+                    <div
+                      className="euiCheckbox__square"
+                    />
                     <label
-                      htmlFor="state-changes"
-                    >
-                      <span
-                        tabIndex={0}
-                      >
-                        <i
-                          className="fa fa-check"
-                        />
-                      </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="state-changes"
+                      className="euiCheckbox__label"
+                      htmlFor="show-state-delta-toggle"
                     >
                       Show state input
                     </label>
@@ -2986,30 +3020,24 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 </li>
                 <li>
                   <div
-                    className="checkbox"
+                    className="euiCheckbox"
                   >
                     <input
+                      aria-label="toggle-raw-json"
                       checked={false}
+                      className="euiCheckbox__input"
                       disabled={false}
-                      id="raw"
+                      id="show-raw-json-toggle"
                       name="raw"
                       onChange={[Function]}
                       type="checkbox"
                     />
+                    <div
+                      className="euiCheckbox__square"
+                    />
                     <label
-                      htmlFor="raw"
-                    >
-                      <span
-                        tabIndex={0}
-                      >
-                        <i
-                          className="fa fa-check"
-                        />
-                      </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="raw"
+                      className="euiCheckbox__label"
+                      htmlFor="show-raw-json-toggle"
                     >
                       Show raw JSON
                     </label>
@@ -3017,30 +3045,24 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 </li>
                 <li>
                   <div
-                    className="checkbox"
+                    className="euiCheckbox"
                   >
                     <input
+                      aria-label="toggle-traceback"
                       checked={false}
+                      className="euiCheckbox__input"
                       disabled={false}
-                      id="traceback"
+                      id="show-traceback-toggle"
                       name="traceback"
                       onChange={[Function]}
                       type="checkbox"
                     />
+                    <div
+                      className="euiCheckbox__square"
+                    />
                     <label
-                      htmlFor="traceback"
-                    >
-                      <span
-                        tabIndex={0}
-                      >
-                        <i
-                          className="fa fa-check"
-                        />
-                      </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="traceback"
+                      className="euiCheckbox__label"
+                      htmlFor="show-traceback-toggle"
                     >
                       Show traceback
                     </label>

@@ -137,7 +137,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
             "table.processes.completed",
             initialProcessesFilterAndSort(false, ["completed"]),
             ["pid", "step", "status", "assignee", "creator", "started", "abbrev"],
-            { showSettings: false, showPaginator: false, pageSize: 5, refresh: true }
+            { showSettings: false, pageSize: 5, refresh: true }
         );
 
         return (
@@ -152,10 +152,6 @@ export default class Processes extends React.PureComponent<IProps, IState> {
                         <p>
                             The processes are split into 2 different tables. The upper one shows all active processes
                             and the lower one shows processes that are done/complete.
-                        </p>
-                        <p>
-                            Note: if you need pagination for completed processes you can toggle it from the table
-                            settings, via the gear icon.
                         </p>
                         <h2>Settings storage</h2>
                         <p>
