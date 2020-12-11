@@ -248,6 +248,9 @@ table.nwa-table {
         td.pid {
             width: 80px;
         }
+        td.note {
+            max-width: 200px;
+        }
     }
     .info i.fa-caret-right {
         color: vars.$primary;
