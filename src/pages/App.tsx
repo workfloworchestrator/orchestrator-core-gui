@@ -27,9 +27,8 @@ import ProductPage from "components/Product";
 import ProductBlock from "components/ProductBlock";
 import ProtectedRoute from "components/ProtectedRoute";
 import { createBrowserHistory } from "history";
-import MetaData from "pages/MetaData";
-import MetaDataPage from "pages/MetaDataPage";
 import ModifySubscription from "pages/ModifySubscription";
+import NewMetaData from "pages/NewMetaData";
 import NewProcess from "pages/NewProcess";
 import NewTask from "pages/NewTask";
 import NotAllowed from "pages/NotAllowed";
@@ -52,7 +51,8 @@ import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
 
 import { assignees, locationCodes, organisations, processStatuses, products, reportError } from "../api";
-import FormTestPage from "./FormTestPage";
+import FormProduct from "./FormProduct";
+import FormProductBlock from "./FormProductBlock";
 
 export const history = createBrowserHistory();
 
@@ -218,9 +218,32 @@ class App extends React.PureComponent<{}, IState> {
                                 />
                                 <Route path="/subscriptions" render={(props) => <SubscriptionsPage {...props} />} />
                                 <Route exact path="/metadata" render={() => <Redirect to="/metadata/products" />} />
-                                <ProtectedRoute path="/metadatapage" render={(props) => <MetaDataPage {...props} />} />
-                                <ProtectedRoute path="/metadata/:type" render={(props) => <MetaData {...props} />} />
-                                <ProtectedRoute path="/product/:id" render={(props) => <ProductPage {...props} />} />
+                                <ProtectedRoute
+                                    path="/metadata/products"
+                                    render={props => <NewMetaData selectedTab={"products"} {...props} />}
+                                />
+                                <ProtectedRoute
+                                    path="/metadata/product_blocks"
+                                    render={props => <NewMetaData selectedTab={"product_blocks"} {...props} />}
+                                />
+                                <ProtectedRoute
+                                    path="/metadata/resource_types"
+                                    render={props => <NewMetaData selectedTab={"resource_types"} {...props} />}
+                                />
+                                <ProtectedRoute
+                                    path="/metadata/fixed_inputs"
+                                    render={props => <NewMetaData selectedTab={"fixed_inputs"} {...props} />}
+                                />
+                                <ProtectedRoute
+                                    path="/metadata/workflows"
+                                    render={props => <NewMetaData selectedTab={"workflows"} {...props} />}
+                                />
+                                <ProtectedRoute
+                                    path="/metadata/workflows2"
+                                    render={props => <NewMetaData selectedTab={"workflows2"} {...props} />}
+                                />
+
+                                <ProtectedRoute path="/product/:id" render={props => <ProductPage {...props} />} />
                                 <ProtectedRoute
                                     path="/product-block/:id"
                                     render={(props) => <ProductBlock {...props} />}

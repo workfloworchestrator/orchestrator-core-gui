@@ -12,14 +12,7 @@
  * limitations under the License.
  *
  */
-import {
-    EuiPage,
-    EuiPageContent,
-    EuiPageContentBody,
-    EuiPageContentHeader,
-    EuiPageContentHeaderSection,
-    EuiTitle
-} from "@elastic/eui";
+import { EuiPageBody, EuiPageContent } from "@elastic/eui";
 import UserInputForm from "components/inputForms/UserInputForm";
 import { JSONSchema6 } from "json-schema";
 import React from "react";
@@ -28,7 +21,7 @@ import { setFlash } from "../utils/Flash";
 import { stop } from "../utils/Utils";
 
 const schema: JSONSchema6 = {
-    title: "Test form",
+    title: "Product Block",
     description: "A product from Acme's catalog",
     type: "object",
     properties: {
@@ -37,19 +30,16 @@ const schema: JSONSchema6 = {
         tag: { type: "string" },
         type: { type: "string" },
         status: { default: "hop1", type: "string", enum: ["hop1", "hop2"] },
-        create_workflow: { type: "string" },
-        modify_workflows: { type: "string" },
-        terminate_workflow: { type: "string" },
-        product_blocks: { type: "string" },
-        fixed_inputs: { type: "string" },
-        create_date: { type: "string", format: "date-time" }
+        resource_types: { default: "hop1", type: "string", enum: ["hop1", "hop2"] },
+        create_date: { type: "string", format: "date-time" },
+        end_date: { type: "string", format: "date-time" }
     },
     required: ["name", "description", "tag"]
 };
 
 interface IState {}
 
-export default class FormTestPage extends React.Component {
+export default class FormProduct extends React.Component {
     state: IState = {};
 
     cancel = (e: React.FormEvent) => {
@@ -71,28 +61,19 @@ export default class FormTestPage extends React.Component {
 
     render() {
         return (
-            <EuiPage>
+            <EuiPageBody>
                 <EuiPageContent>
-                    <EuiPageContentHeader>
-                        <EuiPageContentHeaderSection>
-                            <EuiTitle>
-                                <h2>Test form</h2>
-                            </EuiTitle>
-                        </EuiPageContentHeaderSection>
-                    </EuiPageContentHeader>
-                    <EuiPageContentBody>
-                        <UserInputForm
-                            stepUserInput={schema}
-                            validSubmit={this.submit}
-                            cancel={this.cancel}
-                            previous={this.previous}
-                            hasNext={false}
-                            hasPrev={false}
-                            userInput={{}}
-                        />
-                    </EuiPageContentBody>
+                    <UserInputForm
+                        stepUserInput={schema}
+                        validSubmit={this.submit}
+                        cancel={this.cancel}
+                        previous={this.previous}
+                        hasNext={false}
+                        hasPrev={false}
+                        userInput={{}}
+                    />
                 </EuiPageContent>
-            </EuiPage>
+            </EuiPageBody>
         );
     }
 }
