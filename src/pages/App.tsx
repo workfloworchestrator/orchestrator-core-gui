@@ -238,10 +238,6 @@ class App extends React.PureComponent<{}, IState> {
                                     path="/metadata/workflows"
                                     render={props => <NewMetaData selectedTab={"workflows"} {...props} />}
                                 />
-                                <ProtectedRoute
-                                    path="/metadata/workflows2"
-                                    render={props => <NewMetaData selectedTab={"workflows2"} {...props} />}
-                                />
 
                                 <ProtectedRoute path="/product/:id" render={props => <ProductPage {...props} />} />
                                 <ProtectedRoute

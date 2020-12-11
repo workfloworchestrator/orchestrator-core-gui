@@ -1,6 +1,5 @@
 import { EuiPage, EuiPageBody, EuiPageHeaderSection, EuiTab, EuiTabs } from "@elastic/eui";
 import FixedInputConfiguration from "components/FixedInputConfiguration";
-import WorkFlows from "components/WorkFlows";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import { Link } from "react-router-dom";
@@ -40,12 +39,6 @@ const tabs = [
         name: "WORKFLOWS",
         disabled: false,
         href: "/metadata/workflows"
-    },
-    {
-        id: "workflows2",
-        name: "WORKFLOWS",
-        disabled: false,
-        href: "/metadata/workflows2"
     }
 ];
 
@@ -91,8 +84,6 @@ export default class NewMetaData extends React.Component<IProps, IState> {
                 return <FixedInputConfiguration />;
             case "workflows":
                 return <NewWorkFlows />;
-            case "workflows2":
-                return <WorkFlows />;
             default:
                 return <NewProducts />;
         }
