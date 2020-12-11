@@ -281,6 +281,8 @@ I18n.translations.en = {
                 "running the validation workflow. Forcing a subscription to 'in sync' is potentially dangerous and " +
                 "may break all other workflows that are run after this. If this is the only possible option please " +
                 "state the reason.",
+            interconnection_type: "Interconnection type",
+            interconnection_type_info: "Choose an interconnection type",
             internetpinnen_prefix_subscriptions: "Internet pinnen prefix",
             internetpinnen_prefix_subscriptions_info:
                 "Please select an Internet Pinnen prefix from the IPv4 subnet 145.98.0.0/16. Leave blank to disable.",
@@ -303,6 +305,8 @@ I18n.translations.en = {
             lldp_info: "used for troubleshooting (neighbour/interface check) or other long term use",
             location_code: "Location code",
             location_code_info: "Provide a valid location code",
+            metric_out: "Metric out",
+            metric_out_info: "Choose a metric out number",
             multicast: "Multicast",
             network_changes_ready: "NMS changes ready",
             network_changes_ready_info:
@@ -381,7 +385,13 @@ I18n.translations.en = {
             old_subscription_label: "Old Subscription",
             old_subscription_label_info: "The old subscription in this workflow",
             organisation: "Customer",
-            organisation_info: "Search and select the customer for the product.",
+            organisation_info: "Search and select the customer for the product",
+            peer_community: "Peer community",
+            peer_community_info: "Choose a peer community number",
+            peer_group_name: "IP Peer group name",
+            peer_group_name_info: "Unique name with only letters, digits and minus sign and no spaces or underscores",
+            peer_type: "Peer type",
+            peer_type_info: "Choose a peer type",
             plan_dont_allocate: "Set state to planned",
             plan_dont_allocate_info: "Register this prefix as planned, but do not allocate yet",
             port_id: "Port",
