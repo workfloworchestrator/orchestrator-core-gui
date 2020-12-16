@@ -420,6 +420,8 @@ I18n.translations.en = {
                 "The form will make sure the amount of IPv4 prefixes are the same as the amount of customer saps",
             removed_customer_ipv6_ptp_prefixes_fields:
                 "The form will make sure the amount of IPv6 prefixes are the same as the amount of customer saps",
+            route_servers: "Route servers",
+            route_servers_info: "Enter IP addresses separated by a comma or a newline character",
             sap_migration_summary: "Summary of SAP migration changes",
             sap_migration_summary_info:
                 "Please check the summary for any inconsistencies in the port that will be removed",
