@@ -54,7 +54,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the customer for the product.
+                        Search and select the customer for the product
                       </div>
                     </div>
                     <div
@@ -2141,7 +2141,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the customer for the product.
+                        Search and select the customer for the product
                       </div>
                     </div>
                     <div
@@ -2725,7 +2725,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the customer for the product.
+                        Search and select the customer for the product
                       </div>
                     </div>
                     <div
@@ -3807,7 +3807,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the customer for the product.
+                        Search and select the customer for the product
                       </div>
                     </div>
                     <div
@@ -4391,7 +4391,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the customer for the product.
+                        Search and select the customer for the product
                       </div>
                     </div>
                     <div
@@ -5272,7 +5272,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the customer for the product.
+                        Search and select the customer for the product
                       </div>
                     </div>
                     <div
@@ -5880,7 +5880,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the customer for the product.
+                        Search and select the customer for the product
                       </div>
                     </div>
                     <div
@@ -6761,7 +6761,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the customer for the product.
+                        Search and select the customer for the product
                       </div>
                     </div>
                     <div
