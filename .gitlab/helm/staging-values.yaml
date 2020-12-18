@@ -6,3 +6,8 @@ env:
     REACT_APP_OAUTH2_SCOPE: "openid"
     REACT_APP_CHECK_STATUS_INTERVAL: "3"
     REACT_APP_NETWORKDASHBOARD_URL: https://netwerkdashboard.staging.automation.surf.net
+    REACT_APP_TRACING_ENABLED: "true"
+    REACT_APP_SENTRY_DSN: "https://7f90cb0d26cd47568bbd422f9f76e435@sentry.automation.surf.net/9"
+    REACT_APP_TRACE_SAMPLE_RATE: "1"
+    REACT_APP_ENVIRONMENT: "staging"
+    REACT_APP_TRACING_ORIGINS: "https://orchestrator.staging.automation.surf.net/*"

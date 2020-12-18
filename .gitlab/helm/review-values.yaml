@@ -6,3 +6,5 @@ env:
     REACT_APP_OAUTH2_SCOPE: "openid"
     REACT_APP_CHECK_STATUS_INTERVAL: "3"
     REACT_APP_NETWORKDASHBOARD_URL: https://netwerkdashboard.review.automation.surf.net
+    REACT_APP_TRACING_ENABLED: "false"
+    REACT_APP_ENVIRONMENT: "review"
