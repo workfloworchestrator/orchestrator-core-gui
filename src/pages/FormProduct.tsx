@@ -17,8 +17,12 @@ import UserInputForm from "components/inputForms/UserInputForm";
 import { JSONSchema6 } from "json-schema";
 import React from "react";
 
+import { products } from "../api/index";
 import { setFlash } from "../utils/Flash";
+import { Product } from "../utils/types";
 import { stop } from "../utils/Utils";
+
+const data = products;
 
 const schema: JSONSchema6 = {
     title: "Product",
@@ -41,10 +45,20 @@ const schema: JSONSchema6 = {
     required: ["name", "description", "tag"]
 };
 
-interface IState {}
+interface IState {
+    products: Product[];
+}
 
 export default class FormProduct extends React.Component {
-    state: IState = {};
+    state: IState = {
+        products: []
+    };
+
+    componentDidMount() {
+        data().then(products => {
+            this.setState({ products: products, productsLoaded: false });
+        });
+    }
 
     cancel = (e: React.FormEvent) => {
         stop(e);

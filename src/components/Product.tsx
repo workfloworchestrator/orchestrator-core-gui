@@ -18,6 +18,7 @@ import "components/Product.scss";
 
 import "./Product.scss";
 
+import { EuiButton, EuiFieldText } from "@elastic/eui";
 import { deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes } from "api";
 import { allWorkflows, productBlocks, productById, products, saveProduct } from "api/index";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
@@ -231,25 +232,29 @@ export default class Product extends React.Component<IProps, IState> {
         if (readOnly) {
             return (
                 <section className="buttons">
-                    <button className="button" onClick={() => this.context.redirect("/metadata/products")}>
+                    <EuiButton className="button" onClick={() => this.context.redirect("/metadata/products")}>
                         {I18n.t("metadata.products.back")}
-                    </button>
+                    </EuiButton>
                 </section>
             );
         }
         const invalid = !initial && (this.isInvalid() || this.state.processing);
         return (
             <section className="buttons">
-                <button className="button" onClick={this.cancel}>
+                <EuiButton className="button" onClick={this.cancel}>
                     {I18n.t("process.cancel")}
-                </button>
-                <button tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
+                </EuiButton>
+                <EuiButton
+                    tabIndex={0}
+                    className={`button ${invalid ? "grey disabled" : "blue"}`}
+                    onClick={this.submit}
+                >
                     {I18n.t("process.submit")}
-                </button>
+                </EuiButton>
                 {product.product_id && (
-                    <button className="button red" onClick={this.handleDeleteProduct}>
+                    <EuiButton className="button red" onClick={this.handleDeleteProduct}>
                         {I18n.t("processes.delete")}
-                    </button>
+                    </EuiButton>
                 )}
             </section>
         );
@@ -387,7 +392,7 @@ export default class Product extends React.Component<IProps, IState> {
             <div key={index} className="fixed-input">
                 <div className="wrapper">
                     {index === 0 && <label>{I18n.t("metadata.products.fixed_inputs_name")}</label>}
-                    <input type="text" value={fixedInput.name} disabled={true} />
+                    <EuiFieldText fullWidth={true} type="text" value={fixedInput.name} disabled={true} />
                 </div>
                 <div className="wrapper">
                     {index === 0 && <label>{I18n.t("metadata.products.fixed_inputs_value")}</label>}
@@ -455,7 +460,8 @@ export default class Product extends React.Component<IProps, IState> {
                 <div className="child-form">
                     {product.product_blocks.map((pb) => (
                         <div key={pb.product_block_id} className="product-block">
-                            <input
+                            <EuiFieldText
+                                fullWidth={true}
                                 type="text"
                                 id={pb.product_block_id}
                                 name={pb.product_block_id}
