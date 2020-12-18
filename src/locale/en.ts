@@ -388,7 +388,7 @@ I18n.translations.en = {
             organisation_info: "Search and select the customer for the product",
             peer_community: "Peer community",
             peer_community_info: "Choose a peer community number",
-            peer_group_name: "IP Peer group name",
+            peer_group_name: "Peer group name",
             peer_group_name_info: "Unique name with only letters, digits and minus sign and no spaces or underscores",
             peer_type: "Peer type",
             peer_type_info: "Choose a peer type",
