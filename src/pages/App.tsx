@@ -18,6 +18,7 @@ import "locale/nl";
 import "pages/App.scss";
 
 import { EuiLoadingSpinner, EuiToast } from "@elastic/eui";
+import * as Sentry from "@sentry/react";
 import Flash from "components/Flash";
 import Header from "components/Header";
 import ErrorDialog from "components/modals/ErrorDialog";
@@ -52,7 +53,7 @@ import { AppError } from "utils/types";
 
 import { assignees, locationCodes, organisations, processStatuses, products, reportError } from "../api";
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 
 interface IState {
     loading: boolean;
@@ -242,4 +243,4 @@ class App extends React.PureComponent<{}, IState> {
     }
 }
 
-export default App;
+export default Sentry.withProfiler(App);

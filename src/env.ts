@@ -21,6 +21,12 @@ interface Window {
         OAUTH2_SCOPE: string;
         CHECK_STATUS_INTERVAL: number;
         NETWORKDASHBOARD_URL: string;
+        SENTRY_DSN: string;
+        TRACING_ENABLED: boolean;
+        TRACE_SAMPLE_RATE: number;
+        RELEASE: string;
+        ENVIRONMENT: string;
+        TRACING_ORIGINS: string;
     };
 }
 
@@ -36,5 +42,11 @@ export const ENV = window.__env__ || {
     OAUTH2_CLIENT_ID: process.env.REACT_APP_OAUTH2_CLIENT_ID,
     OAUTH2_SCOPE: process.env.REACT_APP_OAUTH2_SCOPE,
     CHECK_STATUS_INTERVAL: parseInt(process.env.REACT_APP_CHECK_STATUS_INTERVAL ?? "0"),
-    NETWORKDASHBOARD_URL: process.env.REACT_APP_NETWORKDASHBOARD_URL
+    NETWORKDASHBOARD_URL: process.env.REACT_APP_NETWORKDASHBOARD_URL,
+    SENTRY_DSN: process.env.REACT_APP_SENTRY_DSN,
+    TRACING_ENABLED: process.env.REACT_APP_TRACING_ENABLED,
+    TRACE_SAMPLE_RATE: process.env.REACT_APP_TRACE_SAMPLE_RATE,
+    RELEASE: process.env.REACT_APP_RELEASE,
+    ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
+    TRACING_ORIGINS: process.env.REACT_APP_TRACING_ORIGINS
 };

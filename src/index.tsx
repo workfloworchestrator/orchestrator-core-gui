@@ -13,20 +13,39 @@
  *
  */
 
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
 import { logUserInfo } from "api";
 import { setUser } from "api/axios";
 import { ENV } from "env";
 import Oidc, { UserManager, UserManagerSettings, WebStorageStateStore } from "oidc-client";
 import { AuthContext, AuthProvider } from "oidc-react";
-import App from "pages/App";
+import App, { history } from "pages/App";
 import React from "react";
 import ReactDOM from "react-dom";
 
 const appElement = document.getElementById("app");
 
+if (ENV.TRACING_ENABLED) {
+    console.log("Initialized Sentry");
+    Sentry.init({
+        dsn: ENV.SENTRY_DSN,
+        release: "orchestrator-client@" + ENV.RELEASE,
+        autoSessionTracking: true,
+        environment: ENV.ENVIRONMENT,
+        integrations: [
+            new Integrations.BrowserTracing({
+                routingInstrumentation: Sentry.reactRouterV5Instrumentation(history),
+                tracingOrigins: [ENV.TRACING_ORIGINS]
+            })
+        ],
+        tracesSampleRate: Number(ENV.TRACE_SAMPLE_RATE),
+        debug: false
+    });
+}
+
 if (ENV.OAUTH2_ENABLED) {
     const REDIRECT_URL_KEY = "redirectUrl";
-
     // Enable to enable logging in oidc library
     Oidc.Log.logger = console;
 

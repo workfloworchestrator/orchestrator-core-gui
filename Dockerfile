@@ -42,7 +42,6 @@ FROM git.ia.surfsara.nl/automation/dependency_proxy/containers/nginx:alpine
 
 RUN apk update && apk add wget curl
 COPY default.conf /etc/nginx/conf.d/default.conf
-COPY htpasswd.passwd /etc/nginx/htpasswd.passwd
 COPY --from=builder /app/build /usr/share/nginx/html
 COPY --from=builder /app/src/env.js.template .
 
