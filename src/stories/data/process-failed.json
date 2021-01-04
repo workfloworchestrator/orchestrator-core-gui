@@ -1047,7 +1047,6 @@
     ],
     "subscriptions": [
         {
-            "crm_port_id": null,
             "customer_id": "6a608b90-0c11-e511-80d0-005056956c1a",
             "description": "FNAL SP ZP001A 10 Gbit/s",
             "end_date": null,

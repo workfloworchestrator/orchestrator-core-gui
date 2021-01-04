@@ -15,7 +15,6 @@
 import I18n from "i18n-js";
 import { setFlash } from "utils/Flash";
 import {
-    CodedWorkflow,
     ContactPerson,
     Dienstafname,
     EngineStatus,
@@ -160,41 +159,9 @@ export function resourceType(id: string) {
     return fetchJson(`resource_types/${id}`);
 }
 
-export function saveResourceType(resourceType: ResourceType) {
-    return postPutJson(
-        "resource_types",
-        resourceType,
-        isEmpty(resourceType.resource_type_id) ? "post" : "put",
-        true,
-        false
-    );
-}
-
-export function deleteResourceType(id: string) {
-    return fetchJson(`resource_types/${id}`, { method: "DELETE" }, {}, false, false);
-}
-
 //API
-export function allSubscriptions(): Promise<Subscription[]> {
-    return fetchJson(`subscriptions/all`);
-}
-
-export function paginatedSubscriptions(
-    range = "0,24",
-    sort = "start_date,desc",
-    filter: string
-): Promise<Subscription[]> {
-    return fetchJson(`subscriptions?range=${range}&sort=${sort}&filter=${filter}`);
-}
-
 export function subscriptionsDetailWithModel(subscription_id: string): Promise<SubscriptionModel> {
     return fetchJsonWithCustomErrorHandling<SubscriptionModel>(`subscriptions/domain-model/${subscription_id}`);
-}
-
-export function subscriptionsByTags(tagList: string[], statusList: string[] = []) {
-    return fetchJson(
-        `subscriptions/tag/${encodeURIComponent(tagList.join(","))}/${encodeURIComponent(statusList.join(","))}`
-    );
 }
 
 export function nodeSubscriptions(statusList: string[] = []): Promise<Subscription[]> {
@@ -245,10 +212,6 @@ export function subscriptionWorkflows(subscription_id: string): Promise<Workflow
     return fetchJson(`subscriptions/workflows/${subscription_id}`);
 }
 
-export function subscriptionsByProductId(productId: string): Promise<Subscription[]> {
-    return fetchJson(`subscriptions/product${productId}`);
-}
-
 export function organisations(): Promise<Organization[] | undefined> {
     //@ts-ignore
     return fetchJson("crm/organisations", {}, {}, false).catch(() => {
@@ -272,24 +235,12 @@ export function getNodesByLocationAndStatus(locationCode: string, status: string
     return fetchJson(`ims/nodes/${locationCode}/${status}`);
 }
 
-export function getFreePortsByImsNodeIdAndInterfaceType(
-    imsNodeId: number,
-    ieeeInterfaceType: string,
-    mode: string
-): Promise<IMSPort[]> {
-    return fetchJson(`ims/free_ports_ims_node/${imsNodeId}/${ieeeInterfaceType}/${mode}`);
-}
-
 export function getFreePortsByNodeSubscriptionIdAndSpeed(
     nodeSubscriptionId: string,
     interfaceSpeed: number,
     mode: string
 ): Promise<IMSPort[]> {
     return fetchJson(`ims/free_ports/${nodeSubscriptionId}/${interfaceSpeed}/${mode}`);
-}
-
-export function nodesForLocationCode(locationCode: string) {
-    return fetchJson(`ims/nodes/${locationCode}`);
 }
 
 export function usedVlans(subscriptionId: string): Promise<number[][]> {
@@ -353,10 +304,6 @@ export function processStatuses(): Promise<string[]> {
 
 export function allWorkflows(): Promise<Workflow[]> {
     return fetchJson("workflows");
-}
-
-export function allWorkflowCodeImplementations(): Promise<CodedWorkflow[]> {
-    return fetchJson("workflows/coded_workflows");
 }
 
 export function allWorkflowsWithProductTags(): Promise<WorkflowWithProductTags[]> {
