@@ -1,4 +1,4 @@
-image: alpine:latest
+image: git.ia.surfsara.nl/automation/dependency_proxy/containers/alpine:latest
 
 .auto-deploy:
   image: "git.ia.surfsara.nl:5050/automation/projects/build-container/master"
@@ -19,9 +19,12 @@ stages:
 
 include:
   - template: Jobs/Build.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
+  - template: Code-Quality.gitlab-ci.yml
+
 
 unit test:
-  image: node:14.2.0-slim
+  image: git.ia.surfsara.nl/automation/dependency_proxy/containers/node:14.2.0-slim
   stage: test
   variables:
     TZ: Europe/Amsterdam

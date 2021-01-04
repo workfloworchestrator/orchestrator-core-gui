@@ -14,7 +14,10 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "jsx": "preserve",
-        "noEmit": true
+        "noEmit": true,
+        "sourceMap": true,
+        "inlineSources": true,
+        "sourceRoot": "/"
     },
     "include": ["src", "public"]
 }
