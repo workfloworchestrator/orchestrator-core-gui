@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.2.0] - 2020-01-05
+
 -   Made the client compatible with the FastAPI changes in orchestrator#740
 -   Removed Validations page and api dependencies
 -   `#206`: Conditionally show network diagrams for "active" and "insync" subscriptions
