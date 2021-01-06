@@ -309,7 +309,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
     }
 
     _makeConnectionExplanation = (endpoint: IMSEndpoint, sap: any, sub: SubscriptionModel): JSX.Element => {
-        const portmode = sub.sp.port_mode;
+        const portmode = sub.sp.port_mode ? sub.sp.port_mode : "N/A";
         const vlanRange = sap.vlanrange;
         return (
             <EuiCodeBlock>
