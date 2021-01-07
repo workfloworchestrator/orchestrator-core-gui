@@ -294,7 +294,7 @@ exports[`Storyshots NewProcess Preselected 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the customer for the product.
+                        Search and select the customer for the product
                       </div>
                     </div>
                     <div
