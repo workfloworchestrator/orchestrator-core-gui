@@ -15,12 +15,7 @@
 import "lib/uniforms-surfnet/src/ImsPortIdField.scss";
 
 import { EuiFormRow, EuiText } from "@elastic/eui";
-import {
-    getFreePortsByImsNodeIdAndInterfaceType,
-    getFreePortsByNodeSubscriptionIdAndSpeed,
-    getNodesByLocationAndStatus,
-    nodeSubscriptions
-} from "api";
+import { getFreePortsByNodeSubscriptionIdAndSpeed, nodeSubscriptions } from "api";
 import I18n from "i18n-js";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React, { useCallback, useEffect, useState } from "react";
@@ -31,20 +26,12 @@ import { IMSNode, IMSPort, Option, Subscription } from "utils/types";
 export type ImsPortFieldProps = FieldProps<
     number,
     {
-        locationCode?: string;
         nodeSubscriptionId?: string;
         interfaceSpeed: number | string;
         imsPortMode?: "patched" | "unpatched" | "all";
         nodeStatuses?: ("active" | "provisioning")[];
     }
 >;
-
-function nodeToOptionPort(node: IMSNode): Option {
-    return {
-        value: node.id.toString(),
-        label: `${node.name.trim() || "<No description>"}`
-    };
-}
 
 function nodeToOptionCorelink(node: Subscription): Option {
     return {
@@ -55,13 +42,13 @@ function nodeToOptionCorelink(node: Subscription): Option {
 
 declare module "uniforms" {
     interface FilterDOMProps {
-        locationCode: never;
         nodeSubscriptionId: never;
         interfaceSpeed: never;
         nodeStatuses: never;
+        imsPortMode: never;
     }
 }
-filterDOMProps.register("locationCode", "nodeSubscriptionId", "interfaceSpeed", "nodeStatuses");
+filterDOMProps.register("nodeSubscriptionId", "interfaceSpeed", "nodeStatuses", "imsPortMode");
 
 function ImsPortId({
     id,
@@ -75,7 +62,6 @@ function ImsPortId({
     error,
     showInlineError,
     errorMessage,
-    locationCode,
     nodeSubscriptionId,
     interfaceSpeed,
     imsPortMode = "all",
@@ -87,16 +73,9 @@ function ImsPortId({
     const [ports, setPorts] = useState<IMSPort[]>([]);
     const [loading, setLoading] = useState(true);
 
-    const isServicePortLegacyBehavior = !!locationCode;
-
     const onChangeNodes = useCallback(
         (option: ValueType<Option>) => {
-            let value;
-            if (isServicePortLegacyBehavior) {
-                value = option ? parseInt((option as Option).value) : null;
-            } else {
-                value = option ? (option as Option).value : null;
-            }
+            let value = option ? (option as Option).value : null;
 
             if (value === null) {
                 return;
@@ -105,48 +84,34 @@ function ImsPortId({
             setLoading(true);
             setNodeId(value);
             setPorts([]);
-            if (isServicePortLegacyBehavior) {
-                getFreePortsByImsNodeIdAndInterfaceType(value as number, interfaceSpeed as string, "patched").then(
-                    result => {
-                        setPorts(result);
-                        setLoading(false);
-                    }
-                );
-            } else {
-                getFreePortsByNodeSubscriptionIdAndSpeed(value as string, interfaceSpeed as number, imsPortMode).then(
-                    result => {
-                        setPorts(result);
-                        setLoading(false);
-                    }
-                );
-            }
+
+            getFreePortsByNodeSubscriptionIdAndSpeed(value as string, interfaceSpeed as number, imsPortMode).then(
+                result => {
+                    setPorts(result);
+                    setLoading(false);
+                }
+            );
         },
-        [interfaceSpeed, isServicePortLegacyBehavior, imsPortMode]
+        [interfaceSpeed, imsPortMode]
     );
 
     useEffect(() => {
         setLoading(true);
-        if (isServicePortLegacyBehavior) {
-            getNodesByLocationAndStatus(locationCode!, "IS").then(result => {
+
+        const nodesPromise = nodeSubscriptions(nodeStatuses ?? ["active"]);
+        if (nodeSubscriptionId) {
+            nodesPromise.then(result => {
+                setNodes(result.filter(subscription => subscription.subscription_id === nodeSubscriptionId));
+                setLoading(false);
+                onChangeNodes({ value: nodeSubscriptionId } as Option);
+            });
+        } else {
+            nodesPromise.then(result => {
                 setNodes(result);
                 setLoading(false);
             });
-        } else {
-            const nodesPromise = nodeSubscriptions(nodeStatuses ?? ["active"]);
-            if (nodeSubscriptionId) {
-                nodesPromise.then(result => {
-                    setNodes(result.filter(subscription => subscription.subscription_id === nodeSubscriptionId));
-                    setLoading(false);
-                    onChangeNodes({ value: nodeSubscriptionId } as Option);
-                });
-            } else {
-                nodesPromise.then(result => {
-                    setNodes(result);
-                    setLoading(false);
-                });
-            }
         }
-    }, [onChangeNodes, isServicePortLegacyBehavior, nodeStatuses, locationCode, nodeSubscriptionId]);
+    }, [onChangeNodes, nodeStatuses, nodeSubscriptionId]);
 
     const nodesPlaceholder = loading
         ? I18n.t("forms.widgets.nodePort.loading")
@@ -158,12 +123,7 @@ function ImsPortId({
         ? I18n.t("forms.widgets.nodePort.selectPort")
         : I18n.t("forms.widgets.nodePort.selectNodeFirst");
 
-    let node_options: Option[] = [];
-    if (isServicePortLegacyBehavior) {
-        node_options = (nodes as IMSNode[]).map(nodeToOptionPort);
-    } else {
-        node_options = (nodes as Subscription[]).map(nodeToOptionCorelink);
-    }
+    let node_options: Option[] = (nodes as Subscription[]).map(nodeToOptionCorelink);
 
     node_options.sort((x, y) => x.label.localeCompare(y.label));
     const node_value = node_options.find(option => option.value === nodeId?.toString());

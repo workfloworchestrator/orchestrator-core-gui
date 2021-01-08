@@ -1715,56 +1715,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
-                    id="input-crm_port_id-row"
-                  >
-                    <div
-                      className="euiFormRow__labelWrapper"
-                    >
-                      <label
-                        aria-invalid={null}
-                        className="euiFormLabel euiFormRow__label"
-                        htmlFor="input-crm_port_id"
-                      >
-                        The CRM identifier for a port
-                      </label>
-                       
-                      <div
-                        className="euiText euiText--medium"
-                      >
-                        Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example 03602
-                      </div>
-                    </div>
-                    <div
-                      className="euiFormRow__fieldWrapper"
-                    >
-                      <div
-                        className="euiFormControlLayout euiFormControlLayout--fullWidth"
-                      >
-                        <div
-                          className="euiFormControlLayout__childrenWrapper"
-                        >
-                          <input
-                            className="euiFieldText euiFieldText--fullWidth"
-                            disabled={false}
-                            id="input-crm_port_id"
-                            name="crm_port_id"
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            onFocus={[Function]}
-                            placeholder=""
-                            type="text"
-                            value="12345"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-                <section
-                  className="form-input"
-                >
-                  <div
-                    className="euiFormRow euiFormRow--fullWidth"
                     id="input-generic_select-row"
                   >
                     <div
@@ -3790,56 +3740,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
-                    id="input-nms_service_id-row"
-                  >
-                    <div
-                      className="euiFormRow__labelWrapper"
-                    >
-                      <label
-                        aria-invalid={null}
-                        className="euiFormLabel euiFormRow__label"
-                        htmlFor="input-nms_service_id"
-                      >
-                        NMS service id
-                      </label>
-                       
-                      <div
-                        className="euiText euiText--medium"
-                      >
-                        The id of the service on the network (0000-9999)
-                      </div>
-                    </div>
-                    <div
-                      className="euiFormRow__fieldWrapper"
-                    >
-                      <div
-                        className="euiFormControlLayout euiFormControlLayout--fullWidth"
-                      >
-                        <div
-                          className="euiFormControlLayout__childrenWrapper"
-                        >
-                          <input
-                            className="euiFieldText euiFieldText--fullWidth"
-                            disabled={false}
-                            id="input-nms_service_id"
-                            name="nms_service_id"
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            onFocus={[Function]}
-                            placeholder=""
-                            type="text"
-                            value="1234"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-                <section
-                  className="form-input"
-                >
-                  <div
-                    className="euiFormRow euiFormRow--fullWidth"
                     id="input-node_id_port_select-row"
                   >
                     <div
@@ -4128,7 +4028,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 </section>
                 <section
                   className="form-input"
-                  status={null}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"

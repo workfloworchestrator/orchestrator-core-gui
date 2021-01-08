@@ -24,6 +24,12 @@ export type LocationCodeFieldProps = { locationCodes?: string[] } & Omit<
     "placeholder" | "allowedValues"
 >;
 
+declare module "uniforms" {
+    interface FilterDOMProps {
+        locationCodes: never;
+    }
+}
+
 filterDOMProps.register("locationCodes");
 
 function LocationCode({ name, locationCodes, ...props }: LocationCodeFieldProps) {

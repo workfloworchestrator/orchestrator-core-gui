@@ -126,8 +126,6 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
                     field.component = LabelField;
                 } else if (field.format === "summary") {
                     field.component = SummaryField;
-                } else if (field.format === "showDowngradeRedundantChoice") {
-                    field.component = SummaryField;
                 } else if (field.format === "subscription") {
                     field.component = SubscriptionSummaryField;
                 } else if (field.format === "accept") {

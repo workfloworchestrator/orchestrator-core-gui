@@ -144,7 +144,6 @@ export interface IpPrefixSubscription extends Subscription {
 }
 export interface ServicePortSubscription extends Subscription {
     port_mode?: string;
-    crm_port_id?: string;
 }
 
 export interface ServicePort {

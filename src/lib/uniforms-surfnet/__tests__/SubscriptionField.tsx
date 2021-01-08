@@ -608,7 +608,7 @@ describe("<SubscriptionField>", () => {
         expect(wrapper.render()).toMatchSnapshot();
     });
 
-    function makeSubscription(tag: string, port_mode?: string, crm_port_id?: string): ServicePortSubscription {
+    function makeSubscription(tag: string, port_mode?: string): ServicePortSubscription {
         let sub = {
             subscription_id: "abcdefgh-ijkl-mnop-qrst",
             customer_id: "abc",
@@ -618,10 +618,6 @@ describe("<SubscriptionField>", () => {
 
         if (port_mode) {
             sub.port_mode = port_mode;
-        }
-
-        if (crm_port_id) {
-            sub.crm_port_id = crm_port_id;
         }
 
         return sub;
@@ -634,20 +630,10 @@ describe("<SubscriptionField>", () => {
         expect(makeLabel(makeSubscription("Node"), [], [])).toBe("abcdefgh dec");
     });
 
-    test("makeLabel - Works for SN7 Port subscriptions", async () => {
-        expect(makeLabel(makeSubscription("SSP", undefined, "port id"), [], [])).toBe("port id - abcdefgh dec abc");
-        expect(makeLabel(makeSubscription("MSP", undefined, "port id"), [], [])).toBe("port id - abcdefgh dec abc");
-    });
-
     test("makeLabel - Works for Sn8 Port subscriptions", async () => {
         expect(makeLabel(makeSubscription("SP", "tagged"), [], [])).toBe("abcdefgh TAGGED dec abc");
         expect(makeLabel(makeSubscription("SP", "untagged"), [], [])).toBe("abcdefgh UNTAGGED dec abc");
         expect(makeLabel(makeSubscription("MSC"), [], [])).toBe("abcdefgh TAGGED dec abc");
-    });
-
-    test("getPortMode - Works for Sn7 subscriptions", async () => {
-        expect(getPortMode(makeSubscription("SSP"), [])).toBe("untagged");
-        expect(getPortMode(makeSubscription("MSP"), [])).toBe("tagged");
     });
 
     test("getPortMode - Works for Sn8  subscriptions", async () => {
