@@ -112,12 +112,6 @@
             "type": "integer",
             "format": "imsPortId"
         },
-        "crm_port_id": {
-            "title": "Crm Port Id",
-            "default": "12345",
-            "type": "string",
-            "pattern": "^[0-9]{5}$"
-        },
         "generic_select": {
             "title": "Generic Select",
             "default": "none",
@@ -199,12 +193,6 @@
                 }
             },
             "type": "string"
-        },
-        "nms_service_id": {
-            "title": "Nms Service Id",
-            "default": "1234",
-            "type": "string",
-            "pattern": "^[0-9]{4}$"
         },
         "node_id_port_select": {
             "title": "Node Id Port Select",

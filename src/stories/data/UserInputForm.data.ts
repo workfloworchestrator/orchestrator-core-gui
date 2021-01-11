@@ -261,7 +261,7 @@ export const contactPersons = [
     }
 ];
 
-// WIth Tag mocks: have extra info (port_mode and crm_port_id?
+// WIth Tag mocks: have extra info (port_mode)?
 
 // remaining fixtures can be used to deliver subscriptions as returned by subscriptions
 export const allNodeSubscriptions = [

@@ -30,10 +30,11 @@ export type ImsNodeIdFieldProps = {
 
 declare module "uniforms" {
     interface FilterDOMProps {
-        locationCodes: never;
+        locationCode: never;
+        status: never;
     }
 }
-filterDOMProps.register("locationCodes");
+filterDOMProps.register("locationCode", "status");
 
 function ImsNodeId({ name, value, onChange, locationCode, status, ...props }: ImsNodeIdFieldProps) {
     const [loading, setLoading] = useState(true);

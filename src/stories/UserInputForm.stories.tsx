@@ -13,10 +13,8 @@
  *
  */
 
-import { number } from "@storybook/addon-knobs";
 import mock from "axios-mock";
 import React from "react";
-import SN7PortSubscriptions from "stories/data/subscriptions-sn7-ports.json";
 import SN8PortSubscriptions from "stories/data/subscriptions-sn8-ports.json";
 import {
     allNodeSubscriptions,
@@ -54,21 +52,6 @@ export const Contactpersons = () => {
     const form = createForm({ organisation: Organisation, contact_persons: ContactPerson });
 
     return <UserInputContainer formName="Organisation and contacts" stepUserInput={form} />;
-};
-
-export const ServicePort = () => {
-    mock.onGet(/ims\/free_ports\/.*/).reply(200, corelinkPorts10G);
-    mock.onGet(/ims\/free_ports_ims_node\/.*/).reply(200, corelinkPorts10G);
-    mock.onGet("ims/nodes/MT001A/IS").reply(200, imsNodes);
-
-    const form = createForm({
-        ims_port_id_1: imsPortIdProperty({
-            locationCode: "MT001A",
-            interfaceSpeed: "1000BASE-LX"
-        })
-    });
-
-    return <UserInputContainer formName="Service port form" stepUserInput={form} />;
 };
 
 export const Corelink = () => {
@@ -119,119 +102,6 @@ export const Nodes = () => {
     });
 
     return <UserInputContainer formName="Node form" stepUserInput={form} />;
-};
-
-export const Sn7PortselectAllOrganisations = () => {
-    mock.onGet("subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(
-        200,
-        SN7PortSubscriptions.filter(p => p.status === "active")
-    );
-    mock.onGet("subscriptions/ports?filter=tags,MSP-SSP-MSPNL,statuses,active").reply(
-        200,
-        SN7PortSubscriptions.filter(p => p.status === "active")
-    );
-    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("subscriptions/all").reply(200, []);
-    mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
-    loadVlanMocks();
-
-    const form = createForm({
-        organisation: Organisation,
-        bandwidth: Bandwidth,
-        service_ports: servicePortsProperty({ tags: ["MSP", "SSP", "MSPNL"] }, 1, 6)
-    });
-
-    return <UserInputContainer formName="SN7 portselect form, showing all ports" stepUserInput={form} />;
-};
-
-Sn7PortselectAllOrganisations.story = {
-    name: "SN7 Portselect all organisations"
-};
-
-export const Sn7PortselectMspOnly = () => {
-    mock.onGet("subscriptions/ports?filter=tags%2CMSP-MSPNL%2Cstatuses%2Cactive").reply(
-        200,
-        SN7PortSubscriptions.filter(p => p.status === "active").filter(p => ["MSP", "MSPNL"].includes(p.product.tag))
-    );
-    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive", []);
-    mock.onGet("subscriptions/all", []);
-    mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
-    loadVlanMocks();
-
-    const form = createForm({
-        organisation: Organisation,
-        bandwidth: Bandwidth,
-        service_ports: servicePortsProperty({ tags: ["MSP", "MSPNL"] }, 1, 6)
-    });
-
-    return <UserInputContainer formName="SN7 portselect form, showing all ports" stepUserInput={form} />;
-};
-
-Sn7PortselectMspOnly.story = {
-    name: "SN7 Portselect MSP only"
-};
-
-export const Sn7PortselectSelectedOrganisation = () => {
-    mock.onGet("/api/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(
-        200,
-        SN7PortSubscriptions.filter(p => p.status === "active")
-    );
-    mock.onGet("/api/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("/api/subscriptions/all").reply(200, []);
-    mock.onGet("glob:*/api/subscriptions/parent_subscriptions/*").reply(200, []);
-    loadVlanMocks();
-
-    const form = createForm({
-        organisation: Organisation,
-        bandwidth: Bandwidth,
-        service_ports: servicePortsProperty({ organisationKey: "organisation", tags: ["MSP", "SSP", "MSPNL"] }, 1, 6)
-    });
-
-    return (
-        <UserInputContainer
-            formName="SN7 portselect, showing only ports for selected organisation"
-            stepUserInput={form}
-        />
-    );
-};
-
-Sn7PortselectSelectedOrganisation.story = {
-    name: "SN7 Portselect selected organisation"
-};
-
-export const Sn7PortselectBandwidth = () => {
-    mock.onGet("subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(
-        200,
-        SN7PortSubscriptions.filter(p => p.status === "active")
-    );
-    mock.onGet("/api/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("/api/subscriptions/all").reply(200, []);
-    mock.onGet("glob:*/api/subscriptions/parent_subscriptions/*").reply(200, []);
-    mock.onGet(/fixed_inputs\/port_speed_by_subscription_id\/.*/).reply(200, [1000]);
-    loadVlanMocks();
-
-    const form = createForm({
-        service_ports: servicePortsProperty({ bandwidthKey: "current_bandwidth", tags: ["MSP", "SSP", "MSPNL"] }, 1),
-        current_bandwidth: {
-            maximum: 1000000,
-            minimum: 0,
-            title: "Service Speed",
-            type: "integer",
-            value: number("bandwidth", 1000)
-        },
-        new_bandwidth: {
-            maximum: 1000000,
-            minimum: 0,
-            title: "Service Speed",
-            type: "integer"
-        }
-    });
-
-    return <UserInputContainer formName="SN7 portselect form, showing all ports" stepUserInput={form} />;
-};
-
-Sn7PortselectBandwidth.story = {
-    name: "SN7 Portselect bandwidth"
 };
 
 export const Sn8PortselectAllOrganisations = () => {

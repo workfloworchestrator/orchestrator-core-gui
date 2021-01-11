@@ -40,11 +40,6 @@ export function makeLabel(subscription: iSubscription, products: Product[], orga
     if (["Node"].includes(product.tag)) {
         const description = subscription.description || I18n.t("forms.widgets.subscription.missingDescription");
         return `${subscription.subscription_id.substring(0, 8)} ${description.trim()}`;
-    } else if (["MSP", "MSPNL", "SSP"].includes(product.tag)) {
-        const crm_port_id =
-            (subscription as ServicePortSubscription).crm_port_id ||
-            I18n.t("forms.widgets.subscription.missingCrmPortId");
-        return `${crm_port_id} - ${subscription_substring} ${description.trim()} ${organisationName}`;
     } else if (["SP", "SPNL", "AGGSP", "AGGSPNL", "MSC", "MSCNL", "IRBSP"].includes(product.tag)) {
         let portSubscription = subscription as ServicePortSubscription;
         const portMode = getPortMode(portSubscription, products);
@@ -57,10 +52,7 @@ export function makeLabel(subscription: iSubscription, products: Product[], orga
 export function getPortMode(subscription: ServicePortSubscription, products: Product[]) {
     const product = subscription.product || productById(subscription.product_id!, products);
 
-    return (
-        subscription?.port_mode ||
-        (["MSP", "MSPNL", "MSC", "MSCNL", "IRBSP"].includes(product.tag!) ? "tagged" : "untagged")
-    );
+    return subscription?.port_mode || (["MSC", "MSCNL", "IRBSP"].includes(product.tag!) ? "tagged" : "untagged");
 }
 declare module "uniforms" {
     interface FilterDOMProps {
