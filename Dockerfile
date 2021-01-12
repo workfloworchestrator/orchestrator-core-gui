@@ -9,13 +9,10 @@ COPY package.json .
 COPY yarn.lock .
 
 ##########################################################
-### IMAGE FOR LOCAL DEVELOPMENT WITH MOUNTED SOURCE FOLDER
+### IMAGE FOR LOCAL DEVELOPMENT, NODE MODULES ARE INSTALLED AT RUNTIME
 FROM base AS local-dev
 
-RUN yarn install
-
 EXPOSE 3000
-CMD [ "yarn", "start" ]
 
 #####################################################################
 ### IMAGE FOR LOCAL DEVELOPMENT WITH SOURCE FOLDERS COPIED INTO IMAGE

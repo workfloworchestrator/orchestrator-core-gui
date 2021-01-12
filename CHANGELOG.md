@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `#206`: Made "notes" a default Subscription table column
 -   `#206`: Main navigation/tabs are now keyboard accessible
 -   Add Sentry configuration to the orchestrator client
+-   Do not install node-modules in Dockerfile dev stage (do this at runtime instead)
 
 ## [7.1.2] - 2020-12-01
 
