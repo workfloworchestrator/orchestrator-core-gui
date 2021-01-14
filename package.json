@@ -91,7 +91,7 @@
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "eslint-plugin-react": "^7.18.3",
         "eslint-plugin-react-hooks": "^2.4.0",
-        "git-format-staged": "^2.1.0",
+        "git-format-staged": "^2.1.1",
         "http-proxy-middleware": "^0.21.0",
         "husky": "^4.3.7",
         "import-sort-style-module": "^6.0.0",
