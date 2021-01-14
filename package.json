@@ -103,7 +103,7 @@
         "react-test-renderer": "^16.13.1",
         "sass": "^1.32.4",
         "simpl-schema": "^1.7.2",
-        "source-map-explorer": "^2.2.2",
+        "source-map-explorer": "^2.5.2",
         "storybook-react-router": "^1.0.8",
         "typescript": "^3.9.7",
         "uniforms-bridge-simple-schema-2": "^3.0.0-rc.5",
