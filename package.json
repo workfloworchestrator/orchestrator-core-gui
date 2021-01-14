@@ -101,7 +101,7 @@
         "prettier-plugin-import-sort": "^0.0.3",
         "react-router": "^5.1.2",
         "react-test-renderer": "^16.13.1",
-        "sass": "^1.26.8",
+        "sass": "^1.32.4",
         "simpl-schema": "^1.7.2",
         "source-map-explorer": "^2.2.2",
         "storybook-react-router": "^1.0.8",
