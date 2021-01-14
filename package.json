@@ -98,7 +98,7 @@
         "license-check-and-add": "^3.0.4",
         "node-fetch": "^2.6.1",
         "prettier": "1.19.1",
-        "prettier-plugin-import-sort": "^0.0.3",
+        "prettier-plugin-import-sort": "^0.0.6",
         "react-router": "^5.1.2",
         "react-test-renderer": "^16.13.1",
         "sass": "^1.32.4",
