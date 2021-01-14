@@ -32,3 +32,5 @@ delme-validations.json
 package-lock.json
 .vscode
 .env
+
+.eslintcache
