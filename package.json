@@ -7,7 +7,7 @@
         "@elastic/eui": "^30.5.1",
         "@fortawesome/fontawesome-free": "^5.15.2",
         "@sentry/react": "^5.30.0",
-        "@sentry/tracing": "^5.29.1",
+        "@sentry/tracing": "^5.30.0",
         "axios": "^0.21.1",
         "babel-polyfill": "^6.26.0",
         "date-fns": "^2.0.0-alpha.23",
