@@ -56,7 +56,7 @@
         "@storybook/preset-create-react-app": "^1.5.2",
         "@storybook/react": "^5.3.13",
         "@storybook/theming": "^5.3.13",
-        "@types/enzyme": "^3.10.5",
+        "@types/enzyme": "^3.10.8",
         "@types/highlight.js": "^9.12.4",
         "@types/i18n-js": "^3.0.1",
         "@types/invariant": "^2.2.33",
