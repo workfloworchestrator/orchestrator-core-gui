@@ -3472,10 +3472,10 @@
   resolved "https://registry.yarnpkg.com/@types/scroll-into-view/-/scroll-into-view-1.6.7.tgz#edb4182fea8305f79c2f893bebd2dd7b164d543c"
   integrity sha512-TLaZJnAVhIJDXnsnjDQmM4UCbnfqjD6iWyVGniIKRJpv+IZ3SxWA5Q8nwK4ws2CBMCZvEbW3YpLWyQ/EtjWc2A==
 
-"@types/simpl-schema@^0.2.7":
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/@types/simpl-schema/-/simpl-schema-0.2.7.tgz#7575fff84b1cc5a4ea9459e6cfdca6da2fc4d3cb"
-  integrity sha512-d9Fo7kM+5vegoDnBOc8sTilWkORvIkTS9+Ql3sLUC3mCYXdU0/nqTkI2/tlfzWsC7Dwj0T7yNJRmRcug795RlA==
+"@types/simpl-schema@^1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@types/simpl-schema/-/simpl-schema-1.10.0.tgz#39887850eeb729e5d2aed780e3bed825afdc250b"
+  integrity sha512-PeMwKKH4FdqjCwaF6Com2ivJT/AsNxNMAHOOrUg+brs5iqPm/d7PrFUW18Uq+bHdELbRbv9ehmGcFy8JVRdaiw==
 
 "@types/source-list-map@*":
   version "0.1.2"
