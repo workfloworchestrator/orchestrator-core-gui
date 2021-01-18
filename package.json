@@ -80,7 +80,7 @@
         "@types/storybook-react-router": "^1.0.1",
         "@typescript-eslint/eslint-plugin": "^2.21.0",
         "@typescript-eslint/parser": "^2.21.0",
-        "axios-mock-adapter": "^1.18.2",
+        "axios-mock-adapter": "^1.19.0",
         "create-react-app": "^3.4.0",
         "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.15.5",
