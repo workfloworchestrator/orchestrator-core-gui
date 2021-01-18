@@ -8041,10 +8041,10 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-git-format-staged@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/git-format-staged/-/git-format-staged-2.1.0.tgz#9cf11fed8171f23a22adb58ac2877324ea562755"
-  integrity sha512-Ih3EVablJ1Xj/JPMzbXY3Nl0W6NQ9YrA+mad3c9yobODzq9zfOBHMi0h3AScRprm4XtBbIo1oGfwO3cZ4vmg6Q==
+git-format-staged@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/git-format-staged/-/git-format-staged-2.1.1.tgz#e9e4b2f1caf4b6656ef568227aa72915ec2e5d87"
+  integrity sha512-Db4QiAymao9BfpTBCdEcF53jBZfKuwIigqhNmtODD+KOKbxrdDVMDeAs+P7eqJl9udlBZejhRKRbyFRtKLbVmA==
 
 github-slugger@^1.0.0:
   version "1.3.0"
