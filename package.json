@@ -83,7 +83,7 @@
         "axios-mock-adapter": "^1.18.2",
         "create-react-app": "^3.4.0",
         "enzyme": "^3.11.0",
-        "enzyme-adapter-react-16": "^1.15.2",
+        "enzyme-adapter-react-16": "^1.15.5",
         "eslint": "^6.8.0",
         "eslint-config-react-app": "5.2.0",
         "eslint-plugin-flowtype": "^4.6.0",
