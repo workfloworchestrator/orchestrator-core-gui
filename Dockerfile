@@ -1,6 +1,6 @@
 ###############################
 ### BASE LAYER FOR IMAGES BELOW
-FROM git.ia.surfsara.nl/automation/dependency_proxy/containers/node:14.2.0-slim AS base
+FROM node:14.2.0-slim AS base
 
 ENV CI=true
 
@@ -35,7 +35,7 @@ RUN yarn build
 
 ########################
 ### IMAGE FOR PRODUCTION
-FROM git.ia.surfsara.nl/automation/dependency_proxy/containers/nginx:alpine
+FROM nginx:alpine
 
 RUN apk update && apk add wget curl
 COPY default.conf /etc/nginx/conf.d/default.conf
