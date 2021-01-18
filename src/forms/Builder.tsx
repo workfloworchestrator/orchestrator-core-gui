@@ -13,6 +13,7 @@
  *
  */
 
+import { EuiFieldText } from "@elastic/eui";
 import DatePickerCustom from "components/DatePickerCustom";
 import I18n from "i18n-js";
 import React from "react";
@@ -34,11 +35,11 @@ export function formInput<T extends { [index: string]: any }>(
         <section className="form-divider">
             <label htmlFor={name}>{I18n.t(i18nKey)}</label>
             <em>{I18n.t(`${i18nKey}_info`)}</em>
-            <input
-                type="text"
+            <EuiFieldText
                 id={name}
-                name={name}
+                placeholder={name}
                 value={value}
+                fullWidth={true}
                 onChange={onChange}
                 onBlur={onBlur}
                 disabled={readOnly}

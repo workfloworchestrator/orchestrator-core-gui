@@ -18,7 +18,7 @@ import "components/Product.scss";
 
 import "./Product.scss";
 
-import { EuiButton, EuiFieldText } from "@elastic/eui";
+import { EuiButton, EuiFieldText, EuiSuperSelect } from "@elastic/eui";
 import { deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes } from "api";
 import { allWorkflows, productBlocks, productById, products, saveProduct } from "api/index";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
