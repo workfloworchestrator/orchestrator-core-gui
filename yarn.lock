@@ -12091,10 +12091,10 @@ oidc-client@^1.10.1, oidc-client@^1.9.1:
     crypto-js "^3.1.9-1"
     uuid "^3.3.2"
 
-oidc-react@^1.0.0-alpha.5:
-  version "1.0.0-alpha.5"
-  resolved "https://registry.yarnpkg.com/oidc-react/-/oidc-react-1.0.0-alpha.5.tgz#c2e3b0ae61de404d09c12077e3bc7f75cebdc384"
-  integrity sha512-8iOS2zaizzmOYo1vc4Rh7SEo5PO4oWazDcUIphYA9NhY/htre5j0QoaW6uaYQpFmneumhyt67iQKi6WOFWaHMA==
+oidc-react@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/oidc-react/-/oidc-react-1.1.1.tgz#68c99c90816c9cf9d1dbb22701a8aa195abd2f36"
+  integrity sha512-wZmbTKjn6jPO7Jp1orTVLd0Yguql7N2Cvg2wygaUmuCbARG2A0C68aTA4PYY9Sx5pe6xmN3iV64vMffEllifrg==
   dependencies:
     oidc-client "^1.9.1"
     react "^16.11.0"
