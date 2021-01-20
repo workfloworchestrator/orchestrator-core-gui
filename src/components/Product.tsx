@@ -93,7 +93,7 @@ export default class Product extends React.Component<IProps, IState> {
         types: [],
         statuses: [],
         duplicateName: false,
-        allowedFixedInputs: []
+        allowedFixedInputs: [],
     };
 
     componentDidMount() {
@@ -102,12 +102,12 @@ export default class Product extends React.Component<IProps, IState> {
         if (isExistingProduct) {
             const readOnly = getParameterByName("readOnly", window.location.search) === "true";
             const clone = id === "clone";
-            productById(clone ? getParameterByName("productId", window.location.search) : id!).then(product => {
+            productById(clone ? getParameterByName("productId", window.location.search) : id!).then((product) => {
                 if (clone) {
                     delete product.name;
                     delete product.product_id;
                     delete product.created_at;
-                    (product.fixed_inputs || []).forEach(fixedInput => {
+                    (product.fixed_inputs || []).forEach((fixedInput) => {
                         delete fixedInput.created_at;
                         delete fixedInput.fixed_input_id;
                         delete fixedInput.product_id;
@@ -129,8 +129,8 @@ export default class Product extends React.Component<IProps, IState> {
             productTags(),
             productTypes(),
             productStatuses(),
-            fixedInputConfiguration()
-        ]).then(res =>
+            fixedInputConfiguration(),
+        ]).then((res) =>
             this.setState({
                 productBlocks: res[0],
                 workflows: res[1],
@@ -139,19 +139,19 @@ export default class Product extends React.Component<IProps, IState> {
                 types: res[4],
                 statuses: res[5],
                 fixedInputConf: res[6],
-                allowedFixedInputs: this.determineAllowedFixedInputs(productTag, res[6])
+                allowedFixedInputs: this.determineAllowedFixedInputs(productTag, res[6]),
             })
         );
 
     determineAllowedFixedInputs = (productTag: string, fixedInputConf: FixedInputConfiguration) => {
-        const ourTag = Object.keys(fixedInputConf.by_tag).find(tag => tag === productTag);
+        const ourTag = Object.keys(fixedInputConf.by_tag).find((tag) => tag === productTag);
         if (!ourTag) {
             return this.state.allowedFixedInputs;
         }
-        const inputs = fixedInputConf.by_tag[ourTag].map(fi => {
+        const inputs = fixedInputConf.by_tag[ourTag].map((fi) => {
             const name = Object.keys(fi)[0];
             const required = fi[name];
-            const cfi: FixedInputConf = fixedInputConf.fixed_inputs.find(f => f.name === name)!;
+            const cfi: FixedInputConf = fixedInputConf.fixed_inputs.find((f) => f.name === name)!;
             cfi.required = required;
             return cfi;
         });
@@ -164,7 +164,7 @@ export default class Product extends React.Component<IProps, IState> {
             confirmationDialogOpen: true,
             leavePage: true,
             confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
-            cancelDialogAction: () => this.context.redirect("/metadata/products")
+            cancelDialogAction: () => this.context.redirect("/metadata/products"),
         });
     };
 
@@ -174,7 +174,7 @@ export default class Product extends React.Component<IProps, IState> {
 
         const question = I18n.t("metadata.deleteConfirmation", {
             type: "Product",
-            name: product!.name
+            name: product!.name,
         });
         const action = () =>
             deleteProduct(product!.product_id)
@@ -183,11 +183,11 @@ export default class Product extends React.Component<IProps, IState> {
                     setFlash(
                         I18n.t("metadata.flash.delete", {
                             name: product!.name,
-                            type: "Product"
+                            type: "Product",
                         })
                     );
                 })
-                .catch(err => {
+                .catch((err) => {
                     if (err.response && err.response.status === 400) {
                         this.setState({ confirmationDialogOpen: false });
                         if (err.response.data) {
@@ -202,7 +202,7 @@ export default class Product extends React.Component<IProps, IState> {
             confirmationDialogQuestion: question,
             leavePage: false,
             confirmationDialogAction: action,
-            cancelDialogAction: () => this.setState({ confirmationDialogOpen: false })
+            cancelDialogAction: () => this.setState({ confirmationDialogOpen: false }),
         });
     };
 
@@ -218,7 +218,7 @@ export default class Product extends React.Component<IProps, IState> {
                 setFlash(
                     I18n.t(product!.product_id ? "metadata.flash.updated" : "metadata.flash.created", {
                         type: "Product",
-                        name: product!.name
+                        name: product!.name,
                     })
                 );
             });
@@ -257,12 +257,12 @@ export default class Product extends React.Component<IProps, IState> {
 
     isInvalid = (markErrors: boolean = false) => {
         const { errors, required, product, duplicateName } = this.state;
-        const hasErrors = (Object.keys(errors) as (keyof iProduct)[]).some(key => errors[key]);
-        const requiredInputMissing = required.some(attr => isEmpty(product![attr]));
+        const hasErrors = (Object.keys(errors) as (keyof iProduct)[]).some((key) => errors[key]);
+        const requiredInputMissing = required.some((attr) => isEmpty(product![attr]));
         if (markErrors) {
-            const missing = required.filter(attr => isEmpty(product![attr]));
+            const missing = required.filter((attr) => isEmpty(product![attr]));
             const newErrors = { ...errors };
-            missing.forEach(attr => (newErrors[attr] = true));
+            missing.forEach((attr) => (newErrors[attr] = true));
             this.setState({ errors: newErrors });
         }
         return hasErrors || requiredInputMissing || duplicateName;
@@ -273,7 +273,7 @@ export default class Product extends React.Component<IProps, IState> {
         const errors = { ...this.state.errors };
         const { product } = this.state;
         if (name === "name") {
-            const nbr = this.state.products.filter(p => p.name === value).length;
+            const nbr = this.state.products.filter((p) => p.name === value).length;
             const duplicate = product!.product_id ? nbr === 2 : nbr === 1;
             errors[name] = duplicate;
             this.setState({ duplicateName: duplicate });
@@ -285,14 +285,14 @@ export default class Product extends React.Component<IProps, IState> {
     changeWorkflow = (target: string, multi: boolean = false) => (option: ValueType<Option>) => {
         const { product, workflows } = this.state;
 
-        const otherWorkflows = product!.workflows.filter(wf => wf.target !== target);
+        const otherWorkflows = product!.workflows.filter((wf) => wf.target !== target);
         if (!option) {
             product!.workflows = [...otherWorkflows];
         } else if (multi) {
-            const names = (option as Option[]).map(opt => opt.value);
-            product!.workflows = workflows.filter(wf => names.indexOf(wf.name) > -1).concat(otherWorkflows);
+            const names = (option as Option[]).map((opt) => opt.value);
+            product!.workflows = workflows.filter((wf) => names.indexOf(wf.name) > -1).concat(otherWorkflows);
         } else {
-            product!.workflows = [workflows.find(wf => wf.name === (option as Option).value)!].concat(otherWorkflows);
+            product!.workflows = [workflows.find((wf) => wf.name === (option as Option).value)!].concat(otherWorkflows);
         }
         this.setState({ product: product });
     };
@@ -324,7 +324,7 @@ export default class Product extends React.Component<IProps, IState> {
     addProductBlock = (option: ValueType<Option>) => {
         const { product, productBlocks } = this.state;
 
-        const newProductBlock = productBlocks.find(pb => pb.product_block_id === (option as Option).value)!;
+        const newProductBlock = productBlocks.find((pb) => pb.product_block_id === (option as Option).value)!;
         product!.product_blocks.push(newProductBlock);
         this.setState({ product: product });
     };
@@ -333,14 +333,14 @@ export default class Product extends React.Component<IProps, IState> {
         stop(e);
         const { product } = this.state;
 
-        product!.product_blocks = product!.product_blocks.filter(pb => pb.product_block_id !== product_block_id);
+        product!.product_blocks = product!.product_blocks.filter((pb) => pb.product_block_id !== product_block_id);
         this.setState({ product: product });
     };
 
     addFixedInput = (allowedFixedInputs: FixedInputConf[]) => (option: ValueType<Option>) => {
         const { product } = this.state;
 
-        const fi = allowedFixedInputs.find(fi => fi.name === (option as Option).value)!;
+        const fi = allowedFixedInputs.find((fi) => fi.name === (option as Option).value)!;
         product!.fixed_inputs.push({ name: fi.name, value: fi.values[0] } as FixedInput);
         this.setState({ product: product });
     };
@@ -363,10 +363,10 @@ export default class Product extends React.Component<IProps, IState> {
     };
 
     workFlowKeys = (type: string, workflows: Workflow[]) =>
-        workflows.filter(wf => wf.target === type).map(wf => ({ label: wf.description, value: wf.name }));
+        workflows.filter((wf) => wf.target === type).map((wf) => ({ label: wf.description, value: wf.name }));
 
     workFlowByTarget = (product: iProduct, target: string, multiValues: boolean = false) => {
-        const workflows = product.workflows.filter(wf => wf.target === target).map(wf => wf.name);
+        const workflows = product.workflows.filter((wf) => wf.target === target).map((wf) => wf.name);
         return multiValues ? workflows : isEmpty(workflows) ? undefined : workflows[0];
     };
 
@@ -376,12 +376,12 @@ export default class Product extends React.Component<IProps, IState> {
         allowedFixedInputs: FixedInputConf[],
         readOnly: boolean
     ) => {
-        const fixedInputConf = allowedFixedInputs.find(fi => fi.name === fixedInput.name);
+        const fixedInputConf = allowedFixedInputs.find((fi) => fi.name === fixedInput.name);
         const values = fixedInputConf ? fixedInputConf.values : [];
         const required = fixedInputConf ? fixedInputConf.required : true;
 
-        const options = values.map(val => ({ value: val, label: val }));
-        const value = options.find(option => option.value === fixedInput.value);
+        const options = values.map((val) => ({ value: val, label: val }));
+        const value = options.find((option) => option.value === fixedInput.value);
 
         return (
             <div key={index} className="fixed-input">
@@ -409,7 +409,9 @@ export default class Product extends React.Component<IProps, IState> {
     renderFixedInputs = (product: iProduct, readOnly: boolean) => {
         const fixedInputs = product.fixed_inputs;
         const { allowedFixedInputs } = this.state;
-        const availableFixedInputs = allowedFixedInputs.filter(afi => !fixedInputs.some(fi => afi.name === fi.name));
+        const availableFixedInputs = allowedFixedInputs.filter(
+            (afi) => !fixedInputs.some((fi) => afi.name === fi.name)
+        );
         return (
             <section className="form-divider">
                 <label>{I18n.t("metadata.products.fixed_inputs")}</label>
@@ -423,9 +425,9 @@ export default class Product extends React.Component<IProps, IState> {
                         <Select
                             className="select-fixed-input"
                             onChange={this.addFixedInput(allowedFixedInputs)}
-                            options={availableFixedInputs.map(fi => ({
+                            options={availableFixedInputs.map((fi) => ({
                                 value: fi.name,
-                                label: fi.name
+                                label: fi.name,
                             }))}
                             isSearchable={false}
                             isClearable={false}
@@ -444,14 +446,14 @@ export default class Product extends React.Component<IProps, IState> {
 
     renderProductBlocks = (product: iProduct, productBlocks: ProductBlock[], readOnly: boolean) => {
         const availableProductBlocks = productBlocks.filter(
-            pb => !product.product_blocks.some(pPb => pb.product_block_id === pPb.product_block_id)
+            (pb) => !product.product_blocks.some((pPb) => pb.product_block_id === pPb.product_block_id)
         );
         return (
             <section className="form-divider">
                 <label htmlFor="name">{I18n.t("metadata.products.product_blocks")}</label>
                 <em>{I18n.t("metadata.products.product_blocks_info")}</em>
                 <div className="child-form">
-                    {product.product_blocks.map(pb => (
+                    {product.product_blocks.map((pb) => (
                         <div key={pb.product_block_id} className="product-block">
                             <input
                                 type="text"
@@ -467,9 +469,9 @@ export default class Product extends React.Component<IProps, IState> {
                         <Select
                             className="select-product-block"
                             onChange={this.addProductBlock}
-                            options={availableProductBlocks.map(pb => ({
+                            options={availableProductBlocks.map((pb) => ({
                                 value: pb.product_block_id,
-                                label: `${pb.name.toUpperCase()} - ${pb.description}`
+                                label: `${pb.name.toUpperCase()} - ${pb.description}`,
                             }))}
                             isSearchable={true}
                             isClearable={false}
@@ -501,7 +503,7 @@ export default class Product extends React.Component<IProps, IState> {
             confirmationDialogQuestion,
             tags,
             types,
-            statuses
+            statuses,
         } = this.state;
 
         if (!product) {

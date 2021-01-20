@@ -75,10 +75,10 @@ export function filterableEndpoint<T>(
             baseURL: ENV.BACKEND_URL + "/api/",
             params,
             validateStatus: (status: number) => (status >= 200 && status < 300) || status === 304,
-            cancelToken: cancel.token
+            cancelToken: cancel.token,
         })
         .then(
-            response => {
+            (response) => {
                 switch (response.status) {
                     case 200:
                         return [response.data, ...extractResponseHeaders(response.headers)] as [
@@ -92,7 +92,7 @@ export function filterableEndpoint<T>(
                         return Promise.reject(response);
                 }
             },
-            error => {
+            (error) => {
                 if (axios.isCancel(error)) {
                     console.log(`Request canceled: ${error.message}`);
                     // don't set a message to flash, we are canceled.

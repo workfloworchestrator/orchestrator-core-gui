@@ -9,7 +9,7 @@ import {
     SubscriptionInstance,
     SubscriptionInstanceParentRelation,
     SubscriptionModel,
-    SubscriptionWithDetails
+    SubscriptionWithDetails,
 } from "utils/types";
 import { isEmpty } from "utils/Utils";
 
@@ -65,31 +65,31 @@ interface Graph {
 const circuitTypeProperties = {
     optical: {
         style: stylesMap.optical,
-        lineShape: lineShapeMap.optical
+        lineShape: lineShapeMap.optical,
     },
     leased: {
         style: stylesMap.leased,
-        lineShape: lineShapeMap.leased
+        lineShape: lineShapeMap.leased,
     },
     darkFiber: {
         style: stylesMap.darkFiber,
-        lineShape: lineShapeMap.darkFiber
+        lineShape: lineShapeMap.darkFiber,
     },
     equipmentToEquipment: {
         style: stylesMap.equipmentToEquipment,
-        lineShape: lineShapeMap.equipmentToEquipment
+        lineShape: lineShapeMap.equipmentToEquipment,
     },
     crossConnect: {
         style: stylesMap.crossConnect,
-        lineShape: lineShapeMap.crossConnect
+        lineShape: lineShapeMap.crossConnect,
     },
     panelCoupler: {
         style: stylesMap.panelCoupler,
         lineShape: lineShapeMap.coupler,
         size: 30,
         squareWidth: 40,
-        centerLine: true
-    }
+        centerLine: true,
+    },
 };
 
 const graphList: Graph[] = [];
@@ -103,7 +103,7 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
             isTableOn: false,
             imsEndpoints: [],
             imsServices: [],
-            isLoading: false
+            isLoading: false,
         };
     }
 
@@ -115,7 +115,7 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
         if (!isLoading && vcs.length > 0 && isEmpty(imsServices)) {
             this.setState({ isLoading: true });
             vcs.forEach((vc: any, vcIndex: number) => {
-                serviceByImsServiceId(vc.ims_circuit_id).then(result => {
+                serviceByImsServiceId(vc.ims_circuit_id).then((result) => {
                     imsServices[vcIndex] = result;
                     this.setState({ imsServices: imsServices });
                     if (isEmpty(imsEndpoints[vcIndex])) {
@@ -129,7 +129,7 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
     populateEndpoints = ({
         service,
         recursive = false,
-        vc = 0
+        vc = 0,
     }: {
         service: IMSService;
         recursive?: boolean;
@@ -139,42 +139,42 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
             return;
         }
 
-        const uniquePortPromises = (service.endpoints || []).map(async endpoint => {
+        const uniquePortPromises = (service.endpoints || []).map(async (endpoint) => {
             if (endpoint.type === "port") {
-                return portByImsPortId(endpoint.id).then(result =>
+                return portByImsPortId(endpoint.id).then((result) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
-                        endpointType: endpoint.type
+                        endpointType: endpoint.type,
                     })
                 );
             } else if (endpoint.type === "internal_port") {
-                return internalPortByImsPortId(endpoint.id).then(result =>
+                return internalPortByImsPortId(endpoint.id).then((result) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
-                        endpointType: endpoint.type
+                        endpointType: endpoint.type,
                     })
                 );
             } else {
-                return serviceByImsServiceId(endpoint.id).then(result => {
+                return serviceByImsServiceId(endpoint.id).then((result) => {
                     if (["SP", "MSP", "SSP"].includes(result.product)) {
                         // In case of port product we just resolve the underlying port
-                        return portByImsServiceId(endpoint.id).then(result =>
+                        return portByImsServiceId(endpoint.id).then((result) =>
                             Object.assign(result, {
                                 serviceId: endpoint.id,
-                                endpointType: "port"
+                                endpointType: "port",
                             })
                         );
                     }
                     // Return all services that are not actually port services
                     return (Object.assign(result, {
                         serviceId: endpoint.id,
-                        endpointType: endpoint.type
+                        endpointType: endpoint.type,
                     }) as unknown) as IMSEndpoint;
                 });
             }
         });
         //@ts-ignore
-        Promise.all(uniquePortPromises).then(result => {
+        Promise.all(uniquePortPromises).then((result) => {
             const { imsEndpoints } = this.state;
             imsEndpoints[vc] = result.flat();
             this.setState({ imsEndpoints: imsEndpoints });
@@ -226,7 +226,7 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
                 {subscription && subscription.customer_descriptions.length > 0 && (
                     <>
                         <strong>customer descriptions:</strong>
-                        {subscription.customer_descriptions.map(item => (
+                        {subscription.customer_descriptions.map((item) => (
                             <div>{item.description}</div>
                         ))}
                         <br />
@@ -267,7 +267,7 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
                 {subscription && subscription.customer_descriptions.length > 0 && (
                     <>
                         <strong>customer descriptions:</strong>
-                        {subscription.customer_descriptions.map(item => (
+                        {subscription.customer_descriptions.map((item) => (
                             <div>{item.description}</div>
                         ))}
                         <br />
@@ -303,7 +303,7 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
                 endpointLabelA: labelA,
                 endpointLabelZ: labelZ,
                 circuitLabel: label,
-                navTo: index
+                navTo: index,
             };
         };
 

@@ -76,13 +76,13 @@ class App extends React.PureComponent<{}, IState> {
                 assignees: [],
                 processStatuses: [],
                 products: [],
-                redirect: url => history.push(url)
+                redirect: (url) => history.push(url),
             },
             error: false,
             errorDialogOpen: false,
             errorDialogAction: () => {
                 this.setState({ errorDialogOpen: false });
-            }
+            },
         };
         window.onerror = (msg, url, line, col, err?: AppError) => {
             if (err && err.response && (err.response.status === 401 || err.response.status === 403)) {
@@ -101,7 +101,7 @@ class App extends React.PureComponent<{}, IState> {
                 error: info.message,
                 stack: info.stack,
                 targetUrl: response.url,
-                status: response.status
+                status: response.status,
             };
             reportError(error);
         };
@@ -132,7 +132,7 @@ class App extends React.PureComponent<{}, IState> {
             products(),
             locationCodes(),
             assignees(),
-            processStatuses()
+            processStatuses(),
         ]);
 
         const filterdProducts = (allProducts || []).sort((a, b) => a.name.localeCompare(b.name));
@@ -146,8 +146,8 @@ class App extends React.PureComponent<{}, IState> {
                 assignees: allAssignees || [],
                 processStatuses: allProcessStatuses || [],
                 products: filterdProducts || [],
-                redirect: url => history.push(url)
-            }
+                redirect: (url) => history.push(url),
+            },
         });
     }
 
@@ -180,13 +180,13 @@ class App extends React.PureComponent<{}, IState> {
                                 <Route exact path="/" render={() => <Redirect to="/processes" />} />
                                 <ProtectedRoute
                                     path="/new-process"
-                                    render={props => (
+                                    render={(props) => (
                                         <NewProcess preselectedInput={getQueryParameters(props.location.search)} />
                                     )}
                                 />
                                 <ProtectedRoute
                                     path="/modify-subscription"
-                                    render={props => (
+                                    render={(props) => (
                                         <ModifySubscription
                                             workflowName={getParameterByName("workflow", props.location.search)}
                                             subscriptionId={getParameterByName("subscription", props.location.search)}
@@ -195,7 +195,7 @@ class App extends React.PureComponent<{}, IState> {
                                 />
                                 <ProtectedRoute
                                     path="/terminate-subscription"
-                                    render={props => (
+                                    render={(props) => (
                                         <TerminateSubscription
                                             subscriptionId={getParameterByName("subscription", props.location.search)}
                                         />
@@ -203,36 +203,36 @@ class App extends React.PureComponent<{}, IState> {
                                 />
                                 <Route
                                     path="/process/:id"
-                                    render={props => <Redirect to={`/processes/${props.match.params.id}`} />}
+                                    render={(props) => <Redirect to={`/processes/${props.match.params.id}`} />}
                                 />
-                                <Route path="/processes/:id" render={props => <ProcessDetail {...props} />} />
-                                <ProtectedRoute path="/processes" render={props => <Processes />} />
+                                <Route path="/processes/:id" render={(props) => <ProcessDetail {...props} />} />
+                                <ProtectedRoute path="/processes" render={(props) => <Processes />} />
                                 <Route
                                     path="/subscription/:id"
-                                    render={props => <Redirect to={`/subscriptions/${props.match.params.id}`} />}
+                                    render={(props) => <Redirect to={`/subscriptions/${props.match.params.id}`} />}
                                 />
                                 <Route
                                     path="/subscriptions/:id"
-                                    render={props => <SubscriptionDetailPage {...props} />}
+                                    render={(props) => <SubscriptionDetailPage {...props} />}
                                 />
-                                <Route path="/subscriptions" render={props => <SubscriptionsPage {...props} />} />
+                                <Route path="/subscriptions" render={(props) => <SubscriptionsPage {...props} />} />
                                 <Route exact path="/metadata" render={() => <Redirect to="/metadata/products" />} />
-                                <ProtectedRoute path="/metadatapage" render={props => <MetaDataPage {...props} />} />
-                                <ProtectedRoute path="/metadata/:type" render={props => <MetaData {...props} />} />
-                                <ProtectedRoute path="/product/:id" render={props => <ProductPage {...props} />} />
+                                <ProtectedRoute path="/metadatapage" render={(props) => <MetaDataPage {...props} />} />
+                                <ProtectedRoute path="/metadata/:type" render={(props) => <MetaData {...props} />} />
+                                <ProtectedRoute path="/product/:id" render={(props) => <ProductPage {...props} />} />
                                 <ProtectedRoute
                                     path="/product-block/:id"
-                                    render={props => <ProductBlock {...props} />}
+                                    render={(props) => <ProductBlock {...props} />}
                                 />
                                 <ProtectedRoute path="/settings" render={() => <Settings />} />
                                 <ProtectedRoute path="/prefixes" render={() => <Prefixes />} />
                                 <ProtectedRoute path="/new-task" render={() => <NewTask />} />
 
                                 <ProtectedRoute path="/tasks" render={() => <Tasks />} />
-                                <Route path="/task/:id" render={props => <ProcessDetail {...props} />} />
+                                <Route path="/task/:id" render={(props) => <ProcessDetail {...props} />} />
                                 <Route path="/not-allowed" render={() => <NotAllowed />} />
-                                <Route path="/error" render={props => <ServerError {...props} />} />
-                                <Route path="/styleguide" render={props => <StyleGuide {...props} />} />
+                                <Route path="/error" render={(props) => <ServerError {...props} />} />
+                                <Route path="/styleguide" render={(props) => <StyleGuide {...props} />} />
                                 <Route component={NotFound} />
                             </Switch>
                         </div>

@@ -35,7 +35,7 @@ export default class UserInputContainer extends React.Component<IProps> {
                             <h1>{formName}</h1>
                             <UserInputFormWizard
                                 stepUserInput={stepUserInput}
-                                validSubmit={value => {
+                                validSubmit={(value) => {
                                     action("submit")(value);
                                     return Promise.resolve();
                                 }}

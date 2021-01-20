@@ -27,17 +27,17 @@ interface IState {
 
 export default class FixedInputConfiguration extends React.Component<{}, IState> {
     state: IState = {
-        configuration: { by_tag: {}, fixed_inputs: [] }
+        configuration: { by_tag: {}, fixed_inputs: [] },
     };
 
-    componentDidMount = () => fixedInputConfiguration().then(res => this.setState({ configuration: res }));
+    componentDidMount = () => fixedInputConfiguration().then((res) => this.setState({ configuration: res }));
 
     fixedInputValues = (name: string, configuration: iFixedInputConfiguration) => {
-        return configuration.fixed_inputs.find(fi => fi.name === name)!.values.join(", ");
+        return configuration.fixed_inputs.find((fi) => fi.name === name)!.values.join(", ");
     };
 
     fixedInputDescription = (name: string, configuration: iFixedInputConfiguration) => {
-        return configuration.fixed_inputs.find(fi => fi.name === name)!.description;
+        return configuration.fixed_inputs.find((fi) => fi.name === name)!.description;
     };
 
     render() {

@@ -21,20 +21,20 @@ import { formDate } from "forms/Builder";
 import React from "react";
 
 const store = new Store({
-    date: new Date(1)
+    date: new Date(1),
 });
 
 export default {
     title: "DatePicker",
     // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
     parameters: {
-        fileName: __filename
-    }
+        fileName: __filename,
+    },
 };
 
 export const _Definition = () => (
     <State store={store}>
-        {state =>
+        {(state) =>
             formDate(
                 "metadata.productBlocks.created_at",
                 (e: any) => {

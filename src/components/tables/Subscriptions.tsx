@@ -6,13 +6,13 @@ import {
     renderSubscriptionIdCell,
     renderSubscriptionProductsCell,
     renderSubscriptionTagCell,
-    renderTimestampCell
+    renderTimestampCell,
 } from "components/tables/cellRenderers";
 import {
     renderCustomersFilter,
     renderILikeFilter,
     renderMultiSelectFilter,
-    renderSingleSelectFilter
+    renderSingleSelectFilter,
 } from "components/tables/filterRenderers";
 import { NwaTable, isLocalTableSettings } from "components/tables/NwaTable";
 import chunk from "lodash/chunk";
@@ -30,7 +30,7 @@ import {
     RowPropGetter,
     SessionTableSettings,
     TableSettings,
-    TableState
+    TableState,
 } from "react-table";
 import { useQueryParam } from "use-query-params";
 import ApplicationContext from "utils/ApplicationContext";
@@ -71,14 +71,14 @@ export function initialSubscriptionTableSettings(
         delay: 3000,
         pageSize: 25,
         pageIndex: 0,
-        minimized: false
+        minimized: false,
     };
     let rest = optional ? Object.assign(defaults, optional) : defaults;
     return {
         ...filterAndSort,
         name: name,
         hiddenColumns: hiddenColumns,
-        ...rest
+        ...rest,
     };
 }
 
@@ -98,7 +98,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
 
     const initialize = useMemo(
         () =>
-            function(current: TableSettings<Subscription>): TableState<Subscription> {
+            function (current: TableSettings<Subscription>): TableState<Subscription> {
                 // First get LocalState from LocalStorage
                 const settingsFromLocalStorage: LocalTableSettings<Subscription> | {} = JSON.parse(
                     localStorage.getItem(`table-settings:${current.name}`) || "{}"
@@ -123,7 +123,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                     if (filterQ) {
                         filterBy = chunk(filterQ, 2).map(([id, values]) => ({
                             id: id,
-                            values: values ? values.split("-") : []
+                            values: values ? values.split("-") : [],
                         }));
                     }
                 } catch (err) {
@@ -149,7 +149,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
         return {
             ...props,
             id: row.values.subscription_id,
-            className: `${row.values.status}`
+            className: `${row.values.status}`,
         };
     }, []);
 
@@ -181,7 +181,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                         return (
                             <div
                                 {...row.getToggleRowExpandedProps()}
-                                onClick={e => {
+                                onClick={(e) => {
                                     e.stopPropagation();
                                     row.toggleRowExpanded();
                                 }}
@@ -189,20 +189,20 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                                 {button}
                             </div>
                         );
-                    }
+                    },
                 },
                 {
                     Header: "id",
                     accessor: "subscription_id",
                     Filter: renderILikeFilter,
                     disableFilters: false,
-                    Cell: renderSubscriptionIdCell
+                    Cell: renderSubscriptionIdCell,
                 },
                 {
                     Header: "Description",
                     accessor: "description",
                     Filter: renderILikeFilter,
-                    Cell: renderSubscriptionDescriptionCell
+                    Cell: renderSubscriptionDescriptionCell,
                 },
                 {
                     Header: "Status",
@@ -211,14 +211,14 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                         null,
                         ["active", "terminated", "initial", "provisioning", "migrating"],
                         null
-                    )
+                    ),
                 },
                 {
                     Header: "In Sync",
                     id: "insync",
                     accessor: "insync",
                     Cell: renderInsyncCell,
-                    Filter: renderSingleSelectFilter.bind(null, ["yes", "no"], null)
+                    Filter: renderSingleSelectFilter.bind(null, ["yes", "no"], null),
                 },
                 {
                     Header: "Customer",
@@ -226,7 +226,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                     accessor: "customer_id",
                     disableSortBy: true,
                     Cell: renderSubscriptionCustomersCell(organisations, false),
-                    Filter: renderCustomersFilter
+                    Filter: renderCustomersFilter,
                 },
                 {
                     Header: "Abbr.",
@@ -234,43 +234,43 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                     accessor: "customer_id",
                     disableSortBy: true,
                     Cell: renderSubscriptionCustomersCell(organisations, true),
-                    Filter: renderCustomersFilter
+                    Filter: renderCustomersFilter,
                 },
                 {
                     Header: "Product",
                     id: "product",
                     accessor: "product",
                     Cell: renderSubscriptionProductsCell,
-                    Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.name).sort()), null)
+                    Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map((p) => p.name).sort()), null),
                 },
                 {
                     Header: "Tag",
                     id: "tag",
                     accessor: "product",
                     Cell: renderSubscriptionTagCell,
-                    Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.tag).sort()), null)
+                    Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map((p) => p.tag).sort()), null),
                 },
                 {
                     Header: "Start date",
                     id: "start_date",
                     accessor: "start_date",
                     Cell: renderTimestampCell,
-                    disableFilters: true
+                    disableFilters: true,
                 },
                 {
                     Header: "End date",
                     id: "end_date",
                     accessor: "end_date",
                     Cell: renderTimestampCell,
-                    disableFilters: true
+                    disableFilters: true,
                 },
                 {
                     Header: "Notes",
                     id: "note",
                     accessor: "note",
                     // @ts-ignore Filter isn't recognized as valid property
-                    Filter: renderILikeFilter
-                }
+                    Filter: renderILikeFilter,
+                },
             ] as Column<Subscription>[],
         [organisations, products]
     );

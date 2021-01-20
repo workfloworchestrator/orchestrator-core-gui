@@ -35,7 +35,7 @@ import {
     EuiRange,
     EuiSpacer,
     EuiSwitch,
-    EuiText
+    EuiText,
 } from "@elastic/eui";
 import Explain from "components/Explain";
 import React from "react";
@@ -55,7 +55,7 @@ export default class StyleGuide extends React.PureComponent<IProps, IState> {
         this.state = {
             showExplanation: false,
             isModalVisible: false,
-            isSwitchChecked: false
+            isSwitchChecked: false,
         };
     }
 
@@ -76,7 +76,7 @@ export default class StyleGuide extends React.PureComponent<IProps, IState> {
     render() {
         const icons = ["Beats", "Cloud", "Logging", "Kibana"];
 
-        const cardNodes = icons.map(function(item, index) {
+        const cardNodes = icons.map(function (item, index) {
             return (
                 <EuiFlexItem key={index}>
                     <EuiCard
@@ -90,7 +90,7 @@ export default class StyleGuide extends React.PureComponent<IProps, IState> {
             );
         });
 
-        const horizontalCardNodes = icons.map(function(item, index) {
+        const horizontalCardNodes = icons.map(function (item, index) {
             return (
                 <EuiFlexItem key={index}>
                     <EuiCard

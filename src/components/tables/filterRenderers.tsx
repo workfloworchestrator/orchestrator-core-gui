@@ -44,7 +44,7 @@ const renderFilterIcon = (filtering: boolean) => (active: boolean) => {
 function CustomersFilter({
     state,
     dispatch,
-    column
+    column,
 }: {
     state: TableState<ProcessV2>;
     dispatch: Dispatch<TableSettingsAction<ProcessV2>>;
@@ -56,7 +56,7 @@ function CustomersFilter({
      * separator string (with new edge cases) or embrace the separator and see the organisation as an array of
      * UUID parts. The last option is used here.
      */
-    const current = state.filterBy.find(filter => filter.id === "organisation");
+    const current = state.filterBy.find((filter) => filter.id === "organisation");
     const selectedOrganisation = current ? current.values.join("-") : null;
     const filtering = selectedOrganisation !== null;
 
@@ -66,7 +66,7 @@ function CustomersFilter({
         ? organisations
               .map((org: Organization) => ({
                   value: org.uuid,
-                  label: column.id === "abbrev" ? org.abbr : org.name
+                  label: column.id === "abbrev" ? org.abbr : org.name,
               }))
               .sort((a, b) => a.label.localeCompare(b.label))
         : [];
@@ -78,7 +78,7 @@ function CustomersFilter({
             renderButtonContent={renderFilterIcon(filtering)}
             renderContent={(disabled: boolean, reset) => (
                 <Select
-                    ref={ref => ref?.focus()}
+                    ref={(ref) => ref?.focus()}
                     id={`filter-${state.name}.${column.id}`}
                     inputID={`input-filter-${state.name}.${column.id}`}
                     onChange={(selected: ValueType<Option>, action: ActionMeta<Option>) => {
@@ -90,7 +90,7 @@ function CustomersFilter({
                             dispatch({
                                 type: ActionType.FILTER_REPLACE,
                                 id: "organisation",
-                                values: (selected as Option).value.split("-")
+                                values: (selected as Option).value.split("-"),
                             });
                         } else if (action.action === "clear") {
                             dispatch({ type: ActionType.FILTER_CLEAR, id: "organisation" });
@@ -123,18 +123,18 @@ export function renderMultiSelectFilter(
     {
         state,
         dispatch,
-        column
+        column,
     }: {
         state: TableState<ProcessV2>;
         dispatch: Dispatch<TableSettingsAction<ProcessV2>>;
         column: ColumnInstance;
     }
 ) {
-    const current = state.filterBy.find(filter => filter.id === column.id);
+    const current = state.filterBy.find((filter) => filter.id === column.id);
     const currentFilter = current ? current.values : null;
     const options = i18nPrefix
-        ? allOptions.map(val => ({ value: val, label: I18n.t(`${i18nPrefix}.${val}`) }))
-        : allOptions.map(val => ({ value: val, label: val }));
+        ? allOptions.map((val) => ({ value: val, label: I18n.t(`${i18nPrefix}.${val}`) }))
+        : allOptions.map((val) => ({ value: val, label: val }));
     const selected = currentFilter ? options.filter(({ value }) => currentFilter.includes(value)) : [];
     const filtering = selected.length > 0;
     const onChange = (selected: any, action: any) => {
@@ -152,7 +152,7 @@ export function renderMultiSelectFilter(
             renderButtonContent={renderFilterIcon(filtering)}
             renderContent={(disabled, reset) => (
                 <Select
-                    ref={ref => ref?.focus()}
+                    ref={(ref) => ref?.focus()}
                     id={`filter-${state.name}.${column.id}`}
                     inputId={`input-filter-${state.name}.${column.id}`}
                     isDisabled={disabled}
@@ -175,18 +175,18 @@ export function renderSingleSelectFilter(
     {
         state,
         dispatch,
-        column
+        column,
     }: {
         state: TableState<ProcessV2>;
         dispatch: Dispatch<TableSettingsAction<ProcessV2>>;
         column: ColumnInstance;
     }
 ) {
-    const current = state.filterBy.find(filter => filter.id === column.id);
+    const current = state.filterBy.find((filter) => filter.id === column.id);
     const currentFilter = current ? current.values : null;
     const options = i18nPrefix
-        ? allOptions.map(val => ({ value: val, label: I18n.t(`${i18nPrefix}.${val}`) }))
-        : allOptions.map(val => ({ value: val, label: val }));
+        ? allOptions.map((val) => ({ value: val, label: I18n.t(`${i18nPrefix}.${val}`) }))
+        : allOptions.map((val) => ({ value: val, label: val }));
     const selected = currentFilter ? options.filter(({ value }) => currentFilter.includes(value)) : [];
     const filtering = selected.length > 0;
     const onChange = (selected: any, action: any) => {
@@ -207,7 +207,7 @@ export function renderSingleSelectFilter(
             renderButtonContent={renderFilterIcon(filtering)}
             renderContent={(disabled, reset) => (
                 <Select
-                    ref={ref => ref?.focus()}
+                    ref={(ref) => ref?.focus()}
                     id={`filter-${state.name}.${column.id}`}
                     inputId={`input-filter-${state.name}.${column.id}`}
                     isDisabled={disabled}
@@ -231,13 +231,13 @@ const debouncedFilterReplace = debounce((dispatch, id, values) => {
 export function renderILikeFilter({
     state,
     dispatch,
-    column
+    column,
 }: {
     state: TableState<ProcessV2>;
     dispatch: Dispatch<TableSettingsAction<ProcessV2>>;
     column: ColumnInstance;
 }) {
-    const current = state.filterBy.find(filter => filter.id === column.id);
+    const current = state.filterBy.find((filter) => filter.id === column.id);
     const currentFilter = current ? current.values[0] : null;
     if (column.filterValue && column.filterValue !== currentFilter) {
         debouncedFilterReplace(dispatch, column.id, [column.filterValue]);
@@ -248,7 +248,7 @@ export function renderILikeFilter({
         <input
             id={`input-filter-${state.name}.${column.id}`}
             value={column.filterValue}
-            onChange={e => {
+            onChange={(e) => {
                 column.setFilter(e.target.value || undefined);
             }}
             placeholder={I18n.t(`table.filter_placeholder.${column.id}`)}

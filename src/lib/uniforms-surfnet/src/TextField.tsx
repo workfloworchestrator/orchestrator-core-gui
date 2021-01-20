@@ -49,7 +49,7 @@ function Text({
                     disabled={disabled}
                     name={name}
                     isInvalid={error}
-                    onChange={event => onChange(event.target.value)}
+                    onChange={(event) => onChange(event.target.value)}
                     placeholder={placeholder}
                     type={type}
                     value={value ?? ""}

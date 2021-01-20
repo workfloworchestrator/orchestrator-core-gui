@@ -22,7 +22,7 @@ import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import {
     ProcessesTable,
     initialProcessTableSettings,
-    initialProcessesFilterAndSort
+    initialProcessesFilterAndSort,
 } from "components/tables/Processes";
 import I18n from "i18n-js";
 import React from "react";
@@ -55,7 +55,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
             confirmationDialogAction: () => this,
             confirm: () => this,
             confirmationDialogQuestion: "",
-            showExplanation: false
+            showExplanation: false,
         };
     }
 
@@ -68,7 +68,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
             confirmationDialogAction: (e: React.MouseEvent) => {
                 this.cancelConfirmation();
                 action(e);
-            }
+            },
         });
 
     handleAbortProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
@@ -78,7 +78,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
         this.confirmation(
             I18n.t("processes.abortConfirmation", {
                 name: product_name,
-                customer: customer_name
+                customer: customer_name,
             }),
             () =>
                 abortProcess(process.pid).then(() => {
@@ -94,7 +94,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
         this.confirmation(
             I18n.t("processes.retryConfirmation", {
                 name: product_name,
-                customer: customer_name
+                customer: customer_name,
             }),
             () =>
                 retryProcess(process.pid).then(() => {

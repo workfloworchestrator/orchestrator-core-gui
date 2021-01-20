@@ -51,8 +51,8 @@ function OptGroup({
             </EuiFlexItem>
             {enabled &&
                 fields
-                    ?.filter(field => field !== "enabled")
-                    .map(field => (
+                    ?.filter((field) => field !== "enabled")
+                    .map((field) => (
                         <EuiFlexItem key={field}>
                             <AutoField name={field} {...itemProps} />
                         </EuiFlexItem>

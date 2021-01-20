@@ -84,13 +84,13 @@ function ContactPersonName({
 
     const suggestions = value
         ? contactPersons
-              .filter(item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1)
-              .filter(item => !chosenPersons.some(person => person.email === item.email))
+              .filter((item) => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1)
+              .filter((item) => !chosenPersons.some((person) => person.email === item.email))
         : [];
 
     useEffect(() => {
         if (organisationIdValue) {
-            contacts(organisationIdValue).then(contactPersons => {
+            contacts(organisationIdValue).then((contactPersons) => {
                 setContactPersons(contactPersons);
             });
         }

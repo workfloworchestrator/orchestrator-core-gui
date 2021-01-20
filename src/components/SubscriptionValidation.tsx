@@ -56,7 +56,7 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
         confirmationDialogOpen: false,
         confirmationDialogAction: () => this,
         confirm: () => this,
-        confirmationDialogQuestion: ""
+        confirmationDialogQuestion: "",
     };
 
     componentDidUpdate(prevProps: IProps) {
@@ -64,9 +64,9 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
         if (subscriptions && subscriptions.length !== prevProps.subscriptions.length) {
             const { organisations, products } = this.context;
             this.setState({
-                subscriptions: this.props.subscriptions.map(subscription =>
+                subscriptions: this.props.subscriptions.map((subscription) =>
                     enrichSubscription(subscription, organisations, products)
-                )
+                ),
             });
         }
     }
@@ -91,7 +91,7 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
         sorted.name = name;
         this.setState({
             subscriptions: sorted.descending ? subscriptions.reverse() : subscriptions,
-            sorted: sorted
+            sorted: sorted,
         });
     };
 
@@ -111,7 +111,7 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
             confirmationDialogAction: () => {
                 this.cancelConfirmation();
                 action();
-            }
+            },
         });
 
     handleDeleteSubscription = (subscription: SubscriptionWithDetails) => (e: React.MouseEvent<HTMLElement>) => {
@@ -119,14 +119,14 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
         this.confirmation(
             I18n.t("subscriptions.deleteConfirmation", {
                 name: subscription.product.name,
-                customer: subscription.customer_name
+                customer: subscription.customer_name,
             }),
             () =>
                 deleteSubscription(subscription.subscription_id).then(() => {
                     this.props.onChange();
                     setFlash(
                         I18n.t("subscriptions.flash.delete", {
-                            name: subscription.product.name
+                            name: subscription.product.name,
                         })
                     );
                 })
@@ -141,7 +141,7 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
             "product_name",
             "status",
             "start_date_epoch",
-            "end_date_epoch"
+            "end_date_epoch",
         ];
         const th = (index: number) => {
             const name = columns[index];
@@ -221,7 +221,7 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
             sorted,
             confirmationDialogOpen,
             confirmationDialogAction,
-            confirmationDialogQuestion
+            confirmationDialogQuestion,
         } = this.state;
         const { workflow } = this.props;
         return (

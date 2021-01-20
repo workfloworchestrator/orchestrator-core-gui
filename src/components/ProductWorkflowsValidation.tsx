@@ -138,7 +138,7 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
                                 <td>{product.description}</td>
                                 <td>{product.tag}</td>
                                 <td>{product.product_type}</td>
-                                <td>{product.workflows.map(wf => wf.name).join(", ")}</td>
+                                <td>{product.workflows.map((wf) => wf.name).join(", ")}</td>
                                 <td>{product.status}</td>
                             </tr>
                         ))}
@@ -153,12 +153,12 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
             {[TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE].map((target, index) => (
                 <section className="validation" key={index}>
                     {this.renderProducts(
-                        products.filter(prod => !prod.workflows.some(wf => wf.target === target)),
+                        products.filter((prod) => !prod.workflows.some((wf) => wf.target === target)),
                         I18n.t("validations.productWorkflows.productsWithoutWorkflow", {
-                            target: target
+                            target: target,
                         }),
                         I18n.t("validations.productWorkflows.productsWithWorkflow", {
-                            target: target
+                            target: target,
                         })
                     )}
                 </section>
@@ -171,7 +171,7 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
             {[TARGET_CREATE, TARGET_TERMINATE].map((target, index) => (
                 <section className="validation" key={index}>
                     {this.renderProducts(
-                        products.filter(prod => prod.workflows.filter(wf => wf.target === target).length > 1),
+                        products.filter((prod) => prod.workflows.filter((wf) => wf.target === target).length > 1),
                         I18n.t("validations.productWorkflows.productsWithMultipleWorkflow", { target: target }),
                         I18n.t("validations.productWorkflows.productsWithoutMultipleWorkflow", { target: target })
                     )}
@@ -183,7 +183,7 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
     renderWorkflowsWithoutProducts = (workflows: WorkflowWithProductTags[]) => (
         <section className="workflow-validation">
             {this.renderWorkflows(
-                workflows.filter(wf => wf.target !== "SYSTEM").filter(wf => isEmpty(wf.product_tags)),
+                workflows.filter((wf) => wf.target !== "SYSTEM").filter((wf) => isEmpty(wf.product_tags)),
                 I18n.t("validations.productWorkflows.workflowsWithoutProducts"),
                 I18n.t("validations.productWorkflows.workflowsWithProducts")
             )}
@@ -196,7 +196,9 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
     ) => (
         <section className="workflow-validation">
             {this.renderWorkflows(
-                workflows.filter(wf => !workflowCodeImplementations.some(wfImpl => wfImpl.implementation === wf.name)),
+                workflows.filter(
+                    (wf) => !workflowCodeImplementations.some((wfImpl) => wfImpl.implementation === wf.name)
+                ),
                 I18n.t("validations.productWorkflows.workflowsWithoutImplementations"),
                 I18n.t("validations.productWorkflows.workflowsWithImplementations")
             )}
@@ -209,7 +211,9 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
     ) => (
         <section className="workflow-validation">
             {this.renderWorkflowImplementations(
-                workflowCodeImplementations.filter(wfImpl => !workflows.some(wf => wfImpl.implementation === wf.name)),
+                workflowCodeImplementations.filter(
+                    (wfImpl) => !workflows.some((wf) => wfImpl.implementation === wf.name)
+                ),
                 I18n.t("validations.productWorkflows.workflowsWithoutRecords"),
                 I18n.t("validations.productWorkflows.workflowsWithRecords")
             )}

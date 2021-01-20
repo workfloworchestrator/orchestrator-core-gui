@@ -32,7 +32,7 @@ let ApplicationContext = React.createContext<ApplicationContextInterface>({
     products: [],
     assignees: [],
     processStatuses: [],
-    redirect: (_url: string) => {}
+    redirect: (_url: string) => {},
 });
 
 export default ApplicationContext;

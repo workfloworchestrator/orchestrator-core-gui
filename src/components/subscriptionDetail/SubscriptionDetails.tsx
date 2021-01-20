@@ -27,11 +27,11 @@ import {
     Product,
     Subscription,
     SubscriptionModel,
-    SubscriptionProcesses
+    SubscriptionProcesses,
 } from "utils/types";
 
 function renderGrafanaLink(subscription: Subscription, product: Product) {
-    const fi_domain = product?.fixed_inputs.find(fi => fi.name === "domain");
+    const fi_domain = product?.fixed_inputs.find((fi) => fi.name === "domain");
     if (fi_domain && (fi_domain.value === "SURFNET8" || fi_domain.value === "NETHERLIGHT8")) {
         return (
             <tr>
@@ -80,8 +80,8 @@ function renderNetworkDashboardLink(subscription: Subscription, product: Product
 
 function renderFailedTask(subscriptionProcesses: SubscriptionProcesses[]) {
     let failed_tasks = subscriptionProcesses
-        .map(sp => sp.process)
-        .filter(process => process.last_status !== "completed");
+        .map((sp) => sp.process)
+        .filter((process) => process.last_status !== "completed");
 
     if (failed_tasks.length)
         return (
@@ -106,7 +106,7 @@ export default function SubscriptionDetails({ subscription, className = "", subs
     );
 
     function isCurrentlyFavorited(subscription_id: string) {
-        const v = favoritesList.find(s => s.subscription_id === subscription_id);
+        const v = favoritesList.find((s) => s.subscription_id === subscription_id);
         return v !== undefined;
     }
 
@@ -130,7 +130,7 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                             </EuiFlexItem>
                             <EuiFlexItem grow={false}>
                                 <EuiCopy textToCopy={subscription.subscription_id}>
-                                    {copy => (
+                                    {(copy) => (
                                         <EuiButton
                                             id="subscriptions-copy-button"
                                             iconType="copyClipboard"
@@ -150,13 +150,13 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                                     onClick={() => {
                                         const new_list = isCurrentlyFavorited(subscription.subscription_id)
                                             ? favoritesList.filter(
-                                                  item => item.subscription_id !== subscription.subscription_id
+                                                  (item) => item.subscription_id !== subscription.subscription_id
                                               )
                                             : favoritesList.concat([
                                                   {
                                                       subscription_id: subscription.subscription_id,
-                                                      customName: ""
-                                                  }
+                                                      customName: "",
+                                                  },
                                               ]);
                                         setFavoritesList(new_list);
                                     }}

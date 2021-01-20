@@ -29,18 +29,8 @@ test("<RadioField> - renders a set of checkboxes with correct disabled state", (
     const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
     expect(wrapper.find("input")).toHaveLength(2);
-    expect(
-        wrapper
-            .find("input")
-            .at(0)
-            .prop("disabled")
-    ).toBe(true);
-    expect(
-        wrapper
-            .find("input")
-            .at(1)
-            .prop("disabled")
-    ).toBe(true);
+    expect(wrapper.find("input").at(0).prop("disabled")).toBe(true);
+    expect(wrapper.find("input").at(1).prop("disabled")).toBe(true);
 });
 
 test("<RadioField> - renders a set of checkboxes with correct id (inherited)", () => {
@@ -48,18 +38,8 @@ test("<RadioField> - renders a set of checkboxes with correct id (inherited)", (
     const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
     expect(wrapper.find("input")).toHaveLength(2);
-    expect(
-        wrapper
-            .find("input")
-            .at(0)
-            .prop("id")
-    ).toBeTruthy();
-    expect(
-        wrapper
-            .find("input")
-            .at(1)
-            .prop("id")
-    ).toBeTruthy();
+    expect(wrapper.find("input").at(0).prop("id")).toBeTruthy();
+    expect(wrapper.find("input").at(1).prop("id")).toBeTruthy();
 });
 
 test("<RadioField> - renders a set of checkboxes with correct id (specified)", () => {
@@ -67,18 +47,8 @@ test("<RadioField> - renders a set of checkboxes with correct id (specified)", (
     const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
     expect(wrapper.find("input")).toHaveLength(2);
-    expect(
-        wrapper
-            .find("input")
-            .at(0)
-            .prop("id")
-    ).toBe("y-YQ");
-    expect(
-        wrapper
-            .find("input")
-            .at(1)
-            .prop("id")
-    ).toBe("y-Yg");
+    expect(wrapper.find("input").at(0).prop("id")).toBe("y-YQ");
+    expect(wrapper.find("input").at(1).prop("id")).toBe("y-Yg");
 });
 
 test("<RadioField> - renders a set of checkboxes with correct name", () => {
@@ -86,18 +56,8 @@ test("<RadioField> - renders a set of checkboxes with correct name", () => {
     const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
     expect(wrapper.find("input")).toHaveLength(2);
-    expect(
-        wrapper
-            .find("input")
-            .at(0)
-            .prop("name")
-    ).toBe("x");
-    expect(
-        wrapper
-            .find("input")
-            .at(1)
-            .prop("name")
-    ).toBe("x");
+    expect(wrapper.find("input").at(0).prop("name")).toBe("x");
+    expect(wrapper.find("input").at(1).prop("name")).toBe("x");
 });
 
 test("<RadioField> - renders a set of checkboxes with correct options", () => {
@@ -105,37 +65,17 @@ test("<RadioField> - renders a set of checkboxes with correct options", () => {
     const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
     expect(wrapper.find("label")).toHaveLength(2);
-    expect(
-        wrapper
-            .find("label")
-            .at(0)
-            .text()
-    ).toBe("a");
-    expect(
-        wrapper
-            .find("label")
-            .at(1)
-            .text()
-    ).toBe("b");
+    expect(wrapper.find("label").at(0).text()).toBe("a");
+    expect(wrapper.find("label").at(1).text()).toBe("b");
 });
 
 test("<RadioField> - renders a set of checkboxes with correct options (transform)", () => {
-    const element = <RadioField name="x" transform={x => x.toUpperCase()} />;
+    const element = <RadioField name="x" transform={(x) => x.toUpperCase()} />;
     const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
     expect(wrapper.find("label")).toHaveLength(2);
-    expect(
-        wrapper
-            .find("label")
-            .at(0)
-            .text()
-    ).toBe("A");
-    expect(
-        wrapper
-            .find("label")
-            .at(1)
-            .text()
-    ).toBe("B");
+    expect(wrapper.find("label").at(0).text()).toBe("A");
+    expect(wrapper.find("label").at(1).text()).toBe("B");
 });
 
 test("<RadioField> - renders a set of checkboxes with correct value (default)", () => {
@@ -143,18 +83,8 @@ test("<RadioField> - renders a set of checkboxes with correct value (default)", 
     const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
     expect(wrapper.find("input")).toHaveLength(2);
-    expect(
-        wrapper
-            .find("input")
-            .at(0)
-            .prop("checked")
-    ).toBe(false);
-    expect(
-        wrapper
-            .find("input")
-            .at(1)
-            .prop("checked")
-    ).toBe(false);
+    expect(wrapper.find("input").at(0).prop("checked")).toBe(false);
+    expect(wrapper.find("input").at(1).prop("checked")).toBe(false);
 });
 
 test("<RadioField> - renders a set of checkboxes with correct value (model)", () => {
@@ -165,18 +95,8 @@ test("<RadioField> - renders a set of checkboxes with correct value (model)", ()
     );
 
     expect(wrapper.find("input")).toHaveLength(2);
-    expect(
-        wrapper
-            .find("input")
-            .at(0)
-            .prop("checked")
-    ).toBe(false);
-    expect(
-        wrapper
-            .find("input")
-            .at(1)
-            .prop("checked")
-    ).toBe(true);
+    expect(wrapper.find("input").at(0).prop("checked")).toBe(false);
+    expect(wrapper.find("input").at(1).prop("checked")).toBe(true);
 });
 
 test("<RadioField> - renders a set of checkboxes with correct value (specified)", () => {
@@ -184,18 +104,8 @@ test("<RadioField> - renders a set of checkboxes with correct value (specified)"
     const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
     expect(wrapper.find("input")).toHaveLength(2);
-    expect(
-        wrapper
-            .find("input")
-            .at(0)
-            .prop("checked")
-    ).toBe(false);
-    expect(
-        wrapper
-            .find("input")
-            .at(1)
-            .prop("checked")
-    ).toBe(true);
+    expect(wrapper.find("input").at(0).prop("checked")).toBe(false);
+    expect(wrapper.find("input").at(1).prop("checked")).toBe(true);
 });
 
 test("<RadioField> - renders a set of checkboxes which correctly reacts on change", () => {
@@ -205,12 +115,7 @@ test("<RadioField> - renders a set of checkboxes which correctly reacts on chang
     const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }, { onChange }));
 
     expect(wrapper.find("input")).toHaveLength(2);
-    expect(
-        wrapper
-            .find("input")
-            .at(1)
-            .simulate("change")
-    ).toBeTruthy();
+    expect(wrapper.find("input").at(1).simulate("change")).toBeTruthy();
     expect(onChange).toHaveBeenLastCalledWith("x", "b");
 });
 
@@ -224,12 +129,7 @@ test("<RadioField> - renders a set of checkboxes which correctly reacts on chang
     );
 
     expect(wrapper.find("input")).toHaveLength(2);
-    expect(
-        wrapper
-            .find("input")
-            .at(0)
-            .simulate("change")
-    ).toBeTruthy();
+    expect(wrapper.find("input").at(0).simulate("change")).toBeTruthy();
     expect(onChange).toHaveBeenLastCalledWith("x", "a");
 });
 
@@ -238,36 +138,16 @@ test("<RadioField> - renders a label", () => {
     const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
     expect(wrapper.find("label")).toHaveLength(3);
-    expect(
-        wrapper
-            .find("label")
-            .at(0)
-            .text()
-    ).toBe("y");
+    expect(wrapper.find("label").at(0).text()).toBe("y");
 });
 
 test("<RadioField> - renders a wrapper with unknown props", () => {
     const element = <RadioField name="x" data-x="x" data-y="y" data-z="z" />;
     const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-    expect(
-        wrapper
-            .find("div")
-            .at(0)
-            .prop("data-x")
-    ).toBe("x");
-    expect(
-        wrapper
-            .find("div")
-            .at(0)
-            .prop("data-y")
-    ).toBe("y");
-    expect(
-        wrapper
-            .find("div")
-            .at(0)
-            .prop("data-z")
-    ).toBe("z");
+    expect(wrapper.find("div").at(0).prop("data-x")).toBe("x");
+    expect(wrapper.find("div").at(0).prop("data-y")).toBe("y");
+    expect(wrapper.find("div").at(0).prop("data-z")).toBe("z");
 });
 
 test("<RadioField> - works with special characters", () => {

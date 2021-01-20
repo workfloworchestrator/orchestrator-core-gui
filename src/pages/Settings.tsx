@@ -24,7 +24,7 @@ import {
     EuiPage,
     EuiPageBody,
     EuiSelect,
-    EuiSpacer
+    EuiSpacer,
 } from "@elastic/eui";
 import { clearCache, getGlobalStatus, setGlobalStatus } from "api";
 import I18n from "i18n-js";
@@ -36,7 +36,7 @@ enum Cache {
     ims = "ims",
     crm = "crm",
     api = "api",
-    all = "all"
+    all = "all",
 }
 
 interface IProps {}
@@ -55,7 +55,7 @@ export const Settings: SFC = (props: IProps) => {
     }, []);
 
     const getEngineStatus = () => {
-        getGlobalStatus().then(newEngineStatus => {
+        getGlobalStatus().then((newEngineStatus) => {
             setEngineStatus(newEngineStatus);
         });
     };
@@ -69,7 +69,7 @@ export const Settings: SFC = (props: IProps) => {
     const engineDescription = [
         {
             title: I18n.t("settings.status.processes"),
-            description: engineStatus?.running_processes.toString() || ""
+            description: engineStatus?.running_processes.toString() || "",
         },
         {
             title: I18n.t("settings.status.status"),
@@ -80,15 +80,15 @@ export const Settings: SFC = (props: IProps) => {
                 </>
             ) : (
                 ""
-            )
-        }
+            ),
+        },
     ];
 
     const flushCache = () => {
         clearCache(cache).then(() => {
             setFlash(
                 I18n.t("settings.cache.flushed", {
-                    name: I18n.t(`settings.cache.name.${cache}`)
+                    name: I18n.t(`settings.cache.name.${cache}`),
                 })
             );
         });
@@ -105,7 +105,7 @@ export const Settings: SFC = (props: IProps) => {
             if (isNaN(Number(cacheOption))) {
                 cacheOptions.push({
                     value: cacheOption,
-                    text: I18n.t(`settings.cache.name.${cacheOption}`)
+                    text: I18n.t(`settings.cache.name.${cacheOption}`),
                 });
             }
         }
@@ -128,7 +128,7 @@ export const Settings: SFC = (props: IProps) => {
                         id="selectCache"
                         options={cacheOptions}
                         value={cache}
-                        onChange={e => handleCacheChange(e.target.value as Cache)}
+                        onChange={(e) => handleCacheChange(e.target.value as Cache)}
                         aria-label="Select cache to clear"
                     />
                     <EuiSpacer />

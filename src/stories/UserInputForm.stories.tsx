@@ -21,7 +21,7 @@ import {
     contactPersons,
     corelinkPorts10G,
     freeCorelinkPorts,
-    imsNodes
+    imsNodes,
 } from "stories/data/UserInputForm.data";
 import UserInputContainer from "stories/UserInputContainer";
 import {
@@ -32,15 +32,15 @@ import {
     createForm,
     imsPortIdProperty,
     loadVlanMocks,
-    servicePortsProperty
+    servicePortsProperty,
 } from "stories/utils";
 
 export default {
     title: "UserInputForm",
     // Needed to match snapshot file to story, should be done bij injectFileNames but that does not work
     parameters: {
-        fileName: __filename
-    }
+        fileName: __filename,
+    },
 };
 
 export const Contactpersons = () => {
@@ -61,7 +61,7 @@ export const Corelink = () => {
 
     const form = createForm({
         ims_port_id_1: imsPortIdProperty({ interfaceSpeed: 10000, nodeStatuses: ["active", "provisioning"] }),
-        ims_port_id_2: imsPortIdProperty({ interfaceSpeed: 10000, nodeStatuses: ["active", "provisioning"] })
+        ims_port_id_2: imsPortIdProperty({ interfaceSpeed: 10000, nodeStatuses: ["active", "provisioning"] }),
     });
 
     return <UserInputContainer formName="Corelink form" stepUserInput={form} />;
@@ -75,20 +75,20 @@ export const CorelinkAddLink = () => {
         ims_port_id_1: imsPortIdProperty({
             nodeSubscriptionId: "5e3341c2-0017-4d32-9005-56e9b2cbf86c",
             interfaceSpeed: 10000,
-            nodeStatuses: ["active", "provisioning"]
+            nodeStatuses: ["active", "provisioning"],
         }),
         ims_port_id_2: imsPortIdProperty({
             nodeSubscriptionId: "faf4766b-072c-4494-a8d7-8feaf60e2446",
             interfaceSpeed: 10000,
-            nodeStatuses: ["active", "provisioning"]
-        })
+            nodeStatuses: ["active", "provisioning"],
+        }),
     });
 
     return <UserInputContainer formName="Corelink add link form" stepUserInput={form} />;
 };
 
 CorelinkAddLink.story = {
-    name: "Corelink add link"
+    name: "Corelink add link",
 };
 
 export const Nodes = () => {
@@ -98,7 +98,7 @@ export const Nodes = () => {
     mock.onGet("ims/nodes/MT001A/PL").reply(200, imsNodes);
 
     const form = createForm({
-        ims_node_id: ImsNodeId
+        ims_node_id: ImsNodeId,
     });
 
     return <UserInputContainer formName="Node form" stepUserInput={form} />;
@@ -108,7 +108,7 @@ export const Sn8PortselectAllOrganisations = () => {
     mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP%2Cstatuses%2Cactive").reply(200, []);
     mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
         200,
-        SN8PortSubscriptions.filter(p => p.status === "active")
+        SN8PortSubscriptions.filter((p) => p.status === "active")
     );
     mock.onGet("subscriptions/all").reply(200, []);
     mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
@@ -121,22 +121,22 @@ export const Sn8PortselectAllOrganisations = () => {
             { visiblePortMode: "normal", tags: ["SP", "SPNL", "MSC", "MSCNL", "AGGSP"] },
             2,
             2
-        )
+        ),
     });
 
     return <UserInputContainer formName="SN8 portselect form, showing all ports" stepUserInput={form} />;
 };
 
 Sn8PortselectAllOrganisations.story = {
-    name: "SN8 Portselect all organisations"
+    name: "SN8 Portselect all organisations",
 };
 
 export const Sn8PortselectTagged = () => {
     mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
         200,
-        SN8PortSubscriptions.filter(p => p.status === "active")
-            .filter(p => ["SP", "SPNL"].includes(p.product.tag))
-            .filter(p => p.port_mode === "tagged")
+        SN8PortSubscriptions.filter((p) => p.status === "active")
+            .filter((p) => ["SP", "SPNL"].includes(p.product.tag))
+            .filter((p) => p.port_mode === "tagged")
     );
     mock.onGet("subscriptions/all").reply(200, []);
     mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
@@ -145,22 +145,22 @@ export const Sn8PortselectTagged = () => {
     const form = createForm({
         organisation: Organisation,
         bandwidth: Bandwidth,
-        service_ports: servicePortsProperty({ visiblePortMode: "tagged", tags: ["SP", "SPNL"] }, 2, 6)
+        service_ports: servicePortsProperty({ visiblePortMode: "tagged", tags: ["SP", "SPNL"] }, 2, 6),
     });
 
     return <UserInputContainer formName="SN8 portselect form, showing all ports" stepUserInput={form} />;
 };
 
 Sn8PortselectTagged.story = {
-    name: "SN8 Portselect tagged"
+    name: "SN8 Portselect tagged",
 };
 
 export const Sn8PortselectUntagged = () => {
     mock.onGet("/api/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
         200,
-        SN8PortSubscriptions.filter(p => p.status === "active")
-            .filter(p => ["SP", "SPNL"].includes(p.product.tag))
-            .filter(p => p.port_mode === "untagged")
+        SN8PortSubscriptions.filter((p) => p.status === "active")
+            .filter((p) => ["SP", "SPNL"].includes(p.product.tag))
+            .filter((p) => p.port_mode === "untagged")
     );
     mock.onGet("/api/subscriptions/all").reply(200, []);
     mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
@@ -169,20 +169,20 @@ export const Sn8PortselectUntagged = () => {
     const form = createForm({
         organisation: Organisation,
         bandwidth: Bandwidth,
-        service_ports: servicePortsProperty({ visiblePortMode: "untagged", tags: ["SP", "SPNL"] }, 1, 6)
+        service_ports: servicePortsProperty({ visiblePortMode: "untagged", tags: ["SP", "SPNL"] }, 1, 6),
     });
 
     return <UserInputContainer formName="SN8 portselect form, showing all ports" stepUserInput={form} />;
 };
 
 Sn8PortselectUntagged.story = {
-    name: "SN8 Portselect untagged"
+    name: "SN8 Portselect untagged",
 };
 
 export const Sn8PortselectSelectedOrganisation = () => {
     mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP%2Cstatuses%2Cactive").reply(
         200,
-        SN8PortSubscriptions.filter(p => p.status === "active")
+        SN8PortSubscriptions.filter((p) => p.status === "active")
     );
     mock.onGet("subscriptions/all").reply(200, []);
     mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
@@ -195,11 +195,11 @@ export const Sn8PortselectSelectedOrganisation = () => {
             {
                 organisationKey: "organisation",
                 visiblePortMode: "normal",
-                tags: ["SP", "SPNL", "MSC", "MSCNL", "AGGSP"]
+                tags: ["SP", "SPNL", "MSC", "MSCNL", "AGGSP"],
             },
             1,
             6
-        )
+        ),
     });
 
     return (
@@ -211,5 +211,5 @@ export const Sn8PortselectSelectedOrganisation = () => {
 };
 
 Sn8PortselectSelectedOrganisation.story = {
-    name: "SN8 Portselect selected organisation"
+    name: "SN8 Portselect selected organisation",
 };

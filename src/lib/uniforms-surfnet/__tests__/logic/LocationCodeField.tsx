@@ -41,7 +41,7 @@ describe("<LocationCodeField>", () => {
             required: true,
             showInlineError: false,
             value: undefined,
-            placeholder: "Search and select a location code..."
+            placeholder: "Search and select a location code...",
         });
     });
 
@@ -62,7 +62,7 @@ describe("<LocationCodeField>", () => {
             required: true,
             showInlineError: false,
             value: undefined,
-            placeholder: "Search and select a location code..."
+            placeholder: "Search and select a location code...",
         });
     });
 });

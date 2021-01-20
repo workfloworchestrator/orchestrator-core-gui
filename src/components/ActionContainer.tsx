@@ -20,7 +20,7 @@ import React, { useState } from "react";
 function ActionContainer({
     title,
     renderButtonContent,
-    renderContent
+    renderContent,
 }: {
     title: string;
     renderButtonContent: (active: boolean) => React.ReactNode;
@@ -28,7 +28,7 @@ function ActionContainer({
 }) {
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
-    const onButtonClick = () => setIsPopoverOpen(isPopoverOpen => !isPopoverOpen);
+    const onButtonClick = () => setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
     const closePopover = () => setIsPopoverOpen(false);
 
     const button = (

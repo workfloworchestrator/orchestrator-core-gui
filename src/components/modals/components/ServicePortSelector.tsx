@@ -12,7 +12,7 @@ import {
     EuiSuggestItemProps,
     EuiSuperSelect,
     EuiSwitch,
-    EuiText
+    EuiText,
 } from "@elastic/eui";
 import { getPortSubscriptionsForNode, subscriptions } from "api";
 import { FAVORITE_STORAGE_KEY } from "components/modals/components/FavoritePortSelector";
@@ -64,13 +64,13 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
             portsLoading: false,
             ports: [],
             portOptions: [],
-            selectedPort: undefined
+            selectedPort: undefined,
         };
     }
 
     componentDidMount() {
         // Fetch Node subscriptions and prepare it for usage as EuiSuggestItems
-        subscriptions(["Node"], ["provisioning", "active"]).then(result => {
+        subscriptions(["Node"], ["provisioning", "active"]).then((result) => {
             this.setState({ nodesLoading: false, nodes: result });
             // Preselect first one and fetch Ports (debug stuff)
             // this.setState({ nodesLoading: false, nodes: result, selectedNode: result[0] });
@@ -80,10 +80,10 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
 
     fetchPortData = (selectedNode: Subscription) => {
         this.setState({ portsLoading: true });
-        getPortSubscriptionsForNode(selectedNode.subscription_id).then(result => {
+        getPortSubscriptionsForNode(selectedNode.subscription_id).then((result) => {
             console.log(result);
             // Todo: move to render
-            const portOptions = result.map(port => ({
+            const portOptions = result.map((port) => ({
                 value: port.subscription_id,
                 inputDisplay: port.port_name,
                 dropdownDisplay: (
@@ -105,7 +105,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                             </p>
                         </EuiText>
                     </>
-                )
+                ),
             }));
             this.setState({ portsLoading: false, portOptions: portOptions, ports: result });
         });
@@ -113,7 +113,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
 
     onNodeClick = (item: EuiSuggestItemProps) => {
         const { nodes } = this.state;
-        const selectedNode = nodes.find(node => node.description.replace("Node Planned", "") === item.label);
+        const selectedNode = nodes.find((node) => node.description.replace("Node Planned", "") === item.label);
         this.setState({ selectedNode: selectedNode });
         if (selectedNode) {
             this.fetchPortData(selectedNode);
@@ -129,7 +129,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         // update Suggestions
         const nodeSuggestions = nodes
             .filter(
-                node =>
+                (node) =>
                     node.description.includes(nodeQuery) ||
                     node.status.includes(nodeQuery) ||
                     node.subscription_id.includes(nodeQuery)
@@ -142,7 +142,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                 description: `Status: ${node.status}${
                     node.status === "active" ? " Start date: " + timeStampToDate(node.start_date) : ""
                 }`,
-                type: { iconType: "tableDensityNormal", color: node.status === "active" ? "tint5" : "tint1" }
+                type: { iconType: "tableDensityNormal", color: node.status === "active" ? "tint5" : "tint1" },
             }));
         this.setState({ nodeSuggestions: nodeSuggestions.slice(0, 8), nodeQuery: nodeQuery });
     };
@@ -154,7 +154,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
 
     onPortClick = (subscription_id: String) => {
         const { ports } = this.state;
-        const selectedPort = ports.find(port => port.subscription_id === subscription_id);
+        const selectedPort = ports.find((port) => port.subscription_id === subscription_id);
         this.setState({ selectedPort: selectedPort });
     };
 
@@ -162,13 +162,13 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         event.preventDefault();
         const { selectedPort } = this.state;
         const { subscriptions } = this.props;
-        if (subscriptions.find(subscription => subscription.subscription_id === selectedPort?.subscription_id)) {
+        if (subscriptions.find((subscription) => subscription.subscription_id === selectedPort?.subscription_id)) {
             this.props.handleSelect(selectedPort?.subscription_id);
         } else {
             this.setState({
                 message: `The selected subscription is not in the allowed list.`,
                 messageHelp: `Check the bandwidth in the worfklow form or don't override the speed setting in this form.`,
-                errors: true
+                errors: true,
             });
             setTimeout(() => {
                 this.setState({ message: undefined, errors: false });
@@ -185,15 +185,15 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
             if (oldPorts.length === 10) {
                 this.setState({
                     message: `Max 10 favorites allowed. Please delete some if you want to add this port.`,
-                    errors: true
+                    errors: true,
                 });
                 setTimeout(() => {
                     this.setState({ message: undefined, messageHelp: undefined, errors: false });
                 }, 3000);
-            } else if (oldPorts.find(subscription => subscription.subscription_id === selectedPort.subscription_id)) {
+            } else if (oldPorts.find((subscription) => subscription.subscription_id === selectedPort.subscription_id)) {
                 this.setState({
                     message: `This subscription is already in your favorites. Only unique subscriptions allowed.`,
-                    errors: true
+                    errors: true,
                 });
                 setTimeout(() => {
                     this.setState({ message: undefined, messageHelp: undefined, errors: false });
@@ -201,13 +201,13 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
             } else {
                 let newPort: FavoriteSubscriptionStorage = {
                     subscription_id: selectedPort.subscription_id,
-                    customName: ""
+                    customName: "",
                 };
                 oldPorts.push(newPort);
                 localStorage.setItem(FAVORITE_STORAGE_KEY, JSON.stringify(oldPorts));
                 this.setState({
                     message: `Service port: ${selectedPort.description} added to Favorites`,
-                    errors: false
+                    errors: false,
                 });
                 setTimeout(() => {
                     this.setState({ message: undefined, messageHelp: undefined, errors: false });
@@ -231,7 +231,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
             portsLoading,
             portOptions,
             selectedPort,
-            subscriptionFilterEnabled
+            subscriptionFilterEnabled,
         } = this.state;
 
         const { subscriptions } = this.props;
@@ -276,7 +276,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                     >
                         <EuiSuggest
                             status={nodesLoading ? "loading" : "unchanged"}
-                            onInputChange={e => this.onNodeInputChange(e)}
+                            onInputChange={(e) => this.onNodeInputChange(e)}
                             onItemClick={this.onNodeClick}
                             suggestions={nodeSuggestions}
                         />
@@ -290,13 +290,13 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                         fullWidth
                         options={
                             subscriptionFilterEnabled
-                                ? portOptions.filter(item =>
-                                      subscriptions.find(subscription => subscription.subscription_id === item.value)
+                                ? portOptions.filter((item) =>
+                                      subscriptions.find((subscription) => subscription.subscription_id === item.value)
                                   )
                                 : portOptions
                         }
                         valueOfSelected={selectedPort ? selectedPort.subscription_id : undefined}
-                        onChange={value => this.onPortClick(value)}
+                        onChange={(value) => this.onPortClick(value)}
                         itemLayoutAlign="top"
                         hasDividers
                     />

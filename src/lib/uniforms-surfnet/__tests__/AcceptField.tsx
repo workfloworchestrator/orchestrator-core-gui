@@ -29,7 +29,7 @@ const TEST_ACCEPT_DATA = [
     ["sub_checkbox", ">checkbox"],
     ["sub_checkbox2", ">checkbox"],
     ["optional_checkbox", "checkbox?"],
-    ["skip_checkbox", "skip"]
+    ["skip_checkbox", "skip"],
 ];
 
 describe("<AcceptField>", () => {
@@ -61,9 +61,9 @@ describe("<AcceptField>", () => {
                 x: {
                     type: String,
                     uniforms: {
-                        data: TEST_ACCEPT_DATA
-                    }
-                }
+                        data: TEST_ACCEPT_DATA,
+                    },
+                },
             })
         );
         expect(wrapper.find("input")).toHaveLength(6);
@@ -80,9 +80,9 @@ describe("<AcceptField>", () => {
                     x: {
                         type: String,
                         uniforms: {
-                            data: TEST_ACCEPT_DATA
-                        }
-                    }
+                            data: TEST_ACCEPT_DATA,
+                        },
+                    },
                 },
                 { onChange }
             )

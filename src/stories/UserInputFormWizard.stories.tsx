@@ -23,15 +23,15 @@ export default {
     title: "UserInputFormWizard",
     // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
     parameters: {
-        fileName: __filename
-    }
+        fileName: __filename,
+    },
 };
 
 export const Wizard = () => {
     return (
         <MemoryRouter>
             <UserInputFormWizard
-                validSubmit={forms => {
+                validSubmit={(forms) => {
                     action("submit")(forms);
                     if (forms.length === 1) {
                         return Promise.reject({
@@ -42,12 +42,12 @@ export const Wizard = () => {
                                         form: createForm({
                                             ims_port_id_2: {
                                                 type: "string",
-                                                enum: ["1", "2", "3"]
-                                            }
+                                                enum: ["1", "2", "3"],
+                                            },
                                         }),
-                                        hasNext: false
-                                    })
-                            }
+                                        hasNext: false,
+                                    }),
+                            },
                         });
                     } else {
                         return Promise.resolve();
@@ -56,8 +56,8 @@ export const Wizard = () => {
                 stepUserInput={createForm({
                     ims_port_id_1: {
                         type: "string",
-                        enum: ["a", "b", "c"]
-                    }
+                        enum: ["a", "b", "c"],
+                    },
                 })}
                 hasNext={true}
                 cancel={action("cancel")}

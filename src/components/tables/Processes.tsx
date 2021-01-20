@@ -21,7 +21,7 @@ import {
     renderProductsCell,
     renderSubscriptionsCell,
     renderTimestampCell,
-    renderWorkflowNameCell
+    renderWorkflowNameCell,
 } from "components/tables/cellRenderers";
 import { renderCustomersFilter, renderILikeFilter, renderMultiSelectFilter } from "components/tables/filterRenderers";
 import { NwaTable, isLocalTableSettings } from "components/tables/NwaTable";
@@ -41,7 +41,7 @@ import {
     RowPropGetter,
     SessionTableSettings,
     TableSettings,
-    TableState
+    TableState,
 } from "react-table";
 import { StringParam, useQueryParam } from "use-query-params";
 import ApplicationContext from "utils/ApplicationContext";
@@ -51,7 +51,7 @@ import { ProcessV2 } from "utils/types";
 export function initialProcessesFilterAndSort(showTasks: boolean, statuses: string[]) {
     const initialFilterBy = [
         { id: "isTask", values: [`${showTasks ? "true" : "false"}`] },
-        { id: "status", values: statuses }
+        { id: "status", values: statuses },
     ];
     const initialSortBy = [{ id: "modified", desc: true }];
     return { filterBy: initialFilterBy, sortBy: initialSortBy };
@@ -70,14 +70,14 @@ export function initialProcessTableSettings(
         delay: 3000,
         pageSize: 25,
         pageIndex: 0,
-        minimized: false
+        minimized: false,
     };
     let rest = optional ? Object.assign(defaults, optional) : defaults;
     return {
         ...filterAndSort,
         name: name,
         hiddenColumns: hiddenColumns,
-        ...rest
+        ...rest,
     };
 }
 
@@ -102,7 +102,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
 
     const initialize = useMemo(
         () =>
-            function(current: TableSettings<ProcessV2>): TableState<ProcessV2> {
+            function (current: TableSettings<ProcessV2>): TableState<ProcessV2> {
                 // First get LocalState from LocalStorage
                 const settingsFromLocalStorage: LocalTableSettings<ProcessV2> | {} = JSON.parse(
                     localStorage.getItem(`table-settings:${current.name}`) || "{}"
@@ -127,7 +127,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                     if (filterQ) {
                         filterBy = chunk(filterQ, 2).map(([id, values]) => ({
                             id: id,
-                            values: values.split("-")
+                            values: values.split("-"),
                         }));
                     }
                 } catch (err) {
@@ -155,7 +155,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
             return {
                 ...props,
                 id: row.values.pid,
-                className: `${row.values.status}${highlighted}`
+                className: `${row.values.status}${highlighted}`,
             };
         },
         [highlightQ]
@@ -192,7 +192,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                     return (
                         <div
                             {...row.getToggleRowExpandedProps()}
-                            onClick={e => {
+                            onClick={(e) => {
                                 e.stopPropagation();
                                 row.toggleRowExpanded();
                             }}
@@ -201,26 +201,26 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                             {button}
                         </div>
                     );
-                }
+                },
             },
             {
                 Header: "pid",
                 accessor: "pid",
                 disableSortBy: true,
                 disableFilters: true,
-                Cell: renderPidCell
+                Cell: renderPidCell,
             },
             {
                 Header: "Assignee",
                 accessor: "assignee",
-                Filter: renderMultiSelectFilter.bind(null, assignees, "assignees")
+                Filter: renderMultiSelectFilter.bind(null, assignees, "assignees"),
             },
             {
                 Header: "Last step",
                 id: "step",
                 accessor: "last_step",
                 disableSortBy: true,
-                disableFilters: true
+                disableFilters: true,
             },
             {
                 Header: "Status",
@@ -229,20 +229,20 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                 Filter: renderMultiSelectFilter.bind(null, processStatuses, "process_statuses"),
                 Cell: ({ cell }: { cell: Cell }) => {
                     return I18n.t(`process_statuses.${cell.value}`);
-                }
+                },
             },
             {
                 Header: "Workflow",
                 accessor: "workflow",
                 Filter: renderILikeFilter,
-                Cell: renderWorkflowNameCell
+                Cell: renderWorkflowNameCell,
             },
             {
                 Header: "Target",
                 id: "target",
                 accessor: "workflow_target",
                 disableSortBy: true,
-                Filter: renderMultiSelectFilter.bind(null, ["CREATE", "MODIFY", "TERMINATE", "SYSTEM"], null)
+                Filter: renderMultiSelectFilter.bind(null, ["CREATE", "MODIFY", "TERMINATE", "SYSTEM"], null),
             },
             {
                 Header: "Customer",
@@ -250,7 +250,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                 accessor: "subscriptions",
                 disableSortBy: true,
                 Cell: renderCustomersCell(organisations, false),
-                Filter: renderCustomersFilter
+                Filter: renderCustomersFilter,
             },
             {
                 Header: "Abbr.",
@@ -258,7 +258,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                 accessor: "subscriptions",
                 disableSortBy: true,
                 Cell: renderCustomersCell(organisations, true),
-                Filter: renderCustomersFilter
+                Filter: renderCustomersFilter,
             },
             {
                 Header: "Product(s)",
@@ -266,7 +266,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                 accessor: "subscriptions",
                 disableSortBy: true,
                 Cell: renderProductsCell,
-                Filter: renderILikeFilter
+                Filter: renderILikeFilter,
             },
             {
                 Header: "Tag(s)",
@@ -274,34 +274,34 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                 accessor: "subscriptions",
                 disableSortBy: true,
                 Cell: renderProductTagCell,
-                Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.tag).sort()), null)
+                Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map((p) => p.tag).sort()), null),
             },
             {
                 Header: "Subscription(s)",
                 accessor: "subscriptions",
                 disableSortBy: true,
                 Filter: renderILikeFilter,
-                Cell: renderSubscriptionsCell
+                Cell: renderSubscriptionsCell,
             },
             {
                 Header: "Created by",
                 id: "creator",
                 accessor: "created_by",
-                Filter: renderILikeFilter
+                Filter: renderILikeFilter,
             },
             {
                 Header: "Started",
                 id: "started",
                 accessor: "started_at",
                 Cell: renderTimestampCell,
-                disableFilters: true
+                disableFilters: true,
             },
             {
                 Header: "Modified",
                 id: "modified",
                 accessor: "last_modified_at",
                 Cell: renderTimestampCell,
-                disableFilters: true
+                disableFilters: true,
             },
             {
                 Header: "",
@@ -310,7 +310,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                 Cell: ({ cell }: { cell: Cell }) => (
                     <ActionContainer
                         title={"Actions"}
-                        renderButtonContent={active => {
+                        renderButtonContent={(active) => {
                             const classes = ["dropdown-button-content", active ? "active" : ""].join(" ");
                             return (
                                 <span className={classes}>
@@ -318,12 +318,12 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                                 </span>
                             );
                         }}
-                        renderContent={disabled => renderActions(cell.value)}
+                        renderContent={(disabled) => renderActions(cell.value)}
                     />
                 ),
                 disableFilters: true,
-                disableSortBy: true
-            }
+                disableSortBy: true,
+            },
         ],
         [organisations, highlightQ, assignees, processStatuses, products, renderActions]
     );

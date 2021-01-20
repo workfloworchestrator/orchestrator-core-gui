@@ -25,7 +25,7 @@ export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
         return (
             <Link
                 key={subscription.subscription_id}
-                onClick={e => e.stopPropagation()}
+                onClick={(e) => e.stopPropagation()}
                 to={`/subscriptions/${subscription.subscription_id}`}
             >
                 {subscription.description}
@@ -51,12 +51,12 @@ export function renderCustomersCell(organisations: Organization[] | null | undef
         if (organisations === null || organisations === undefined) {
             return I18n.t(abbreviate ? "unavailable_abbreviated" : "unavailable");
         }
-        const organisation: Organization | undefined = organisations.find(org => org.uuid === uuid);
+        const organisation: Organization | undefined = organisations.find((org) => org.uuid === uuid);
         return organisation ? (abbreviate ? organisation.abbr : organisation.name) : uuid;
     }
     return function doRenderCustomersCell({ cell }: { cell: Cell }) {
         const subscriptions: Subscription[] = cell.value;
-        return uniq(subscriptions.map(subscription => subscription.customer_id))
+        return uniq(subscriptions.map((subscription) => subscription.customer_id))
             .map(lookup)
             .join(", ");
     };
@@ -67,7 +67,7 @@ export function renderSubscriptionCustomersCell(organisations: Organization[] | 
         if (organisations === null || organisations === undefined) {
             return I18n.t(abbreviate ? "unavailable_abbreviated" : "unavailable");
         }
-        const organisation: Organization | undefined = organisations.find(org => org.uuid === uuid);
+        const organisation: Organization | undefined = organisations.find((org) => org.uuid === uuid);
         return organisation ? (abbreviate ? organisation.abbr : organisation.name) : uuid;
     }
     return function doRenderCustomersCell({ cell }: { cell: Cell }) {
@@ -98,7 +98,7 @@ export function renderTimestampCell({ cell }: { cell: Cell }) {
 export function renderPidCell({ cell }: { cell: Cell }) {
     const pid: string = cell.value;
     return (
-        <Link key={pid} onClick={e => e.stopPropagation()} to={`/processes/${pid}`} title={pid}>
+        <Link key={pid} onClick={(e) => e.stopPropagation()} to={`/processes/${pid}`} title={pid}>
             {pid.slice(0, 8)}
         </Link>
     );
@@ -112,7 +112,7 @@ export function renderWorkflowNameCell({ cell }: { cell: Cell }) {
         <Link
             id={`process-detail-${pid}`}
             key={pid}
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
             to={`/processes/${pid}`}
             title={name}
         >
@@ -130,7 +130,7 @@ export function renderSubscriptionDescriptionCell({ cell }: { cell: Cell }) {
         <Link
             id={`subscription-detail-${subscription_id}`}
             key={subscription_id}
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
             to={`/subscriptions/${subscription_id}`}
             title={name}
         >
@@ -144,7 +144,7 @@ export function renderSubscriptionIdCell({ cell }: { cell: Cell }) {
     return (
         <Link
             key={subscriptionID}
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
             to={`/subscriptions/${subscriptionID}`}
             title={subscriptionID}
         >
@@ -177,12 +177,12 @@ export function renderCustomersCelliv2(organisations: Organization[] | null | un
         if (organisations === null || organisations === undefined) {
             return I18n.t(abbreviate ? "unavailable_abbreviated" : "unavailable");
         }
-        const organisation: Organization | undefined = organisations.find(org => org.uuid === uuid);
+        const organisation: Organization | undefined = organisations.find((org) => org.uuid === uuid);
         return organisation ? (abbreviate ? organisation.abbr : organisation.name) : uuid;
     }
     return function doRenderCustomersCell({ cell }: { cell: Cell }) {
         const subscriptions: Subscription[] = cell.value;
-        return uniq(subscriptions.map(subscription => subscription.customer_id))
+        return uniq(subscriptions.map((subscription) => subscription.customer_id))
             .map(lookup)
             .join(", ");
     };

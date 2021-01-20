@@ -23,7 +23,7 @@ export default function UserProfile() {
 
     return (
         <ul className="user-profile">
-            {Object.keys(auth?.userData?.profile || []).map(key => (
+            {Object.keys(auth?.userData?.profile || []).map((key) => (
                 <li key={key} className="user-attribute">
                     <span className="user-key">{key.toString()}</span>
                     <span className="value">{auth?.userData?.profile[key]}</span>

@@ -29,12 +29,7 @@ test("<ListItemField> - renders ListDelField", () => {
     const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
 
     expect(wrapper.find(ListDelField)).toHaveLength(1);
-    expect(
-        wrapper
-            .find(ListDelField)
-            .childAt(0)
-            .prop("name")
-    ).toBe("x.1");
+    expect(wrapper.find(ListDelField).childAt(0).prop("name")).toBe("x.1");
 });
 
 test("<ListItemField> - renders ListDelField with label", () => {
@@ -42,12 +37,7 @@ test("<ListItemField> - renders ListDelField with label", () => {
     const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
 
     expect(wrapper.find(ListDelField)).toHaveLength(1);
-    expect(
-        wrapper
-            .find(ListDelField)
-            .childAt(0)
-            .prop("name")
-    ).toBe("x.1");
+    expect(wrapper.find(ListDelField).childAt(0).prop("name")).toBe("x.1");
     expect(wrapper.find(ListDelField)).toHaveLength(1);
     expect(wrapper.find(ListDelField).prop("outerList")).toBe(true);
 });

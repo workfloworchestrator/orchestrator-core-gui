@@ -61,7 +61,7 @@ describe("<ProductField>", () => {
                 "c9b3fbf5-677c-46c3-ad79-06b3beeffdca",
                 "9a8bd1ea-6650-4900-b820-3c7f0f16ef1d",
                 "a3bf8b26-50a6-4586-8e58-ad552cb39798",
-                "182b7c39-6c98-40da-9122-d7d27f61d449"
+                "182b7c39-6c98-40da-9122-d7d27f61d449",
             ],
             disabled: false,
             error: null,
@@ -69,7 +69,7 @@ describe("<ProductField>", () => {
             required: true,
             showInlineError: false,
             value: undefined,
-            placeholder: "Search and select a product..."
+            placeholder: "Search and select a product...",
         });
         //@ts-ignore
         expect(wrapper.find(SelectField).prop("transform")("e2620adb-d28c-4525-9110-ca14e7afca46")).toBe("SSP 40G");
@@ -85,7 +85,7 @@ describe("<ProductField>", () => {
                     productIds={[
                         "e2620adb-d28c-4525-9110-ca14e7afca46",
                         "78925941-83f7-4e96-925b-0d518db1b970",
-                        "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7"
+                        "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
                     ]}
                 />
             </ApplicationContext.Provider>
@@ -97,7 +97,7 @@ describe("<ProductField>", () => {
             allowedValues: [
                 "e2620adb-d28c-4525-9110-ca14e7afca46",
                 "78925941-83f7-4e96-925b-0d518db1b970",
-                "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7"
+                "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             ],
             disabled: false,
             error: null,
@@ -105,7 +105,7 @@ describe("<ProductField>", () => {
             required: true,
             showInlineError: false,
             value: undefined,
-            placeholder: "Search and select a product..."
+            placeholder: "Search and select a product...",
         });
         //@ts-ignore
         expect(wrapper.find(SelectField).prop("transform")("e2620adb-d28c-4525-9110-ca14e7afca46")).toBe("SSP 40G");

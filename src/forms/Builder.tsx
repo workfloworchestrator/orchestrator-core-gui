@@ -61,16 +61,16 @@ export function formSelect(
     const options: Option[] = !values.length
         ? []
         : typeof values[0] === "string"
-        ? (values as string[]).map(val => ({ value: val, label: val }))
+        ? (values as string[]).map((val) => ({ value: val, label: val }))
         : (values as Option[]);
 
     const value = !selected_value
         ? undefined
         : multiple
         ? ((selected_value as string[])
-              .map(value => options.find(option => option.value === value))
-              .filter(value => !!value) as ReadonlyArray<Option>)
-        : options.find(option => option.value === (selected_value as string));
+              .map((value) => options.find((option) => option.value === value))
+              .filter((value) => !!value) as ReadonlyArray<Option>)
+        : options.find((option) => option.value === (selected_value as string));
 
     return (
         <section className="form-divider">

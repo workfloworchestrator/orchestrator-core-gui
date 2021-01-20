@@ -9,7 +9,7 @@ import {
     NumField,
     RadioField,
     SelectField,
-    TextField
+    TextField,
 } from "lib/uniforms-surfnet/src";
 /*
  * Copyright 2019-2020 SURF.
@@ -42,8 +42,8 @@ test("<AutoField> - detects RadioField", () => {
             x: {
                 type: String,
                 allowedValues: ["x", "y"],
-                uniforms: { checkboxes: true }
-            }
+                uniforms: { checkboxes: true },
+            },
         })
     );
 
@@ -56,7 +56,7 @@ test("<AutoField> - detects SelectField", () => {
         element,
         createContext({
             x: { type: Array, allowedValues: ["x", "y"] },
-            "x.$": { type: String }
+            "x.$": { type: String },
         })
     );
 

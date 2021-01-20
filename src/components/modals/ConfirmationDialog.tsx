@@ -22,7 +22,7 @@ import {
     EuiModalFooter,
     EuiModalHeader,
     EuiModalHeaderTitle,
-    EuiOverlayMask
+    EuiOverlayMask,
 } from "@elastic/eui";
 import I18n from "i18n-js";
 import React from "react";
@@ -42,7 +42,7 @@ export default function ConfirmationDialog({
     confirm,
     question = "",
     leavePage = false,
-    isError = false
+    isError = false,
 }: IProps) {
     const modalContent = (
         <div>
