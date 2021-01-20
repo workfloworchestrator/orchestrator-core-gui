@@ -16501,10 +16501,10 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"
   integrity sha512-VUJ49FC8U1OxwZLxIbTTrDvLnf/6TDgxZcK8wxR8zs13xpx7xbG60ndBlhNrFi2EMuFRoeDoJO7wthSLq42EjA==
 
-"simpl-schema@^1.0.0 || ^0.0.4", simpl-schema@^1.7.2:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/simpl-schema/-/simpl-schema-1.7.2.tgz#0e53f0cd3758aa8c818e8e4ef0f5ce699811b774"
-  integrity sha512-eUQuOKaNXPKQ8RsE8DH5+IDlWDp+p+qrWAiwpxo1//Q609gadrux4DAQwL4KQLB2W6zUS7on0aALTQDU3zFZig==
+"simpl-schema@^1.0.0 || ^0.0.4", simpl-schema@^1.10.2:
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/simpl-schema/-/simpl-schema-1.10.2.tgz#5a2628a3936105b54c13f9245acbb6c1704a8df2"
+  integrity sha512-s53RTUqy4sLR9ah8Jqgs2yqyQeImYDPWGqBxcboJRj4FN3Z022r1TEeYkN0k6sxVtE1E+dXk0aFEbRnEiFHB8w==
   dependencies:
     clone "^2.1.2"
     message-box "^0.2.7"
