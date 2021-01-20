@@ -19,7 +19,7 @@ import {
     EuiInMemoryTable,
     EuiPageContent,
     EuiPageContentHeader,
-    EuiSpacer
+    EuiSpacer,
 } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import I18n from "i18n-js";
@@ -53,11 +53,11 @@ export default class NewProductBlocks extends React.Component {
         confirmationDialogAction: () => this,
         confirm: () => this,
         confirmationDialogQuestion: "",
-        leavePage: true
+        leavePage: true,
     };
 
     componentDidMount() {
-        data().then(productBlocks => {
+        data().then((productBlocks) => {
             this.setState({ productBlocks: productBlocks, productBlocksLoaded: false });
         });
     }
@@ -69,7 +69,7 @@ export default class NewProductBlocks extends React.Component {
         this.confirmation(
             I18n.t("metadata.deleteConfirmation", {
                 type: "Product Block",
-                name: productBlock.name
+                name: productBlock.name,
             }),
             () =>
                 deleteProductBlock(productBlock.product_block_id)
@@ -78,11 +78,11 @@ export default class NewProductBlocks extends React.Component {
                         setFlash(
                             I18n.t("metadata.flash.delete", {
                                 name: productBlock.name,
-                                type: "Product Block"
+                                type: "Product Block",
                             })
                         );
                     })
-                    .catch(err => {
+                    .catch((err) => {
                         if (err.response && err.response.status === 400) {
                             if (err.response.data) {
                                 setFlash(err.response.data.error);
@@ -101,7 +101,7 @@ export default class NewProductBlocks extends React.Component {
             confirmationDialogAction: () => {
                 this.cancelConfirmation();
                 action();
-            }
+            },
         });
 
     render() {
@@ -110,15 +110,15 @@ export default class NewProductBlocks extends React.Component {
             productBlocksLoaded,
             confirmationDialogOpen,
             confirmationDialogAction,
-            confirmationDialogQuestion
+            confirmationDialogQuestion,
         } = this.state;
 
         const search = {
             box: {
                 incremental: true,
                 schema: true,
-                placeholder: "Search for product blocks.."
-            }
+                placeholder: "Search for product blocks..",
+            },
         };
 
         const columns = [
@@ -127,28 +127,28 @@ export default class NewProductBlocks extends React.Component {
                 name: "NAME",
                 sortable: true,
                 truncateText: false,
-                width: "15%"
+                width: "15%",
             },
             {
                 field: "description",
                 name: "DESCRIPTION",
                 sortable: true,
                 truncateText: false,
-                width: "20%"
+                width: "20%",
             },
             {
                 field: "status",
                 name: "STATUS",
                 sortable: true,
                 truncateText: false,
-                width: "8%"
+                width: "8%",
             },
             {
                 field: "tag",
                 name: "TAG",
                 sortable: true,
                 truncateText: false,
-                width: "8%"
+                width: "8%",
             },
             {
                 field: "resource_types",
@@ -163,7 +163,7 @@ export default class NewProductBlocks extends React.Component {
                     ));
                     return <div>{renderPB}</div>;
                 },
-                width: "15%"
+                width: "15%",
             },
             {
                 field: "created_at",
@@ -174,7 +174,7 @@ export default class NewProductBlocks extends React.Component {
                     const renderCA = renderDateTime(created_at);
                     return <div>{renderCA}</div>;
                 },
-                width: "15%"
+                width: "15%",
             },
             {
                 field: "product_block_id",
@@ -189,7 +189,7 @@ export default class NewProductBlocks extends React.Component {
                         />
                     );
                     return <div>{Edit}</div>;
-                }
+                },
             },
             {
                 field: "product_block_id",
@@ -204,8 +204,8 @@ export default class NewProductBlocks extends React.Component {
                         />
                     );
                     return <div>{Delete}</div>;
-                }
-            }
+                },
+            },
         ];
 
         return (

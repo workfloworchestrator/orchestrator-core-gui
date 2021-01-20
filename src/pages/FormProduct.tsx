@@ -40,9 +40,9 @@ const schema: JSONSchema6 = {
         product_blocks: { type: "string" },
         fixed_inputs: { type: "string" },
         create_date: { type: "string", format: "date-time" },
-        end_date: { type: "string", format: "date-time" }
+        end_date: { type: "string", format: "date-time" },
     },
-    required: ["name", "description", "tag"]
+    required: ["name", "description", "tag"],
 };
 
 interface IState {
@@ -51,11 +51,11 @@ interface IState {
 
 export default class FormProduct extends React.Component {
     state: IState = {
-        products: []
+        products: [],
     };
 
     componentDidMount() {
-        data().then(products => {
+        data().then((products) => {
             this.setState({ products: products, productsLoaded: false });
         });
     }

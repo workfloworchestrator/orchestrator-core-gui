@@ -20,7 +20,7 @@ import {
     EuiLink,
     EuiPageContent,
     EuiPageContentHeader,
-    EuiSpacer
+    EuiSpacer,
 } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import I18n from "i18n-js";
@@ -53,11 +53,11 @@ export default class NewProducts extends React.Component {
         confirmationDialogAction: () => this,
         confirm: () => this,
         confirmationDialogQuestion: "",
-        leavePage: true
+        leavePage: true,
     };
 
     componentDidMount() {
-        data().then(products => {
+        data().then((products) => {
             this.setState({ products: products, productsLoaded: false });
         });
     }
@@ -68,7 +68,7 @@ export default class NewProducts extends React.Component {
         this.confirmation(
             I18n.t("metadata.deleteConfirmation", {
                 type: "Product",
-                name: product.name
+                name: product.name,
             }),
             () =>
                 deleteProduct(product.product_id)
@@ -77,11 +77,11 @@ export default class NewProducts extends React.Component {
                         setFlash(
                             I18n.t("metadata.flash.delete", {
                                 name: product.name,
-                                type: "Product"
+                                type: "Product",
                             })
                         );
                     })
-                    .catch(err => {
+                    .catch((err) => {
                         if (err.response && err.response.status === 400) {
                             if (err.response.data) {
                                 setFlash(err.response.data.error);
@@ -100,7 +100,7 @@ export default class NewProducts extends React.Component {
             confirmationDialogAction: () => {
                 this.cancelConfirmation();
                 action();
-            }
+            },
         });
 
     render() {
@@ -109,15 +109,15 @@ export default class NewProducts extends React.Component {
             productsLoaded,
             confirmationDialogOpen,
             confirmationDialogAction,
-            confirmationDialogQuestion
+            confirmationDialogQuestion,
         } = this.state;
 
         const search = {
             box: {
                 incremental: true,
                 schema: true,
-                placeholder: "Search for products.."
-            }
+                placeholder: "Search for products..",
+            },
         };
 
         const columns = [
@@ -126,28 +126,28 @@ export default class NewProducts extends React.Component {
                 name: "NAME",
                 sortable: true,
                 truncateText: false,
-                width: "15%"
+                width: "15%",
             },
             {
                 field: "description",
                 name: "DESCRIPTION",
                 sortable: true,
                 truncateText: false,
-                width: "15%"
+                width: "15%",
             },
             {
                 field: "tag",
                 name: "TAG",
                 sortable: true,
                 truncateText: false,
-                width: "6%"
+                width: "6%",
             },
             {
                 field: "product_type",
                 name: "TYPE",
                 sortable: true,
                 truncateText: false,
-                width: "6%"
+                width: "6%",
             },
             {
                 field: "status",
@@ -188,7 +188,7 @@ export default class NewProducts extends React.Component {
                                 </EuiBadge>
                             );
                     }
-                }
+                },
             },
             {
                 field: "product_blocks",
@@ -205,7 +205,7 @@ export default class NewProducts extends React.Component {
                     ));
                     return <div>{renderPB}</div>;
                 },
-                width: "16%"
+                width: "16%",
             },
             {
                 field: "created_at",
@@ -216,7 +216,7 @@ export default class NewProducts extends React.Component {
                     const renderCA = renderDateTime(created_at);
                     return <div>{renderCA}</div>;
                 },
-                width: "20%"
+                width: "20%",
             },
             {
                 field: "product_id",
@@ -231,7 +231,7 @@ export default class NewProducts extends React.Component {
                         />
                     );
                     return <div>{Edit}</div>;
-                }
+                },
             },
             {
                 field: "product_id",
@@ -246,8 +246,8 @@ export default class NewProducts extends React.Component {
                         />
                     );
                     return <div>{Delete}</div>;
-                }
-            }
+                },
+            },
         ];
 
         return (

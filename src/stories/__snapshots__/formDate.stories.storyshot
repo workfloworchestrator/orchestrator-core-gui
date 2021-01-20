@@ -7,41 +7,60 @@ exports[`Storyshots DatePicker Definition 1`] = `
   <section
     className="form-divider"
   >
-    <label>
-      Created
-    </label>
-    <em>
-      The date this Product Block was created
-    </em>
     <div
-      className="react-datepicker-wrapper"
+      className="euiFormRow"
+      id="metadata.productBlocks.created_at-row"
     >
       <div
-        className="react-datepicker__input-container"
+        className="euiFormRow__labelWrapper"
+      >
+        <label
+          className="euiFormLabel euiFormRow__label"
+          htmlFor="metadata.productBlocks.created_at"
+        >
+          Created
+        </label>
+         
+        <div
+          className="euiText euiText--medium"
+        >
+          The date this Product Block was created
+        </div>
+      </div>
+      <div
+        className="euiFormRow__fieldWrapper"
       >
         <div
-          className="date_picker_custom"
+          className="react-datepicker-wrapper"
         >
-          <button
-            onClick={[Function]}
+          <div
+            className="react-datepicker__input-container"
           >
-            01/01/1970
-          </button>
-          <span
-            className="clear"
-            onClick={[Function]}
-          >
-            <i
-              className="fas fa-times"
-            />
-          </span>
-          <span
-            onClick={[Function]}
-          >
-            <i
-              className="fas fa-calendar-alt"
-            />
-          </span>
+            <div
+              className="date_picker_custom"
+            >
+              <button
+                onClick={[Function]}
+              >
+                01/01/1970
+              </button>
+              <span
+                className="clear"
+                onClick={[Function]}
+              >
+                <i
+                  className="fas fa-times"
+                />
+              </span>
+              <span
+                onClick={[Function]}
+              >
+                <i
+                  className="fas fa-calendar-alt"
+                />
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

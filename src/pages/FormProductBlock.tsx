@@ -32,9 +32,9 @@ const schema: JSONSchema6 = {
         status: { default: "hop1", type: "string", enum: ["hop1", "hop2"] },
         resource_types: { default: "hop1", type: "string", enum: ["hop1", "hop2"] },
         create_date: { type: "string", format: "date-time" },
-        end_date: { type: "string", format: "date-time" }
+        end_date: { type: "string", format: "date-time" },
     },
-    required: ["name", "description", "tag"]
+    required: ["name", "description", "tag"],
 };
 
 interface IState {}

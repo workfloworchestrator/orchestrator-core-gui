@@ -14,32 +14,32 @@ const tabs = [
         id: "products",
         name: "PRODUCTS",
         disabled: false,
-        href: "/metadata/products"
+        href: "/metadata/products",
     },
     {
         id: "product_blocks",
         name: "PRODUCT BLOCKS",
         disabled: false,
-        href: "/metadata/product_blocks"
+        href: "/metadata/product_blocks",
     },
     {
         id: "resource_types",
         name: "RESOURCE TYPES",
         disabled: false,
-        href: "/metadata/resource_types"
+        href: "/metadata/resource_types",
     },
     {
         id: "fixed_inputs",
         name: "FIXED INPUTS",
         disabled: false,
-        href: "/metadata/fixed_inputs"
+        href: "/metadata/fixed_inputs",
     },
     {
         id: "workflows",
         name: "WORKFLOWS",
         disabled: false,
-        href: "/metadata/workflows"
-    }
+        href: "/metadata/workflows",
+    },
 ];
 
 interface MatchParam {}
@@ -54,7 +54,7 @@ interface IState {
 
 export default class NewMetaData extends React.Component<IProps, IState> {
     state: IState = {
-        selectedTabId: this.props.selectedTab
+        selectedTabId: this.props.selectedTab,
     };
 
     renderTabs = () => {

@@ -31,11 +31,11 @@ export default class NewResourceTypes extends React.Component {
     state: IState = {
         resourceTypes: [],
         resourceTypesLoaded: true,
-        isLoading: false
+        isLoading: false,
     };
 
     componentDidMount() {
-        data().then(resourceTypes => {
+        data().then((resourceTypes) => {
             this.setState({ resourceTypes: resourceTypes, resourceTypesLoaded: false });
         });
     }
@@ -47,8 +47,8 @@ export default class NewResourceTypes extends React.Component {
             box: {
                 incremental: true,
                 schema: true,
-                placeholder: "Search for resource types.."
-            }
+                placeholder: "Search for resource types..",
+            },
         };
 
         const columns = [
@@ -56,21 +56,21 @@ export default class NewResourceTypes extends React.Component {
                 field: "resource_type",
                 name: "TYPE",
                 sortable: true,
-                truncateText: false
+                truncateText: false,
             },
             {
                 field: "description",
                 name: "DESCRIPTION",
                 sortable: true,
                 truncateText: false,
-                width: "50%"
+                width: "50%",
             },
             {
                 field: "resource_type_id",
                 name: "RESOURCE ID",
                 sortable: true,
-                truncateText: false
-            }
+                truncateText: false,
+            },
         ];
 
         return (

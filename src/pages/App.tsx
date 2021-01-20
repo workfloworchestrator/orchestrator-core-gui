@@ -51,8 +51,6 @@ import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
 
 import { assignees, locationCodes, organisations, processStatuses, products, reportError } from "../api";
-import FormProduct from "./FormProduct";
-import FormProductBlock from "./FormProductBlock";
 
 export const history = createBrowserHistory();
 
@@ -219,27 +217,10 @@ class App extends React.PureComponent<{}, IState> {
                                 <Route path="/subscriptions" render={(props) => <SubscriptionsPage {...props} />} />
                                 <Route exact path="/metadata" render={() => <Redirect to="/metadata/products" />} />
                                 <ProtectedRoute
-                                    path="/metadata/products"
-                                    render={props => <NewMetaData selectedTab={"products"} {...props} />}
+                                    path="/metadata/:type"
+                                    render={(props) => <NewMetaData selectedTab={props.match.params.type} {...props} />}
                                 />
-                                <ProtectedRoute
-                                    path="/metadata/product_blocks"
-                                    render={props => <NewMetaData selectedTab={"product_blocks"} {...props} />}
-                                />
-                                <ProtectedRoute
-                                    path="/metadata/resource_types"
-                                    render={props => <NewMetaData selectedTab={"resource_types"} {...props} />}
-                                />
-                                <ProtectedRoute
-                                    path="/metadata/fixed_inputs"
-                                    render={props => <NewMetaData selectedTab={"fixed_inputs"} {...props} />}
-                                />
-                                <ProtectedRoute
-                                    path="/metadata/workflows"
-                                    render={props => <NewMetaData selectedTab={"workflows"} {...props} />}
-                                />
-
-                                <ProtectedRoute path="/product/:id" render={props => <ProductPage {...props} />} />
+                                <ProtectedRoute path="/product/:id" render={(props) => <ProductPage {...props} />} />
                                 <ProtectedRoute
                                     path="/product-block/:id"
                                     render={(props) => <ProductBlock {...props} />}
@@ -253,7 +234,6 @@ class App extends React.PureComponent<{}, IState> {
                                 <Route path="/not-allowed" render={() => <NotAllowed />} />
                                 <Route path="/error" render={(props) => <ServerError {...props} />} />
                                 <Route path="/styleguide" render={(props) => <StyleGuide {...props} />} />
-                                <Route path="/test-form" render={props => <FormTestPage {...props} />} />
                                 <Route component={NotFound} />
                             </Switch>
                         </div>

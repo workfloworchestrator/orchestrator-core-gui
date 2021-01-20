@@ -32,11 +32,11 @@ export default class NewWorkFlows extends React.Component {
     state: IState = {
         workFlows: [],
         workFlowsLoaded: true,
-        isLoading: false
+        isLoading: false,
     };
 
     componentDidMount() {
-        data().then(workFlows => {
+        data().then((workFlows) => {
             this.setState({ workFlows: workFlows, workFlowsLoaded: false });
         });
     }
@@ -48,8 +48,8 @@ export default class NewWorkFlows extends React.Component {
             box: {
                 incremental: true,
                 schema: true,
-                placeholder: "Search for workflows.."
-            }
+                placeholder: "Search for workflows..",
+            },
         };
 
         const columns = [
@@ -57,20 +57,20 @@ export default class NewWorkFlows extends React.Component {
                 field: "name",
                 name: "UNIQUE KEY",
                 sortable: true,
-                truncateText: false
+                truncateText: false,
             },
             {
                 field: "description",
                 name: "DESCRIPTION",
                 sortable: true,
                 truncateText: false,
-                width: "30%"
+                width: "30%",
             },
             {
                 field: "target",
                 name: "TARGET",
                 sortable: true,
-                truncateText: false
+                truncateText: false,
             },
             {
                 field: "product_tags",
@@ -84,7 +84,7 @@ export default class NewWorkFlows extends React.Component {
                         </EuiBadge>
                     ));
                     return <div>{renderPT}</div>;
-                }
+                },
             },
             {
                 field: "created_at",
@@ -94,8 +94,8 @@ export default class NewWorkFlows extends React.Component {
                 render: (created_at: any) => {
                     const renderCA = renderDateTime(created_at);
                     return <div>{renderCA}</div>;
-                }
-            }
+                },
+            },
         ];
 
         return (

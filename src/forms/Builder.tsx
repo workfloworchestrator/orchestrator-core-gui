@@ -106,7 +106,11 @@ export function formDate(
 ) {
     return (
         <section className="form-divider">
-            <EuiFormRow label={I18n.t(i18nKey)} labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}>
+            <EuiFormRow
+                id={i18nKey}
+                label={I18n.t(i18nKey)}
+                labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}
+            >
                 <DatePicker
                     selected={value}
                     isClearable={false}
