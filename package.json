@@ -58,7 +58,7 @@
         "@storybook/theming": "^5.3.13",
         "@types/enzyme": "^3.10.8",
         "@types/highlight.js": "^9.12.4",
-        "@types/i18n-js": "^3.0.1",
+        "@types/i18n-js": "^3.8.0",
         "@types/invariant": "^2.2.33",
         "@types/jest": "^26.0.20",
         "@types/json-schema": "^7.0.6",
