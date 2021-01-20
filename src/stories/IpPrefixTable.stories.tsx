@@ -25,15 +25,15 @@ export default {
     title: "IpPrefixTable",
     // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
     parameters: {
-        fileName: __filename
-    }
+        fileName: __filename,
+    },
 };
 
 export const Definition = () => {
     mock.reset();
     mock.onGet(/ipam\/prefix_filters/).reply(200, [
         { id: 1, prefix: "10.0.0.0/16", version: 4 },
-        { id: 2, prefix: "2010::/32", version: 6 }
+        { id: 2, prefix: "2010::/32", version: 6 },
     ]);
     mock.onGet("ipam/ip_blocks/1").reply(200, IP_BLOCKS);
     mock.onGet("ipam/ip_blocks/2").reply(200, IP_BLOCKS_V6);

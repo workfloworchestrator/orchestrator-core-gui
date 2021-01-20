@@ -56,7 +56,7 @@ function useFilterableDataFetcher<T extends object>(endpoint: string): [T[], num
                     }
                     dispatch({ type: ActionType.LOADING_STOP });
                 })
-                .catch(error => {
+                .catch((error) => {
                     // don't call dispatch on cancellation, the hook was unmounted.
                     dispatch({ type: ActionType.LOADING_STOP });
                     dispatch({ type: ActionType.REFRESH_DISABLE }); // disable autorefresh on errors to not swamp the logs with failed requests

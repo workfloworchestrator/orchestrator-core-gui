@@ -24,12 +24,12 @@ let data: Omit<SubscriptionsContextType, "getSubscriptions"> & { getSubscription
     subscriptions: subscriptionsCache,
     clearSubscriptions: clearSubscriptions,
     getSubscription: getSubscription,
-    getSubscriptions: undefined
+    getSubscriptions: undefined,
 };
 
 function getSubscriptionsHandler(tags?: string[], statuses: string[] = ["active"]): Promise<ServicePortSubscription[]> {
     function updateSubscriptions(subscriptions: ServicePortSubscription[]) {
-        subscriptions.forEach(subscription => {
+        subscriptions.forEach((subscription) => {
             // We merge instead of overwriting to preserve values like port_mode that might not be set in one call but are in
             // a previous call
             data.subscriptions[subscription.subscription_id] = merge(
@@ -42,7 +42,7 @@ function getSubscriptionsHandler(tags?: string[], statuses: string[] = ["active"
     }
 
     if (
-        tags?.filter(tag => ["SSP", "MSP", "MSPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL", "SP", "SPNL"].includes(tag))
+        tags?.filter((tag) => ["SSP", "MSP", "MSPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL", "SP", "SPNL"].includes(tag))
             .length
     ) {
         return portSubscriptions(tags, statuses).then(updateSubscriptions);

@@ -76,16 +76,16 @@ export default class ProductBlock extends React.Component<IProps, IState> {
         readOnly: false,
         processing: false,
         resourceTypes: [],
-        productBlocks: []
+        productBlocks: [],
     };
 
     componentDidMount() {
         const id = this.props.match?.params.id;
         if (id !== "new") {
             const readOnly = getParameterByName("readOnly", window.location.search) === "true";
-            productBlockById(id!).then(res => this.setState({ productBlock: res, isNew: false, readOnly: readOnly }));
+            productBlockById(id!).then((res) => this.setState({ productBlock: res, isNew: false, readOnly: readOnly }));
         }
-        Promise.all([resourceTypes(), productBlocks()]).then(res =>
+        Promise.all([resourceTypes(), productBlocks()]).then((res) =>
             this.setState({ resourceTypes: res[0], productBlocks: res[1] })
         );
     }
@@ -96,7 +96,7 @@ export default class ProductBlock extends React.Component<IProps, IState> {
             confirmationDialogOpen: true,
             leavePage: true,
             confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
-            cancelDialogAction: () => this.context.redirect("/metadata/product_blocks")
+            cancelDialogAction: () => this.context.redirect("/metadata/product_blocks"),
         });
     };
 
@@ -105,7 +105,7 @@ export default class ProductBlock extends React.Component<IProps, IState> {
         const { productBlock } = this.state;
         const question = I18n.t("metadata.deleteConfirmation", {
             type: "Product Block",
-            name: productBlock!.name
+            name: productBlock!.name,
         });
         const action = () =>
             deleteProductBlock(productBlock!.product_block_id)
@@ -114,11 +114,11 @@ export default class ProductBlock extends React.Component<IProps, IState> {
                     setFlash(
                         I18n.t("metadata.flash.delete", {
                             type: "Product Block",
-                            name: productBlock!.name
+                            name: productBlock!.name,
                         })
                     );
                 })
-                .catch(err => {
+                .catch((err) => {
                     if (err.response && err.response.status === 400) {
                         this.setState({ confirmationDialogOpen: false });
                         if (err.response.data) {
@@ -133,7 +133,7 @@ export default class ProductBlock extends React.Component<IProps, IState> {
             confirmationDialogQuestion: question,
             leavePage: false,
             confirmationDialogAction: action,
-            cancelDialogAction: () => this.setState({ confirmationDialogOpen: false })
+            cancelDialogAction: () => this.setState({ confirmationDialogOpen: false }),
         });
     };
 
@@ -148,7 +148,7 @@ export default class ProductBlock extends React.Component<IProps, IState> {
                 setFlash(
                     I18n.t(productBlock!.product_block_id ? "metadata.flash.updated" : "metadata.flash.created", {
                         type: "Product Block",
-                        name: productBlock!.name
+                        name: productBlock!.name,
                     })
                 );
             });
@@ -187,12 +187,12 @@ export default class ProductBlock extends React.Component<IProps, IState> {
 
     isInvalid = (markErrors: boolean = false) => {
         const { errors, required, productBlock, duplicateName } = this.state;
-        const hasErrors = (Object.keys(errors) as (keyof iProductBlock)[]).some(key => errors[key]);
-        const requiredInputMissing = required.some(attr => isEmpty(productBlock![attr]));
+        const hasErrors = (Object.keys(errors) as (keyof iProductBlock)[]).some((key) => errors[key]);
+        const requiredInputMissing = required.some((attr) => isEmpty(productBlock![attr]));
         if (markErrors) {
-            const missing = required.filter(attr => isEmpty(productBlock![attr]));
+            const missing = required.filter((attr) => isEmpty(productBlock![attr]));
             const newErrors = { ...errors };
-            missing.forEach(attr => (newErrors[attr] = true));
+            missing.forEach((attr) => (newErrors[attr] = true));
             this.setState({ errors: newErrors });
         }
 
@@ -204,7 +204,7 @@ export default class ProductBlock extends React.Component<IProps, IState> {
         const errors = { ...this.state.errors };
         const { productBlock } = this.state;
         if (name === "name") {
-            const nbr = this.state.productBlocks.filter(p => p.name === value).length;
+            const nbr = this.state.productBlocks.filter((p) => p.name === value).length;
             const duplicate = productBlock!.product_block_id ? nbr === 2 : nbr === 1;
             errors[name] = duplicate;
             this.setState({ duplicateName: duplicate });
@@ -236,7 +236,7 @@ export default class ProductBlock extends React.Component<IProps, IState> {
 
     addResourceType = (option: ValueType<Option>) => {
         const { productBlock, resourceTypes } = this.state;
-        const newResourceType = resourceTypes.find(rt => rt.resource_type_id === (option as Option).value)!;
+        const newResourceType = resourceTypes.find((rt) => rt.resource_type_id === (option as Option).value)!;
         productBlock!.resource_types.push(newResourceType);
         this.setState({ productBlock: productBlock });
     };
@@ -245,21 +245,21 @@ export default class ProductBlock extends React.Component<IProps, IState> {
         stop(e);
         const { productBlock } = this.state;
         productBlock!.resource_types = productBlock!.resource_types.filter(
-            rt => rt.resource_type_id !== resource_type_id
+            (rt) => rt.resource_type_id !== resource_type_id
         );
         this.setState({ productBlock: productBlock });
     };
 
     renderResourceTypes = (productBlock: iProductBlock, resourceTypes: ResourceType[], readOnly: boolean) => {
         const availableResourceTypes = resourceTypes.filter(
-            rt => !productBlock.resource_types.some(pbRt => rt.resource_type_id === pbRt.resource_type_id)
+            (rt) => !productBlock.resource_types.some((pbRt) => rt.resource_type_id === pbRt.resource_type_id)
         );
         return (
             <section className="form-divider">
                 <label htmlFor="name">{I18n.t("metadata.productBlocks.resourceTypes")}</label>
                 <em>{I18n.t("metadata.productBlocks.resourceTypes_info")}</em>
                 <div className="child-form">
-                    {productBlock.resource_types.map(rt => (
+                    {productBlock.resource_types.map((rt) => (
                         <div key={rt.resource_type_id} className="resource-type">
                             <input
                                 type="text"
@@ -275,9 +275,9 @@ export default class ProductBlock extends React.Component<IProps, IState> {
                         <Select
                             className="select-resource-type"
                             onChange={this.addResourceType}
-                            options={availableResourceTypes.map(rt => ({
+                            options={availableResourceTypes.map((rt) => ({
                                 value: rt.resource_type_id,
-                                label: `${rt.resource_type.toUpperCase()} - ${rt.description}`
+                                label: `${rt.resource_type.toUpperCase()} - ${rt.description}`,
                             }))}
                             isSearchable={true}
                             isClearable={false}
@@ -305,7 +305,7 @@ export default class ProductBlock extends React.Component<IProps, IState> {
             resourceTypes,
             duplicateName,
             initial,
-            confirmationDialogQuestion
+            confirmationDialogQuestion,
         } = this.state;
 
         if (!productBlock) {

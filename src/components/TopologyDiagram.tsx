@@ -5,7 +5,7 @@ import {
     portByImsServiceId,
     prefixById,
     serviceByImsServiceId,
-    subscriptionsDetailWithModel
+    subscriptionsDetailWithModel,
 } from "api";
 import React from "react";
 import { TrafficMap } from "react-network-diagrams";
@@ -38,14 +38,14 @@ interface IState {
 // Mapping of node type to size of shape
 const nodeSizeMap = {
     hub: 5.5,
-    cloud: 7
+    cloud: 7,
 };
 
 // Mapping of node name to shape (default is circle, other
 // options are cloud or square currently)
 const nodeShapeMap: any = {
     L2VPNWOLK: "cloud",
-    WOLK: "cloud"
+    WOLK: "cloud",
 };
 
 // Maps link capacity to line thickness
@@ -53,7 +53,7 @@ const edgeThicknessMap = {
     "100G": 9,
     "10G": 3,
     "1G": 1.5,
-    subG: 1
+    subG: 1,
 };
 
 // The color map maps an edge value (within the range) to a color
@@ -64,7 +64,7 @@ const edgeColorMap = [
     { color: "#4da7c0", label: "5 - 10", range: [5, 10] },
     { color: "#238b45", label: "2 - 5", range: [2, 5] },
     { color: "#3690c0", label: "1 - 2", range: [1, 2] },
-    { color: "#74a9cf", label: "0 - 1", range: [0, 1] }
+    { color: "#74a9cf", label: "0 - 1", range: [0, 1] },
 ];
 
 let pathColorMap: any = {};
@@ -146,7 +146,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         selection: null,
         panelText: null,
         prefix: {},
-        prefixesLoaded: []
+        prefixesLoaded: [],
     };
 
     prefixesLoaded: string[] = [];
@@ -168,7 +168,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         if (!isLoading && vcs.length > 0 && isEmpty(imsServices)) {
             this.setState({ isLoading: true });
             vcs.forEach((vc: any, vcIndex: number) => {
-                serviceByImsServiceId(vc.ims_circuit_id).then(result => {
+                serviceByImsServiceId(vc.ims_circuit_id).then((result) => {
                     imsServices[vcIndex] = result;
                     this.setState({ imsServices: imsServices });
                     if (isEmpty(imsEndpoints[vcIndex])) {
@@ -208,7 +208,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
     populateEndpoints = ({
         service,
         recursive = false,
-        vc = 0
+        vc = 0,
     }: {
         service: IMSService;
         recursive?: boolean;
@@ -218,38 +218,38 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
             return;
         }
 
-        const uniquePortPromises = (service.endpoints || []).map(async endpoint => {
+        const uniquePortPromises = (service.endpoints || []).map(async (endpoint) => {
             if (endpoint.type === "port") {
-                return portByImsPortId(endpoint.id).then(result =>
+                return portByImsPortId(endpoint.id).then((result) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
-                        endpointType: endpoint.type
+                        endpointType: endpoint.type,
                     })
                 );
             } else if (endpoint.type === "internal_port") {
-                return internalPortByImsPortId(endpoint.id).then(result =>
+                return internalPortByImsPortId(endpoint.id).then((result) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
-                        endpointType: endpoint.type
+                        endpointType: endpoint.type,
                     })
                 );
             } else {
-                return serviceByImsServiceId(endpoint.id).then(result => {
+                return serviceByImsServiceId(endpoint.id).then((result) => {
                     if (["SP", "MSP", "SSP"].includes(result.product)) {
                         // In case of port product we just resolve the underlying port
-                        return portByImsServiceId(endpoint.id).then(result =>
+                        return portByImsServiceId(endpoint.id).then((result) =>
                             Object.assign(result, {
                                 serviceId: endpoint.id,
-                                endpointType: "port"
+                                endpointType: "port",
                             })
                         );
                     } else if (result.product === "AGGSP") {
-                        const internalPortId = result.endpoints.find(e => e.type === "service");
+                        const internalPortId = result.endpoints.find((e) => e.type === "service");
                         if (internalPortId) {
                             console.log("discard", result);
                             return portByImsServiceId(internalPortId.id).then((port: any) =>
                                 Object.assign(port, {
-                                    serviceId: endpoint.id
+                                    serviceId: endpoint.id,
                                 })
                             );
                         } else {
@@ -259,13 +259,13 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                     // Return all services that are not actually port services
                     return (Object.assign(result, {
                         serviceId: endpoint.id,
-                        endpointType: endpoint.type
+                        endpointType: endpoint.type,
                     }) as unknown) as IMSEndpoint;
                 });
             }
         });
         //@ts-ignore
-        Promise.all(uniquePortPromises).then(result => {
+        Promise.all(uniquePortPromises).then((result) => {
             const { imsEndpoints } = this.state;
             imsEndpoints[vc] = result.flat();
             this.setState({ imsEndpoints: imsEndpoints });
@@ -300,12 +300,12 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
             x: x,
             y: y,
             id: id,
-            text: <div></div>
+            text: <div></div>,
         };
     }
 
     _getNode(id: string): Subscription | undefined {
-        return this.state.nodes.find(node => node.subscription_id === id);
+        return this.state.nodes.find((node) => node.subscription_id === id);
     }
 
     _makeConnectionExplanation = (endpoint: IMSEndpoint, sap: any, sub: SubscriptionModel): JSX.Element => {
@@ -373,7 +373,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
     _calculatePositionFor(radius: number, index: number, n: number): Point {
         return {
             x: radius * Math.cos((index * 2 * Math.PI) / n),
-            y: radius * Math.sin((index * 2 * Math.PI) / n)
+            y: radius * Math.sin((index * 2 * Math.PI) / n),
         };
     }
 
@@ -409,7 +409,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         topology.nodes.push(wolk);
 
         subscription.vc.saps.forEach((sap: any, index: number) => {
-            const portSubscription = portSubscriptions.find(s => s.subscription_id === sap.port_subscription_id);
+            const portSubscription = portSubscriptions.find((s) => s.subscription_id === sap.port_subscription_id);
             this._updatePrefixInformation(sap);
 
             if (!portSubscription) {
@@ -459,7 +459,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                 esi.saps.forEach((sap: any, index: number) => {
                     // find instance in instances
                     const portSubscriptionId = sap.port_subscription_id;
-                    const portSubscription = portSubscriptions.find(s => s.subscription_id === portSubscriptionId);
+                    const portSubscription = portSubscriptions.find((s) => s.subscription_id === portSubscriptionId);
                     if (!portSubscription) {
                         console.log("failed to find subscription", portSubscriptionId);
                         return;
@@ -513,19 +513,19 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                         iface_source: "to_newy-cr5_ip-c",
                         iface_target: "to_bost-cr1_ip-a",
                         loc_source: node.name,
-                        loc_target: "WOLK"
-                    }
+                        loc_target: "WOLK",
+                    },
                 ],
                 site: null,
                 source: node.name,
                 target: "WOLK",
-                total_capacity: 10000000
+                total_capacity: 10000000,
             };
             topology.edges.push(edge);
             topology.paths.push({
                 ends: [],
                 steps: [node.name, "WOLK"],
-                name: `${node.name}__WOLK`
+                name: `${node.name}__WOLK`,
             });
         });
     }
@@ -536,7 +536,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         const drawingMethod = this.state.mapMode === 0 ? "simple" : "pathBidirectionalArrow";
         const mapSelection = {
             nodes: this.state.selectionType === "node" ? [this.state.selection] : [],
-            edges: this.state.selectionType === "edge" ? [this.state.selection] : []
+            edges: this.state.selectionType === "edge" ? [this.state.selection] : [],
         };
         return (
             <EuiFlexGroup justifyContent="spaceAround">

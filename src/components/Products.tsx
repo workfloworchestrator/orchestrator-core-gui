@@ -70,41 +70,41 @@ export default class Products extends React.Component<{}, IState> {
         confirmationDialogAction: () => this,
         confirm: () => this,
         confirmationDialogQuestion: "",
-        refresh: true
+        refresh: true,
     };
 
     componentDidMount() {
-        products().then(res => {
+        products().then((res) => {
             const enhancedProducts: ProductWithExtra[] = res.map((prod: Partial<ProductWithExtra>) => {
-                prod.product_blocks_string = (prod.product_blocks || []).map(pb => pb.name).join(", ");
+                prod.product_blocks_string = (prod.product_blocks || []).map((pb) => pb.name).join(", ");
                 return prod as ProductWithExtra;
             });
             const newFilterAttributesTag: Filter[] = [];
             //@ts-ignore
-            const uniqueTags = [...new Set(enhancedProducts.map(p => p.tag))];
-            uniqueTags.forEach(tag =>
+            const uniqueTags = [...new Set(enhancedProducts.map((p) => p.tag))];
+            uniqueTags.forEach((tag) =>
                 newFilterAttributesTag.push({
                     name: tag,
                     selected: true,
-                    count: enhancedProducts.filter(p => p.tag === tag).length
+                    count: enhancedProducts.filter((p) => p.tag === tag).length,
                 })
             );
             const newFilterAttributesType: Filter[] = [];
             //@ts-ignore
-            const uniqueTypes = [...new Set(enhancedProducts.map(p => p.product_type))];
-            uniqueTypes.forEach(type =>
+            const uniqueTypes = [...new Set(enhancedProducts.map((p) => p.product_type))];
+            uniqueTypes.forEach((type) =>
                 newFilterAttributesType.push({
                     name: type,
                     selected: true,
-                    count: enhancedProducts.filter(p => p.product_type === type).length
+                    count: enhancedProducts.filter((p) => p.product_type === type).length,
                 })
             );
             const sortedProducts = enhancedProducts.sort(this.sortBy(this.state.sorted.name));
             this.setState({
                 products: sortedProducts,
                 filteredProducts: sortedProducts,
-                filterAttributesTag: newFilterAttributesTag.filter(attr => attr.count > 0),
-                filterAttributesType: newFilterAttributesType.filter(attr => attr.count > 0)
+                filterAttributesTag: newFilterAttributesTag.filter((attr) => attr.count > 0),
+                filterAttributesType: newFilterAttributesType.filter((attr) => attr.count > 0),
             });
         });
     }
@@ -147,22 +147,22 @@ export default class Products extends React.Component<{}, IState> {
                 "product_blocks_string",
                 "create_subscription_workflow_key",
                 "modify_subscription_workflow_key",
-                "terminate_subscription_workflow_key"
+                "terminate_subscription_workflow_key",
             ];
-            products = products.filter(p =>
+            products = products.filter((p) =>
                 searchable
-                    .filter(search => p[search])
-                    .map(search => (p[search] as string).toLowerCase().indexOf(queryToLower))
-                    .some(indexOf => indexOf > -1)
+                    .filter((search) => p[search])
+                    .map((search) => (p[search] as string).toLowerCase().indexOf(queryToLower))
+                    .some((indexOf) => indexOf > -1)
             );
         }
-        products = products.filter(p => {
-            const filter = filterAttributesTag.find(attr => attr.name === p.tag);
+        products = products.filter((p) => {
+            const filter = filterAttributesTag.find((attr) => attr.name === p.tag);
             return filter ? filter.selected : true;
         });
 
-        products = products.filter(p => {
-            const filter = filterAttributesType.find(attr => attr.name === p.product_type);
+        products = products.filter((p) => {
+            const filter = filterAttributesType.find((attr) => attr.name === p.product_type);
             return filter ? filter.selected : true;
         });
 
@@ -170,12 +170,12 @@ export default class Products extends React.Component<{}, IState> {
         return sorted.descending ? products.reverse() : products;
     };
 
-    delayedSearch = debounce(query => {
+    delayedSearch = debounce((query) => {
         const products = [...this.state.products];
         const { sorted, filterAttributesTag, filterAttributesType } = this.state;
         this.setState({
             query: query,
-            filteredProducts: this.doSearchAndSort(query, products, sorted, filterAttributesTag, filterAttributesType)
+            filteredProducts: this.doSearchAndSort(query, products, sorted, filterAttributesTag, filterAttributesType),
         });
     }, 250);
 
@@ -190,7 +190,7 @@ export default class Products extends React.Component<{}, IState> {
         this.confirmation(
             I18n.t("metadata.deleteConfirmation", {
                 type: "Product",
-                name: product.name
+                name: product.name,
             }),
             () =>
                 deleteProduct(product.product_id)
@@ -199,11 +199,11 @@ export default class Products extends React.Component<{}, IState> {
                         setFlash(
                             I18n.t("metadata.flash.delete", {
                                 name: product.name,
-                                type: "Product"
+                                type: "Product",
                             })
                         );
                     })
-                    .catch(err => {
+                    .catch((err) => {
                         if (err.response && err.response.status === 400) {
                             if (err.response.data) {
                                 setFlash(err.response.data.error);
@@ -222,7 +222,7 @@ export default class Products extends React.Component<{}, IState> {
             confirmationDialogAction: () => {
                 this.cancelConfirmation();
                 action();
-            }
+            },
         });
 
     renderActions = (product: ProductWithExtra, actions: Action) => {
@@ -234,26 +234,26 @@ export default class Products extends React.Component<{}, IState> {
             icon: "fa fa-search-plus",
             euiIcon: "search",
             label: "view",
-            action: this.editProduct(product, true, false)
+            action: this.editProduct(product, true, false),
         };
         const edit = {
             icon: "fa fa-edit",
             euiIcon: "pencil",
             label: "edit",
-            action: this.editProduct(product, false, false)
+            action: this.editProduct(product, false, false),
         };
         const _delete = {
             icon: "fas fa-trash-alt",
             euiIcon: "trash",
             label: "delete",
             action: this.handleDeleteProduct(product),
-            danger: true
+            danger: true,
         };
         const clone = {
             icon: "far fa-clone",
             euiIcon: "copy",
             label: "clone",
-            action: this.editProduct(product, false, true, true)
+            action: this.editProduct(product, false, true, true),
         };
         const options = [view, edit, _delete, clone];
         return <DropDownActions options={options} i18nPrefix="metadata.products" />;
@@ -276,7 +276,7 @@ export default class Products extends React.Component<{}, IState> {
         sorted.name = name;
         this.setState({
             filteredProducts: sorted.descending ? filteredProducts.reverse() : filteredProducts,
-            sorted: sorted
+            sorted: sorted,
         });
     };
 
@@ -284,7 +284,7 @@ export default class Products extends React.Component<{}, IState> {
         const { products, sorted, query, filterAttributesTag, filterAttributesType } = this.state;
         const newFilterAttributesTag = [...filterAttributesTag];
         if (name === "tag") {
-            newFilterAttributesTag.forEach(attr => {
+            newFilterAttributesTag.forEach((attr) => {
                 if (attr.name === item.name) {
                     attr.selected = !attr.selected;
                 }
@@ -292,7 +292,7 @@ export default class Products extends React.Component<{}, IState> {
         }
         const newFilterAttributesType = [...filterAttributesType];
         if (name === "product_type") {
-            newFilterAttributesType.forEach(attr => {
+            newFilterAttributesType.forEach((attr) => {
                 if (attr.name === item.name) {
                     attr.selected = !attr.selected;
                 }
@@ -307,7 +307,7 @@ export default class Products extends React.Component<{}, IState> {
                 sorted,
                 newFilterAttributesTag,
                 newFilterAttributesType
-            )
+            ),
         });
     };
 
@@ -326,7 +326,7 @@ export default class Products extends React.Component<{}, IState> {
             "product_type",
             "status",
             "product_blocks_string",
-            "created_at"
+            "created_at",
         ];
         const th = (index: number) => {
             const name = columns[index];
@@ -361,7 +361,7 @@ export default class Products extends React.Component<{}, IState> {
                                 key={`${product.product_id}_${index}`}
                                 onClick={this.editProduct(product, false, false)}
                             >
-                                {tdValues.map(tdValue => td(tdValue, product))}
+                                {tdValues.map((tdValue) => td(tdValue, product))}
                                 <td data-label={I18n.t("metadata.products.created_at")} className="created_at">
                                     {renderDateTime(product.created_at)}
                                 </td>
@@ -374,7 +374,7 @@ export default class Products extends React.Component<{}, IState> {
                                 >
                                     <ActionContainer
                                         title={"Actions"}
-                                        renderButtonContent={active => {
+                                        renderButtonContent={(active) => {
                                             const classes = ["dropdown-button-content", active ? "active" : ""].join(
                                                 " "
                                             );
@@ -384,7 +384,7 @@ export default class Products extends React.Component<{}, IState> {
                                                 </span>
                                             );
                                         }}
-                                        renderContent={disabled => this.renderActions(product, actions)}
+                                        renderContent={(disabled) => this.renderActions(product, actions)}
                                     />
                                 </td>
                             </tr>
@@ -393,7 +393,7 @@ export default class Products extends React.Component<{}, IState> {
                             <td className="metadata-results" colSpan={6}>
                                 {I18n.t("metadata.results", {
                                     type: "Products",
-                                    count: products.length
+                                    count: products.length,
                                 })}
                             </td>
                         </tr>
@@ -418,7 +418,7 @@ export default class Products extends React.Component<{}, IState> {
             confirmationDialogQuestion,
             sorted,
             filterAttributesTag,
-            filterAttributesType
+            filterAttributesType,
         } = this.state;
         return (
             <div className="mod-products">

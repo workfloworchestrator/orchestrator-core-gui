@@ -35,10 +35,10 @@ filterDOMProps.register("productIds");
 function Product({ name, productIds, ...props }: ProductFieldProps) {
     const all_products = useContext(ApplicationContext).products;
 
-    const products = productIds ? productIds.map(id => productById(id, all_products)) : all_products;
+    const products = productIds ? productIds.map((id) => productById(id, all_products)) : all_products;
 
     const productLabelLookup =
-        products.reduce<{ [index: string]: string }>(function(mapping, product) {
+        products.reduce<{ [index: string]: string }>(function (mapping, product) {
             mapping[product.product_id] = product.name;
             return mapping;
         }, {}) ?? {};

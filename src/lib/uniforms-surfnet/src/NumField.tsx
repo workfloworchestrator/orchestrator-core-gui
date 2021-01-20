@@ -57,7 +57,7 @@ function Num({
                     name={name}
                     isInvalid={error}
                     placeholder={placeholder}
-                    onChange={event => onChange(parseInt(event.target.value))}
+                    onChange={(event) => onChange(parseInt(event.target.value))}
                     min={min}
                     max={max}
                     step={step ?? 1}

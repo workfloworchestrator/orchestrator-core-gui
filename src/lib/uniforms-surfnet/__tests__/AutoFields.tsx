@@ -31,7 +31,7 @@ test("<AutoFields> - render all fields by default", () => {
         createContext({
             x: { type: String },
             y: { type: String },
-            z: { type: String }
+            z: { type: String },
         })
     );
 
@@ -45,11 +45,11 @@ test("<AutoFields> - renders only specified fields", () => {
         createContext({
             x: { type: String },
             y: { type: String },
-            z: { type: String }
+            z: { type: String },
         })
     );
 
-    expect(wrapper.find("input").someWhere(e => e.prop("name") === "z")).toBe(false);
+    expect(wrapper.find("input").someWhere((e) => e.prop("name") === "z")).toBe(false);
 });
 
 test("<AutoFields> - does not render ommited fields", () => {
@@ -59,11 +59,11 @@ test("<AutoFields> - does not render ommited fields", () => {
         createContext({
             x: { type: String },
             y: { type: String },
-            z: { type: String }
+            z: { type: String },
         })
     );
 
-    expect(wrapper.find("input").someWhere(e => e.prop("name") === "x")).toBe(false);
+    expect(wrapper.find("input").someWhere((e) => e.prop("name") === "x")).toBe(false);
 });
 
 test("<AutoFields> - works with custom component", () => {
@@ -75,7 +75,7 @@ test("<AutoFields> - works with custom component", () => {
         createContext({
             x: { type: String },
             y: { type: String },
-            z: { type: String }
+            z: { type: String },
         })
     );
 
@@ -89,7 +89,7 @@ test("<AutoFields> - wraps fields in specified element", () => {
         createContext({
             x: { type: String },
             y: { type: String },
-            z: { type: String }
+            z: { type: String },
         })
     );
 

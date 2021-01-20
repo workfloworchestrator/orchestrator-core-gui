@@ -41,7 +41,7 @@ interface IState {
 export default class MetaData extends React.Component<IProps, IState> {
     state: IState = {
         tabs: ["products", "product_blocks", "resource_types", "fixed_inputs", "workflows"],
-        selectedTab: "products"
+        selectedTab: "products",
     };
 
     switchTab = (tab: string) => () => {
@@ -82,7 +82,7 @@ export default class MetaData extends React.Component<IProps, IState> {
         return (
             <EuiPage>
                 <EuiPageBody component="div" className="mod-metadata">
-                    <section className="tabs">{tabs.map(tab => this.renderTab(tab, selectedTab))}</section>
+                    <section className="tabs">{tabs.map((tab) => this.renderTab(tab, selectedTab))}</section>
                     {this.renderTabContent(selectedTab)}
                     <ScrollUpButton />
                 </EuiPageBody>

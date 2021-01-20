@@ -67,7 +67,7 @@ describe("<SelectField>", () => {
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "a", value: "a" },
-            { label: "b", value: "b" }
+            { label: "b", value: "b" },
         ]);
     });
 
@@ -78,7 +78,7 @@ describe("<SelectField>", () => {
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "A", value: "a" },
-            { label: "B", value: "b" }
+            { label: "B", value: "b" },
         ]);
     });
 
@@ -87,14 +87,14 @@ describe("<SelectField>", () => {
         const wrapper = mount(
             element,
             createContext({
-                x: { type: String, allowedValues: ["a", "b"], optional: true }
+                x: { type: String, allowedValues: ["a", "b"], optional: true },
             })
         );
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "a", value: "a" },
-            { label: "b", value: "b" }
+            { label: "b", value: "b" },
         ]);
         expect(wrapper.find(ReactSelect).prop("placeholder")).toBe("Search and select a value...");
     });
@@ -106,7 +106,7 @@ describe("<SelectField>", () => {
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "a", value: "a" },
-            { label: "b", value: "b" }
+            { label: "b", value: "b" },
         ]);
         expect(wrapper.find(ReactSelect).prop("placeholder")).toBe("y");
     });
@@ -191,24 +191,9 @@ describe("<SelectField>", () => {
         const element = <SelectField name="x" data-x="x" data-y="y" data-z="z" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(
-            wrapper
-                .find("section")
-                .at(0)
-                .prop("data-x")
-        ).toBe("x");
-        expect(
-            wrapper
-                .find("section")
-                .at(0)
-                .prop("data-y")
-        ).toBe("y");
-        expect(
-            wrapper
-                .find("section")
-                .at(0)
-                .prop("data-z")
-        ).toBe("z");
+        expect(wrapper.find("section").at(0).prop("data-x")).toBe("x");
+        expect(wrapper.find("section").at(0).prop("data-y")).toBe("y");
+        expect(wrapper.find("section").at(0).prop("data-z")).toBe("z");
     });
 
     test("<SelectField> - renders a select with correct value (as uniqueItem list child)", async () => {
@@ -218,7 +203,7 @@ describe("<SelectField>", () => {
             createContext(
                 {
                     x: { type: Array, uniforms: { uniqueItems: true } },
-                    "x.$": { type: String, allowedValues: ["a", "b"] }
+                    "x.$": { type: String, allowedValues: ["a", "b"] },
                 },
                 { model: { x: ["a", undefined] } }
             )
@@ -227,24 +212,9 @@ describe("<SelectField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(2);
-        expect(
-            wrapper
-                .find(ReactSelect)
-                .at(0)
-                .prop("value")
-        ).toStrictEqual({ label: "a", value: "a" });
-        expect(
-            wrapper
-                .find(ReactSelect)
-                .at(1)
-                .prop("value")
-        ).toStrictEqual(undefined);
-        expect(
-            wrapper
-                .find(ReactSelect)
-                .at(1)
-                .prop("options")
-        ).toStrictEqual([{ label: "b", value: "b" }]);
+        expect(wrapper.find(ReactSelect).at(0).prop("value")).toStrictEqual({ label: "a", value: "a" });
+        expect(wrapper.find(ReactSelect).at(1).prop("value")).toStrictEqual(undefined);
+        expect(wrapper.find(ReactSelect).at(1).prop("options")).toStrictEqual([{ label: "b", value: "b" }]);
         expect(wrapper.render()).toMatchSnapshot();
     });
 

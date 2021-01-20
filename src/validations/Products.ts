@@ -17,10 +17,10 @@ import { Product } from "utils/types";
 import { isEmpty } from "utils/Utils";
 
 export function filterProductsByBandwidth(products: Product[], bandwidth?: string | number): Product[] {
-    return products.filter(prod => {
+    return products.filter((prod) => {
         const fixedInputs = prod.fixed_inputs;
         if (fixedInputs && !isEmpty(bandwidth)) {
-            const speed = fixedInputs.find(fi => fi.name === "port_speed");
+            const speed = fixedInputs.find((fi) => fi.name === "port_speed");
             if (speed && parseInt(speed.value, 10) < parseInt(bandwidth as string, 10)) {
                 return false;
             }

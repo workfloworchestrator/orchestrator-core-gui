@@ -34,7 +34,7 @@ describe("<ImsNodeIdField>", () => {
         expect(wrapper.html()).toBe("<br>");
         expect(wrapper.find(SelectField)).toHaveLength(1);
         expect(wrapper.find(SelectField).props()).toMatchObject({
-            placeholder: "Loading nodes, please wait..."
+            placeholder: "Loading nodes, please wait...",
         });
 
         await waitForComponentToPaint(wrapper);
@@ -56,7 +56,7 @@ describe("<ImsNodeIdField>", () => {
             required: true,
             showInlineError: false,
             value: undefined,
-            placeholder: "Select a node"
+            placeholder: "Select a node",
         });
         //@ts-ignore
         expect(wrapper.find(SelectField).prop("transform")("1")).toBe("Some Node");
@@ -79,7 +79,7 @@ describe("<ImsNodeIdField>", () => {
             required: true,
             showInlineError: false,
             value: undefined,
-            placeholder: "Select a node"
+            placeholder: "Select a node",
         });
         //@ts-ignore
         expect(wrapper.find(SelectField).prop("transform")("1")).toBe("Some Node");

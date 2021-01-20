@@ -39,7 +39,7 @@ function MiniPaginator({
     pageOptions,
     pageSize,
     previousPage,
-    setPageSize
+    setPageSize,
 }: IPaginatorProps) {
     return (
         <EuiFlexGroup className="mini-paginator">

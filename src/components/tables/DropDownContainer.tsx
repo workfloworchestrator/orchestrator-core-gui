@@ -19,7 +19,7 @@ import React, { useState } from "react";
 function DropDownContainer({
     title,
     renderButtonContent,
-    renderContent
+    renderContent,
 }: {
     title: string;
     renderButtonContent: (active: boolean, hover: boolean) => React.ReactNode;
@@ -32,7 +32,7 @@ function DropDownContainer({
         <div className={"dropdown-container"}>
             <button
                 className={"dropdown-button"}
-                onClick={e => {
+                onClick={(e) => {
                     e.stopPropagation();
                     if (active) {
                         setActive(false);
@@ -46,7 +46,7 @@ function DropDownContainer({
             </button>
             <div
                 className={active ? "dropdown open" : hover ? "dropdown open" : "dropdown"}
-                onClick={e => {
+                onClick={(e) => {
                     e.stopPropagation();
                     if (!active) {
                         setActive(true);

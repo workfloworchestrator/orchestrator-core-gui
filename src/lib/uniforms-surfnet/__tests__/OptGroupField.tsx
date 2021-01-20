@@ -25,17 +25,12 @@ test("<OptGroupField> - renders an the correct fields when disabled", () => {
             x: { type: Object },
             "x.enabled": { type: Boolean },
             "x.b": { type: Number },
-            "x.c": { type: Number }
+            "x.c": { type: Number },
         })
     );
 
     expect(wrapper.find("input")).toHaveLength(1);
-    expect(
-        wrapper
-            .find("input")
-            .at(0)
-            .prop("name")
-    ).toBe("x.enabled");
+    expect(wrapper.find("input").at(0).prop("name")).toBe("x.enabled");
     expect(wrapper.render()).toMatchSnapshot();
 });
 
@@ -48,31 +43,16 @@ test("<OptGroupField> - renders an the correct fields when enabled", () => {
                 x: { type: Object },
                 "x.enabled": { type: Boolean },
                 "x.b": { type: Number },
-                "x.c": { type: Number }
+                "x.c": { type: Number },
             },
             { model: { x: { enabled: true } } }
         )
     );
 
     expect(wrapper.find("input")).toHaveLength(3);
-    expect(
-        wrapper
-            .find("input")
-            .at(0)
-            .prop("name")
-    ).toBe("x.enabled");
-    expect(
-        wrapper
-            .find("input")
-            .at(1)
-            .prop("name")
-    ).toBe("x.b");
-    expect(
-        wrapper
-            .find("input")
-            .at(2)
-            .prop("name")
-    ).toBe("x.c");
+    expect(wrapper.find("input").at(0).prop("name")).toBe("x.enabled");
+    expect(wrapper.find("input").at(1).prop("name")).toBe("x.b");
+    expect(wrapper.find("input").at(2).prop("name")).toBe("x.c");
     expect(wrapper.render()).toMatchSnapshot();
 });
 
@@ -83,7 +63,7 @@ test("<OptGroupField> - renders a label", () => {
         createContext({
             x: { type: Object },
             "x.enabled": { type: Boolean },
-            "x.b": { type: Number }
+            "x.b": { type: Number },
         })
     );
 
@@ -103,26 +83,11 @@ test("<OptGroupField> - renders a wrapper with unknown props", () => {
         createContext({
             x: { type: Object },
             "x.enabled": { type: Boolean },
-            "x.b": { type: Number }
+            "x.b": { type: Number },
         })
     );
 
-    expect(
-        wrapper
-            .find(".optgroup-field")
-            .at(0)
-            .prop("data-x")
-    ).toBe("x");
-    expect(
-        wrapper
-            .find(".optgroup-field")
-            .at(0)
-            .prop("data-y")
-    ).toBe("y");
-    expect(
-        wrapper
-            .find(".optgroup-field")
-            .at(0)
-            .prop("data-z")
-    ).toBe("z");
+    expect(wrapper.find(".optgroup-field").at(0).prop("data-x")).toBe("x");
+    expect(wrapper.find(".optgroup-field").at(0).prop("data-y")).toBe("y");
+    expect(wrapper.find(".optgroup-field").at(0).prop("data-z")).toBe("z");
 });

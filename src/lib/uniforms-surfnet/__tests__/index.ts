@@ -47,6 +47,6 @@ it("exports everything", () => {
         SummaryField: expect.any(Function),
         SubmitField: expect.any(Function),
         TextField: expect.any(Function),
-        VlanField: expect.any(Function)
+        VlanField: expect.any(Function),
     });
 });

@@ -146,24 +146,9 @@ test("<ContactPersonNameField> - renders a wrapper with unknown props", () => {
     const element = <ContactPersonNameField name="x" data-x="x" data-y="y" data-z="z" />;
     const wrapper = mount(element, createContext({ x: { type: String } }));
 
-    expect(
-        wrapper
-            .find("section")
-            .at(0)
-            .prop("data-x")
-    ).toBe("x");
-    expect(
-        wrapper
-            .find("section")
-            .at(0)
-            .prop("data-y")
-    ).toBe("y");
-    expect(
-        wrapper
-            .find("section")
-            .at(0)
-            .prop("data-z")
-    ).toBe("z");
+    expect(wrapper.find("section").at(0).prop("data-x")).toBe("x");
+    expect(wrapper.find("section").at(0).prop("data-y")).toBe("y");
+    expect(wrapper.find("section").at(0).prop("data-z")).toBe("z");
 });
 
 test("<ContactPersonNameField> - renders autocomplete based on key", async () => {
@@ -180,7 +165,7 @@ test("<ContactPersonNameField> - renders autocomplete based on key", async () =>
     expect(wrapper.find(Autocomplete)).toHaveLength(1);
     expect(wrapper.find(Autocomplete).props()).toMatchObject({
         query: "n",
-        suggestions: [{ name: "name", email: "a@b.nl", phone: "" }]
+        suggestions: [{ name: "name", email: "a@b.nl", phone: "" }],
     });
 });
 
@@ -198,7 +183,7 @@ test("<ContactPersonNameField> - renders autocomplete based on id", async () => 
     expect(wrapper.find(Autocomplete)).toHaveLength(1);
     expect(wrapper.find(Autocomplete).props()).toMatchObject({
         query: "n",
-        suggestions: [{ name: "name", email: "a@b.nl", phone: "" }]
+        suggestions: [{ name: "name", email: "a@b.nl", phone: "" }],
     });
 });
 

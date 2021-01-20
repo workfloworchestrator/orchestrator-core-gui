@@ -4,7 +4,7 @@ module.exports = {
     mode: "production",
     entry: "./main.scss",
     output: {
-        path: path.resolve(__dirname)
+        path: path.resolve(__dirname),
     },
     module: {
         rules: [
@@ -13,15 +13,15 @@ module.exports = {
                 use: [
                     {
                         loader: "file-loader",
-                        options: { outputPath: "./", name: "theme.css" }
+                        options: { outputPath: "./", name: "theme.css" },
                     },
                     // Compiles Sass to CSS
-                    "sass-loader"
-                ]
-            }
-        ]
+                    "sass-loader",
+                ],
+            },
+        ],
     },
     performance: {
-        maxAssetSize: 500000
-    }
+        maxAssetSize: 500000,
+    },
 };

@@ -40,7 +40,7 @@ function Radio({
         <div {...filterDOMProps(props)}>
             {label && <label>{label}</label>}
 
-            {allowedValues?.map(item => (
+            {allowedValues?.map((item) => (
                 <div key={item}>
                     <input
                         checked={item === value}

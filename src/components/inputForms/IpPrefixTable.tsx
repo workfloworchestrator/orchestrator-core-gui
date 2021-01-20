@@ -52,27 +52,27 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                 ipamStates.indexOf("Free"),
                 ipamStates.indexOf("Allocated"),
                 ipamStates.indexOf("Planned"),
-                ipamStates.indexOf("Subnet")
+                ipamStates.indexOf("Subnet"),
             ],
-            prefix: undefined
+            prefix: undefined,
         },
         sorted: {
             name: "prefix",
-            descending: false
-        }
+            descending: false,
+        },
     };
 
     componentDidMount() {
-        prefix_filters().then(result => {
+        prefix_filters().then((result) => {
             let { filter } = this.state;
             filter.prefix = result[0];
             this.setState({
                 filter_prefixes: result,
                 filter: filter,
-                filteredIpBlocks: this.filterAndSortBlocks()
+                filteredIpBlocks: this.filterAndSortBlocks(),
             });
         });
-        ip_blocks(1).then(result => {
+        ip_blocks(1).then((result) => {
             this.setState({ ipBlocks: result, loading: false });
         });
     }
@@ -85,7 +85,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         sorted.name = name;
         this.setState({
             sorted: sorted,
-            filteredIpBlocks: this.filterAndSortBlocks()
+            filteredIpBlocks: this.filterAndSortBlocks(),
         });
     };
 
@@ -116,11 +116,11 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         if (target.checked) {
             filter.state.push(state_filter);
         } else {
-            filter.state = filter.state.filter(e => e !== state_filter);
+            filter.state = filter.state.filter((e) => e !== state_filter);
         }
         this.setState({
             filter: filter,
-            filteredIpBlocks: this.filterAndSortBlocks()
+            filteredIpBlocks: this.filterAndSortBlocks(),
         });
     };
 
@@ -128,14 +128,14 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         const parentPrefix = parseInt((e as Option).value, 10);
         let { filter, filter_prefixes } = this.state;
         let the_prefix: IpPrefix | undefined = undefined;
-        filter_prefixes.forEach(prefix => (the_prefix = prefix["id"] === parentPrefix ? prefix : the_prefix));
+        filter_prefixes.forEach((prefix) => (the_prefix = prefix["id"] === parentPrefix ? prefix : the_prefix));
         filter.prefix = the_prefix;
-        ip_blocks(parentPrefix).then(result => {
+        ip_blocks(parentPrefix).then((result) => {
             this.setState({
                 ipBlocks: result,
                 filteredIpBlocks: this.filterAndSortBlocks(),
                 loading: false,
-                filter: filter
+                filter: filter,
             });
         });
     };
@@ -146,11 +146,11 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         const keys = Object.keys(filter) as ("state" | "prefix")[];
         keys.map((key, index) => {
             if (key === "state") {
-                filteredIpBlocks = filteredIpBlocks.filter(i => filter[key].includes(i[key]));
+                filteredIpBlocks = filteredIpBlocks.filter((i) => filter[key].includes(i[key]));
             } else if (key === "prefix" && filter.prefix !== undefined) {
-                filteredIpBlocks = filteredIpBlocks.filter(i => i.parent === filter.prefix!.id);
+                filteredIpBlocks = filteredIpBlocks.filter((i) => i.parent === filter.prefix!.id);
             } else if (key !== "prefix") {
-                filteredIpBlocks = filteredIpBlocks.filter(i => prop(i, key) === prop(filter, key));
+                filteredIpBlocks = filteredIpBlocks.filter((i) => prop(i, key) === prop(filter, key));
             }
             return key;
         });
@@ -179,11 +179,11 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                 </th>
             );
         };
-        const options: Option[] = filter_prefixes.map(fp => ({
+        const options: Option[] = filter_prefixes.map((fp) => ({
             value: fp.id.toString(),
-            label: fp.prefix
+            label: fp.prefix,
         }));
-        const value = options.find(option => option.value === parentPrefix?.toString());
+        const value = options.find((option) => option.value === parentPrefix?.toString());
 
         return (
             <div>

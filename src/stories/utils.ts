@@ -34,49 +34,49 @@ export function vlanData() {
 export function loadVlanMocks() {
     mock.onGet(/ims\/vlans\/0.*/).reply(200, vlanData());
     mock.onGet(/ims\/vlans\/1.*/).reply(200, vlanData(), {
-        overwriteRoutes: false
+        overwriteRoutes: false,
     });
     mock.onGet(/ims\/vlans\/2.*/).reply(200, vlanData(), {
-        overwriteRoutes: false
+        overwriteRoutes: false,
     });
     mock.onGet(/ims\/vlans\/3.*/).reply(200, vlanData(), {
-        overwriteRoutes: false
+        overwriteRoutes: false,
     });
     mock.onGet(/ims\/vlans\/4.*/).reply(200, vlanData(), {
-        overwriteRoutes: false
+        overwriteRoutes: false,
     });
     mock.onGet(/ims\/vlans\/5.*/).reply(200, vlanData(), {
-        overwriteRoutes: false
+        overwriteRoutes: false,
     });
     mock.onGet(/ims\/vlans\/6.*/).reply(200, vlanData(), {
-        overwriteRoutes: false
+        overwriteRoutes: false,
     });
     mock.onGet(/ims\/vlans\/7.*/).reply(200, vlanData(), {
-        overwriteRoutes: false
+        overwriteRoutes: false,
     });
     mock.onGet(/ims\/vlans\/8.*/).reply(200, vlanData(), {
-        overwriteRoutes: false
+        overwriteRoutes: false,
     });
     mock.onGet(/ims\/vlans\/9.*/).reply(200, vlanData(), {
-        overwriteRoutes: false
+        overwriteRoutes: false,
     });
     mock.onGet(/ims\/vlans\/a.*/).reply(200, vlanData(), {
-        overwriteRoutes: false
+        overwriteRoutes: false,
     });
     mock.onGet(/ims\/vlans\/b.*/).reply(200, vlanData(), {
-        overwriteRoutes: false
+        overwriteRoutes: false,
     });
     mock.onGet(/ims\/vlans\/c.*/).reply(200, vlanData(), {
-        overwriteRoutes: false
+        overwriteRoutes: false,
     });
     mock.onGet(/ims\/vlans\/d.*/).reply(200, vlanData(), {
-        overwriteRoutes: false
+        overwriteRoutes: false,
     });
     mock.onGet(/ims\/vlans\/e.*/).reply(200, vlanData(), {
-        overwriteRoutes: false
+        overwriteRoutes: false,
     });
     mock.onGet(/ims\/vlans\/f.*/).reply(200, vlanData(), {
-        overwriteRoutes: false
+        overwriteRoutes: false,
     });
 }
 
@@ -85,7 +85,7 @@ export function createForm(properties: {}, required?: string[]): JSONSchema6 {
         properties: properties,
         required: required ?? Object.keys(properties),
         title: "Validator",
-        type: "object"
+        type: "object",
     };
 }
 
@@ -95,44 +95,44 @@ export const ContactPerson = {
             email: {
                 format: "email",
                 title: "Email",
-                type: "string"
+                type: "string",
             },
             name: {
                 title: "Name",
                 type: "string",
-                format: "contactPersonName"
+                format: "contactPersonName",
             },
             phone: {
                 default: "",
                 title: "Phone",
-                type: "string"
-            }
+                type: "string",
+            },
         },
         required: ["email", "name"],
         title: "ContactPerson",
-        type: "object"
+        type: "object",
     },
     minItems: 1,
     title: "Contact Persons",
-    type: "array"
+    type: "array",
 };
 export const Organisation = {
     title: "Organisation",
     type: "string",
-    format: "organisationId"
+    format: "organisationId",
 };
 
 export const Bandwidth = {
     maximum: 1000000,
     minimum: 0,
     title: "Service Speed",
-    type: "integer"
+    type: "integer",
 };
 
 export const ImsNodeId = {
     title: "ImsNodeId",
     type: "integer",
-    format: "imsNodeId"
+    format: "imsNodeId",
 };
 
 export function imsPortIdProperty(options: {}) {
@@ -140,7 +140,7 @@ export function imsPortIdProperty(options: {}) {
         title: "ImsPortId",
         type: "integer",
         format: "imsPortId",
-        ...options
+        ...options,
     };
 }
 
@@ -154,23 +154,23 @@ export function servicePortsProperty(portOptions: {}, minItems = 1, maxItems = 2
                     format: "subscriptionId",
                     visiblePortMode: "normal",
                     tags: ["SP", "SPNL", "MSC", "MSCNL", "AGGSP"],
-                    ...portOptions
+                    ...portOptions,
                 },
                 vlan: {
                     examples: ["345", "20-23,45,50-100"],
                     pattern: "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
                     title: "Vlan",
                     type: "string",
-                    format: "vlan"
-                }
+                    format: "vlan",
+                },
             },
             required: ["subscription_id", "vlan", "tag", "port_mode"],
             title: "ServicePort",
-            type: "object"
+            type: "object",
         },
         maxItems: maxItems,
         minItems: minItems,
         title: "Service Ports",
-        type: "array"
+        type: "array",
     };
 }

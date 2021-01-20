@@ -36,7 +36,7 @@ export default function AutoFields({
         element,
         { ...props },
         (fields ?? schema.getSubfields())
-            .filter(field => !omitFields.includes(field))
-            .map(field => createElement(autoField, { key: field, name: field, className: "form-input" }))
+            .filter((field) => !omitFields.includes(field))
+            .map((field) => createElement(autoField, { key: field, name: field, className: "form-input" }))
     );
 }

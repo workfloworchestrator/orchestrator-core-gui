@@ -24,7 +24,7 @@ import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import {
     ProcessesTable,
     initialProcessTableSettings,
-    initialProcessesFilterAndSort
+    initialProcessesFilterAndSort,
 } from "components/tables/Processes";
 import I18n from "i18n-js";
 import React from "react";
@@ -53,7 +53,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             confirmationDialogAction: () => {},
             confirm: () => {},
             confirmationDialogQuestion: "",
-            showExplanation: false
+            showExplanation: false,
         };
     }
 
@@ -72,13 +72,13 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                 null,
                 [
                     { id: "isTask", values: ["true"] },
-                    { id: "status", values: ["running", "failed", "waiting", "api_unavailable", "inconsistent_data"] }
+                    { id: "status", values: ["running", "failed", "waiting", "api_unavailable", "inconsistent_data"] },
                 ],
                 null
             )
                 .then(([tasks]) => {
                     if (tasks && tasks.length > 0) {
-                        return Promise.all(tasks.map(task => retryProcess(task.pid)));
+                        return Promise.all(tasks.map((task) => retryProcess(task.pid)));
                     } else {
                         return Promise.reject();
                     }
@@ -97,7 +97,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             confirmationDialogAction: (e: React.MouseEvent) => {
                 this.cancelConfirmation();
                 action(e);
-            }
+            },
         });
 
     handleAbortProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
@@ -107,7 +107,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
         this.confirmation(
             I18n.t("processes.abortConfirmation", {
                 name: product_name,
-                customer: customer_name
+                customer: customer_name,
             }),
             () =>
                 abortProcess(process.pid).then(() => {
@@ -133,7 +133,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
         this.confirmation(
             I18n.t("processes.retryConfirmation", {
                 name: product_name,
-                customer: customer_name
+                customer: customer_name,
             }),
             () =>
                 retryProcess(process.pid).then(() => {

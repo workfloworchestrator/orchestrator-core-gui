@@ -31,9 +31,9 @@ I18n.translations.en = {
         links: {
             help: "Help",
             logout: "Logout",
-            exit: "Exit"
+            exit: "Exit",
         },
-        role: "Role"
+        role: "Role",
     },
 
     navigation: {
@@ -44,7 +44,7 @@ I18n.translations.en = {
         tasks: "Tasks",
         prefixes: "LIR Prefixes",
         settings: "Settings",
-        new_process: "New Process"
+        new_process: "New Process",
     },
     prefixes: {
         customer: "Customer",
@@ -60,9 +60,9 @@ I18n.translations.en = {
         filters: {
             family: "IP Family",
             root_prefix: "Root Prefix",
-            state: "State"
+            state: "State",
         },
-        searchPlaceHolder: "Search for IP prefixes"
+        searchPlaceHolder: "Search for IP prefixes",
     },
     processes: {
         actions: {
@@ -70,7 +70,7 @@ I18n.translations.en = {
             details: "Details",
             user_input: "User input",
             abort: "Abort",
-            retry: "Retry"
+            retry: "Retry",
         },
         delete: "Delete",
         deleteConfirmation: "Are you sure you want to delete {{name}} process for {{customer}}?",
@@ -79,8 +79,8 @@ I18n.translations.en = {
         flash: {
             delete: "Process {{name}} is deleted",
             abort: "Process {{name}} is aborted",
-            retry: "Process {{name}} has been retried"
-        }
+            retry: "Process {{name}} has been retried",
+        },
     },
     forms: {
         widgets: {
@@ -88,33 +88,33 @@ I18n.translations.en = {
                 selectNode: "Select a node",
                 selectNodeFirst: "First select a node",
                 selectPort: "Select a port",
-                loading: "Loading..."
+                loading: "Loading...",
             },
             contactPersonName: {
-                placeholder: "Search and add contact persons..."
+                placeholder: "Search and add contact persons...",
             },
             select: {
-                placeholder: "Search and select a value..."
+                placeholder: "Search and select a value...",
             },
             locationCode: {
-                placeholder: "Search and select a location code..."
+                placeholder: "Search and select a location code...",
             },
             node_select: {
                 select_node: "Select a node",
                 nodes_loading: "Loading nodes, please wait...",
-                no_nodes_placeholder: "No nodes available"
+                no_nodes_placeholder: "No nodes available",
             },
             organisation: {
-                placeholder: "Search and select a customer..."
+                placeholder: "Search and select a customer...",
             },
             product: {
-                placeholder: "Search and select a product..."
+                placeholder: "Search and select a product...",
             },
             subscription: {
                 placeholder: "Search and select a subscription...",
                 missingDescription: "<No description>",
                 missingCrmPortId: "<No CRM port ID>",
-                missingPortMode: "<No port_mode>"
+                missingPortMode: "<No port_mode>",
             },
             subscriptionSummary: {
                 customerName: "Customer",
@@ -130,8 +130,8 @@ I18n.translations.en = {
                     name: "Name",
                     description: "Description",
                     productType: "Product type",
-                    tag: "Tag"
-                }
+                    tag: "Tag",
+                },
             },
             vlan: {
                 vlansInUseError: "VLAN range {{vlans}} are already in use for the selected service port",
@@ -144,8 +144,8 @@ I18n.translations.en = {
                     "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
                 untaggedPortInUse: "This service port is already in use and cannot be chosen",
                 taggedOnly:
-                    "VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports."
-            }
+                    "VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports.",
+            },
         },
         fields: {
             accept_accept: {
@@ -153,7 +153,7 @@ I18n.translations.en = {
                 noc_modification_confirmation_info:
                     "Confirm that the modifications are implemented in the network as specified.",
                 noc_modification_confirmation_template:
-                    "Confirm modification of service with NMS service id {{nms_service_id}} from {{human_service_speed}} to {{new_human_service_speed}}"
+                    "Confirm modification of service with NMS service id {{nms_service_id}} from {{human_service_speed}} to {{new_human_service_speed}}",
             },
             added_service_ports: "Add ports",
             added_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
@@ -171,7 +171,7 @@ I18n.translations.en = {
                 info: "Bidirectional Forwarding Detection",
                 enabled: "Enable BFD",
                 minimum_interval: "Minimum Interval",
-                multiplier: "Multiplier"
+                multiplier: "Multiplier",
             },
             bgp_export_policy: "BGP Export Policy",
             bgp_export_policy_info: "Border Gateway Protocol routing table option.",
@@ -271,7 +271,7 @@ I18n.translations.en = {
             node_terminate_warning_accept: {
                 node_terminate_warning: "Node terminate warning",
                 node_terminate_warning_info:
-                    "When you terminate the subscription you have to manually set the node to PLANNED again in IMS before you can re-run the node create workflow"
+                    "When you terminate the subscription you have to manually set the node to PLANNED again in IMS before you can re-run the node create workflow",
             },
             note: "Notes",
             note_info: "Notes, reminders and feedback about this description.",
@@ -351,8 +351,8 @@ I18n.translations.en = {
                 "Enable VLAN retagging. When selected only one VLAN ID per SAP is allowed. Modify this checkbox only during a maintenance window for active L2VPN services!!",
             select_task: "Select a task to start",
             zone: "Zone",
-            zone_info: "DNS Zone to check"
-        }
+            zone_info: "DNS Zone to check",
+        },
     },
     process: {
         cancel: "Cancel",
@@ -361,7 +361,7 @@ I18n.translations.en = {
             create_create: "Created create process for product {{name}} with pid {{pid}}",
             create_modify: "Created {{name}} process for subscription {{subscriptionId}} with pid {{pid}}",
             update: "Resumed process for workflow {{name}}",
-            wizard_next_step: "Navigated to next step in form wizard"
+            wizard_next_step: "Navigated to next step in form wizard",
         },
         input_fields_have_validation_errors: "{{nrOfValidationErrors}} input field(s) have validation errors",
         new_process: "Create new process / subscription",
@@ -372,10 +372,10 @@ I18n.translations.en = {
         subscription_link_txt: "Show Subscription related by this {{target}} Process",
         tabs: {
             user_input: "User input",
-            process: "Process"
+            process: "Process",
         },
         userInput: "User input for step {{name}} for product {{product}}",
-        workflow: "Process instance of workflow {{name}}"
+        workflow: "Process instance of workflow {{name}}",
     },
     process_state: {
         raw: "Show raw JSON",
@@ -390,8 +390,8 @@ I18n.translations.en = {
             created_by: "Created by",
             step: "Current step",
             started: "Started",
-            last_modified: "Last updated"
-        }
+            last_modified: "Last updated",
+        },
     },
     validations: {
         product: "Product",
@@ -418,7 +418,7 @@ I18n.translations.en = {
             subscriptions: "Subscriptions",
             workflows: "Workflows",
             fixedInputs: "Fixed Inputs",
-            productWorkflows: "Product ⟺ Workflows"
+            productWorkflows: "Product ⟺ Workflows",
         },
         no_subscriptions: "No invalid subscriptions",
         workflow_key: "Invalid subscriptions for workflow {{workflow}}",
@@ -432,8 +432,8 @@ I18n.translations.en = {
             error: {
                 required_not_present: "Required FixedInput, but not present",
                 invalid_value: "Invalid value for FixedInput: {{value}}",
-                missing_configuration: "FixedInput for product is not configured"
-            }
+                missing_configuration: "FixedInput for product is not configured",
+            },
         },
         productWorkflows: {
             title: "Validation of the Products ⟺ Workflows configuration in the code / database.",
@@ -450,8 +450,8 @@ I18n.translations.en = {
             workflowsWithImplementations: "All workflows in the database have a code implementation",
             workflowsWithoutRecords:
                 "The following workflows in the code have no corresponding database record. This is an error",
-            workflowsWithRecords: "All implementations of workflows in the code have a corresponding database record"
-        }
+            workflowsWithRecords: "All implementations of workflows in the code have a corresponding database record",
+        },
     },
     filter: {
         CHANGES: "Changes",
@@ -516,7 +516,7 @@ I18n.translations.en = {
         IPv4: "IPv4",
         IPv6: "IPv6",
         SP: "SN8 Service Port",
-        SPNL: "NL8 Service Port"
+        SPNL: "NL8 Service Port",
     },
     subscriptions: {
         customer_name: "Customer",
@@ -548,7 +548,7 @@ I18n.translations.en = {
         product: "Product",
         product_tag: "Type",
         flash: {
-            delete: "Subscription {{name}} was deleted"
+            delete: "Subscription {{name}} was deleted",
         },
         fetchingRelatedSubscriptions: "Please wait until we have loaded related subscriptions",
         noRelatedSubscriptions:
@@ -561,7 +561,7 @@ I18n.translations.en = {
         stats_in_grafana: "Stats (SN8/NL8 products only)",
         go_to_grafana: "Go to Grafana",
         networkdashboard_url: "Networkdashboard url (Customer subscriptions)",
-        go_to_networkdashboard_url: "Go to Networkdashboard"
+        go_to_networkdashboard_url: "Go to Networkdashboard",
     },
     subscription: {
         acquiring_insync_info_about_relations: "Acquiring 'insync' info of related subscriptions...",
@@ -587,7 +587,7 @@ I18n.translations.en = {
             end_date: "End date",
             product_type: "Product type",
             status: "Status",
-            tag: "Tag"
+            tag: "Tag",
         },
         process: {
             target: "Target",
@@ -595,7 +595,7 @@ I18n.translations.en = {
             id: "Id",
             started_at: "Started at",
             status: "Status",
-            modified_at: "Modified at"
+            modified_at: "Modified at",
         },
         ims_service: {
             id: "IMS service ID ({{id}})",
@@ -609,7 +609,7 @@ I18n.translations.en = {
             order_id: "Order ID",
             aliases: "Aliases",
             endpoints: "Endpoints",
-            removed: "This circuit ID has been removed from IMS"
+            removed: "This circuit ID has been removed from IMS",
         },
         ims_port: {
             connector_type: "Connector type",
@@ -622,7 +622,7 @@ I18n.translations.en = {
             patchposition: "Patch position",
             port: "Port",
             status: "Status",
-            removed: "This port ID has been removed from IMS"
+            removed: "This port ID has been removed from IMS",
         },
         ipam_address: {
             id: "Assigned IP Address ID",
@@ -630,7 +630,7 @@ I18n.translations.en = {
             state: "State",
             address: "IP Address",
             tags: "Tags",
-            removed: "This address ID has been removed from IPAM"
+            removed: "This address ID has been removed from IPAM",
         },
         ipam_prefix: {
             description: "Description",
@@ -640,10 +640,10 @@ I18n.translations.en = {
             state: "State",
             address: "Address ({{id}})",
             tags: "Tags",
-            removed: "This prefix ID has been removed from IPAM"
+            removed: "This prefix ID has been removed from IPAM",
         },
         subscription: {
-            removed: "This subscription does not exist anymore"
+            removed: "This subscription does not exist anymore",
         },
         fetchingImsData: "Please wait until we have loaded all IMS information...",
         terminate: "Terminate Subscription",
@@ -666,16 +666,16 @@ I18n.translations.en = {
         selectSubscriptionPlaceholder: "Search and select a subscription...",
         namedSelectSubscriptionPlaceholder: "Select a subscription from {{name}}",
         start: "Start process",
-        actions: "Actions"
+        actions: "Actions",
     },
     terminate_subscription: {
         cancel: "Cancel",
         submit: "Terminate",
-        subscription_childs: "Child subscriptions - ports used in {{product}}"
+        subscription_childs: "Child subscriptions - ports used in {{product}}",
     },
     clipboard: {
         copied: "Copied!",
-        copy: "Copy to clipboard"
+        copy: "Copy to clipboard",
     },
     metadata: {
         tabs: {
@@ -683,13 +683,13 @@ I18n.translations.en = {
             product_blocks: "Product Blocks",
             resource_types: "Resource Types",
             fixed_inputs: "Fixed Inputs",
-            workflows: "Workflows"
+            workflows: "Workflows",
         },
         deleteConfirmation: "Are you sure you want to delete {{type}} {{name}}?",
         flash: {
             updated: "{{type}} {{name}} successfully updated",
             created: "{{type}} {{name}} successfully created.",
-            delete: "{{type}} {{name}} successfully deleted."
+            delete: "{{type}} {{name}} successfully deleted.",
         },
         ipBlocks: {
             id: "id",
@@ -697,7 +697,7 @@ I18n.translations.en = {
             description: "description",
             state: "state",
             state_repr: "status",
-            version: "version"
+            version: "version",
         },
         products: {
             searchPlaceHolder: "Search for Products",
@@ -749,7 +749,7 @@ I18n.translations.en = {
             no_found: "No Products",
             duplicate_name: "This name is already taken. Product names need to be unique.",
             select_add_fixed_input: "Add a Fixed Input...",
-            select_no_more_fixed_inputs: "No more Fixed Inputs to add"
+            select_no_more_fixed_inputs: "No more Fixed Inputs to add",
         },
         productBlocks: {
             searchPlaceHolder: "Search for Product Blocks",
@@ -779,7 +779,7 @@ I18n.translations.en = {
             select_add_resource_type: "Add a Resource Type...",
             select_no_more_resource_types: "No more Resource Types to add",
             no_found: "No Product Blocks",
-            duplicate_name: "This name is already taken. Product Block names need to be unique"
+            duplicate_name: "This name is already taken. Product Block names need to be unique",
         },
         resourceTypes: {
             searchPlaceHolder: "Search for Resource Types",
@@ -796,7 +796,7 @@ I18n.translations.en = {
             delete: "Delete",
             no_found: "No Resource Types",
             duplicate_name: "This type is already taken. Resource Types types need to be unique",
-            resource_type_id: "Resource type ID"
+            resource_type_id: "Resource type ID",
         },
         fixedInputs: {
             tags: "Fixed Inputs for Product tag: {{tag}}",
@@ -805,7 +805,7 @@ I18n.translations.en = {
             name: "Name",
             fixedInput: "Fixed Input name",
             values: "Values",
-            required: "Required"
+            required: "Required",
         },
         workflows: {
             name: "Unique key",
@@ -818,9 +818,9 @@ I18n.translations.en = {
             searchPlaceHolder: "Search for workflows...",
             no_found: "No workflows found",
             explanation:
-                "Workflows that are not the type SYSTEM - e.g. are not Tasks - and do not have a relation with any Product can never be run. These workflows are colored grey and should be subject for investigation."
+                "Workflows that are not the type SYSTEM - e.g. are not Tasks - and do not have a relation with any Product can never be run. These workflows are colored grey and should be subject for investigation.",
         },
-        results: "{{type}} found: {{count}}"
+        results: "{{type}} found: {{count}}",
     },
     tasks: {
         new: "New Task",
@@ -833,9 +833,9 @@ I18n.translations.en = {
             abort: "Task {{name}} is aborted",
             retry: "Task {{name}} has been retried",
             runall: "All failed tasks retried",
-            runallfailed: "Not all failed tasks could be retried"
+            runallfailed: "Not all failed tasks could be retried",
         },
-        runall: "Rerun all"
+        runall: "Rerun all",
     },
     task: {
         workflow: "Workflow",
@@ -848,13 +848,13 @@ I18n.translations.en = {
         subscription_link_txt: "Show Subscription related by this task",
         tabs: {
             user_input: "User input",
-            process: "Task"
+            process: "Task",
         },
         new_task: "New task",
         flash: {
             create: "Created task for workflow {{name}} with pid {{pid}}",
-            update: "Resumed task for workflow {{name}}"
-        }
+            update: "Resumed task for workflow {{name}}",
+        },
     },
 
     settings: {
@@ -863,19 +863,19 @@ I18n.translations.en = {
                 ims: "IMS locations",
                 crm: "CRM organisations, contacts and locations",
                 api: "Workflow endpoints (combined caches)",
-                all: "All caches"
+                all: "All caches",
             },
             remove: "Flush Settings",
             remove_info: "Select settings to flush",
             clear: "Flush",
-            flushed: "Settings {{name}} was flushed"
+            flushed: "Settings {{name}} was flushed",
         },
         status: {
             info: "Modify the engine settings",
             info_detail: "Stop or start workflows through this menu",
             options: {
                 true: "Pause the engine",
-                false: "Start the engine"
+                false: "Start the engine",
             },
             processes: "Running processes:",
             status: "Engine status:",
@@ -883,29 +883,30 @@ I18n.translations.en = {
                 running: "Engine is Running",
                 pausing: "Engine is Pausing, unable to submit workflows",
                 paused: "Engine is Paused, unable to submit workflows",
-                restarted: "The engine has been restarted"
-            }
-        }
+                restarted: "The engine has been restarted",
+            },
+        },
     },
     error_dialog: {
         title: "Unexpected error",
         body:
             "This is embarrassing; an unexpected error has occurred. It has been logged and reported. Please try again. Still doesn't work? Please click 'Help'.",
-        ok: "Close"
+        ok: "Close",
     },
     not_found: {
         title: "404",
-        description: "The requested page could not be found"
+        description: "The requested page could not be found",
     },
     server_error: {
         title: "500",
         description:
             "An unexpected error occurred. It has been logged and reported. Please try again. Still doesn't" +
-            " work? Get Help."
+            " work? Get Help.",
     },
     not_allowed: {
         title: "403",
-        description: "This page is restricted. You don't have access based on your group memberships and / or SAB roles"
+        description:
+            "This page is restricted. You don't have access based on your group memberships and / or SAB roles",
     },
     confirmation_dialog: {
         title: "Please confirm",
@@ -914,14 +915,14 @@ I18n.translations.en = {
         leavePage: "Do you really want to leave this page?",
         leavePageSub: "Changes that you made will not be saved.",
         stay: "Stay",
-        leave: "Leave"
+        leave: "Leave",
     },
 
     ims_changes: {
         circuit_changed:
             "In LP Circuit {{id}} {{description}} the old endpoint references has been replaced by the new endpoint reference",
         old_endpoint: "The old endpoint",
-        new_endpoint: "The new endpoint"
+        new_endpoint: "The new endpoint",
     },
 
     workflow: {
@@ -1002,12 +1003,12 @@ I18n.translations.en = {
         validate_sn8_irb_service_port: "Validate SN8 IRB Service Port",
         validate_sn8_service_port: "Validate SN8 Service Port",
         validate_sn8_msc: "Validate SN8 MSC",
-        validate_sn8_aggregated_service_port: "Validate SN8 Aggregated Service Port"
+        validate_sn8_aggregated_service_port: "Validate SN8 Aggregated Service Port",
     },
     external: {
         errors: {
-            crm_unavailable: "CRM is unresponsive... {{type}} unavailable!!"
-        }
+            crm_unavailable: "CRM is unresponsive... {{type}} unavailable!!",
+        },
     },
     table: {
         is_minimized: " (minimized)",
@@ -1019,7 +1020,7 @@ I18n.translations.en = {
             refresh: "Autorefresh for {{delay}}ms",
             hidden_columns: "Show/Hide columns:",
             show_paginator: "Show Paginator",
-            hide_paginator: "Hide Paginator"
+            hide_paginator: "Hide Paginator",
         },
         processes: {
             active: "Active Processes",
@@ -1027,7 +1028,7 @@ I18n.translations.en = {
             caption: "{{taskOrProcess}}{{statuses}}{{filters}}{{sorted}}.",
             with_status: " with status ",
             filtered_on: " and filtered on ",
-            sorted_by: " and sorted by "
+            sorted_by: " and sorted by ",
         },
         subscriptions: {
             complete: "Active Subscriptions",
@@ -1035,7 +1036,7 @@ I18n.translations.en = {
             caption: "{{taskOrProcess}}{{statuses}}{{filters}}{{sorted}}.",
             with_status: " with status ",
             filtered_on: " and filtered on ",
-            sorted_by: " and sorted by "
+            sorted_by: " and sorted by ",
         },
         tasks: "Tasks",
         expanded_row: {
@@ -1048,7 +1049,7 @@ I18n.translations.en = {
             inconsistent_data:
                 "The following failure was caused by inconsistent data between the orchestrator and another system. This happened at step '{{step}}'. Manual intervention is required.",
             completed: "Completed",
-            created: "Created"
+            created: "Created",
         },
         no_results: "No results found.",
         filter_placeholder: {
@@ -1066,12 +1067,12 @@ I18n.translations.en = {
             subscriptions: "description...",
             target: "workflow target...",
             subscription_id: "id",
-            insync: "yes or no"
+            insync: "yes or no",
         },
         filter_button: {
             on: "on",
-            off: "off"
-        }
+            off: "off",
+        },
     },
     process_statuses: {
         created: "Created",
@@ -1082,14 +1083,14 @@ I18n.translations.en = {
         failed: "Failed",
         api_unavailable: "API unavailable",
         inconsistent_data: "Inconsistent data",
-        completed: "Completed"
+        completed: "Completed",
     },
     assignees: {
         CHANGES: "Changes",
         NOC: "NOC",
         KLANT_SUPPORT: "Klant Support",
         KLANTSUPPORT: "Klant Support",
-        SYSTEM: "System"
+        SYSTEM: "System",
     },
     unavailable: "Unavailable",
     unavailable_abbreviated: "N/A",
@@ -1100,8 +1101,8 @@ I18n.translations.en = {
         select: "Select favorite",
         add: "Add favorite",
         remove: "Remove favorite",
-        toomany: "You can only have 10 favorites. Please remove one before adding a new one."
-    }
+        toomany: "You can only have 10 favorites. Please remove one before adding a new one.",
+    },
 };
 
 export default I18n.translations.en;

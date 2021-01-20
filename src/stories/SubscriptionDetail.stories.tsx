@@ -26,8 +26,8 @@ export default {
     decorators: [StoryRouter()],
     // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
     parameters: {
-        fileName: __filename
-    }
+        fileName: __filename,
+    },
 };
 
 export const Subscription = () => {
@@ -50,26 +50,26 @@ export const Subscription = () => {
                 product_id: "40128a3f-1303-48be-bda0-375bb3299432",
                 started_at: 1574768648,
                 traceback: null,
-                workflow: "migrate_sn7_ip_bgp_ipss_to_sn8"
+                workflow: "migrate_sn7_ip_bgp_ipss_to_sn8",
             },
             subscription_id: "9c8c13d5-6954-461a-a931-32894c193aa0",
-            workflow_target: "CREATE"
-        }
+            workflow_target: "CREATE",
+        },
     ]);
 
     mock.onGet("products/a3bf8b26-50a6-4586-8e58-ad552cb39798").reply(
         200,
-        PRODUCTS.filter(p => p.product_id === "a3bf8b26-50a6-4586-8e58-ad552cb39798")[0]
+        PRODUCTS.filter((p) => p.product_id === "a3bf8b26-50a6-4586-8e58-ad552cb39798")[0]
     );
 
     mock.onGet("subscriptions/workflows/pid").reply(200, {
         create: [{ description: "Create SN8 IP BGP", name: "create_sn8_ip_bgp" }],
         modify: [
             { description: "Change port", name: "modify_sn8_ip_bgp_change_port" },
-            { description: "Change a SN8 IP BGP subscription", name: "modify_sn8_ip_bgp" }
+            { description: "Change a SN8 IP BGP subscription", name: "modify_sn8_ip_bgp" },
         ],
         terminate: [{ description: "Terminate SN8 IP BGP", name: "terminate_sn8_ip_bgp" }],
-        system: [{ description: "Validate SN8 IP BGP", name: "validate_sn8_ip_bgp" }]
+        system: [{ description: "Validate SN8 IP BGP", name: "validate_sn8_ip_bgp" }],
     });
 
     mock.onGet("subscriptions/parent_subscriptions/pid").reply(200, []);
@@ -79,7 +79,7 @@ export const Subscription = () => {
         domain: "SURFNET8",
         endpoints: [
             { id: 36260, type: "service", vlanranges: [{ end: 0, start: 0, sub_circuit_id: null }] },
-            { id: 31420, type: "internet", vlanranges: [{ end: 0, start: 0, sub_circuit_id: null }] }
+            { id: 31420, type: "internet", vlanranges: [{ end: 0, start: 0, sub_circuit_id: null }] },
         ],
         extra_info: "10 Gbit/s SN8 SURFinternet BGP in DOETINCHEM van Graafschap College",
         id: 36261,
@@ -88,7 +88,7 @@ export const Subscription = () => {
         order_id: "SN8 PROCESS 4953FFE3-A2DB-4E90-BCAB-5DD22CD564FD",
         product: "IP",
         speed: "SERVICE",
-        status: "3"
+        status: "3",
     });
     mock.onGet("ims/service_by_ims_service_id/36260").reply(200, {
         aliases: ["SUBSCRIPTION_ID=F9ACBF45-4BFD-45DB-892C-774EB967B033"],
@@ -102,7 +102,7 @@ export const Subscription = () => {
         order_id: "SNNP-77718",
         product: "SP",
         speed: "10GBASE-SR",
-        status: "3"
+        status: "3",
     });
     mock.onGet("ims/service_by_ims_service_id/62409").reply(200, {
         customer_descriptions: [],
@@ -117,9 +117,9 @@ export const Subscription = () => {
                     {
                         end: 0,
                         start: 0,
-                        sub_circuit_id: null
-                    }
-                ]
+                        sub_circuit_id: null,
+                    },
+                ],
             },
             {
                 id: 31420,
@@ -128,9 +128,9 @@ export const Subscription = () => {
                     {
                         end: 0,
                         start: 0,
-                        sub_circuit_id: null
-                    }
-                ]
+                        sub_circuit_id: null,
+                    },
+                ],
             },
             {
                 id: 44835,
@@ -139,10 +139,10 @@ export const Subscription = () => {
                     {
                         end: 0,
                         start: 0,
-                        sub_circuit_id: null
-                    }
-                ]
-            }
+                        sub_circuit_id: null,
+                    },
+                ],
+            },
         ],
         extra_info: "1 Gbit/s SN8 SURFinternet BGP in EINDHOVEN en MAASTRICHT van Design Academy Eindhoven",
         id: 62409,
@@ -151,7 +151,7 @@ export const Subscription = () => {
         order_id: "SN8 PROCESS 89A28434-D570-4C04-B87C-210C7465A0C5",
         product: "IP",
         speed: "SERVICE",
-        status: "IS"
+        status: "IS",
     });
 
     mock.onGet(/ims\/service_by_ims_service_id\/(31420|44835|45045)/).reply(200, {
@@ -167,7 +167,7 @@ export const Subscription = () => {
         order_id: "XX",
         product: "SURFMULTIPOINT",
         speed: "INTERNETWOLK",
-        status: "3"
+        status: "3",
     });
     mock.onGet("ims/port_by_ims_service/36260").reply(200, {
         connector_type: "LC/PC",
@@ -179,7 +179,7 @@ export const Subscription = () => {
         node: "DTC001A-JNX-02",
         patchposition: "DTC001A_ODF01/02 ()",
         port: "0/1/1",
-        status: "3"
+        status: "3",
     });
     mock.onGet("ims/port_by_ims_port/683015").reply(200, {
         connector_type: "LC/PC",
@@ -191,7 +191,7 @@ export const Subscription = () => {
         node: "DTC001A-JNX-02",
         patchposition: "DTC001A_ODF01/02 ()",
         port: "0/1/1",
-        status: "IS"
+        status: "IS",
     });
     mock.onGet("subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653").reply(200, SN8PortSubscriptions[0]);
     mock.onGet("ipam/prefix_by_id/166").reply(200, {
@@ -209,7 +209,7 @@ export const Subscription = () => {
                 state__label: "Default Resource: Ready",
                 tags: ["ip", "Customer", "orchestrator"],
                 vrf: 1,
-                vrf__label: "global"
+                vrf__label: "global",
             },
             {
                 address: "145.145.4.25",
@@ -224,8 +224,8 @@ export const Subscription = () => {
                 state__label: "Default Resource: Ready",
                 tags: ["ip", "SURFnet", "orchestrator"],
                 vrf: 1,
-                vrf__label: "global"
-            }
+                vrf__label: "global",
+            },
         ],
         afi: "4",
         asn: 1,
@@ -240,12 +240,12 @@ export const Subscription = () => {
         sub_prefixes: [],
         tags: ["ip", "orchestrator"],
         vrf: 1,
-        vrf__label: "global"
+        vrf__label: "global",
     });
     mock.onGet("crm/dienstafname/9c8c13d5-6954-461a-a931-32894c193aa0").reply(200, {
         guid: "d9713a9f-bab6-4e78-b56e-5c5cc2c1fb26",
         code: "MSP",
-        status: "_Opgezegd"
+        status: "_Opgezegd",
     });
 
     //@ts-ignore

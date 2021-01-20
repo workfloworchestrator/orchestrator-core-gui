@@ -72,32 +72,32 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
         sortOrder: { name: "prefix", descending: false },
         filterAttributes: {
             state: ipamStates
-                .filter(s => s)
-                .map(state => ({
+                .filter((s) => s)
+                .map((state) => ({
                     name: state ?? "",
                     selected: state === "Allocated",
-                    count: 0
+                    count: 0,
                 })),
-            rootPrefix: []
+            rootPrefix: [],
         },
         rootPrefixes: [],
-        availablePrefixId: 10000
+        availablePrefixId: 10000,
     };
 
     componentDidMount() {
         this.setState({});
 
-        prefix_filters().then(result => {
+        prefix_filters().then((result) => {
             const prefixFilters = result.map((p, idx) => ({
                 name: p.prefix,
                 selected: idx === 0,
-                count: 0
+                count: 0,
             }));
             const currentFilterAttributes = this.state.filterAttributes;
             const modifiedAttributes = { rootPrefix: prefixFilters };
             this.setState({
                 rootPrefixes: result,
-                filterAttributes: { ...currentFilterAttributes, ...modifiedAttributes }
+                filterAttributes: { ...currentFilterAttributes, ...modifiedAttributes },
             });
             this.getFreePrefixes(result);
             this.getPrefixSubscriptions(result);
@@ -114,8 +114,8 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
         const { organisations } = this.context;
         const mapper = async (root: IpPrefix) => {
             await prefixSubscriptionsByRootPrefix(root.id)
-                .then(result =>
-                    result.map(prefix => {
+                .then((result) =>
+                    result.map((prefix) => {
                         const { customer_id, start_date, subscription_id } = prefix;
                         const organisation =
                             customer_id === undefined ? "Unknown" : organisationNameByUuid(customer_id, organisations);
@@ -124,22 +124,22 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
                             ...prefix,
                             subscription_id: subscription,
                             start_date_as_str: renderDate(start_date),
-                            customer: organisation
+                            customer: organisation,
                         };
                     })
                 )
-                .then(result => {
+                .then((result) => {
                     //deduping is added as a temporary fix removing the IP "root_prefix" filter
                     //a more thorough redesign is called for in wf-client ticket #255
-                    this.setState(prevState => {
+                    this.setState((prevState) => {
                         let newPrefixes = prevState.prefixes.concat(result);
-                        newPrefixes = Array.from(new Set(newPrefixes.map(p => p.id))).map(id => {
-                            return newPrefixes.find(s => s.id === id)!;
+                        newPrefixes = Array.from(new Set(newPrefixes.map((p) => p.id))).map((id) => {
+                            return newPrefixes.find((s) => s.id === id)!;
                         });
                         return { prefixes: newPrefixes };
                     });
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.log(`failed to load prefix ${root.id}`);
                 });
         };
@@ -149,8 +149,8 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
     getFreePrefixes = (roots: IpPrefix[]) => {
         const now = Math.floor(Date.now() / 1000);
         const nowString = renderDate(now);
-        return roots.map(p =>
-            freeSubnets(p.prefix).then(result => {
+        return roots.map((p) =>
+            freeSubnets(p.prefix).then((result) => {
                 const { availablePrefixId } = this.state;
                 const free = result.map((r, idx) => {
                     const [networkAddress, prefixlen] = r.split("/");
@@ -175,12 +175,12 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
                         insync: false,
                         customer_id: "",
                         end_date: now,
-                        note: ""
+                        note: "",
                     } as ExtendedIpPrefixSubscription;
                 });
-                this.setState(prevState => ({
+                this.setState((prevState) => ({
                     prefixes: prevState.prefixes.concat(free),
-                    availablePrefixId: prevState.availablePrefixId + free.length
+                    availablePrefixId: prevState.availablePrefixId + free.length,
                 }));
             })
         );
@@ -189,13 +189,13 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
     count = () => {
         const { prefixes, filterAttributes } = this.state;
         const { state, rootPrefix } = filterAttributes;
-        const stateCount = state.map(attr => {
+        const stateCount = state.map((attr) => {
             const newCount = prefixes.reduce((acc, p) => {
                 return ipamStates[p.state] === attr.name ? acc + 1 : acc;
             }, 0);
             return newCount === attr.count ? attr : { ...attr, count: newCount };
         });
-        const rootPrefixCount = rootPrefix.map(attr => {
+        const rootPrefixCount = rootPrefix.map((attr) => {
             const newCount = prefixes.reduce((acc, p) => {
                 return p.parent === attr.name ? acc + 1 : acc;
             }, 0);
@@ -204,27 +204,27 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
         this.setState({
             filterAttributes: {
                 state: stateCount,
-                rootPrefix: rootPrefixCount
-            }
+                rootPrefix: rootPrefixCount,
+            },
         });
     };
 
     debouncedCount = debounce(this.count, 1500, {
         leading: true,
-        trailing: true
+        trailing: true,
     });
 
     setFilter = (filterName: "state" | "rootPrefix") => (item: Filter) => {
         const currentFilterAttributes = this.state.filterAttributes;
         var modifiedAttributes: Partial<FilterAttributes> = {};
-        modifiedAttributes[filterName] = currentFilterAttributes[filterName].map(attr => {
+        modifiedAttributes[filterName] = currentFilterAttributes[filterName].map((attr) => {
             if (attr.name === item.name) {
                 attr.selected = !attr.selected;
             }
             return attr;
         });
         this.setState({
-            filterAttributes: { ...currentFilterAttributes, ...modifiedAttributes }
+            filterAttributes: { ...currentFilterAttributes, ...modifiedAttributes },
         });
     };
 
@@ -232,7 +232,7 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
         stop(e);
         const currentFilterAttributes = this.state.filterAttributes;
         var modifiedAttributes: Partial<FilterAttributes> = {};
-        modifiedAttributes[filterName] = currentFilterAttributes[filterName].map(attr => {
+        modifiedAttributes[filterName] = currentFilterAttributes[filterName].map((attr) => {
             if (attr.name !== item.name && attr.selected) {
                 attr.selected = false;
             } else if (attr.name === item.name && !attr.selected) {
@@ -241,7 +241,7 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
             return attr;
         });
         this.setState({
-            filterAttributes: { ...currentFilterAttributes, ...modifiedAttributes }
+            filterAttributes: { ...currentFilterAttributes, ...modifiedAttributes },
         });
     };
 
@@ -249,21 +249,21 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
         stop(e);
         const currentFilterAttributes = this.state.filterAttributes;
         var modifiedAttributes: Partial<FilterAttributes> = {};
-        modifiedAttributes[filterName] = currentFilterAttributes[filterName].map(attr => {
+        modifiedAttributes[filterName] = currentFilterAttributes[filterName].map((attr) => {
             if (!attr.selected) {
                 attr.selected = true;
             }
             return attr;
         });
         this.setState({
-            filterAttributes: { ...currentFilterAttributes, ...modifiedAttributes }
+            filterAttributes: { ...currentFilterAttributes, ...modifiedAttributes },
         });
     };
 
     filter = (unfiltered: ExtendedIpPrefixSubscription[]) => {
         const { state } = this.state.filterAttributes;
-        return unfiltered.filter(prefix => {
-            const stateFilter = state.find(attr => ipamStates.indexOf(attr.name) === prefix.state);
+        return unfiltered.filter((prefix) => {
+            const stateFilter = state.find((attr) => ipamStates.indexOf(attr.name) === prefix.state);
 
             return stateFilter ? stateFilter.selected : true;
         });
@@ -309,7 +309,7 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
     runQuery = (query: string) => {
         const { prefixes } = this.state;
         const queryToLower = query.toLowerCase();
-        const results = prefixes.filter(prefix => {
+        const results = prefixes.filter((prefix) => {
             return (
                 prefix.prefix.toLowerCase().includes(queryToLower) ||
                 prefix.customer.toLowerCase().includes(queryToLower) ||
@@ -335,8 +335,8 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
         const product_id = memoize(
             constant(
                 this.context.products
-                    .filter(p => p.tag === "IP_PREFIX")
-                    .map(p => p.product_id)
+                    .filter((p) => p.tag === "IP_PREFIX")
+                    .map((p) => p.product_id)
                     .pop()
             )
         )();
@@ -360,7 +360,7 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
             "prefix",
             "parent",
             "state",
-            "start_date"
+            "start_date",
         ];
         const th = (index: number) => {
             const name = columns[index];
@@ -402,7 +402,7 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
                                 <tr>{columns.map((column, index) => th(index))}</tr>
                             </thead>
                             <tbody>
-                                {sortedPrefixes.map(prefix => (
+                                {sortedPrefixes.map((prefix) => (
                                     <tr
                                         key={prefix.id}
                                         onClick={this.subscriptionLink(prefix)}

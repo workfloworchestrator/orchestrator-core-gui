@@ -25,7 +25,7 @@ function AsyncSnapshot({
     story,
     context,
     renderTree,
-    done // --> callback passed to test method when asyncJest option is true
+    done, // --> callback passed to test method when asyncJest option is true
 }: {
     story: any;
     context: any;
@@ -40,7 +40,7 @@ function AsyncSnapshot({
     async function match(tree: any) {
         await act(async () => {
             tree.update(story.render());
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise((resolve) => setTimeout(resolve, 1000));
         });
         const updated_tree = tree.toJSON();
 
@@ -67,5 +67,5 @@ initStoryshots({
     /* configuration options */
     asyncJest: true,
     stories2snapsConverter: converter,
-    test: AsyncSnapshot
+    test: AsyncSnapshot,
 });

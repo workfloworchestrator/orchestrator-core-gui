@@ -36,7 +36,7 @@ import {
     SubscriptionField,
     SubscriptionSummaryField,
     SummaryField,
-    VlanField
+    VlanField,
 } from "lib/uniforms-surfnet/src";
 import cloneDeep from "lodash/cloneDeep";
 import get from "lodash/get";
@@ -174,7 +174,7 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
         let {
             default: defaultValue = _default !== undefined ? _default : get(this.schema.default, name),
             const: constValue = _const,
-            type = _type
+            type = _type,
             // @ts-ignore
         } = this._compiledSchema[name];
 
@@ -210,7 +210,7 @@ function fillPreselection(form: JSONSchema6, query: string) {
     const queryParams = getQueryParameters(query);
 
     if (form && form.properties) {
-        Object.keys(queryParams).forEach(param => {
+        Object.keys(queryParams).forEach((param) => {
             if (form && form.properties && form.properties[param]) {
                 const organisatieInput = form.properties[param] as JSONSchemaFormProperty;
                 if (!organisatieInput.uniforms) {
@@ -244,13 +244,13 @@ class UserInputForm extends React.Component<IProps, IState> {
     state: IState = {
         confirmationDialogOpen: false,
         processing: false,
-        nrOfValidationErrors: 0
+        nrOfValidationErrors: 0,
     };
 
     public static defaultProps = {
         previous: () => {},
         hasPrev: false,
-        hasNext: false
+        hasNext: false,
     };
 
     cancel = (e: React.FormEvent) => {
@@ -281,8 +281,8 @@ class UserInputForm extends React.Component<IProps, IState> {
                         details: json.validation_errors.map((e: ValidationError) => ({
                             message: e.msg,
                             params: e.ctx || {},
-                            dataPath: "." + e.loc.join(".")
-                        }))
+                            dataPath: "." + e.loc.join("."),
+                        })),
                     };
                 }
 
@@ -377,7 +377,7 @@ class UserInputForm extends React.Component<IProps, IState> {
                                 <section className="form-errors">
                                     <em className="error backend-validation-metadata">
                                         {I18n.t("process.input_fields_have_validation_errors", {
-                                            nrOfValidationErrors: nrOfValidationErrors
+                                            nrOfValidationErrors: nrOfValidationErrors,
                                         })}
                                     </em>
                                 </section>
