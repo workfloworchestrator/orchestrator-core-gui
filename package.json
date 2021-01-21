@@ -18,7 +18,7 @@
         "invariant": "^2.2.4",
         "lodash": "^4.14.149",
         "moment": "^2.25.3",
-        "object-hash": "^2.0.3",
+        "object-hash": "^2.1.1",
         "oidc-client": "^1.10.1",
         "oidc-react": "^1.1.1",
         "p-map": "^4.0.0",
