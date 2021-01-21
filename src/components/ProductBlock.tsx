@@ -18,6 +18,7 @@ import "components/ProductBlock.scss";
 
 import "./ProductBlock.scss";
 
+import { EuiButton, EuiFieldText } from "@elastic/eui";
 import { deleteProductBlock } from "api";
 import { productBlockById, productBlocks, resourceTypes, saveProductBlock } from "api/index";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
@@ -161,25 +162,29 @@ export default class ProductBlock extends React.Component<IProps, IState> {
         if (readOnly) {
             return (
                 <section className="buttons">
-                    <button className="button" onClick={() => this.context.redirect("/metadata/product_blocks")}>
+                    <EuiButton className="button" onClick={() => this.context.redirect("/metadata/product_blocks")}>
                         {I18n.t("metadata.productBlocks.back")}
-                    </button>
+                    </EuiButton>
                 </section>
             );
         }
         const invalid = !initial && (this.isInvalid() || this.state.processing);
         return (
             <section className="buttons">
-                <button className="button" onClick={this.cancel}>
+                <EuiButton className="button" onClick={this.cancel}>
                     {I18n.t("process.cancel")}
-                </button>
-                <button tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
+                </EuiButton>
+                <EuiButton
+                    tabIndex={0}
+                    className={`button ${invalid ? "grey disabled" : "blue"}`}
+                    onClick={this.submit}
+                >
                     {I18n.t("process.submit")}
-                </button>
+                </EuiButton>
                 {productBlock.product_block_id && (
-                    <button className="button red" onClick={this.handleDeleteProductBlock}>
+                    <EuiButton className="button red" onClick={this.handleDeleteProductBlock}>
                         {I18n.t("processes.delete")}
-                    </button>
+                    </EuiButton>
                 )}
             </section>
         );
@@ -261,7 +266,8 @@ export default class ProductBlock extends React.Component<IProps, IState> {
                 <div className="child-form">
                     {productBlock.resource_types.map((rt) => (
                         <div key={rt.resource_type_id} className="resource-type">
-                            <input
+                            <EuiFieldText
+                                fullWidth={true}
                                 type="text"
                                 id={rt.resource_type_id}
                                 name={rt.resource_type_id}
