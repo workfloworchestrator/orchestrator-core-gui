@@ -9675,10 +9675,10 @@ immer@1.10.0:
   resolved "https://registry.yarnpkg.com/immer/-/immer-1.10.0.tgz#bad67605ba9c810275d91e1c2a47d4582e98286d"
   integrity sha512-O3sR1/opvCDGLEVcvrGTMtLac8GJ5IwZC4puPrLuRj3l7ICKvkmA0vGuU9OW8mV9WIBRnaxp5GJh9IEAaNOoYg==
 
-immer@^5.3.4:
-  version "5.3.6"
-  resolved "https://registry.yarnpkg.com/immer/-/immer-5.3.6.tgz#51eab8cbbeb13075fe2244250f221598818cac04"
-  integrity sha512-pqWQ6ozVfNOUDjrLfm4Pt7q4Q12cGw2HUZgry4Q5+Myxu9nmHRkWBpI0J4+MK0AxbdFtdMTwEGVl7Vd+vEiK+A==
+immer@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-8.0.0.tgz#08763549ba9dd7d5e2eb4bec504a8315bd9440c2"
+  integrity sha512-jm87NNBAIG4fHwouilCHIecFXp5rMGkiFrAuhVO685UnMAlOneEAnOyzPt8OnP47TC11q/E7vpzZe0WvwepFTg==
 
 import-cwd@^2.0.0:
   version "2.1.0"
@@ -16247,10 +16247,10 @@ schema-utils@^2.6.0, schema-utils@^2.6.4:
     ajv "^6.12.4"
     ajv-keywords "^3.5.2"
 
-scroll-into-view@^1.9.7:
-  version "1.14.2"
-  resolved "https://registry.yarnpkg.com/scroll-into-view/-/scroll-into-view-1.14.2.tgz#21ea5bb2f921b9bb173ae73d78946c393a4e171d"
-  integrity sha512-sOAtPgiEiU5Ry6WX8T/DhkwAlaOyMHpYowxMrrcwfT7GQsndFmNGk0JBVvsJWxrrxbI7nvep4hl1mXnJ4YpUnA==
+scroll-into-view@^1.15.0:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/scroll-into-view/-/scroll-into-view-1.15.0.tgz#9e6733bd74680349d6e5c49ddde6a09d9309fadf"
+  integrity sha512-Ytbg8O1GlN8vOOZMPDOrjXixAFXZ4oJklxHkYREqdUFYo+a8qVuPX16U3nRkifKnM8kkvY9sOy7EL30HaeW07Q==
 
 select-hose@^2.0.0:
   version "2.0.0"
