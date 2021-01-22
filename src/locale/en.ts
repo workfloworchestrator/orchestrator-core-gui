@@ -219,6 +219,7 @@ I18n.translations.en = {
             extra_information: "Extra information",
             extra_information_info:
                 "Additional information to add to the subscription description and IPAM description",
+            form_info: "Extra info",
             ims_node_id: "Choose a node from IMS",
             ims_node_id_info: "Choose a node that has state PLANNED or READY FOR SERVICE in IMS",
             ims_port_id_1: "First node and port",
