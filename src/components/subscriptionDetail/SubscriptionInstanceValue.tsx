@@ -327,6 +327,8 @@ export function getExternalTypeData(
                 ),
                 i18nKey: "subscription",
             };
+        case "ipv4_ipam_id":
+        case "ipv6_ipam_id":
         case "ptp_ipv4_ipam_id":
         case "ptp_ipv6_ipam_id":
         case "ipam_prefix_id":
