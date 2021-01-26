@@ -219,6 +219,7 @@ I18n.translations.en = {
             extra_information: "Extra information",
             extra_information_info:
                 "Additional information to add to the subscription description and IPAM description",
+            form_info: "Extra info",
             ims_node_id: "Choose a node from IMS",
             ims_node_id_info: "Choose a node that has state PLANNED or READY FOR SERVICE in IMS",
             ims_port_id_1: "First node and port",
@@ -268,7 +269,7 @@ I18n.translations.en = {
             location_code: "Location code",
             location_code_info: "Provide a valid location code",
             metric_out: "Metric out",
-            metric_out_info: "Choose a metric out number",
+            metric_out_info: "Choose a metric out number (optional)",
             multicast: "Multicast",
             noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
             noc_customer_confirmation_info: "Has the customer confirmed that the service was successfully delivered?",
@@ -289,9 +290,11 @@ I18n.translations.en = {
             organisation: "Customer",
             organisation_info: "Search and select the customer for the product",
             peer_community: "Peer community",
-            peer_community_info: "Choose a peer community number",
+            peer_community_info:
+                "Second part of SURFnet import-policy community for peer-group (1103:x). Relevant for IX & Transit (eg. 3030 for ams-ix)",
             peer_group_name: "Peer group name",
-            peer_group_name_info: "Unique name with only letters, digits and minus sign and no spaces or underscores",
+            peer_group_name_info:
+                "Unique name with only letters, digits and minus sign and no spaces or underscores (eg. ams-ix)",
             peer_port_name: "Peer Port Name",
             peer_port_name_info: "Unique name with only letters, digits and minus sign and no spaces or underscores",
             peer_port_type: "Peer Port Type",
@@ -327,7 +330,8 @@ I18n.translations.en = {
             removed_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             removed_service_ports_info: "Select some ports to remove them from this subscription",
             route_servers: "Route servers",
-            route_servers_info: "Enter IP addresses separated by a comma or a newline character",
+            route_servers_info:
+                "Enter IP addresses separated by a comma or a newline character. Mainly for IX peer-groups. (optional)",
             secondary_remote_port_shutdown: "Secondary Remote port shutdown",
             secondary_service_ports: "Secondary Service Ports",
             secondary_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
