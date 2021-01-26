@@ -31,8 +31,12 @@ import {
 } from "utils/types";
 
 function renderGrafanaLink(subscription: Subscription, product: Product) {
-    const fi_domain = product?.fixed_inputs.find((fi) => fi.name === "domain");
-    if (fi_domain && (fi_domain.value === "SURFNET8" || fi_domain.value === "NETHERLIGHT8")) {
+    if (
+        (product.product_type === "Port" ||
+        product.product_type === "LightPath" ||
+        product.product_type === "IP" ||
+        product.product_type === "L2VPN")  
+        && product.tag !== "MSC") {
         return (
             <tr>
                 <td id="subscriptions-stats_in_grafana-k">{I18n.t("subscriptions.stats_in_grafana")}</td>
