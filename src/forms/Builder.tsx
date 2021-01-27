@@ -13,11 +13,10 @@
  *
  */
 
-import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
-import DatePickerCustom from "components/DatePickerCustom";
+import { EuiDatePicker, EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import I18n from "i18n-js";
+import moment, { Moment } from "moment";
 import React from "react";
-import DatePicker from "react-datepicker";
 import Select, { ValueType } from "react-select";
 import { Option } from "utils/types";
 
@@ -36,8 +35,7 @@ export function formInput<T extends { [index: string]: any }>(
             <EuiFormRow
                 label={I18n.t(i18nKey)}
                 labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}
-                isInvalid={true}
-                error={"Floemp"}
+                isInvalid={false}
             >
                 <EuiFieldText
                     id={name}
@@ -104,6 +102,15 @@ export function formDate(
     value: Date | null,
     openToDate = new Date()
 ) {
+    console.log(value);
+
+    const date = value ? moment(value) : null;
+
+    const handleChange = (date: Moment) => {
+        // internal change function only needed to moment convert to date (so old code is use-able)
+        onChange(date.toDate());
+    };
+
     return (
         <section className="form-divider">
             <EuiFormRow
@@ -111,16 +118,7 @@ export function formDate(
                 label={I18n.t(i18nKey)}
                 labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}
             >
-                <DatePicker
-                    selected={value}
-                    isClearable={false}
-                    onChange={onChange}
-                    openToDate={openToDate}
-                    customInput={
-                        <DatePickerCustom disabled={readOnly} onClick={onChange} clear={() => onChange(null)} />
-                    }
-                    disabled={readOnly}
-                />
+                <EuiDatePicker selected={date} onClear={() => onChange(null)} onChange={handleChange} />
             </EuiFormRow>
         </section>
     );
