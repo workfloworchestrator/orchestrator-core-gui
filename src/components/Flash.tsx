@@ -30,7 +30,7 @@ export default class Flash extends React.PureComponent<{}, IState> {
     callback = (flash: FlashData | null) => {
         this.setState({
             flash: flash ?? undefined,
-            className: isEmpty(flash?.message) ? "hide" : ""
+            className: isEmpty(flash?.message) ? "hide" : "",
         });
         if (flash && (!flash.type || flash.type !== "error")) {
             setTimeout(() => this.setState({ className: "hide" }), flash.type === "info" ? 5000 : 7500);

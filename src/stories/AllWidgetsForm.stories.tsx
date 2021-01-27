@@ -29,8 +29,8 @@ export default {
     title: "Complete Input widgets form new",
     // Needed to match snapshot file to story, should be done bij injectFileNames but that does not work
     parameters: {
-        fileName: __filename
-    }
+        fileName: __filename,
+    },
 };
 
 function prepare() {
@@ -41,42 +41,46 @@ function prepare() {
     mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, { allNodeSubscriptions });
     mock.onGet("subscriptions/ports?filter=tags%2CMSP-MSPNL-SSP%2Cstatuses%2Cactive").reply(
         200,
-        SN7PortSubscriptions.filter(p => p.status === "active").filter(p =>
+        SN7PortSubscriptions.filter((p) => p.status === "active").filter((p) =>
             ["MSP", "MSPNL", "SSP"].includes(p.product.tag)
         )
     );
     mock.onGet("subscriptions?filter=tags%2CIP_PREFIX%2Cstatuses%2Cactive").reply(200, []);
     mock.onGet("subscriptions/ports?filter=tags%2CMSP-MSPNL%2Cstatuses%2Cactive").reply(
         200,
-        SN7PortSubscriptions.filter(p => p.status === "active").filter(p => ["MSP", "MSPNL"].includes(p.product.tag))
+        SN7PortSubscriptions.filter((p) => p.status === "active").filter((p) =>
+            ["MSP", "MSPNL"].includes(p.product.tag)
+        )
     );
     mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive").reply(
         200,
-        SN8PortSubscriptions.filter(p => ["active"].includes(p.status)).filter(p => ["Node"].includes(p.product.tag))
+        SN8PortSubscriptions.filter((p) => ["active"].includes(p.status)).filter((p) =>
+            ["Node"].includes(p.product.tag)
+        )
     );
     mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(
         200,
-        SN8PortSubscriptions.filter(p => ["active", "provisioning"].includes(p.status)).filter(p =>
+        SN8PortSubscriptions.filter((p) => ["active", "provisioning"].includes(p.status)).filter((p) =>
             ["Node"].includes(p.product.tag)
         )
     );
     mock.onGet("subscriptions?filter=tags%2CIPS%2Cstatuses%2Cactive-provisioning").reply(
         200,
-        SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPS"].includes(p.product.tag))
+        SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => ["IPS"].includes(p.product.tag))
     );
     mock.onGet("subscriptions?filter=tags%2CIPBGP%2Cstatuses%2Cactive-provisioning").reply(
         200,
-        SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPBGP"].includes(p.product.tag))
+        SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => ["IPBGP"].includes(p.product.tag))
     );
     mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP-AGGSPNL%2Cstatuses%2Cactive").reply(
         200,
-        SN8PortSubscriptions.filter(p => p.status === "active").filter(p =>
+        SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) =>
             ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"].includes(p.product.tag)
         )
     );
     mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
         200,
-        SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["SP", "SPNL"].includes(p.product.tag))
+        SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => ["SP", "SPNL"].includes(p.product.tag))
     );
     mock.onGet(/crm\/contacts\/.*/).reply(200, contactPersons);
 
@@ -91,10 +95,10 @@ function prepare() {
         create: [{ description: "Create SN8 IP BGP", name: "create_sn8_ip_bgp" }],
         modify: [
             { description: "Change port", name: "modify_sn8_ip_bgp_change_port" },
-            { description: "Change a SN8 IP BGP subscription", name: "modify_sn8_ip_bgp" }
+            { description: "Change a SN8 IP BGP subscription", name: "modify_sn8_ip_bgp" },
         ],
         terminate: [{ description: "Terminate SN8 IP BGP", name: "terminate_sn8_ip_bgp" }],
-        system: [{ description: "Validate SN8 IP BGP", name: "validate_sn8_ip_bgp" }]
+        system: [{ description: "Validate SN8 IP BGP", name: "validate_sn8_ip_bgp" }],
     });
     mock.onGet("subscriptions/product/2b2125f2-a074-4e44-8d4b-edc677381d46").reply(200, imsNodes);
     mock.onGet("subscriptions/tag/IPS/").reply(200, []);

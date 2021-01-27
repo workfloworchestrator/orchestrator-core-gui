@@ -35,7 +35,7 @@ export default class Autocomplete extends React.PureComponent<IProps> {
     selectedRow?: HTMLElement | null;
 
     static defaultProps = {
-        className: ""
+        className: "",
     };
 
     componentDidUpdate(prevProps: IProps) {
@@ -78,7 +78,7 @@ export default class Autocomplete extends React.PureComponent<IProps> {
                                 key={index}
                                 className={selectedItem === index ? "active" : ""}
                                 onClick={() => itemSelected(item, personIndex)}
-                                ref={ref => {
+                                ref={(ref) => {
                                     if (selectedItem === index) {
                                         this.selectedRow = ref;
                                     }

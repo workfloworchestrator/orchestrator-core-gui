@@ -8,7 +8,7 @@ import {
     EuiFormRow,
     EuiInMemoryTable,
     EuiSpacer,
-    EuiText
+    EuiText,
 } from "@elastic/eui";
 import { subscriptionsDetailWithModel } from "api";
 import I18n from "i18n-js";
@@ -52,7 +52,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
             portSubscriptionsIds: [],
             ports: [],
             selectedPort: undefined,
-            selectedSubscription: undefined
+            selectedSubscription: undefined,
         };
     }
 
@@ -63,10 +63,10 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
     loadData = () => {
         let portSubscriptionIds: FavoriteSubscriptionStorage[];
         portSubscriptionIds = JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
-        let promises = portSubscriptionIds.map(subscription =>
+        let promises = portSubscriptionIds.map((subscription) =>
             subscriptionsDetailWithModel(subscription.subscription_id)
         );
-        Promise.all(promises).then(result => {
+        Promise.all(promises).then((result) => {
             this.setState({ ports: result, portsLoaded: true });
         });
     };
@@ -76,11 +76,11 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
         const { editMode } = this.state;
         let portSubscriptionIds: FavoriteSubscriptionStorage[];
         portSubscriptionIds = JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
-        const editName = portSubscriptionIds.find(item => item.subscription_id === subscription_id)?.customName ?? "";
+        const editName = portSubscriptionIds.find((item) => item.subscription_id === subscription_id)?.customName ?? "";
         this.setState({
             selectedSubscription: subscription_id,
             editMode: !editMode,
-            editName: editName
+            editName: editName,
         });
     };
 
@@ -89,7 +89,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
         const oldPorts: FavoriteSubscriptionStorage[] =
             JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
         const newPorts: FavoriteSubscriptionStorage[] = oldPorts.filter(
-            item => item.subscription_id !== subscription_id
+            (item) => item.subscription_id !== subscription_id
         );
         localStorage.setItem(FAVORITE_STORAGE_KEY, JSON.stringify(newPorts));
         this.loadData();
@@ -104,7 +104,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
         const { selectedSubscription, editName } = this.state;
         let oldPorts: FavoriteSubscriptionStorage[] =
             JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
-        const portIndex = oldPorts.findIndex(port => port.subscription_id === selectedSubscription);
+        const portIndex = oldPorts.findIndex((port) => port.subscription_id === selectedSubscription);
 
         oldPorts[portIndex].customName = editName;
         console.log(oldPorts);
@@ -117,13 +117,13 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
         event.preventDefault();
         const { subscriptions } = this.props;
 
-        if (subscriptions.find(subscription => subscription.subscription_id === subscription_id)) {
+        if (subscriptions.find((subscription) => subscription.subscription_id === subscription_id)) {
             this.props.handleSelect(subscription_id);
         } else {
             this.setState({
                 message: `The selected subscription is not in the allowed list.`,
                 messageHelp: `Check the bandwidth in the workflow form.`,
-                errors: true
+                errors: true,
             });
             setTimeout(() => {
                 this.setState({ message: undefined, errors: false });
@@ -140,7 +140,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
             editName,
             ports,
             portsLoaded,
-            selectedSubscription
+            selectedSubscription,
         } = this.state;
         let portSubscriptionIds: FavoriteSubscriptionStorage[];
         portSubscriptionIds = JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
@@ -151,26 +151,26 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                 name: "ID",
                 sortable: true,
                 truncateText: true,
-                width: "90px"
+                width: "90px",
             },
             {
                 field: "description",
                 name: "Description",
-                sortable: true
+                sortable: true,
             },
             {
                 field: "port_mode",
                 name: "Mode",
                 sortable: true,
                 render: (port_mode: any) => <EuiBadge color="primary">{port_mode}</EuiBadge>,
-                width: "80px"
+                width: "80px",
             },
             {
                 field: "subscription_id",
                 name: "My name",
                 sortable: true,
                 render: (subscription_id: any) =>
-                    portSubscriptionIds.find(item => item.subscription_id === subscription_id)?.customName ?? ""
+                    portSubscriptionIds.find((item) => item.subscription_id === subscription_id)?.customName ?? "",
             },
             {
                 field: "subscription_id",
@@ -208,14 +208,14 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                             />
                         )}
                     </>
-                )
-            }
+                ),
+            },
         ];
 
         let subscriptionDescription = "";
         if (editMode) {
             subscriptionDescription =
-                ports.find(port => port.subscription_id === selectedSubscription)?.description ?? "";
+                ports.find((port) => port.subscription_id === selectedSubscription)?.description ?? "";
         }
 
         return (

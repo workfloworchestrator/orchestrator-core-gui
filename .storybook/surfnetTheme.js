@@ -33,5 +33,5 @@ export default create({
 
     brandTitle: "Orchestrator Storybook",
     brandUrl: "https://docs.dev.automation.surf.net/workflows-client/",
-    brandImage: "https://docs.dev.automation.surf.net/surfnet_logo.png"
+    brandImage: "https://docs.dev.automation.surf.net/surfnet_logo.png",
 });

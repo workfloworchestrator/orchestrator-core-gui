@@ -31,7 +31,7 @@ import { Option, Organization, Product, ServicePortSubscription, Subscription as
 import { filterProductsByBandwidth } from "validations/Products";
 
 export function makeLabel(subscription: iSubscription, products: Product[], organisations?: Organization[]) {
-    const organisation = organisations && organisations.find(org => org.uuid === subscription.customer_id);
+    const organisation = organisations && organisations.find((org) => org.uuid === subscription.customer_id);
     const organisationName = organisation ? organisation.name : subscription.customer_id.substring(0, 8);
     const product = subscription.product || productById(subscription.product_id!, products);
     const description = subscription.description || I18n.t("forms.widgets.subscription.missingDescription");
@@ -151,48 +151,48 @@ function Subscription({
     const filteredProductIds = useMemo(() => {
         let products = allProducts;
         if (tags?.length) {
-            products = allProducts.filter(product => tags?.includes(product.tag));
+            products = allProducts.filter((product) => tags?.includes(product.tag));
         }
 
         if (productIds?.length) {
-            products = allProducts.filter(product => productIds?.includes(product.product_id));
+            products = allProducts.filter((product) => productIds?.includes(product.product_id));
         }
 
         if (usedBandwidth) {
             products = filterProductsByBandwidth(products, usedBandwidth);
         }
 
-        return products.map(product => product.product_id);
+        return products.map((product) => product.product_id);
     }, [allProducts, usedBandwidth, productIds, tags]);
 
     useEffect(() => {
-        getSubscriptions(tags, statuses).then(result => updateSubscriptions(result));
+        getSubscriptions(tags, statuses).then((result) => updateSubscriptions(result));
     }, [getSubscriptions, tags, statuses]);
 
     // Filter by product, needed because getSubscriptions might return more than we want
     subscriptions =
         filteredProductIds.length === allProducts.length
             ? subscriptions
-            : subscriptions.filter(sp => filteredProductIds.includes(sp.product.product_id));
+            : subscriptions.filter((sp) => filteredProductIds.includes(sp.product.product_id));
 
     if (excludedSubscriptionIds) {
-        subscriptions = subscriptions.filter(item => !excludedSubscriptionIds.includes(item.subscription_id));
+        subscriptions = subscriptions.filter((item) => !excludedSubscriptionIds.includes(item.subscription_id));
     }
 
     // Port mode filter
     if (visiblePortMode !== "all") {
         if (visiblePortMode === "normal") {
             subscriptions = subscriptions.filter(
-                item => getPortMode(item, allProducts) === "tagged" || getPortMode(item, allProducts) === "untagged"
+                (item) => getPortMode(item, allProducts) === "tagged" || getPortMode(item, allProducts) === "untagged"
             );
         } else {
-            subscriptions = subscriptions.filter(item => getPortMode(item, allProducts) === visiblePortMode);
+            subscriptions = subscriptions.filter((item) => getPortMode(item, allProducts) === visiblePortMode);
         }
     }
 
     // Customer filter toggle
     if (usedOrganisationId) {
-        subscriptions = subscriptions.filter(item => item.customer_id === usedOrganisationId);
+        subscriptions = subscriptions.filter((item) => item.customer_id === usedOrganisationId);
     }
 
     if (parentName !== name) {
@@ -202,13 +202,15 @@ function Subscription({
                 (_item, index) => index.toString() !== nameArray[nameArray.length - 1]
             );
 
-            subscriptions = subscriptions.filter(subscription => !chosenValues.includes(subscription.subscription_id));
+            subscriptions = subscriptions.filter(
+                (subscription) => !chosenValues.includes(subscription.subscription_id)
+            );
         }
     }
 
     const options = subscriptions.map((subscription: iSubscription) => ({
         label: makeLabel(subscription, allProducts, organisations),
-        value: subscription.subscription_id
+        value: subscription.subscription_id,
     }));
 
     const selectedValue = options.find((option: Option) => option.value === value);
@@ -240,7 +242,7 @@ function Subscription({
                                 onClick={() => {
                                     setLoading(true);
                                     clearSubscriptions();
-                                    getSubscriptions(tags, statuses).then(result => {
+                                    getSubscriptions(tags, statuses).then((result) => {
                                         updateSubscriptions(result);
                                         setLoading(false);
                                     });

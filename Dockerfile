@@ -1,6 +1,6 @@
 ###############################
 ### BASE LAYER FOR IMAGES BELOW
-FROM git.ia.surfsara.nl/automation/dependency_proxy/containers/node:14.2.0-slim AS base
+FROM node:14.2.0-slim AS base
 
 ENV CI=true
 
@@ -9,13 +9,10 @@ COPY package.json .
 COPY yarn.lock .
 
 ##########################################################
-### IMAGE FOR LOCAL DEVELOPMENT WITH MOUNTED SOURCE FOLDER
+### IMAGE FOR LOCAL DEVELOPMENT, NODE MODULES ARE INSTALLED AT RUNTIME
 FROM base AS local-dev
 
-RUN yarn install
-
 EXPOSE 3000
-CMD [ "yarn", "start" ]
 
 #####################################################################
 ### IMAGE FOR LOCAL DEVELOPMENT WITH SOURCE FOLDERS COPIED INTO IMAGE
@@ -38,7 +35,7 @@ RUN yarn build
 
 ########################
 ### IMAGE FOR PRODUCTION
-FROM git.ia.surfsara.nl/automation/dependency_proxy/containers/nginx:alpine
+FROM nginx:alpine
 
 RUN apk update && apk add wget curl
 COPY default.conf /etc/nginx/conf.d/default.conf

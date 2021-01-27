@@ -56,7 +56,7 @@ function ImsNodeId({ name, value, onChange, locationCode, status, ...props }: Im
             : I18n.t("forms.widgets.node_select.no_nodes_placeholder");
 
     const imsNodeIdLabelLookup =
-        nodes?.reduce<{ [index: string]: string }>(function(mapping, node) {
+        nodes?.reduce<{ [index: string]: string }>(function (mapping, node) {
             mapping[node.id.toString()] = node.name;
             return mapping;
         }, {}) ?? {};

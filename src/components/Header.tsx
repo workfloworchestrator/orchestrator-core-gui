@@ -51,7 +51,7 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
                     ? "development"
                     : "production",
             globalLock: false,
-            engineStatus: "RUNNING"
+            engineStatus: "RUNNING",
         };
     }
 
@@ -85,7 +85,7 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
     }
 
     refeshStatus = () => {
-        getGlobalStatus().then(globalStatus => {
+        getGlobalStatus().then((globalStatus) => {
             const { globalLock } = this.state;
             if (!globalStatus.global_lock && globalLock) {
                 this.setState({ globalLock: globalStatus.global_lock });

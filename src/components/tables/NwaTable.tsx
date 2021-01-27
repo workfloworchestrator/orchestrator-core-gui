@@ -39,7 +39,7 @@ import {
     useFilters,
     usePagination,
     useSortBy,
-    useTable
+    useTable,
 } from "react-table";
 
 import MiniPaginator from "./MiniPaginator";
@@ -64,7 +64,7 @@ export enum ActionType {
     SHOW_SETTINGS_TOGGLE = "show-settings/toggle",
     SHOW_PAGINATOR_TOGGLE = "show-paginator/toggle",
     MINIMIZE = "table/minimize",
-    MAXIMIZE = "table/maximize"
+    MAXIMIZE = "table/maximize",
 }
 
 export type TableSettingsAction<T extends object> =
@@ -101,13 +101,13 @@ export function tableSettingsReducer<T extends object>(
 ) {
     // Uncomment to see all the actions in the console.
     // console.log(action);
-    const changedState = produce(newState, draft => {
+    const changedState = produce(newState, (draft) => {
         switch (action.type) {
             case ActionType.OVERRIDE:
                 Object.assign(draft, action.settings);
                 break;
             case ActionType.FILTER_ADD: {
-                let index = draft.filterBy.findIndex(entry => entry.id === action.id);
+                let index = draft.filterBy.findIndex((entry) => entry.id === action.id);
                 if (index === -1) {
                     draft.filterBy.push({ id: action.id, values: [action.value] });
                     draft.filterBy.sort(); // keep list sorted to keep URL's stable.
@@ -118,7 +118,7 @@ export function tableSettingsReducer<T extends object>(
                 break;
             }
             case ActionType.FILTER_REMOVE: {
-                let index = draft.filterBy.findIndex(entry => entry.id === action.id);
+                let index = draft.filterBy.findIndex((entry) => entry.id === action.id);
                 if (index > -1) {
                     let valueIdx = draft.filterBy[index].values.findIndex((value: string) => value === action.value);
                     if (valueIdx > -1) {
@@ -132,7 +132,7 @@ export function tableSettingsReducer<T extends object>(
                 break;
             }
             case ActionType.FILTER_REPLACE: {
-                let index = draft.filterBy.findIndex(entry => entry.id === action.id);
+                let index = draft.filterBy.findIndex((entry) => entry.id === action.id);
                 if (index === -1) {
                     draft.filterBy.push({ id: action.id, values: action.values });
                 } else {
@@ -142,7 +142,7 @@ export function tableSettingsReducer<T extends object>(
                 break;
             }
             case ActionType.FILTER_CLEAR: {
-                let index = draft.filterBy.findIndex(entry => entry.id === action.id);
+                let index = draft.filterBy.findIndex((entry) => entry.id === action.id);
                 if (index > -1) {
                     draft.filterBy.splice(index);
                 }
@@ -212,7 +212,7 @@ export function NwaTable<T extends object>({
     extraRowPropGetter,
     renderSubComponent,
     excludeInFilter,
-    advancedSearch
+    advancedSearch,
 }: INwaTableProps<T>) {
     const [data, pageCount, fetchData] = useFilterableDataFetcher<T>(endpoint);
     const {
@@ -231,7 +231,7 @@ export function NwaTable<T extends object>({
         allColumns,
         visibleColumns,
         state,
-        dispatch
+        dispatch,
     } = useTable<T>(
         {
             columns,
@@ -246,7 +246,7 @@ export function NwaTable<T extends object>({
             debug: true,
             // @ts-ignore Compiler expects id and value even on ActionTypes without them
             stateReducer: tableSettingsReducer,
-            initialState: initialState
+            initialState: initialState,
         },
         (hooks: Hooks<T>) => {
             hooks.getRowProps.push(extraRowPropGetter);
@@ -267,7 +267,7 @@ export function NwaTable<T extends object>({
         hiddenColumns,
         pageIndex,
         pageSize,
-        minimized
+        minimized,
     } = state;
 
     const preferencesProps = {
@@ -275,11 +275,11 @@ export function NwaTable<T extends object>({
         allColumns,
         dispatch,
         initialTableSettings,
-        excludeInFilter
+        excludeInFilter,
     };
     const advancedSearchProps = {
         state,
-        dispatch
+        dispatch,
     };
     const TableRendererProps = {
         getTableProps,
@@ -288,7 +288,7 @@ export function NwaTable<T extends object>({
         headerGroups,
         page,
         visibleColumns,
-        renderSubComponent
+        renderSubComponent,
     };
     const paginatorProps = {
         canNextPage,
@@ -300,7 +300,7 @@ export function NwaTable<T extends object>({
         pageOptions,
         pageSize,
         previousPage,
-        setPageSize
+        setPageSize,
     };
 
     // Update localStorage

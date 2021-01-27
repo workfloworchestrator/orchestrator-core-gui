@@ -33,13 +33,13 @@ function AdvancedSearch<T extends object>({ state, dispatch }: IProps<T>) {
             <EuiFlexItem grow={10}>
                 <EuiFieldSearch
                     placeholder={I18n.t("subscriptions.advancedSearchPlaceHolder")}
-                    value={state.filterBy.find(column => column.id === "tsv")?.values[0] ?? ""}
-                    onChange={searchPhrase => {
+                    value={state.filterBy.find((column) => column.id === "tsv")?.values[0] ?? ""}
+                    onChange={(searchPhrase) => {
                         searchPhrase &&
                             dispatch({
                                 type: ActionType.FILTER_REPLACE,
                                 id: "tsv",
-                                values: [searchPhrase.target.value]
+                                values: [searchPhrase.target.value],
                             });
                     }}
                     isClearable={true}

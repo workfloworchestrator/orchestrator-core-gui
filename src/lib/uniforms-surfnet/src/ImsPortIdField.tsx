@@ -36,7 +36,7 @@ export type ImsPortFieldProps = FieldProps<
 function nodeToOptionCorelink(node: Subscription): Option {
     return {
         value: node.subscription_id,
-        label: `${node.subscription_id.substring(0, 8)} ${node.description.trim() || "<No description>"}`
+        label: `${node.subscription_id.substring(0, 8)} ${node.description.trim() || "<No description>"}`,
     };
 }
 
@@ -86,7 +86,7 @@ function ImsPortId({
             setPorts([]);
 
             getFreePortsByNodeSubscriptionIdAndSpeed(value as string, interfaceSpeed as number, imsPortMode).then(
-                result => {
+                (result) => {
                     setPorts(result);
                     setLoading(false);
                 }
@@ -100,13 +100,13 @@ function ImsPortId({
 
         const nodesPromise = nodeSubscriptions(nodeStatuses ?? ["active"]);
         if (nodeSubscriptionId) {
-            nodesPromise.then(result => {
-                setNodes(result.filter(subscription => subscription.subscription_id === nodeSubscriptionId));
+            nodesPromise.then((result) => {
+                setNodes(result.filter((subscription) => subscription.subscription_id === nodeSubscriptionId));
                 setLoading(false);
                 onChangeNodes({ value: nodeSubscriptionId } as Option);
             });
         } else {
-            nodesPromise.then(result => {
+            nodesPromise.then((result) => {
                 setNodes(result);
                 setLoading(false);
             });
@@ -126,15 +126,15 @@ function ImsPortId({
     let node_options: Option[] = (nodes as Subscription[]).map(nodeToOptionCorelink);
 
     node_options.sort((x, y) => x.label.localeCompare(y.label));
-    const node_value = node_options.find(option => option.value === nodeId?.toString());
+    const node_value = node_options.find((option) => option.value === nodeId?.toString());
 
     const port_options: Option<number>[] = ports
-        .map(aPort => ({
+        .map((aPort) => ({
             value: aPort.id,
-            label: `${aPort.port} (${aPort.status}) (${aPort.iface_type})`
+            label: `${aPort.port} (${aPort.status}) (${aPort.iface_type})`,
         }))
         .sort((x, y) => x.label.localeCompare(y.label));
-    const port_value = port_options.find(option => option.value === value);
+    const port_value = port_options.find((option) => option.value === value);
 
     return (
         <section {...filterDOMProps(props)}>

@@ -48,5 +48,5 @@ export const ENV = window.__env__ || {
     TRACE_SAMPLE_RATE: process.env.REACT_APP_TRACE_SAMPLE_RATE,
     RELEASE: process.env.REACT_APP_RELEASE,
     ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
-    TRACING_ORIGINS: process.env.REACT_APP_TRACING_ORIGINS
+    TRACING_ORIGINS: process.env.REACT_APP_TRACING_ORIGINS,
 };

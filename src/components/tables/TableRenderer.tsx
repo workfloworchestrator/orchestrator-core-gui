@@ -35,7 +35,7 @@ export function TableRenderer<T extends object>({
     prepareRow,
     headerGroups,
     page,
-    visibleColumns
+    visibleColumns,
 }: ITableRendererProps<T>) {
     const sortIcon = (col: ColumnInstance<T>) => {
         if (!col.canSort) {
@@ -55,17 +55,17 @@ export function TableRenderer<T extends object>({
     return (
         <table className="nwa-table" {...getTableProps()}>
             <thead>
-                {headerGroups.map(headerGroup => (
+                {headerGroups.map((headerGroup) => (
                     <React.Fragment key={`header_fragment_${headerGroup.id}`}>
                         <tr className={"column-ids"} {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
+                            {headerGroup.headers.map((column) => (
                                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                                     {column.render("Header")} {sortIcon(column)}
                                 </th>
                             ))}
                         </tr>
                         <tr className={"filters"}>
-                            {headerGroup.headers.map(column => (
+                            {headerGroup.headers.map((column) => (
                                 <th id={`filter_headers_${column.id}`} key={column.id}>
                                     {column.canFilter && column.render("Filter")}
                                 </th>
@@ -80,7 +80,7 @@ export function TableRenderer<T extends object>({
                     return (
                         <React.Fragment key={`row_fragment_${row.id}`}>
                             <tr {...row.getRowProps()}>
-                                {row.cells.map(cell => {
+                                {row.cells.map((cell) => {
                                     return (
                                         <td {...cell.getCellProps([{ className: cell.column.id }])}>
                                             {cell.render("Cell")}

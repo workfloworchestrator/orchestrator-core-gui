@@ -23,7 +23,7 @@ export const imsNodes = [
         networkrole: null,
         status: "PL",
         type: "MX960BASE3-AC",
-        vendor: "JUNIPER"
+        vendor: "JUNIPER",
     },
     {
         id: 84016,
@@ -34,7 +34,7 @@ export const imsNodes = [
         networkrole: null,
         status: "PL",
         type: "MX960BASE3-AC",
-        vendor: "JUNIPER"
+        vendor: "JUNIPER",
     },
     {
         id: 84017,
@@ -45,7 +45,7 @@ export const imsNodes = [
         networkrole: null,
         status: "PL",
         type: "MX960BASE3-AC",
-        vendor: "JUNIPER"
+        vendor: "JUNIPER",
     },
     {
         id: 84018,
@@ -56,7 +56,7 @@ export const imsNodes = [
         networkrole: null,
         status: "PL",
         type: "MX960BASE3-AC",
-        vendor: "JUNIPER"
+        vendor: "JUNIPER",
     },
     {
         id: 84024,
@@ -67,8 +67,8 @@ export const imsNodes = [
         networkrole: null,
         status: "PL",
         type: "MX960BASE3-AC",
-        vendor: "JUNIPER"
-    }
+        vendor: "JUNIPER",
+    },
 ];
 
 export const freeCorelinkPorts = [
@@ -78,7 +78,7 @@ export const freeCorelinkPorts = [
         iface_type: "10GBASE-SR",
         node: "ASD001A-JNX-01-VTB",
         port: "1/0/0",
-        status: "1"
+        status: "1",
     },
     {
         fiber_type: "multi-mode",
@@ -86,7 +86,7 @@ export const freeCorelinkPorts = [
         iface_type: "10GBASE-SR",
         node: "ASD001A-JNX-01-VTB",
         port: "1/0/1",
-        status: "1"
+        status: "1",
     },
     {
         fiber_type: "single-mode",
@@ -94,7 +94,7 @@ export const freeCorelinkPorts = [
         iface_type: "10GBASE-LR",
         node: "ASD001A-JNX-01-VTB",
         port: "1/0/2",
-        status: "1"
+        status: "1",
     },
     {
         fiber_type: "multi-mode",
@@ -102,8 +102,8 @@ export const freeCorelinkPorts = [
         iface_type: "10GBASE-SR",
         node: "ASD001A-JNX-01-VTB",
         port: "1/0/3",
-        status: "1"
-    }
+        status: "1",
+    },
 ];
 
 export const corelinkPorts10G = [
@@ -113,7 +113,7 @@ export const corelinkPorts10G = [
         iface_type: "10GBASE-LR",
         node: "MT001A-JNX-ACID86-VTB",
         port: "1/0/0",
-        status: "3"
+        status: "3",
     },
     {
         fiber_type: "multi-mode",
@@ -121,7 +121,7 @@ export const corelinkPorts10G = [
         iface_type: "10GBASE-SR",
         node: "MT001A-JNX-ACID86-VTB",
         port: "1/0/1",
-        status: "3"
+        status: "3",
     },
     {
         fiber_type: "multi-mode",
@@ -129,7 +129,7 @@ export const corelinkPorts10G = [
         iface_type: "10GBASE-SR",
         node: "MT001A-JNX-ACID86-VTB",
         port: "1/0/2",
-        status: "3"
+        status: "3",
     },
     {
         fiber_type: "single-mode",
@@ -137,7 +137,7 @@ export const corelinkPorts10G = [
         iface_type: "10GBASE-LR",
         node: "MT001A-JNX-ACID86-VTB",
         port: "1/0/3",
-        status: "3"
+        status: "3",
     },
     {
         fiber_type: "single-mode",
@@ -145,7 +145,7 @@ export const corelinkPorts10G = [
         iface_type: "10GBASE-LR",
         node: "MT001A-JNX-ACID86-VTB",
         port: "1/0/4",
-        status: "3"
+        status: "3",
     },
     {
         fiber_type: "single-mode",
@@ -153,7 +153,7 @@ export const corelinkPorts10G = [
         iface_type: "10GBASE-LR",
         node: "MT001A-JNX-ACID86-VTB",
         port: "1/0/5",
-        status: "3"
+        status: "3",
     },
     {
         fiber_type: "multi-mode",
@@ -161,7 +161,7 @@ export const corelinkPorts10G = [
         iface_type: "10GBASE-SR",
         node: "MT001A-JNX-ACID86-VTB",
         port: "1/0/6",
-        status: "3"
+        status: "3",
     },
     {
         fiber_type: "multi-mode",
@@ -169,7 +169,7 @@ export const corelinkPorts10G = [
         iface_type: "10GBASE-SR",
         node: "MT001A-JNX-ACID86-VTB",
         port: "1/0/7",
-        status: "3"
+        status: "3",
     },
     {
         fiber_type: "single-mode",
@@ -177,7 +177,7 @@ export const corelinkPorts10G = [
         iface_type: "10GBASE-LR",
         node: "MT001A-JNX-ACID86-VTB",
         port: "1/0/8",
-        status: "3"
+        status: "3",
     },
     {
         fiber_type: "single-mode",
@@ -185,7 +185,7 @@ export const corelinkPorts10G = [
         iface_type: "10GBASE-LR",
         node: "MT001A-JNX-ACID86-VTB",
         port: "1/0/9",
-        status: "3"
+        status: "3",
     },
     {
         fiber_type: "single-mode",
@@ -193,7 +193,7 @@ export const corelinkPorts10G = [
         iface_type: "10GBASE-LR",
         node: "MT001A-JNX-ACID86-VTB",
         port: "1/2/0",
-        status: "3"
+        status: "3",
     },
     {
         fiber_type: "single-mode",
@@ -201,7 +201,7 @@ export const corelinkPorts10G = [
         iface_type: "10GBASE-LR",
         node: "MT001A-JNX-ACID86-VTB",
         port: "1/2/1",
-        status: "3"
+        status: "3",
     },
     {
         fiber_type: "multi-mode",
@@ -209,7 +209,7 @@ export const corelinkPorts10G = [
         iface_type: "10GBASE-SR",
         node: "MT001A-JNX-ACID86-VTB",
         port: "1/2/2",
-        status: "3"
+        status: "3",
     },
     {
         fiber_type: "single-mode",
@@ -217,48 +217,48 @@ export const corelinkPorts10G = [
         iface_type: "10GBASE-LR",
         node: "MT001A-JNX-ACID86-VTB",
         port: "1/2/3",
-        status: "3"
-    }
+        status: "3",
+    },
 ];
 
 export const contactPersons = [
     {
         email: "rene@surf.net",
         name: "Rene",
-        phone: "+31 6 1234 1234"
+        phone: "+31 6 1234 1234",
     },
     {
         email: "jos.beek@schreursacedemie.nl",
         name: "Jos Beek",
-        phone: "+31 40 233 23 23"
+        phone: "+31 40 233 23 23",
     },
     {
         email: "henk@henkie.nl",
-        name: "Henk & Ingrid"
+        name: "Henk & Ingrid",
     },
     {
         email: "thijs@surf.net",
-        name: "Thijs"
+        name: "Thijs",
     },
     {
         email: "guido@surf.net",
         name: "Guido",
-        phone: "+31 6 1234 1234"
+        phone: "+31 6 1234 1234",
     },
     {
         email: "hiram@surf.net",
         name: "Hiram",
-        phone: "+31 6 46 59 65 40"
+        phone: "+31 6 46 59 65 40",
     },
     {
         email: "peter@surf.net",
         name: "Peter",
-        phone: "+31 6 1234 1234"
+        phone: "+31 6 1234 1234",
     },
     {
         email: "paul@surf.net",
-        name: "Paul"
-    }
+        name: "Paul",
+    },
 ];
 
 // WIth Tag mocks: have extra info (port_mode)?
@@ -278,11 +278,11 @@ export const allNodeSubscriptions = [
             product_id: "d7a85e1f-b55b-4831-9ff5-11d7c81ab6d0",
             product_type: "Node",
             status: "active",
-            tag: "Node"
+            tag: "Node",
         },
         start_date: null,
         status: "provisioning",
-        subscription_id: "5e3341c2-0017-4d32-9005-56e9b2cbf86c"
+        subscription_id: "5e3341c2-0017-4d32-9005-56e9b2cbf86c",
     },
     {
         customer_id: "c9b5e717-0b11-e511-80d0-005056956c1a",
@@ -297,11 +297,11 @@ export const allNodeSubscriptions = [
             product_id: "d7a85e1f-b55b-4831-9ff5-11d7c81ab6d0",
             product_type: "Node",
             status: "active",
-            tag: "Node"
+            tag: "Node",
         },
         start_date: null,
         status: "provisioning",
-        subscription_id: "faf4766b-072c-4494-a8d7-8feaf60e2446"
+        subscription_id: "faf4766b-072c-4494-a8d7-8feaf60e2446",
     },
     {
         customer_id: "c9b5e717-0b11-e511-80d0-005056956c1a",
@@ -316,11 +316,11 @@ export const allNodeSubscriptions = [
             product_id: "d7a85e1f-b55b-4831-9ff5-11d7c81ab6d0",
             product_type: "Node",
             status: "active",
-            tag: "Node"
+            tag: "Node",
         },
         start_date: null,
         status: "provisioning",
-        subscription_id: "b88f6de0-40fc-4b9d-821f-710a69bd0cf0"
+        subscription_id: "b88f6de0-40fc-4b9d-821f-710a69bd0cf0",
     },
     {
         customer_id: "c9b5e717-0b11-e511-80d0-005056956c1a",
@@ -335,10 +335,10 @@ export const allNodeSubscriptions = [
             product_id: "d7a85e1f-b55b-4831-9ff5-11d7c81ab6d0",
             product_type: "Node",
             status: "active",
-            tag: "Node"
+            tag: "Node",
         },
         start_date: null,
         status: "provisioning",
-        subscription_id: "b3c02b69-4c70-4be7-adba-3bc3a6112315"
-    }
+        subscription_id: "b3c02b69-4c70-4be7-adba-3bc3a6112315",
+    },
 ];

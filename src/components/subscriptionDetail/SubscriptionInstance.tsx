@@ -34,10 +34,10 @@ export default function SubscriptionInstance({ subscription_instance }: IProps) 
     }
 
     const fields = Object.entries(subscription_instance)
-        .filter(entry => !["label", "subscription_instance_id", "product_block_name"].includes(entry[0]))
-        .map<[string, any]>(entry => (isArray(entry[1]) ? entry : [entry[0], [entry[1]]]));
+        .filter((entry) => !["label", "subscription_instance_id", "product_block_name"].includes(entry[0]))
+        .map<[string, any]>((entry) => (isArray(entry[1]) ? entry : [entry[0], [entry[1]]]));
 
-    const [value_fields, instance_fields] = partition(fields, entry => typeof entry[1][0] !== "object");
+    const [value_fields, instance_fields] = partition(fields, (entry) => typeof entry[1][0] !== "object");
     return (
         <section className="product-block">
             <h3>{subscription_instance.product_block_name}</h3>
@@ -47,13 +47,13 @@ export default function SubscriptionInstance({ subscription_instance }: IProps) 
                 <thead />
                 {value_fields
                     .sort((entryA, entryB) => entryA[0].localeCompare(entryB[0]))
-                    .flatMap(entry => entry[1].map((value: any) => [entry[0], value]))
+                    .flatMap((entry) => entry[1].map((value: any) => [entry[0], value]))
                     .map((entry, i) => (
                         <SubscriptionInstanceValue key={i} label={entry[0]} value={entry[1]} />
                     ))}
             </table>
             {instance_fields
-                .flatMap(entry => entry[1])
+                .flatMap((entry) => entry[1])
                 .map((instance: ISubscriptionInstance, i: number) => (
                     <SubscriptionInstance key={i} subscription_instance={instance} />
                 ))}

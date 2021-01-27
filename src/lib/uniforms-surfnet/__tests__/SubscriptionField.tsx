@@ -30,8 +30,8 @@ const APP_CONTEXT = {
         { product_id: "P1", tag: "A", fixed_inputs: [{ name: "port_speed", value: "1000" }] } as Product,
         { product_id: "P2", tag: "A", fixed_inputs: [{ name: "port_speed", value: "10000" }] } as Product,
         { product_id: "P3", tag: "B" } as Product,
-        { product_id: "P4", tag: "C" } as Product
-    ]
+        { product_id: "P4", tag: "C" } as Product,
+    ],
 };
 
 describe("<SubscriptionField>", () => {
@@ -93,7 +93,7 @@ describe("<SubscriptionField>", () => {
         const { element, getSubscriptions } = withSubscriptions(<SubscriptionField name="x" />);
         getSubscriptions.mockReturnValue([
             { subscription_id: "a", customer_id: "c1", description: "d1", product: { tag: "" } as Product },
-            { subscription_id: "b", customer_id: "c2", description: "d2", product: { tag: "" } as Product }
+            { subscription_id: "b", customer_id: "c2", description: "d2", product: { tag: "" } as Product },
         ]);
 
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -103,7 +103,7 @@ describe("<SubscriptionField>", () => {
         expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "d1", value: "a" },
-            { label: "d2", value: "b" }
+            { label: "d2", value: "b" },
         ]);
         expect(wrapper.render()).toMatchSnapshot();
     });
@@ -116,14 +116,14 @@ describe("<SubscriptionField>", () => {
                 subscription_id: "a",
                 customer_id: "c1",
                 description: "d1",
-                product: { product_id: "P1", tag: "A" } as Product
+                product: { product_id: "P1", tag: "A" } as Product,
             },
             {
                 subscription_id: "b",
                 customer_id: "c2",
                 description: "d2",
-                product: { product_id: "P2", tag: "A" } as Product
-            }
+                product: { product_id: "P2", tag: "A" } as Product,
+            },
         ]);
 
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -133,7 +133,7 @@ describe("<SubscriptionField>", () => {
         expect(getSubscriptions).toHaveBeenCalledWith(["A"], undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "d1", value: "a" },
-            { label: "d2", value: "b" }
+            { label: "d2", value: "b" },
         ]);
     });
 
@@ -141,7 +141,7 @@ describe("<SubscriptionField>", () => {
         const { element, getSubscriptions } = withSubscriptions(<SubscriptionField name="x" statuses={["active"]} />);
         getSubscriptions.mockReturnValue([
             { subscription_id: "a", customer_id: "c1", description: "d1", product: { tag: "" } as Product },
-            { subscription_id: "b", customer_id: "c2", description: "d2", product: { tag: "" } as Product }
+            { subscription_id: "b", customer_id: "c2", description: "d2", product: { tag: "" } as Product },
         ]);
 
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -151,7 +151,7 @@ describe("<SubscriptionField>", () => {
         expect(getSubscriptions).toHaveBeenCalledWith(undefined, ["active"]);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "d1", value: "a" },
-            { label: "d2", value: "b" }
+            { label: "d2", value: "b" },
         ]);
     });
 
@@ -161,7 +161,7 @@ describe("<SubscriptionField>", () => {
         );
         getSubscriptions.mockReturnValue([
             { subscription_id: "a", customer_id: "c1", description: "d1", product: { tag: "" } as Product },
-            { subscription_id: "b", customer_id: "c2", description: "d2", product: { tag: "" } as Product }
+            { subscription_id: "b", customer_id: "c2", description: "d2", product: { tag: "" } as Product },
         ]);
 
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -179,14 +179,14 @@ describe("<SubscriptionField>", () => {
                 subscription_id: "a",
                 customer_id: "c1",
                 description: "d1",
-                product: { tag: "A" } as Product
+                product: { tag: "A" } as Product,
             },
             {
                 subscription_id: "b",
                 customer_id: "c2",
                 description: "d2",
-                product: { tag: "A" } as Product
-            }
+                product: { tag: "A" } as Product,
+            },
         ]);
 
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -204,14 +204,14 @@ describe("<SubscriptionField>", () => {
                 subscription_id: "a",
                 customer_id: "c1",
                 description: "d1",
-                product: { tag: "A" } as Product
+                product: { tag: "A" } as Product,
             },
             {
                 subscription_id: "b",
                 customer_id: "c2",
                 description: "d2",
-                product: { tag: "A" } as Product
-            }
+                product: { tag: "A" } as Product,
+            },
         ]);
 
         const wrapper = mount(element, createContext({ x: { type: String } }, { model: {} }));
@@ -229,14 +229,14 @@ describe("<SubscriptionField>", () => {
                 subscription_id: "a",
                 customer_id: "c1",
                 description: "d1",
-                product: { tag: "A" } as Product
+                product: { tag: "A" } as Product,
             },
             {
                 subscription_id: "b",
                 customer_id: "c2",
                 description: "d2",
-                product: { tag: "A" } as Product
-            }
+                product: { tag: "A" } as Product,
+            },
         ]);
 
         const wrapper = mount(element, createContext({ x: { type: String } }, { model: { key: "c2" } }));
@@ -257,14 +257,14 @@ describe("<SubscriptionField>", () => {
                 customer_id: "c1",
                 description: "d1",
                 port_mode: "untagged",
-                product: { tag: "SP" } as Product
+                product: { tag: "SP" } as Product,
             },
             {
                 subscription_id: "b",
                 customer_id: "c2",
                 description: "d2",
-                product: { tag: "MSC" } as Product
-            }
+                product: { tag: "MSC" } as Product,
+            },
         ]);
 
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -285,13 +285,13 @@ describe("<SubscriptionField>", () => {
                 customer_id: "c1",
                 description: "d1",
                 port_mode: "untagged",
-                product: { tag: "SP" } as Product
+                product: { tag: "SP" } as Product,
             },
             {
                 subscription_id: "b",
                 customer_id: "c2",
                 description: "d2",
-                product: { tag: "MSC" } as Product
+                product: { tag: "MSC" } as Product,
             },
             {
                 subscription_id: "c",
@@ -299,8 +299,8 @@ describe("<SubscriptionField>", () => {
                 description: "d3",
                 port_mode: "link_member",
 
-                product: { tag: "SP" } as Product
-            }
+                product: { tag: "SP" } as Product,
+            },
         ]);
 
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -310,7 +310,7 @@ describe("<SubscriptionField>", () => {
         expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "a UNTAGGED d1 c1", value: "a" },
-            { label: "b TAGGED d2 c2", value: "b" }
+            { label: "b TAGGED d2 c2", value: "b" },
         ]);
     });
 
@@ -327,14 +327,14 @@ describe("<SubscriptionField>", () => {
                 customer_id: "c1",
                 description: "d1",
                 port_mode: "untagged",
-                product: { tag: "A", product_id: "P1" } as Product
+                product: { tag: "A", product_id: "P1" } as Product,
             },
             {
                 subscription_id: "b",
                 customer_id: "c2",
                 description: "d2",
-                product: { tag: "A", product_id: "P4" } as Product
-            }
+                product: { tag: "A", product_id: "P4" } as Product,
+            },
         ]);
 
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -357,14 +357,14 @@ describe("<SubscriptionField>", () => {
                 customer_id: "c1",
                 description: "d1",
                 port_mode: "untagged",
-                product: { tag: "A", product_id: "P2" } as Product
+                product: { tag: "A", product_id: "P2" } as Product,
             },
             {
                 subscription_id: "b",
                 customer_id: "c2",
                 description: "d2",
-                product: { tag: "A", product_id: "P3" } as Product
-            }
+                product: { tag: "A", product_id: "P3" } as Product,
+            },
         ]);
 
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -374,7 +374,7 @@ describe("<SubscriptionField>", () => {
         expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "d1", value: "a" },
-            { label: "d2", value: "b" }
+            { label: "d2", value: "b" },
         ]);
     });
     test("<SubscriptionField> - renders a select with correct options (bandwithKey filterd products)", async () => {
@@ -390,14 +390,14 @@ describe("<SubscriptionField>", () => {
                 customer_id: "c1",
                 description: "d1",
                 port_mode: "untagged",
-                product: { tag: "A", product_id: "P2" } as Product
+                product: { tag: "A", product_id: "P2" } as Product,
             },
             {
                 subscription_id: "b",
                 customer_id: "c2",
                 description: "d2",
-                product: { tag: "A", product_id: "P3" } as Product
-            }
+                product: { tag: "A", product_id: "P3" } as Product,
+            },
         ]);
 
         const wrapper = mount(element, createContext({ x: { type: String } }, { model: { bandwidth: "10000" } }));
@@ -407,7 +407,7 @@ describe("<SubscriptionField>", () => {
         expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "d1", value: "a" },
-            { label: "d2", value: "b" }
+            { label: "d2", value: "b" },
         ]);
     });
 
@@ -419,7 +419,7 @@ describe("<SubscriptionField>", () => {
         const wrapper = mount(
             element,
             createContext({
-                x: { type: String, optional: true }
+                x: { type: String, optional: true },
             })
         );
         await waitForComponentToPaint(wrapper);
@@ -442,7 +442,7 @@ describe("<SubscriptionField>", () => {
     test("<SubscriptionField> - renders a select with correct value (model)", async () => {
         const { element, getSubscriptions } = withSubscriptions(<SubscriptionField name="x" value="b" />);
         getSubscriptions.mockReturnValue([
-            { subscription_id: "b", customer_id: "abc", description: "dec", product: { tag: "" } as Product }
+            { subscription_id: "b", customer_id: "abc", description: "dec", product: { tag: "" } as Product },
         ]);
 
         const wrapper = mount(element, createContext({ x: { type: String } }, { model: { x: "b" } }));
@@ -455,7 +455,7 @@ describe("<SubscriptionField>", () => {
     test("<SubscriptionField> - renders a select with correct value (specified)", async () => {
         const { element, getSubscriptions } = withSubscriptions(<SubscriptionField name="x" value="b" />);
         getSubscriptions.mockReturnValue([
-            { subscription_id: "b", customer_id: "abc", description: "dec", product: { tag: "" } as Product }
+            { subscription_id: "b", customer_id: "abc", description: "dec", product: { tag: "" } as Product },
         ]);
 
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -543,24 +543,9 @@ describe("<SubscriptionField>", () => {
         const wrapper = mount(element, createContext({ x: { type: String } }));
         await waitForComponentToPaint(wrapper);
 
-        expect(
-            wrapper
-                .find("section")
-                .at(0)
-                .prop("data-x")
-        ).toBe("x");
-        expect(
-            wrapper
-                .find("section")
-                .at(0)
-                .prop("data-y")
-        ).toBe("y");
-        expect(
-            wrapper
-                .find("section")
-                .at(0)
-                .prop("data-z")
-        ).toBe("z");
+        expect(wrapper.find("section").at(0).prop("data-x")).toBe("x");
+        expect(wrapper.find("section").at(0).prop("data-y")).toBe("y");
+        expect(wrapper.find("section").at(0).prop("data-z")).toBe("z");
     });
 
     test("<SubscriptionField> - renders a select with correct value (as uniqueItem list child)", async () => {
@@ -571,14 +556,14 @@ describe("<SubscriptionField>", () => {
         );
         getSubscriptions.mockReturnValue([
             { subscription_id: "a", customer_id: "abc1", description: "dec1", product: { tag: "" } as Product },
-            { subscription_id: "b", customer_id: "abc2", description: "dec2", product: { tag: "" } as Product }
+            { subscription_id: "b", customer_id: "abc2", description: "dec2", product: { tag: "" } as Product },
         ]);
         const wrapper = mount(
             element,
             createContext(
                 {
                     x: { type: Array, uniforms: { uniqueItems: true } },
-                    "x.$": { type: String }
+                    "x.$": { type: String },
                 },
                 { model: { x: ["a", undefined] } }
             )
@@ -587,24 +572,9 @@ describe("<SubscriptionField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(2);
-        expect(
-            wrapper
-                .find(ReactSelect)
-                .at(0)
-                .prop("value")
-        ).toStrictEqual({ label: "dec1", value: "a" });
-        expect(
-            wrapper
-                .find(ReactSelect)
-                .at(1)
-                .prop("value")
-        ).toStrictEqual(undefined);
-        expect(
-            wrapper
-                .find(ReactSelect)
-                .at(1)
-                .prop("options")
-        ).toStrictEqual([{ label: "dec2", value: "b" }]);
+        expect(wrapper.find(ReactSelect).at(0).prop("value")).toStrictEqual({ label: "dec1", value: "a" });
+        expect(wrapper.find(ReactSelect).at(1).prop("value")).toStrictEqual(undefined);
+        expect(wrapper.find(ReactSelect).at(1).prop("options")).toStrictEqual([{ label: "dec2", value: "b" }]);
         expect(wrapper.render()).toMatchSnapshot();
     });
 
@@ -613,7 +583,7 @@ describe("<SubscriptionField>", () => {
             subscription_id: "abcdefgh-ijkl-mnop-qrst",
             customer_id: "abc",
             description: "dec",
-            product: { tag } as Product
+            product: { tag } as Product,
         } as ServicePortSubscription;
 
         if (port_mode) {

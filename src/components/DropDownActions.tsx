@@ -30,13 +30,13 @@ export default function DropDownActions({ options, i18nPrefix, className }: IPro
     const panel: any = {
         id: 0,
         title: "Actions",
-        items: []
+        items: [],
     };
     panel.items = options.map((option, index) => {
         return {
             name: I18n.t(`${i18nPrefix}.${option.label}`),
             icon: option.euiIcon,
-            onClick: option.action
+            onClick: option.action,
         };
     });
     return <EuiContextMenu initialPanelId={0} panels={[panel]} />;

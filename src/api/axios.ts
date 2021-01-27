@@ -32,30 +32,30 @@ const axiosConfig = {
         Accept: "application/json",
         "Content-Type": "application/json",
         post: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         },
         put: {
-            "Content-Type": "application/json"
-        }
-    }
+            "Content-Type": "application/json",
+        },
+    },
 };
 
 const axiosInstance = axios.create(axiosConfig);
-axiosInstance.interceptors.request.use(config => {
+axiosInstance.interceptors.request.use((config) => {
     calls++;
     mySpinner.start();
     return config;
 });
 
 axiosInstance.interceptors.response.use(
-    response => {
+    (response) => {
         calls--;
         if (calls <= 0) {
             mySpinner.stop();
         }
         return response;
     },
-    error => {
+    (error) => {
         calls--;
         if (calls <= 0) {
             mySpinner.stop();

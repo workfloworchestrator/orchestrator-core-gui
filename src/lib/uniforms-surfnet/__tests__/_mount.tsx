@@ -24,7 +24,7 @@ function mount(node: ReactElement, options: any) {
     }
     return enzyme(node, {
         wrappingComponent: context.Provider,
-        wrappingComponentProps: { value: options.context }
+        wrappingComponentProps: { value: options.context },
     });
 }
 

@@ -16,7 +16,7 @@ import { Organization, Product, SubscriptionWithDetails } from "utils/types";
 import { isEmpty } from "utils/Utils";
 
 export function organisationNameByUuid(uuid: string, organisations?: Organization[]) {
-    const organisation = organisations && organisations.find(org => org.uuid === uuid);
+    const organisation = organisations && organisations.find((org) => org.uuid === uuid);
     return organisation ? organisation.name : uuid;
 }
 
@@ -43,7 +43,7 @@ export function productTagById(id: string, products: Product[]): string {
 }
 
 export function productById(id: string, products: Product[]): Product {
-    return products.find(prod => prod.product_id === id)!;
+    return products.find((prod) => prod.product_id === id)!;
 }
 
 export function renderDateTime(epoch: number) {

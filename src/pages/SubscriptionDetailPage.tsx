@@ -39,7 +39,7 @@ export default class SubscriptionDetailPage extends React.PureComponent<IProps, 
     state = {
         confirmationDialogOpen: false,
         confirmationDialogAction: () => {},
-        confirmationDialogQuestion: ""
+        confirmationDialogQuestion: "",
     };
 
     render() {
@@ -54,7 +54,7 @@ export default class SubscriptionDetailPage extends React.PureComponent<IProps, 
                 confirmationDialogAction: (e: React.MouseEvent) => {
                     cancelConfirmation();
                     action(e);
-                }
+                },
             });
 
         return (

@@ -36,7 +36,7 @@ export default class NewTask extends React.Component<{}, IState> {
     state: IState = {};
 
     componentDidMount = () => {
-        workflowsByTarget("SYSTEM").then(workflows => {
+        workflowsByTarget("SYSTEM").then((workflows) => {
             const options = workflows.reduce<{ [index: string]: string }>((acc, wf) => {
                 acc[wf.name] = wf.description;
                 return acc;
@@ -47,11 +47,11 @@ export default class NewTask extends React.Component<{}, IState> {
                     properties: {
                         select_task: {
                             type: "string",
-                            options: options
-                        }
-                    }
+                            options: options,
+                        },
+                    },
                 } as JSONSchema6,
-                hasNext: false
+                hasNext: false,
             });
         });
     };
@@ -59,12 +59,12 @@ export default class NewTask extends React.Component<{}, IState> {
     validSubmit = (taskInput: {}[]) => {
         const { select_task } = taskInput[0] as { select_task: string };
 
-        let promise = startProcess(select_task, taskInput.slice(1)).then(process => {
+        let promise = startProcess(select_task, taskInput.slice(1)).then((process) => {
             this.context.redirect(`/tasks?highlight=${process.id}`);
             setFlash(I18n.t("task.flash.create", { name: I18n.t(`workflow.${select_task}`), pid: process.id }));
         });
 
-        return catchErrorStatus<EngineStatus>(promise, 503, json => {
+        return catchErrorStatus<EngineStatus>(promise, 503, (json) => {
             setFlash(I18n.t("settings.status.engine.paused"), "error");
             this.context.redirect("/processes");
         });

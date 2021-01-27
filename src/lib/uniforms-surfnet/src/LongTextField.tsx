@@ -48,7 +48,7 @@ function LongText({
                     disabled={disabled}
                     name={name}
                     isInvalid={error}
-                    onChange={event => onChange(event.target.value)}
+                    onChange={(event) => onChange(event.target.value)}
                     placeholder={placeholder}
                     value={value ?? ""}
                     fullWidth

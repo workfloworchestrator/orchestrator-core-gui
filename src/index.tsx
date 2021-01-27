@@ -36,11 +36,11 @@ if (ENV.TRACING_ENABLED) {
         integrations: [
             new Integrations.BrowserTracing({
                 routingInstrumentation: Sentry.reactRouterV5Instrumentation(history),
-                tracingOrigins: [ENV.TRACING_ORIGINS]
-            })
+                tracingOrigins: [ENV.TRACING_ORIGINS],
+            }),
         ],
         tracesSampleRate: Number(ENV.TRACE_SAMPLE_RATE),
-        debug: false
+        debug: false,
     });
 }
 
@@ -56,7 +56,7 @@ if (ENV.OAUTH2_ENABLED) {
         response_type: "code",
         scope: ENV.OAUTH2_SCOPE || "openid",
         loadUserInfo: true,
-        userStore: new WebStorageStateStore({ store: localStorage })
+        userStore: new WebStorageStateStore({ store: localStorage }),
     };
 
     const userManager = new UserManager(oidcConfig);
@@ -67,7 +67,7 @@ if (ENV.OAUTH2_ENABLED) {
             onBeforeSignIn={() => {
                 localStorage.setItem(REDIRECT_URL_KEY, window.location.href);
             }}
-            onSignIn={user => {
+            onSignIn={(user) => {
                 if (user !== null) {
                     setUser(user);
 
@@ -91,9 +91,11 @@ if (ENV.OAUTH2_ENABLED) {
             }}
         >
             <AuthContext.Consumer>
-                {props => {
+                {(props) => {
+                    // @ts-ignore
                     setUser(props.userData || null);
 
+                    // @ts-ignore
                     if (props.userData && !props.userData.expired) {
                         return <App />;
                     }

@@ -25,7 +25,7 @@ export type OrganisationFieldProps = Omit<SelectFieldProps, "placeholder" | "tra
 function Organisation({ name, ...props }: OrganisationFieldProps) {
     const { organisations } = useContext(ApplicationContext);
     const organisationLabelLookup =
-        organisations?.reduce<{ [index: string]: string }>(function(mapping, org) {
+        organisations?.reduce<{ [index: string]: string }>(function (mapping, org) {
             mapping[org.uuid] = org.name;
             return mapping;
         }, {}) ?? {};

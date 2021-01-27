@@ -13,6 +13,7 @@
  *
  */
 
+import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import DatePickerCustom from "components/DatePickerCustom";
 import I18n from "i18n-js";
 import React from "react";
@@ -32,17 +33,23 @@ export function formInput<T extends { [index: string]: any }>(
 ) {
     return (
         <section className="form-divider">
-            <label htmlFor={name}>{I18n.t(i18nKey)}</label>
-            <em>{I18n.t(`${i18nKey}_info`)}</em>
-            <input
-                type="text"
-                id={name}
-                name={name}
-                value={value}
-                onChange={onChange}
-                onBlur={onBlur}
-                disabled={readOnly}
-            />
+            <EuiFormRow
+                label={I18n.t(i18nKey)}
+                labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}
+                isInvalid={true}
+                error={"Floemp"}
+            >
+                <EuiFieldText
+                    id={name}
+                    placeholder={name}
+                    value={value}
+                    fullWidth={true}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    disabled={readOnly}
+                />
+            </EuiFormRow>
+            {/*Todo: refactor to use EuiForm error handling*/}
             {errors[name] && <em className="error">{I18n.t("process.format_error")}</em>}
             {additionalError && <em className="error">{additionalError}</em>}
         </section>
@@ -61,31 +68,31 @@ export function formSelect(
     const options: Option[] = !values.length
         ? []
         : typeof values[0] === "string"
-        ? (values as string[]).map(val => ({ value: val, label: val }))
+        ? (values as string[]).map((val) => ({ value: val, label: val }))
         : (values as Option[]);
 
     const value = !selected_value
         ? undefined
         : multiple
         ? ((selected_value as string[])
-              .map(value => options.find(option => option.value === value))
-              .filter(value => !!value) as ReadonlyArray<Option>)
-        : options.find(option => option.value === (selected_value as string));
+              .map((value) => options.find((option) => option.value === value))
+              .filter((value) => !!value) as ReadonlyArray<Option>)
+        : options.find((option) => option.value === (selected_value as string));
 
     return (
         <section className="form-divider">
-            <label>{I18n.t(i18nKey)}</label>
-            <em>{I18n.t(`${i18nKey}_info`)}</em>
-            <Select
-                className="select-status"
-                onChange={onChange}
-                options={options}
-                isSearchable={false}
-                value={value}
-                isClearable={clearable}
-                isDisabled={readOnly}
-                isMulti={multiple}
-            />
+            <EuiFormRow label={I18n.t(i18nKey)} labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}>
+                <Select
+                    className="select-status"
+                    onChange={onChange}
+                    options={options}
+                    isSearchable={false}
+                    value={value}
+                    isClearable={clearable}
+                    isDisabled={readOnly}
+                    isMulti={multiple}
+                />
+            </EuiFormRow>
         </section>
     );
 }
@@ -99,16 +106,22 @@ export function formDate(
 ) {
     return (
         <section className="form-divider">
-            <label>{I18n.t(i18nKey)}</label>
-            <em>{I18n.t(`${i18nKey}_info`)}</em>
-            <DatePicker
-                selected={value}
-                isClearable={false}
-                onChange={onChange}
-                openToDate={openToDate}
-                customInput={<DatePickerCustom disabled={readOnly} onClick={onChange} clear={() => onChange(null)} />}
-                disabled={readOnly}
-            />
+            <EuiFormRow
+                id={i18nKey}
+                label={I18n.t(i18nKey)}
+                labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}
+            >
+                <DatePicker
+                    selected={value}
+                    isClearable={false}
+                    onChange={onChange}
+                    openToDate={openToDate}
+                    customInput={
+                        <DatePickerCustom disabled={readOnly} onClick={onChange} clear={() => onChange(null)} />
+                    }
+                    disabled={readOnly}
+                />
+            </EuiFormRow>
         </section>
     );
 }

@@ -46,7 +46,7 @@ export default class FilterDropDown extends React.PureComponent<IProps, IState> 
                 <li key={item.name} onClick={() => filterBy(item)}>
                     <CheckBox name={item.name} value={item.selected} onChange={() => filterBy(item)} />
                     <label htmlFor={item.name}>{`${name} (${item.count})`}</label>
-                    <i className="fa fa-filter" onClick={e => singleSelectFilter(e, item)} />
+                    <i className="fa fa-filter" onClick={(e) => singleSelectFilter(e, item)} />
                 </li>
             );
         }
@@ -59,13 +59,13 @@ export default class FilterDropDown extends React.PureComponent<IProps, IState> 
     };
 
     renderDropDown = (items: Filter[], filterBy: filterCallback) => (
-        <ul className="drop-down">{items.map(item => this.renderDropDownItem(item, filterBy))}</ul>
+        <ul className="drop-down">{items.map((item) => this.renderDropDownItem(item, filterBy))}</ul>
     );
 
     render() {
         const { items, filterBy, label, selectAll } = this.props;
         const { dropDownActive } = this.state;
-        const filtered = items.filter(item => item.selected);
+        const filtered = items.filter((item) => item.selected);
         const count = filtered.reduce((acc, item) => item.count, 0);
         const name =
             filtered.length === items.length

@@ -43,7 +43,7 @@ describe("<OrganisationField>", () => {
                 "9865c1cb-0911-e511-80d0-005056956c1a",
                 "772cee0f-c4e1-e811-810e-0050569555d1",
                 "29865c1cb-0911-e511-80d0-005056956c1a",
-                "872cee0f-c4e1-e811-810e-0050569555d1"
+                "872cee0f-c4e1-e811-810e-0050569555d1",
             ],
             disabled: false,
             error: null,
@@ -51,7 +51,7 @@ describe("<OrganisationField>", () => {
             required: true,
             showInlineError: false,
             value: undefined,
-            placeholder: "Search and select a customer..."
+            placeholder: "Search and select a customer...",
         });
         //@ts-ignore
         expect(wrapper.find(SelectField).prop("transform")("2f47f65a-0911-e511-80d0-005056956c1a")).toBe(

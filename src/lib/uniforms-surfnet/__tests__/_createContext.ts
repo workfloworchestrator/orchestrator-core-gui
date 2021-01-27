@@ -39,8 +39,8 @@ export default function createContext(schema: {} = {}, context?: Partial<Context
                 label: false,
                 placeholder: false,
                 showInlineError: false,
-                ...context?.state
-            }
-        }
+                ...context?.state,
+            },
+        },
     };
 }

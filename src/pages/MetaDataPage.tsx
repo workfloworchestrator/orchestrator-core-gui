@@ -11,7 +11,7 @@ import {
     EuiPageHeader,
     EuiPageHeaderSection,
     EuiSpacer,
-    EuiTabbedContent
+    EuiTabbedContent,
 } from "@elastic/eui";
 import I18n from "i18n-js";
 import React from "react";
@@ -83,12 +83,12 @@ export default class MetaDataPage extends React.Component {
         confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
         cancelDialogAction: () => this.context.redirect("/metadata/products"),
         confirmationDialogQuestion: "",
-        leavePage: true
+        leavePage: true,
     };
 
     // Data inladen met =
     componentDidMount() {
-        data().then(products => {
+        data().then((products) => {
             this.setState({ products: products, productsLoaded: false });
         });
     }
@@ -112,7 +112,7 @@ export default class MetaDataPage extends React.Component {
         // stop(e);
         const question = I18n.t("metadata.deleteConfirmation", {
             type: "Product",
-            name: products.name
+            name: products.name,
         });
         const action = () =>
             deleteProduct(products.product_id)
@@ -121,11 +121,11 @@ export default class MetaDataPage extends React.Component {
                     setFlash(
                         I18n.t("metadata.flash.delete", {
                             name: products,
-                            type: "Product"
+                            type: "Product",
                         })
                     );
                 })
-                .catch(err => {
+                .catch((err) => {
                     if (err.response && err.response.status === 400) {
                         this.setState({ confirmationDialogOpen: false });
                         err.response.json().then((json: { error: string }) => setFlash(json["error"], "error"));
@@ -138,7 +138,7 @@ export default class MetaDataPage extends React.Component {
             confirmationDialogQuestion: question,
             leavePage: false,
             confirmationDialogAction: action,
-            cancelDialogAction: () => this.setState({ confirmationDialogOpen: false })
+            cancelDialogAction: () => this.setState({ confirmationDialogOpen: false }),
         });
     };
 
@@ -152,7 +152,7 @@ export default class MetaDataPage extends React.Component {
                     description: "Clone",
                     icon: "copy",
                     onClick: () => {},
-                    "data-test-subj": "action-clone"
+                    "data-test-subj": "action-clone",
                 },
                 {
                     name: (products: any) => (products.product_id ? "Delete" : "Remove"),
@@ -162,7 +162,7 @@ export default class MetaDataPage extends React.Component {
                     type: "icon",
                     onClick: this.handleDeleteProduct,
                     isPrimary: true,
-                    "data-test-subj": "action-delete"
+                    "data-test-subj": "action-delete",
                 },
                 {
                     name: "Edit",
@@ -171,8 +171,8 @@ export default class MetaDataPage extends React.Component {
                     icon: "pencil",
                     type: "icon",
                     onClick: () => {},
-                    "data-test-subj": "action-edit"
-                }
+                    "data-test-subj": "action-edit",
+                },
             ];
             return actions;
         }
@@ -192,8 +192,8 @@ export default class MetaDataPage extends React.Component {
         const search = {
             box: {
                 incremental: incremental,
-                schema: true
-            }
+                schema: true,
+            },
             // filters aanmaken =
             // filters: !filters ? undefined :
             // [
@@ -207,28 +207,28 @@ export default class MetaDataPage extends React.Component {
                 name: "NAME",
                 sortable: true,
                 truncateText: false,
-                width: "20.5%"
+                width: "20.5%",
             },
             {
                 field: "description",
                 name: "DESCRIPTION",
                 sortable: true,
                 truncateText: false,
-                width: "17%"
+                width: "17%",
             },
             {
                 field: "tag",
                 name: "TAG",
                 sortable: true,
                 truncateText: false,
-                width: "7.5%"
+                width: "7.5%",
             },
             {
                 field: "product_type",
                 name: "TYPE",
                 sortable: true,
                 truncateText: false,
-                width: "7.5%"
+                width: "7.5%",
             },
             {
                 field: "status",
@@ -257,7 +257,7 @@ export default class MetaDataPage extends React.Component {
                                 </EuiBadge>
                             );
                     }
-                }
+                },
             },
             {
                 field: "product_blocks",
@@ -272,7 +272,7 @@ export default class MetaDataPage extends React.Component {
                     ));
                     return <div>{renderPB}</div>;
                 },
-                width: "20%"
+                width: "20%",
             },
             {
                 field: "created_at",
@@ -283,7 +283,7 @@ export default class MetaDataPage extends React.Component {
                     const renderCA = renderDateTime(created_at);
                     return <div>{renderCA}</div>;
                 },
-                width: "15%"
+                width: "15%",
             },
             {
                 field: "actions",
@@ -297,8 +297,8 @@ export default class MetaDataPage extends React.Component {
                             {renderMA}
                         </EuiButtonIcon>
                     );
-                }
-            }
+                },
+            },
         ];
 
         const tabs = [
@@ -324,8 +324,8 @@ export default class MetaDataPage extends React.Component {
                             />
                         </EuiPageContentHeader>
                     </EuiPageContent>
-                )
-            }
+                ),
+            },
         ];
 
         return (

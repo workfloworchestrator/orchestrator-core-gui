@@ -61,23 +61,23 @@ export default function NewProcess(props: IProps) {
 
             const productId = (processInput as { product: string }[])[0].product;
             const product = productById(productId, products);
-            const workflow = product.workflows.find(wf => wf.target === TARGET_CREATE)!.name;
+            const workflow = product.workflows.find((wf) => wf.target === TARGET_CREATE)!.name;
 
             if (!productValidation) {
-                validation(productId).then(productValidation => setProductValidation(productValidation));
+                validation(productId).then((productValidation) => setProductValidation(productValidation));
             }
 
             let promise = startProcess(workflow, processInput).then(
-                process => {
+                (process) => {
                     redirect(`/processes?highlight=${process.id}`);
                     setFlash(I18n.t("process.flash.create_create", { name: product.name, pid: process.id }));
                 },
-                e => {
+                (e) => {
                     throw e;
                 }
             );
 
-            return catchErrorStatus<EngineStatus>(promise, 503, json => {
+            return catchErrorStatus<EngineStatus>(promise, 503, (json) => {
                 setFlash(I18n.t(`settings.status.engine.${json.global_status.toLowerCase()}`), "error");
                 redirect("/processes");
             });
@@ -87,10 +87,10 @@ export default function NewProcess(props: IProps) {
 
     useEffect(() => {
         if (preselectedInput.product) {
-            catchErrorStatus<FormNotCompleteResponse>(submit([]), 510, json => {
+            catchErrorStatus<FormNotCompleteResponse>(submit([]), 510, (json) => {
                 setForm({
                     stepUserInput: json.form,
-                    hasNext: json.hasNext ?? false
+                    hasNext: json.hasNext ?? false,
                 });
             });
         } else {
@@ -103,13 +103,13 @@ export default function NewProcess(props: IProps) {
                             type: "string",
                             format: "productId",
                             productIds: products
-                                .filter(prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))
-                                .filter(prod => prod.status === "active")
-                                .map(product => product.product_id)
-                        }
-                    }
+                                .filter((prod) => !isEmpty(prod.workflows.find((wf) => wf.target === TARGET_CREATE)))
+                                .filter((prod) => prod.status === "active")
+                                .map((product) => product.product_id),
+                        },
+                    },
                 } as JSONSchema6,
-                hasNext: true
+                hasNext: true,
             });
         }
     }, [products, submit, preselectedInput]);

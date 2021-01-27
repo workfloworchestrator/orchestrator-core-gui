@@ -43,14 +43,14 @@ interface IState {
 
 class ProcessStateDetails extends React.PureComponent<IProps, IState> {
     public static defaultProps = {
-        collapsed: []
+        collapsed: [],
     };
 
     state: IState = {
         raw: false,
         details: true,
         stateChanges: true,
-        traceback: false
+        traceback: false,
     };
 
     renderRaw = (process: CustomProcessWithDetails) => {
@@ -58,7 +58,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
         return (
             <section>
                 <EuiCopy textToCopy={json}>
-                    {copy => (
+                    {(copy) => (
                         <span className="copy-to-clipboard-container">
                             <button data-for="copy-to-clipboard" onClick={copy}>
                                 <i className={`far fa-clone`} />
@@ -83,11 +83,11 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                                     I18n.t("process_state.wording_process", {
                                         product: process.productName,
                                         customer: process.customerName,
-                                        workflow: process.workflow_name
+                                        workflow: process.workflow_name,
                                     })}
                                 {!this.props.isProcess &&
                                     I18n.t("process_state.wording_task", {
-                                        workflow: process.workflow_name
+                                        workflow: process.workflow_name,
                                     })}
                             </h3>
                         </EuiText>
@@ -151,7 +151,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
     stateDelta = (prev: State, curr: State) => {
         const prevKeys = Object.keys(prev);
         const currKeys = Object.keys(curr);
-        const newKeys = currKeys.filter(key => prevKeys.indexOf(key) === -1 || !isEqual(prev[key], curr[key]));
+        const newKeys = currKeys.filter((key) => prevKeys.indexOf(key) === -1 || !isEqual(prev[key], curr[key]));
         const newState = newKeys.sort().reduce((acc: State, key) => {
             if (curr[key] === Object(curr[key]) && !Array.isArray(curr[key]) && prev[key]) {
                 acc[key] = this.stateDelta(prev[key], curr[key]);
@@ -179,7 +179,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                             iconType="link"
                         >
                             {I18n.t(`${this.props.isProcess ? "process" : "task"}.subscription_link_txt`, {
-                                target: ps.workflow_target
+                                target: ps.workflow_target,
                             })}
                         </EuiButton>
                     </div>
@@ -285,7 +285,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                 <section className={stepIsCollapsed ? "state-delta collapsed" : "state-delta"}>
                     <table>
                         <tbody>
-                            {Object.keys(json).map(key => (
+                            {Object.keys(json).map((key) => (
                                 <tr key={key}>
                                     <td id={`${index}-${applyIdNamingConvention(key)}-k`} className="key">
                                         {key}
@@ -318,7 +318,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
             this.props.isProcess ? "assignee" : "created_by",
             "step",
             "started",
-            "last_modified"
+            "last_modified",
         ];
         return (
             <section className="process-overview">
@@ -326,7 +326,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                     <section className="process-summary">
                         <table>
                             <tbody>
-                                {summaryKeys.map(key => (
+                                {summaryKeys.map((key) => (
                                     <tr key={key}>
                                         <td className="title">{I18n.t(`process_state.summary.${key}`)}</td>
                                         <td className="value">{this.renderSummaryValue(prop(process, key))}</td>

@@ -40,7 +40,7 @@ function getAllNumbersForVlanRange(vlanRange?: string) {
         vlanRange
             .replace(/ /g, "")
             .split(",")
-            .map(sl => sl.split("-").map(Number))
+            .map((sl) => sl.split("-").map(Number))
     );
 }
 
@@ -75,12 +75,12 @@ function groupedArrayFromNumbers(numbers: number[]) {
         return r;
     }, []);
 
-    return grouped_numbers.map(l => (l[0] !== l[l.length - 1] ? [l[0], l[l.length - 1]] : [l[0]]));
+    return grouped_numbers.map((l) => (l[0] !== l[l.length - 1] ? [l[0], l[l.length - 1]] : [l[0]]));
 }
 
 function vlanRangeFromNumbers(list: number[]) {
     return groupedArrayFromNumbers(list)
-        .map(sl => sl.join("-"))
+        .map((sl) => sl.join("-"))
         .join(",");
 }
 
@@ -113,8 +113,8 @@ function Vlan({
     const completeList: ServicePort[] = get(model, completeListFieldName) || [];
     const extraUsedVlans = completeList
         .filter((_item, index) => index.toString() !== nameArray.slice(-2, -1)[0])
-        .filter(item => get(item, subscriptionFieldName) === subscriptionId)
-        .map(item => get(item, selfName))
+        .filter((item) => get(item, subscriptionFieldName) === subscriptionId)
+        .map((item) => get(item, selfName))
         .join(",");
 
     const subscription = getSubscription(subscriptionId);
@@ -135,11 +135,11 @@ function Vlan({
     useEffect(() => {
         if (subscriptionId) {
             getUsedVlans(subscriptionId)
-                .then(result => {
+                .then((result) => {
                     setUsedVlansInIms(result);
                     setMissingInIms(false);
                 })
-                .catch(e => {
+                .catch((e) => {
                     setMissingInIms(true);
                 });
         }
@@ -147,12 +147,12 @@ function Vlan({
 
     // Filter currently used vlans because they are probably from the current subscription
     const currentVlans = getAllNumbersForVlanRange(initialValue);
-    const usedVlans = numbersFromGroupedArray(usedVlansInIms).filter(n => !currentVlans.includes(n));
+    const usedVlans = numbersFromGroupedArray(usedVlansInIms).filter((n) => !currentVlans.includes(n));
     const allUsedVlans = usedVlans.concat(getAllNumbersForVlanRange(extraUsedVlans)).sort();
     const validFormat = !value || value === "0" || !inValidVlan(value);
     // Don't validate if disabled (untagged shows as disable but needs validation)
     const vlansInUse =
-        validFormat && !disabled ? getAllNumbersForVlanRange(value).filter(num => allUsedVlans.includes(num)) : [];
+        validFormat && !disabled ? getAllNumbersForVlanRange(value).filter((num) => allUsedVlans.includes(num)) : [];
 
     const placeholder = subscriptionId
         ? I18n.t("forms.widgets.vlan.placeholder")
@@ -189,7 +189,7 @@ function Vlan({
                     disabled={!subscriptionId || disabled || isUntagged}
                     name={name}
                     isInvalid={error}
-                    onChange={event => onChange(event.target.value)}
+                    onChange={(event) => onChange(event.target.value)}
                     placeholder={placeholder}
                     type="text"
                     value={value ?? ""}

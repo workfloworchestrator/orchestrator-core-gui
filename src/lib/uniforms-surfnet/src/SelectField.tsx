@@ -66,12 +66,12 @@ function Select({
                 (_item, index) => index.toString() !== nameArray[nameArray.length - 1]
             );
 
-            allowedValues = allowedValues.filter(value => !chosenValues.includes(value));
+            allowedValues = allowedValues.filter((value) => !chosenValues.includes(value));
         }
     }
     const options = allowedValues.map((value: any) => ({
         label: transform ? transform(value) : value,
-        value: value
+        value: value,
     }));
 
     const selectedValue = options.find((option: Option) => option.value === value);

@@ -29,7 +29,7 @@ const tabs = [
                 <EuiIcon type="filter" />
             </span>
         ),
-        disabled: false
+        disabled: false,
     },
     {
         id: "favoritePorts",
@@ -39,8 +39,8 @@ const tabs = [
                 <EuiIcon type="heart" />
             </span>
         ),
-        disabled: false
-    }
+        disabled: false,
+    },
 ];
 
 interface IProps {
@@ -55,14 +55,14 @@ interface IState {
 
 export default class ServicePortSelectorModal extends React.PureComponent<IProps, IState> {
     public static defaultProps = {
-        selectedTabId: "nodeFilter"
+        selectedTabId: "nodeFilter",
     };
 
     constructor(props: IProps) {
         super(props);
 
         this.state = {
-            selectedTabId: this.props.selectedTabId
+            selectedTabId: this.props.selectedTabId,
         };
     }
 
