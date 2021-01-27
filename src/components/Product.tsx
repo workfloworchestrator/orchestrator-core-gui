@@ -13,7 +13,6 @@
  *
  */
 
-import "react-datepicker/dist/react-datepicker.css";
 import "components/Product.scss";
 
 import "./Product.scss";

@@ -118,7 +118,12 @@ export function formDate(
                 label={I18n.t(i18nKey)}
                 labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}
             >
-                <EuiDatePicker selected={date} onClear={() => onChange(null)} onChange={handleChange} />
+                <EuiDatePicker
+                    selected={date}
+                    onClear={() => onChange(null)}
+                    onChange={handleChange}
+                    disabled={readOnly}
+                />
             </EuiFormRow>
         </section>
     );
