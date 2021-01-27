@@ -39,14 +39,14 @@ import {
     SubscriptionProcesses,
     Workflow,
     WorkflowReasons,
-    WorkflowWithProductTags
+    WorkflowWithProductTags,
 } from "utils/types";
 import { isEmpty } from "utils/Utils";
 
 import axiosInstance from "./axios";
 
 export function catchErrorStatus<T>(promise: Promise<any>, status: number, callback: (json: T) => void) {
-    return promise.catch(err => {
+    return promise.catch((err) => {
         if (err.response && err.response.status === status) {
             callback(err.response.data);
         } else {
@@ -89,8 +89,8 @@ function axiosFetch<R = {}>(
     // preset the config with the relative URL and a GET type.
     // presets can be overridden with `options`.
     return axiosInstance({ url: path, method: "GET", ...options })
-        .then(res => res.data)
-        .catch(err => {
+        .then((res) => res.data)
+        .catch((err) => {
             if (showErrorDialog) {
                 setTimeout(() => {
                     throw err;
@@ -218,7 +218,7 @@ export function organisations(): Promise<Organization[] | undefined> {
         setTimeout(() => {
             setFlash(
                 I18n.t("external.errors.crm_unavailable", {
-                    type: "Organisations"
+                    type: "Organisations",
                 }),
                 "error"
             );
@@ -270,13 +270,13 @@ export function parentSubscriptions(childSubscriptionId: string): Promise<Subscr
 export function processSubscriptionsBySubscriptionId(subscriptionId: string): Promise<SubscriptionProcesses[]> {
     return fetchJsonWithCustomErrorHandling<SubscriptionProcesses[]>(
         `processes/process-subscriptions-by-subscription-id/${subscriptionId}`
-    ).catch(err => Promise.resolve([]));
+    ).catch((err) => Promise.resolve([]));
 }
 
 export function processSubscriptionsByProcessId(processId: string): Promise<ProcessSubscription[]> {
     return fetchJsonWithCustomErrorHandling<ProcessSubscription[]>(
         `processes/process-subscriptions-by-pid/${processId}`
-    ).catch(err => []);
+    ).catch((err) => []);
 }
 
 export function locationCodes(): Promise<string[] | undefined> {
@@ -285,7 +285,7 @@ export function locationCodes(): Promise<string[] | undefined> {
         setTimeout(() => {
             setFlash(
                 I18n.t("external.errors.crm_unavailable", {
-                    type: "Locations"
+                    type: "Locations",
                 }),
                 "error"
             );
@@ -389,7 +389,7 @@ export function validation(productId: string): Promise<ProductValidation> {
 }
 
 export function contacts(organisationId: string): Promise<ContactPerson[]> {
-    return fetchJson<ContactPerson[]>(`crm/contacts/${organisationId}`, {}, {}, false, true).catch(err =>
+    return fetchJson<ContactPerson[]>(`crm/contacts/${organisationId}`, {}, {}, false, true).catch((err) =>
         Promise.resolve([])
     );
 }
@@ -415,7 +415,7 @@ export function logUserInfo(username: string, message: string) {
 }
 
 export function dienstafnameBySubscription(subscriptionId: string): Promise<Dienstafname | undefined> {
-    return fetchJson<Dienstafname>(`crm/dienstafname/${subscriptionId}`, {}, {}, false).catch(err =>
+    return fetchJson<Dienstafname>(`crm/dienstafname/${subscriptionId}`, {}, {}, false).catch((err) =>
         Promise.resolve(undefined)
     );
 }

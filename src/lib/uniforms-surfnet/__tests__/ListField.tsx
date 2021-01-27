@@ -37,12 +37,7 @@ test("<ListField> - renders correct label (specified)", () => {
     const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
 
     expect(wrapper.find(".euiFormLabel")).toHaveLength(2);
-    expect(
-        wrapper
-            .find(".euiFormLabel")
-            .at(0)
-            .text()
-    ).toEqual(expect.stringContaining("ListFieldLabel"));
+    expect(wrapper.find(".euiFormLabel").at(0).text()).toEqual(expect.stringContaining("ListFieldLabel"));
 });
 
 test("<ListField> - renders correct numer of items with initialCount (specified)", () => {
@@ -56,12 +51,7 @@ test("<ListField> - passes itemProps to its children", () => {
     const element = <ListField name="x" initialCount={3} itemProps={{ "data-xyz": 1 }} />;
     const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
 
-    expect(
-        wrapper
-            .find(ListItemField)
-            .first()
-            .prop("data-xyz")
-    ).toBe(1);
+    expect(wrapper.find(ListItemField).first().prop("data-xyz")).toBe(1);
 });
 
 test("<ListField> - renders children (specified)", () => {
@@ -88,18 +78,8 @@ test("<ListField> - renders children with correct name (children)", () => {
     );
     const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
 
-    expect(
-        wrapper
-            .find(Child)
-            .at(0)
-            .prop("name")
-    ).toBe("0");
-    expect(
-        wrapper
-            .find(Child)
-            .at(1)
-            .prop("name")
-    ).toBe("1");
+    expect(wrapper.find(Child).at(0).prop("name")).toBe("0");
+    expect(wrapper.find(Child).at(1).prop("name")).toBe("1");
 });
 
 test("<ListField> - renders children with correct values", () => {
@@ -111,25 +91,10 @@ test("<ListField> - renders children with correct values", () => {
 
     expect(wrapper.find(ListItemField)).toHaveLength(3);
 
-    expect(
-        wrapper
-            .find("input")
-            .at(0)
-            .prop("value")
-    ).toBe("a");
-    expect(
-        wrapper
-            .find("input")
-            .at(1)
-            .prop("value")
-    ).toBe("b");
+    expect(wrapper.find("input").at(0).prop("value")).toBe("a");
+    expect(wrapper.find("input").at(1).prop("value")).toBe("b");
 
-    expect(
-        wrapper
-            .find("input")
-            .at(2)
-            .prop("value")
-    ).toBe("c");
+    expect(wrapper.find("input").at(2).prop("value")).toBe("c");
     expect(wrapper.render()).toMatchSnapshot();
 });
 
@@ -137,18 +102,8 @@ test("<ListField> - renders children with correct name (value)", () => {
     const element = <ListField name="x" initialCount={2} />;
     const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
 
-    expect(
-        wrapper
-            .find(ListItemField)
-            .at(0)
-            .prop("name")
-    ).toBe("0");
-    expect(
-        wrapper
-            .find(ListItemField)
-            .at(1)
-            .prop("name")
-    ).toBe("1");
+    expect(wrapper.find(ListItemField).at(0).prop("name")).toBe("0");
+    expect(wrapper.find(ListItemField).at(1).prop("name")).toBe("1");
     expect(wrapper.render()).toMatchSnapshot();
 });
 
@@ -163,49 +118,14 @@ test("<ListField> - renders correctly when child is list", () => {
     );
 
     expect(wrapper.find(ListItemField)).toHaveLength(2);
-    expect(
-        wrapper
-            .find(ListItemField)
-            .at(0)
-            .prop("outerList")
-    ).toBe(true);
-    expect(
-        wrapper
-            .find(ListItemField)
-            .at(1)
-            .prop("outerList")
-    ).toBe(false);
+    expect(wrapper.find(ListItemField).at(0).prop("outerList")).toBe(true);
+    expect(wrapper.find(ListItemField).at(1).prop("outerList")).toBe(false);
     expect(wrapper.find(ListAddField)).toHaveLength(2);
-    expect(
-        wrapper
-            .find(ListAddField)
-            .at(0)
-            .prop("outerList")
-    ).toBe(false);
-    expect(
-        wrapper
-            .find(ListAddField)
-            .at(1)
-            .prop("outerList")
-    ).toBe(true);
+    expect(wrapper.find(ListAddField).at(0).prop("outerList")).toBe(false);
+    expect(wrapper.find(ListAddField).at(1).prop("outerList")).toBe(true);
 
     expect(wrapper.find("section")).toHaveLength(3);
-    expect(
-        wrapper
-            .find("section")
-            .at(0)
-            .prop("className")
-    ).toBe("list-field outer-list");
-    expect(
-        wrapper
-            .find("section")
-            .at(1)
-            .prop("className")
-    ).toBe("list-field");
-    expect(
-        wrapper
-            .find(ListField)
-            .at(0)
-            .render()
-    ).toMatchSnapshot();
+    expect(wrapper.find("section").at(0).prop("className")).toBe("list-field outer-list");
+    expect(wrapper.find("section").at(1).prop("className")).toBe("list-field");
+    expect(wrapper.find(ListField).at(0).render()).toMatchSnapshot();
 });

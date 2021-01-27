@@ -80,7 +80,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             confirmationDialogOpen: false,
             confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => {},
             confirm: (e: React.MouseEvent<HTMLButtonElement>) => {},
-            confirmationDialogQuestion: ""
+            confirmationDialogQuestion: "",
         };
     }
 
@@ -105,13 +105,13 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                 stepUserInput: stepUserInput,
                 tabs: tabs,
                 selectedTab: selectedTab,
-                product: productById(enrichedProcess.product, products)
+                product: productById(enrichedProcess.product, products),
             });
             processSubscriptionsByProcessId(enrichedProcess.id)
-                .then(res => {
+                .then((res) => {
                     this.setState({ subscriptionProcesses: res, loaded: true });
                 })
-                .catch(err => {
+                .catch((err) => {
                     if (err.response && err.response.status === 404) {
                         this.setState({ notFound: true, loaded: true });
                     } else {
@@ -128,11 +128,11 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         if (!process.is_task) {
             message = I18n.t("processes.deleteConfirmation", {
                 name: process.productName,
-                customer: process.customerName
+                customer: process.customerName,
             });
         } else {
             message = I18n.t("tasks.deleteConfirmation", {
-                name: process.workflow_name
+                name: process.workflow_name,
             });
         }
 
@@ -141,7 +141,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                 this.context.redirect(`/${process.is_task ? "tasks" : "processes"}`);
                 setFlash(
                     I18n.t(`${process.is_task ? "tasks" : "processes"}.flash.delete`, {
-                        name: process.productName
+                        name: process.productName,
                     })
                 );
             })
@@ -155,11 +155,11 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         if (!process.is_task) {
             message = I18n.t("processes.abortConfirmation", {
                 name: process.productName,
-                customer: process.customerName
+                customer: process.customerName,
             });
         } else {
             message = I18n.t("tasks.abortConfirmation", {
-                name: process.workflow_name
+                name: process.workflow_name,
             });
         }
 
@@ -168,7 +168,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                 this.context.redirect(process.is_task ? "/tasks" : "/processes");
                 setFlash(
                     I18n.t(`${process.is_task ? "tasks" : "processes"}.flash.abort`, {
-                        name: process.productName
+                        name: process.productName,
                     })
                 );
             })
@@ -182,11 +182,11 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         if (!process.is_task) {
             message = I18n.t("processes.retryConfirmation", {
                 name: process.productName,
-                customer: process.customerName
+                customer: process.customerName,
             });
         } else {
             message = I18n.t("tasks.retryConfirmation", {
-                name: process.workflow_name
+                name: process.workflow_name,
             });
         }
 
@@ -195,7 +195,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                 this.context.redirect(process.is_task ? "/tasks" : `/processes?highlight=${process.id}`);
                 setFlash(
                     I18n.t(`${process.is_task ? "tasks" : "processes"}.flash.retry`, {
-                        name: process.productName
+                        name: process.productName,
                     })
                 );
             })
@@ -248,7 +248,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => {
                 this.cancelConfirmation();
                 action(e);
-            }
+            },
         });
 
     renderActions = (process: CustomProcessWithDetails) => {
@@ -258,10 +258,10 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             this.handleRetryProcess(process),
             this.handleDeleteProcess(process),
             this.handleAbortProcess(process)
-        ).filter(option => option.label !== "user_input" && option.label !== "details");
+        ).filter((option) => option.label !== "user_input" && option.label !== "details");
 
         if (!process.is_task) {
-            options = options.filter(option => option.label !== "delete");
+            options = options.filter((option) => option.label !== "delete");
         }
 
         const lastStepIndex = process.steps.findIndex((item: Step) => item.name === process.step);
@@ -313,7 +313,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             return Promise.reject();
         }
 
-        return resumeProcess(process.id, processInput).then(e => {
+        return resumeProcess(process.id, processInput).then((e) => {
             this.context.redirect(`/${process.is_task ? "tasks" : `processes?highlight=${process.id}`}`);
             setFlash(I18n.t(`${process.is_task ? "task" : "process"}.flash.update`, { name: process.workflow_name }));
         });
@@ -357,11 +357,11 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                             <EuiText>
                                 <h3>
                                     {I18n.t(`${process.is_task ? "task" : "process"}.workflow`, {
-                                        name: process.workflow_name
+                                        name: process.workflow_name,
                                     })}
                                     {I18n.t(`${process.is_task ? "task" : "process"}.userInput`, {
                                         name: step.name,
-                                        product: productName || ""
+                                        product: productName || "",
                                     })}
                                 </h3>
                             </EuiText>
@@ -395,7 +395,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             subscriptionProcesses,
             confirmationDialogOpen,
             confirmationDialogAction,
-            confirmationDialogQuestion
+            confirmationDialogQuestion,
         } = this.state;
         if (!process) {
             return null;
@@ -414,7 +414,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                         question={confirmationDialogQuestion}
                     />
                     <section className="tabs">
-                        {tabs.map(tab => this.renderTab(process.is_task, tab, selectedTab))}
+                        {tabs.map((tab) => this.renderTab(process.is_task, tab, selectedTab))}
                     </section>
                     {renderContent &&
                         this.renderTabContent(selectedTab, process, step, stepUserInput, subscriptionProcesses)}

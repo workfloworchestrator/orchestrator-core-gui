@@ -35,7 +35,7 @@ function Preferences<T extends object>({
     state,
     dispatch,
     initialTableSettings,
-    excludeInFilter
+    excludeInFilter,
 }: IProps<T>) {
     const { name, minimized, refresh, delay, loading, showSettings, showPaginator } = state;
 
@@ -118,7 +118,7 @@ function Preferences<T extends object>({
                         <h4>{I18n.t("table.preferences.autorefresh")}</h4>
                     </EuiText>
                     <NumericInput
-                        onChange={valueAsNumber => {
+                        onChange={(valueAsNumber) => {
                             valueAsNumber && dispatch({ type: ActionType.REFRESH_DELAY, delay: valueAsNumber });
                         }}
                         min={500}
@@ -131,8 +131,8 @@ function Preferences<T extends object>({
                         <h4>{I18n.t("table.preferences.hidden_columns")}</h4>
                     </EuiText>
                     {allColumns
-                        .filter(column => !excludeInFilter.includes(column.id))
-                        .map(column => {
+                        .filter((column) => !excludeInFilter.includes(column.id))
+                        .map((column) => {
                             return <EuiCheckbox id={column.id} {...column.getToggleHiddenProps()} label={column.id} />;
                         })}
                 </div>

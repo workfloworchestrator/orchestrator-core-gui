@@ -19,7 +19,7 @@ addDecorator(withKnobs);
 
 addDecorator(withState());
 
-const withContainerSection = cb => <section className="storybook-container">{cb()}</section>;
+const withContainerSection = (cb) => <section className="storybook-container">{cb()}</section>;
 addDecorator(withContainerSection);
 
 function withContext(storyFn) {
@@ -29,7 +29,7 @@ function withContext(storyFn) {
                 organisations: ORGANISATIONS,
                 locationCodes: LOCATION_CODES,
                 products: PRODUCTS,
-                redirect: action("Change url")
+                redirect: action("Change url"),
             }}
         >
             {storyFn()}

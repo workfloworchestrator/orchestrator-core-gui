@@ -37,7 +37,7 @@ export default function withSubscriptions(component: JSX.Element) {
                         getSubscriptions: (tags?: string[], statuses?: string[]) =>
                             Promise.resolve(getSubscriptions(tags, statuses)),
                         clearSubscriptions,
-                        subscriptions
+                        subscriptions,
                     } as any
                 }
             >
@@ -47,6 +47,6 @@ export default function withSubscriptions(component: JSX.Element) {
         subscriptions,
         getSubscription,
         getSubscriptions,
-        clearSubscriptions
+        clearSubscriptions,
     };
 }

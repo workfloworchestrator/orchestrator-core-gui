@@ -25,8 +25,8 @@ export default {
     decorators: [StoryRouter()],
     // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
     parameters: {
-        fileName: __filename
-    }
+        fileName: __filename,
+    },
 };
 
 export const Process = () => {

@@ -22,7 +22,7 @@ const onChange = jest.fn();
 const context = (schema?: {}) =>
     createContext(merge({ x: { type: Array, maxCount: 3 }, "x.$": String }, schema), {
         onChange,
-        model: { x: ["x", "y", "z"] }
+        model: { x: ["x", "y", "z"] },
     });
 
 beforeEach(() => {

@@ -22,7 +22,7 @@ interface Spinner {
 
 const mySpinner: Spinner = {
     start: () => mySpinner.onStart && mySpinner.onStart(),
-    stop: () => mySpinner.onStop && mySpinner.onStop()
+    stop: () => mySpinner.onStop && mySpinner.onStop(),
 };
 
 export default mySpinner;

@@ -20,7 +20,7 @@ import {
     portByImsServiceId,
     prefixById,
     serviceByImsServiceId,
-    subscriptionsDetailWithModel
+    subscriptionsDetailWithModel,
 } from "api";
 import I18n from "i18n-js";
 import { isEmpty } from "lodash";
@@ -62,7 +62,7 @@ function DataRow({
     type,
     label,
     value,
-    rawLabel
+    rawLabel,
 }: {
     type: string;
     label: string;
@@ -86,7 +86,7 @@ function SubscriptionInstanceValueRow({
     isExternalLinkValue,
     toggleCollapsed,
     type,
-    children
+    children,
 }: React.PropsWithChildren<{
     label: string;
     value: string;
@@ -149,7 +149,7 @@ function EndpointDetail({ endpoint }: { endpoint: IMSEndpoint }) {
                   "node",
                   "patchposition",
                   "port",
-                  "status"
+                  "status",
               ]
             : endpoint.endpointType === "internal_port"
             ? ["line_name", "location", "node", "port"]
@@ -158,7 +158,7 @@ function EndpointDetail({ endpoint }: { endpoint: IMSEndpoint }) {
 
     return (
         <DataTable>
-            {keys.map(attr => (
+            {keys.map((attr) => (
                 <DataRow key={attr} type={i18n_base} label={attr} value={prop(endpoint, attr as keyof IMSEndpoint)} />
             ))}
         </DataTable>
@@ -174,42 +174,42 @@ function ImsServiceDetail({ service, recursive = false }: { service: IMSService;
             return;
         }
 
-        const uniquePortPromises = (service.endpoints || []).map(async endpoint => {
+        const uniquePortPromises = (service.endpoints || []).map(async (endpoint) => {
             if (endpoint.type === "port") {
-                return portByImsPortId(endpoint.id).then(result =>
+                return portByImsPortId(endpoint.id).then((result) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
-                        endpointType: endpoint.type
+                        endpointType: endpoint.type,
                     })
                 );
             } else if (endpoint.type === "internal_port") {
-                return internalPortByImsPortId(endpoint.id).then(result =>
+                return internalPortByImsPortId(endpoint.id).then((result) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
-                        endpointType: endpoint.type
+                        endpointType: endpoint.type,
                     })
                 );
             } else {
-                return serviceByImsServiceId(endpoint.id).then(result => {
+                return serviceByImsServiceId(endpoint.id).then((result) => {
                     if (["SP", "MSP", "SSP"].includes(result.product)) {
                         // In case of port product we just resolve the underlying port
-                        return portByImsServiceId(endpoint.id).then(result =>
+                        return portByImsServiceId(endpoint.id).then((result) =>
                             Object.assign(result, {
                                 serviceId: endpoint.id,
-                                endpointType: "port"
+                                endpointType: "port",
                             })
                         );
                     }
                     // Return all services that are not actually port services
                     return (Object.assign(result, {
                         serviceId: endpoint.id,
-                        endpointType: endpoint.type
+                        endpointType: endpoint.type,
                     }) as unknown) as IMSEndpoint;
                 });
             }
         });
         //@ts-ignore
-        Promise.all(uniquePortPromises).then(result => setEndpoints(result.flat()));
+        Promise.all(uniquePortPromises).then((result) => setEndpoints(result.flat()));
     }, [recursive, service]);
 
     return (
@@ -233,15 +233,15 @@ function ImsServiceDetail({ service, recursive = false }: { service: IMSService;
                 label="endpoints"
                 value={(service.endpoints || [])
                     .map(
-                        endpoint =>
+                        (endpoint) =>
                             `ID: ${endpoint.id}${endpoint.vlanranges ? " - " : ""}${(endpoint.vlanranges || [])
-                                .map(vlan => `VLAN: ${vlan.start} - ${vlan.end}`)
+                                .map((vlan) => `VLAN: ${vlan.start} - ${vlan.end}`)
                                 .join(", ")}`
                     )
                     .join(", ")}
             />
             {endpoints
-                .filter(port => service.endpoints.map(endpoint => endpoint.id).includes(port.serviceId))
+                .filter((port) => service.endpoints.map((endpoint) => endpoint.id).includes(port.serviceId))
                 .map((port, index) => {
                     const type = ["port", "internal_port"].includes(port.endpointType) ? "ims_port" : "ims_service";
                     return (
@@ -306,14 +306,14 @@ export function getExternalTypeData(
                     data.endpointType = "port";
                     return <EndpointDetail endpoint={data} />;
                 },
-                i18nKey: "ims_port"
+                i18nKey: "ims_port",
             };
         case "ims_circuit_id":
         case "ims_corelink_trunk_id":
             return {
                 getter: (identifier: string) => serviceByImsServiceId(parseInt(identifier)),
                 render: (data: IMSService) => <ImsServiceDetail service={data} recursive={true} />,
-                i18nKey: "ims_service"
+                i18nKey: "ims_service",
             };
         case "node_subscription_id":
         case "port_subscription_id":
@@ -325,8 +325,10 @@ export function getExternalTypeData(
                 render: (data: SubscriptionModel) => (
                     <SubscriptionDetails subscription={data} className="related-subscription" />
                 ),
-                i18nKey: "subscription"
+                i18nKey: "subscription",
             };
+        case "ipv4_ipam_id":
+        case "ipv6_ipam_id":
         case "ptp_ipv4_ipam_id":
         case "ptp_ipv6_ipam_id":
         case "ipam_prefix_id":
@@ -335,7 +337,7 @@ export function getExternalTypeData(
             return {
                 getter: (identifier: string) => prefixById(parseInt(identifier)),
                 render: (data: IPAMPrefix) => <IpamPrefix prefix={data} />,
-                i18nKey: "ipam_prefix"
+                i18nKey: "ipam_prefix",
             };
         case "node_ipv4_ipam_id":
         case "node_ipv6_ipam_id":
@@ -344,7 +346,7 @@ export function getExternalTypeData(
             return {
                 getter: (identifier: string) => addressById(parseInt(identifier)),
                 render: (data: IPAMAddress) => <IpamAddress address={data} />,
-                i18nKey: "ipam_address"
+                i18nKey: "ipam_address",
             };
         case "ims_aggregate_port_id":
             return {
@@ -353,13 +355,13 @@ export function getExternalTypeData(
                     data.endpointType = "internal_port";
                     return <EndpointDetail endpoint={data} />;
                 },
-                i18nKey: "ims_port"
+                i18nKey: "ims_port",
             };
         default:
             return {
                 getter: (_: string) => Promise.resolve({}),
                 render: undefined,
-                i18nKey: ""
+                i18nKey: "",
             };
     }
 }
@@ -384,8 +386,8 @@ export default function SubscriptionInstanceValue({ label, value }: IProps) {
     useEffect(() => {
         if (data === undefined && !collapsed && isExternalLinkValue) {
             getter(value)
-                .catch(err => Promise.resolve(null))
-                .then(data => {
+                .catch((err) => Promise.resolve(null))
+                .then((data) => {
                     if (data && isSubscriptionValue) {
                         data.product_id = data.product.product_id;
                         enrichSubscription(data as SubscriptionModel, organisations, products);

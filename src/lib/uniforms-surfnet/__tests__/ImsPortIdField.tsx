@@ -25,7 +25,7 @@ import { IMSPort, Subscription } from "utils/types";
 describe("<ImsPortIdField>", () => {
     test("<ImsPortIdField> - renders inputs", async () => {
         mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, [
-            { subscription_id: "abcdefghij", name: "name", status: "active", description: "description" }
+            { subscription_id: "abcdefghij", name: "name", status: "active", description: "description" },
         ] as Subscription[]);
         const element = <ImsPortIdField name="x" interfaceSpeed={1000} nodeStatuses={["active", "provisioning"]} />;
 
@@ -33,31 +33,26 @@ describe("<ImsPortIdField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(2);
-        expect(
-            wrapper
-                .find(ReactSelect)
-                .at(0)
-                .props()
-        ).toMatchObject({
+        expect(wrapper.find(ReactSelect).at(0).props()).toMatchObject({
             options: [{ label: "abcdefgh description", value: "abcdefghij" }],
             value: undefined,
-            isDisabled: false
+            isDisabled: false,
         });
-        expect(
-            wrapper
-                .find(ReactSelect)
-                .at(1)
-                .props()
-        ).toMatchObject({ options: [], value: undefined, isDisabled: true, placeholder: "First select a node" });
+        expect(wrapper.find(ReactSelect).at(1).props()).toMatchObject({
+            options: [],
+            value: undefined,
+            isDisabled: true,
+            placeholder: "First select a node",
+        });
         expect(wrapper.render()).toMatchSnapshot();
     });
 
     test("<ImsPortIdField> - reacts on change inputs", async () => {
         mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, [
-            { subscription_id: "abcdefghij", name: "name", status: "active", description: "description" }
+            { subscription_id: "abcdefghij", name: "name", status: "active", description: "description" },
         ] as Subscription[]);
         mock.onGet("ims/free_ports/abcdefghij/1000/all").reply(200, [
-            { id: 1, iface_type: "iface_type", port: "0/0/0", status: "IS" }
+            { id: 1, iface_type: "iface_type", port: "0/0/0", status: "IS" },
         ] as IMSPort[]);
         const element = <ImsPortIdField name="x" interfaceSpeed={1000} nodeStatuses={["active", "provisioning"]} />;
 
@@ -65,40 +60,27 @@ describe("<ImsPortIdField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(2);
-        wrapper
-            .find(ReactSelect)
-            .at(0)
-            .invoke("onChange")({ label: "abcdefgh description", value: "abcdefghij" });
+        wrapper.find(ReactSelect).at(0).invoke("onChange")({ label: "abcdefgh description", value: "abcdefghij" });
         await waitForComponentToPaint(wrapper);
-        expect(
-            wrapper
-                .find(ReactSelect)
-                .at(0)
-                .props()
-        ).toMatchObject({
+        expect(wrapper.find(ReactSelect).at(0).props()).toMatchObject({
             options: [{ label: "abcdefgh description", value: "abcdefghij" }],
             value: { label: "abcdefgh description", value: "abcdefghij" },
-            isDisabled: false
+            isDisabled: false,
         });
-        expect(
-            wrapper
-                .find(ReactSelect)
-                .at(1)
-                .props()
-        ).toMatchObject({
+        expect(wrapper.find(ReactSelect).at(1).props()).toMatchObject({
             options: [{ label: "0/0/0 (IS) (iface_type)", value: 1 }],
             value: undefined,
             isDisabled: false,
-            placeholder: "Select a port"
+            placeholder: "Select a port",
         });
     });
 
     test("<ImsPortIdField> - renders inputs node set", async () => {
         mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, [
-            { subscription_id: "abcdefghij", name: "name", status: "active", description: "description" }
+            { subscription_id: "abcdefghij", name: "name", status: "active", description: "description" },
         ] as Subscription[]);
         mock.onGet("ims/free_ports/abcdefghij/1000/all").reply(200, [
-            { id: 1, iface_type: "iface_type", port: "0/0/0", status: "IS" }
+            { id: 1, iface_type: "iface_type", port: "0/0/0", status: "IS" },
         ] as IMSPort[]);
 
         const element = (
@@ -114,26 +96,16 @@ describe("<ImsPortIdField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(2);
-        expect(
-            wrapper
-                .find(ReactSelect)
-                .at(0)
-                .props()
-        ).toMatchObject({
+        expect(wrapper.find(ReactSelect).at(0).props()).toMatchObject({
             options: [{ label: "abcdefgh description", value: "abcdefghij" }],
             value: { label: "abcdefgh description", value: "abcdefghij" },
-            isDisabled: true
+            isDisabled: true,
         });
-        expect(
-            wrapper
-                .find(ReactSelect)
-                .at(1)
-                .props()
-        ).toMatchObject({
+        expect(wrapper.find(ReactSelect).at(1).props()).toMatchObject({
             options: [{ label: "0/0/0 (IS) (iface_type)", value: 1 }],
             value: undefined,
             isDisabled: false,
-            placeholder: "Select a port"
+            placeholder: "Select a port",
         });
         expect(wrapper.render()).toMatchSnapshot();
     });

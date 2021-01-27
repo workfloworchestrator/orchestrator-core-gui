@@ -43,7 +43,7 @@ interface IState {
 
 export default class UserInputFormWizard extends React.Component<IProps, IState> {
     public static defaultProps = {
-        hasNext: false
+        hasNext: false,
     };
 
     context!: React.ContextType<typeof ApplicationContext>;
@@ -75,7 +75,7 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
         newUserInputs.push(currentFormData);
 
         let result = this.props.validSubmit(newUserInputs);
-        return catchErrorStatus<FormNotCompleteResponse>(result, 510, json => {
+        return catchErrorStatus<FormNotCompleteResponse>(result, 510, (json) => {
             // Scroll to top when navigating to next screen of wizard
             window.scrollTo(0, 0);
             setFlash(I18n.t("process.flash.wizard_next_step"));

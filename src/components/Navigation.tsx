@@ -24,7 +24,7 @@ import {
     EuiModalFooter,
     EuiModalHeader,
     EuiOverlayMask,
-    EuiToast
+    EuiToast,
 } from "@elastic/eui";
 import { Control } from "@elastic/eui/src/components/control_bar/control_bar";
 import I18n from "i18n-js";
@@ -61,7 +61,7 @@ const Navigation = () => {
                     radius: 8, // The radius of the inner circle
                     color: "#4DB3CF", // #rgb or #rrggbb or array of colors
                     top: "25%",
-                    position: "fixed"
+                    position: "fixed",
                 }).spin(spinnerTarget.current);
             }
         } else {
@@ -72,7 +72,7 @@ const Navigation = () => {
     const getControls = (): Control[] => {
         const controls: Control[] = [];
 
-        navItems.forEach(navItem => {
+        navItems.forEach((navItem) => {
             controls.push({
                 "aria-label": `${navItem}-tab`,
                 controlType: "text",
@@ -80,7 +80,7 @@ const Navigation = () => {
                 text: <Link to={`/${navItem}`}>{I18n.t(`navigation.${navItem}`)}</Link>,
                 className: location.pathname.startsWith(`/${navItem.replace("_", "-")}`)
                     ? "navigation__active navigation__item"
-                    : "navigation__item"
+                    : "navigation__item",
             });
         });
 
@@ -89,13 +89,13 @@ const Navigation = () => {
             id: "main-navigation-filters-tab",
             controlType: "icon",
             iconType: "filter",
-            onClick: showModal
+            onClick: showModal,
         });
 
         return [
             ...controls,
             {
-                controlType: "spacer"
+                controlType: "spacer",
             },
             {
                 controlType: "text",
@@ -114,8 +114,8 @@ const Navigation = () => {
                         </EuiButton>
                     </Link>
                 ),
-                className: "navigation__cta"
-            }
+                className: "navigation__cta",
+            },
         ];
     };
 

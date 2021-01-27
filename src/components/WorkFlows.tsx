@@ -47,40 +47,40 @@ export default class WorkFlows extends React.Component<{}, IState> {
         filterAttributesProductTag: [],
         filterAttributesTarget: [],
         query: "",
-        sorted: { name: "name", descending: true }
+        sorted: { name: "name", descending: true },
     };
 
     componentDidMount() {
         allWorkflowsWithProductTags().then((res: WorkflowWithProductTagsString[]) => {
-            res.forEach(wf => (wf.product_tags_string = wf.product_tags.join(", ")));
+            res.forEach((wf) => (wf.product_tags_string = wf.product_tags.join(", ")));
             const newFilterAttributesProductTag: Filter[] = [];
             const uniqueWorkflowTags = res.reduce((acc, wf) => {
-                wf.product_tags.forEach(t => acc.add(t));
+                wf.product_tags.forEach((t) => acc.add(t));
                 return acc;
             }, new Set<string>());
-            uniqueWorkflowTags.forEach(tag =>
+            uniqueWorkflowTags.forEach((tag) =>
                 newFilterAttributesProductTag.push({
                     name: tag,
                     selected: true,
-                    count: res.filter(wf => wf.product_tags.includes(tag)).length
+                    count: res.filter((wf) => wf.product_tags.includes(tag)).length,
                 })
             );
             const newFilterAttributesTarget: Filter[] = [];
             // @ts-ignore
-            const uniqueTargets: string[] = [...new Set(res.map(wf => wf.target))];
-            uniqueTargets.forEach(target =>
+            const uniqueTargets: string[] = [...new Set(res.map((wf) => wf.target))];
+            uniqueTargets.forEach((target) =>
                 newFilterAttributesTarget.push({
                     name: target,
                     selected: true,
-                    count: res.filter(wf => wf.target === target).length
+                    count: res.filter((wf) => wf.target === target).length,
                 })
             );
             res = res.sort(this.sortBy(this.state.sorted.name));
             this.setState({
                 workflows: res,
                 filteredWorkflows: res,
-                filterAttributesProductTag: newFilterAttributesProductTag.filter(attr => attr.count > 0),
-                filterAttributesTarget: newFilterAttributesTarget.filter(attr => attr.count > 0)
+                filterAttributesProductTag: newFilterAttributesProductTag.filter((attr) => attr.count > 0),
+                filterAttributesTarget: newFilterAttributesTarget.filter((attr) => attr.count > 0),
             });
         });
     }
@@ -102,20 +102,20 @@ export default class WorkFlows extends React.Component<{}, IState> {
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
             const searchable: SortKeys[] = ["name", "description", "target", "product_tags_string"];
-            workflows = workflows.filter(p =>
+            workflows = workflows.filter((p) =>
                 searchable
-                    .filter(search => p[search])
-                    .map(search => (p[search] as string).toLowerCase().indexOf(queryToLower))
-                    .some(indexOf => indexOf > -1)
+                    .filter((search) => p[search])
+                    .map((search) => (p[search] as string).toLowerCase().indexOf(queryToLower))
+                    .some((indexOf) => indexOf > -1)
             );
         }
-        workflows = workflows.filter(wf => {
-            const filter = filterAttributesProductTag.find(attr => wf.product_tags.includes(attr.name));
+        workflows = workflows.filter((wf) => {
+            const filter = filterAttributesProductTag.find((attr) => wf.product_tags.includes(attr.name));
             return filter ? filter.selected : true;
         });
 
-        workflows = workflows.filter(wf => {
-            const filter = filterAttributesTarget.find(attr => attr.name === wf.target);
+        workflows = workflows.filter((wf) => {
+            const filter = filterAttributesTarget.find((attr) => attr.name === wf.target);
             return filter ? filter.selected : true;
         });
 
@@ -123,7 +123,7 @@ export default class WorkFlows extends React.Component<{}, IState> {
         return sorted.descending ? workflows.reverse() : workflows;
     };
 
-    delayedSearch = debounce(query => {
+    delayedSearch = debounce((query) => {
         const workflows = [...this.state.workflows];
         const { sorted, filterAttributesProductTag, filterAttributesTarget } = this.state;
         this.setState({
@@ -134,7 +134,7 @@ export default class WorkFlows extends React.Component<{}, IState> {
                 sorted,
                 filterAttributesProductTag,
                 filterAttributesTarget
-            )
+            ),
         });
     }, 250);
 
@@ -156,7 +156,7 @@ export default class WorkFlows extends React.Component<{}, IState> {
         sorted.name = name;
         this.setState({
             filteredWorkflows: sorted.descending ? filteredWorkflows.reverse() : filteredWorkflows,
-            sorted: sorted
+            sorted: sorted,
         });
     };
 
@@ -164,7 +164,7 @@ export default class WorkFlows extends React.Component<{}, IState> {
         const { workflows, sorted, query, filterAttributesProductTag, filterAttributesTarget } = this.state;
         const newFilterAttributesProductTag = [...filterAttributesProductTag];
         if (name === "workflow_tag") {
-            newFilterAttributesProductTag.forEach(attr => {
+            newFilterAttributesProductTag.forEach((attr) => {
                 if (attr.name === item.name) {
                     attr.selected = !attr.selected;
                 }
@@ -172,7 +172,7 @@ export default class WorkFlows extends React.Component<{}, IState> {
         }
         const newFilterAttributesTarget = [...filterAttributesTarget];
         if (name === "target") {
-            newFilterAttributesTarget.forEach(attr => {
+            newFilterAttributesTarget.forEach((attr) => {
                 if (attr.name === item.name) {
                     attr.selected = !attr.selected;
                 }
@@ -187,7 +187,7 @@ export default class WorkFlows extends React.Component<{}, IState> {
                 sorted,
                 newFilterAttributesProductTag,
                 newFilterAttributesTarget
-            )
+            ),
         });
     };
 
@@ -225,7 +225,7 @@ export default class WorkFlows extends React.Component<{}, IState> {
                     <tbody>
                         {workflows.map((workflow, index) => (
                             <tr className={this.workFlowClassName(workflow)} key={`${workflow.workflow_id}_${index}`}>
-                                {tdValues.map(tdValue => td(tdValue, workflow))}
+                                {tdValues.map((tdValue) => td(tdValue, workflow))}
                                 <td data-label={I18n.t("metadata.workflows.created_at")} className="created_at">
                                     {renderDateTime(workflow.created_at)}
                                 </td>
@@ -235,7 +235,7 @@ export default class WorkFlows extends React.Component<{}, IState> {
                             <td className="metadata-results" colSpan={6}>
                                 {I18n.t("metadata.results", {
                                     type: "Workflows",
-                                    count: workflows.length
+                                    count: workflows.length,
                                 })}
                             </td>
                         </tr>

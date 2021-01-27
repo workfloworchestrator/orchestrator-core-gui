@@ -69,18 +69,8 @@ test("<BoolField> - renders a input with correct label (specified)", () => {
     const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
     expect(wrapper.find("label")).toHaveLength(2);
-    expect(
-        wrapper
-            .find("label")
-            .last()
-            .text()
-    ).toBe("x");
-    expect(
-        wrapper
-            .find("label")
-            .last()
-            .prop("htmlFor")
-    ).toBe(wrapper.find("input").prop("id"));
+    expect(wrapper.find("label").last().text()).toBe("x");
+    expect(wrapper.find("label").last().prop("htmlFor")).toBe(wrapper.find("input").prop("id"));
 });
 
 test("<BoolField> - renders a input with correct value (default)", () => {
@@ -122,22 +112,7 @@ test("<BoolField> - renders a wrapper with unknown props", () => {
     const element = <BoolField name="x" data-x="x" data-y="y" data-z="z" />;
     const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
-    expect(
-        wrapper
-            .find("section")
-            .at(0)
-            .prop("data-x")
-    ).toBe("x");
-    expect(
-        wrapper
-            .find("section")
-            .at(0)
-            .prop("data-y")
-    ).toBe("y");
-    expect(
-        wrapper
-            .find("section")
-            .at(0)
-            .prop("data-z")
-    ).toBe("z");
+    expect(wrapper.find("section").at(0).prop("data-x")).toBe("x");
+    expect(wrapper.find("section").at(0).prop("data-y")).toBe("y");
+    expect(wrapper.find("section").at(0).prop("data-z")).toBe("z");
 });

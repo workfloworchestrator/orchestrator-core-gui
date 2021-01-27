@@ -31,33 +31,33 @@ export function actionOptions(
         icon: "fa fa-search-plus",
         euiIcon: "search",
         label: "details",
-        action: showAction
+        action: showAction,
     };
     const userInput = {
         icon: "fa fa-edit",
         euiIcon: "pencil",
         label: "user_input",
-        action: showAction
+        action: showAction,
     };
     const retry = {
         icon: "fa fa-sync",
         euiIcon: "refresh",
         label: "retry",
-        action: retryAction
+        action: retryAction,
     };
     const _delete = {
         icon: "fa fa-trash",
         euiIcon: "trash",
         label: "delete",
         action: deleteAction,
-        danger: true
+        danger: true,
     };
     const abort = {
         icon: "fa fa-window-close",
         euiIcon: "crossInACircleFilled",
         label: "abort",
         action: abortAction,
-        danger: true
+        danger: true,
     };
     let options = [];
     let status = "";

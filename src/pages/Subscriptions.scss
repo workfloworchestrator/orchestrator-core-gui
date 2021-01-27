@@ -29,7 +29,7 @@ div.actions {
         cursor: pointer;
         font-size: 22px;
         i {
-            color: color.adjust(vars.$primary, $lightness: 5);
+            color: color.adjust(vars.$primary, $lightness: 5%);
             font-size: 30px;
             margin-top: 15px;
         }

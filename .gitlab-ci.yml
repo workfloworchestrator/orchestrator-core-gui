@@ -1,4 +1,4 @@
-image: git.ia.surfsara.nl/automation/dependency_proxy/containers/alpine:latest
+image: alpine:latest
 
 .auto-deploy:
   image: "git.ia.surfsara.nl:5050/automation/projects/build-container/master"
@@ -24,7 +24,7 @@ include:
 
 
 unit test:
-  image: git.ia.surfsara.nl/automation/dependency_proxy/containers/node:14.2.0-slim
+  image: node:14.2.0-slim
   stage: test
   variables:
     TZ: Europe/Amsterdam

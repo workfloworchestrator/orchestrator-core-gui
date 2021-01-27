@@ -76,14 +76,14 @@ function List({
             </EuiFormRow>
 
             <ul>
-                {range(Math.max(value?.length ?? 0, initialCount ?? 0)).map(itemIndex =>
+                {range(Math.max(value?.length ?? 0, initialCount ?? 0)).map((itemIndex) =>
                     Children.map(children, (child, childIndex) =>
                         isValidElement(child)
                             ? cloneElement(child, {
                                   key: `${itemIndex}-${childIndex}`,
                                   name: child.props.name?.replace("$", "" + itemIndex),
                                   outerList: hasListAsChild,
-                                  ...itemProps
+                                  ...itemProps,
                               })
                             : child
                     )

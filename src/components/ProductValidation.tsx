@@ -37,11 +37,11 @@ export default class ProductValidation extends React.PureComponent<IProps> {
         const errorDescription = blockMissing
             ? I18n.t("validations.block_missing", {
                   name: blockName,
-                  product: productName
+                  product: productName,
               })
             : I18n.t("validations.resource_type_missing", {
                   name: error.name,
-                  block: blockName
+                  block: blockName,
               });
         return (
             <tr key={index}>
@@ -101,7 +101,7 @@ export default class ProductValidation extends React.PureComponent<IProps> {
         const hasMapping = !isEmpty(productsBlocks);
         const mappings = productsBlocks.reduce<ResourceTypeInfo[]>((acc, key) => {
             const resourceTypes = mapping[key];
-            resourceTypes.forEach(resourceType => acc.push({ name: key, resourceTypes: resourceType }));
+            resourceTypes.forEach((resourceType) => acc.push({ name: key, resourceTypes: resourceType }));
             return acc;
         }, []);
         return (

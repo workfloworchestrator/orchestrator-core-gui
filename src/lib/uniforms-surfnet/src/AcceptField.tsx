@@ -75,7 +75,7 @@ function Accept({
     data = data ?? [
         [name, "label", {}],
         [`${name}_info`, "info", {}],
-        [name, "checkbox", {}]
+        [name, "checkbox", {}],
     ];
 
     let [state, dispatch] = useReducer(

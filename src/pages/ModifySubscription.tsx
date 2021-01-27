@@ -40,10 +40,10 @@ class ModifySubscription extends React.Component<IProps, IState> {
     componentDidMount = () => {
         const { subscriptionId, workflowName } = this.props;
 
-        let promise = startProcess(workflowName, [{ subscription_id: subscriptionId }]).then(res => {
+        let promise = startProcess(workflowName, [{ subscription_id: subscriptionId }]).then((res) => {
             this.setState({ pid: res.id });
         });
-        catchErrorStatus<FormNotCompleteResponse>(promise, 510, json => {
+        catchErrorStatus<FormNotCompleteResponse>(promise, 510, (json) => {
             this.setState({ stepUserInput: json.form });
         });
     };
@@ -55,7 +55,7 @@ class ModifySubscription extends React.Component<IProps, IState> {
     submit = (processInput: {}[]) => {
         const { subscriptionId, workflowName } = this.props;
 
-        return startProcess(workflowName, [{ subscription_id: subscriptionId }, ...processInput]).then(res => {
+        return startProcess(workflowName, [{ subscription_id: subscriptionId }, ...processInput]).then((res) => {
             this.setState({ pid: res.id });
         });
     };
@@ -69,7 +69,7 @@ class ModifySubscription extends React.Component<IProps, IState> {
                 I18n.t("process.flash.create_modify", {
                     name: I18n.t(`workflow.${workflowName}`),
                     subscriptionId: subscriptionId,
-                    pid: pid
+                    pid: pid,
                 })
             );
             return <Redirect to={workflowName.startsWith("validate") ? "/tasks" : `/processes?highlight=${pid}`} />;

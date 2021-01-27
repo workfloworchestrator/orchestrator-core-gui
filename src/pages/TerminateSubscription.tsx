@@ -36,7 +36,7 @@ interface IState {
 }
 
 function getTerminateWorkflow(product: Product) {
-    return product.workflows.find(wf => wf.target === TARGET_TERMINATE)!;
+    return product.workflows.find((wf) => wf.target === TARGET_TERMINATE)!;
 }
 
 class TerminateSubscription extends React.Component<IProps, IState> {
@@ -45,13 +45,15 @@ class TerminateSubscription extends React.Component<IProps, IState> {
     componentDidMount = () => {
         const { subscriptionId } = this.props;
 
-        subscriptionsDetailWithModel(subscriptionId).then(sub =>
-            productById(sub.product.product_id).then(product => {
+        subscriptionsDetailWithModel(subscriptionId).then((sub) =>
+            productById(sub.product.product_id).then((product) => {
                 const terminate_workflow = getTerminateWorkflow(product);
-                let promise = startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }]).then(res => {
-                    this.setState({ pid: res.id, product: product });
-                });
-                catchErrorStatus<FormNotCompleteResponse>(promise, 510, json => {
+                let promise = startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }]).then(
+                    (res) => {
+                        this.setState({ pid: res.id, product: product });
+                    }
+                );
+                catchErrorStatus<FormNotCompleteResponse>(promise, 510, (json) => {
                     this.setState({ stepUserInput: json.form, product: product });
                 });
             })
@@ -68,7 +70,7 @@ class TerminateSubscription extends React.Component<IProps, IState> {
         const terminate_workflow = getTerminateWorkflow(product!);
 
         return startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }, ...processInput]).then(
-            res => {
+            (res) => {
                 this.setState({ pid: res.id });
             }
         );
@@ -89,7 +91,7 @@ class TerminateSubscription extends React.Component<IProps, IState> {
                 I18n.t("process.flash.create_modify", {
                     name: I18n.t(`workflow.${terminate_workflow.name}`),
                     subscriptionId: subscriptionId,
-                    pid: pid
+                    pid: pid,
                 })
             );
             return <Redirect to={`/processes?highlight=${pid}`} />;

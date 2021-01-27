@@ -22,7 +22,7 @@ import {
     EuiFlexGroup,
     EuiFlexItem,
     EuiPagination,
-    EuiPopover
+    EuiPopover,
 } from "@elastic/eui";
 import React, { useState } from "react";
 
@@ -47,7 +47,7 @@ function Paginator({
     pageOptions,
     pageSize,
     previousPage,
-    setPageSize
+    setPageSize,
 }: IPaginatorProps) {
     // page switchint
     const switchPage = (pageNumber: number) => {
@@ -56,7 +56,7 @@ function Paginator({
 
     // popover
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-    const onButtonClick = () => setIsPopoverOpen(isPopoverOpen => !isPopoverOpen);
+    const onButtonClick = () => setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
     const closePopover = () => setIsPopoverOpen(false);
     const getIconType = (size: number) => {
         return size === pageSize ? "check" : "empty";
@@ -67,7 +67,7 @@ function Paginator({
             Rows per page: {pageSize}
         </EuiButtonEmpty>
     );
-    const items = [5, 10, 25, 50, 100].map(newSize => (
+    const items = [5, 10, 25, 50, 100].map((newSize) => (
         <EuiContextMenuItem
             key={`${newSize}_rows`}
             icon={getIconType(newSize)}
@@ -91,7 +91,7 @@ function Paginator({
                                     aria-label="pagination"
                                     pageCount={pageOptions.length}
                                     activePage={pageIndex}
-                                    onPageClick={activePage => switchPage(activePage)}
+                                    onPageClick={(activePage) => switchPage(activePage)}
                                 />
                             </EuiFlexItem>
                             <EuiFlexItem>

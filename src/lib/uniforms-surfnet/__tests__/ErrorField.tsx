@@ -21,7 +21,7 @@ const error = {
     error: "validation-error",
     reason: "X is required",
     details: [{ name: "x", type: "required", details: { value: null } }],
-    message: "X is required [validation-error]"
+    message: "X is required [validation-error]",
 };
 
 test("<ErrorField> - works", () => {

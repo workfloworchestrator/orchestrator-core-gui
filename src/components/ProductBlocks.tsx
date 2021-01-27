@@ -65,14 +65,14 @@ export default class ProductBlocks extends React.Component<{}, IState> {
         confirmationDialogAction: () => this,
         confirm: () => this,
         confirmationDialogQuestion: "",
-        refresh: true
+        refresh: true,
     };
 
     componentDidMount() {
-        productBlocks().then(res => {
+        productBlocks().then((res) => {
             const productBlocks = res
                 .map((pb: Partial<ProductBlockWithExtra>) => {
-                    pb.resource_types_string = (pb.resource_types || []).map(rt => rt.resource_type).join(", ");
+                    pb.resource_types_string = (pb.resource_types || []).map((rt) => rt.resource_type).join(", ");
                     return pb as ProductBlockWithExtra;
                 })
                 .sort(this.sortBy(this.state.sorted.name));
@@ -103,22 +103,22 @@ export default class ProductBlocks extends React.Component<{}, IState> {
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
             const searchable: Column[] = ["name", "description", "tag", "status", "resource_types_string"];
-            productBlocks = productBlocks.filter(pb =>
+            productBlocks = productBlocks.filter((pb) =>
                 searchable
-                    .filter(search => pb[search])
-                    .map(search => (pb[search] as string).toLowerCase().indexOf(queryToLower))
-                    .some(indexOf => indexOf > -1)
+                    .filter((search) => pb[search])
+                    .map((search) => (pb[search] as string).toLowerCase().indexOf(queryToLower))
+                    .some((indexOf) => indexOf > -1)
             );
         }
         productBlocks.sort(this.sortBy(sorted.name));
         return sorted.descending ? productBlocks.reverse() : productBlocks;
     };
 
-    delayedSearch = debounce(query => {
+    delayedSearch = debounce((query) => {
         const productBlocks = [...this.state.productBlocks];
         this.setState({
             query: query,
-            filteredProductBlocks: this.doSearchAndSort(query, productBlocks, this.state.sorted)
+            filteredProductBlocks: this.doSearchAndSort(query, productBlocks, this.state.sorted),
         });
     }, 250);
 
@@ -128,7 +128,7 @@ export default class ProductBlocks extends React.Component<{}, IState> {
         stop(e);
         const newShow = actions.id === productBlock.product_block_id ? !actions.show : true;
         this.setState({
-            actions: { show: newShow, id: productBlock.product_block_id }
+            actions: { show: newShow, id: productBlock.product_block_id },
         });
     };
 
@@ -137,7 +137,7 @@ export default class ProductBlocks extends React.Component<{}, IState> {
         this.confirmation(
             I18n.t("metadata.deleteConfirmation", {
                 type: "Product Block",
-                name: productBlock.name
+                name: productBlock.name,
             }),
             () =>
                 deleteProductBlock(productBlock.product_block_id)
@@ -146,11 +146,11 @@ export default class ProductBlocks extends React.Component<{}, IState> {
                         setFlash(
                             I18n.t("metadata.flash.delete", {
                                 name: productBlock.name,
-                                type: "Product Block"
+                                type: "Product Block",
                             })
                         );
                     })
-                    .catch(err => {
+                    .catch((err) => {
                         if (err.response && err.response.status === 400) {
                             if (err.response.data) {
                                 setFlash(err.response.data.error);
@@ -169,7 +169,7 @@ export default class ProductBlocks extends React.Component<{}, IState> {
             confirmationDialogAction: () => {
                 this.cancelConfirmation();
                 action();
-            }
+            },
         });
 
     renderActions = (productBlock: ProductBlockWithExtra, actions: Action) => {
@@ -181,20 +181,20 @@ export default class ProductBlocks extends React.Component<{}, IState> {
             icon: "fa fa-search-plus",
             euiIcon: "search",
             label: "view",
-            action: this.editProductBlock(productBlock, true, false)
+            action: this.editProductBlock(productBlock, true, false),
         };
         const edit = {
             icon: "fa fa-edit",
             euiIcon: "pencil",
             label: "edit",
-            action: this.editProductBlock(productBlock, false, false)
+            action: this.editProductBlock(productBlock, false, false),
         };
         const _delete = {
             icon: "fas fa-trash-alt",
             euiIcon: "trash",
             label: "delete",
             action: this.handleDeleteProductBlock(productBlock),
-            danger: true
+            danger: true,
         };
         const options = [view, edit, _delete];
         return <DropDownActions options={options} i18nPrefix="metadata.productBlocks" />;
@@ -217,7 +217,7 @@ export default class ProductBlocks extends React.Component<{}, IState> {
         sorted.name = name;
         this.setState({
             filteredProductBlocks: sorted.descending ? filteredProductBlocks.reverse() : filteredProductBlocks,
-            sorted: sorted
+            sorted: sorted,
         });
     };
 
@@ -274,7 +274,7 @@ export default class ProductBlocks extends React.Component<{}, IState> {
                                     data-label={I18n.t("metadata.productBlocks.resource_types")}
                                     className="resource_types"
                                 >
-                                    {productBlock.resource_types.map(rt => rt.resource_type).join(", ")}
+                                    {productBlock.resource_types.map((rt) => rt.resource_type).join(", ")}
                                 </td>
                                 <td data-label={I18n.t("metadata.productBlocks.created_at")} className="started">
                                     {renderDateTime(productBlock.created_at)}
@@ -288,7 +288,7 @@ export default class ProductBlocks extends React.Component<{}, IState> {
                                 >
                                     <ActionContainer
                                         title={"Actions"}
-                                        renderButtonContent={active => {
+                                        renderButtonContent={(active) => {
                                             const classes = ["dropdown-button-content", active ? "active" : ""].join(
                                                 " "
                                             );
@@ -298,7 +298,7 @@ export default class ProductBlocks extends React.Component<{}, IState> {
                                                 </span>
                                             );
                                         }}
-                                        renderContent={disabled => this.renderActions(productBlock, actions)}
+                                        renderContent={(disabled) => this.renderActions(productBlock, actions)}
                                     />
                                 </td>
                             </tr>
@@ -322,7 +322,7 @@ export default class ProductBlocks extends React.Component<{}, IState> {
             confirmationDialogOpen,
             confirmationDialogAction,
             confirmationDialogQuestion,
-            sorted
+            sorted,
         } = this.state;
         return (
             <div className="mod-product-blocks">

@@ -20,7 +20,7 @@ import { Redirect, Route, RouteComponentProps } from "react-router-dom";
 
 export default function ProtectedRoute({
     path,
-    render
+    render,
 }: {
     path: string;
     render: (props: RouteComponentProps<any>) => ReactNode;
@@ -32,7 +32,7 @@ export default function ProtectedRoute({
 
     const auth = useAuth();
 
-    if (!ENV.OAUTH2_ENABLED || (auth.userData && !auth.userData.expired)) {
+    if (!ENV.OAUTH2_ENABLED || (auth?.userData && !auth?.userData.expired)) {
         return <Route path={path} render={render} />;
     }
     return <Redirect to={"/not-allowed"} />;

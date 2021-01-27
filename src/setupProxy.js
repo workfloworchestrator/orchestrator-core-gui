@@ -13,9 +13,9 @@
  *
  */
 
-const proxy = require("http-proxy-middleware");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 //@ts-ignore
-module.exports = function(app) {
-    app.use(proxy("/api", { target: process.env.BACKEND_URL, changeOrigin: true }));
+module.exports = function (app) {
+    app.use("/api", createProxyMiddleware({ target: process.env.BACKEND_URL, changeOrigin: true }));
 };

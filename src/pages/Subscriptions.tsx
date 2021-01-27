@@ -21,7 +21,7 @@ import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import {
     SubscriptionsTable,
     initialSubscriptionTableSettings,
-    initialSubscriptionsFilterAndSort
+    initialSubscriptionsFilterAndSort,
 } from "components/tables/Subscriptions";
 import React from "react";
 import ScrollUpButton from "react-scroll-up-button";
@@ -50,7 +50,7 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
             confirmationDialogAction: () => this,
             confirm: () => this,
             confirmationDialogQuestion: "",
-            showExplanation: false
+            showExplanation: false,
         };
     }
 
@@ -63,7 +63,7 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
             confirmationDialogAction: (e: React.MouseEvent) => {
                 this.cancelConfirmation();
                 action(e);
-            }
+            },
         });
 
     showSubscription = (subscription: Subscription) => () => {

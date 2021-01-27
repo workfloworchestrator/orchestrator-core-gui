@@ -61,7 +61,7 @@ import {
     UseSortByHooks,
     UseSortByInstanceProps,
     UseSortByOptions,
-    UseSortByState
+    UseSortByState,
 } from "react-table";
 
 declare module "react-table" {

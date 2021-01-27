@@ -39,16 +39,16 @@ interface IState {
 export default class SplitPrefix extends React.PureComponent<IProps> {
     state: IState = {
         subnets: [],
-        desiredPrefixlen: 0
+        desiredPrefixlen: 0,
     };
 
     fetchFreePrefixes(subnet: string, prefixlen: number, desiredPrefixlen: number) {
-        free_subnets(subnet, prefixlen, desiredPrefixlen).then(result => {
-            let subnets = result.filter(x => parseInt(x.split("/")[1], 10) === desiredPrefixlen);
+        free_subnets(subnet, prefixlen, desiredPrefixlen).then((result) => {
+            let subnets = result.filter((x) => parseInt(x.split("/")[1], 10) === desiredPrefixlen);
             this.setState({
                 subnets: subnets,
                 desiredPrefixlen: desiredPrefixlen,
-                loading: false
+                loading: false,
             });
         });
     }
@@ -83,12 +83,12 @@ export default class SplitPrefix extends React.PureComponent<IProps> {
         const version = subnet.indexOf(":") === -1 ? 4 : 6;
         const max_for_version = version === 4 ? 32 : 64;
         const { desiredPrefixlen } = this.state;
-        const prefixlengths = range(max_for_version - prefixMin + 1).map(x => prefixMin + x);
-        const length_options: Option<number>[] = prefixlengths.map(pl => ({ value: pl, label: pl.toString() }));
-        const length_value = length_options.find(option => option.value === desiredPrefixlen);
+        const prefixlengths = range(max_for_version - prefixMin + 1).map((x) => prefixMin + x);
+        const length_options: Option<number>[] = prefixlengths.map((pl) => ({ value: pl, label: pl.toString() }));
+        const length_value = length_options.find((option) => option.value === desiredPrefixlen);
 
-        const prefix_options = this.state.subnets.map(sn => ({ label: sn, value: sn }));
-        const prefix_value = prefix_options.find(option => option.value === selectedSubnet);
+        const prefix_options = this.state.subnets.map((sn) => ({ label: sn, value: sn }));
+        const prefix_value = prefix_options.find((option) => option.value === selectedSubnet);
         return (
             <section>
                 <h3>

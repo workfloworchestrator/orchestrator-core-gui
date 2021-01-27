@@ -24,23 +24,13 @@ test("<NestField> - renders an <AutoField> for each field", () => {
         createContext({
             x: { type: Object },
             "x.a": { type: String },
-            "x.b": { type: Number }
+            "x.b": { type: Number },
         })
     );
 
     expect(wrapper.find(AutoField)).toHaveLength(2);
-    expect(
-        wrapper
-            .find(AutoField)
-            .at(0)
-            .prop("name")
-    ).toBe("a");
-    expect(
-        wrapper
-            .find(AutoField)
-            .at(1)
-            .prop("name")
-    ).toBe("b");
+    expect(wrapper.find(AutoField).at(0).prop("name")).toBe("a");
+    expect(wrapper.find(AutoField).at(1).prop("name")).toBe("b");
     expect(wrapper.render()).toMatchSnapshot();
 });
 
@@ -55,7 +45,7 @@ test("<NestField> - renders custom content if given", () => {
         createContext({
             x: { type: Object },
             "x.a": { type: String },
-            "x.b": { type: Number }
+            "x.b": { type: Number },
         })
     );
 
@@ -71,17 +61,12 @@ test("<NestField> - renders a label", () => {
         createContext({
             x: { type: Object },
             "x.a": { type: String },
-            "x.b": { type: Number }
+            "x.b": { type: Number },
         })
     );
 
     expect(wrapper.find("label")).toHaveLength(2);
-    expect(
-        wrapper
-            .find("span.euiTitle")
-            .at(0)
-            .text()
-    ).toBe("y");
+    expect(wrapper.find("span.euiTitle").at(0).text()).toBe("y");
 });
 
 test("<NestField> - renders a wrapper with unknown props", () => {
@@ -91,28 +76,13 @@ test("<NestField> - renders a wrapper with unknown props", () => {
         createContext({
             x: { type: Object },
             "x.a": { type: String },
-            "x.b": { type: Number }
+            "x.b": { type: Number },
         })
     );
 
-    expect(
-        wrapper
-            .find(".nest-field")
-            .at(0)
-            .prop("data-x")
-    ).toBe("x");
-    expect(
-        wrapper
-            .find(".nest-field")
-            .at(0)
-            .prop("data-y")
-    ).toBe("y");
-    expect(
-        wrapper
-            .find(".nest-field")
-            .at(0)
-            .prop("data-z")
-    ).toBe("z");
+    expect(wrapper.find(".nest-field").at(0).prop("data-x")).toBe("x");
+    expect(wrapper.find(".nest-field").at(0).prop("data-y")).toBe("y");
+    expect(wrapper.find(".nest-field").at(0).prop("data-z")).toBe("z");
 });
 
 test("<NestField> - renders correctly in list", () => {
@@ -123,7 +93,7 @@ test("<NestField> - renders correctly in list", () => {
             x: { type: Array },
             "x.$": { type: Object },
             "x.$.a": { type: String },
-            "x.$.b": { type: Number }
+            "x.$.b": { type: Number },
         })
     );
 

@@ -21,7 +21,7 @@ import {
     processSubscriptionsBySubscriptionId,
     productById,
     subscriptionWorkflows,
-    subscriptionsDetailWithModel
+    subscriptionsDetailWithModel,
 } from "api";
 import CheckBox from "components/CheckBox";
 import NetworkDiagram from "components/Diagram";
@@ -40,7 +40,7 @@ import {
     SubscriptionModel,
     SubscriptionProcesses,
     SubscriptionWithDetails,
-    WorkflowReasons
+    WorkflowReasons,
 } from "utils/types";
 import { applyIdNamingConvention, isEmpty, stop } from "utils/Utils";
 
@@ -62,7 +62,7 @@ interface IState {
 function SubscriptionDetailSection({
     name,
     children,
-    className = ""
+    className = "",
 }: React.PropsWithChildren<{
     name: string;
     className?: string;
@@ -79,7 +79,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
     context!: React.ContextType<typeof ApplicationContext>;
 
     state: IState = {
-        notFound: false
+        notFound: false,
     };
 
     componentDidMount = () => {
@@ -94,7 +94,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
             processSubscriptionsBySubscriptionId(subscriptionId),
             subscriptionWorkflows(subscriptionId),
             parentSubscriptions(subscriptionId),
-            dienstafnameBySubscription(subscriptionId)
+            dienstafnameBySubscription(subscriptionId),
         ];
 
         Promise.all<
@@ -123,13 +123,13 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                         subscriptionProcesses: result[1],
                         workflows: result[2],
                         dienstafname: result[4],
-                        parentSubscriptions: parentSubscriptions
+                        parentSubscriptions: parentSubscriptions,
                     });
 
-                    productById(result[0].product_id).then(product => this.setState({ product: product }));
+                    productById(result[0].product_id).then((product) => this.setState({ product: product }));
                 }
             )
-            .catch(err => {
+            .catch((err) => {
                 if (err.response && err.response.status === 404) {
                     this.setState({ notFound: true });
                 } else {
@@ -152,7 +152,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         this.props.confirmation!(
             I18n.t("subscription.terminateConfirmation", {
                 name: subscription.product.name,
-                customer: organisationNameByUuid(subscription.customer_id, this.context.organisations)
+                customer: organisationNameByUuid(subscription.customer_id, this.context.organisations),
             }),
             () => this.context.redirect(`/terminate-subscription?subscription=${subscription.subscription_id}`)
         );
@@ -165,7 +165,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
             I18n.t("subscription.modifyConfirmation", {
                 name: subscription.product.name,
                 customer: organisationNameByUuid(subscription.customer_id, this.context.organisations),
-                change: change
+                change: change,
             }),
             () =>
                 this.context.redirect(
@@ -215,7 +215,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
             "product_name",
             "status",
             "product_tag",
-            "start_date"
+            "start_date",
         ];
         const th = (index: number) => {
             const name = columns[index];
@@ -423,7 +423,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
             );
         };
 
-        subscriptionProcesses = subscriptionProcesses.filter(sp => !sp.process.is_task);
+        subscriptionProcesses = subscriptionProcesses.filter((sp) => !sp.process.is_task);
 
         return (
             <SubscriptionDetailSection name="subscription.process_link" className="subscription-processes">
@@ -513,13 +513,13 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
 
         const subscription_instances = Object.entries(subscription ?? {})
             .filter(
-                entry =>
+                (entry) =>
                     typeof entry[1] === "object" &&
                     !["product", "customer_descriptions"].includes(entry[0]) &&
                     entry[1] !== null
             )
-            .map(entry => entry[1])
-            .flatMap(entry => (isArray(entry) ? entry : [entry]));
+            .map((entry) => entry[1])
+            .flatMap((entry) => (isArray(entry) ? entry : [entry]));
 
         if (!subscription || !workflows || !subscriptionProcesses || !parentSubscriptions) {
             return null;

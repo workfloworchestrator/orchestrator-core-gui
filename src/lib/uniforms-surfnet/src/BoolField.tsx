@@ -52,7 +52,7 @@ function Bool({
                     id={id}
                     name={name}
                     label={name}
-                    onChange={event => onChange(event.target.checked)}
+                    onChange={(event) => onChange(event.target.checked)}
                 />
             </EuiFormRow>
         </section>

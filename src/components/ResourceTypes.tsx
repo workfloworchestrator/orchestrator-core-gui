@@ -39,11 +39,11 @@ export default class ResourceTypes extends React.Component<{}, IState> {
         filteredResourceTypes: [],
         query: "",
         sorted: { name: "resource_type", descending: true },
-        refresh: true
+        refresh: true,
     };
 
     componentDidMount() {
-        resourceTypes().then(res => {
+        resourceTypes().then((res) => {
             res = res.sort(this.sortBy(this.state.sorted.name));
             this.setState({ resourceTypes: res, filteredResourceTypes: res });
         });
@@ -60,22 +60,22 @@ export default class ResourceTypes extends React.Component<{}, IState> {
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
             const searchable: Column[] = ["resource_type", "description"];
-            resourceTypes = resourceTypes.filter(rt =>
+            resourceTypes = resourceTypes.filter((rt) =>
                 searchable
-                    .filter(search => rt[search])
-                    .map(search => rt[search].toLowerCase().indexOf(queryToLower))
-                    .some(indexOf => indexOf > -1)
+                    .filter((search) => rt[search])
+                    .map((search) => rt[search].toLowerCase().indexOf(queryToLower))
+                    .some((indexOf) => indexOf > -1)
             );
         }
         resourceTypes.sort(this.sortBy(sorted.name));
         return sorted.descending ? resourceTypes.reverse() : resourceTypes;
     };
 
-    delayedSearch = debounce(query => {
+    delayedSearch = debounce((query) => {
         const resourceTypes = [...this.state.resourceTypes];
         this.setState({
             query: query,
-            filteredResourceTypes: this.doSearchAndSort(query, resourceTypes, this.state.sorted)
+            filteredResourceTypes: this.doSearchAndSort(query, resourceTypes, this.state.sorted),
         });
     }, 250);
 
@@ -96,14 +96,14 @@ export default class ResourceTypes extends React.Component<{}, IState> {
         sorted.name = name;
         this.setState({
             filteredResourceTypes: sorted.descending ? filteredResourceTypes.reverse() : filteredResourceTypes,
-            sorted: sorted
+            sorted: sorted,
         });
     };
 
     filter = () => {
         const { filteredResourceTypes, sorted, query } = this.state;
         this.setState({
-            filteredResourceTypes: this.doSearchAndSort(query, filteredResourceTypes, sorted)
+            filteredResourceTypes: this.doSearchAndSort(query, filteredResourceTypes, sorted),
         });
     };
 
