@@ -217,7 +217,15 @@ export default class ProductBlock extends React.Component<IProps, IState> {
         errors[name] = isEmpty(value);
         this.setState({ errors: errors });
     };
-    changeProperty = (name: keyof iProductBlock) => (e: any) => {
+
+    changeProperty = (name: keyof iProductBlock) => (
+        e:
+            | Date
+            | React.MouseEvent<HTMLSpanElement | HTMLButtonElement>
+            | null
+            | React.ChangeEvent<HTMLInputElement>
+            | ValueType<Option>
+    ) => {
         const { productBlock } = this.state;
         let value;
         if (isEmpty(e) || isDate(e)) {

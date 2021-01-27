@@ -107,7 +107,7 @@ export function formDate(
     const date = value ? moment(value) : null;
 
     const handleChange = (date: Moment) => {
-        // internal change function only needed to moment convert to date (so old code is use-able)
+        // internal change function only needed to convert moment to date (so old code is use-able)
         onChange(date.toDate());
     };
 
