@@ -33,10 +33,11 @@ import {
 function renderGrafanaLink(subscription: Subscription, product: Product) {
     if (
         (product.product_type === "Port" ||
-        product.product_type === "LightPath" ||
-        product.product_type === "IP" ||
-        product.product_type === "L2VPN")  
-        && product.tag !== "MSC") {
+            product.product_type === "LightPath" ||
+            product.product_type === "IP" ||
+            product.product_type === "L2VPN") &&
+        product.tag !== "MSC"
+    ) {
         return (
             <tr>
                 <td id="subscriptions-stats_in_grafana-k">{I18n.t("subscriptions.stats_in_grafana")}</td>
