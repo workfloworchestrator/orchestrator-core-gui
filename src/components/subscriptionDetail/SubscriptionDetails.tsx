@@ -32,6 +32,7 @@ import {
 
 function renderGrafanaLink(subscription: Subscription, product: Product) {
     const fi_domain = product?.fixed_inputs.find((fi) => fi.name === "domain");
+    const node_name = subscription.description.split(" ").slice(-1);
     if (fi_domain && (fi_domain.value === "SURFNET8" || fi_domain.value === "NETHERLIGHT8")) {
         return (
             <tr>
@@ -39,6 +40,21 @@ function renderGrafanaLink(subscription: Subscription, product: Product) {
                 <td id="subscriptions-stats_in_grafana-v">
                     <a
                         href={`https://grafana.surf.net/d/v6yLvaQmk/surfnet8-subscription-id?orgId=1&refresh=30s&var-datasource=SURFnet-Subscriptions&var-measurement=NetworkMeasurements_bps_5min&var-subid=${subscription.subscription_id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {I18n.t("subscriptions.go_to_grafana")}
+                    </a>
+                </td>
+            </tr>
+        );
+    } else if (product.product_type === "Node") {
+        return (
+            <tr>
+                <td id="subscriptions-stats_in_grafana-k">{I18n.t("subscriptions.stats_in_grafana")}</td>
+                <td id="subscriptions-stats_in_grafana-v">
+                    <a
+                        href={`https://grafana.surf.net/d/000000020/?&var-Hostname=${node_name}.dcn.surf.net`}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
