@@ -31,11 +31,17 @@ import {
 } from "utils/types";
 
 function renderGrafanaLink(subscription: Subscription, product: Product) {
+    const node_name = subscription.description.split(" ").slice(-1);
+    var url_grafana = `https://grafana.surf.net/d/v6yLvaQmk/surfnet8-subscription-id?orgId=1&refresh=30s&var-datasource=SURFnet-Subscriptions&var-measurement=NetworkMeasurements_bps_5min&var-subid=${subscription.subscription_id}`
+    if (product.product_type === "Node") { 
+        url_grafana = `https://grafana.surf.net/d/000000020/?&var-Hostname=${node_name}.dcn.surf.net`
+    }
     if (
         (product.product_type === "Port" ||
             product.product_type === "LightPath" ||
             product.product_type === "IP" ||
-            product.product_type === "L2VPN") &&
+            product.product_type === "L2VPN"||
+            product.product_type === "Node") &&
         product.tag !== "MSC"
     ) {
         return (
@@ -43,7 +49,7 @@ function renderGrafanaLink(subscription: Subscription, product: Product) {
                 <td id="subscriptions-stats_in_grafana-k">{I18n.t("subscriptions.stats_in_grafana")}</td>
                 <td id="subscriptions-stats_in_grafana-v">
                     <a
-                        href={`https://grafana.surf.net/d/v6yLvaQmk/surfnet8-subscription-id?orgId=1&refresh=30s&var-datasource=SURFnet-Subscriptions&var-measurement=NetworkMeasurements_bps_5min&var-subid=${subscription.subscription_id}`}
+                        href={`${url_grafana}`}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
