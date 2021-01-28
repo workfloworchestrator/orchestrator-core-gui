@@ -48,23 +48,24 @@ em {
     }
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="number"],
-textarea {
-    display: block;
-    width: 100%;
-    border: 1px solid vars.$lighter-grey;
-    padding: 6px;
-    border-radius: vars.$br;
-    font-size: 14px;
-    margin-top: 4px;
-    &[disabled],
-    &:read-only {
-        background-color: vars.$lightest-grey;
-    }
-}
+// Todo: probably this whole file can be removed during clean up. (this messed with the calendar display)
+//input[type="text"],
+//input[type="email"],
+//input[type="tel"],
+//input[type="number"],
+//textarea {
+//    display: block;
+//    width: 100%;
+//    border: 1px solid vars.$lighter-grey;
+//    padding: 6px;
+//    border-radius: vars.$br;
+//    font-size: 14px;
+//    margin-top: 4px;
+//    &[disabled],
+//    &:read-only {
+//        background-color: vars.$lightest-grey;
+//    }
+//}
 
 .button {
     min-width: 200px;
