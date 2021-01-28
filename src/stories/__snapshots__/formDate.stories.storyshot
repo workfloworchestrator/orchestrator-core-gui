@@ -8,7 +8,7 @@ exports[`Storyshots DatePicker Definition 1`] = `
     className="form-divider"
   >
     <div
-      className="euiFormRow"
+      className="euiFormRow euiFormRow--fullWidth"
       id="metadata.productBlocks.created_at-row"
     >
       <div
