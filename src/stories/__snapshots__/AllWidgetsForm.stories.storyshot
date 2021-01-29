@@ -453,7 +453,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     className="euiFormLabel euiFormRow__label"
                                     htmlFor="bfd"
                                   >
-                                    Enable BFD
+                                    Enable BFD *
                                   </label>
                                    
                                   <div
@@ -658,7 +658,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-contact_persons.0.name"
                                 >
-                                  Name
+                                  Name *
                                 </label>
                                  
                                 <div
@@ -715,7 +715,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-contact_persons.0.email"
                                 >
-                                  Email
+                                  Email *
                                 </label>
                                  
                                 <div
@@ -4595,7 +4595,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports1.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -4613,7 +4613,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-subscription id *"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports1.0.subscription_id"
                                     onClick={[Function]}
@@ -4765,7 +4765,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports1.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -5135,7 +5135,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports2.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -5153,7 +5153,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-subscription id *"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports2.0.subscription_id"
                                     onClick={[Function]}
@@ -5305,7 +5305,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports2.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -5675,7 +5675,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports3.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -5817,7 +5817,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports3.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -5938,7 +5938,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports4.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -5956,7 +5956,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-subscription id *"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports4.0.subscription_id"
                                     onClick={[Function]}
@@ -6108,7 +6108,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports4.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -6167,7 +6167,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports4.0.bandwidth"
                                 >
-                                  bandwidth
+                                  bandwidth *
                                 </label>
                                  
                                 <div
@@ -6588,7 +6588,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports5.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -6606,7 +6606,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-subscription id *"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports5.0.subscription_id"
                                     onClick={[Function]}
@@ -6758,7 +6758,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports5.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -6879,7 +6879,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports6.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -7021,7 +7021,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports6.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -7142,7 +7142,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports7.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -7284,7 +7284,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports7.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -7405,7 +7405,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports8.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -7423,7 +7423,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-subscription id *"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports8.0.subscription_id"
                                     onClick={[Function]}
@@ -7575,7 +7575,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports8.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -8443,7 +8443,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports9.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -8585,7 +8585,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports9.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -8706,7 +8706,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports10.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -8848,7 +8848,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports10.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -8969,7 +8969,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn81.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -8987,7 +8987,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-subscription id *"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports_sn81.0.subscription_id"
                                     onClick={[Function]}
@@ -9163,7 +9163,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn81.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -9284,7 +9284,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn82.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -9302,7 +9302,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-subscription id *"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports_sn82.0.subscription_id"
                                     onClick={[Function]}
@@ -9478,7 +9478,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn82.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -9599,7 +9599,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn83.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -9617,7 +9617,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-subscription id *"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports_sn83.0.subscription_id"
                                     onClick={[Function]}
@@ -9793,7 +9793,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn83.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -9914,7 +9914,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn84.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -9932,7 +9932,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-subscription id *"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports_sn84.0.subscription_id"
                                     onClick={[Function]}
@@ -10108,7 +10108,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn84.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -10229,7 +10229,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn85.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -10371,7 +10371,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn85.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -10492,7 +10492,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn86.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -10510,7 +10510,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-subscription id *"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports_sn86.0.subscription_id"
                                     onClick={[Function]}
@@ -10686,7 +10686,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn86.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div
@@ -10807,7 +10807,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn87.0.subscription_id"
                                 >
-                                  subscription id
+                                  subscription id *
                                 </label>
                                  
                                 <div
@@ -10949,7 +10949,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn87.0.vlan"
                                 >
-                                  vlan
+                                  vlan *
                                 </label>
                                  
                                 <div

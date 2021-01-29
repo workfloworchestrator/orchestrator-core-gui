@@ -250,7 +250,14 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
     getProps(name: string) {
         let props = super.getProps(name);
         const translation_key = name.replace(/\.\d+(.\d+)*/, "_fields");
-        props.label = I18n.t(`forms.fields.${translation_key}`);
+        let label = I18n.t(`forms.fields.${translation_key}`);
+
+        // Mark required inputs. It would be better to have the `required` prop available in the form components as well
+        if (props.required && !props.readOnly && !props.isDisabled) {
+            label = `${label} *`;
+        }
+
+        props.label = label;
         props.description = I18n.t(`forms.fields.${translation_key}_info`, { defaultValue: "" });
         props.id = `input-${name}`;
 
