@@ -105,42 +105,43 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
         const field = super.getField(name);
         //@ts-ignore
         const { type = field.type } = this._compiledSchema[name];
+        const { format = field.format } = this._compiledSchema[name];
 
         if (!field.component) {
             if (type === "string") {
-                if (field.format === "subscriptionId") {
+                if (format === "subscriptionId") {
                     field.component = SubscriptionField;
-                } else if (field.format === "productId") {
+                } else if (format === "productId") {
                     field.component = ProductField;
-                } else if (field.format === "locationCode") {
+                } else if (format === "locationCode") {
                     field.component = LocationCodeField;
-                } else if (field.format === "organisationId") {
+                } else if (format === "organisationId") {
                     field.component = OrganisationField;
-                } else if (field.format === "contactPersonName") {
+                } else if (format === "contactPersonName") {
                     field.component = ContactPersonNameField;
-                } else if (field.format === "vlan") {
+                } else if (format === "vlan") {
                     field.component = VlanField;
-                } else if (field.format === "long") {
+                } else if (format === "long") {
                     field.component = LongTextField;
-                } else if (field.format === "label") {
+                } else if (format === "label") {
                     field.component = LabelField;
-                } else if (field.format === "summary") {
+                } else if (format === "summary") {
                     field.component = SummaryField;
-                } else if (field.format === "subscription") {
+                } else if (format === "subscription") {
                     field.component = SubscriptionSummaryField;
-                } else if (field.format === "accept") {
+                } else if (format === "accept") {
                     field.component = AcceptField;
-                } else if (field.format === "ipvanynetwork") {
+                } else if (format === "ipvanynetwork") {
                     field.component = IPvAnyNetworkField;
                 }
             } else if (type === "integer") {
-                if (field.format === "imsPortId") {
+                if (format === "imsPortId") {
                     field.component = ImsPortIdField;
-                } else if (field.format === "imsNodeId") {
+                } else if (format === "imsNodeId") {
                     field.component = ImsNodeIdField;
                 }
             } else if (type === "object") {
-                if (field.format === "optGroup") {
+                if (format === "optGroup") {
                     field.component = OptGroupField;
                 }
             }
