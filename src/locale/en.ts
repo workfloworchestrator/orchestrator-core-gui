@@ -574,7 +574,7 @@ I18n.translations.en = {
         terminatedWarning: "The info below may be outdated as the subscription they belong to is terminated!",
         failed_task: "See {{pid}}",
         customer_descriptions: "Customer description(s)",
-        stats_in_grafana: "Stats (SN8/NL8 products only)",
+        stats_in_grafana: "Stats",
         go_to_grafana: "Go to Grafana",
         networkdashboard_url: "Networkdashboard url (Customer subscriptions)",
         go_to_networkdashboard_url: "Go to Networkdashboard",
