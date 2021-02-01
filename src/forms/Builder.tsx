@@ -36,6 +36,7 @@ export function formInput<T extends { [index: string]: any }>(
                 label={I18n.t(i18nKey)}
                 labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}
                 isInvalid={false}
+                fullWidth={true}
             >
                 <EuiFieldText
                     id={name}
@@ -79,7 +80,11 @@ export function formSelect(
 
     return (
         <section className="form-divider">
-            <EuiFormRow label={I18n.t(i18nKey)} labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}>
+            <EuiFormRow
+                fullWidth={true}
+                label={I18n.t(i18nKey)}
+                labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}
+            >
                 <Select
                     className="select-status"
                     onChange={onChange}
@@ -117,6 +122,7 @@ export function formDate(
                 id={i18nKey}
                 label={I18n.t(i18nKey)}
                 labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}
+                fullWidth={true}
             >
                 <EuiDatePicker
                     selected={date}

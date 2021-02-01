@@ -17,7 +17,7 @@ import "components/ProductBlock.scss";
 
 import "./ProductBlock.scss";
 
-import { EuiButton, EuiFieldText } from "@elastic/eui";
+import { EuiButton } from "@elastic/eui";
 import { deleteProductBlock } from "api";
 import { productBlockById, productBlocks, resourceTypes, saveProductBlock } from "api/index";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
@@ -26,7 +26,7 @@ import { formDate, formInput, formSelect } from "forms/Builder";
 import I18n from "i18n-js";
 import React from "react";
 import { RouteComponentProps } from "react-router";
-import Select, { ValueType } from "react-select";
+import { ValueType } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { getParameterByName } from "utils/QueryParameters";
@@ -238,67 +238,6 @@ export default class ProductBlock extends React.Component<IProps, IState> {
         this.setState({ productBlock: productBlock });
     };
 
-    addResourceType = (option: ValueType<Option>) => {
-        const { productBlock, resourceTypes } = this.state;
-        const newResourceType = resourceTypes.find((rt) => rt.resource_type_id === (option as Option).value)!;
-        productBlock!.resource_types.push(newResourceType);
-        this.setState({ productBlock: productBlock });
-    };
-
-    removeResourceType = (resource_type_id: string) => (e: React.MouseEvent<HTMLElement>) => {
-        stop(e);
-        const { productBlock } = this.state;
-        productBlock!.resource_types = productBlock!.resource_types.filter(
-            (rt) => rt.resource_type_id !== resource_type_id
-        );
-        this.setState({ productBlock: productBlock });
-    };
-
-    renderResourceTypes = (productBlock: iProductBlock, resourceTypes: ResourceType[], readOnly: boolean) => {
-        const availableResourceTypes = resourceTypes.filter(
-            (rt) => !productBlock.resource_types.some((pbRt) => rt.resource_type_id === pbRt.resource_type_id)
-        );
-        return (
-            <section className="form-divider">
-                <label htmlFor="name">{I18n.t("metadata.productBlocks.resourceTypes")}</label>
-                <em>{I18n.t("metadata.productBlocks.resourceTypes_info")}</em>
-                <div className="child-form">
-                    {productBlock.resource_types.map((rt) => (
-                        <div key={rt.resource_type_id} className="resource-type">
-                            <EuiFieldText
-                                fullWidth={true}
-                                type="text"
-                                id={rt.resource_type_id}
-                                name={rt.resource_type_id}
-                                value={`${rt.resource_type.toUpperCase()} - ${rt.description}`}
-                                disabled={true}
-                            />
-                            <i className="fa fa-minus" onClick={this.removeResourceType(rt.resource_type_id)} />
-                        </div>
-                    ))}
-                    {!readOnly && (
-                        <Select
-                            className="select-resource-type"
-                            onChange={this.addResourceType}
-                            options={availableResourceTypes.map((rt) => ({
-                                value: rt.resource_type_id,
-                                label: `${rt.resource_type.toUpperCase()} - ${rt.description}`,
-                            }))}
-                            isSearchable={true}
-                            isClearable={false}
-                            placeholder={
-                                availableResourceTypes.length > 0
-                                    ? I18n.t("metadata.productBlocks.select_add_resource_type")
-                                    : I18n.t("metadata.productBlocks.select_no_more_resource_types")
-                            }
-                            isDisabled={readOnly || availableResourceTypes.length === 0}
-                        />
-                    )}
-                </div>
-            </section>
-        );
-    };
-
     render() {
         const {
             confirmationDialogOpen,
@@ -307,7 +246,6 @@ export default class ProductBlock extends React.Component<IProps, IState> {
             productBlock,
             leavePage,
             readOnly,
-            resourceTypes,
             duplicateName,
             initial,
             confirmationDialogQuestion,
@@ -351,15 +289,6 @@ export default class ProductBlock extends React.Component<IProps, IState> {
                         this.changeProperty("description"),
                         this.validateProperty("description")
                     )}
-                    {formInput(
-                        "metadata.productBlocks.tag",
-                        "tag",
-                        productBlock.tag || "",
-                        readOnly,
-                        this.state.errors,
-                        this.changeProperty("tag"),
-                        () => true
-                    )}
                     {formSelect(
                         "metadata.productBlocks.status",
                         this.changeProperty("status"),
@@ -367,7 +296,6 @@ export default class ProductBlock extends React.Component<IProps, IState> {
                         readOnly,
                         productBlock.status || "active"
                     )}
-                    {this.renderResourceTypes(productBlock, resourceTypes, readOnly)}
                     {formDate(
                         "metadata.productBlocks.created_at",
                         () => false,

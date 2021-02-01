@@ -1,66 +1,79 @@
-/*
- * Copyright 2019-2020 SURF.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
-import "pages/MetaData.scss";
-
-import { EuiPage, EuiPageBody } from "@elastic/eui";
+import { EuiPage, EuiPageBody, EuiPageHeaderSection, EuiTab, EuiTabs } from "@elastic/eui";
 import FixedInputConfiguration from "components/FixedInputConfiguration";
-import ProductBlocks from "components/ProductBlocks";
-import Products from "components/Products";
-import ResourceTypes from "components/ResourceTypes";
-import WorkFlows from "components/WorkFlows";
-import I18n from "i18n-js";
 import React from "react";
 import { RouteComponentProps } from "react-router";
-import ScrollUpButton from "react-scroll-up-button";
-import ApplicationContext from "utils/ApplicationContext";
-import { applyIdNamingConvention } from "utils/Utils";
+import { Link } from "react-router-dom";
 
-interface MatchParams {
-    type: string;
+import ProductBlocks from "../components/ProductBlocks";
+import Products from "../components/Products";
+import ResourceTypes from "../components/ResourceTypes";
+import WorkFlows from "../components/WorkFlows";
+
+const tabs = [
+    {
+        id: "products",
+        name: "PRODUCTS",
+        disabled: false,
+        href: "/metadata/products",
+    },
+    {
+        id: "product_blocks",
+        name: "PRODUCT BLOCKS",
+        disabled: false,
+        href: "/metadata/product_blocks",
+    },
+    {
+        id: "resource_types",
+        name: "RESOURCE TYPES",
+        disabled: false,
+        href: "/metadata/resource_types",
+    },
+    {
+        id: "fixed_inputs",
+        name: "FIXED INPUTS",
+        disabled: false,
+        href: "/metadata/fixed_inputs",
+    },
+    {
+        id: "workflows",
+        name: "WORKFLOWS",
+        disabled: false,
+        href: "/metadata/workflows",
+    },
+];
+
+interface MatchParam {}
+
+interface IProps extends RouteComponentProps<MatchParam> {
+    selectedTab: string;
 }
-interface IProps extends RouteComponentProps<MatchParams> {}
 
 interface IState {
-    tabs: string[];
-    selectedTab: string;
+    selectedTabId: string;
 }
 
 export default class MetaData extends React.Component<IProps, IState> {
     state: IState = {
-        tabs: ["products", "product_blocks", "resource_types", "fixed_inputs", "workflows"],
-        selectedTab: "products",
+        selectedTabId: this.props.selectedTab,
     };
 
-    switchTab = (tab: string) => () => {
-        this.context.redirect(`/metadata/${tab}`);
+    renderTabs = () => {
+        const { selectedTabId } = this.state;
+        return tabs.map((tab, index) => (
+            <Link to={tab.href} key={index}>
+                <EuiTab
+                    onClick={() => this.setState({ selectedTabId: tab.id })}
+                    isSelected={tab.id === selectedTabId}
+                    key={index}
+                >
+                    {tab.name}
+                </EuiTab>
+            </Link>
+        ));
     };
 
-    renderTab = (tab: string, selectedTab: string) => (
-        <span
-            id={`${applyIdNamingConvention(tab)}`}
-            key={tab}
-            className={tab === selectedTab ? "active" : ""}
-            onClick={this.switchTab(tab)}
-        >
-            {I18n.t(`metadata.tabs.${tab}`)}
-        </span>
-    );
-
-    renderTabContent = (selectedTab: string) => {
-        switch (selectedTab) {
+    renderPage = (selectedTabId: string) => {
+        switch (selectedTabId) {
             case "products":
                 return <Products />;
             case "product_blocks":
@@ -72,23 +85,22 @@ export default class MetaData extends React.Component<IProps, IState> {
             case "workflows":
                 return <WorkFlows />;
             default:
-                throw new Error(`Unknown tab ${selectedTab}`);
+                return <Products />;
         }
     };
 
     render() {
-        const { tabs } = this.state;
-        const selectedTab = this.props.match.params.type;
+        const { selectedTabId } = this.state;
+
         return (
             <EuiPage>
-                <EuiPageBody component="div" className="mod-metadata">
-                    <section className="tabs">{tabs.map((tab) => this.renderTab(tab, selectedTab))}</section>
-                    {this.renderTabContent(selectedTab)}
-                    <ScrollUpButton />
+                <EuiPageBody component="div">
+                    <EuiTabs>{this.renderTabs()}</EuiTabs>
+                    <EuiPageBody>
+                        <EuiPageHeaderSection>{this.renderPage(selectedTabId)}</EuiPageHeaderSection>
+                    </EuiPageBody>
                 </EuiPageBody>
             </EuiPage>
         );
     }
 }
-
-MetaData.contextType = ApplicationContext;

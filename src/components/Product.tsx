@@ -17,7 +17,7 @@ import "components/Product.scss";
 
 import "./Product.scss";
 
-import { EuiButton, EuiFieldText } from "@elastic/eui";
+import { EuiButton } from "@elastic/eui";
 import { deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes } from "api";
 import { allWorkflows, productBlocks, productById, products, saveProduct } from "api/index";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
@@ -26,13 +26,12 @@ import { formDate, formInput, formSelect } from "forms/Builder";
 import I18n from "i18n-js";
 import React from "react";
 import { RouteComponentProps } from "react-router";
-import Select, { ValueType } from "react-select";
+import { ValueType } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { getParameterByName } from "utils/QueryParameters";
-import { FixedInput, FixedInputConfiguration, Option, ProductBlock, Workflow, Product as iProduct } from "utils/types";
+import { FixedInputConfiguration, Option, ProductBlock, Workflow, Product as iProduct } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
-import { TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE } from "validations/Products";
 
 const TAG_LIGHTPATH = "LightPath";
 
@@ -286,21 +285,6 @@ export default class Product extends React.Component<IProps, IState> {
         this.setState({ errors: errors });
     };
 
-    changeWorkflow = (target: string, multi: boolean = false) => (option: ValueType<Option>) => {
-        const { product, workflows } = this.state;
-
-        const otherWorkflows = product!.workflows.filter((wf) => wf.target !== target);
-        if (!option) {
-            product!.workflows = [...otherWorkflows];
-        } else if (multi) {
-            const names = (option as Option[]).map((opt) => opt.value);
-            product!.workflows = workflows.filter((wf) => names.indexOf(wf.name) > -1).concat(otherWorkflows);
-        } else {
-            product!.workflows = [workflows.find((wf) => wf.name === (option as Option).value)!].concat(otherWorkflows);
-        }
-        this.setState({ product: product });
-    };
-
     changeProperty = (name: keyof iProduct) => (
         e:
             | Date
@@ -325,174 +309,6 @@ export default class Product extends React.Component<IProps, IState> {
         }
     };
 
-    addProductBlock = (option: ValueType<Option>) => {
-        const { product, productBlocks } = this.state;
-
-        const newProductBlock = productBlocks.find((pb) => pb.product_block_id === (option as Option).value)!;
-        product!.product_blocks.push(newProductBlock);
-        this.setState({ product: product });
-    };
-
-    removeProductBlock = (product_block_id: string) => (e: React.MouseEvent<HTMLElement>) => {
-        stop(e);
-        const { product } = this.state;
-
-        product!.product_blocks = product!.product_blocks.filter((pb) => pb.product_block_id !== product_block_id);
-        this.setState({ product: product });
-    };
-
-    addFixedInput = (allowedFixedInputs: FixedInputConf[]) => (option: ValueType<Option>) => {
-        const { product } = this.state;
-
-        const fi = allowedFixedInputs.find((fi) => fi.name === (option as Option).value)!;
-        product!.fixed_inputs.push({ name: fi.name, value: fi.values[0] } as FixedInput);
-        this.setState({ product: product });
-    };
-
-    fixedInputValueChanged = (index: number) => (option: ValueType<Option>) => {
-        const { product } = this.state;
-
-        const newValue = (option as Option).value;
-        const fixedInput = product!.fixed_inputs[index];
-        fixedInput.value = newValue;
-        this.setState({ product: product });
-    };
-
-    removeFixedInput = (index: number) => (e: React.MouseEvent<HTMLElement>) => {
-        stop(e);
-        const { product } = this.state;
-
-        product!.fixed_inputs.splice(index, 1);
-        this.setState({ product: product });
-    };
-
-    workFlowKeys = (type: string, workflows: Workflow[]) =>
-        workflows.filter((wf) => wf.target === type).map((wf) => ({ label: wf.description, value: wf.name }));
-
-    workFlowByTarget = (product: iProduct, target: string, multiValues: boolean = false) => {
-        const workflows = product.workflows.filter((wf) => wf.target === target).map((wf) => wf.name);
-        return multiValues ? workflows : isEmpty(workflows) ? undefined : workflows[0];
-    };
-
-    renderSingleFixedInput = (
-        fixedInput: FixedInput,
-        index: number,
-        allowedFixedInputs: FixedInputConf[],
-        readOnly: boolean
-    ) => {
-        const fixedInputConf = allowedFixedInputs.find((fi) => fi.name === fixedInput.name);
-        const values = fixedInputConf ? fixedInputConf.values : [];
-        const required = fixedInputConf ? fixedInputConf.required : true;
-
-        const options = values.map((val) => ({ value: val, label: val }));
-        const value = options.find((option) => option.value === fixedInput.value);
-
-        return (
-            <div key={index} className="fixed-input">
-                <div className="wrapper">
-                    {index === 0 && <label>{I18n.t("metadata.products.fixed_inputs_name")}</label>}
-                    <EuiFieldText fullWidth={true} type="text" value={fixedInput.name} disabled={true} />
-                </div>
-                <div className="wrapper">
-                    {index === 0 && <label>{I18n.t("metadata.products.fixed_inputs_value")}</label>}
-                    <Select
-                        className="select-fixed-input-value"
-                        onChange={this.fixedInputValueChanged(index)}
-                        options={options}
-                        isSearchable={false}
-                        value={value}
-                        isClearable={false}
-                        isDisabled={readOnly}
-                    />
-                </div>
-                {!required && <i className="fa fa-minus first" onClick={this.removeFixedInput(index)} />}
-            </div>
-        );
-    };
-
-    renderFixedInputs = (product: iProduct, readOnly: boolean) => {
-        const fixedInputs = product.fixed_inputs;
-        const { allowedFixedInputs } = this.state;
-        const availableFixedInputs = allowedFixedInputs.filter(
-            (afi) => !fixedInputs.some((fi) => afi.name === fi.name)
-        );
-        return (
-            <section className="form-divider">
-                <label>{I18n.t("metadata.products.fixed_inputs")}</label>
-                <em>{I18n.t("metadata.products.fixed_inputs_info")}</em>
-                <div className="child-form">
-                    {fixedInputs.map((fv, index) =>
-                        this.renderSingleFixedInput(fv, index, allowedFixedInputs, readOnly)
-                    )}
-
-                    {!readOnly && (
-                        <Select
-                            className="select-fixed-input"
-                            onChange={this.addFixedInput(allowedFixedInputs)}
-                            options={availableFixedInputs.map((fi) => ({
-                                value: fi.name,
-                                label: fi.name,
-                            }))}
-                            isSearchable={false}
-                            isClearable={false}
-                            placeholder={
-                                availableFixedInputs.length > 0
-                                    ? I18n.t("metadata.products.select_add_fixed_input")
-                                    : I18n.t("metadata.products.select_no_more_fixed_inputs")
-                            }
-                            isDisabled={readOnly || availableFixedInputs.length === 0}
-                        />
-                    )}
-                </div>
-            </section>
-        );
-    };
-
-    renderProductBlocks = (product: iProduct, productBlocks: ProductBlock[], readOnly: boolean) => {
-        const availableProductBlocks = productBlocks.filter(
-            (pb) => !product.product_blocks.some((pPb) => pb.product_block_id === pPb.product_block_id)
-        );
-        return (
-            <section className="form-divider">
-                <label htmlFor="name">{I18n.t("metadata.products.product_blocks")}</label>
-                <em>{I18n.t("metadata.products.product_blocks_info")}</em>
-                <div className="child-form">
-                    {product.product_blocks.map((pb) => (
-                        <div key={pb.product_block_id} className="product-block">
-                            <EuiFieldText
-                                fullWidth={true}
-                                type="text"
-                                id={pb.product_block_id}
-                                name={pb.product_block_id}
-                                value={`${pb.name.toUpperCase()} - ${pb.description}`}
-                                disabled={true}
-                            />
-                            <i className="fa fa-minus" onClick={this.removeProductBlock(pb.product_block_id)} />
-                        </div>
-                    ))}
-                    {!readOnly && (
-                        <Select
-                            className="select-product-block"
-                            onChange={this.addProductBlock}
-                            options={availableProductBlocks.map((pb) => ({
-                                value: pb.product_block_id,
-                                label: `${pb.name.toUpperCase()} - ${pb.description}`,
-                            }))}
-                            isSearchable={true}
-                            isClearable={false}
-                            placeholder={
-                                availableProductBlocks.length > 0
-                                    ? I18n.t("metadata.products.select_add_product_block")
-                                    : I18n.t("metadata.products.select_no_more_product_blocks")
-                            }
-                            isDisabled={readOnly || availableProductBlocks.length === 0}
-                        />
-                    )}
-                </div>
-            </section>
-        );
-    };
-
     render() {
         const {
             confirmationDialogOpen,
@@ -501,13 +317,9 @@ export default class Product extends React.Component<IProps, IState> {
             product,
             leavePage,
             readOnly,
-            productBlocks,
-            workflows,
             duplicateName,
             initial,
             confirmationDialogQuestion,
-            tags,
-            types,
             statuses,
         } = this.state;
 
@@ -551,53 +363,12 @@ export default class Product extends React.Component<IProps, IState> {
                         this.validateProperty("description")
                     )}
                     {formSelect(
-                        "metadata.products.tag",
-                        this.changeProperty("tag"),
-                        tags,
-                        readOnly,
-                        product.tag || TAG_LIGHTPATH
-                    )}
-                    {formSelect(
-                        "metadata.products.product_type",
-                        this.changeProperty("product_type"),
-                        types,
-                        readOnly,
-                        product.product_type || "Port"
-                    )}
-                    {formSelect(
                         "metadata.products.status",
                         this.changeProperty("status"),
                         statuses,
                         readOnly,
                         product.status || "active"
                     )}
-                    {formSelect(
-                        "metadata.products.create_subscription_workflow_key",
-                        this.changeWorkflow(TARGET_CREATE),
-                        this.workFlowKeys(TARGET_CREATE, workflows),
-                        readOnly,
-                        this.workFlowByTarget(product, TARGET_CREATE),
-                        true
-                    )}
-                    {formSelect(
-                        "metadata.products.modify_subscription_workflow_key",
-                        this.changeWorkflow(TARGET_MODIFY, true),
-                        this.workFlowKeys(TARGET_MODIFY, workflows),
-                        readOnly,
-                        this.workFlowByTarget(product, TARGET_MODIFY, true),
-                        true,
-                        true
-                    )}
-                    {formSelect(
-                        "metadata.products.terminate_subscription_workflow_key",
-                        this.changeWorkflow(TARGET_TERMINATE),
-                        this.workFlowKeys(TARGET_TERMINATE, workflows),
-                        readOnly,
-                        this.workFlowByTarget(product, TARGET_TERMINATE),
-                        true
-                    )}
-                    {this.renderProductBlocks(product, productBlocks, readOnly)}
-                    {this.renderFixedInputs(product, readOnly)}
                     {formDate(
                         "metadata.products.created_at",
                         () => false,
