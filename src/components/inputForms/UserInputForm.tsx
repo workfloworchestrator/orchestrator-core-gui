@@ -19,6 +19,7 @@ import { EuiButton, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { SubscriptionsContextProvider } from "components/subscriptionContext";
 import I18n from "i18n-js";
+import invariant from "invariant";
 import { JSONSchema6 } from "json-schema";
 import {
     AcceptField,
@@ -100,9 +101,25 @@ filterDOMProps.register("examples");
 filterDOMProps.register("allOf");
 filterDOMProps.register("options");
 
+function resolveRef(reference: string, schema: Record<string, any>) {
+    invariant(
+        reference.startsWith("#"),
+        'Reference is not an internal reference, and only such are allowed: "%s"',
+        reference
+    );
+
+    const resolvedReference = reference
+        .split("/")
+        .filter((part) => part && part !== "#")
+        .reduce((definition, next) => definition[next], schema);
+
+    invariant(resolvedReference, 'Reference not found in schema: "%s"', reference);
+
+    return resolvedReference;
+}
 class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
     getField(name: string) {
-        const field = super.getField(name);
+        const field = this.getFieldFixed(name);
         //@ts-ignore
         const { type = field.type } = this._compiledSchema[name];
         const { format = field.format } = this._compiledSchema[name];
@@ -148,6 +165,86 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
         }
 
         return field;
+    }
+
+    // This a copy of the super class function to provide a fix for https://github.com/vazco/uniforms/issues/863
+    getFieldFixed(name: string) {
+        return joinName(null, name).reduce((definition, next, nextIndex, array) => {
+            const previous = joinName(array.slice(0, nextIndex));
+            const isRequired = get(
+                definition,
+                "required",
+                get(this._compiledSchema, [previous, "required"], [])
+            ).includes(next);
+
+            const _key = joinName(previous, next);
+            const _definition = this._compiledSchema[_key] || {};
+
+            if (next === "$" || next === "" + parseInt(next, 10)) {
+                invariant(definition.type === "array", 'Field not found in schema: "%s"', name);
+                definition = Array.isArray(definition.items) ? definition.items[parseInt(next, 10)] : definition.items;
+            } else if (definition.type === "object") {
+                invariant(definition.properties, 'Field properties not found in schema: "%s"', name);
+                definition = definition.properties[next];
+            } else {
+                const [{ properties: combinedDefinition = {} } = {}] = ["allOf", "anyOf", "oneOf"]
+                    .filter((key) => definition[key])
+                    .map((key) => {
+                        // FIXME: Correct type for `definition`.
+                        const localDef = (definition[key] as any[]).map((subSchema) =>
+                            subSchema.$ref ? resolveRef(subSchema.$ref, this.schema) : subSchema
+                        );
+                        return localDef.find(({ properties = {} }) => properties[next]);
+                    });
+
+                definition = combinedDefinition[next];
+            }
+
+            invariant(definition, 'Field not found in schema: "%s"', name);
+
+            if (definition.$ref) {
+                definition = resolveRef(definition.$ref, this.schema);
+            }
+
+            ["allOf", "anyOf", "oneOf"].forEach((key) => {
+                if (definition[key]) {
+                    // FIXME: Correct type for `definition`.
+                    _definition[key] = (definition[key] as any[]).map((def) =>
+                        def.$ref ? resolveRef(def.$ref, this.schema) : def
+                    );
+                }
+            });
+
+            // Naive computation of combined type, properties and required
+            const combinedPartials: any[] = []
+                .concat(_definition.allOf, _definition.anyOf, _definition.oneOf)
+                .filter(Boolean);
+
+            if (combinedPartials.length) {
+                _definition.properties = definition.properties ?? {};
+                _definition.required = definition.required ?? [];
+
+                combinedPartials.forEach((combinedPartial) => {
+                    const { properties, required } = combinedPartial;
+                    if (properties) {
+                        Object.assign(_definition.properties, properties);
+                    }
+                    if (required) {
+                        _definition.required.push(...required);
+                    }
+
+                    for (const key in combinedPartial) {
+                        if (combinedPartial[key] && !_definition[key]) {
+                            _definition[key] = combinedPartial[key];
+                        }
+                    }
+                });
+            }
+
+            this._compiledSchema[_key] = Object.assign(_definition, { isRequired });
+
+            return definition;
+        }, this.schema);
     }
 
     getProps(name: string) {
