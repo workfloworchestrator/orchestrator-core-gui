@@ -13,11 +13,10 @@
  *
  */
 
-import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
-import DatePickerCustom from "components/DatePickerCustom";
+import { EuiDatePicker, EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import I18n from "i18n-js";
+import moment, { Moment } from "moment";
 import React from "react";
-import DatePicker from "react-datepicker";
 import Select, { ValueType } from "react-select";
 import { Option } from "utils/types";
 
@@ -36,8 +35,8 @@ export function formInput<T extends { [index: string]: any }>(
             <EuiFormRow
                 label={I18n.t(i18nKey)}
                 labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}
-                isInvalid={true}
-                error={"Floemp"}
+                isInvalid={false}
+                fullWidth={true}
             >
                 <EuiFieldText
                     id={name}
@@ -81,7 +80,11 @@ export function formSelect(
 
     return (
         <section className="form-divider">
-            <EuiFormRow label={I18n.t(i18nKey)} labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}>
+            <EuiFormRow
+                fullWidth={true}
+                label={I18n.t(i18nKey)}
+                labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}
+            >
                 <Select
                     className="select-status"
                     onChange={onChange}
@@ -104,21 +107,27 @@ export function formDate(
     value: Date | null,
     openToDate = new Date()
 ) {
+    console.log(value);
+
+    const date = value ? moment(value) : null;
+
+    const handleChange = (date: Moment) => {
+        // internal change function only needed to convert moment to date (so old code is use-able)
+        onChange(date.toDate());
+    };
+
     return (
         <section className="form-divider">
             <EuiFormRow
                 id={i18nKey}
                 label={I18n.t(i18nKey)}
                 labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}
+                fullWidth={true}
             >
-                <DatePicker
-                    selected={value}
-                    isClearable={false}
-                    onChange={onChange}
-                    openToDate={openToDate}
-                    customInput={
-                        <DatePickerCustom disabled={readOnly} onClick={onChange} clear={() => onChange(null)} />
-                    }
+                <EuiDatePicker
+                    selected={date}
+                    onClear={() => onChange(null)}
+                    onChange={handleChange}
                     disabled={readOnly}
                 />
             </EuiFormRow>
