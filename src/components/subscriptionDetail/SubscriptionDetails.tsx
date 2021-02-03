@@ -58,21 +58,6 @@ function renderGrafanaLink(subscription: Subscription, product: Product) {
                 </td>
             </tr>
         );
-    } else if (product.product_type === "Node") {
-        return (
-            <tr>
-                <td id="subscriptions-stats_in_grafana-k">{I18n.t("subscriptions.stats_in_grafana")}</td>
-                <td id="subscriptions-stats_in_grafana-v">
-                    <a
-                        href={`https://grafana.surf.net/d/000000020/?&var-Hostname=${node_name}.dcn.surf.net`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        {I18n.t("subscriptions.go_to_grafana")}
-                    </a>
-                </td>
-            </tr>
-        );
     } else {
         return null;
     }
