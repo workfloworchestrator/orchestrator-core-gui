@@ -309,7 +309,8 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
     }
 
     _makeConnectionExplanation = (endpoint: IMSEndpoint, sap: any, sub: SubscriptionModel): JSX.Element => {
-        const portmode = sub.sp.port_mode ? sub.sp.port_mode : "N/A";
+        const block = sub.sp ?? sub.aggsp ?? sub.irb;
+        const portmode = block.port_mode ? block.port_mode : "N/A";
         const vlanRange = sap.vlanrange;
         return (
             <EuiCodeBlock>
@@ -355,7 +356,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
 
         return (
             <div>
-                {endpoint && this._makeConnectionExplanation(endpoint, sap, sub!)}
+                {endpoint && this._makeConnectionExplanation(endpoint, sap, sub)}
                 <EuiCodeBlock>
                     <strong>asn :</strong> {prefixInstance.asn__label}
                     <br />
@@ -416,10 +417,9 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                 return;
             }
 
-            const endpoint = imsEndpoints[0].find(
-                (e: IMSEndpoint) => e.serviceId === portSubscription!.sp.ims_circuit_id
-            );
-            const label = `${endpoint?.node}__${endpoint?.port.replace(/\//g, "_")}`;
+            const block = portSubscription.sp ?? portSubscription.aggsp ?? portSubscription.irb;
+            const endpoint = imsEndpoints[0].find((e: IMSEndpoint) => e.serviceId === block.ims_circuit_id);
+            const label = endpoint?.port ? `${endpoint?.node}__${endpoint?.port.replace(/\//g, "_")}` : endpoint?.name;
             const point = this._calculatePositionFor(radius, index, subscription.vc.saps.length);
             const node = this._makeNode(
                 sap.port_subscription_id,
@@ -428,7 +428,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                 60 + point.y,
                 "hub"
             );
-            node.text = this._makePrefixExplanation(endpoint!, portSubscription!, sap!);
+            node.text = this._makePrefixExplanation(endpoint!, portSubscription, sap!);
             topology.names.push(node);
             topology.nodes.push(node);
         });
