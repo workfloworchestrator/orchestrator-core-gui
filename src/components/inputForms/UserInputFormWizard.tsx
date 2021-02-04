@@ -93,11 +93,19 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
             return null;
         }
 
+        /* Generate a key based on input widget names that results in a new
+         * clean instance + rerender of UserInputForm if the form changes. Without this, state of previous,
+         * wizard step can cause wrong/weird defaul values for forms inputs.
+         *
+         * Note: to ensure a new form for multiple form wizard steps with exactly the same field
+         * the hash is calculated on the form object itself, which generates a unique hash as it
+         * has a changing ".length" attribute.
+         * */
+        const key = hash.sha1(currentForm.form);
+
         return (
             <UserInputForm
-                // Generate a key based on input widget names that results in a new
-                // instance of UserInputForm if the form changes
-                key={hash.sha1(currentForm.form.properties)}
+                key={key}
                 stepUserInput={currentForm.form}
                 validSubmit={this.submit}
                 previous={this.previous}
