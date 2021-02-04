@@ -144,7 +144,7 @@ export function tableSettingsReducer<T extends object>(
             case ActionType.FILTER_CLEAR: {
                 let index = draft.filterBy.findIndex((entry) => entry.id === action.id);
                 if (index > -1) {
-                    draft.filterBy.splice(index);
+                    draft.filterBy.splice(index, 1);
                 }
                 break;
             }
