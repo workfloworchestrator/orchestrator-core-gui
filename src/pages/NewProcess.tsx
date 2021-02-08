@@ -16,16 +16,15 @@
 import "pages/NewProcess.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
-import { catchErrorStatus, startProcess, validation } from "api";
+import { catchErrorStatus, startProcess } from "api";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
-import ProductValidationComponent from "components/ProductValidation";
 import I18n from "i18n-js";
 import { JSONSchema6 } from "json-schema";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { productById } from "utils/Lookups";
-import { EngineStatus, FormNotCompleteResponse, ProductValidation } from "utils/types";
+import { EngineStatus, FormNotCompleteResponse } from "utils/types";
 import { isEmpty } from "utils/Utils";
 import { TARGET_CREATE } from "validations/Products";
 
@@ -49,7 +48,6 @@ interface Form {
 export default function NewProcess(props: IProps) {
     const { preselectedInput } = props;
     const { products, redirect } = useContext(ApplicationContext);
-    const [productValidation, setProductValidation] = useState<ProductValidation | undefined>(undefined);
     const [form, setForm] = useState<Form>({});
     const { stepUserInput, hasNext } = form;
 
@@ -62,10 +60,6 @@ export default function NewProcess(props: IProps) {
             const productId = (processInput as { product: string }[])[0].product;
             const product = productById(productId, products);
             const workflow = product.workflows.find((wf) => wf.target === TARGET_CREATE)!.name;
-
-            if (!productValidation) {
-                validation(productId).then((productValidation) => setProductValidation(productValidation));
-            }
 
             let promise = startProcess(workflow, processInput).then(
                 (process) => {
@@ -82,7 +76,7 @@ export default function NewProcess(props: IProps) {
                 redirect("/processes");
             });
         },
-        [redirect, products, productValidation, preselectedInput]
+        [redirect, products, preselectedInput]
     );
 
     useEffect(() => {
@@ -119,12 +113,6 @@ export default function NewProcess(props: IProps) {
             <EuiPageBody component="div" className="mod-new-process">
                 <section className="card">
                     <h1>{I18n.t("process.new_process")}</h1>
-                    {!!(productValidation?.valid === false && !!productValidation.product) && (
-                        <section>
-                            <label htmlFor="none">{I18n.t("process.product_validation")}</label>
-                            <ProductValidationComponent validation={productValidation} />
-                        </section>
-                    )}
                     {stepUserInput && (
                         <UserInputFormWizard
                             stepUserInput={stepUserInput}
