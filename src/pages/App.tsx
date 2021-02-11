@@ -27,8 +27,8 @@ import ProductPage from "components/Product";
 import ProductBlock from "components/ProductBlock";
 import ProtectedRoute from "components/ProtectedRoute";
 import { createBrowserHistory } from "history";
+import MetaData from "pages/MetaData";
 import ModifySubscription from "pages/ModifySubscription";
-import NewMetaData from "pages/NewMetaData";
 import NewProcess from "pages/NewProcess";
 import NewTask from "pages/NewTask";
 import NotAllowed from "pages/NotAllowed";
@@ -218,7 +218,7 @@ class App extends React.PureComponent<{}, IState> {
                                 <Route exact path="/metadata" render={() => <Redirect to="/metadata/products" />} />
                                 <ProtectedRoute
                                     path="/metadata/:type"
-                                    render={(props) => <NewMetaData selectedTab={props.match.params.type} {...props} />}
+                                    render={(props) => <MetaData selectedTab={props.match.params.type} {...props} />}
                                 />
                                 <ProtectedRoute path="/product/:id" render={(props) => <ProductPage {...props} />} />
                                 <ProtectedRoute

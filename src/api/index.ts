@@ -30,7 +30,6 @@ import {
     ProcessWithDetails,
     Product,
     ProductBlock,
-    ProductValidation,
     ResourceType,
     ServicePortFilterItem,
     ServicePortSubscription,
@@ -382,10 +381,6 @@ export function retryProcess(processId: string) {
 
 export function fixedInputConfiguration(): Promise<FixedInputConfiguration> {
     return fetchJson("fixed_inputs/configuration");
-}
-
-export function validation(productId: string): Promise<ProductValidation> {
-    return fetchJson(`products/${productId}/validate`);
 }
 
 export function contacts(organisationId: string): Promise<ContactPerson[]> {

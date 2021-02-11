@@ -35,12 +35,20 @@ function AdvancedSearch<T extends object>({ state, dispatch }: IProps<T>) {
                     placeholder={I18n.t("subscriptions.advancedSearchPlaceHolder")}
                     value={state.filterBy.find((column) => column.id === "tsv")?.values[0] ?? ""}
                     onChange={(searchPhrase) => {
-                        searchPhrase &&
-                            dispatch({
-                                type: ActionType.FILTER_REPLACE,
-                                id: "tsv",
-                                values: [searchPhrase.target.value],
-                            });
+                        if (searchPhrase) {
+                            if (searchPhrase.target.value) {
+                                dispatch({
+                                    type: ActionType.FILTER_REPLACE,
+                                    id: "tsv",
+                                    values: [searchPhrase.target.value],
+                                });
+                            } else {
+                                dispatch({
+                                    type: ActionType.FILTER_CLEAR,
+                                    id: "tsv",
+                                });
+                            }
+                        }
                     }}
                     isClearable={true}
                     fullWidth

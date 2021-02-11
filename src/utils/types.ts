@@ -382,29 +382,6 @@ export interface WorkflowReasons {
     reason?: string;
 }
 
-export interface ProductValidationError {
-    error: string;
-    name: string;
-    block?: string;
-}
-
-export interface ProductValidationMapping {
-    [index: string]: { [index: string]: string }[];
-}
-
-export interface ProductValidation {
-    product: { name: string; workflow: string; description: string };
-    valid: boolean;
-    mapping: ProductValidationMapping;
-    errors: ProductValidationError[];
-}
-
-export interface FixedInputValidation {
-    name: string;
-    id: string;
-    errors: { name: string; error: string; value: string }[];
-}
-
 export type GlobalStatus = "RUNNING" | "PAUSED" | "PAUSING";
 
 export interface EngineStatus {

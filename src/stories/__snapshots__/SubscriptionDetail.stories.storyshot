@@ -286,7 +286,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                     <td
                       id="subscriptions-stats_in_grafana-k"
                     >
-                      Stats (SN8/NL8 products only)
+                      Stats
                     </td>
                     <td
                       id="subscriptions-stats_in_grafana-v"
