@@ -327,8 +327,6 @@ export function getExternalTypeData(
                 ),
                 i18nKey: "subscription",
             };
-        case "ipv4_ipam_id":
-        case "ipv6_ipam_id":
         case "ptp_ipv4_ipam_id":
         case "ptp_ipv6_ipam_id":
         case "ipam_prefix_id":
@@ -339,6 +337,8 @@ export function getExternalTypeData(
                 render: (data: IPAMPrefix) => <IpamPrefix prefix={data} />,
                 i18nKey: "ipam_prefix",
             };
+        case "ipv4_ipam_address_id":
+        case "ipv6_ipam_address_id":
         case "node_ipv4_ipam_id":
         case "node_ipv6_ipam_id":
         case "corelink_ipv4_ipam_id":

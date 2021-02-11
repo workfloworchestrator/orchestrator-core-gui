@@ -13,126 +13,58 @@
  *
  */
 
-import "components/ProductBlocks.scss";
-
-import { EuiButton, EuiFieldSearch, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
-import { deleteProductBlock, productBlocks } from "api/index";
-import DropDownActions from "components/DropDownActions";
+import {
+    EuiBadge,
+    EuiButtonIcon,
+    EuiInMemoryTable,
+    EuiPageContent,
+    EuiPageContentHeader,
+    EuiSpacer,
+} from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import I18n from "i18n-js";
-import debounce from "lodash/debounce";
 import React from "react";
-import ApplicationContext from "utils/ApplicationContext";
-import { setFlash } from "utils/Flash";
-import { renderDateTime } from "utils/Lookups";
-import { ProductBlock, SortOption } from "utils/types";
-import { isEmpty, stop } from "utils/Utils";
 
-import ActionContainer from "./ActionContainer";
+import { deleteProductBlock, productBlocks } from "../api/index";
+import { setFlash } from "../utils/Flash";
+import { renderDateTime } from "../utils/Lookups";
+import { ProductBlock } from "../utils/types";
+import { stop } from "../utils/Utils";
 
-interface Action {
-    show: boolean;
-    id: string;
-}
-
-type Column = "name" | "description" | "status" | "tag" | "resource_types" | "created_at" | "resource_types_string";
-
-interface ProductBlockWithExtra extends ProductBlock {
-    resource_types_string: string;
-}
+const data = productBlocks;
 
 interface IState {
-    productBlocks: ProductBlockWithExtra[];
-    filteredProductBlocks: ProductBlockWithExtra[];
-    query: string;
-    actions: Action;
-    sorted: SortOption<Column>;
+    productBlocks: ProductBlock[];
+    productBlocksLoaded: boolean;
+    isLoading: boolean;
     confirmationDialogOpen: boolean;
     confirmationDialogAction: () => void;
     confirm: () => void;
     confirmationDialogQuestion: string;
-    refresh: boolean;
+    leavePage: boolean;
 }
 
-export default class ProductBlocks extends React.Component<{}, IState> {
+export default class ProductBlocks extends React.Component {
     state: IState = {
         productBlocks: [],
-        filteredProductBlocks: [],
-        query: "",
-        actions: { show: false, id: "" },
-        sorted: { name: "name", descending: true },
+        productBlocksLoaded: true,
+        isLoading: false,
         confirmationDialogOpen: false,
         confirmationDialogAction: () => this,
         confirm: () => this,
         confirmationDialogQuestion: "",
-        refresh: true,
+        leavePage: true,
     };
 
     componentDidMount() {
-        productBlocks().then((res) => {
-            const productBlocks = res
-                .map((pb: Partial<ProductBlockWithExtra>) => {
-                    pb.resource_types_string = (pb.resource_types || []).map((rt) => rt.resource_type).join(", ");
-                    return pb as ProductBlockWithExtra;
-                })
-                .sort(this.sortBy(this.state.sorted.name));
-            this.setState({ productBlocks: productBlocks, filteredProductBlocks: productBlocks });
+        data().then((productBlocks) => {
+            this.setState({ productBlocks: productBlocks, productBlocksLoaded: false });
         });
     }
 
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
 
-    editProductBlock = (
-        productBlock: ProductBlockWithExtra | undefined,
-        readOnly: boolean = true,
-        newProductBlock: boolean = false
-    ) => () => {
-        this.context.redirect(
-            `/product-block/${newProductBlock ? "new" : productBlock!.product_block_id}?readOnly=${readOnly}`
-        );
-    };
-
-    search = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const target: HTMLInputElement = e.target;
-        const query = target.value;
-        this.setState({ query: query });
-        this.delayedSearch(query);
-    };
-
-    doSearchAndSort = (query: string, productBlocks: ProductBlockWithExtra[], sorted: SortOption<Column>) => {
-        if (!isEmpty(query)) {
-            const queryToLower = query.toLowerCase();
-            const searchable: Column[] = ["name", "description", "tag", "status", "resource_types_string"];
-            productBlocks = productBlocks.filter((pb) =>
-                searchable
-                    .filter((search) => pb[search])
-                    .map((search) => (pb[search] as string).toLowerCase().indexOf(queryToLower))
-                    .some((indexOf) => indexOf > -1)
-            );
-        }
-        productBlocks.sort(this.sortBy(sorted.name));
-        return sorted.descending ? productBlocks.reverse() : productBlocks;
-    };
-
-    delayedSearch = debounce((query) => {
-        const productBlocks = [...this.state.productBlocks];
-        this.setState({
-            query: query,
-            filteredProductBlocks: this.doSearchAndSort(query, productBlocks, this.state.sorted),
-        });
-    }, 250);
-
-    toggleActions = (productBlock: ProductBlockWithExtra, actions: Action) => (
-        e: React.MouseEvent<HTMLTableDataCellElement>
-    ) => {
-        stop(e);
-        const newShow = actions.id === productBlock.product_block_id ? !actions.show : true;
-        this.setState({
-            actions: { show: newShow, id: productBlock.product_block_id },
-        });
-    };
-
-    handleDeleteProductBlock = (productBlock: ProductBlockWithExtra) => (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleDeleteProductBlock = (productBlock: ProductBlock) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
         this.confirmation(
             I18n.t("metadata.deleteConfirmation", {
@@ -172,193 +104,131 @@ export default class ProductBlocks extends React.Component<{}, IState> {
             },
         });
 
-    renderActions = (productBlock: ProductBlockWithExtra, actions: Action) => {
-        const actionId = productBlock.product_block_id;
-        if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
-            return null;
-        }
-        const view = {
-            icon: "fa fa-search-plus",
-            euiIcon: "search",
-            label: "view",
-            action: this.editProductBlock(productBlock, true, false),
-        };
-        const edit = {
-            icon: "fa fa-edit",
-            euiIcon: "pencil",
-            label: "edit",
-            action: this.editProductBlock(productBlock, false, false),
-        };
-        const _delete = {
-            icon: "fas fa-trash-alt",
-            euiIcon: "trash",
-            label: "delete",
-            action: this.handleDeleteProductBlock(productBlock),
-            danger: true,
-        };
-        const options = [view, edit, _delete];
-        return <DropDownActions options={options} i18nPrefix="metadata.productBlocks" />;
-    };
-
-    sortBy = (name: Column) => (a: ProductBlockWithExtra, b: ProductBlockWithExtra) => {
-        const aSafe = a[name] || "";
-        const bSafe = b[name] || "";
-        return typeof aSafe === "string"
-            ? aSafe.toLowerCase().localeCompare((bSafe as string).toLowerCase())
-            : (aSafe as number) - (bSafe as number);
-    };
-
-    sort = (name: Column) => (e: React.MouseEvent<HTMLTableHeaderCellElement>) => {
-        stop(e);
-        const sorted = { ...this.state.sorted };
-        const filteredProductBlocks = [...this.state.filteredProductBlocks].sort(this.sortBy(name));
-
-        sorted.descending = sorted.name === name ? !sorted.descending : false;
-        sorted.name = name;
-        this.setState({
-            filteredProductBlocks: sorted.descending ? filteredProductBlocks.reverse() : filteredProductBlocks,
-            sorted: sorted,
-        });
-    };
-
-    sortColumnIcon = (name: Column, sorted: SortOption) => {
-        if (sorted.name === name) {
-            return <i className={sorted.descending ? "fas fa-sort-down" : "fas fa-sort-up"} />;
-        }
-        return <i />;
-    };
-
-    renderProductBlocks(productBlocks: ProductBlockWithExtra[], actions: Action, sorted: SortOption) {
-        const columns: Column[] = ["name", "description", "status", "tag", "resource_types", "created_at"];
-        const th = (index: number) => {
-            const name = columns[index];
-            return (
-                <th key={index} className={name} onClick={this.sort(name)}>
-                    <span>{I18n.t(`metadata.productBlocks.${name}`)}</span>
-                    {this.sortColumnIcon(name, sorted)}
-                </th>
-            );
-        };
-
-        if (productBlocks.length !== 0) {
-            return (
-                <table className="product-blocks">
-                    <thead>
-                        <tr>
-                            {columns.map((column, index) => th(index))}
-                            <th className="actions">
-                                <span>{I18n.t("metadata.productBlocks.actions")}</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {productBlocks.map((productBlock, index) => (
-                            <tr
-                                key={`${productBlock.product_block_id}_${index}`}
-                                onClick={this.editProductBlock(productBlock, false, false)}
-                                className={productBlock.status}
-                            >
-                                <td data-label={I18n.t("metadata.productBlocks.name")} className="name">
-                                    {productBlock.name}
-                                </td>
-                                <td data-label={I18n.t("metadata.productBlocks.description")} className="description">
-                                    {productBlock.description}
-                                </td>
-                                <td data-label={I18n.t("metadata.productBlocks.status")} className="status">
-                                    {productBlock.status}
-                                </td>
-                                <td data-label={I18n.t("metadata.productBlocks.tag")} className="tag">
-                                    {productBlock.tag}
-                                </td>
-                                <td
-                                    data-label={I18n.t("metadata.productBlocks.resource_types")}
-                                    className="resource_types"
-                                >
-                                    {productBlock.resource_types.map((rt) => rt.resource_type).join(", ")}
-                                </td>
-                                <td data-label={I18n.t("metadata.productBlocks.created_at")} className="started">
-                                    {renderDateTime(productBlock.created_at)}
-                                </td>
-                                <td
-                                    data-label={I18n.t("metadata.productBlocks.actions")}
-                                    className="actions"
-                                    onClick={this.toggleActions(productBlock, actions)}
-                                    tabIndex={1}
-                                    // onBlur={() => this.setState({ actions: { show: false, id: "" } })}
-                                >
-                                    <ActionContainer
-                                        title={"Actions"}
-                                        renderButtonContent={(active) => {
-                                            const classes = ["dropdown-button-content", active ? "active" : ""].join(
-                                                " "
-                                            );
-                                            return (
-                                                <span className={classes}>
-                                                    <i className={"fa fa-bars"} />
-                                                </span>
-                                            );
-                                        }}
-                                        renderContent={(disabled) => this.renderActions(productBlock, actions)}
-                                    />
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            );
-        }
-        return (
-            <div>
-                <em>{I18n.t("metadata.productBlocks.no_found")}</em>
-            </div>
-        );
-    }
-
     render() {
         const {
-            filteredProductBlocks,
-            actions,
-            query,
+            productBlocks,
+            productBlocksLoaded,
             confirmationDialogOpen,
             confirmationDialogAction,
             confirmationDialogQuestion,
-            sorted,
         } = this.state;
-        return (
-            <div className="mod-product-blocks">
-                <ConfirmationDialog
-                    isOpen={confirmationDialogOpen}
-                    cancel={this.cancelConfirmation}
-                    confirm={confirmationDialogAction}
-                    question={confirmationDialogQuestion}
-                />
-                <EuiFlexGroup>
-                    <EuiFlexItem grow={6}>
-                        <EuiFieldSearch
-                            placeholder={I18n.t("metadata.productBlocks.searchPlaceHolder")}
-                            value={query}
-                            onChange={this.search}
-                            isClearable={true}
-                            fullWidth
+
+        const search = {
+            box: {
+                incremental: true,
+                schema: true,
+                placeholder: "Search for product blocks..",
+            },
+        };
+
+        const columns = [
+            {
+                field: "name",
+                name: "NAME",
+                sortable: true,
+                truncateText: false,
+                width: "15%",
+            },
+            {
+                field: "description",
+                name: "DESCRIPTION",
+                sortable: true,
+                truncateText: false,
+                width: "20%",
+            },
+            {
+                field: "status",
+                name: "STATUS",
+                sortable: true,
+                truncateText: false,
+                width: "8%",
+            },
+            {
+                field: "tag",
+                name: "TAG",
+                sortable: true,
+                truncateText: false,
+                width: "8%",
+            },
+            {
+                field: "resource_types",
+                name: "RESOURCE TYPES",
+                sortable: true,
+                truncateText: false,
+                render: (resource_types: any) => {
+                    const renderPB = resource_types.map((item: any) => (
+                        <EuiBadge color="primary" isDisabled={false}>
+                            {item.resource_type}
+                        </EuiBadge>
+                    ));
+                    return <div>{renderPB}</div>;
+                },
+                width: "15%",
+            },
+            {
+                field: "created_at",
+                name: "CREATED ",
+                sortable: true,
+                truncateText: false,
+                render: (created_at: any) => {
+                    const renderCA = renderDateTime(created_at);
+                    return <div>{renderCA}</div>;
+                },
+                width: "15%",
+            },
+            {
+                field: "product_block_id",
+                name: "",
+                width: "2.5%",
+                render: (product_block_id: any) => {
+                    const Edit = (
+                        <EuiButtonIcon
+                            href={`/product-block/${product_block_id}?readOnly=false`}
+                            iconType="pencil"
+                            aria-label="Edit"
                         />
-                    </EuiFlexItem>
-                    <EuiFlexItem>
-                        <EuiButton
-                            onClick={this.editProductBlock(undefined, false, true)}
-                            color="secondary"
-                            iconType="plusInCircle"
-                            fill
-                        >
-                            {I18n.t("metadata.productBlocks.new")}
-                        </EuiButton>
-                    </EuiFlexItem>
-                </EuiFlexGroup>
-                <section className="product-block">
-                    {this.renderProductBlocks(filteredProductBlocks, actions, sorted)}
-                </section>
-            </div>
+                    );
+                    return <div>{Edit}</div>;
+                },
+            },
+            {
+                field: "product_block_id",
+                name: "",
+                width: "2%",
+                render: (product_block_id: any, record: any) => {
+                    const Delete = (
+                        <EuiButtonIcon
+                            onClick={this.handleDeleteProductBlock(record)}
+                            iconType="trash"
+                            aria-label="Delete"
+                        />
+                    );
+                    return <div>{Delete}</div>;
+                },
+            },
+        ];
+
+        return (
+            <EuiPageContent>
+                <EuiPageContentHeader>
+                    <ConfirmationDialog
+                        isOpen={confirmationDialogOpen}
+                        cancel={this.cancelConfirmation}
+                        confirm={confirmationDialogAction}
+                        question={confirmationDialogQuestion}
+                    />
+                    <EuiSpacer size="l" />
+                    <EuiInMemoryTable
+                        items={productBlocks}
+                        columns={columns}
+                        search={search}
+                        pagination={true}
+                        sorting={true}
+                        loading={productBlocksLoaded}
+                        hasActions={true}
+                    />
+                </EuiPageContentHeader>
+            </EuiPageContent>
         );
     }
 }
-
-ProductBlocks.contextType = ApplicationContext;
