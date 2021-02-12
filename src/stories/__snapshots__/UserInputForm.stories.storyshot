@@ -224,7 +224,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-contact_persons.0.email"
                                 >
-                                  Email *
+                                  Email
                                 </label>
                                  
                                 <div
@@ -276,7 +276,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-contact_persons.0.name"
                                 >
-                                  Name *
+                                  Name
                                 </label>
                                  
                                 <div
@@ -2366,7 +2366,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.subscription_id"
                                 >
-                                  Service Port *
+                                  Service Port
                                 </label>
                                  
                                 <div
@@ -2384,7 +2384,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-Service Port *"
+                                    aria-label="reload-Service Port"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
@@ -2560,7 +2560,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.vlan"
                                 >
-                                  Port Vlan *
+                                  Port Vlan
                                 </label>
                                  
                                 <div
@@ -3247,7 +3247,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.subscription_id"
                                 >
-                                  Service Port *
+                                  Service Port
                                 </label>
                                  
                                 <div
@@ -3265,7 +3265,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-Service Port *"
+                                    aria-label="reload-Service Port"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
@@ -3441,7 +3441,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.vlan"
                                 >
-                                  Port Vlan *
+                                  Port Vlan
                                 </label>
                                  
                                 <div
@@ -3855,7 +3855,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.subscription_id"
                                 >
-                                  Service Port *
+                                  Service Port
                                 </label>
                                  
                                 <div
@@ -3873,7 +3873,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-Service Port *"
+                                    aria-label="reload-Service Port"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
@@ -4049,7 +4049,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.vlan"
                                 >
-                                  Port Vlan *
+                                  Port Vlan
                                 </label>
                                  
                                 <div
@@ -4736,7 +4736,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.subscription_id"
                                 >
-                                  Service Port *
+                                  Service Port
                                 </label>
                                  
                                 <div
@@ -4754,7 +4754,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-Service Port *"
+                                    aria-label="reload-Service Port"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
@@ -4930,7 +4930,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.vlan"
                                 >
-                                  Port Vlan *
+                                  Port Vlan
                                 </label>
                                  
                                 <div

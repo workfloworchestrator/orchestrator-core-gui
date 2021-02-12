@@ -305,9 +305,6 @@ I18n.translations.en = {
             old_service_port_info: "Choose Service Ports to change",
             organisation: "Customer",
             organisation_info: "Search and select the customer for the product",
-            peer_deployment_summary: "Check the settings for the IP Peers",
-            peer_deployment_summary_info:
-                "When you press submit, the product will be deployed. If something is wrong, correct it now.",
             peer_community: "Peer community",
             peer_community_info:
                 "Second part of SURFnet import-policy community for peer-group (1103:x). Relevant for IX & Transit (eg. 3030 for ams-ix)",
@@ -326,6 +323,8 @@ I18n.translations.en = {
             peer_port_type_info: "Choose a peer type",
             peer_type: "Peer type",
             peer_type_info: "Choose a peer type",
+            peerings_summary: "Check the settings for the IP Peering Ports",
+            peerings_summary_info: "If something is wrong, correct it now.",
             plan_dont_allocate: "Set state to planned",
             plan_dont_allocate_info: "Register this prefix as planned, but do not allocate yet",
             port_id: "Port",
@@ -334,6 +333,9 @@ I18n.translations.en = {
             port_mode_info: "The port mode of the new service port",
             ports_summary: "Redundant LP Subscription Ports",
             ports_summary_info: "",
+            product_summary: "Check the settings",
+            product_summary_info:
+                "When you press submit, the product will be deployed. If something is wrong, correct it now",
             primary_remote_port_shutdown: "Primary Remote port shutdown",
             primary_service_ports: "Primary Service Ports",
             primary_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
