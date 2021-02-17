@@ -288,7 +288,7 @@ exports[`Storyshots NewProcess Preselected 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-organisation"
                       >
-                        Customer
+                        Customer *
                       </label>
                        
                       <div

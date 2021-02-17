@@ -48,7 +48,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-organisation"
                       >
-                        Customer
+                        Customer *
                       </label>
                        
                       <div
@@ -188,7 +188,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-contact_persons"
                       >
-                        Customer contact persons
+                        Customer contact persons *
                       </label>
                        
                       <div
@@ -509,7 +509,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-ims_port_id_1"
                       >
-                        First node and port
+                        First node and port *
                       </label>
                        
                       <div
@@ -805,7 +805,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-ims_port_id_2"
                       >
-                        Second node and port
+                        Second node and port *
                       </label>
                        
                       <div
@@ -1202,7 +1202,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-ims_port_id_1"
                       >
-                        First node and port
+                        First node and port *
                       </label>
                        
                       <div
@@ -1498,7 +1498,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-ims_port_id_2"
                       >
-                        Second node and port
+                        Second node and port *
                       </label>
                        
                       <div
@@ -1895,7 +1895,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-ims_node_id"
                       >
-                        Choose a node from IMS
+                        Choose a node from IMS *
                       </label>
                        
                       <div
@@ -2135,7 +2135,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-organisation"
                       >
-                        Customer
+                        Customer *
                       </label>
                        
                       <div
@@ -2274,7 +2274,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-bandwidth"
                       >
-                        Bandwidth
+                        Bandwidth *
                       </label>
                        
                       <div
@@ -2328,7 +2328,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports"
                       >
-                        Service Ports
+                        Service Ports *
                       </label>
                        
                       <div
@@ -3016,7 +3016,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-organisation"
                       >
-                        Customer
+                        Customer *
                       </label>
                        
                       <div
@@ -3155,7 +3155,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-bandwidth"
                       >
-                        Bandwidth
+                        Bandwidth *
                       </label>
                        
                       <div
@@ -3209,7 +3209,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports"
                       >
-                        Service Ports
+                        Service Ports *
                       </label>
                        
                       <div
@@ -3624,7 +3624,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-organisation"
                       >
-                        Customer
+                        Customer *
                       </label>
                        
                       <div
@@ -3763,7 +3763,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-bandwidth"
                       >
-                        Bandwidth
+                        Bandwidth *
                       </label>
                        
                       <div
@@ -3817,7 +3817,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports"
                       >
-                        Service Ports
+                        Service Ports *
                       </label>
                        
                       <div
@@ -4505,7 +4505,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-organisation"
                       >
-                        Customer
+                        Customer *
                       </label>
                        
                       <div
@@ -4644,7 +4644,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-bandwidth"
                       >
-                        Bandwidth
+                        Bandwidth *
                       </label>
                        
                       <div
@@ -4698,7 +4698,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports"
                       >
-                        Service Ports
+                        Service Ports *
                       </label>
                        
                       <div
