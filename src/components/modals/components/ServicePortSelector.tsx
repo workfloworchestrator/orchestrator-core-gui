@@ -167,7 +167,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         } else {
             this.setState({
                 message: `The selected subscription is not in the allowed list.`,
-                messageHelp: `Check the bandwidth in the worfklow form or don't override the speed setting in this form.`,
+                messageHelp: `Check the speed in the worfklow form or don't override the speed setting in this form.`,
                 errors: true,
             });
             setTimeout(() => {
