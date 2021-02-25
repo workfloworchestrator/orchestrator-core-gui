@@ -37,6 +37,7 @@ function renderGrafanaLink(subscription: Subscription, product: Product) {
             product.product_type === "LightPath" ||
             product.product_type === "IP" ||
             product.product_type === "L2VPN" ||
+            product.product_type === "Firewall" ||
             product.product_type === "Node") &&
         product.tag !== "MSC"
     ) {
@@ -64,7 +65,8 @@ function renderNetworkDashboardLink(subscription: Subscription, product: Product
         product.product_type === "Port" ||
         product.product_type === "LightPath" ||
         product.product_type === "IP" ||
-        product.product_type === "L2VPN"
+        product.product_type === "L2VPN" ||
+        product.product_type === "Firewall"
     ) {
         return (
             <tr>
