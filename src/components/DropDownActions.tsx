@@ -16,7 +16,7 @@
 // import "components/DropDownActions.scss";
 
 import { EuiContextMenu } from "@elastic/eui";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import React from "react";
 import { Action } from "utils/types";
 
@@ -34,7 +34,7 @@ export default function DropDownActions({ options, i18nPrefix, className }: IPro
     };
     panel.items = options.map((option, index) => {
         return {
-            name: I18n.t(`${i18nPrefix}.${option.label}`),
+            name: intl.formatMessage({ id: `${i18nPrefix}.${option.label}` }),
             icon: option.euiIcon,
             onClick: option.action,
         };

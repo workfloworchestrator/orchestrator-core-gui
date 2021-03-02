@@ -13,8 +13,8 @@
  *
  */
 
-import I18n from "i18n-js";
 import SelectField, { SelectFieldProps } from "lib/uniforms-surfnet/src/SelectField";
+import { intl } from "locale/i18n";
 import get from "lodash/get";
 import React, { useContext } from "react";
 import { connectField } from "uniforms";
@@ -36,7 +36,7 @@ function Organisation({ name, ...props }: OrganisationFieldProps) {
             {...props}
             allowedValues={Object.keys(organisationLabelLookup)}
             transform={(uuid: string) => get(organisationLabelLookup, uuid, uuid)}
-            placeholder={I18n.t("forms.widgets.organisation.placeholder")}
+            placeholder={intl.formatMessage({ id: "forms.widgets.organisation.placeholder" })}
         />
     );
 }

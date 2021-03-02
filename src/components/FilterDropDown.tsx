@@ -16,7 +16,7 @@
 import "components/FilterDropDown.scss";
 
 import CheckBox from "components/CheckBox";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import React from "react";
 import { Filter } from "utils/types";
 
@@ -40,7 +40,7 @@ export default class FilterDropDown extends React.PureComponent<IProps, IState> 
 
     renderDropDownItem = (item: Filter, filterBy: filterCallback) => {
         const { noTrans, singleSelectFilter } = this.props;
-        const name = noTrans ? item.name : I18n.t(`filter.${item.name.replace(/ /g, "_")}`);
+        const name = noTrans ? item.name : intl.formatMessage({ id: `filter.${item.name.replace(/ /g, "_")}` });
         if (singleSelectFilter) {
             return (
                 <li key={item.name} onClick={() => filterBy(item)}>
@@ -69,8 +69,8 @@ export default class FilterDropDown extends React.PureComponent<IProps, IState> 
         const count = filtered.reduce((acc, item) => item.count, 0);
         const name =
             filtered.length === items.length
-                ? I18n.t("filter.all", { count: count })
-                : I18n.t("filter.selected", { count: count });
+                ? intl.formatMessage({ id: "filter.all" }, { count: count })
+                : intl.formatMessage({ id: "filter.selected" }, { count: count });
         const faIcon = dropDownActive ? "fa-caret-up" : "fa-caret-down";
         return (
             <section className="filter-drop-down">

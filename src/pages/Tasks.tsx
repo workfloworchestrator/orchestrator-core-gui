@@ -26,7 +26,7 @@ import {
     initialProcessTableSettings,
     initialProcessesFilterAndSort,
 } from "components/tables/Processes";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import React from "react";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
@@ -64,7 +64,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
     };
 
     runAllTasks = () => {
-        this.confirmation(I18n.t("tasks.runallConfirmation"), () => {
+        this.confirmation(intl.formatMessage({ id: "tasks.runallConfirmation" }), () => {
             filterableEndpoint<ProcessV2>(
                 "processes",
                 null,
@@ -84,8 +84,8 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                     }
                 })
                 .then(
-                    () => setFlash(I18n.t("tasks.flash.runall")),
-                    () => setFlash(I18n.t("tasks.flash.runallfailed"))
+                    () => setFlash(intl.formatMessage({ id: "tasks.flash.runall" })),
+                    () => setFlash(intl.formatMessage({ id: "tasks.flash.runallfailed" }))
                 );
         });
     };
@@ -105,13 +105,10 @@ export default class Tasks extends React.PureComponent<{}, IState> {
         const product_name = process.subscriptions[0].product.name;
         const customer_name = organisationNameByUuid(process.subscriptions[0].customer_id, this.context.organisations);
         this.confirmation(
-            I18n.t("processes.abortConfirmation", {
-                name: product_name,
-                customer: customer_name,
-            }),
+            intl.formatMessage({ id: "processes.abortConfirmation" }, { name: product_name, customer: customer_name }),
             () =>
                 abortProcess(process.pid).then(() => {
-                    setFlash(I18n.t("processes.flash.abort", { name: product_name }));
+                    setFlash(intl.formatMessage({ id: "processes.flash.abort" }, { name: product_name }));
                 })
         );
     };
@@ -119,9 +116,9 @@ export default class Tasks extends React.PureComponent<{}, IState> {
     handleDeleteProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
         stop(e);
         const workflow_name = process.workflow;
-        this.confirmation(I18n.t("tasks.deleteConfirmation", { name: workflow_name }), () =>
+        this.confirmation(intl.formatMessage({ id: "tasks.deleteConfirmation" }, { name: workflow_name }), () =>
             deleteProcess(process.pid).then(() => {
-                setFlash(I18n.t("tasks.flash.delete", { name: workflow_name }));
+                setFlash(intl.formatMessage({ id: "tasks.flash.delete" }, { name: workflow_name }));
             })
         );
     };
@@ -131,13 +128,10 @@ export default class Tasks extends React.PureComponent<{}, IState> {
         const product_name = process.subscriptions[0].product.name;
         const customer_name = organisationNameByUuid(process.subscriptions[0].customer_id, this.context.organisations);
         this.confirmation(
-            I18n.t("processes.retryConfirmation", {
-                name: product_name,
-                customer: customer_name,
-            }),
+            intl.formatMessage({ id: "processes.retryConfirmation" }, { name: product_name, customer: customer_name }),
             () =>
                 retryProcess(process.pid).then(() => {
-                    setFlash(I18n.t("processes.flash.retry", { name: product_name }));
+                    setFlash(intl.formatMessage({ id: "processes.flash.retry" }, { name: product_name }));
                 })
         );
     };
@@ -200,23 +194,23 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                     <EuiFlexGroup className="actions actions-buttons">
                         <EuiFlexItem>
                             <EuiButton onClick={this.runAllTasks} fill color="primary" iconType="refresh">
-                                {I18n.t("tasks.runall")}
+                                {intl.formatMessage({ id: "tasks.runall" })}
                             </EuiButton>
                         </EuiFlexItem>
                         <EuiFlexItem>
                             <EuiButton onClick={this.newTask} fill color="secondary" iconType="plusInCircle">
-                                {I18n.t("tasks.new")}
+                                {intl.formatMessage({ id: "tasks.new" })}
                             </EuiButton>
                         </EuiFlexItem>
                         <EuiFlexItem className="explain">{this.renderExplain()}</EuiFlexItem>
                     </EuiFlexGroup>
                     {/* <div className="actions">
                         <button className="button blue" onClick={this.runAllTasks}>
-                            {I18n.t("tasks.runall")}
+                            {intl.formatMessage({id: "tasks.runall"})}
                             <i className="fa fa-sync" />
                         </button>
                         <button className="new button green" onClick={this.newTask}>
-                            {I18n.t("tasks.new")} <i className="fa fa-plus" />
+                            {intl.formatMessage({id: "tasks.new"})} <i className="fa fa-plus" />
                         </button>
                         {this.renderExplain()}
                     </div> */}

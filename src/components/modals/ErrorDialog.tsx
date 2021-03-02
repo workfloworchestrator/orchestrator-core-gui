@@ -24,7 +24,7 @@ import {
     EuiModalHeaderTitle,
     EuiOverlayMask,
 } from "@elastic/eui";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import React from "react";
 
 import { stop } from "../../utils/Utils";
@@ -41,10 +41,10 @@ export default function ErrorDialog({ isOpen = false, close }: IProps) {
             <EuiOverlayMask>
                 <EuiModal className="error-modal" onClose={close} initialFocus="[name=popfirst]">
                     <EuiModalHeader>
-                        <EuiModalHeaderTitle>{I18n.t("error_dialog.title")}</EuiModalHeaderTitle>
+                        <EuiModalHeaderTitle>{intl.formatMessage({ id: "error_dialog.title" })}</EuiModalHeaderTitle>
                     </EuiModalHeader>
                     <EuiModalBody>
-                        <h2>{I18n.t("error_dialog.body")}</h2>
+                        <h2>{intl.formatMessage({ id: "error_dialog.body" })}</h2>
                     </EuiModalBody>
                     <EuiModalFooter>
                         <EuiButton
@@ -55,7 +55,7 @@ export default function ErrorDialog({ isOpen = false, close }: IProps) {
                             fill
                             id="dialog-confirm"
                         >
-                            {I18n.t("error_dialog.ok")}
+                            {intl.formatMessage({ id: "error_dialog.ok" })}
                         </EuiButton>
                     </EuiModalFooter>
                 </EuiModal>

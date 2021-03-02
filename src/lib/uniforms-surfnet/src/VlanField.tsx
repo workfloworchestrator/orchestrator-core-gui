@@ -16,9 +16,9 @@
 import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import { usedVlans as getUsedVlans } from "api";
 import { SubscriptionsContext } from "components/subscriptionContext";
-import I18n from "i18n-js";
 import { getPortMode } from "lib/uniforms-surfnet/src/SubscriptionField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
+import { intl } from "locale/i18n";
 import get from "lodash/get";
 import React, { useContext, useEffect, useState } from "react";
 import { connectField, filterDOMProps, joinName, useForm } from "uniforms";
@@ -155,23 +155,26 @@ function Vlan({
         validFormat && !disabled ? getAllNumbersForVlanRange(value).filter((num) => allUsedVlans.includes(num)) : [];
 
     const placeholder = subscriptionId
-        ? I18n.t("forms.widgets.vlan.placeholder")
-        : I18n.t("forms.widgets.vlan.placeholderNoServicePort");
+        ? intl.formatMessage({ id: "forms.widgets.vlan.placeholder" })
+        : intl.formatMessage({ id: "forms.widgets.vlan.placeholderNoServicePort" });
 
     const errorMessageExtra = missingInIms
-        ? I18n.t("forms.widgets.vlan.missingInIms")
+        ? intl.formatMessage({ id: "forms.widgets.vlan.missingInIms" })
         : !validFormat
-        ? I18n.t("forms.widgets.vlan.invalidVlan")
+        ? intl.formatMessage({ id: "forms.widgets.vlan.invalidVlan" })
         : vlansInUse.length
         ? vlansInUse.length >= 1 && vlansInUse[0] === 0
-            ? I18n.t("forms.widgets.vlan.untaggedPortInUse")
-            : I18n.t("forms.widgets.vlan.vlansInUseError", { vlans: vlanRangeFromNumbers(vlansInUse) })
+            ? intl.formatMessage({ id: "forms.widgets.vlan.untaggedPortInUse" })
+            : intl.formatMessage(
+                  { id: "forms.widgets.vlan.vlansInUseError" },
+                  { vlans: vlanRangeFromNumbers(vlansInUse) }
+              )
         : undefined;
     const message = isUntagged
-        ? I18n.t("forms.widgets.vlan.taggedOnly")
+        ? intl.formatMessage({ id: "forms.widgets.vlan.taggedOnly" })
         : !allUsedVlans.length
-        ? I18n.t("forms.widgets.vlan.allPortsAvailable")
-        : I18n.t("forms.widgets.vlan.vlansInUse", { vlans: vlanRangeFromNumbers(allUsedVlans) });
+        ? intl.formatMessage({ id: "forms.widgets.vlan.allPortsAvailable" })
+        : intl.formatMessage({ id: "forms.widgets.vlan.vlansInUse" }, { vlans: vlanRangeFromNumbers(allUsedVlans) });
 
     return (
         <section {...filterDOMProps(props)}>

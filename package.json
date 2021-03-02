@@ -24,6 +24,7 @@
         "p-map": "^4.0.0",
         "react": "^16.14.0",
         "react-dom": "^16.14.0",
+        "react-intl": "^5.13.2",
         "react-network-diagrams": "^0.8.0",
         "react-numeric-input": "^2.2.3",
         "react-pretty-json": "^2.0.2",
@@ -43,6 +44,7 @@
         "use-query-params": "^0.4.5"
     },
     "devDependencies": {
+        "@formatjs/cli": "^3.1.6",
         "@sambego/storybook-state": "^2.0.1",
         "@storybook/addon-actions": "^5.3.13",
         "@storybook/addon-docs": "^5.3.13",
@@ -85,6 +87,7 @@
         "eslint": "^6.8.0",
         "eslint-config-react-app": "5.2.0",
         "eslint-plugin-flowtype": "^4.6.0",
+        "eslint-plugin-formatjs": "^2.12.7",
         "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "eslint-plugin-react": "^7.18.3",
@@ -102,6 +105,7 @@
         "sass": "^1.32.5",
         "simpl-schema": "^1.10.2",
         "source-map-explorer": "^2.5.2",
+        "storybook-addon-intl": "^2.4.1",
         "storybook-react-router": "^1.0.8",
         "typescript": "^3.9.7",
         "uniforms-bridge-simple-schema-2": "^3.0.0-rc.5",
@@ -116,7 +120,9 @@
         "storybook": "start-storybook -p 9009 -s ./public",
         "build-storybook": "build-storybook -s ./public",
         "prettier": "prettier -c \"{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}\"",
-        "prettier-fix": "prettier --write \"{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}\""
+        "prettier-fix": "prettier --write \"{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}\"",
+        "extract": "formatjs extract",
+        "compile": "formatjs compile"
     },
     "importSort": {
         ".js, .jsx, .ts, .tsx": {
@@ -125,7 +131,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "git-format-staged -f 'prettier --stdin --stdin-filepath \"{}\"' '*.js' '*.jsx' '*.ts' '*.tsx' '*.scss' '*.json' '*.gql', '*.md'"
+            "pre-commit": "git-format-staged -f 'prettier --stdin-filepath \"{}\"' '*.js' '*.jsx' '*.ts' '*.tsx' '*.scss' '*.json' '*.gql', '*.md'"
         }
     },
     "eslintConfig": {

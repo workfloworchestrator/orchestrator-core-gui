@@ -18,7 +18,7 @@ import "pages/Prefixes.scss";
 import { EuiFieldSearch, EuiPage, EuiPageBody } from "@elastic/eui";
 import { freeSubnets, prefixSubscriptionsByRootPrefix, prefix_filters } from "api";
 import FilterDropDown from "components/FilterDropDown";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import constant from "lodash/constant";
 import debounce from "lodash/debounce";
 import memoize from "lodash/memoize";
@@ -366,7 +366,7 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
             const name = columns[index];
             return (
                 <th key={index} className={name} onClick={this.toggleSort(name)}>
-                    <span>{I18n.t(`prefixes.${name}`)}</span>
+                    <span>{intl.formatMessage({ id: `prefixes.${name}` })}</span>
                     {this.sortColumnIcon(name, this.state.sortOrder)}
                 </th>
             );
@@ -384,11 +384,11 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
                                 filterBy={this.setFilter("state")}
                                 singleSelectFilter={this.singleSelectFilter("state")}
                                 selectAll={this.selectAll("state")}
-                                label={I18n.t("prefixes.filters.state")}
+                                label={intl.formatMessage({ id: "prefixes.filters.state" })}
                             />
 
                             <EuiFieldSearch
-                                placeholder={I18n.t("prefixes.searchPlaceHolder")}
+                                placeholder={intl.formatMessage({ id: "prefixes.searchPlaceHolder" })}
                                 value={query}
                                 onChange={this.search}
                                 isClearable={true}
@@ -408,31 +408,55 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
                                         onClick={this.subscriptionLink(prefix)}
                                         className={ipamStates[prefix.state] ?? ""}
                                     >
-                                        <td data-label={I18n.t("prefixes.customer")} className="customer">
+                                        <td
+                                            data-label={intl.formatMessage({ id: "prefixes.customer" })}
+                                            className="customer"
+                                        >
                                             {prefix.customer}
                                         </td>
-                                        <td data-label={I18n.t("prefixes.subscription_id")} className="subscription">
+                                        <td
+                                            data-label={intl.formatMessage({ id: "prefixes.subscription_id" })}
+                                            className="subscription"
+                                        >
                                             {prefix.subscription_id.substring(0, 8)}
                                         </td>
-                                        <td data-label={I18n.t("prefixes.description")} className="description">
+                                        <td
+                                            data-label={intl.formatMessage({ id: "prefixes.description" })}
+                                            className="description"
+                                        >
                                             {prefix.description}
                                         </td>
-                                        <td data-label={I18n.t("prefixes.family")} className="family">
+                                        <td
+                                            data-label={intl.formatMessage({ id: "prefixes.family" })}
+                                            className="family"
+                                        >
                                             {familyFullName[prefix.family]}
                                         </td>
-                                        <td data-label={I18n.t("prefixes.prefixlen")} className="prefixlen">
+                                        <td
+                                            data-label={intl.formatMessage({ id: "prefixes.prefixlen" })}
+                                            className="prefixlen"
+                                        >
                                             /{prefix.prefixlen}
                                         </td>
-                                        <td data-label={I18n.t("prefixes.prefix")} className="prefix">
+                                        <td
+                                            data-label={intl.formatMessage({ id: "prefixes.prefix" })}
+                                            className="prefix"
+                                        >
                                             {prefix.prefix}
                                         </td>
-                                        <td data-label={I18n.t("prefixes.parent")} className="parent">
+                                        <td
+                                            data-label={intl.formatMessage({ id: "prefixes.parent" })}
+                                            className="parent"
+                                        >
                                             {prefix.parent}
                                         </td>
-                                        <td data-label={I18n.t("prefixes.state")} className="state">
+                                        <td data-label={intl.formatMessage({ id: "prefixes.state" })} className="state">
                                             {ipamStates[prefix.state]}
                                         </td>
-                                        <td data-label={I18n.t("prefixes.start_date")} className="start_date">
+                                        <td
+                                            data-label={intl.formatMessage({ id: "prefixes.start_date" })}
+                                            className="start_date"
+                                        >
                                             {prefix.start_date_as_str}
                                         </td>
                                     </tr>

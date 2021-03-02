@@ -13,8 +13,8 @@
  *
  */
 
-import I18n from "i18n-js";
 import SelectField, { SelectFieldProps } from "lib/uniforms-surfnet/src/SelectField";
+import { intl } from "locale/i18n";
 import get from "lodash/get";
 import React, { useContext } from "react";
 import { connectField, filterDOMProps } from "uniforms";
@@ -49,7 +49,7 @@ function Product({ name, productIds, ...props }: ProductFieldProps) {
             {...props}
             allowedValues={Object.keys(productLabelLookup)}
             transform={(uuid: string) => get(productLabelLookup, uuid, uuid)}
-            placeholder={I18n.t("forms.widgets.product.placeholder")}
+            placeholder={intl.formatMessage({ id: "forms.widgets.product.placeholder" })}
         />
     );
 }

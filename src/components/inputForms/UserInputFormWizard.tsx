@@ -15,7 +15,7 @@
 
 import { catchErrorStatus } from "api/index";
 import UserInputForm from "components/inputForms/UserInputForm";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import isEqual from "lodash/isEqual";
 import hash from "object-hash";
 import React from "react";
@@ -78,7 +78,7 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
         return catchErrorStatus<FormNotCompleteResponse>(result, 510, (json) => {
             // Scroll to top when navigating to next screen of wizard
             window.scrollTo(0, 0);
-            setFlash(I18n.t("process.flash.wizard_next_step"));
+            setFlash(intl.formatMessage({ id: "process.flash.wizard_next_step" }));
             this.setState({ forms: [...forms, { form: json.form, hasNext: json.hasNext }], userInputs: newUserInputs });
         });
     };

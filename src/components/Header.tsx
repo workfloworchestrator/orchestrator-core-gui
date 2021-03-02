@@ -19,8 +19,8 @@ import { EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderSectionItem, EuiText
 import { getGlobalStatus, logUserInfo } from "api";
 import UserProfile from "components/UserProfile";
 import { ENV } from "env";
-import I18n from "i18n-js";
 import logo from "images/network-automation.png";
+import { intl } from "locale/i18n";
 import { Profile } from "oidc-client";
 import { AuthContextProps, withAuth } from "oidc-react";
 import React from "react";
@@ -89,7 +89,7 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
             const { globalLock } = this.state;
             if (!globalStatus.global_lock && globalLock) {
                 this.setState({ globalLock: globalStatus.global_lock });
-                setFlash(I18n.t("settings.status.engine.restarted"));
+                setFlash(intl.formatMessage({ id: "settings.status.engine.restarted" }));
             }
             this.setState({ globalLock: globalStatus.global_lock, engineStatus: globalStatus.global_status });
         });
@@ -114,7 +114,7 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
                     <EuiHeaderSectionItem border="right">
                         <EuiText grow={false}>
                             <h1 className={`header__app-title ${environment}`}>
-                                {I18n.t("header.title")}
+                                {intl.formatMessage({ id: "header.title" })}
                                 {environment !== "production" && ` ${environment}`}
                             </h1>
                         </EuiText>
@@ -124,7 +124,7 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
                 <EuiHeaderSectionItem>
                     <EuiHeaderLinks aria-label="App navigation links example">
                         <EuiHeaderLink href="#">
-                            {I18n.t(`settings.status.engine.${engineStatus.toLowerCase()}`)}{" "}
+                            {intl.formatMessage({ id: `settings.status.engine.${engineStatus.toLowerCase()}` })}
                             <i className={`fa fa-circle header__status ${engineStatus.toLowerCase()}`}></i>
                         </EuiHeaderLink>
 
@@ -133,11 +133,11 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
                             href="https://docs.dev.automation.surf.net/static/html/workflows.html"
                             target="_blank"
                         >
-                            {I18n.t("header.links.help")}
+                            {intl.formatMessage({ id: "header.links.help" })}
                         </EuiHeaderLink>
 
                         <EuiHeaderLink id="logout" onClick={this.logout}>
-                            {I18n.t("header.links.logout")}
+                            {intl.formatMessage({ id: "header.links.logout" })}
                         </EuiHeaderLink>
 
                         {currentUser && (

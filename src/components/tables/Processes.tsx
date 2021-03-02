@@ -25,7 +25,7 @@ import {
 } from "components/tables/cellRenderers";
 import { renderCustomersFilter, renderILikeFilter, renderMultiSelectFilter } from "components/tables/filterRenderers";
 import { NwaTable, isLocalTableSettings } from "components/tables/NwaTable";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import chunk from "lodash/chunk";
 import isNull from "lodash/isNull";
 import last from "lodash/last";
@@ -165,7 +165,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
         const { status, step, info } = row.values;
         return (
             <div className={"expanded-row"}>
-                <h2>{I18n.t(`table.expanded_row.${status}`, { step: step })}</h2>
+                <h2>{intl.formatMessage({ id: `table.expanded_row.${status}` }, { step: step })}</h2>
                 <pre>{info}</pre>
             </div>
         );
@@ -228,7 +228,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                 accessor: "last_status",
                 Filter: renderMultiSelectFilter.bind(null, processStatuses, "process_statuses"),
                 Cell: ({ cell }: { cell: Cell }) => {
-                    return I18n.t(`process_statuses.${cell.value}`);
+                    return intl.formatMessage({ id: `process_statuses.${cell.value}` });
                 },
             },
             {

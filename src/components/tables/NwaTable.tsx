@@ -23,8 +23,8 @@ import Preferences from "components/tables/Preferences";
 import { TableRenderer } from "components/tables/TableRenderer";
 import useFilterableDataFetcher from "components/tables/useFilterableDataFetcher";
 import useInterval from "components/tables/useInterval";
-import I18n from "i18n-js";
 import produce from "immer";
+import { intl } from "locale/i18n";
 import React, { useEffect } from "react";
 import {
     Column,
@@ -341,7 +341,9 @@ export function NwaTable<T extends object>({
             </EuiFlexGroup>
             {!minimized && advancedSearch && <AdvancedSearch {...advancedSearchProps} />}
             {!minimized && <TableRenderer {...TableRendererProps} />}
-            {!minimized && data.length === 0 && <div className={"no-results"}>{I18n.t("table.no_results")}</div>}
+            {!minimized && data.length === 0 && (
+                <div className={"no-results"}>{intl.formatMessage({ id: "table.no_results" })}</div>
+            )}
             {!minimized && showPaginator && <Paginator {...paginatorProps} />}
         </div>
     );

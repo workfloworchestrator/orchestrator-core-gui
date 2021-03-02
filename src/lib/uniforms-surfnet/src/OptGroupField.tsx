@@ -1,4 +1,3 @@
-import { EuiDescribedFormGroup, EuiFlexItem, EuiFormRow } from "@elastic/eui";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,9 +12,11 @@ import { EuiDescribedFormGroup, EuiFlexItem, EuiFormRow } from "@elastic/eui";
  * limitations under the License.
  *
  */
-import I18n from "i18n-js";
+
+import { EuiDescribedFormGroup, EuiFlexItem, EuiFormRow } from "@elastic/eui";
 import { AutoField, BoolField } from "lib/uniforms-surfnet/src";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
+import { intl } from "locale/i18n";
 import React from "react";
 import { connectField, filterDOMProps, useField } from "uniforms";
 
@@ -36,8 +37,8 @@ function OptGroup({
     return (
         <EuiDescribedFormGroup
             {...filterDOMProps(props)}
-            title={<span>{I18n.t(`forms.fields.${name}.title`)}</span>}
-            description={I18n.t(`forms.fields.${name}.info`)}
+            title={<span>{intl.formatMessage({ id: `forms.fields.${name}.title` })}</span>}
+            description={intl.formatMessage({ id: `forms.fields.${name}.info` })}
             className={`${className} optgroup-field`}
         >
             <EuiFlexItem>

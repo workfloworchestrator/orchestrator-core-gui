@@ -18,7 +18,7 @@ import "pages/TerminateSubscription.scss";
 import { EuiPage, EuiPageBody } from "@elastic/eui";
 import { catchErrorStatus, productById, startProcess, subscriptionsDetailWithModel } from "api/index";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import React from "react";
 import { Redirect, RouteComponentProps, withRouter } from "react-router";
 import { setFlash } from "utils/Flash";
@@ -88,11 +88,14 @@ class TerminateSubscription extends React.Component<IProps, IState> {
 
         if (pid) {
             setFlash(
-                I18n.t("process.flash.create_modify", {
-                    name: I18n.t(`workflow.${terminate_workflow.name}`),
-                    subscriptionId: subscriptionId,
-                    pid: pid,
-                })
+                intl.formatMessage(
+                    { id: "process.flash.create_modify" },
+                    {
+                        name: intl.formatMessage({ id: `workflow.${terminate_workflow.name}` }),
+                        subscriptionId: subscriptionId,
+                        pid: pid,
+                    }
+                )
             );
             return <Redirect to={`/processes?highlight=${pid}`} />;
         }
@@ -105,7 +108,7 @@ class TerminateSubscription extends React.Component<IProps, IState> {
             <EuiPage>
                 <EuiPageBody component="div" className="mod-terminate-subscription">
                     <section className="card">
-                        <h1>{I18n.t("subscription.terminate")}</h1>
+                        <h1>{intl.formatMessage({ id: "subscription.terminate" })}</h1>
 
                         <UserInputFormWizard
                             stepUserInput={stepUserInput}

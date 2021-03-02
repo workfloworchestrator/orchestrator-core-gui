@@ -24,7 +24,7 @@ import {
     initialProcessTableSettings,
     initialProcessesFilterAndSort,
 } from "components/tables/Processes";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import React from "react";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
@@ -76,13 +76,10 @@ export default class Processes extends React.PureComponent<IProps, IState> {
         const product_name = process.subscriptions[0].product.name;
         const customer_name = organisationNameByUuid(process.subscriptions[0].customer_id, this.context.organisations);
         this.confirmation(
-            I18n.t("processes.abortConfirmation", {
-                name: product_name,
-                customer: customer_name,
-            }),
+            intl.formatMessage({ id: "processes.abortConfirmation" }, { name: product_name, customer: customer_name }),
             () =>
                 abortProcess(process.pid).then(() => {
-                    setFlash(I18n.t("processes.flash.abort", { name: product_name }));
+                    setFlash(intl.formatMessage({ id: "processes.flash.abort" }, { name: product_name }));
                 })
         );
     };
@@ -92,13 +89,10 @@ export default class Processes extends React.PureComponent<IProps, IState> {
         const product_name = process.subscriptions[0].product.name;
         const customer_name = organisationNameByUuid(process.subscriptions[0].customer_id, this.context.organisations);
         this.confirmation(
-            I18n.t("processes.retryConfirmation", {
-                name: product_name,
-                customer: customer_name,
-            }),
+            intl.formatMessage({ id: "processes.retryConfirmation" }, { name: product_name, customer: customer_name }),
             () =>
                 retryProcess(process.pid).then(() => {
-                    setFlash(I18n.t("processes.flash.retry", { name: product_name }));
+                    setFlash(intl.formatMessage({ id: "processes.flash.retry" }, { name: product_name }));
                 })
         );
     };

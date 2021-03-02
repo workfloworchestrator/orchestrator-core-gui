@@ -16,8 +16,8 @@
 import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import { contacts } from "api";
 import Autocomplete from "components/inputForms/Autocomplete";
-import I18n from "i18n-js";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
+import { intl } from "locale/i18n";
 import { isFunction } from "lodash";
 import get from "lodash/get";
 import React, { Ref, useEffect, useState } from "react";
@@ -170,7 +170,9 @@ function ContactPersonName({
                     name={name}
                     isInvalid={error}
                     onChange={onChangeInternal}
-                    placeholder={placeholder || I18n.t("forms.widgets.contactPersonName.placeholder")}
+                    placeholder={
+                        placeholder || intl.formatMessage({ id: "forms.widgets.contactPersonName.placeholder" })
+                    }
                     type="text"
                     value={value ?? ""}
                     onKeyDown={onAutocompleteKeyDown}

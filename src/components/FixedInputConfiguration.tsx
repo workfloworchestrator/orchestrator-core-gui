@@ -17,7 +17,7 @@ import "components/FixedInputConfiguration.scss";
 
 import { fixedInputConfiguration } from "api";
 import CheckBox from "components/CheckBox";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import React from "react";
 import { FixedInputConfiguration as iFixedInputConfiguration } from "utils/types";
 
@@ -44,14 +44,20 @@ export default class FixedInputConfiguration extends React.Component<{}, IState>
         const { configuration } = this.state;
         return Object.keys(configuration.by_tag).map((tag, index) => (
             <section className="fixed-input-configuration" key={index}>
-                <h3 className="description">{I18n.t("metadata.fixedInputs.tags", { tag: tag })}</h3>
+                <h3 className="description">{intl.formatMessage({ id: "metadata.fixedInputs.tags" }, { tag: tag })}</h3>
                 <table>
                     <thead>
                         <tr>
-                            <th className={"fixed-input"}>{I18n.t("metadata.fixedInputs.fixedInput")}</th>
-                            <th className={"values"}>{I18n.t("metadata.fixedInputs.values")}</th>
-                            <th className={"description"}>{I18n.t("metadata.fixedInputs.description")}</th>
-                            <th className={"required"}>{I18n.t("metadata.fixedInputs.required")}</th>
+                            <th className={"fixed-input"}>
+                                {intl.formatMessage({ id: "metadata.fixedInputs.fixedInput" })}
+                            </th>
+                            <th className={"values"}>{intl.formatMessage({ id: "metadata.fixedInputs.values" })}</th>
+                            <th className={"description"}>
+                                {intl.formatMessage({ id: "metadata.fixedInputs.description" })}
+                            </th>
+                            <th className={"required"}>
+                                {intl.formatMessage({ id: "metadata.fixedInputs.required" })}
+                            </th>
                         </tr>
                     </thead>
                     <tbody>

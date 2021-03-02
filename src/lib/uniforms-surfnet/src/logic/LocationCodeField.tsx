@@ -13,8 +13,8 @@
  *
  */
 
-import I18n from "i18n-js";
 import SelectField, { SelectFieldProps } from "lib/uniforms-surfnet/src/SelectField";
+import { intl } from "locale/i18n";
 import React, { useContext } from "react";
 import { connectField, filterDOMProps } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
@@ -44,7 +44,7 @@ function LocationCode({ name, locationCodes, ...props }: LocationCodeFieldProps)
             name=""
             {...props}
             allowedValues={locationCodes}
-            placeholder={I18n.t("forms.widgets.locationCode.placeholder")}
+            placeholder={intl.formatMessage({ id: "forms.widgets.locationCode.placeholder" })}
         />
     );
 }

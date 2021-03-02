@@ -12,7 +12,7 @@
  * limitations under the License.
  *
  */
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import { setFlash } from "utils/Flash";
 import {
     ContactPerson,
@@ -215,12 +215,7 @@ export function organisations(): Promise<Organization[] | undefined> {
     //@ts-ignore
     return fetchJson("crm/organisations", {}, {}, false).catch(() => {
         setTimeout(() => {
-            setFlash(
-                I18n.t("external.errors.crm_unavailable", {
-                    type: "Organisations",
-                }),
-                "error"
-            );
+            setFlash(intl.formatMessage({ id: "external.errors.crm_unavailable" }, { type: "Organisations" }), "error");
         });
         return undefined;
     });
@@ -282,12 +277,7 @@ export function locationCodes(): Promise<string[] | undefined> {
     // @ts-ignore
     return fetchJson("crm/location_codes", {}, {}, false).catch(() => {
         setTimeout(() => {
-            setFlash(
-                I18n.t("external.errors.crm_unavailable", {
-                    type: "Locations",
-                }),
-                "error"
-            );
+            setFlash(intl.formatMessage({ id: "external.errors.crm_unavailable" }, { type: "Locations" }), "error");
         });
         return undefined;
     });
@@ -413,4 +403,8 @@ export function dienstafnameBySubscription(subscriptionId: string): Promise<Dien
     return fetchJson<Dienstafname>(`crm/dienstafname/${subscriptionId}`, {}, {}, false).catch((err) =>
         Promise.resolve(undefined)
     );
+}
+
+export function translations(locale: string): Promise<Record<string, any>> {
+    return fetchJson<Record<string, any>>(`translations/${locale}`, {}, {}, true, true);
 }

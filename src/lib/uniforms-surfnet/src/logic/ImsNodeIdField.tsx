@@ -14,8 +14,8 @@
  */
 
 import { getNodesByLocationAndStatus } from "api";
-import I18n from "i18n-js";
 import SelectField, { SelectFieldProps } from "lib/uniforms-surfnet/src/SelectField";
+import { intl } from "locale/i18n";
 import { get } from "lodash";
 import React, { useEffect, useState } from "react";
 import { connectField, filterDOMProps } from "uniforms";
@@ -50,10 +50,10 @@ function ImsNodeId({ name, value, onChange, locationCode, status, ...props }: Im
 
     const placeholder =
         loading && locationCode
-            ? I18n.t("forms.widgets.node_select.nodes_loading")
+            ? intl.formatMessage({ id: "forms.widgets.node_select.nodes_loading" })
             : nodes.length
-            ? I18n.t("forms.widgets.node_select.select_node")
-            : I18n.t("forms.widgets.node_select.no_nodes_placeholder");
+            ? intl.formatMessage({ id: "forms.widgets.node_select.select_node" })
+            : intl.formatMessage({ id: "forms.widgets.node_select.no_nodes_placeholder" });
 
     const imsNodeIdLabelLookup =
         nodes?.reduce<{ [index: string]: string }>(function (mapping, node) {

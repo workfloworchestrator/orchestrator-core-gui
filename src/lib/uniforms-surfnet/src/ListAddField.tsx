@@ -13,8 +13,8 @@
  *
  */
 
-import I18n from "i18n-js";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
+import { intl } from "locale/i18n";
 import cloneDeep from "lodash/cloneDeep";
 import React from "react";
 import { connectField, filterDOMProps, joinName, useField } from "uniforms";
@@ -44,7 +44,7 @@ function ListAdd({ disabled, name, value, onChange, initialCount, outerList = fa
             }}
         >
             <i className={`fa fa-plus ${!limitNotReached || disabled ? "disabled" : ""}`} />
-            <label>{outerList && I18n.t(`forms.fields.${parentName}_add`)}</label>
+            <label>{outerList && intl.formatMessage({ id: `forms.fields.${parentName}_add` })}</label>
         </div>
     );
 }

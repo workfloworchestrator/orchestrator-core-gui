@@ -27,7 +27,7 @@ import {
     EuiSpacer,
 } from "@elastic/eui";
 import { clearCache, getGlobalStatus, setGlobalStatus } from "api";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import React, { SFC, useEffect, useState } from "react";
 import { setFlash } from "utils/Flash";
 import { EngineStatus } from "utils/types";
@@ -62,17 +62,17 @@ export const Settings: SFC = (props: IProps) => {
 
     const lockEngine = (isLocked: boolean) => {
         setGlobalStatus(isLocked).then(() => {
-            setFlash(I18n.t(`settings.status.engine.${isLocked ? "pausing" : "restarted"}`));
+            setFlash(intl.formatMessage({ id: `settings.status.engine.${isLocked ? "pausing" : "restarted"}` }));
         });
     };
 
     const engineDescription = [
         {
-            title: I18n.t("settings.status.processes"),
+            title: intl.formatMessage({ id: "settings.status.processes" }),
             description: engineStatus?.running_processes.toString() || "",
         },
         {
-            title: I18n.t("settings.status.status"),
+            title: intl.formatMessage({ id: "settings.status.status" }),
             description: engineStatus ? (
                 <>
                     <EuiIcon type="dot" color={engineStatus?.global_status === "RUNNING" ? "success" : "warning"} />
@@ -87,9 +87,10 @@ export const Settings: SFC = (props: IProps) => {
     const flushCache = () => {
         clearCache(cache).then(() => {
             setFlash(
-                I18n.t("settings.cache.flushed", {
-                    name: I18n.t(`settings.cache.name.${cache}`),
-                })
+                intl.formatMessage(
+                    { id: "settings.cache.flushed" },
+                    { name: intl.formatMessage({ id: `settings.cache.name.${cache}` }) }
+                )
             );
         });
     };
@@ -105,7 +106,7 @@ export const Settings: SFC = (props: IProps) => {
             if (isNaN(Number(cacheOption))) {
                 cacheOptions.push({
                     value: cacheOption,
-                    text: I18n.t(`settings.cache.name.${cacheOption}`),
+                    text: intl.formatMessage({ id: `settings.cache.name.${cacheOption}` }),
                 });
             }
         }
@@ -121,8 +122,8 @@ export const Settings: SFC = (props: IProps) => {
             <EuiPageBody component="div">
                 <EuiCard
                     textAlign="left"
-                    title={I18n.t("settings.cache.remove")}
-                    description={<span>{I18n.t("settings.cache.remove_info")}</span>}
+                    title={intl.formatMessage({ id: "settings.cache.remove" })}
+                    description={<span>{intl.formatMessage({ id: "settings.cache.remove_info" })}</span>}
                 >
                     <EuiSelect
                         id="selectCache"
@@ -133,14 +134,14 @@ export const Settings: SFC = (props: IProps) => {
                     />
                     <EuiSpacer />
                     <EuiButton id="flush-cache" fill iconSide="right" iconType="refresh" onClick={flushCache}>
-                        {I18n.t("settings.cache.clear")}
+                        {intl.formatMessage({ id: "settings.cache.clear" })}
                     </EuiButton>
                 </EuiCard>
                 <EuiSpacer />
                 <EuiCard
                     textAlign="left"
-                    title={I18n.t("settings.status.info")}
-                    description={<span>{I18n.t("settings.status.info_detail")}</span>}
+                    title={intl.formatMessage({ id: "settings.status.info" })}
+                    description={<span>{intl.formatMessage({ id: "settings.status.info_detail" })}</span>}
                 >
                     <EuiButton
                         id="toggle-engine-status"
@@ -149,7 +150,7 @@ export const Settings: SFC = (props: IProps) => {
                         color={isRunning ? "warning" : "primary"}
                         onClick={() => lockEngine(isRunning)}
                     >
-                        {I18n.t(`settings.status.options.${isRunning}`)}
+                        {intl.formatMessage({ id: `settings.status.options.${isRunning}` })}
                     </EuiButton>
                     <EuiHorizontalRule margin="l" />
                     <EuiDescriptionList type="column" listItems={engineDescription} style={{ maxWidth: "400px" }} />

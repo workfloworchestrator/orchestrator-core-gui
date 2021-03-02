@@ -15,7 +15,7 @@
 
 import "components/ProductWorkflowsValidation.scss";
 
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import React from "react";
 import ApplicationContext from "utils/ApplicationContext";
 import { CodedWorkflow, Product, WorkflowWithProductTags } from "utils/types";
@@ -35,7 +35,7 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
             const name = columns[index];
             return (
                 <th key={index} className={name}>
-                    <span>{I18n.t(`metadata.workflows.${name}`)}</span>
+                    <span>{intl.formatMessage({ id: `metadata.workflows.${name}` })}</span>
                 </th>
             );
         };
@@ -70,7 +70,7 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
             const name = columns[index];
             return (
                 <th key={index} className={name}>
-                    <span>{I18n.t(`metadata.workflows.${name}`)}</span>
+                    <span>{intl.formatMessage({ id: `metadata.workflows.${name}` })}</span>
                 </th>
             );
         };
@@ -104,12 +104,12 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
             const name = columns[index];
             return (
                 <th key={index} className={name}>
-                    <span>{I18n.t(`metadata.products.${name}`)}</span>
+                    <span>{intl.formatMessage({ id: `metadata.products.${name}` })}</span>
                 </th>
             );
         };
         const td = (name: keyof Product, product: Product) => (
-            <td key={name} data-label={I18n.t(`metadata.products.${name}`)} className={name}>
+            <td key={name} data-label={intl.formatMessage({ id: `metadata.products.${name}` })} className={name}>
                 {product[name]}
             </td>
         );
@@ -154,12 +154,14 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
                 <section className="validation" key={index}>
                     {this.renderProducts(
                         products.filter((prod) => !prod.workflows.some((wf) => wf.target === target)),
-                        I18n.t("validations.productWorkflows.productsWithoutWorkflow", {
-                            target: target,
-                        }),
-                        I18n.t("validations.productWorkflows.productsWithWorkflow", {
-                            target: target,
-                        })
+                        intl.formatMessage(
+                            { id: "validations.productWorkflows.productsWithoutWorkflow" },
+                            { target: target }
+                        ),
+                        intl.formatMessage(
+                            { id: "validations.productWorkflows.productsWithWorkflow" },
+                            { target: target }
+                        )
                     )}
                 </section>
             ))}
@@ -172,8 +174,14 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
                 <section className="validation" key={index}>
                     {this.renderProducts(
                         products.filter((prod) => prod.workflows.filter((wf) => wf.target === target).length > 1),
-                        I18n.t("validations.productWorkflows.productsWithMultipleWorkflow", { target: target }),
-                        I18n.t("validations.productWorkflows.productsWithoutMultipleWorkflow", { target: target })
+                        intl.formatMessage(
+                            { id: "validations.productWorkflows.productsWithMultipleWorkflow" },
+                            { target: target }
+                        ),
+                        intl.formatMessage(
+                            { id: "validations.productWorkflows.productsWithoutMultipleWorkflow" },
+                            { target: target }
+                        )
                     )}
                 </section>
             ))}
@@ -184,8 +192,8 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
         <section className="workflow-validation">
             {this.renderWorkflows(
                 workflows.filter((wf) => wf.target !== "SYSTEM").filter((wf) => isEmpty(wf.product_tags)),
-                I18n.t("validations.productWorkflows.workflowsWithoutProducts"),
-                I18n.t("validations.productWorkflows.workflowsWithProducts")
+                intl.formatMessage({ id: "validations.productWorkflows.workflowsWithoutProducts" }),
+                intl.formatMessage({ id: "validations.productWorkflows.workflowsWithProducts" })
             )}
         </section>
     );
@@ -199,8 +207,8 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
                 workflows.filter(
                     (wf) => !workflowCodeImplementations.some((wfImpl) => wfImpl.implementation === wf.name)
                 ),
-                I18n.t("validations.productWorkflows.workflowsWithoutImplementations"),
-                I18n.t("validations.productWorkflows.workflowsWithImplementations")
+                intl.formatMessage({ id: "validations.productWorkflows.workflowsWithoutImplementations" }),
+                intl.formatMessage({ id: "validations.productWorkflows.workflowsWithImplementations" })
             )}
         </section>
     );
@@ -214,8 +222,8 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
                 workflowCodeImplementations.filter(
                     (wfImpl) => !workflows.some((wf) => wfImpl.implementation === wf.name)
                 ),
-                I18n.t("validations.productWorkflows.workflowsWithoutRecords"),
-                I18n.t("validations.productWorkflows.workflowsWithRecords")
+                intl.formatMessage({ id: "validations.productWorkflows.workflowsWithoutRecords" }),
+                intl.formatMessage({ id: "validations.productWorkflows.workflowsWithRecords" })
             )}
         </section>
     );

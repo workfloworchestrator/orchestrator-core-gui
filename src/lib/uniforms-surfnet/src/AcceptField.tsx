@@ -15,8 +15,8 @@
 import "lib/uniforms-surfnet/src/AcceptField.scss";
 
 import { EuiCheckbox, EuiText } from "@elastic/eui";
-import I18n, { TranslateOptions } from "i18n-js";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
+import { intl } from "locale/i18n";
 import React, { useReducer } from "react";
 import { connectField, filterDOMProps } from "uniforms";
 
@@ -32,7 +32,7 @@ type AcceptItemType =
     | "skip"
     | "margin"
     | "value";
-type AcceptItem = [string, AcceptItemType, TranslateOptions?];
+type AcceptItem = [string, AcceptItemType, Record<string, string>?];
 type AcceptValue = "SKIPPED" | "ACCEPTED" | "INCOMPLETE";
 
 export type AcceptFieldProps = FieldProps<AcceptValue, { data?: AcceptItem[] }>;
@@ -107,7 +107,7 @@ function Accept({
     return (
         <section {...filterDOMProps(props)} className={`${className} accept-field`}>
             {data.map((entry: any[], index: number) => {
-                const label = I18n.t(`${i18nBaseKey}.${entry[0]}`, entry[2]);
+                const label = intl.formatMessage({ id: `${i18nBaseKey}.${entry[0]}` }, entry[2]);
                 switch (entry[1]) {
                     case "label":
                         return (

@@ -18,7 +18,7 @@ import "components/SubscriptionValidation.scss";
 import { deleteSubscription } from "api/index";
 import CheckBox from "components/CheckBox";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import React from "react";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
@@ -117,17 +117,18 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
     handleDeleteSubscription = (subscription: SubscriptionWithDetails) => (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
         this.confirmation(
-            I18n.t("subscriptions.deleteConfirmation", {
-                name: subscription.product.name,
-                customer: subscription.customer_name,
-            }),
+            intl.formatMessage(
+                { id: "subscriptions.deleteConfirmation" },
+                {
+                    name: subscription.product.name,
+                    customer: subscription.customer_name,
+                }
+            ),
             () =>
                 deleteSubscription(subscription.subscription_id).then(() => {
                     this.props.onChange();
                     setFlash(
-                        I18n.t("subscriptions.flash.delete", {
-                            name: subscription.product.name,
-                        })
+                        intl.formatMessage({ id: "subscriptions.flash.delete" }, { name: subscription.product.name })
                     );
                 })
         );
@@ -147,7 +148,7 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
             const name = columns[index];
             return (
                 <th key={index} className={name} onClick={this.sort(name)}>
-                    <span>{I18n.t(`subscriptions.${name}`)}</span>
+                    <span>{intl.formatMessage({ id: `subscriptions.${name}` })}</span>
                     {this.sortColumnIcon(name, sorted)}
                 </th>
             );
@@ -160,17 +161,23 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
                         <tr>
                             {columns.map((column, index) => th(index))}
                             <th className="action">
-                                <span>{I18n.t("subscriptions.noop")}</span>
+                                <span>{intl.formatMessage({ id: "subscriptions.noop" })}</span>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         {subscriptions.map((subscription, index) => (
                             <tr key={`${subscription.subscription_id}_${index}`}>
-                                <td data-label={I18n.t("subscriptions.customer_name")} className="customer_name">
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.customer_name" })}
+                                    className="customer_name"
+                                >
                                     {subscription.customer_name}
                                 </td>
-                                <td data-label={I18n.t("subscriptions.description")} className="description">
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.description" })}
+                                    className="description"
+                                >
                                     <a
                                         href={`subscriptions/${subscription.subscription_id}`}
                                         target="_blank"
@@ -179,22 +186,31 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
                                         {subscription.description}
                                     </a>
                                 </td>
-                                <td data-label={I18n.t("subscriptions.insync")} className="insync">
+                                <td data-label={intl.formatMessage({ id: "subscriptions.insync" })} className="insync">
                                     <CheckBox value={subscription.insync} name="insync" readOnly={true} />
                                 </td>
-                                <td data-label={I18n.t("subscriptions.product_name")} className="product_name">
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.product_name" })}
+                                    className="product_name"
+                                >
                                     {subscription.product.name}
                                 </td>
-                                <td data-label={I18n.t("subscriptions.status")} className="status">
+                                <td data-label={intl.formatMessage({ id: "subscriptions.status" })} className="status">
                                     {subscription.status}
                                 </td>
-                                <td data-label={I18n.t("subscriptions.start_date_epoch")} className="start_date_epoch">
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.start_date_epoch" })}
+                                    className="start_date_epoch"
+                                >
                                     {renderDate(subscription.start_date)}
                                 </td>
-                                <td data-label={I18n.t("subscriptions.name")} className="end_date_epoch">
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.name" })}
+                                    className="end_date_epoch"
+                                >
                                     {renderDate(subscription.end_date)}
                                 </td>
-                                <td data-label={I18n.t("subscriptions.noop")} className="actions">
+                                <td data-label={intl.formatMessage({ id: "subscriptions.noop" })} className="actions">
                                     <span>
                                         <i
                                             className="fas fa-trash-alt"
@@ -210,7 +226,7 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
         }
         return (
             <div>
-                <em>{I18n.t("validations.no_subscriptions")}</em>
+                <em>{intl.formatMessage({ id: "validations.no_subscriptions" })}</em>
             </div>
         );
     }
@@ -232,7 +248,7 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
                     confirm={confirmationDialogAction}
                     question={confirmationDialogQuestion}
                 />
-                <h3>{I18n.t("validations.workflow_key", { workflow: workflow })}</h3>
+                <h3>{intl.formatMessage({ id: "validations.workflow_key" }, { workflow: workflow })}</h3>
                 <section className="subscriptions">
                     {this.renderSubscriptionsTable(subscriptions ?? [], sorted)}
                 </section>

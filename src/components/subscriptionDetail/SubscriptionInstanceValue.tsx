@@ -22,7 +22,7 @@ import {
     serviceByImsServiceId,
     subscriptionsDetailWithModel,
 } from "api";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import { isEmpty } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
 import ApplicationContext from "utils/ApplicationContext";
@@ -72,7 +72,7 @@ function DataRow({
     return (
         <tr>
             <td className={`${applyIdNamingConvention(`${type}-${label}`)}-k`}>
-                {rawLabel ?? I18n.t(`subscription.${type}.${label}`)}
+                {rawLabel ?? intl.formatMessage({ id: `subscription.${type}.${label}` })}
             </td>
             <td className={`${applyIdNamingConvention(`${type}-${label}`)}-v`}>{value}</td>
         </tr>
@@ -117,7 +117,7 @@ function SubscriptionInstanceValueRow({
                 </td>
                 {isDeleted && (
                     <td>
-                        <em className="error">{I18n.t(`subscription.${type}.removed`)}</em>
+                        <em className="error">{intl.formatMessage({ id: `subscription.${type}.removed` })}</em>
                     </td>
                 )}
             </tr>
@@ -249,7 +249,7 @@ function ImsServiceDetail({ service, recursive = false }: { service: IMSService;
                             key={index}
                             type={type}
                             label="id"
-                            rawLabel={I18n.t(`subscription.${type}.id`, { id: port.id })}
+                            rawLabel={intl.formatMessage({ id: `subscription.${type}.id` }, { id: port.id })}
                             value={<EndpointDetail endpoint={port} />}
                         />
                     );
@@ -285,7 +285,7 @@ function IpamPrefix({ prefix }: { prefix: IPAMPrefix }) {
                         key={idx}
                         type="ipam_prefix"
                         label="address"
-                        rawLabel={I18n.t("subscription.ipam_prefix.address", { id: address.id })}
+                        rawLabel={intl.formatMessage({ id: "subscription.ipam_prefix.address" }, { id: address.id })}
                         value={<IpamAddress address={address} />}
                     />
                 ))}

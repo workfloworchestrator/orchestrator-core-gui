@@ -18,7 +18,7 @@ import "pages/ModifySubscription.scss";
 import { EuiPage, EuiPageBody } from "@elastic/eui";
 import { catchErrorStatus, startProcess } from "api/index";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import React from "react";
 import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import { setFlash } from "utils/Flash";
@@ -66,11 +66,14 @@ class ModifySubscription extends React.Component<IProps, IState> {
 
         if (pid) {
             setFlash(
-                I18n.t("process.flash.create_modify", {
-                    name: I18n.t(`workflow.${workflowName}`),
-                    subscriptionId: subscriptionId,
-                    pid: pid,
-                })
+                intl.formatMessage(
+                    { id: "process.flash.create_modify" },
+                    {
+                        name: intl.formatMessage({ id: `workflow.${workflowName}` }),
+                        subscriptionId: subscriptionId,
+                        pid: pid,
+                    }
+                )
             );
             return <Redirect to={workflowName.startsWith("validate") ? "/tasks" : `/processes?highlight=${pid}`} />;
         }
@@ -83,7 +86,7 @@ class ModifySubscription extends React.Component<IProps, IState> {
             <EuiPage>
                 <EuiPageBody component="div" className="mod-modify-subscription">
                     <section className="card">
-                        <h1>{I18n.t(`workflow.${workflowName}`)}</h1>
+                        <h1>{intl.formatMessage({ id: `workflow.${workflowName}` })}</h1>
                         <UserInputFormWizard
                             stepUserInput={stepUserInput}
                             validSubmit={this.submit}

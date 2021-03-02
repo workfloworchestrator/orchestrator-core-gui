@@ -15,7 +15,7 @@
 
 import DropDownContainer from "components/tables/DropDownContainer";
 import { ActionType, TableSettingsAction } from "components/tables/NwaTable";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import debounce from "lodash/debounce";
 import React, { Dispatch, useContext } from "react";
 import Select, { ActionMeta, ValueType } from "react-select";
@@ -100,7 +100,7 @@ function CustomersFilter({
                     value={value}
                     isSearchable={true}
                     isClearable={true}
-                    placeholder={I18n.t(`table.filter_placeholder.${column.id}`)}
+                    placeholder={intl.formatMessage({ id: `table.filter_placeholder.${column.id}` })}
                     isDisabled={disabled || organisations?.length === 0}
                     onBlur={reset}
                 />
@@ -133,7 +133,10 @@ export function renderMultiSelectFilter(
     const current = state.filterBy.find((filter) => filter.id === column.id);
     const currentFilter = current ? current.values : null;
     const options = i18nPrefix
-        ? allOptions.map((val) => ({ value: val, label: I18n.t(`${i18nPrefix}.${val}`) }))
+        ? allOptions.map((val) => ({
+              value: val,
+              label: intl.formatMessage({ id: `${i18nPrefix}.${val}` }),
+          }))
         : allOptions.map((val) => ({ value: val, label: val }));
     const selected = currentFilter ? options.filter(({ value }) => currentFilter.includes(value)) : [];
     const filtering = selected.length > 0;
@@ -161,7 +164,7 @@ export function renderMultiSelectFilter(
                     name={"multi-select"}
                     options={options}
                     onChange={onChange}
-                    placeholder={I18n.t(`table.filter_placeholder.${column.id}`)}
+                    placeholder={intl.formatMessage({ id: `table.filter_placeholder.${column.id}` })}
                     onBlur={reset}
                 />
             )}
@@ -185,7 +188,10 @@ export function renderSingleSelectFilter(
     const current = state.filterBy.find((filter) => filter.id === column.id);
     const currentFilter = current ? current.values : null;
     const options = i18nPrefix
-        ? allOptions.map((val) => ({ value: val, label: I18n.t(`${i18nPrefix}.${val}`) }))
+        ? allOptions.map((val) => ({
+              value: val,
+              label: intl.formatMessage({ id: `${i18nPrefix}.${val}` }),
+          }))
         : allOptions.map((val) => ({ value: val, label: val }));
     const selected = currentFilter ? options.filter(({ value }) => currentFilter.includes(value)) : [];
     const filtering = selected.length > 0;
@@ -216,7 +222,7 @@ export function renderSingleSelectFilter(
                     name={"multi-select"}
                     options={options}
                     onChange={onChange}
-                    placeholder={I18n.t(`table.filter_placeholder.${column.id}`)}
+                    placeholder={intl.formatMessage({ id: `table.filter_placeholder.${column.id}` })}
                     onBlur={reset}
                 />
             )}
@@ -251,7 +257,7 @@ export function renderILikeFilter({
             onChange={(e) => {
                 column.setFilter(e.target.value || undefined);
             }}
-            placeholder={I18n.t(`table.filter_placeholder.${column.id}`)}
+            placeholder={intl.formatMessage({ id: `table.filter_placeholder.${column.id}` })}
         />
     );
 }

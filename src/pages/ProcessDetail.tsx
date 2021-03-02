@@ -21,7 +21,7 @@ import { abortProcess, deleteProcess, processSubscriptionsByProcessId, retryProc
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import ProcessStateDetails from "components/ProcessStateDetails";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import ScrollUpButton from "react-scroll-up-button";
@@ -126,23 +126,22 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
         let message;
         if (!process.is_task) {
-            message = I18n.t("processes.deleteConfirmation", {
-                name: process.productName,
-                customer: process.customerName,
-            });
+            message = intl.formatMessage(
+                { id: "processes.deleteConfirmation" },
+                { name: process.productName, customer: process.customerName }
+            );
         } else {
-            message = I18n.t("tasks.deleteConfirmation", {
-                name: process.workflow_name,
-            });
+            message = intl.formatMessage({ id: "tasks.deleteConfirmation" }, { name: process.workflow_name });
         }
 
         this.confirmation(message, () =>
             deleteProcess(process.id).then(() => {
                 this.context.redirect(`/${process.is_task ? "tasks" : "processes"}`);
                 setFlash(
-                    I18n.t(`${process.is_task ? "tasks" : "processes"}.flash.delete`, {
-                        name: process.productName,
-                    })
+                    intl.formatMessage(
+                        { id: `${process.is_task ? "tasks" : "processes"}.flash.delete` },
+                        { name: process.productName }
+                    )
                 );
             })
         );
@@ -153,23 +152,22 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
         let message;
         if (!process.is_task) {
-            message = I18n.t("processes.abortConfirmation", {
-                name: process.productName,
-                customer: process.customerName,
-            });
+            message = intl.formatMessage(
+                { id: "processes.abortConfirmation" },
+                { name: process.productName, customer: process.customerName }
+            );
         } else {
-            message = I18n.t("tasks.abortConfirmation", {
-                name: process.workflow_name,
-            });
+            message = intl.formatMessage({ id: "tasks.abortConfirmation" }, { name: process.workflow_name });
         }
 
         this.confirmation(message, () =>
             abortProcess(process.id).then(() => {
                 this.context.redirect(process.is_task ? "/tasks" : "/processes");
                 setFlash(
-                    I18n.t(`${process.is_task ? "tasks" : "processes"}.flash.abort`, {
-                        name: process.productName,
-                    })
+                    intl.formatMessage(
+                        { id: `${process.is_task ? "tasks" : "processes"}.flash.abort` },
+                        { name: process.productName }
+                    )
                 );
             })
         );
@@ -180,23 +178,22 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
         let message;
         if (!process.is_task) {
-            message = I18n.t("processes.retryConfirmation", {
-                name: process.productName,
-                customer: process.customerName,
-            });
+            message = intl.formatMessage(
+                { id: "processes.retryConfirmation" },
+                { name: process.productName, customer: process.customerName }
+            );
         } else {
-            message = I18n.t("tasks.retryConfirmation", {
-                name: process.workflow_name,
-            });
+            message = intl.formatMessage({ id: "tasks.retryConfirmation" }, { name: process.workflow_name });
         }
 
         this.confirmation(message, () =>
             retryProcess(process.id).then(() => {
                 this.context.redirect(process.is_task ? "/tasks" : `/processes?highlight=${process.id}`);
                 setFlash(
-                    I18n.t(`${process.is_task ? "tasks" : "processes"}.flash.retry`, {
-                        name: process.productName,
-                    })
+                    intl.formatMessage(
+                        { id: `${process.is_task ? "tasks" : "processes"}.flash.retry` },
+                        { name: process.productName }
+                    )
                 );
             })
         );
@@ -279,7 +276,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                                 iconSide="right"
                                 onClick={option.action}
                             >
-                                {I18n.t(`processes.actions.${option.label}`).toUpperCase()}
+                                {intl.formatMessage({ id: `processes.actions.${option.label}` }).toUpperCase()}
                             </EuiButton>
                         </EuiFlexItem>
                     ))}
@@ -315,7 +312,12 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
         return resumeProcess(process.id, processInput).then((e) => {
             this.context.redirect(`/${process.is_task ? "tasks" : `processes?highlight=${process.id}`}`);
-            setFlash(I18n.t(`${process.is_task ? "task" : "process"}.flash.update`, { name: process.workflow_name }));
+            setFlash(
+                intl.formatMessage(
+                    { id: `${process.is_task ? "task" : "process"}.flash.update` },
+                    { name: process.workflow_name }
+                )
+            );
         });
     };
 
@@ -356,14 +358,15 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                         <section className="header-info">
                             <EuiText>
                                 <h3>
-                                    {I18n.t(`${process.is_task ? "task" : "process"}.workflow`, {
-                                        name: process.workflow_name,
-                                    })}
-                                    <br></br>
-                                    {I18n.t(`${process.is_task ? "task" : "process"}.userInput`, {
-                                        name: step.name,
-                                        product: productName || "",
-                                    })}
+                                    {intl.formatMessage(
+                                        { id: `${process.is_task ? "task" : "process"}.workflow` },
+                                        { name: process.workflow_name }
+                                    )}
+                                    <br />
+                                    {intl.formatMessage(
+                                        { id: `${process.is_task ? "task" : "process"}.userInput` },
+                                        { name: step.name, product: productName || "" }
+                                    )}
                                 </h3>
                             </EuiText>
                         </section>
@@ -379,9 +382,9 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         }
     };
 
-    renderTab = (isTask: boolean, tab: string, selectedTab: string) => (
+    renderTab = (tab: string, selectedTab: string) => (
         <span id={tab} key={tab} className={tab === selectedTab ? "active" : ""} onClick={this.switchTab(tab)}>
-            {I18n.t(`${isTask ? "task" : "process"}.tabs.${tab}`)}
+            {intl.formatMessage({ id: `process.tabs.${tab}` })}
         </span>
     );
 
@@ -414,15 +417,13 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                         confirm={confirmationDialogAction}
                         question={confirmationDialogQuestion}
                     />
-                    <section className="tabs">
-                        {tabs.map((tab) => this.renderTab(process.is_task, tab, selectedTab))}
-                    </section>
+                    <section className="tabs">{tabs.map((tab) => this.renderTab(tab, selectedTab))}</section>
                     {renderContent &&
                         this.renderTabContent(selectedTab, process, step, stepUserInput, subscriptionProcesses)}
                     {renderNotFound && (
                         <section className="not-found">
                             <EuiPanel>
-                                <h1>{I18n.t(`${process.is_task ? "task" : "process"}.notFound`)}</h1>
+                                <h1>{intl.formatMessage({ id: "process.notFound" })}</h1>
                             </EuiPanel>
                         </section>
                     )}

@@ -11,7 +11,7 @@ import {
     EuiText,
 } from "@elastic/eui";
 import { subscriptionsDetailWithModel } from "api";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import React, { MouseEvent } from "react";
 import { FavoriteSubscriptionStorage, Subscription, SubscriptionModel } from "utils/types";
 
@@ -181,7 +181,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                         <EuiButtonIcon
                             id={`favorite-port-selector-modal-${subscription_id}-edit`}
                             iconType="pencil"
-                            aria-label={I18n.t(`favorites.edit`)}
+                            aria-label={intl.formatMessage({ id: "favorites.edit" })}
                             onClick={(
                                 event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, globalThis.MouseEvent>
                             ) => this.onChangeEditMode(event, subscription_id)}
@@ -189,7 +189,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                         <EuiButtonIcon
                             id={`favorite-port-selector-modal-${subscription_id}-delete`}
                             iconType="trash"
-                            aria-label={I18n.t(`favorites.trash`)}
+                            aria-label={intl.formatMessage({ id: "favorites.trash" })}
                             onClick={(
                                 event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, globalThis.MouseEvent>
                             ) => this.onDelete(event, subscription_id)}
@@ -198,7 +198,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                             <EuiButtonIcon
                                 id={`favorite-port-selector-modal-${subscription_id}-select`}
                                 iconType="pinFilled"
-                                aria-label={I18n.t(`favorites.select`)}
+                                aria-label={intl.formatMessage({ id: "favorites.select" })}
                                 onClick={(
                                     event: React.MouseEvent<
                                         HTMLButtonElement | HTMLAnchorElement,

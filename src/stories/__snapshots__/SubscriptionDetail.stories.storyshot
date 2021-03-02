@@ -310,7 +310,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                       id="subscriptions-in_networkdashboard-v"
                     >
                       <a
-                        href="undefined/subscription/9c8c13d5-6954-461a-a931-32894c193aa0"
+                        href="https://netwerkdashboard.surfnet.nl/subscription/9c8c13d5-6954-461a-a931-32894c193aa0"
                         rel="noopener noreferrer"
                         target="_blank"
                       >
@@ -1107,7 +1107,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                         id="modify-link-modify-sn8-ip-bgp-change-port"
                         onClick={[Function]}
                       >
-                        Replace port
+                        workflow.modify_sn8_ip_bgp_change_port
                       </a>
                     </td>
                     <td />
@@ -1119,7 +1119,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                         id="modify-link-modify-sn8-ip-bgp"
                         onClick={[Function]}
                       >
-                        Modify BGP
+                        workflow.modify_sn8_ip_bgp
                       </a>
                     </td>
                     <td />
@@ -1131,7 +1131,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                         id="validate-link-validate-sn8-ip-bgp"
                         onClick={[Function]}
                       >
-                        Validate SN8 IP BGP
+                        workflow.validate_sn8_ip_bgp
                       </a>
                     </td>
                     <td />

@@ -18,7 +18,7 @@ import "components/ProcessStateDetails.scss";
 import { EuiButton, EuiCheckbox, EuiCopy, EuiIcon, EuiText } from "@elastic/eui";
 import HighlightCode from "components/HighlightCode";
 import StepDetails from "components/Step";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import isEqual from "lodash/isEqual";
 import { CustomProcessWithDetails } from "pages/ProcessDetail";
 import React from "react";
@@ -80,15 +80,19 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                         <EuiText>
                             <h3>
                                 {this.props.isProcess &&
-                                    I18n.t("process_state.wording_process", {
-                                        product: process.productName,
-                                        customer: process.customerName,
-                                        workflow: process.workflow_name,
-                                    })}
+                                    intl.formatMessage(
+                                        { id: "process_state.wording_process" },
+                                        {
+                                            product: process.productName,
+                                            customer: process.customerName,
+                                            workflow: process.workflow_name,
+                                        }
+                                    )}
                                 {!this.props.isProcess &&
-                                    I18n.t("process_state.wording_task", {
-                                        workflow: process.workflow_name,
-                                    })}
+                                    intl.formatMessage(
+                                        { id: "process_state.wording_task" },
+                                        { workflow: process.workflow_name }
+                                    )}
                             </h3>
                         </EuiText>
                     </li>
@@ -101,7 +105,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                                 aria-label="toggle-details"
                                 name="details"
                                 checked={details}
-                                label={I18n.t(`process_state.details`)}
+                                label={intl.formatMessage({ id: "process_state.details" })}
                                 onChange={() => this.setState({ details: !details })}
                             />
                         </li>
@@ -113,7 +117,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                                 aria-label="toggle-state-delta"
                                 name="state-changes"
                                 checked={stateChanges}
-                                label={I18n.t(`process_state.stateChanges`)}
+                                label={intl.formatMessage({ id: "process_state.stateChanges" })}
                                 onChange={() => this.setState({ stateChanges: !stateChanges })}
                             />
                         </li>
@@ -124,7 +128,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                             aria-label="toggle-raw-json"
                             name="raw"
                             checked={raw}
-                            label={I18n.t(`process_state.raw`)}
+                            label={intl.formatMessage({ id: "process_state.raw" })}
                             onChange={() => this.setState({ raw: !raw })}
                         />
                     </li>
@@ -135,7 +139,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                                 aria-label="toggle-traceback"
                                 name="traceback"
                                 checked={traceback}
-                                label={I18n.t(`process_state.traceback`)}
+                                label={intl.formatMessage({ id: "process_state.traceback" })}
                                 onChange={() => this.setState({ traceback: !traceback })}
                             />
                         </li>
@@ -178,9 +182,10 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                             // color="secondary"
                             iconType="link"
                         >
-                            {I18n.t(`${this.props.isProcess ? "process" : "task"}.subscription_link_txt`, {
-                                target: ps.workflow_target,
-                            })}
+                            {intl.formatMessage(
+                                { id: `${this.props.isProcess ? "process" : "task"}.subscription_link_txt` },
+                                { target: ps.workflow_target }
+                            )}
                         </EuiButton>
                     </div>
                 ))}
@@ -328,7 +333,9 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                             <tbody>
                                 {summaryKeys.map((key) => (
                                     <tr key={key}>
-                                        <td className="title">{I18n.t(`process_state.summary.${key}`)}</td>
+                                        <td className="title">
+                                            {intl.formatMessage({ id: `process_state.summary.${key}` })}
+                                        </td>
                                         <td className="value">{this.renderSummaryValue(prop(process, key))}</td>
                                     </tr>
                                 ))}

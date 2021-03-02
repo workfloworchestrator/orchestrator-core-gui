@@ -23,7 +23,7 @@ import {
     EuiSpacer,
 } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import React from "react";
 
 import { deleteProduct, products } from "../api/index";
@@ -66,19 +66,13 @@ export default class Products extends React.Component {
 
     handleDeleteProduct = (product: Product) => (e: React.MouseEvent<HTMLButtonElement>) => {
         this.confirmation(
-            I18n.t("metadata.deleteConfirmation", {
-                type: "Product",
-                name: product.name,
-            }),
+            intl.formatMessage({ id: "metadata.deleteConfirmation" }, { type: "Product", name: product.name }),
             () =>
                 deleteProduct(product.product_id)
                     .then(() => {
                         this.componentDidMount();
                         setFlash(
-                            I18n.t("metadata.flash.delete", {
-                                name: product.name,
-                                type: "Product",
-                            })
+                            intl.formatMessage({ id: "metadata.flash.delete" }, { name: product.name, type: "Product" })
                         );
                     })
                     .catch((err) => {

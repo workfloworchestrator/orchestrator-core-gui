@@ -23,7 +23,7 @@ import { allWorkflows, productBlocks, productById, products, saveProduct } from 
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { isDate } from "date-fns";
 import { formDate, formInput, formSelect } from "forms/Builder";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import { ValueType } from "react-select";
@@ -171,19 +171,16 @@ export default class Product extends React.Component<IProps, IState> {
         stop(e);
         const { product } = this.state;
 
-        const question = I18n.t("metadata.deleteConfirmation", {
-            type: "Product",
-            name: product!.name,
-        });
+        const question = intl.formatMessage(
+            { id: "metadata.deleteConfirmation" },
+            { type: "Product", name: product!.name }
+        );
         const action = () =>
             deleteProduct(product!.product_id)
                 .then(() => {
                     this.context.redirect("/metadata/products");
                     setFlash(
-                        I18n.t("metadata.flash.delete", {
-                            name: product!.name,
-                            type: "Product",
-                        })
+                        intl.formatMessage({ id: "metadata.flash.delete" }, { name: product!.name, type: "Product" })
                     );
                 })
                 .catch((err) => {
@@ -215,10 +212,10 @@ export default class Product extends React.Component<IProps, IState> {
             saveProduct(product!).then(() => {
                 this.context.redirect("/metadata/products");
                 setFlash(
-                    I18n.t(product!.product_id ? "metadata.flash.updated" : "metadata.flash.created", {
-                        type: "Product",
-                        name: product!.name,
-                    })
+                    intl.formatMessage(
+                        { id: product!.product_id ? "metadata.flash.updated" : "metadata.flash.created" },
+                        { type: "Product", name: product!.name }
+                    )
                 );
             });
         } else {
@@ -231,7 +228,7 @@ export default class Product extends React.Component<IProps, IState> {
             return (
                 <section className="buttons">
                     <EuiButton className="button" onClick={() => this.context.redirect("/metadata/products")}>
-                        {I18n.t("metadata.products.back")}
+                        {intl.formatMessage({ id: "metadata.products.back" })}
                     </EuiButton>
                 </section>
             );
@@ -240,18 +237,18 @@ export default class Product extends React.Component<IProps, IState> {
         return (
             <section className="buttons">
                 <EuiButton className="button" onClick={this.cancel}>
-                    {I18n.t("process.cancel")}
+                    {intl.formatMessage({ id: "process.cancel" })}
                 </EuiButton>
                 <EuiButton
                     tabIndex={0}
                     className={`button ${invalid ? "grey disabled" : "blue"}`}
                     onClick={this.submit}
                 >
-                    {I18n.t("process.submit")}
+                    {intl.formatMessage({ id: "process.submit" })}
                 </EuiButton>
                 {product.product_id && (
                     <EuiButton className="button red" onClick={this.handleDeleteProduct}>
-                        {I18n.t("processes.delete")}
+                        {intl.formatMessage({ id: "processes.delete" })}
                     </EuiButton>
                 )}
             </section>
@@ -351,7 +348,7 @@ export default class Product extends React.Component<IProps, IState> {
                         this.state.errors,
                         this.changeProperty("name"),
                         this.validateProperty("name"),
-                        duplicateName ? I18n.t("metadata.products.duplicate_name") : undefined
+                        duplicateName ? intl.formatMessage({ id: "metadata.products.duplicate_name" }) : undefined
                     )}
                     {formInput(
                         "metadata.products.description",

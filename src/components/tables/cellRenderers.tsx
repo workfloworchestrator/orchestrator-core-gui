@@ -12,7 +12,7 @@
  * limitations under the License.
  *
  */
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import uniq from "lodash/uniq";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -49,7 +49,7 @@ export function renderSubscriptionProductsCell({ cell }: { cell: Cell }) {
 export function renderCustomersCell(organisations: Organization[] | null | undefined, abbreviate: boolean) {
     function lookup(uuid: string) {
         if (organisations === null || organisations === undefined) {
-            return I18n.t(abbreviate ? "unavailable_abbreviated" : "unavailable");
+            return intl.formatMessage({ id: abbreviate ? "unavailable_abbreviated" : "unavailable" });
         }
         const organisation: Organization | undefined = organisations.find((org) => org.uuid === uuid);
         return organisation ? (abbreviate ? organisation.abbr : organisation.name) : uuid;
@@ -65,7 +65,7 @@ export function renderCustomersCell(organisations: Organization[] | null | undef
 export function renderSubscriptionCustomersCell(organisations: Organization[] | null | undefined, abbreviate: boolean) {
     function lookup(uuid: string) {
         if (organisations === null || organisations === undefined) {
-            return I18n.t(abbreviate ? "unavailable_abbreviated" : "unavailable");
+            return intl.formatMessage({ id: abbreviate ? "unavailable_abbreviated" : "unavailable" });
         }
         const organisation: Organization | undefined = organisations.find((org) => org.uuid === uuid);
         return organisation ? (abbreviate ? organisation.abbr : organisation.name) : uuid;
@@ -175,7 +175,7 @@ export function renderSubscriptionTagCell({ cell }: { cell: Cell }) {
 export function renderCustomersCelliv2(organisations: Organization[] | null | undefined, abbreviate: boolean) {
     function lookup(uuid: string) {
         if (organisations === null || organisations === undefined) {
-            return I18n.t(abbreviate ? "unavailable_abbreviated" : "unavailable");
+            return intl.formatMessage({ id: abbreviate ? "unavailable_abbreviated" : "unavailable" });
         }
         const organisation: Organization | undefined = organisations.find((org) => org.uuid === uuid);
         return organisation ? (abbreviate ? organisation.abbr : organisation.name) : uuid;
