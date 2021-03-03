@@ -16,8 +16,8 @@
 import "components/FilterDropDown.scss";
 
 import CheckBox from "components/CheckBox";
-import { intl } from "locale/i18n";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { Filter } from "utils/types";
 
 type filterCallback = (filter: Filter) => void;
@@ -40,12 +40,15 @@ export default class FilterDropDown extends React.PureComponent<IProps, IState> 
 
     renderDropDownItem = (item: Filter, filterBy: filterCallback) => {
         const { noTrans, singleSelectFilter } = this.props;
-        const name = noTrans ? item.name : intl.formatMessage({ id: `filter.${item.name.replace(/ /g, "_")}` });
+        const name = noTrans ? item.name : <FormattedMessage id={`filter.${item.name.replace(/ /g, "_")}`} />;
         if (singleSelectFilter) {
             return (
                 <li key={item.name} onClick={() => filterBy(item)}>
                     <CheckBox name={item.name} value={item.selected} onChange={() => filterBy(item)} />
-                    <label htmlFor={item.name}>{`${name} (${item.count})`}</label>
+                    <label htmlFor={item.name}>
+                        {name}
+                        {` (${item.count})`}
+                    </label>
                     <i className="fa fa-filter" onClick={(e) => singleSelectFilter(e, item)} />
                 </li>
             );
@@ -53,7 +56,10 @@ export default class FilterDropDown extends React.PureComponent<IProps, IState> 
         return (
             <li key={item.name} onClick={() => filterBy(item)}>
                 <CheckBox name={item.name} value={item.selected} onChange={() => filterBy(item)} />
-                <label htmlFor={item.name}>{`${name} (${item.count})`}</label>
+                <label htmlFor={item.name}>
+                    {name}
+                    {` (${item.count})`}
+                </label>
             </li>
         );
     };
@@ -68,9 +74,11 @@ export default class FilterDropDown extends React.PureComponent<IProps, IState> 
         const filtered = items.filter((item) => item.selected);
         const count = filtered.reduce((acc, item) => item.count, 0);
         const name =
-            filtered.length === items.length
-                ? intl.formatMessage({ id: "filter.all" }, { count: count })
-                : intl.formatMessage({ id: "filter.selected" }, { count: count });
+            filtered.length === items.length ? (
+                <FormattedMessage id="filter.all" values={{ count: count }} />
+            ) : (
+                <FormattedMessage id="filter.selected" values={{ count: count }} />
+            );
         const faIcon = dropDownActive ? "fa-caret-up" : "fa-caret-down";
         return (
             <section className="filter-drop-down">

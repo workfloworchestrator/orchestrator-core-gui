@@ -22,8 +22,8 @@ import {
     EuiSpacer,
 } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
-import { intl } from "locale/i18n";
 import React from "react";
+import { WrappedComponentProps, injectIntl } from "react-intl";
 
 import { deleteProductBlock, productBlocks } from "../api/index";
 import { setFlash } from "../utils/Flash";
@@ -44,7 +44,7 @@ interface IState {
     leavePage: boolean;
 }
 
-export default class ProductBlocks extends React.Component {
+class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
     state: IState = {
         productBlocks: [],
         productBlocksLoaded: true,
@@ -66,6 +66,8 @@ export default class ProductBlocks extends React.Component {
 
     handleDeleteProductBlock = (productBlock: ProductBlock) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
+        const { intl } = this.props;
+
         this.confirmation(
             intl.formatMessage(
                 { id: "metadata.deleteConfirmation" },
@@ -232,3 +234,5 @@ export default class ProductBlocks extends React.Component {
         );
     }
 }
+
+export default injectIntl(ProductBlocks);

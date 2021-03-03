@@ -19,8 +19,8 @@ import { EuiPage, EuiPageBody } from "@elastic/eui";
 import { catchErrorStatus, startProcess } from "api";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import { JSONSchema6 } from "json-schema";
-import { intl } from "locale/i18n";
 import React, { useCallback, useContext, useEffect, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { productById } from "utils/Lookups";
@@ -46,6 +46,7 @@ interface Form {
 }
 
 export default function NewProcess(props: IProps) {
+    const intl = useIntl();
     const { preselectedInput } = props;
     const { products, redirect } = useContext(ApplicationContext);
     const [form, setForm] = useState<Form>({});
@@ -84,7 +85,7 @@ export default function NewProcess(props: IProps) {
                 redirect("/processes");
             });
         },
-        [redirect, products, preselectedInput]
+        [redirect, products, preselectedInput, intl]
     );
 
     useEffect(() => {
@@ -114,19 +115,21 @@ export default function NewProcess(props: IProps) {
                 hasNext: true,
             });
         }
-    }, [products, submit, preselectedInput]);
+    }, [products, submit, preselectedInput, intl]);
 
     return (
         <EuiPage>
             <EuiPageBody component="div" className="mod-new-process">
                 <section className="card">
-                    <h1>{intl.formatMessage({ id: "process.new_process" })}</h1>
+                    <h1>
+                        <FormattedMessage id="process.new_process" />
+                    </h1>
                     {stepUserInput && (
                         <UserInputFormWizard
                             stepUserInput={stepUserInput}
                             validSubmit={submit}
                             cancel={() => redirect("/processes")}
-                            hasNext={hasNext}
+                            hasNext={hasNext ?? false}
                         />
                     )}
                 </section>

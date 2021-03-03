@@ -18,13 +18,13 @@ import "pages/ModifySubscription.scss";
 import { EuiPage, EuiPageBody } from "@elastic/eui";
 import { catchErrorStatus, startProcess } from "api/index";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
-import { intl } from "locale/i18n";
 import React from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import { setFlash } from "utils/Flash";
 import { FormNotCompleteResponse, InputForm } from "utils/types";
 
-interface IProps extends RouteComponentProps {
+interface IProps extends RouteComponentProps, WrappedComponentProps {
     subscriptionId: string;
     workflowName: string;
 }
@@ -62,7 +62,7 @@ class ModifySubscription extends React.Component<IProps, IState> {
 
     render() {
         const { stepUserInput, pid } = this.state;
-        const { subscriptionId, workflowName } = this.props;
+        const { subscriptionId, workflowName, intl } = this.props;
 
         if (pid) {
             setFlash(
@@ -86,7 +86,9 @@ class ModifySubscription extends React.Component<IProps, IState> {
             <EuiPage>
                 <EuiPageBody component="div" className="mod-modify-subscription">
                     <section className="card">
-                        <h1>{intl.formatMessage({ id: `workflow.${workflowName}` })}</h1>
+                        <h1>
+                            <FormattedMessage id={`workflow.${workflowName}`} />
+                        </h1>
                         <UserInputFormWizard
                             stepUserInput={stepUserInput}
                             validSubmit={this.submit}
@@ -100,4 +102,4 @@ class ModifySubscription extends React.Component<IProps, IState> {
     }
 }
 
-export default withRouter(ModifySubscription);
+export default injectIntl(withRouter(ModifySubscription));

@@ -18,8 +18,8 @@ import "components/SubscriptionValidation.scss";
 import { deleteSubscription } from "api/index";
 import CheckBox from "components/CheckBox";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
-import { intl } from "locale/i18n";
 import React from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { enrichSubscription, renderDate } from "utils/Lookups";
@@ -35,7 +35,7 @@ type Column =
     | "start_date_epoch"
     | "end_date_epoch";
 
-interface IProps {
+interface IProps extends WrappedComponentProps {
     subscriptions: Subscription[];
     workflow: string;
     onChange: () => void;
@@ -50,7 +50,7 @@ interface IState {
     confirmationDialogQuestion: string;
 }
 
-export default class SubscriptionValidation extends React.Component<IProps, IState> {
+class SubscriptionValidation extends React.Component<IProps, IState> {
     state: IState = {
         sorted: { name: "status", descending: false },
         confirmationDialogOpen: false,
@@ -116,6 +116,7 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
 
     handleDeleteSubscription = (subscription: SubscriptionWithDetails) => (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
+        const { intl } = this.props;
         this.confirmation(
             intl.formatMessage(
                 { id: "subscriptions.deleteConfirmation" },
@@ -135,6 +136,8 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
     };
 
     renderSubscriptionsTable(subscriptions: SubscriptionWithDetails[], sorted: SortOption) {
+        const { intl } = this.props;
+
         const columns: Column[] = [
             "customer_name",
             "description",
@@ -148,7 +151,9 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
             const name = columns[index];
             return (
                 <th key={index} className={name} onClick={this.sort(name)}>
-                    <span>{intl.formatMessage({ id: `subscriptions.${name}` })}</span>
+                    <span>
+                        <FormattedMessage id={`subscriptions.${name}`} />
+                    </span>
                     {this.sortColumnIcon(name, sorted)}
                 </th>
             );
@@ -161,7 +166,9 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
                         <tr>
                             {columns.map((column, index) => th(index))}
                             <th className="action">
-                                <span>{intl.formatMessage({ id: "subscriptions.noop" })}</span>
+                                <span>
+                                    <FormattedMessage id={"subscriptions.noop"} />
+                                </span>
                             </th>
                         </tr>
                     </thead>
@@ -226,7 +233,9 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
         }
         return (
             <div>
-                <em>{intl.formatMessage({ id: "validations.no_subscriptions" })}</em>
+                <em>
+                    <FormattedMessage id="validations.no_subscriptions" />
+                </em>
             </div>
         );
     }
@@ -248,7 +257,9 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
                     confirm={confirmationDialogAction}
                     question={confirmationDialogQuestion}
                 />
-                <h3>{intl.formatMessage({ id: "validations.workflow_key" }, { workflow: workflow })}</h3>
+                <h3>
+                    <FormattedMessage id="validations.workflow_key" values={{ workflow: workflow }} />
+                </h3>
                 <section className="subscriptions">
                     {this.renderSubscriptionsTable(subscriptions ?? [], sorted)}
                 </section>
@@ -258,3 +269,5 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
 }
 
 SubscriptionValidation.contextType = ApplicationContext;
+
+export default injectIntl(SubscriptionValidation);

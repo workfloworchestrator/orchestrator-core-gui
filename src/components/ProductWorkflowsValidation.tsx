@@ -15,8 +15,8 @@
 
 import "components/ProductWorkflowsValidation.scss";
 
-import { intl } from "locale/i18n";
 import React from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { CodedWorkflow, Product, WorkflowWithProductTags } from "utils/types";
 import { isEmpty } from "utils/Utils";
@@ -24,18 +24,24 @@ import { TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE } from "validations/Prod
 
 type Column = "name" | "target" | "product_tags_string" | "description";
 
-interface IProps {
+interface IProps extends WrappedComponentProps {
     workflowCodeImplementations: CodedWorkflow[];
     workflows: WorkflowWithProductTags[];
 }
-export default class ProductWorkflowsValidation extends React.Component<IProps> {
-    renderWorkflows(workflows: WorkflowWithProductTags[], msg: string, nonPresentMsg: string) {
+class ProductWorkflowsValidation extends React.Component<IProps> {
+    renderWorkflows(
+        workflows: WorkflowWithProductTags[],
+        msg: JSX.Element | string,
+        nonPresentMsg: JSX.Element | string
+    ) {
         const columns: Column[] = ["name", "target", "product_tags_string", "description"];
         const th = (index: number) => {
             const name = columns[index];
             return (
                 <th key={index} className={name}>
-                    <span>{intl.formatMessage({ id: `metadata.workflows.${name}` })}</span>
+                    <span>
+                        <FormattedMessage id={`metadata.workflows.${name}`} />
+                    </span>
                 </th>
             );
         };
@@ -64,13 +70,19 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
         );
     }
 
-    renderWorkflowImplementations(workflows: CodedWorkflow[], msg: string, nonPresentMsg: string) {
+    renderWorkflowImplementations(
+        workflows: CodedWorkflow[],
+        msg: JSX.Element | string,
+        nonPresentMsg: JSX.Element | string
+    ) {
         const columns = ["implementation", "name", "target"];
         const th = (index: number) => {
             const name = columns[index];
             return (
                 <th key={index} className={name}>
-                    <span>{intl.formatMessage({ id: `metadata.workflows.${name}` })}</span>
+                    <span>
+                        <FormattedMessage id={`metadata.workflows.${name}`} />
+                    </span>
                 </th>
             );
         };
@@ -98,13 +110,16 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
         );
     }
 
-    renderProducts(products: Product[], productsMsg: string, noProductsMsg: string) {
+    renderProducts(products: Product[], productsMsg: JSX.Element | string, noProductsMsg: JSX.Element | string) {
+        const { intl } = this.props;
         const columns = ["name", "description", "tag", "product_type", "workflows_string", "status"];
         const th = (index: number) => {
             const name = columns[index];
             return (
                 <th key={index} className={name}>
-                    <span>{intl.formatMessage({ id: `metadata.products.${name}` })}</span>
+                    <span>
+                        <FormattedMessage id={`metadata.products.${name}`} />
+                    </span>
                 </th>
             );
         };
@@ -148,85 +163,95 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
         );
     }
 
-    renderProductsWithoutTargetWorkflow = (products: Product[]) => (
-        <section className="product-target-validation">
-            {[TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE].map((target, index) => (
-                <section className="validation" key={index}>
-                    {this.renderProducts(
-                        products.filter((prod) => !prod.workflows.some((wf) => wf.target === target)),
-                        intl.formatMessage(
-                            { id: "validations.productWorkflows.productsWithoutWorkflow" },
-                            { target: target }
-                        ),
-                        intl.formatMessage(
-                            { id: "validations.productWorkflows.productsWithWorkflow" },
-                            { target: target }
-                        )
-                    )}
-                </section>
-            ))}
-        </section>
-    );
+    renderProductsWithoutTargetWorkflow = (products: Product[]) => {
+        return (
+            <section className="product-target-validation">
+                {[TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE].map((target, index) => (
+                    <section className="validation" key={index}>
+                        {this.renderProducts(
+                            products.filter((prod) => !prod.workflows.some((wf) => wf.target === target)),
+                            <FormattedMessage
+                                id="validations.productWorkflows.productsWithoutWorkflow"
+                                values={{ target: target }}
+                            />,
+                            <FormattedMessage
+                                id="validations.productWorkflows.productsWithWorkflow"
+                                values={{ target: target }}
+                            />
+                        )}
+                    </section>
+                ))}
+            </section>
+        );
+    };
 
-    renderProductsWithMultipleTargetWorkflow = (products: Product[]) => (
-        <section className="product-target-validation">
-            {[TARGET_CREATE, TARGET_TERMINATE].map((target, index) => (
-                <section className="validation" key={index}>
-                    {this.renderProducts(
-                        products.filter((prod) => prod.workflows.filter((wf) => wf.target === target).length > 1),
-                        intl.formatMessage(
-                            { id: "validations.productWorkflows.productsWithMultipleWorkflow" },
-                            { target: target }
-                        ),
-                        intl.formatMessage(
-                            { id: "validations.productWorkflows.productsWithoutMultipleWorkflow" },
-                            { target: target }
-                        )
-                    )}
-                </section>
-            ))}
-        </section>
-    );
+    renderProductsWithMultipleTargetWorkflow = (products: Product[]) => {
+        return (
+            <section className="product-target-validation">
+                {[TARGET_CREATE, TARGET_TERMINATE].map((target, index) => (
+                    <section className="validation" key={index}>
+                        {this.renderProducts(
+                            products.filter((prod) => prod.workflows.filter((wf) => wf.target === target).length > 1),
+                            <FormattedMessage
+                                id="validations.productWorkflows.productsWithMultipleWorkflow"
+                                values={{ target: target }}
+                            />,
+                            <FormattedMessage
+                                id="validations.productWorkflows.productsWithoutMultipleWorkflow"
+                                values={{ target: target }}
+                            />
+                        )}
+                    </section>
+                ))}
+            </section>
+        );
+    };
 
-    renderWorkflowsWithoutProducts = (workflows: WorkflowWithProductTags[]) => (
-        <section className="workflow-validation">
-            {this.renderWorkflows(
-                workflows.filter((wf) => wf.target !== "SYSTEM").filter((wf) => isEmpty(wf.product_tags)),
-                intl.formatMessage({ id: "validations.productWorkflows.workflowsWithoutProducts" }),
-                intl.formatMessage({ id: "validations.productWorkflows.workflowsWithProducts" })
-            )}
-        </section>
-    );
+    renderWorkflowsWithoutProducts = (workflows: WorkflowWithProductTags[]) => {
+        return (
+            <section className="workflow-validation">
+                {this.renderWorkflows(
+                    workflows.filter((wf) => wf.target !== "SYSTEM").filter((wf) => isEmpty(wf.product_tags)),
+                    <FormattedMessage id="validations.productWorkflows.workflowsWithoutProducts" />,
+                    <FormattedMessage id="validations.productWorkflows.workflowsWithProducts" />
+                )}
+            </section>
+        );
+    };
 
     renderDatabaseWorkflowsWithNoImplementation = (
         workflowCodeImplementations: CodedWorkflow[],
         workflows: WorkflowWithProductTags[]
-    ) => (
-        <section className="workflow-validation">
-            {this.renderWorkflows(
-                workflows.filter(
-                    (wf) => !workflowCodeImplementations.some((wfImpl) => wfImpl.implementation === wf.name)
-                ),
-                intl.formatMessage({ id: "validations.productWorkflows.workflowsWithoutImplementations" }),
-                intl.formatMessage({ id: "validations.productWorkflows.workflowsWithImplementations" })
-            )}
-        </section>
-    );
+    ) => {
+        return (
+            <section className="workflow-validation">
+                {this.renderWorkflows(
+                    workflows.filter(
+                        (wf) => !workflowCodeImplementations.some((wfImpl) => wfImpl.implementation === wf.name)
+                    ),
+                    <FormattedMessage id="validations.productWorkflows.workflowsWithoutImplementations" />,
+                    <FormattedMessage id="validations.productWorkflows.workflowsWithImplementations" />
+                )}
+            </section>
+        );
+    };
 
     renderCodeWorkflowsWithNoDatabaseRecord = (
         workflowCodeImplementations: CodedWorkflow[],
         workflows: WorkflowWithProductTags[]
-    ) => (
-        <section className="workflow-validation">
-            {this.renderWorkflowImplementations(
-                workflowCodeImplementations.filter(
-                    (wfImpl) => !workflows.some((wf) => wfImpl.implementation === wf.name)
-                ),
-                intl.formatMessage({ id: "validations.productWorkflows.workflowsWithoutRecords" }),
-                intl.formatMessage({ id: "validations.productWorkflows.workflowsWithRecords" })
-            )}
-        </section>
-    );
+    ) => {
+        return (
+            <section className="workflow-validation">
+                {this.renderWorkflowImplementations(
+                    workflowCodeImplementations.filter(
+                        (wfImpl) => !workflows.some((wf) => wfImpl.implementation === wf.name)
+                    ),
+                    <FormattedMessage id="validations.productWorkflows.workflowsWithoutRecords" />,
+                    <FormattedMessage id="validations.productWorkflows.workflowsWithRecords" />
+                )}
+            </section>
+        );
+    };
 
     render() {
         const { workflowCodeImplementations, workflows } = this.props;
@@ -244,3 +269,5 @@ export default class ProductWorkflowsValidation extends React.Component<IProps> 
 }
 
 ProductWorkflowsValidation.contextType = ApplicationContext;
+
+export default injectIntl(ProductWorkflowsValidation);

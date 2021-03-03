@@ -27,8 +27,8 @@ import {
     EuiSpacer,
 } from "@elastic/eui";
 import { clearCache, getGlobalStatus, setGlobalStatus } from "api";
-import { intl } from "locale/i18n";
-import React, { SFC, useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import { setFlash } from "utils/Flash";
 import { EngineStatus } from "utils/types";
 
@@ -41,7 +41,8 @@ enum Cache {
 
 interface IProps {}
 
-export const Settings: SFC = (props: IProps) => {
+export const Settings: FunctionComponent = (props: IProps) => {
+    const intl = useIntl();
     const [cache, setCache] = useState<Cache>(Cache.ims);
     const [engineStatus, setEngineStatus] = useState<EngineStatus>();
 
@@ -122,8 +123,12 @@ export const Settings: SFC = (props: IProps) => {
             <EuiPageBody component="div">
                 <EuiCard
                     textAlign="left"
-                    title={intl.formatMessage({ id: "settings.cache.remove" })}
-                    description={<span>{intl.formatMessage({ id: "settings.cache.remove_info" })}</span>}
+                    title={<FormattedMessage id="settings.cache.remove" />}
+                    description={
+                        <span>
+                            <FormattedMessage id="settings.cache.remove_info" />
+                        </span>
+                    }
                 >
                     <EuiSelect
                         id="selectCache"
@@ -134,14 +139,18 @@ export const Settings: SFC = (props: IProps) => {
                     />
                     <EuiSpacer />
                     <EuiButton id="flush-cache" fill iconSide="right" iconType="refresh" onClick={flushCache}>
-                        {intl.formatMessage({ id: "settings.cache.clear" })}
+                        <FormattedMessage id="settings.cache.clear" />
                     </EuiButton>
                 </EuiCard>
                 <EuiSpacer />
                 <EuiCard
                     textAlign="left"
-                    title={intl.formatMessage({ id: "settings.status.info" })}
-                    description={<span>{intl.formatMessage({ id: "settings.status.info_detail" })}</span>}
+                    title={<FormattedMessage id="settings.status.info" />}
+                    description={
+                        <span>
+                            <FormattedMessage id="settings.status.info_detail" />
+                        </span>
+                    }
                 >
                     <EuiButton
                         id="toggle-engine-status"
@@ -150,7 +159,7 @@ export const Settings: SFC = (props: IProps) => {
                         color={isRunning ? "warning" : "primary"}
                         onClick={() => lockEngine(isRunning)}
                     >
-                        {intl.formatMessage({ id: `settings.status.options.${isRunning}` })}
+                        <FormattedMessage id={`settings.status.options.${isRunning}`} />
                     </EuiButton>
                     <EuiHorizontalRule margin="l" />
                     <EuiDescriptionList type="column" listItems={engineDescription} style={{ maxWidth: "400px" }} />

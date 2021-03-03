@@ -20,10 +20,10 @@ import { getGlobalStatus, logUserInfo } from "api";
 import UserProfile from "components/UserProfile";
 import { ENV } from "env";
 import logo from "images/network-automation.png";
-import { intl } from "locale/i18n";
 import { Profile } from "oidc-client";
 import { AuthContextProps, withAuth } from "oidc-react";
 import React from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { Link } from "react-router-dom";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
@@ -36,8 +36,10 @@ interface IState {
     engineStatus: GlobalStatus;
 }
 
-class Header extends React.PureComponent<AuthContextProps, IState> {
-    constructor(props: AuthContextProps) {
+interface IProps extends WrappedComponentProps, AuthContextProps {}
+
+class Header extends React.PureComponent<IProps, IState> {
+    constructor(props: IProps) {
         super(props);
         const hostname = window.location.hostname;
         this.state = {
@@ -87,6 +89,7 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
     refeshStatus = () => {
         getGlobalStatus().then((globalStatus) => {
             const { globalLock } = this.state;
+            const { intl } = this.props;
             if (!globalStatus.global_lock && globalLock) {
                 this.setState({ globalLock: globalStatus.global_lock });
                 setFlash(intl.formatMessage({ id: "settings.status.engine.restarted" }));
@@ -114,7 +117,7 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
                     <EuiHeaderSectionItem border="right">
                         <EuiText grow={false}>
                             <h1 className={`header__app-title ${environment}`}>
-                                {intl.formatMessage({ id: "header.title" })}
+                                <FormattedMessage id="header.title" />
                                 {environment !== "production" && ` ${environment}`}
                             </h1>
                         </EuiText>
@@ -124,7 +127,7 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
                 <EuiHeaderSectionItem>
                     <EuiHeaderLinks aria-label="App navigation links example">
                         <EuiHeaderLink href="#">
-                            {intl.formatMessage({ id: `settings.status.engine.${engineStatus.toLowerCase()}` })}
+                            <FormattedMessage id={`settings.status.engine.${engineStatus.toLowerCase()}`} />
                             <i className={`fa fa-circle header__status ${engineStatus.toLowerCase()}`}></i>
                         </EuiHeaderLink>
 
@@ -133,11 +136,11 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
                             href="https://docs.dev.automation.surf.net/static/html/workflows.html"
                             target="_blank"
                         >
-                            {intl.formatMessage({ id: "header.links.help" })}
+                            <FormattedMessage id="header.links.help" />
                         </EuiHeaderLink>
 
                         <EuiHeaderLink id="logout" onClick={this.logout}>
-                            {intl.formatMessage({ id: "header.links.logout" })}
+                            <FormattedMessage id="header.links.logout" />
                         </EuiHeaderLink>
 
                         {currentUser && (
@@ -159,4 +162,4 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
 
 Header.contextType = ApplicationContext;
 
-export default withAuth(Header);
+export default injectIntl(withAuth(Header));

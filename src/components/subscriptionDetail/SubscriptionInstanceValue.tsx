@@ -22,9 +22,9 @@ import {
     serviceByImsServiceId,
     subscriptionsDetailWithModel,
 } from "api";
-import { intl } from "locale/i18n";
 import { isEmpty } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { enrichSubscription, ipamStates, organisationNameByUuid } from "utils/Lookups";
 import { IMSEndpoint, IMSService, SubscriptionModel, prop } from "utils/types";
@@ -72,7 +72,7 @@ function DataRow({
     return (
         <tr>
             <td className={`${applyIdNamingConvention(`${type}-${label}`)}-k`}>
-                {rawLabel ?? intl.formatMessage({ id: `subscription.${type}.${label}` })}
+                {rawLabel ?? <FormattedMessage id={`subscription.${type}.${label}`} />}
             </td>
             <td className={`${applyIdNamingConvention(`${type}-${label}`)}-v`}>{value}</td>
         </tr>
@@ -117,7 +117,9 @@ function SubscriptionInstanceValueRow({
                 </td>
                 {isDeleted && (
                     <td>
-                        <em className="error">{intl.formatMessage({ id: `subscription.${type}.removed` })}</em>
+                        <em className="error">
+                            <FormattedMessage id={`subscription.${type}.removed`} />
+                        </em>
                     </td>
                 )}
             </tr>
@@ -168,6 +170,7 @@ function EndpointDetail({ endpoint }: { endpoint: IMSEndpoint }) {
 function ImsServiceDetail({ service, recursive = false }: { service: IMSService; recursive?: boolean }) {
     const { organisations } = useContext(ApplicationContext);
     const [endpoints, setEndpoints] = useState<IMSEndpoint[]>([]);
+    const intl = useIntl();
 
     useEffect(() => {
         if (isEmpty(service) || !recursive) {
@@ -271,6 +274,8 @@ function IpamAddress({ address }: { address: IPAMAddress }) {
 }
 
 function IpamPrefix({ prefix }: { prefix: IPAMPrefix }) {
+    const intl = useIntl();
+
     return (
         <DataTable>
             <DataRow type="ipam_prefix" label="description" value={prefix.description} />

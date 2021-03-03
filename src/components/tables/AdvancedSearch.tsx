@@ -15,8 +15,8 @@
 
 import { EuiFieldSearch, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import { ActionType, TableSettingsAction } from "components/tables/NwaTable";
-import { intl } from "locale/i18n";
 import React, { Dispatch } from "react";
+import { useIntl } from "react-intl";
 import { TableState } from "react-table";
 
 interface IProps<T extends object> {
@@ -25,6 +25,8 @@ interface IProps<T extends object> {
 }
 
 function AdvancedSearch<T extends object>({ state, dispatch }: IProps<T>) {
+    const intl = useIntl();
+
     return (
         <EuiFlexGroup alignItems="center" className="advanced-search-container">
             <EuiFlexItem>

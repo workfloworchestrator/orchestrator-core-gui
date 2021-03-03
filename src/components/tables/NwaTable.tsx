@@ -24,8 +24,8 @@ import { TableRenderer } from "components/tables/TableRenderer";
 import useFilterableDataFetcher from "components/tables/useFilterableDataFetcher";
 import useInterval from "components/tables/useInterval";
 import produce from "immer";
-import { intl } from "locale/i18n";
 import React, { useEffect } from "react";
+import { FormattedMessage } from "react-intl";
 import {
     Column,
     Hooks,
@@ -342,7 +342,9 @@ export function NwaTable<T extends object>({
             {!minimized && advancedSearch && <AdvancedSearch {...advancedSearchProps} />}
             {!minimized && <TableRenderer {...TableRendererProps} />}
             {!minimized && data.length === 0 && (
-                <div className={"no-results"}>{intl.formatMessage({ id: "table.no_results" })}</div>
+                <div className={"no-results"}>
+                    <FormattedMessage id="table.no_results" />
+                </div>
             )}
             {!minimized && showPaginator && <Paginator {...paginatorProps} />}
         </div>

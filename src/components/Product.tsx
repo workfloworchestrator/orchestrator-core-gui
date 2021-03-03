@@ -23,8 +23,8 @@ import { allWorkflows, productBlocks, productById, products, saveProduct } from 
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { isDate } from "date-fns";
 import { formDate, formInput, formSelect } from "forms/Builder";
-import { intl } from "locale/i18n";
 import React from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { RouteComponentProps } from "react-router";
 import { ValueType } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
@@ -39,7 +39,7 @@ interface MatchParams {
     id: string;
 }
 
-interface IProps extends Partial<RouteComponentProps<MatchParams>> {
+interface IProps extends Partial<RouteComponentProps<MatchParams>>, WrappedComponentProps {
     subscriptionId?: string;
 }
 
@@ -73,7 +73,7 @@ interface IState {
     fixedInputConf?: FixedInputConfiguration;
 }
 
-export default class Product extends React.Component<IProps, IState> {
+class Product extends React.Component<IProps, IState> {
     state: IState = {
         confirmationDialogOpen: false,
         confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
@@ -170,6 +170,7 @@ export default class Product extends React.Component<IProps, IState> {
     handleDeleteProduct = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
         const { product } = this.state;
+        const { intl } = this.props;
 
         const question = intl.formatMessage(
             { id: "metadata.deleteConfirmation" },
@@ -205,6 +206,7 @@ export default class Product extends React.Component<IProps, IState> {
     submit = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
         const { product, processing } = this.state;
+        const { intl } = this.props;
 
         const invalid = this.isInvalid(true) || processing;
         if (!invalid) {
@@ -228,7 +230,7 @@ export default class Product extends React.Component<IProps, IState> {
             return (
                 <section className="buttons">
                     <EuiButton className="button" onClick={() => this.context.redirect("/metadata/products")}>
-                        {intl.formatMessage({ id: "metadata.products.back" })}
+                        <FormattedMessage id="metadata.products.back" />
                     </EuiButton>
                 </section>
             );
@@ -237,18 +239,18 @@ export default class Product extends React.Component<IProps, IState> {
         return (
             <section className="buttons">
                 <EuiButton className="button" onClick={this.cancel}>
-                    {intl.formatMessage({ id: "process.cancel" })}
+                    <FormattedMessage id="processes.cancel" />
                 </EuiButton>
                 <EuiButton
                     tabIndex={0}
                     className={`button ${invalid ? "grey disabled" : "blue"}`}
                     onClick={this.submit}
                 >
-                    {intl.formatMessage({ id: "process.submit" })}
+                    <FormattedMessage id="processes.submit" />
                 </EuiButton>
                 {product.product_id && (
                     <EuiButton className="button red" onClick={this.handleDeleteProduct}>
-                        {intl.formatMessage({ id: "processes.delete" })}
+                        <FormattedMessage id="processes.delete" />
                     </EuiButton>
                 )}
             </section>
@@ -319,6 +321,7 @@ export default class Product extends React.Component<IProps, IState> {
             confirmationDialogQuestion,
             statuses,
         } = this.state;
+        const { intl } = this.props;
 
         if (!product) {
             return null;
@@ -381,3 +384,5 @@ export default class Product extends React.Component<IProps, IState> {
 }
 
 Product.contextType = ApplicationContext;
+
+export default injectIntl(Product);

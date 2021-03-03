@@ -21,8 +21,8 @@ import { abortProcess, deleteProcess, processSubscriptionsByProcessId, retryProc
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import ProcessStateDetails from "components/ProcessStateDetails";
-import { intl } from "locale/i18n";
 import React from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { RouteComponentProps } from "react-router-dom";
 import ScrollUpButton from "react-scroll-up-button";
 import { DecodedValueMap, NumberParam, QueryParamConfigMap, SetQuery, withQueryParams } from "use-query-params";
@@ -40,7 +40,7 @@ interface MatchParams {
     id: string;
 }
 
-interface IProps extends RouteComponentProps<MatchParams> {
+interface IProps extends RouteComponentProps<MatchParams>, WrappedComponentProps {
     query: DecodedValueMap<typeof queryConfig>;
     setQuery: SetQuery<typeof queryConfig>;
 }
@@ -123,6 +123,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
     handleDeleteProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
+        const { intl } = this.props;
 
         let message;
         if (!process.is_task) {
@@ -149,6 +150,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
     handleAbortProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
+        const { intl } = this.props;
 
         let message;
         if (!process.is_task) {
@@ -175,6 +177,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
     handleRetryProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
+        const { intl } = this.props;
 
         let message;
         if (!process.is_task) {
@@ -249,6 +252,8 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         });
 
     renderActions = (process: CustomProcessWithDetails) => {
+        const { intl } = this.props;
+
         let options = actionOptions(
             process,
             () => false,
@@ -305,6 +310,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
     };
 
     validSubmit = (processInput: {}[]) => {
+        const { intl } = this.props;
         const { process } = this.state;
         if (!process) {
             return Promise.reject();
@@ -358,15 +364,15 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                         <section className="header-info">
                             <EuiText>
                                 <h3>
-                                    {intl.formatMessage(
-                                        { id: `${process.is_task ? "task" : "process"}.workflow` },
-                                        { name: process.workflow_name }
-                                    )}
+                                    <FormattedMessage
+                                        id={`${process.is_task ? "task" : "process"}.workflow`}
+                                        values={{ name: process.workflow_name }}
+                                    />
                                     <br />
-                                    {intl.formatMessage(
-                                        { id: `${process.is_task ? "task" : "process"}.userInput` },
-                                        { name: step.name, product: productName || "" }
-                                    )}
+                                    <FormattedMessage
+                                        id={`${process.is_task ? "task" : "process"}.userInput`}
+                                        values={{ name: step.name, product: productName || "" }}
+                                    />
                                 </h3>
                             </EuiText>
                         </section>
@@ -384,7 +390,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
     renderTab = (tab: string, selectedTab: string) => (
         <span id={tab} key={tab} className={tab === selectedTab ? "active" : ""} onClick={this.switchTab(tab)}>
-            {intl.formatMessage({ id: `process.tabs.${tab}` })}
+            <FormattedMessage id={`process.tabs.${tab}`} />
         </span>
     );
 
@@ -423,7 +429,9 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                     {renderNotFound && (
                         <section className="not-found">
                             <EuiPanel>
-                                <h1>{intl.formatMessage({ id: "process.notFound" })}</h1>
+                                <h1>
+                                    <FormattedMessage id="process.notFound" />
+                                </h1>
                             </EuiPanel>
                         </section>
                     )}
@@ -436,4 +444,4 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
 ProcessDetail.contextType = ApplicationContext;
 
-export default withQueryParams(queryConfig, ProcessDetail);
+export default injectIntl(withQueryParams(queryConfig, ProcessDetail));

@@ -17,8 +17,8 @@ import { EuiButton, EuiCopy, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import CheckBox from "components/CheckBox";
 import { FAVORITE_STORAGE_KEY } from "components/modals/components/FavoritePortSelector";
 import { ENV } from "env";
-import { intl } from "locale/i18n";
 import React, { useContext } from "react";
+import { FormattedMessage } from "react-intl";
 import { useStorageState } from "react-storage-hooks";
 import ApplicationContext from "utils/ApplicationContext";
 import { organisationNameByUuid, renderDate } from "utils/Lookups";
@@ -48,11 +48,11 @@ function renderGrafanaLink(subscription: Subscription, product: Product) {
         return (
             <tr>
                 <td id="subscriptions-stats_in_grafana-k">
-                    {intl.formatMessage({ id: "subscriptions.stats_in_grafana" })}
+                    <FormattedMessage id="subscriptions.stats_in_grafana" />
                 </td>
                 <td id="subscriptions-stats_in_grafana-v">
                     <a href={`${url_grafana}`} target="_blank" rel="noopener noreferrer">
-                        {intl.formatMessage({ id: "subscriptions.go_to_grafana" })}
+                        <FormattedMessage id="subscriptions.go_to_grafana" />
                     </a>
                 </td>
             </tr>
@@ -73,7 +73,7 @@ function renderNetworkDashboardLink(subscription: Subscription, product: Product
         return (
             <tr>
                 <td id="subscriptions-in_networkdashboard-k">
-                    {intl.formatMessage({ id: "subscriptions.networkdashboard_url" })}
+                    <FormattedMessage id="subscriptions.networkdashboard_url" />
                 </td>
                 <td id="subscriptions-in_networkdashboard-v">
                     <a
@@ -81,7 +81,7 @@ function renderNetworkDashboardLink(subscription: Subscription, product: Product
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        {intl.formatMessage({ id: "subscriptions.go_to_networkdashboard_url" })}
+                        <FormattedMessage id="subscriptions.go_to_networkdashboard_url" />
                     </a>
                 </td>
             </tr>
@@ -99,7 +99,7 @@ function renderFailedTask(subscriptionProcesses: SubscriptionProcesses[]) {
     if (failed_tasks.length)
         return (
             <a target="_blank" rel="noopener noreferrer" href={`/task/${failed_tasks[0].pid}`}>
-                {intl.formatMessage({ id: "subscriptions.failed_task" }, failed_tasks[0] as any)}
+                <FormattedMessage id="subscriptions.failed_task" values={failed_tasks[0] as any} />
             </a>
         );
 }
@@ -129,7 +129,9 @@ export default function SubscriptionDetails({ subscription, className = "", subs
             <thead />
             <tbody>
                 <tr>
-                    <td id="subscriptions-id-k">{intl.formatMessage({ id: "subscriptions.id" })}</td>
+                    <td id="subscriptions-id-k">
+                        <FormattedMessage id="subscriptions.id" />
+                    </td>
                     <td id="subscriptions-id-v">
                         <EuiFlexGroup>
                             <EuiFlexItem grow={false}>
@@ -174,38 +176,52 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                                         setFavoritesList(new_list);
                                     }}
                                 >
-                                    {isCurrentlyFavorited(subscription.subscription_id)
-                                        ? intl.formatMessage({ id: "favorites.remove" })
-                                        : intl.formatMessage({ id: "favorites.add" })}
+                                    <FormattedMessage
+                                        id={
+                                            isCurrentlyFavorited(subscription.subscription_id)
+                                                ? "favorites.remove"
+                                                : "favorites.add"
+                                        }
+                                    />
                                 </EuiButton>
                             </EuiFlexItem>
                         </EuiFlexGroup>
                     </td>
                 </tr>
                 <tr>
-                    <td id="subscriptions-name-k">{intl.formatMessage({ id: "subscriptions.name" })}</td>
+                    <td id="subscriptions-name-k">
+                        <FormattedMessage id="subscriptions.name" />
+                    </td>
                     <td id="subscriptions-name-v">{subscription.product.name}</td>
                 </tr>
                 <tr>
-                    <td id="subscriptions-description-k">{intl.formatMessage({ id: "subscriptions.description" })}</td>
+                    <td id="subscriptions-description-k">
+                        <FormattedMessage id="subscriptions.description" />
+                    </td>
                     <td id="subscriptions-description-v">{subscription.description}</td>
                 </tr>
                 <tr>
                     <td id="subscriptions-startdate-k">
-                        {intl.formatMessage({ id: "subscriptions.start_date_epoch" })}
+                        <FormattedMessage id="subscriptions.start_date_epoch" />
                     </td>
                     <td id="subscriptions-startdate-v">{renderDate(subscription.start_date)}</td>
                 </tr>
                 <tr>
-                    <td id="subscriptions-enddate-k">{intl.formatMessage({ id: "subscriptions.end_date_epoch" })}</td>
+                    <td id="subscriptions-enddate-k">
+                        <FormattedMessage id="subscriptions.end_date_epoch" />
+                    </td>
                     <td id="subscriptions-enddate-v">{renderDate(subscription.end_date)}</td>
                 </tr>
                 <tr>
-                    <td id="subscriptions-status-k">{intl.formatMessage({ id: "subscriptions.status" })}</td>
+                    <td id="subscriptions-status-k">
+                        <FormattedMessage id="subscriptions.status" />
+                    </td>
                     <td id="subscriptions-status-v">{subscription.status}</td>
                 </tr>
                 <tr>
-                    <td id="subscriptions-insync-k">{intl.formatMessage({ id: "subscriptions.insync" })}</td>
+                    <td id="subscriptions-insync-k">
+                        <FormattedMessage id="subscriptions.insync" />
+                    </td>
                     <td id="subscriptions-insync-v">
                         <CheckBox value={subscription.insync || false} readOnly={true} name="isync" />
                         {!subscription.insync && renderFailedTask(subscriptionProcesses)}
@@ -214,19 +230,21 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                 {customer_name && (
                     <tr>
                         <td id="subscriptions-customer-name-k">
-                            {intl.formatMessage({ id: "subscriptions.customer_name" })}
+                            <FormattedMessage id="subscriptions.customer_name" />
                         </td>
                         <td id="subscriptions-customer-name-v">{customer_name}</td>
                     </tr>
                 )}
                 <tr>
-                    <td id="subscriptions-customer-id-k">{intl.formatMessage({ id: "subscriptions.customer_id" })}</td>
+                    <td id="subscriptions-customer-id-k">
+                        <FormattedMessage id="subscriptions.customer_id" />
+                    </td>
                     <td id="subscriptions-customer-id-v">{subscription.customer_id}</td>
                 </tr>
                 {subscription.customer_descriptions && (
                     <tr>
                         <td id="subscriptions-customer-descriptions-k">
-                            {intl.formatMessage({ id: "subscriptions.customer_descriptions" })}
+                            <FormattedMessage id="subscriptions.customer_descriptions" />
                         </td>
                         <td id="subscriptions-customer-descriptions-v">
                             <dl>
@@ -243,7 +261,9 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                 {renderGrafanaLink(subscription, subscription.product)}
                 {renderNetworkDashboardLink(subscription, subscription.product)}
                 <tr>
-                    <td id="subscriptions-note-k">{intl.formatMessage({ id: "subscriptions.note" })}</td>
+                    <td id="subscriptions-note-k">
+                        <FormattedMessage id="subscriptions.note" />
+                    </td>
                     <td id="subscriptions-note-v">{subscription.note}</td>
                 </tr>
             </tbody>

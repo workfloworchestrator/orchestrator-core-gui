@@ -19,8 +19,8 @@ import { EuiPage, EuiPageBody } from "@elastic/eui";
 import { catchErrorStatus, startProcess, workflowsByTarget } from "api";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import { JSONSchema6 } from "json-schema";
-import { intl } from "locale/i18n";
 import React from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { EngineStatus, InputForm } from "utils/types";
@@ -30,7 +30,7 @@ interface IState {
     hasNext?: boolean;
 }
 
-export default class NewTask extends React.Component<{}, IState> {
+class NewTask extends React.Component<WrappedComponentProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
 
     state: IState = {};
@@ -57,6 +57,7 @@ export default class NewTask extends React.Component<{}, IState> {
     };
 
     validSubmit = (taskInput: {}[]) => {
+        const { intl } = this.props;
         const { select_task } = taskInput[0] as { select_task: string };
 
         let promise = startProcess(select_task, taskInput.slice(1)).then((process) => {
@@ -82,7 +83,9 @@ export default class NewTask extends React.Component<{}, IState> {
                 <EuiPageBody component="div" className="mod-new-task">
                     <section className="card">
                         <section className="form-step">
-                            <h1>{intl.formatMessage({ id: "task.new_task" })}</h1>
+                            <h1>
+                                <FormattedMessage id="task.new_task" />
+                            </h1>
 
                             {stepUserInput && (
                                 <UserInputFormWizard
@@ -101,3 +104,5 @@ export default class NewTask extends React.Component<{}, IState> {
 }
 
 NewTask.contextType = ApplicationContext;
+
+export default injectIntl(NewTask);

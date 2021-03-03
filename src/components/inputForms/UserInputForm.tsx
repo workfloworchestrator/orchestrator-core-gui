@@ -42,6 +42,7 @@ import { intl } from "locale/i18n";
 import cloneDeep from "lodash/cloneDeep";
 import get from "lodash/get";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { RouteComponentProps, withRouter } from "react-router";
 import { filterDOMProps, joinName } from "uniforms";
 import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
@@ -410,12 +411,12 @@ class UserInputForm extends React.Component<IProps, IState> {
 
         const prevButton = hasPrev ? (
             <EuiButton id="button-prev-form-submit" fill onClick={this.props.previous}>
-                {intl.formatMessage({ id: "process.previous" })}
+                <FormattedMessage id="process.previous" />
             </EuiButton>
         ) : (
             <EuiFlexItem>
                 <EuiButton id="button-cancel-form-submit" color="warning" onClick={this.cancel}>
-                    {intl.formatMessage({ id: "process.cancel" })}
+                    <FormattedMessage id="process.cancel" />
                 </EuiButton>
             </EuiFlexItem>
         );
@@ -429,7 +430,7 @@ class UserInputForm extends React.Component<IProps, IState> {
                 isLoading={this.state.processing}
                 type="submit"
             >
-                {intl.formatMessage({ id: "process.next" })}
+                <FormattedMessage id="process.next" />
             </EuiButton>
         ) : (
             <EuiButton
@@ -440,7 +441,7 @@ class UserInputForm extends React.Component<IProps, IState> {
                 isLoading={this.state.processing}
                 type="submit"
             >
-                {intl.formatMessage({ id: "process.submit" })}
+                <FormattedMessage id="process.submit" />
             </EuiButton>
         );
 
@@ -481,10 +482,10 @@ class UserInputForm extends React.Component<IProps, IState> {
                             {nrOfValidationErrors > 0 && (
                                 <section className="form-errors">
                                     <em className="error backend-validation-metadata">
-                                        {intl.formatMessage(
-                                            { id: "process.input_fields_have_validation_errors" },
-                                            { nrOfValidationErrors: nrOfValidationErrors }
-                                        )}
+                                        <FormattedMessage
+                                            id="process.input_fields_have_validation_errors"
+                                            values={{ nrOfValidationErrors: nrOfValidationErrors }}
+                                        />
                                     </em>
                                 </section>
                             )}

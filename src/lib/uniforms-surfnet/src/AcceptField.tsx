@@ -16,8 +16,8 @@ import "lib/uniforms-surfnet/src/AcceptField.scss";
 
 import { EuiCheckbox, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
-import { intl } from "locale/i18n";
 import React, { useReducer } from "react";
+import { FormattedMessage } from "react-intl";
 import { connectField, filterDOMProps } from "uniforms";
 
 type AcceptItemType =
@@ -107,7 +107,7 @@ function Accept({
     return (
         <section {...filterDOMProps(props)} className={`${className} accept-field`}>
             {data.map((entry: any[], index: number) => {
-                const label = intl.formatMessage({ id: `${i18nBaseKey}.${entry[0]}` }, entry[2]);
+                const label = <FormattedMessage id={`${i18nBaseKey}.${entry[0]}`} values={entry[2]} />;
                 switch (entry[1]) {
                     case "label":
                         return (

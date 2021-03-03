@@ -18,12 +18,12 @@ import "pages/Prefixes.scss";
 import { EuiFieldSearch, EuiPage, EuiPageBody } from "@elastic/eui";
 import { freeSubnets, prefixSubscriptionsByRootPrefix, prefix_filters } from "api";
 import FilterDropDown from "components/FilterDropDown";
-import { intl } from "locale/i18n";
 import constant from "lodash/constant";
 import debounce from "lodash/debounce";
 import memoize from "lodash/memoize";
 import pMap from "p-map";
 import React from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
 import { familyFullName, ipAddressToNumber, ipamStates, organisationNameByUuid, renderDate } from "utils/Lookups";
@@ -46,7 +46,7 @@ type Column =
     | "state"
     | "start_date";
 
-interface IProps {}
+interface IProps extends WrappedComponentProps {}
 
 interface FilterAttributes {
     state: Filter[];
@@ -63,7 +63,7 @@ interface IState {
     availablePrefixId: number;
 }
 
-export default class Prefixes extends React.PureComponent<IProps, IState> {
+class Prefixes extends React.PureComponent<IProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {
         prefixes: [],
@@ -351,6 +351,7 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
     };
 
     render() {
+        const { intl } = this.props;
         const columns: Column[] = [
             "customer",
             "subscription_id",
@@ -366,7 +367,9 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
             const name = columns[index];
             return (
                 <th key={index} className={name} onClick={this.toggleSort(name)}>
-                    <span>{intl.formatMessage({ id: `prefixes.${name}` })}</span>
+                    <span>
+                        <FormattedMessage id={`prefixes.${name}`} />
+                    </span>
                     {this.sortColumnIcon(name, this.state.sortOrder)}
                 </th>
             );
@@ -472,3 +475,5 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
 }
 
 Prefixes.contextType = ApplicationContext;
+
+export default injectIntl(Prefixes);

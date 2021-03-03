@@ -11,13 +11,13 @@ import {
     EuiText,
 } from "@elastic/eui";
 import { subscriptionsDetailWithModel } from "api";
-import { intl } from "locale/i18n";
 import React, { MouseEvent } from "react";
+import { WrappedComponentProps, injectIntl } from "react-intl";
 import { FavoriteSubscriptionStorage, Subscription, SubscriptionModel } from "utils/types";
 
 export const FAVORITE_STORAGE_KEY = "favoritePortsArray-v4";
 
-interface IProps {
+interface IProps extends WrappedComponentProps {
     handleSelect: any;
     subscriptions: Subscription[];
     managementOnly: boolean;
@@ -38,7 +38,7 @@ interface IState {
     selectedSubscription?: string;
 }
 
-export default class FavoritePortSelector extends React.PureComponent<IProps, IState> {
+class FavoritePortSelector extends React.PureComponent<IProps, IState> {
     constructor(props: IProps) {
         super(props);
 
@@ -142,6 +142,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
             portsLoaded,
             selectedSubscription,
         } = this.state;
+        const { intl } = this.props;
         let portSubscriptionIds: FavoriteSubscriptionStorage[];
         portSubscriptionIds = JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
 
@@ -279,3 +280,5 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
         );
     }
 }
+
+export default injectIntl(FavoritePortSelector);

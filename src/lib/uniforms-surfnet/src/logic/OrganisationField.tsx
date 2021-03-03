@@ -14,15 +14,16 @@
  */
 
 import SelectField, { SelectFieldProps } from "lib/uniforms-surfnet/src/SelectField";
-import { intl } from "locale/i18n";
 import get from "lodash/get";
 import React, { useContext } from "react";
+import { useIntl } from "react-intl";
 import { connectField } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 
 export type OrganisationFieldProps = Omit<SelectFieldProps, "placeholder" | "transform" | "allowedValues">;
 
 function Organisation({ name, ...props }: OrganisationFieldProps) {
+    const intl = useIntl();
     const { organisations } = useContext(ApplicationContext);
     const organisationLabelLookup =
         organisations?.reduce<{ [index: string]: string }>(function (mapping, org) {

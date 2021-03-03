@@ -16,8 +16,8 @@
 import { EuiDescribedFormGroup, EuiFlexItem, EuiFormRow } from "@elastic/eui";
 import { AutoField, BoolField } from "lib/uniforms-surfnet/src";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
-import { intl } from "locale/i18n";
 import React from "react";
+import { useIntl } from "react-intl";
 import { connectField, filterDOMProps, useField } from "uniforms";
 
 export type OptGroupFieldProps = FieldProps<null, { fields?: any[]; itemProps?: object }>;
@@ -33,6 +33,7 @@ function OptGroup({
     ...props
 }: OptGroupFieldProps) {
     const enabled = useField("enabled", {})[0].value;
+    const intl = useIntl();
 
     return (
         <EuiDescribedFormGroup

@@ -16,8 +16,8 @@
 import "components/inputForms/IpPrefixTable.scss";
 
 import { ip_blocks, prefix_filters } from "api";
-import { intl } from "locale/i18n";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import Select, { ValueType } from "react-select";
 import { ipamStates } from "utils/Lookups";
 import { IpBlock, IpPrefix, Option, SortOption, prop } from "utils/types";
@@ -175,7 +175,9 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
             const name = columns[index];
             return (
                 <th key={index} className={name} onClick={this.sort(name)}>
-                    <span>{intl.formatMessage({ id: `metadata.ipBlocks.${name}` })}</span>
+                    <span>
+                        <FormattedMessage id={`metadata.ipBlocks.${name}`} />
+                    </span>
                     {this.sortColumnIcon(name, sorted)}
                 </th>
             );

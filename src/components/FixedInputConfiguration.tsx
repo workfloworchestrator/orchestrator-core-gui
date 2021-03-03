@@ -17,8 +17,8 @@ import "components/FixedInputConfiguration.scss";
 
 import { fixedInputConfiguration } from "api";
 import CheckBox from "components/CheckBox";
-import { intl } from "locale/i18n";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { FixedInputConfiguration as iFixedInputConfiguration } from "utils/types";
 
 interface IState {
@@ -44,19 +44,23 @@ export default class FixedInputConfiguration extends React.Component<{}, IState>
         const { configuration } = this.state;
         return Object.keys(configuration.by_tag).map((tag, index) => (
             <section className="fixed-input-configuration" key={index}>
-                <h3 className="description">{intl.formatMessage({ id: "metadata.fixedInputs.tags" }, { tag: tag })}</h3>
+                <h3 className="description">
+                    <FormattedMessage id="metadata.fixedInputs.tags" values={{ tag: tag }} />
+                </h3>
                 <table>
                     <thead>
                         <tr>
                             <th className={"fixed-input"}>
-                                {intl.formatMessage({ id: "metadata.fixedInputs.fixedInput" })}
+                                <FormattedMessage id="metadata.fixedInputs.fixedInput" />
                             </th>
-                            <th className={"values"}>{intl.formatMessage({ id: "metadata.fixedInputs.values" })}</th>
+                            <th className={"values"}>
+                                <FormattedMessage id="metadata.fixedInputs.values" />
+                            </th>
                             <th className={"description"}>
-                                {intl.formatMessage({ id: "metadata.fixedInputs.description" })}
+                                <FormattedMessage id="metadata.fixedInputs.description" />
                             </th>
                             <th className={"required"}>
-                                {intl.formatMessage({ id: "metadata.fixedInputs.required" })}
+                                <FormattedMessage id="metadata.fixedInputs.required" />
                             </th>
                         </tr>
                     </thead>

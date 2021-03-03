@@ -26,8 +26,8 @@ import {
     initialProcessTableSettings,
     initialProcessesFilterAndSort,
 } from "components/tables/Processes";
-import { intl } from "locale/i18n";
 import React from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
@@ -36,6 +36,7 @@ import { ProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
 
+interface IProps extends WrappedComponentProps {}
 interface IState {
     confirmationDialogOpen: boolean;
     confirmationDialogAction: (e: React.MouseEvent) => void;
@@ -43,9 +44,8 @@ interface IState {
     confirmationDialogQuestion: string;
     showExplanation: boolean;
 }
-
-export default class Tasks extends React.PureComponent<{}, IState> {
-    constructor(props: {}) {
+class Tasks extends React.PureComponent<IProps, IState> {
+    constructor(props: IProps) {
         super(props);
 
         this.state = {
@@ -64,6 +64,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
     };
 
     runAllTasks = () => {
+        const { intl } = this.props;
         this.confirmation(intl.formatMessage({ id: "tasks.runallConfirmation" }), () => {
             filterableEndpoint<ProcessV2>(
                 "processes",
@@ -102,6 +103,8 @@ export default class Tasks extends React.PureComponent<{}, IState> {
 
     handleAbortProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
         stop(e);
+        const { intl } = this.props;
+
         const product_name = process.subscriptions[0].product.name;
         const customer_name = organisationNameByUuid(process.subscriptions[0].customer_id, this.context.organisations);
         this.confirmation(
@@ -115,6 +118,8 @@ export default class Tasks extends React.PureComponent<{}, IState> {
 
     handleDeleteProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
         stop(e);
+        const { intl } = this.props;
+
         const workflow_name = process.workflow;
         this.confirmation(intl.formatMessage({ id: "tasks.deleteConfirmation" }, { name: workflow_name }), () =>
             deleteProcess(process.pid).then(() => {
@@ -125,6 +130,8 @@ export default class Tasks extends React.PureComponent<{}, IState> {
 
     handleRetryProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
         stop(e);
+        const { intl } = this.props;
+
         const product_name = process.subscriptions[0].product.name;
         const customer_name = organisationNameByUuid(process.subscriptions[0].customer_id, this.context.organisations);
         this.confirmation(
@@ -194,23 +201,24 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                     <EuiFlexGroup className="actions actions-buttons">
                         <EuiFlexItem>
                             <EuiButton onClick={this.runAllTasks} fill color="primary" iconType="refresh">
-                                {intl.formatMessage({ id: "tasks.runall" })}
+                                <FormattedMessage id="tasks.runall" />
                             </EuiButton>
                         </EuiFlexItem>
                         <EuiFlexItem>
                             <EuiButton onClick={this.newTask} fill color="secondary" iconType="plusInCircle">
-                                {intl.formatMessage({ id: "tasks.new" })}
+                                <FormattedMessage id="tasks.new" />
                             </EuiButton>
                         </EuiFlexItem>
                         <EuiFlexItem className="explain">{this.renderExplain()}</EuiFlexItem>
                     </EuiFlexGroup>
                     {/* <div className="actions">
                         <button className="button blue" onClick={this.runAllTasks}>
-                            {intl.formatMessage({id: "tasks.runall"})}
+                            <FormattedMessage id="tasks.runall"/>
                             <i className="fa fa-sync" />
                         </button>
                         <button className="new button green" onClick={this.newTask}>
-                            {intl.formatMessage({id: "tasks.new"})} <i className="fa fa-plus" />
+                            <FormattedMessage id="tasks.new"/>
+                            <i className="fa fa-plus" />
                         </button>
                         {this.renderExplain()}
                     </div> */}
@@ -227,3 +235,5 @@ export default class Tasks extends React.PureComponent<{}, IState> {
 }
 
 Tasks.contextType = ApplicationContext;
+
+export default injectIntl(Tasks);

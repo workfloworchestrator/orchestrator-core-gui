@@ -23,8 +23,8 @@ import {
     EuiSpacer,
 } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
-import { intl } from "locale/i18n";
 import React from "react";
+import { WrappedComponentProps, injectIntl } from "react-intl";
 
 import { deleteProduct, products } from "../api/index";
 import { setFlash } from "../utils/Flash";
@@ -44,7 +44,7 @@ interface IState {
     leavePage: boolean;
 }
 
-export default class Products extends React.Component {
+class Products extends React.Component<WrappedComponentProps, IState> {
     state: IState = {
         products: [],
         productsLoaded: true,
@@ -65,6 +65,7 @@ export default class Products extends React.Component {
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
 
     handleDeleteProduct = (product: Product) => (e: React.MouseEvent<HTMLButtonElement>) => {
+        const { intl } = this.props;
         this.confirmation(
             intl.formatMessage({ id: "metadata.deleteConfirmation" }, { type: "Product", name: product.name }),
             () =>
@@ -268,3 +269,5 @@ export default class Products extends React.Component {
         );
     }
 }
+
+export default injectIntl(Products);

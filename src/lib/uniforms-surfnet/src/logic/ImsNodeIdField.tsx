@@ -15,9 +15,9 @@
 
 import { getNodesByLocationAndStatus } from "api";
 import SelectField, { SelectFieldProps } from "lib/uniforms-surfnet/src/SelectField";
-import { intl } from "locale/i18n";
 import { get } from "lodash";
 import React, { useEffect, useState } from "react";
+import { useIntl } from "react-intl";
 import { connectField, filterDOMProps } from "uniforms";
 import { IMSNode } from "utils/types";
 
@@ -37,6 +37,7 @@ declare module "uniforms" {
 filterDOMProps.register("locationCode", "status");
 
 function ImsNodeId({ name, value, onChange, locationCode, status, ...props }: ImsNodeIdFieldProps) {
+    const intl = useIntl();
     const [loading, setLoading] = useState(true);
     const [nodes, setNodes] = useState<IMSNode[]>([]);
 

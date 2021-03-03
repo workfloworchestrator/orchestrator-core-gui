@@ -18,14 +18,14 @@ import "pages/TerminateSubscription.scss";
 import { EuiPage, EuiPageBody } from "@elastic/eui";
 import { catchErrorStatus, productById, startProcess, subscriptionsDetailWithModel } from "api/index";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
-import { intl } from "locale/i18n";
 import React from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { Redirect, RouteComponentProps, withRouter } from "react-router";
 import { setFlash } from "utils/Flash";
 import { FormNotCompleteResponse, InputForm, Product } from "utils/types";
 import { TARGET_TERMINATE } from "validations/Products";
 
-interface IProps extends RouteComponentProps {
+interface IProps extends RouteComponentProps, WrappedComponentProps {
     subscriptionId: string;
 }
 
@@ -77,7 +77,7 @@ class TerminateSubscription extends React.Component<IProps, IState> {
     };
 
     render() {
-        const { subscriptionId } = this.props;
+        const { subscriptionId, intl } = this.props;
         const { stepUserInput, product, pid } = this.state;
 
         if (!product) {
@@ -108,7 +108,9 @@ class TerminateSubscription extends React.Component<IProps, IState> {
             <EuiPage>
                 <EuiPageBody component="div" className="mod-terminate-subscription">
                     <section className="card">
-                        <h1>{intl.formatMessage({ id: "subscription.terminate" })}</h1>
+                        <h1>
+                            <FormattedMessage id="subscription.terminate" />
+                        </h1>
 
                         <UserInputFormWizard
                             stepUserInput={stepUserInput}
@@ -123,4 +125,4 @@ class TerminateSubscription extends React.Component<IProps, IState> {
     }
 }
 
-export default withRouter(TerminateSubscription);
+export default injectIntl(withRouter(TerminateSubscription));

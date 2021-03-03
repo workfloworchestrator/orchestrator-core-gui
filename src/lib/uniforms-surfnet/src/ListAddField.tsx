@@ -14,9 +14,9 @@
  */
 
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
-import { intl } from "locale/i18n";
 import cloneDeep from "lodash/cloneDeep";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { connectField, filterDOMProps, joinName, useField } from "uniforms";
 
 export type ListAddFieldProps = FieldProps<string, { initialCount?: number; outerList?: boolean }>;
@@ -44,7 +44,7 @@ function ListAdd({ disabled, name, value, onChange, initialCount, outerList = fa
             }}
         >
             <i className={`fa fa-plus ${!limitNotReached || disabled ? "disabled" : ""}`} />
-            <label>{outerList && intl.formatMessage({ id: `forms.fields.${parentName}_add` })}</label>
+            <label>{outerList && <FormattedMessage id={`forms.fields.${parentName}_add`} />}</label>
         </div>
     );
 }
