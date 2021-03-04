@@ -155,10 +155,12 @@ I18n.translations.en = {
                 noc_modification_confirmation_template:
                     "Confirm modification of service with NMS service id {{nms_service_id}} from {{human_service_speed}} to {{new_human_service_speed}}",
             },
-            add_extra_peers: "Amount of new peers",
             added_service_ports: "Add ports",
             added_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             added_service_ports_info: "Select some ports to add them to this subscription",
+            amount_of_new_peers: "Amount of new peers",
+            amount_of_new_peers_info:
+                "Select the amount of peers you want to add or leave it blanc to skip adding new peers",
             as_prepend: "AS Prepend",
             as_prepend_info: "AS validation (1..5)",
             asn: "Autonomous System Number",
