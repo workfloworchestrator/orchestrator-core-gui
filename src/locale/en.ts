@@ -339,7 +339,7 @@ I18n.translations.en = {
             peerings_summary_info: "If something is wrong, correct it now.",
             plan_dont_allocate: "Set state to planned",
             plan_dont_allocate_info: "Register this prefix as planned, but do not allocate yet",
-            port_and_group_summary: "Info about related subscriptions",
+            port_and_group_summary: "Info about the current peer",
             port_id: "Port",
             port_id_info: "Select a port",
             port_mode: "Port Mode",
