@@ -359,6 +359,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                                     {I18n.t(`${process.is_task ? "task" : "process"}.workflow`, {
                                         name: process.workflow_name,
                                     })}
+                                    <br></br>
                                     {I18n.t(`${process.is_task ? "task" : "process"}.userInput`, {
                                         name: step.name,
                                         product: productName || "",
