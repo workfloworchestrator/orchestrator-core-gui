@@ -22,8 +22,8 @@ import {
     EuiSpacer,
 } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
-import I18n from "i18n-js";
 import React from "react";
+import { WrappedComponentProps, injectIntl } from "react-intl";
 
 import { deleteProductBlock, productBlocks } from "../api/index";
 import { setFlash } from "../utils/Flash";
@@ -44,7 +44,7 @@ interface IState {
     leavePage: boolean;
 }
 
-export default class ProductBlocks extends React.Component {
+class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
     state: IState = {
         productBlocks: [],
         productBlocksLoaded: true,
@@ -66,20 +66,22 @@ export default class ProductBlocks extends React.Component {
 
     handleDeleteProductBlock = (productBlock: ProductBlock) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
+        const { intl } = this.props;
+
         this.confirmation(
-            I18n.t("metadata.deleteConfirmation", {
-                type: "Product Block",
-                name: productBlock.name,
-            }),
+            intl.formatMessage(
+                { id: "metadata.deleteConfirmation" },
+                { type: "Product Block", name: productBlock.name }
+            ),
             () =>
                 deleteProductBlock(productBlock.product_block_id)
                     .then(() => {
                         this.componentDidMount();
                         setFlash(
-                            I18n.t("metadata.flash.delete", {
-                                name: productBlock.name,
-                                type: "Product Block",
-                            })
+                            intl.formatMessage(
+                                { id: "metadata.flash.delete" },
+                                { name: productBlock.name, type: "Product Block" }
+                            )
                         );
                     })
                     .catch((err) => {
@@ -232,3 +234,5 @@ export default class ProductBlocks extends React.Component {
         );
     }
 }
+
+export default injectIntl(ProductBlocks);

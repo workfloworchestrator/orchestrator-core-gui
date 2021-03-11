@@ -13,9 +13,9 @@
  *
  */
 
-import I18n from "i18n-js";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { connectField, filterDOMProps, joinName, useField } from "uniforms";
 
 export type ListDelFieldProps = FieldProps<null, { initialCount?: number; itemProps?: {}; outerList?: boolean }>;
@@ -44,7 +44,7 @@ function ListDel({ disabled, name, id, onChange, outerList = false, ...props }: 
         >
             <i className={`fa fa-minus ${!limitNotReached ? "disabled" : ""}`} />
 
-            <label>{outerList && I18n.t(`forms.fields.${parentName}_del`)}</label>
+            <label>{outerList && <FormattedMessage id={`forms.fields.${parentName}_del`} />}</label>
         </div>
     );
 }

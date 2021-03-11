@@ -39,7 +39,7 @@ test("<ListAddField> - renders label when outerList", () => {
 
     expect(wrapper.find(ListAddField)).toHaveLength(1);
     expect(wrapper.find("label")).toHaveLength(1);
-    expect(wrapper.find("label").text()).toBe('[missing "en.forms.fields.x_add" translation]');
+    expect(wrapper.find("label").text()).toBe("forms.fields.x_add");
 });
 
 test("<ListAddField> - prevents onClick when disabled", () => {

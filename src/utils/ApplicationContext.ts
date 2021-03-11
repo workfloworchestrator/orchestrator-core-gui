@@ -23,6 +23,7 @@ export interface ApplicationContextInterface {
     assignees: string[];
     processStatuses: string[];
     redirect: (_url: string) => void;
+    setLocale: (locale: string) => Promise<void>;
 }
 
 // Don't just add stuff here. This is reserved for things that don't change during the lifetime of the application
@@ -33,6 +34,7 @@ let ApplicationContext = React.createContext<ApplicationContextInterface>({
     assignees: [],
     processStatuses: [],
     redirect: (_url: string) => {},
+    setLocale: async (_locale: string) => {},
 });
 
 export default ApplicationContext;

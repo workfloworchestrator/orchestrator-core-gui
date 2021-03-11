@@ -25,13 +25,13 @@ import {
 } from "components/tables/cellRenderers";
 import { renderCustomersFilter, renderILikeFilter, renderMultiSelectFilter } from "components/tables/filterRenderers";
 import { NwaTable, isLocalTableSettings } from "components/tables/NwaTable";
-import I18n from "i18n-js";
 import chunk from "lodash/chunk";
 import isNull from "lodash/isNull";
 import last from "lodash/last";
 import omitBy from "lodash/omitBy";
 import sortedUniq from "lodash/sortedUniq";
 import React, { useCallback, useContext, useMemo } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import {
     Cell,
     Column,
@@ -92,6 +92,7 @@ interface FilterParams {
 }
 
 export function ProcessesTable({ initialTableSettings, renderActions, isProcess }: ProcessesTableProps) {
+    const intl = useIntl();
     const { name } = initialTableSettings;
     const queryNameSpace = last(name.split("."));
     const highlightQ = useQueryParam("highlight", StringParam)[0]; // only use the getter
@@ -165,7 +166,9 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
         const { status, step, info } = row.values;
         return (
             <div className={"expanded-row"}>
-                <h2>{I18n.t(`table.expanded_row.${status}`, { step: step })}</h2>
+                <h2>
+                    <FormattedMessage id={`table.expanded_row.${status}`} values={{ step: step }} />
+                </h2>
                 <pre>{info}</pre>
             </div>
         );
@@ -228,7 +231,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                 accessor: "last_status",
                 Filter: renderMultiSelectFilter.bind(null, processStatuses, "process_statuses"),
                 Cell: ({ cell }: { cell: Cell }) => {
-                    return I18n.t(`process_statuses.${cell.value}`);
+                    return intl.formatMessage({ id: `process_statuses.${cell.value}` });
                 },
             },
             {
@@ -325,7 +328,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                 disableSortBy: true,
             },
         ],
-        [organisations, highlightQ, assignees, processStatuses, products, renderActions]
+        [organisations, highlightQ, assignees, processStatuses, products, renderActions, intl]
     );
 
     const persistSettings = useCallback(

@@ -171,7 +171,6 @@ exports[`Storyshots IpPrefixTable Definition 1`] = `
             <span>
               id
             </span>
-             
             <i />
           </th>
           <th
@@ -181,7 +180,6 @@ exports[`Storyshots IpPrefixTable Definition 1`] = `
             <span>
               prefix
             </span>
-             
             <i
               className="fas fa-sort-up"
             />
@@ -193,7 +191,6 @@ exports[`Storyshots IpPrefixTable Definition 1`] = `
             <span>
               description
             </span>
-             
             <i />
           </th>
           <th
@@ -203,7 +200,6 @@ exports[`Storyshots IpPrefixTable Definition 1`] = `
             <span>
               status
             </span>
-             
             <i />
           </th>
         </tr>

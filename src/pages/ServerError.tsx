@@ -16,8 +16,8 @@
 import "pages/NotFound.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
-import I18n from "i18n-js";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { RouteComponentProps } from "react-router";
 
 export default function ServerError(props: RouteComponentProps<{}>) {
@@ -27,8 +27,12 @@ export default function ServerError(props: RouteComponentProps<{}>) {
     return (
         <EuiPage>
             <EuiPageBody component="div" className="mod-server-error">
-                <h1>{I18n.t("server_error.title")}</h1>
-                <p>{I18n.t("server_error.description")}</p>
+                <h1>
+                    <FormattedMessage id="server_error.title" />
+                </h1>
+                <p>
+                    <FormattedMessage id="server_error.description" />
+                </p>
                 {customError && <p>Details: {customError}</p>}
             </EuiPageBody>
         </EuiPage>

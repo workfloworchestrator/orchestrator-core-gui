@@ -48,13 +48,13 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-organisation"
                       >
-                        Customer
+                        forms.fields.organisation *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the customer for the product
+                        forms.fields.organisation_info
                       </div>
                     </div>
                     <div
@@ -188,13 +188,13 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-contact_persons"
                       >
-                        Customer contact persons
+                        forms.fields.contact_persons *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        The persons to notify when the process is finished. You can add multiple emails, names and phone numbers.
+                        forms.fields.contact_persons_info
                       </div>
                     </div>
                     <div
@@ -224,13 +224,13 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-contact_persons.0.email"
                                 >
-                                  Email
+                                  forms.fields.contact_persons_fields.email
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.contact_persons_fields.email_info
                                 </div>
                               </div>
                               <div
@@ -276,13 +276,13 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-contact_persons.0.name"
                                 >
-                                  Name
+                                  forms.fields.contact_persons_fields.name
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.contact_persons_fields.name_info
                                 </div>
                               </div>
                               <div
@@ -333,13 +333,13 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-contact_persons.0.phone"
                                 >
-                                  Phone number
+                                  forms.fields.contact_persons_fields.phone
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.contact_persons_fields.phone_info
                                 </div>
                               </div>
                               <div
@@ -509,13 +509,13 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-ims_port_id_1"
                       >
-                        First node and port
+                        forms.fields.ims_port_id_1 *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Choose the first node and port that you want to use
+                        forms.fields.ims_port_id_1_info
                       </div>
                     </div>
                     <div
@@ -805,13 +805,13 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-ims_port_id_2"
                       >
-                        Second node and port
+                        forms.fields.ims_port_id_2 *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Choose the second node and port that you want to use
+                        forms.fields.ims_port_id_2_info
                       </div>
                     </div>
                     <div
@@ -1202,13 +1202,13 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-ims_port_id_1"
                       >
-                        First node and port
+                        forms.fields.ims_port_id_1 *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Choose the first node and port that you want to use
+                        forms.fields.ims_port_id_1_info
                       </div>
                     </div>
                     <div
@@ -1498,13 +1498,13 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-ims_port_id_2"
                       >
-                        Second node and port
+                        forms.fields.ims_port_id_2 *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Choose the second node and port that you want to use
+                        forms.fields.ims_port_id_2_info
                       </div>
                     </div>
                     <div
@@ -1895,13 +1895,13 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-ims_node_id"
                       >
-                        Choose a node from IMS
+                        forms.fields.ims_node_id *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Choose a node that has state PLANNED or READY FOR SERVICE in IMS
+                        forms.fields.ims_node_id_info
                       </div>
                     </div>
                     <div
@@ -2135,13 +2135,13 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-organisation"
                       >
-                        Customer
+                        forms.fields.organisation *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the customer for the product
+                        forms.fields.organisation_info
                       </div>
                     </div>
                     <div
@@ -2274,13 +2274,13 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-bandwidth"
                       >
-                        Bandwidth
+                        forms.fields.bandwidth *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Desired bandwidth in Mbit/s
+                        forms.fields.bandwidth_info
                       </div>
                     </div>
                     <div
@@ -2328,13 +2328,13 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports"
                       >
-                        Service Ports
+                        forms.fields.service_ports *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Choose Service Ports
+                        forms.fields.service_ports_info
                       </div>
                     </div>
                     <div
@@ -2366,13 +2366,13 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.subscription_id"
                                 >
-                                  Service Port
+                                  forms.fields.service_ports_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -2384,7 +2384,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-Service Port"
+                                    aria-label="reload-forms.fields.service_ports_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
@@ -2560,13 +2560,13 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.vlan"
                                 >
-                                  Port Vlan
+                                  forms.fields.service_ports_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -2645,7 +2645,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -2839,7 +2839,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -3016,13 +3016,13 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-organisation"
                       >
-                        Customer
+                        forms.fields.organisation *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the customer for the product
+                        forms.fields.organisation_info
                       </div>
                     </div>
                     <div
@@ -3155,13 +3155,13 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-bandwidth"
                       >
-                        Bandwidth
+                        forms.fields.bandwidth *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Desired bandwidth in Mbit/s
+                        forms.fields.bandwidth_info
                       </div>
                     </div>
                     <div
@@ -3209,13 +3209,13 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports"
                       >
-                        Service Ports
+                        forms.fields.service_ports *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Choose Service Ports
+                        forms.fields.service_ports_info
                       </div>
                     </div>
                     <div
@@ -3247,13 +3247,13 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.subscription_id"
                                 >
-                                  Service Port
+                                  forms.fields.service_ports_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -3265,7 +3265,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-Service Port"
+                                    aria-label="reload-forms.fields.service_ports_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
@@ -3441,13 +3441,13 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.vlan"
                                 >
-                                  Port Vlan
+                                  forms.fields.service_ports_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -3624,13 +3624,13 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-organisation"
                       >
-                        Customer
+                        forms.fields.organisation *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the customer for the product
+                        forms.fields.organisation_info
                       </div>
                     </div>
                     <div
@@ -3763,13 +3763,13 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-bandwidth"
                       >
-                        Bandwidth
+                        forms.fields.bandwidth *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Desired bandwidth in Mbit/s
+                        forms.fields.bandwidth_info
                       </div>
                     </div>
                     <div
@@ -3817,13 +3817,13 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports"
                       >
-                        Service Ports
+                        forms.fields.service_ports *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Choose Service Ports
+                        forms.fields.service_ports_info
                       </div>
                     </div>
                     <div
@@ -3855,13 +3855,13 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.subscription_id"
                                 >
-                                  Service Port
+                                  forms.fields.service_ports_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -3873,7 +3873,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-Service Port"
+                                    aria-label="reload-forms.fields.service_ports_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
@@ -4049,13 +4049,13 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.vlan"
                                 >
-                                  Port Vlan
+                                  forms.fields.service_ports_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -4134,7 +4134,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -4328,7 +4328,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -4505,13 +4505,13 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-organisation"
                       >
-                        Customer
+                        forms.fields.organisation *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the customer for the product
+                        forms.fields.organisation_info
                       </div>
                     </div>
                     <div
@@ -4644,13 +4644,13 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-bandwidth"
                       >
-                        Bandwidth
+                        forms.fields.bandwidth *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Desired bandwidth in Mbit/s
+                        forms.fields.bandwidth_info
                       </div>
                     </div>
                     <div
@@ -4698,13 +4698,13 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports"
                       >
-                        Service Ports
+                        forms.fields.service_ports *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Choose Service Ports
+                        forms.fields.service_ports_info
                       </div>
                     </div>
                     <div
@@ -4736,13 +4736,13 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.subscription_id"
                                 >
-                                  Service Port
+                                  forms.fields.service_ports_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -4754,7 +4754,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-Service Port"
+                                    aria-label="reload-forms.fields.service_ports_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
@@ -4930,13 +4930,13 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports.0.vlan"
                                 >
-                                  Port Vlan
+                                  forms.fields.service_ports_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_fields.vlan_info
                                 </div>
                               </div>
                               <div

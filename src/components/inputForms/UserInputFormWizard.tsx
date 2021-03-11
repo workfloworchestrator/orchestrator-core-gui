@@ -15,10 +15,10 @@
 
 import { catchErrorStatus } from "api/index";
 import UserInputForm from "components/inputForms/UserInputForm";
-import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
 import hash from "object-hash";
 import React from "react";
+import { WrappedComponentProps, injectIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { FormNotCompleteResponse, InputForm } from "utils/types";
@@ -29,11 +29,11 @@ interface Form {
     hasNext?: boolean;
 }
 
-interface IProps {
+interface IProps extends WrappedComponentProps {
     stepUserInput: InputForm;
     validSubmit: (form: {}[]) => Promise<void>;
     cancel: () => void;
-    hasNext: boolean;
+    hasNext?: boolean;
 }
 
 interface IState {
@@ -41,7 +41,7 @@ interface IState {
     userInputs: {}[];
 }
 
-export default class UserInputFormWizard extends React.Component<IProps, IState> {
+class UserInputFormWizard extends React.Component<IProps, IState> {
     public static defaultProps = {
         hasNext: false,
     };
@@ -71,6 +71,7 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
 
     submit = (currentFormData: {}) => {
         const { forms, userInputs } = this.state;
+        const { intl } = this.props;
         let newUserInputs = userInputs.slice(0, forms.length - 1);
         newUserInputs.push(currentFormData);
 
@@ -78,8 +79,11 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
         return catchErrorStatus<FormNotCompleteResponse>(result, 510, (json) => {
             // Scroll to top when navigating to next screen of wizard
             window.scrollTo(0, 0);
-            setFlash(I18n.t("process.flash.wizard_next_step"));
-            this.setState({ forms: [...forms, { form: json.form, hasNext: json.hasNext }], userInputs: newUserInputs });
+            setFlash(intl.formatMessage({ id: "process.flash.wizard_next_step" }));
+            this.setState({
+                forms: [...forms, { form: json.form, hasNext: json.hasNext }],
+                userInputs: newUserInputs,
+            });
         });
     };
 
@@ -93,11 +97,19 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
             return null;
         }
 
+        /* Generate a key based on input widget names that results in a new
+         * clean instance + rerender of UserInputForm if the form changes. Without this, state of previous,
+         * wizard step can cause wrong/weird default values for forms inputs.
+         *
+         * Note: to ensure a new form for multiple form wizard steps with exactly the same fields and labels on
+         * the form the hash is calculated on the form object itself + length, which generates a unique hash as it
+         * has a changing ".length" attribute.
+         * */
+        const key = hash.sha1({ form: currentForm.form, length: forms.length });
+
         return (
             <UserInputForm
-                // Generate a key based on input widget names that results in a new
-                // instance of UserInputForm if the form changes
-                key={hash.sha1(currentForm.form.properties)}
+                key={key}
                 stepUserInput={currentForm.form}
                 validSubmit={this.submit}
                 previous={this.previous}
@@ -111,3 +123,5 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
 }
 
 UserInputFormWizard.contextType = ApplicationContext;
+
+export default injectIntl(UserInputFormWizard);

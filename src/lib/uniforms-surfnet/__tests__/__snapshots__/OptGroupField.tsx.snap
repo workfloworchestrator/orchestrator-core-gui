@@ -26,7 +26,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x.title\\" translation]",
+                    "data": "forms.fields.x.title",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -46,7 +46,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x.info\\" translation]",
+                          "data": "forms.fields.x.info",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -101,7 +101,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x.info\\" translation]",
+                        "data": "forms.fields.x.info",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -132,7 +132,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x.title\\" translation]",
+                      "data": "forms.fields.x.title",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -2037,7 +2037,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x.title\\" translation]",
+                      "data": "forms.fields.x.title",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -2057,7 +2057,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x.info\\" translation]",
+                            "data": "forms.fields.x.info",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -2112,7 +2112,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x.info\\" translation]",
+                          "data": "forms.fields.x.info",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -2143,7 +2143,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x.title\\" translation]",
+                        "data": "forms.fields.x.title",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -2278,7 +2278,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x.title\\" translation]",
+                    "data": "forms.fields.x.title",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -2298,7 +2298,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x.info\\" translation]",
+                          "data": "forms.fields.x.info",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -2353,7 +2353,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x.info\\" translation]",
+                        "data": "forms.fields.x.info",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -2384,7 +2384,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x.title\\" translation]",
+                      "data": "forms.fields.x.title",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -14585,7 +14585,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x.title\\" translation]",
+                      "data": "forms.fields.x.title",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -14605,7 +14605,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x.info\\" translation]",
+                            "data": "forms.fields.x.info",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -14660,7 +14660,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x.info\\" translation]",
+                          "data": "forms.fields.x.info",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -14691,7 +14691,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x.title\\" translation]",
+                        "data": "forms.fields.x.title",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,

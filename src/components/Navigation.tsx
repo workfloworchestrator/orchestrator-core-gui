@@ -27,9 +27,9 @@ import {
     EuiToast,
 } from "@elastic/eui";
 import { Control } from "@elastic/eui/src/components/control_bar/control_bar";
-import I18n from "i18n-js";
 import mySpinner from "lib/Spin";
 import React, { useEffect, useRef, useState } from "react";
+import { FormattedMessage } from "react-intl";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { Spinner } from "spin.js";
@@ -77,7 +77,11 @@ const Navigation = () => {
                 "aria-label": `${navItem}-tab`,
                 controlType: "text",
                 id: `main-navigation-${navItem}-tab`,
-                text: <Link to={`/${navItem}`}>{I18n.t(`navigation.${navItem}`)}</Link>,
+                text: (
+                    <Link to={`/${navItem}`}>
+                        <FormattedMessage id={`navigation.${navItem}`} />
+                    </Link>
+                ),
                 className: location.pathname.startsWith(`/${navItem.replace("_", "-")}`)
                     ? "navigation__active navigation__item"
                     : "navigation__item",
@@ -110,7 +114,7 @@ const Navigation = () => {
                             color="secondary"
                             fill
                         >
-                            {I18n.t(`navigation.new_process`)}
+                            <FormattedMessage id="navigation.new_process" />
                         </EuiButton>
                     </Link>
                 ),
@@ -131,7 +135,9 @@ const Navigation = () => {
             {isModalVisible && (
                 <EuiOverlayMask>
                     <EuiModal onClose={closeModal} initialFocus="[id=modalNodeSelector]">
-                        <EuiModalHeader>{I18n.t(`favorites.manage`)}</EuiModalHeader>
+                        <EuiModalHeader>
+                            <FormattedMessage id="favorites.manage" />
+                        </EuiModalHeader>
                         <EuiModalBody>
                             <FavoritesManagementModal />
                         </EuiModalBody>

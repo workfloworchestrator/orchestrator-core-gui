@@ -2369,6 +2369,7 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
             >
               <h3>
                 Process instance of workflow migrate_sn7_ip_static_sap_to_sn8
+                <br />
                 User input for step Select new SAP to migrate to for product SSP 10G
               </h3>
             </div>
@@ -2397,7 +2398,7 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
                       className="euiFormLabel euiFormRow__label"
                       id="input-ip_static_service_port"
                     >
-                      IP Service Port
+                      forms.fields.ip_static_service_port
                     </label>
                   </section>
                 </section>
@@ -2561,6 +2562,7 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
             >
               <h3>
                 Process instance of workflow migrate_sn7_ip_static_sap_to_sn8
+                <br />
                 User input for step Select new SAP to migrate to for product SSP 10G
               </h3>
             </div>
@@ -2589,7 +2591,7 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
                       className="euiFormLabel euiFormRow__label"
                       id="input-ip_static_service_port"
                     >
-                      IP Service Port
+                      forms.fields.ip_static_service_port
                     </label>
                   </section>
                 </section>

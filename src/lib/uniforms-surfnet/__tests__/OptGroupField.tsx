@@ -68,12 +68,8 @@ test("<OptGroupField> - renders a label", () => {
     );
 
     expect(wrapper.find("label")).toHaveLength(2);
-    expect(wrapper.find("span.euiDescribedFormGroup__title").text()).toBe(
-        '[missing "en.forms.fields.x.title" translation]'
-    );
-    expect(wrapper.find("div.euiDescribedFormGroup__description").text()).toBe(
-        '[missing "en.forms.fields.x.info" translation]'
-    );
+    expect(wrapper.find("span.euiDescribedFormGroup__title").text()).toBe("forms.fields.x.title");
+    expect(wrapper.find("div.euiDescribedFormGroup__description").text()).toBe("forms.fields.x.info");
 });
 
 test("<OptGroupField> - renders a wrapper with unknown props", () => {

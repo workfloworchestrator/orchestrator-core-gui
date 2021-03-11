@@ -11,13 +11,13 @@ import {
     EuiText,
 } from "@elastic/eui";
 import { subscriptionsDetailWithModel } from "api";
-import I18n from "i18n-js";
 import React, { MouseEvent } from "react";
+import { WrappedComponentProps, injectIntl } from "react-intl";
 import { FavoriteSubscriptionStorage, Subscription, SubscriptionModel } from "utils/types";
 
 export const FAVORITE_STORAGE_KEY = "favoritePortsArray-v4";
 
-interface IProps {
+interface IProps extends WrappedComponentProps {
     handleSelect: any;
     subscriptions: Subscription[];
     managementOnly: boolean;
@@ -38,7 +38,7 @@ interface IState {
     selectedSubscription?: string;
 }
 
-export default class FavoritePortSelector extends React.PureComponent<IProps, IState> {
+class FavoritePortSelector extends React.PureComponent<IProps, IState> {
     constructor(props: IProps) {
         super(props);
 
@@ -142,6 +142,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
             portsLoaded,
             selectedSubscription,
         } = this.state;
+        const { intl } = this.props;
         let portSubscriptionIds: FavoriteSubscriptionStorage[];
         portSubscriptionIds = JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
 
@@ -181,7 +182,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                         <EuiButtonIcon
                             id={`favorite-port-selector-modal-${subscription_id}-edit`}
                             iconType="pencil"
-                            aria-label={I18n.t(`favorites.edit`)}
+                            aria-label={intl.formatMessage({ id: "favorites.edit" })}
                             onClick={(
                                 event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, globalThis.MouseEvent>
                             ) => this.onChangeEditMode(event, subscription_id)}
@@ -189,7 +190,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                         <EuiButtonIcon
                             id={`favorite-port-selector-modal-${subscription_id}-delete`}
                             iconType="trash"
-                            aria-label={I18n.t(`favorites.trash`)}
+                            aria-label={intl.formatMessage({ id: "favorites.trash" })}
                             onClick={(
                                 event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, globalThis.MouseEvent>
                             ) => this.onDelete(event, subscription_id)}
@@ -198,7 +199,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                             <EuiButtonIcon
                                 id={`favorite-port-selector-modal-${subscription_id}-select`}
                                 iconType="pinFilled"
-                                aria-label={I18n.t(`favorites.select`)}
+                                aria-label={intl.formatMessage({ id: "favorites.select" })}
                                 onClick={(
                                     event: React.MouseEvent<
                                         HTMLButtonElement | HTMLAnchorElement,
@@ -279,3 +280,5 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
         );
     }
 }
+
+export default injectIntl(FavoritePortSelector);

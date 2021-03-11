@@ -16,15 +16,19 @@
 import "pages/NotFound.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
-import I18n from "i18n-js";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 export default function NotFound() {
     return (
         <EuiPage>
             <EuiPageBody component="div" className="mod-not-found">
-                <h1>{I18n.t("not_found.title")}</h1>
-                <p>{I18n.t("not_found.description")}</p>
+                <h1>
+                    <FormattedMessage id="not_found.title" />
+                </h1>
+                <p>
+                    <FormattedMessage id="not_found.description" />
+                </p>
             </EuiPageBody>
         </EuiPage>
     );
