@@ -48,13 +48,13 @@ exports[`Storyshots NewProcess Default 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-product"
                       >
-                        Product
+                        forms.fields.product
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the product
+                        forms.fields.product_info
                       </div>
                     </div>
                     <div
@@ -288,13 +288,13 @@ exports[`Storyshots NewProcess Preselected 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-organisation"
                       >
-                        Customer
+                        forms.fields.organisation *
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the customer for the product
+                        forms.fields.organisation_info
                       </div>
                     </div>
                     <div

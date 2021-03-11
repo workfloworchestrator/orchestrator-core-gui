@@ -14,11 +14,11 @@
  */
 
 import { EuiFormRow, EuiText } from "@elastic/eui";
-import I18n from "i18n-js";
 import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { get } from "lodash";
 import React from "react";
+import { WrappedComponentProps, injectIntl } from "react-intl";
 import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import { Option } from "utils/types";
@@ -27,7 +27,7 @@ import { ListField, ListItemField, SelectField } from ".";
 
 export type SelectFieldProps = FieldProps<
     string | string[],
-    { allowedValues?: string[]; transform?(value: string): string }
+    { allowedValues?: string[]; transform?(value: string): string } & WrappedComponentProps
 >;
 
 function Select({
@@ -47,6 +47,7 @@ function Select({
     error,
     showInlineError,
     errorMessage,
+    intl,
     ...props
 }: SelectFieldProps) {
     const nameArray = joinName(null, name);
@@ -106,7 +107,7 @@ function Select({
                         value={selectedValue}
                         isSearchable={true}
                         isClearable={true}
-                        placeholder={placeholder || I18n.t("forms.widgets.select.placeholder")}
+                        placeholder={placeholder || intl.formatMessage({ id: "forms.widgets.select.placeholder" })}
                         isDisabled={disabled}
                         required={required}
                         inputRef={inputRef}
@@ -117,4 +118,4 @@ function Select({
     }
 }
 
-export default connectField(Select, { kind: "leaf" });
+export default connectField(injectIntl(Select), { kind: "leaf" });

@@ -24,8 +24,8 @@ import {
     initialProcessTableSettings,
     initialProcessesFilterAndSort,
 } from "components/tables/Processes";
-import I18n from "i18n-js";
 import React from "react";
+import { WrappedComponentProps, injectIntl } from "react-intl";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
@@ -36,7 +36,7 @@ import { actionOptions } from "validations/Processes";
 
 import { abortProcess, retryProcess } from "../api";
 
-interface IProps {}
+interface IProps extends WrappedComponentProps {}
 
 interface IState {
     confirmationDialogOpen: boolean;
@@ -46,7 +46,7 @@ interface IState {
     showExplanation: boolean;
 }
 
-export default class Processes extends React.PureComponent<IProps, IState> {
+class Processes extends React.PureComponent<IProps, IState> {
     constructor(props: IProps) {
         super(props);
 
@@ -73,32 +73,28 @@ export default class Processes extends React.PureComponent<IProps, IState> {
 
     handleAbortProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
         stop(e);
+        const { intl } = this.props;
         const product_name = process.subscriptions[0].product.name;
         const customer_name = organisationNameByUuid(process.subscriptions[0].customer_id, this.context.organisations);
         this.confirmation(
-            I18n.t("processes.abortConfirmation", {
-                name: product_name,
-                customer: customer_name,
-            }),
+            intl.formatMessage({ id: "processes.abortConfirmation" }, { name: product_name, customer: customer_name }),
             () =>
                 abortProcess(process.pid).then(() => {
-                    setFlash(I18n.t("processes.flash.abort", { name: product_name }));
+                    setFlash(intl.formatMessage({ id: "processes.flash.abort" }, { name: product_name }));
                 })
         );
     };
 
     handleRetryProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
         stop(e);
+        const { intl } = this.props;
         const product_name = process.subscriptions[0].product.name;
         const customer_name = organisationNameByUuid(process.subscriptions[0].customer_id, this.context.organisations);
         this.confirmation(
-            I18n.t("processes.retryConfirmation", {
-                name: product_name,
-                customer: customer_name,
-            }),
+            intl.formatMessage({ id: "processes.retryConfirmation" }, { name: product_name, customer: customer_name }),
             () =>
                 retryProcess(process.pid).then(() => {
-                    setFlash(I18n.t("processes.flash.retry", { name: product_name }));
+                    setFlash(intl.formatMessage({ id: "processes.flash.retry" }, { name: product_name }));
                 })
         );
     };
@@ -187,3 +183,5 @@ export default class Processes extends React.PureComponent<IProps, IState> {
 }
 
 Processes.contextType = ApplicationContext;
+
+export default injectIntl(Processes);

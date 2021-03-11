@@ -17,8 +17,8 @@ import "components/FixedInputConfiguration.scss";
 
 import { fixedInputConfiguration } from "api";
 import CheckBox from "components/CheckBox";
-import I18n from "i18n-js";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { FixedInputConfiguration as iFixedInputConfiguration } from "utils/types";
 
 interface IState {
@@ -44,14 +44,24 @@ export default class FixedInputConfiguration extends React.Component<{}, IState>
         const { configuration } = this.state;
         return Object.keys(configuration.by_tag).map((tag, index) => (
             <section className="fixed-input-configuration" key={index}>
-                <h3 className="description">{I18n.t("metadata.fixedInputs.tags", { tag: tag })}</h3>
+                <h3 className="description">
+                    <FormattedMessage id="metadata.fixedInputs.tags" values={{ tag: tag }} />
+                </h3>
                 <table>
                     <thead>
                         <tr>
-                            <th className={"fixed-input"}>{I18n.t("metadata.fixedInputs.fixedInput")}</th>
-                            <th className={"values"}>{I18n.t("metadata.fixedInputs.values")}</th>
-                            <th className={"description"}>{I18n.t("metadata.fixedInputs.description")}</th>
-                            <th className={"required"}>{I18n.t("metadata.fixedInputs.required")}</th>
+                            <th className={"fixed-input"}>
+                                <FormattedMessage id="metadata.fixedInputs.fixedInput" />
+                            </th>
+                            <th className={"values"}>
+                                <FormattedMessage id="metadata.fixedInputs.values" />
+                            </th>
+                            <th className={"description"}>
+                                <FormattedMessage id="metadata.fixedInputs.description" />
+                            </th>
+                            <th className={"required"}>
+                                <FormattedMessage id="metadata.fixedInputs.required" />
+                            </th>
                         </tr>
                     </thead>
                     <tbody>

@@ -16,15 +16,19 @@
 import "pages/NotFound.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
-import I18n from "i18n-js";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 export default function NotAllowed() {
     return (
         <EuiPage>
             <EuiPageBody component="div" className="mod-not-allowed">
-                <h1>{I18n.t("not_allowed.title")}</h1>
-                <p>{I18n.t("not_allowed.description")}</p>
+                <h1>
+                    <FormattedMessage id="not_allowed.title" />
+                </h1>
+                <p>
+                    <FormattedMessage id="not_allowed.description" />
+                </p>
             </EuiPageBody>
         </EuiPage>
     );

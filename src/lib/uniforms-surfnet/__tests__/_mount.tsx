@@ -13,18 +13,36 @@
  *
  */
 import { mount as enzyme } from "enzyme";
-import { ReactElement } from "react";
+import { parse_translations_dict } from "locale/i18n";
+import React, { ReactElement } from "react";
+import { IntlProvider } from "react-intl";
 import { context } from "uniforms";
+
+import en from "../../../locale/en";
+import createContext from "./_createContext";
 
 test("Test suite must contain at least one test", () => {});
 
+function TestWrapper({ uniformsOptions, children }: any) {
+    return (
+        <context.Provider value={uniformsOptions.context}>
+            <IntlProvider // Locale of the application
+                locale="en-GB"
+                // Locale of the fallback defaultMessage
+                defaultLocale="en-GB"
+                messages={parse_translations_dict(en)}
+                onError={(_) => {}}
+            >
+                {children}
+            </IntlProvider>
+        </context.Provider>
+    );
+}
+
 function mount(node: ReactElement, options: any) {
-    if (options === undefined) {
-        return enzyme(node);
-    }
     return enzyme(node, {
-        wrappingComponent: context.Provider,
-        wrappingComponentProps: { value: options.context },
+        wrappingComponent: TestWrapper,
+        wrappingComponentProps: { uniformsOptions: options ?? createContext() },
     });
 }
 

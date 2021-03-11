@@ -13,10 +13,10 @@
  *
  */
 
-import I18n from "i18n-js";
 import SelectField, { SelectFieldProps } from "lib/uniforms-surfnet/src/SelectField";
 import get from "lodash/get";
 import React, { useContext } from "react";
+import { useIntl } from "react-intl";
 import { connectField, filterDOMProps } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { productById } from "utils/Lookups";
@@ -33,6 +33,7 @@ declare module "uniforms" {
 filterDOMProps.register("productIds");
 
 function Product({ name, productIds, ...props }: ProductFieldProps) {
+    const intl = useIntl();
     const all_products = useContext(ApplicationContext).products;
 
     const products = productIds ? productIds.map((id) => productById(id, all_products)) : all_products;
@@ -49,7 +50,7 @@ function Product({ name, productIds, ...props }: ProductFieldProps) {
             {...props}
             allowedValues={Object.keys(productLabelLookup)}
             transform={(uuid: string) => get(productLabelLookup, uuid, uuid)}
-            placeholder={I18n.t("forms.widgets.product.placeholder")}
+            placeholder={intl.formatMessage({ id: "forms.widgets.product.placeholder" })}
         />
     );
 }

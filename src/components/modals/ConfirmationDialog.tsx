@@ -24,8 +24,8 @@ import {
     EuiModalHeaderTitle,
     EuiOverlayMask,
 } from "@elastic/eui";
-import I18n from "i18n-js";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 interface IProps {
     isOpen?: boolean;
@@ -48,8 +48,12 @@ export default function ConfirmationDialog({
         <div>
             {leavePage ? (
                 <section className={`dialog-content ${isError ? " error" : ""}`}>
-                    <h2>{I18n.t("confirmation_dialog.leavePage")}</h2>
-                    <p>{I18n.t("confirmation_dialog.leavePageSub")}</p>
+                    <h2>
+                        <FormattedMessage id="confirmation_dialog.leavePage" />
+                    </h2>
+                    <p>
+                        <FormattedMessage id="confirmation_dialog.leavePageSub" />
+                    </p>
                 </section>
             ) : (
                 <section className="dialog-content">
@@ -66,18 +70,24 @@ export default function ConfirmationDialog({
             <EuiOverlayMask>
                 <EuiModal className="confirm-modal" onClose={cancel} initialFocus="[name=popfirst]">
                     <EuiModalHeader>
-                        <EuiModalHeaderTitle>{I18n.t("confirmation_dialog.title")}</EuiModalHeaderTitle>
+                        <EuiModalHeaderTitle>
+                            <FormattedMessage id="confirmation_dialog.title" />
+                        </EuiModalHeaderTitle>
                     </EuiModalHeader>
 
                     <EuiModalBody>{modalContent}</EuiModalBody>
 
                     <EuiModalFooter>
                         <EuiButton onClick={cancel} color="warning" id="dialog-cancel">
-                            {leavePage ? I18n.t("confirmation_dialog.leave") : I18n.t("confirmation_dialog.cancel")}
+                            <FormattedMessage
+                                id={leavePage ? "confirmation_dialog.leave" : "confirmation_dialog.cancel"}
+                            />
                         </EuiButton>
 
                         <EuiButton onClick={confirm} fill id="dialog-confirm">
-                            {leavePage ? I18n.t("confirmation_dialog.stay") : I18n.t("confirmation_dialog.confirm")}
+                            <FormattedMessage
+                                id={leavePage ? "confirmation_dialog.stay" : "confirmation_dialog.confirm"}
+                            />
                         </EuiButton>
                     </EuiModalFooter>
                 </EuiModal>

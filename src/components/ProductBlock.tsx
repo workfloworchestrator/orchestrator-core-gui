@@ -23,8 +23,8 @@ import { productBlockById, productBlocks, resourceTypes, saveProductBlock } from
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { isDate } from "date-fns";
 import { formDate, formInput, formSelect } from "forms/Builder";
-import I18n from "i18n-js";
 import React from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { RouteComponentProps } from "react-router";
 import { ValueType } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
@@ -39,7 +39,7 @@ interface MatchParams {
     id: string;
 }
 
-interface IProps extends Partial<RouteComponentProps<MatchParams>> {
+interface IProps extends Partial<RouteComponentProps<MatchParams>>, WrappedComponentProps {
     subscriptionId?: string;
 }
 
@@ -61,7 +61,7 @@ interface IState {
     productBlocks: iProductBlock[];
 }
 
-export default class ProductBlock extends React.Component<IProps, IState> {
+class ProductBlock extends React.Component<IProps, IState> {
     state: IState = {
         confirmationDialogOpen: false,
         confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
@@ -103,19 +103,20 @@ export default class ProductBlock extends React.Component<IProps, IState> {
     handleDeleteProductBlock = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
         const { productBlock } = this.state;
-        const question = I18n.t("metadata.deleteConfirmation", {
-            type: "Product Block",
-            name: productBlock!.name,
-        });
+        const { intl } = this.props;
+        const question = intl.formatMessage(
+            { id: "metadata.deleteConfirmation" },
+            { type: "Product Block", name: productBlock!.name }
+        );
         const action = () =>
             deleteProductBlock(productBlock!.product_block_id)
                 .then(() => {
                     this.context.redirect("/metadata/product_blocks");
                     setFlash(
-                        I18n.t("metadata.flash.delete", {
-                            type: "Product Block",
-                            name: productBlock!.name,
-                        })
+                        intl.formatMessage(
+                            { id: "metadata.flash.delete" },
+                            { type: "Product Block", name: productBlock!.name }
+                        )
                     );
                 })
                 .catch((err) => {
@@ -140,16 +141,17 @@ export default class ProductBlock extends React.Component<IProps, IState> {
     submit = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
         const { productBlock, processing } = this.state;
+        const { intl } = this.props;
         const invalid = this.isInvalid(true) || processing;
         if (!invalid) {
             this.setState({ processing: true });
             saveProductBlock(productBlock!).then(() => {
                 this.context.redirect("/metadata/product_blocks");
                 setFlash(
-                    I18n.t(productBlock!.product_block_id ? "metadata.flash.updated" : "metadata.flash.created", {
-                        type: "Product Block",
-                        name: productBlock!.name,
-                    })
+                    intl.formatMessage(
+                        { id: productBlock!.product_block_id ? "metadata.flash.updated" : "metadata.flash.created" },
+                        { type: "Product Block", name: productBlock!.name }
+                    )
                 );
             });
         } else {
@@ -162,7 +164,7 @@ export default class ProductBlock extends React.Component<IProps, IState> {
             return (
                 <section className="buttons">
                     <EuiButton className="button" onClick={() => this.context.redirect("/metadata/product_blocks")}>
-                        {I18n.t("metadata.productBlocks.back")}
+                        <FormattedMessage id="metadata.productBlocks.back" />
                     </EuiButton>
                 </section>
             );
@@ -171,18 +173,18 @@ export default class ProductBlock extends React.Component<IProps, IState> {
         return (
             <section className="buttons">
                 <EuiButton className="button" onClick={this.cancel}>
-                    {I18n.t("process.cancel")}
+                    <FormattedMessage id="process.cancel" />
                 </EuiButton>
                 <EuiButton
                     tabIndex={0}
                     className={`button ${invalid ? "grey disabled" : "blue"}`}
                     onClick={this.submit}
                 >
-                    {I18n.t("process.submit")}
+                    <FormattedMessage id="process.submit" />
                 </EuiButton>
                 {productBlock.product_block_id && (
                     <EuiButton className="button red" onClick={this.handleDeleteProductBlock}>
-                        {I18n.t("processes.delete")}
+                        <FormattedMessage id="processes.delete" />
                     </EuiButton>
                 )}
             </section>
@@ -250,6 +252,7 @@ export default class ProductBlock extends React.Component<IProps, IState> {
             initial,
             confirmationDialogQuestion,
         } = this.state;
+        const { intl } = this.props;
 
         if (!productBlock) {
             return null;
@@ -278,7 +281,7 @@ export default class ProductBlock extends React.Component<IProps, IState> {
                         this.state.errors,
                         this.changeProperty("name"),
                         this.validateProperty("name"),
-                        duplicateName ? I18n.t("metadata.productBlocks.duplicate_name") : undefined
+                        duplicateName ? intl.formatMessage({ id: "metadata.productBlocks.duplicate_name" }) : undefined
                     )}
                     {formInput(
                         "metadata.productBlocks.description",
@@ -311,3 +314,5 @@ export default class ProductBlock extends React.Component<IProps, IState> {
 }
 
 ProductBlock.contextType = ApplicationContext;
+
+export default injectIntl(ProductBlock);

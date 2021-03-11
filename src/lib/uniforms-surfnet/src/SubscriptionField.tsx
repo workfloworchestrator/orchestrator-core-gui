@@ -18,11 +18,12 @@ import "lib/uniforms-surfnet/src/SubscriptionField.scss";
 import { EuiButtonIcon, EuiFormRow, EuiModal, EuiOverlayMask, EuiText } from "@elastic/eui";
 import ServicePortSelectorModal from "components/modals/ServicePortSelectorModal";
 import { SubscriptionsContext } from "components/subscriptionContext";
-import I18n from "i18n-js";
 import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
+import { intl } from "locale/i18n";
 import get from "lodash/get";
 import React, { useContext, useEffect, useMemo, useState } from "react";
+import { WrappedComponentProps, injectIntl } from "react-intl";
 import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
@@ -34,11 +35,13 @@ export function makeLabel(subscription: iSubscription, products: Product[], orga
     const organisation = organisations && organisations.find((org) => org.uuid === subscription.customer_id);
     const organisationName = organisation ? organisation.name : subscription.customer_id.substring(0, 8);
     const product = subscription.product || productById(subscription.product_id!, products);
-    const description = subscription.description || I18n.t("forms.widgets.subscription.missingDescription");
+    const description =
+        subscription.description || intl.formatMessage({ id: "forms.widgets.subscription.missingDescription" });
     const subscription_substring = subscription.subscription_id.substring(0, 8);
 
     if (["Node"].includes(product.tag)) {
-        const description = subscription.description || I18n.t("forms.widgets.subscription.missingDescription");
+        const description =
+            subscription.description || intl.formatMessage({ id: "forms.widgets.subscription.missingDescription" });
         return `${subscription.subscription_id.substring(0, 8)} ${description.trim()}`;
     } else if (["SP", "SPNL", "AGGSP", "AGGSPNL", "MSC", "MSCNL", "IRBSP"].includes(product.tag)) {
         let portSubscription = subscription as ServicePortSubscription;
@@ -88,7 +91,7 @@ export type SubscriptionFieldProps = FieldProps<
         bandwidthKey?: string;
         tags?: string[]; // There is an assumption that using tags means you want port subscriptions
         statuses?: string[];
-    }
+    } & WrappedComponentProps
 >;
 
 function Subscription({
@@ -116,6 +119,8 @@ function Subscription({
     bandwidthKey,
     tags,
     statuses,
+    inlist,
+    intl,
     ...props
 }: SubscriptionFieldProps) {
     const nameArray = joinName(null, name);
@@ -284,7 +289,7 @@ function Subscription({
                         value={selectedValue}
                         isSearchable={true}
                         isClearable={false}
-                        placeholder={I18n.t("forms.widgets.subscription.placeholder")}
+                        placeholder={intl.formatMessage({ id: "forms.widgets.subscription.placeholder" })}
                         isDisabled={disabled}
                         required={required}
                         inputRef={inputRef}
@@ -296,4 +301,4 @@ function Subscription({
     );
 }
 
-export default connectField(Subscription, { kind: "leaf" });
+export default connectField(injectIntl(Subscription), { kind: "leaf" });

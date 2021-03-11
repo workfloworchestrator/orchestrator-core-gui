@@ -9,7 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- added Grafana link for SN8 nodes on subscription detail page 
+## [v7.3.1]
+
+-   Added new handling of Translations
+-   added Grafana link for SN8 nodes on subscription detail page
 
 ## [7.2.0] - 2020-01-05
 

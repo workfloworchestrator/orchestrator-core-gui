@@ -16,9 +16,9 @@ import "lib/uniforms-surfnet/src/ImsPortIdField.scss";
 
 import { EuiFormRow, EuiText } from "@elastic/eui";
 import { getFreePortsByNodeSubscriptionIdAndSpeed, nodeSubscriptions } from "api";
-import I18n from "i18n-js";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React, { useCallback, useEffect, useState } from "react";
+import { WrappedComponentProps, injectIntl } from "react-intl";
 import Select, { ValueType } from "react-select";
 import { connectField, filterDOMProps } from "uniforms";
 import { IMSNode, IMSPort, Option, Subscription } from "utils/types";
@@ -30,7 +30,7 @@ export type ImsPortFieldProps = FieldProps<
         interfaceSpeed: number | string;
         imsPortMode?: "patched" | "unpatched" | "all";
         nodeStatuses?: ("active" | "provisioning")[];
-    }
+    } & WrappedComponentProps
 >;
 
 function nodeToOptionCorelink(node: Subscription): Option {
@@ -66,6 +66,7 @@ function ImsPortId({
     interfaceSpeed,
     imsPortMode = "all",
     nodeStatuses,
+    intl,
     ...props
 }: ImsPortFieldProps) {
     const [nodes, setNodes] = useState<IMSNode[] | Subscription[]>([]);
@@ -112,16 +113,15 @@ function ImsPortId({
             });
         }
     }, [onChangeNodes, nodeStatuses, nodeSubscriptionId]);
-
     const nodesPlaceholder = loading
-        ? I18n.t("forms.widgets.nodePort.loading")
-        : I18n.t("forms.widgets.nodePort.selectNode");
+        ? intl.formatMessage({ id: "forms.widgets.nodePort.loading" })
+        : intl.formatMessage({ id: "forms.widgets.nodePort.selectNode" });
 
     const portPlaceholder = loading
-        ? I18n.t("forms.widgets.nodePort.loading")
+        ? intl.formatMessage({ id: "forms.widgets.nodePort.loading" })
         : nodeId
-        ? I18n.t("forms.widgets.nodePort.selectPort")
-        : I18n.t("forms.widgets.nodePort.selectNodeFirst");
+        ? intl.formatMessage({ id: "forms.widgets.nodePort.selectPort" })
+        : intl.formatMessage({ id: "forms.widgets.nodePort.selectNodeFirst" });
 
     let node_options: Option[] = (nodes as Subscription[]).map(nodeToOptionCorelink);
 
@@ -184,4 +184,4 @@ function ImsPortId({
     );
 }
 
-export default connectField(ImsPortId, { kind: "leaf" });
+export default connectField(injectIntl(ImsPortId), { kind: "leaf" });
