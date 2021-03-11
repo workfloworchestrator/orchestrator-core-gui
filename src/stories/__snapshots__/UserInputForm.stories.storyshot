@@ -54,7 +54,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.organisation_info
+                         
                       </div>
                     </div>
                     <div
@@ -194,7 +194,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.contact_persons_info
+                         
                       </div>
                     </div>
                     <div
@@ -230,7 +230,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.contact_persons_fields.email_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -282,7 +282,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.contact_persons_fields.name_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -339,7 +339,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.contact_persons_fields.phone_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -515,7 +515,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.ims_port_id_1_info
+                         
                       </div>
                     </div>
                     <div
@@ -811,7 +811,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.ims_port_id_2_info
+                         
                       </div>
                     </div>
                     <div
@@ -1208,7 +1208,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.ims_port_id_1_info
+                         
                       </div>
                     </div>
                     <div
@@ -1504,7 +1504,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.ims_port_id_2_info
+                         
                       </div>
                     </div>
                     <div
@@ -1901,7 +1901,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.ims_node_id_info
+                         
                       </div>
                     </div>
                     <div
@@ -2141,7 +2141,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.organisation_info
+                         
                       </div>
                     </div>
                     <div
@@ -2280,7 +2280,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.bandwidth_info
+                         
                       </div>
                     </div>
                     <div
@@ -2334,7 +2334,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports_info
+                         
                       </div>
                     </div>
                     <div
@@ -2372,7 +2372,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -2566,7 +2566,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -2645,7 +2645,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -2839,7 +2839,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -3022,7 +3022,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.organisation_info
+                         
                       </div>
                     </div>
                     <div
@@ -3161,7 +3161,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.bandwidth_info
+                         
                       </div>
                     </div>
                     <div
@@ -3215,7 +3215,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports_info
+                         
                       </div>
                     </div>
                     <div
@@ -3253,7 +3253,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -3447,7 +3447,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -3630,7 +3630,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.organisation_info
+                         
                       </div>
                     </div>
                     <div
@@ -3769,7 +3769,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.bandwidth_info
+                         
                       </div>
                     </div>
                     <div
@@ -3823,7 +3823,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports_info
+                         
                       </div>
                     </div>
                     <div
@@ -3861,7 +3861,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -4055,7 +4055,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -4134,7 +4134,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -4328,7 +4328,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -4511,7 +4511,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.organisation_info
+                         
                       </div>
                     </div>
                     <div
@@ -4650,7 +4650,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.bandwidth_info
+                         
                       </div>
                     </div>
                     <div
@@ -4704,7 +4704,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports_info
+                         
                       </div>
                     </div>
                     <div
@@ -4742,7 +4742,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -4936,7 +4936,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div

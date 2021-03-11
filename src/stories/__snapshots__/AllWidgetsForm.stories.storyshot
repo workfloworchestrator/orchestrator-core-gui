@@ -54,7 +54,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.product_info
+                         
                       </div>
                     </div>
                     <div
@@ -193,7 +193,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.product2_info
+                         
                       </div>
                     </div>
                     <div
@@ -365,7 +365,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.bandwidth1_info
+                         
                       </div>
                     </div>
                     <div
@@ -459,7 +459,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <div
                                     className="euiText euiText--medium"
                                   >
-                                    forms.fields.bfd.enabled_info
+                                     
                                   </div>
                                 </div>
                                 <div
@@ -519,7 +519,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.boolean1_info
+                         
                       </div>
                     </div>
                     <div
@@ -573,7 +573,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.boolean2_info
+                         
                       </div>
                     </div>
                     <div
@@ -628,7 +628,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.contact_persons_info
+                         
                       </div>
                     </div>
                     <div
@@ -664,7 +664,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.contact_persons_fields.name_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -721,7 +721,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.contact_persons_fields.email_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -773,7 +773,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.contact_persons_fields.phone_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -848,7 +848,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.corelink_add_link1_info
+                         
                       </div>
                     </div>
                     <div
@@ -1144,7 +1144,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.corelink_add_link2_info
+                         
                       </div>
                     </div>
                     <div
@@ -1440,7 +1440,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.corelink_info
+                         
                       </div>
                     </div>
                     <div
@@ -1731,7 +1731,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.generic_select_info
+                         
                       </div>
                     </div>
                     <div
@@ -1889,7 +1889,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.ip_prefix_info
+                         
                       </div>
                     </div>
                     <div
@@ -3267,7 +3267,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.isalias_info
+                         
                       </div>
                     </div>
                     <div
@@ -3317,7 +3317,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.jira_ticket_info
+                         
                       </div>
                     </div>
                     <div
@@ -3377,7 +3377,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.location_code_info
+                         
                       </div>
                     </div>
                     <div
@@ -3515,7 +3515,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.migration_summary1_info
+                         
                       </div>
                     </div>
                     <div
@@ -3600,7 +3600,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.migration_summary2_info
+                         
                       </div>
                     </div>
                     <div
@@ -3677,7 +3677,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.migration_summary3_info
+                         
                       </div>
                     </div>
                     <div
@@ -3752,7 +3752,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.node_id_port_select_info
+                         
                       </div>
                     </div>
                     <div
@@ -4043,7 +4043,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.nodes_for_location_code_and_status_info
+                         
                       </div>
                     </div>
                     <div
@@ -4182,7 +4182,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.numeric1_info
+                         
                       </div>
                     </div>
                     <div
@@ -4233,7 +4233,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.numeric2_info
+                         
                       </div>
                     </div>
                     <div
@@ -4285,7 +4285,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.organisation1_info
+                         
                       </div>
                     </div>
                     <div
@@ -4424,7 +4424,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.organisation2_info
+                         
                       </div>
                     </div>
                     <div
@@ -4559,7 +4559,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports1_info
+                         
                       </div>
                     </div>
                     <div
@@ -4597,7 +4597,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports1_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -4767,7 +4767,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports1_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -4846,7 +4846,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports1_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -5016,7 +5016,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports1_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -5099,7 +5099,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports2_info
+                         
                       </div>
                     </div>
                     <div
@@ -5137,7 +5137,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports2_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -5307,7 +5307,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports2_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -5386,7 +5386,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports2_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -5556,7 +5556,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports2_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -5639,7 +5639,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports3_info
+                         
                       </div>
                     </div>
                     <div
@@ -5677,7 +5677,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports3_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -5819,7 +5819,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports3_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -5902,7 +5902,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports4_info
+                         
                       </div>
                     </div>
                     <div
@@ -5940,7 +5940,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports4_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -6110,7 +6110,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports4_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -6169,7 +6169,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports4_fields.bandwidth_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -6244,7 +6244,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports4_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -6414,7 +6414,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports4_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -6473,7 +6473,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports4_fields.bandwidth_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -6552,7 +6552,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports5_info
+                         
                       </div>
                     </div>
                     <div
@@ -6590,7 +6590,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports5_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -6760,7 +6760,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports5_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -6843,7 +6843,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports6_info
+                         
                       </div>
                     </div>
                     <div
@@ -6881,7 +6881,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports6_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -7023,7 +7023,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports6_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -7106,7 +7106,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports7_info
+                         
                       </div>
                     </div>
                     <div
@@ -7144,7 +7144,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports7_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -7286,7 +7286,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports7_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -7369,7 +7369,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports8_info
+                         
                       </div>
                     </div>
                     <div
@@ -7407,7 +7407,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports8_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -7577,7 +7577,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports8_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -7656,7 +7656,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports8_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -7826,7 +7826,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports8_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -7905,7 +7905,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports8_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -8075,7 +8075,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports8_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -8154,7 +8154,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports8_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -8324,7 +8324,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports8_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -8407,7 +8407,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports9_info
+                         
                       </div>
                     </div>
                     <div
@@ -8445,7 +8445,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports9_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -8587,7 +8587,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports9_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -8670,7 +8670,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports10_info
+                         
                       </div>
                     </div>
                     <div
@@ -8708,7 +8708,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports10_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -8850,7 +8850,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports10_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -8933,7 +8933,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports_sn81_info
+                         
                       </div>
                     </div>
                     <div
@@ -8971,7 +8971,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_sn81_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -9165,7 +9165,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_sn81_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -9248,7 +9248,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports_sn82_info
+                         
                       </div>
                     </div>
                     <div
@@ -9286,7 +9286,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_sn82_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -9480,7 +9480,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_sn82_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -9563,7 +9563,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports_sn83_info
+                         
                       </div>
                     </div>
                     <div
@@ -9601,7 +9601,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_sn83_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -9795,7 +9795,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_sn83_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -9878,7 +9878,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports_sn84_info
+                         
                       </div>
                     </div>
                     <div
@@ -9916,7 +9916,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_sn84_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -10110,7 +10110,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_sn84_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -10193,7 +10193,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports_sn85_info
+                         
                       </div>
                     </div>
                     <div
@@ -10231,7 +10231,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_sn85_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -10373,7 +10373,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_sn85_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -10456,7 +10456,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports_sn86_info
+                         
                       </div>
                     </div>
                     <div
@@ -10494,7 +10494,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_sn86_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -10688,7 +10688,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_sn86_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -10771,7 +10771,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.service_ports_sn87_info
+                         
                       </div>
                     </div>
                     <div
@@ -10809,7 +10809,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_sn87_fields.subscription_id_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -10951,7 +10951,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  forms.fields.service_ports_sn87_fields.vlan_info
+                                   
                                 </div>
                               </div>
                               <div
@@ -11033,7 +11033,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.stp_info
+                         
                       </div>
                     </div>
                     <div
@@ -11083,7 +11083,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.string1_info
+                         
                       </div>
                     </div>
                     <div
@@ -11133,7 +11133,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.string2_info
+                         
                       </div>
                     </div>
                     <div
@@ -11183,7 +11183,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.string3_info
+                         
                       </div>
                     </div>
                     <div
@@ -11232,7 +11232,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.subscription_id_info
+                         
                       </div>
                     </div>
                     <div
@@ -11261,7 +11261,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.subscription_product_tag1_info
+                         
                       </div>
                     </div>
                     <div
@@ -11429,7 +11429,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.subscription_product_tag2_info
+                         
                       </div>
                     </div>
                     <div
@@ -11598,7 +11598,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.subscriptions1_info
+                         
                       </div>
                     </div>
                     <div
@@ -11628,7 +11628,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className="euiText euiText--medium"
                             >
-                              forms.fields.subscriptions1_fields_info
+                               
                             </div>
                           </div>
                           <div
@@ -11808,7 +11808,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className="euiText euiText--medium"
                             >
-                              forms.fields.subscriptions1_fields_info
+                               
                             </div>
                           </div>
                           <div
@@ -12000,7 +12000,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.subscriptions2_info
+                         
                       </div>
                     </div>
                     <div
@@ -12030,7 +12030,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className="euiText euiText--medium"
                             >
-                              forms.fields.subscriptions2_fields_info
+                               
                             </div>
                           </div>
                           <div
@@ -12210,7 +12210,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className="euiText euiText--medium"
                             >
-                              forms.fields.subscriptions2_fields_info
+                               
                             </div>
                           </div>
                           <div
@@ -12401,7 +12401,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.transition_product1_info
+                         
                       </div>
                     </div>
                     <div
@@ -12559,7 +12559,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.uuid_info
+                         
                       </div>
                     </div>
                     <div
@@ -12609,7 +12609,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.bandwidth2_info
+                         
                       </div>
                     </div>
                     <div
@@ -12662,7 +12662,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.bandwidth3_info
+                         
                       </div>
                     </div>
                     <div
