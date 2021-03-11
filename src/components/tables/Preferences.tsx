@@ -17,8 +17,8 @@ import "components/tables/Preferences.scss";
 
 import { EuiButton, EuiCheckbox, EuiFlexGroup, EuiFlexItem, EuiText } from "@elastic/eui";
 import { ActionType, TableSettingsAction } from "components/tables/NwaTable";
-import I18n from "i18n-js";
 import React, { Dispatch } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import NumericInput from "react-numeric-input";
 import { ColumnInstance, TableSettings, TableState } from "react-table";
 
@@ -38,20 +38,21 @@ function Preferences<T extends object>({
     excludeInFilter,
 }: IProps<T>) {
     const { name, minimized, refresh, delay, loading, showSettings, showPaginator } = state;
+    const intl = useIntl();
 
     return (
         <span key={`preferences_${name}`}>
             <div className={`table-preferences-icon-bar${minimized ? " minimized" : ""}`}>
                 <span className="table-name">
-                    {I18n.t(name)}
-                    {minimized && I18n.t("table.is_minimized")}
+                    <FormattedMessage id={name} />
+                    {minimized && <FormattedMessage id="table.is_minimized" />}
                 </span>
                 {"   "}
                 <span
                     title={
                         refresh
-                            ? I18n.t("table.preferences.refresh", { delay: delay })
-                            : I18n.t("table.preferences.norefresh")
+                            ? intl.formatMessage({ id: "table.preferences.refresh" }, { delay: delay })
+                            : intl.formatMessage({ id: "table.preferences.norefresh" })
                     }
                     onClick={() => dispatch({ type: ActionType.REFRESH_TOGGLE })}
                     className={refresh ? (loading ? "pulse" : "rest") : "dead"}
@@ -68,7 +69,7 @@ function Preferences<T extends object>({
                 </span>
                 {"   "}
                 <span
-                    title={I18n.t("table.preferences.edit")}
+                    title={intl.formatMessage({ id: "table.preferences.edit" })}
                     onClick={() => dispatch({ type: ActionType.SHOW_SETTINGS_TOGGLE })}
                 >
                     <i className={showSettings ? "fa fa-cog active" : "fa fa-cog"} />
@@ -77,14 +78,14 @@ function Preferences<T extends object>({
 
                 {minimized ? (
                     <span
-                        title={I18n.t("table.preferences.maximize")}
+                        title={intl.formatMessage({ id: "table.preferences.maximize" })}
                         onClick={() => dispatch({ type: ActionType.MAXIMIZE })}
                     >
                         <i className={"fa fa-caret-up"} />
                     </span>
                 ) : (
                     <span
-                        title={I18n.t("table.preferences.minimize")}
+                        title={intl.formatMessage({ id: "table.preferences.minimize" })}
                         onClick={() => dispatch({ type: ActionType.MINIMIZE })}
                     >
                         <i className={"fa fa-caret-down"} />
@@ -100,7 +101,7 @@ function Preferences<T extends object>({
                                 color="warning"
                                 iconType="refresh"
                             >
-                                {I18n.t("table.preferences.reset")}
+                                <FormattedMessage id="table.preferences.reset" />
                             </EuiButton>
                         </EuiFlexItem>
                         <EuiFlexItem>
@@ -108,14 +109,20 @@ function Preferences<T extends object>({
                                 onClick={() => dispatch({ type: ActionType.SHOW_PAGINATOR_TOGGLE })}
                                 color="primary"
                             >
-                                {showPaginator
-                                    ? I18n.t("table.preferences.hide_paginator")
-                                    : I18n.t("table.preferences.show_paginator")}
+                                <FormattedMessage
+                                    id={
+                                        showPaginator
+                                            ? "table.preferences.hide_paginator"
+                                            : "table.preferences.show_paginator"
+                                    }
+                                />
                             </EuiButton>
                         </EuiFlexItem>
                     </EuiFlexGroup>
                     <EuiText size="s">
-                        <h4>{I18n.t("table.preferences.autorefresh")}</h4>
+                        <h4>
+                            <FormattedMessage id="table.preferences.autorefresh" />
+                        </h4>
                     </EuiText>
                     <NumericInput
                         onChange={(valueAsNumber) => {
@@ -128,7 +135,9 @@ function Preferences<T extends object>({
                         strict={true}
                     />
                     <EuiText size="s">
-                        <h4>{I18n.t("table.preferences.hidden_columns")}</h4>
+                        <h4>
+                            <FormattedMessage id="table.preferences.hidden_columns" />
+                        </h4>
                     </EuiText>
                     {allColumns
                         .filter((column) => !excludeInFilter.includes(column.id))

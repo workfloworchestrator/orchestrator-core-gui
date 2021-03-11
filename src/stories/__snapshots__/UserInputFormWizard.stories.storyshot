@@ -36,13 +36,13 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
                   className="euiFormLabel euiFormRow__label"
                   htmlFor="input-ims_port_id_1"
                 >
-                  First node and port *
+                  forms.fields.ims_port_id_1 *
                 </label>
                  
                 <div
                   className="euiText euiText--medium"
                 >
-                  Choose the first node and port that you want to use
+                  forms.fields.ims_port_id_1_info
                 </div>
               </div>
               <div

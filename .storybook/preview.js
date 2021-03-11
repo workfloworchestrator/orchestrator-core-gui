@@ -6,10 +6,12 @@ import { action } from "@storybook/addon-actions";
 import { withKnobs } from "@storybook/addon-knobs";
 import { addDecorator } from "@storybook/react";
 import mock from "axios-mock";
-import I18n from "i18n-js";
 import React from "react";
+import { setIntlConfig, withIntl } from "storybook-addon-intl";
 
-import en from "../src/locale/en"; // We need to import this
+import en from "../src/locale/en";
+import { parse_translations_dict } from "../src/locale/i18n";
+import nl from "../src/locale/nl";
 import LOCATION_CODES from "../src/stories/data/location_codes.json";
 import ORGANISATIONS from "../src/stories/data/organisations.json";
 import PRODUCTS from "../src/stories/data/products.json";
@@ -38,8 +40,22 @@ function withContext(storyFn) {
 }
 addDecorator(withContext);
 
-I18n.locale = "en";
-I18n.missingBehaviour = "guess";
+const messages = {
+    en: parse_translations_dict(en),
+    nl: parse_translations_dict(nl),
+};
+const getMessages = (locale) => messages[locale];
+
+// Set intl configuration
+setIntlConfig({
+    locales: ["en", "nl"],
+    defaultLocale: "en",
+    getMessages,
+    onError: (_) => {},
+});
+
+// Register decorator
+addDecorator(withIntl);
 
 // Set runtime config
 window.__env__ = {};

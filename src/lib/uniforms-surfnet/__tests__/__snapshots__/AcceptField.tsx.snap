@@ -15,7 +15,7 @@ initialize {
         },
         "children": Array [
           Object {
-            "data": "[missing \\"en.forms.fields.x\\" translation]",
+            "data": "forms.fields.x",
             "next": null,
             "parent": [Circular],
             "prev": null,
@@ -30,7 +30,7 @@ initialize {
           },
           "children": Array [
             Object {
-              "data": "[missing \\"en.forms.fields.x_info\\" translation]",
+              "data": "forms.fields.x_info",
               "next": null,
               "parent": [Circular],
               "prev": null,
@@ -68,7 +68,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x\\" translation]",
+                        "data": "forms.fields.x",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -130,7 +130,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x\\" translation]",
+                      "data": "forms.fields.x",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -195,7 +195,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x\\" translation]",
+                    "data": "forms.fields.x",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -300,7 +300,7 @@ initialize {
         },
         "children": Array [
           Object {
-            "data": "[missing \\"en.forms.fields.x_info\\" translation]",
+            "data": "forms.fields.x_info",
             "next": null,
             "parent": [Circular],
             "prev": null,
@@ -338,7 +338,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x\\" translation]",
+                      "data": "forms.fields.x",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -400,7 +400,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x\\" translation]",
+                    "data": "forms.fields.x",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -465,7 +465,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x\\" translation]",
+                  "data": "forms.fields.x",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -551,7 +551,7 @@ initialize {
           },
           "children": Array [
             Object {
-              "data": "[missing \\"en.forms.fields.x\\" translation]",
+              "data": "forms.fields.x",
               "next": null,
               "parent": [Circular],
               "prev": null,
@@ -608,7 +608,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x\\" translation]",
+                    "data": "forms.fields.x",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -670,7 +670,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x\\" translation]",
+                  "data": "forms.fields.x",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -735,7 +735,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "[missing \\"en.forms.fields.x\\" translation]",
+                "data": "forms.fields.x",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -811,7 +811,7 @@ initialize {
           },
           "children": Array [
             Object {
-              "data": "[missing \\"en.forms.fields.x_info\\" translation]",
+              "data": "forms.fields.x_info",
               "next": null,
               "parent": [Circular],
               "prev": null,
@@ -828,7 +828,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "[missing \\"en.forms.fields.x\\" translation]",
+                "data": "forms.fields.x",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -922,7 +922,7 @@ initialize {
         },
         "children": Array [
           Object {
-            "data": "[missing \\"en.forms.fields.x_accept.label\\" translation]",
+            "data": "forms.fields.x_accept.label",
             "next": null,
             "parent": [Circular],
             "prev": null,
@@ -937,7 +937,7 @@ initialize {
           },
           "children": Array [
             Object {
-              "data": "[missing \\"en.forms.fields.x_accept.info\\" translation]",
+              "data": "forms.fields.x_accept.info",
               "next": null,
               "parent": [Circular],
               "prev": null,
@@ -952,7 +952,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "[missing \\"en.forms.fields.x_accept.warning\\" translation]",
+                "data": "forms.fields.x_accept.warning",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -1060,7 +1060,7 @@ initialize {
                             },
                             "children": Array [
                               Object {
-                                "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                                "data": "forms.fields.x_accept.checkbox1",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
@@ -1122,7 +1122,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                              "data": "forms.fields.x_accept.checkbox1",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -1187,7 +1187,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                            "data": "forms.fields.x_accept.checkbox1",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -1261,7 +1261,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.label_with_context\\" translation]",
+                          "data": "forms.fields.x_accept.label_with_context",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -1299,7 +1299,7 @@ initialize {
                                 },
                                 "children": Array [
                                   Object {
-                                    "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                                    "data": "forms.fields.x_accept.sub_checkbox",
                                     "next": null,
                                     "parent": [Circular],
                                     "prev": null,
@@ -1361,7 +1361,7 @@ initialize {
                               },
                               "children": Array [
                                 Object {
-                                  "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                                  "data": "forms.fields.x_accept.sub_checkbox",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": null,
@@ -1426,7 +1426,7 @@ initialize {
                             },
                             "children": Array [
                               Object {
-                                "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                                "data": "forms.fields.x_accept.sub_checkbox",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
@@ -1523,7 +1523,7 @@ initialize {
                                   },
                                   "children": Array [
                                     Object {
-                                      "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                                      "data": "forms.fields.x_accept.sub_checkbox2",
                                       "next": null,
                                       "parent": [Circular],
                                       "prev": null,
@@ -1585,7 +1585,7 @@ initialize {
                                 },
                                 "children": Array [
                                   Object {
-                                    "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                                    "data": "forms.fields.x_accept.sub_checkbox2",
                                     "next": null,
                                     "parent": [Circular],
                                     "prev": null,
@@ -1650,7 +1650,7 @@ initialize {
                               },
                               "children": Array [
                                 Object {
-                                  "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                                  "data": "forms.fields.x_accept.sub_checkbox2",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": null,
@@ -1747,7 +1747,7 @@ initialize {
                                     },
                                     "children": Array [
                                       Object {
-                                        "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                                        "data": "forms.fields.x_accept.optional_checkbox",
                                         "next": null,
                                         "parent": [Circular],
                                         "prev": null,
@@ -1809,7 +1809,7 @@ initialize {
                                   },
                                   "children": Array [
                                     Object {
-                                      "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                                      "data": "forms.fields.x_accept.optional_checkbox",
                                       "next": null,
                                       "parent": [Circular],
                                       "prev": null,
@@ -1874,7 +1874,7 @@ initialize {
                                 },
                                 "children": Array [
                                   Object {
-                                    "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                                    "data": "forms.fields.x_accept.optional_checkbox",
                                     "next": null,
                                     "parent": [Circular],
                                     "prev": null,
@@ -1971,7 +1971,7 @@ initialize {
                                       },
                                       "children": Array [
                                         Object {
-                                          "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                                          "data": "forms.fields.x_accept.skip_checkbox",
                                           "next": null,
                                           "parent": [Circular],
                                           "prev": null,
@@ -2033,7 +2033,7 @@ initialize {
                                     },
                                     "children": Array [
                                       Object {
-                                        "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                                        "data": "forms.fields.x_accept.skip_checkbox",
                                         "next": null,
                                         "parent": [Circular],
                                         "prev": null,
@@ -2098,7 +2098,7 @@ initialize {
                                   },
                                   "children": Array [
                                     Object {
-                                      "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                                      "data": "forms.fields.x_accept.skip_checkbox",
                                       "next": null,
                                       "parent": [Circular],
                                       "prev": null,
@@ -2281,7 +2281,7 @@ initialize {
         },
         "children": Array [
           Object {
-            "data": "[missing \\"en.forms.fields.x_accept.info\\" translation]",
+            "data": "forms.fields.x_accept.info",
             "next": null,
             "parent": [Circular],
             "prev": null,
@@ -2296,7 +2296,7 @@ initialize {
           },
           "children": Array [
             Object {
-              "data": "[missing \\"en.forms.fields.x_accept.warning\\" translation]",
+              "data": "forms.fields.x_accept.warning",
               "next": null,
               "parent": [Circular],
               "prev": null,
@@ -2404,7 +2404,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                              "data": "forms.fields.x_accept.checkbox1",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -2466,7 +2466,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                            "data": "forms.fields.x_accept.checkbox1",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -2531,7 +2531,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                          "data": "forms.fields.x_accept.checkbox1",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -2605,7 +2605,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.label_with_context\\" translation]",
+                        "data": "forms.fields.x_accept.label_with_context",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -2643,7 +2643,7 @@ initialize {
                               },
                               "children": Array [
                                 Object {
-                                  "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                                  "data": "forms.fields.x_accept.sub_checkbox",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": null,
@@ -2705,7 +2705,7 @@ initialize {
                             },
                             "children": Array [
                               Object {
-                                "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                                "data": "forms.fields.x_accept.sub_checkbox",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
@@ -2770,7 +2770,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                              "data": "forms.fields.x_accept.sub_checkbox",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -2867,7 +2867,7 @@ initialize {
                                 },
                                 "children": Array [
                                   Object {
-                                    "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                                    "data": "forms.fields.x_accept.sub_checkbox2",
                                     "next": null,
                                     "parent": [Circular],
                                     "prev": null,
@@ -2929,7 +2929,7 @@ initialize {
                               },
                               "children": Array [
                                 Object {
-                                  "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                                  "data": "forms.fields.x_accept.sub_checkbox2",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": null,
@@ -2994,7 +2994,7 @@ initialize {
                             },
                             "children": Array [
                               Object {
-                                "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                                "data": "forms.fields.x_accept.sub_checkbox2",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
@@ -3091,7 +3091,7 @@ initialize {
                                   },
                                   "children": Array [
                                     Object {
-                                      "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                                      "data": "forms.fields.x_accept.optional_checkbox",
                                       "next": null,
                                       "parent": [Circular],
                                       "prev": null,
@@ -3153,7 +3153,7 @@ initialize {
                                 },
                                 "children": Array [
                                   Object {
-                                    "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                                    "data": "forms.fields.x_accept.optional_checkbox",
                                     "next": null,
                                     "parent": [Circular],
                                     "prev": null,
@@ -3218,7 +3218,7 @@ initialize {
                               },
                               "children": Array [
                                 Object {
-                                  "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                                  "data": "forms.fields.x_accept.optional_checkbox",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": null,
@@ -3315,7 +3315,7 @@ initialize {
                                     },
                                     "children": Array [
                                       Object {
-                                        "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                                        "data": "forms.fields.x_accept.skip_checkbox",
                                         "next": null,
                                         "parent": [Circular],
                                         "prev": null,
@@ -3377,7 +3377,7 @@ initialize {
                                   },
                                   "children": Array [
                                     Object {
-                                      "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                                      "data": "forms.fields.x_accept.skip_checkbox",
                                       "next": null,
                                       "parent": [Circular],
                                       "prev": null,
@@ -3442,7 +3442,7 @@ initialize {
                                 },
                                 "children": Array [
                                   Object {
-                                    "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                                    "data": "forms.fields.x_accept.skip_checkbox",
                                     "next": null,
                                     "parent": [Circular],
                                     "prev": null,
@@ -3606,7 +3606,7 @@ initialize {
           },
           "children": Array [
             Object {
-              "data": "[missing \\"en.forms.fields.x_accept.label\\" translation]",
+              "data": "forms.fields.x_accept.label",
               "next": null,
               "parent": [Circular],
               "prev": null,
@@ -3640,7 +3640,7 @@ initialize {
         },
         "children": Array [
           Object {
-            "data": "[missing \\"en.forms.fields.x_accept.warning\\" translation]",
+            "data": "forms.fields.x_accept.warning",
             "next": null,
             "parent": [Circular],
             "prev": null,
@@ -3748,7 +3748,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                            "data": "forms.fields.x_accept.checkbox1",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -3810,7 +3810,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                          "data": "forms.fields.x_accept.checkbox1",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -3875,7 +3875,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                        "data": "forms.fields.x_accept.checkbox1",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -3949,7 +3949,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.label_with_context\\" translation]",
+                      "data": "forms.fields.x_accept.label_with_context",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -3987,7 +3987,7 @@ initialize {
                             },
                             "children": Array [
                               Object {
-                                "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                                "data": "forms.fields.x_accept.sub_checkbox",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
@@ -4049,7 +4049,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                              "data": "forms.fields.x_accept.sub_checkbox",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -4114,7 +4114,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                            "data": "forms.fields.x_accept.sub_checkbox",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -4211,7 +4211,7 @@ initialize {
                               },
                               "children": Array [
                                 Object {
-                                  "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                                  "data": "forms.fields.x_accept.sub_checkbox2",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": null,
@@ -4273,7 +4273,7 @@ initialize {
                             },
                             "children": Array [
                               Object {
-                                "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                                "data": "forms.fields.x_accept.sub_checkbox2",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
@@ -4338,7 +4338,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                              "data": "forms.fields.x_accept.sub_checkbox2",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -4435,7 +4435,7 @@ initialize {
                                 },
                                 "children": Array [
                                   Object {
-                                    "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                                    "data": "forms.fields.x_accept.optional_checkbox",
                                     "next": null,
                                     "parent": [Circular],
                                     "prev": null,
@@ -4497,7 +4497,7 @@ initialize {
                               },
                               "children": Array [
                                 Object {
-                                  "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                                  "data": "forms.fields.x_accept.optional_checkbox",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": null,
@@ -4562,7 +4562,7 @@ initialize {
                             },
                             "children": Array [
                               Object {
-                                "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                                "data": "forms.fields.x_accept.optional_checkbox",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
@@ -4659,7 +4659,7 @@ initialize {
                                   },
                                   "children": Array [
                                     Object {
-                                      "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                                      "data": "forms.fields.x_accept.skip_checkbox",
                                       "next": null,
                                       "parent": [Circular],
                                       "prev": null,
@@ -4721,7 +4721,7 @@ initialize {
                                 },
                                 "children": Array [
                                   Object {
-                                    "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                                    "data": "forms.fields.x_accept.skip_checkbox",
                                     "next": null,
                                     "parent": [Circular],
                                     "prev": null,
@@ -4786,7 +4786,7 @@ initialize {
                               },
                               "children": Array [
                                 Object {
-                                  "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                                  "data": "forms.fields.x_accept.skip_checkbox",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": null,
@@ -4940,7 +4940,7 @@ initialize {
           },
           "children": Array [
             Object {
-              "data": "[missing \\"en.forms.fields.x_accept.info\\" translation]",
+              "data": "forms.fields.x_accept.info",
               "next": null,
               "parent": [Circular],
               "prev": null,
@@ -4957,7 +4957,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "[missing \\"en.forms.fields.x_accept.label\\" translation]",
+                "data": "forms.fields.x_accept.label",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -5092,7 +5092,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                          "data": "forms.fields.x_accept.checkbox1",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -5154,7 +5154,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                        "data": "forms.fields.x_accept.checkbox1",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -5219,7 +5219,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                      "data": "forms.fields.x_accept.checkbox1",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -5293,7 +5293,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.label_with_context\\" translation]",
+                    "data": "forms.fields.x_accept.label_with_context",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -5331,7 +5331,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                              "data": "forms.fields.x_accept.sub_checkbox",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -5393,7 +5393,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                            "data": "forms.fields.x_accept.sub_checkbox",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -5458,7 +5458,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                          "data": "forms.fields.x_accept.sub_checkbox",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -5555,7 +5555,7 @@ initialize {
                             },
                             "children": Array [
                               Object {
-                                "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                                "data": "forms.fields.x_accept.sub_checkbox2",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
@@ -5617,7 +5617,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                              "data": "forms.fields.x_accept.sub_checkbox2",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -5682,7 +5682,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                            "data": "forms.fields.x_accept.sub_checkbox2",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -5779,7 +5779,7 @@ initialize {
                               },
                               "children": Array [
                                 Object {
-                                  "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                                  "data": "forms.fields.x_accept.optional_checkbox",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": null,
@@ -5841,7 +5841,7 @@ initialize {
                             },
                             "children": Array [
                               Object {
-                                "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                                "data": "forms.fields.x_accept.optional_checkbox",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
@@ -5906,7 +5906,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                              "data": "forms.fields.x_accept.optional_checkbox",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -6003,7 +6003,7 @@ initialize {
                                 },
                                 "children": Array [
                                   Object {
-                                    "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                                    "data": "forms.fields.x_accept.skip_checkbox",
                                     "next": null,
                                     "parent": [Circular],
                                     "prev": null,
@@ -6065,7 +6065,7 @@ initialize {
                               },
                               "children": Array [
                                 Object {
-                                  "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                                  "data": "forms.fields.x_accept.skip_checkbox",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": null,
@@ -6130,7 +6130,7 @@ initialize {
                             },
                             "children": Array [
                               Object {
-                                "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                                "data": "forms.fields.x_accept.skip_checkbox",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
@@ -6278,7 +6278,7 @@ initialize {
           },
           "children": Array [
             Object {
-              "data": "[missing \\"en.forms.fields.x_accept.warning\\" translation]",
+              "data": "forms.fields.x_accept.warning",
               "next": null,
               "parent": [Circular],
               "prev": null,
@@ -6295,7 +6295,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "[missing \\"en.forms.fields.x_accept.info\\" translation]",
+                "data": "forms.fields.x_accept.info",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -6312,7 +6312,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.label\\" translation]",
+                  "data": "forms.fields.x_accept.label",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -6446,7 +6446,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                        "data": "forms.fields.x_accept.checkbox1",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -6508,7 +6508,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                      "data": "forms.fields.x_accept.checkbox1",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -6573,7 +6573,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                    "data": "forms.fields.x_accept.checkbox1",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -6647,7 +6647,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.label_with_context\\" translation]",
+                  "data": "forms.fields.x_accept.label_with_context",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -6685,7 +6685,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                            "data": "forms.fields.x_accept.sub_checkbox",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -6747,7 +6747,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                          "data": "forms.fields.x_accept.sub_checkbox",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -6812,7 +6812,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                        "data": "forms.fields.x_accept.sub_checkbox",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -6909,7 +6909,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                              "data": "forms.fields.x_accept.sub_checkbox2",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -6971,7 +6971,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                            "data": "forms.fields.x_accept.sub_checkbox2",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -7036,7 +7036,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                          "data": "forms.fields.x_accept.sub_checkbox2",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -7133,7 +7133,7 @@ initialize {
                             },
                             "children": Array [
                               Object {
-                                "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                                "data": "forms.fields.x_accept.optional_checkbox",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
@@ -7195,7 +7195,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                              "data": "forms.fields.x_accept.optional_checkbox",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -7260,7 +7260,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                            "data": "forms.fields.x_accept.optional_checkbox",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -7357,7 +7357,7 @@ initialize {
                               },
                               "children": Array [
                                 Object {
-                                  "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                                  "data": "forms.fields.x_accept.skip_checkbox",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": null,
@@ -7419,7 +7419,7 @@ initialize {
                             },
                             "children": Array [
                               Object {
-                                "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                                "data": "forms.fields.x_accept.skip_checkbox",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
@@ -7484,7 +7484,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                              "data": "forms.fields.x_accept.skip_checkbox",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -7633,7 +7633,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "[missing \\"en.forms.fields.x_accept.warning\\" translation]",
+                "data": "forms.fields.x_accept.warning",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -7650,7 +7650,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.info\\" translation]",
+                  "data": "forms.fields.x_accept.info",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -7667,7 +7667,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.label\\" translation]",
+                    "data": "forms.fields.x_accept.label",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -7778,7 +7778,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                      "data": "forms.fields.x_accept.checkbox1",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -7840,7 +7840,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                    "data": "forms.fields.x_accept.checkbox1",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -7905,7 +7905,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                  "data": "forms.fields.x_accept.checkbox1",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -7979,7 +7979,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "[missing \\"en.forms.fields.x_accept.label_with_context\\" translation]",
+                "data": "forms.fields.x_accept.label_with_context",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -8017,7 +8017,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                          "data": "forms.fields.x_accept.sub_checkbox",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -8079,7 +8079,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                        "data": "forms.fields.x_accept.sub_checkbox",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -8144,7 +8144,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                      "data": "forms.fields.x_accept.sub_checkbox",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -8241,7 +8241,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                            "data": "forms.fields.x_accept.sub_checkbox2",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -8303,7 +8303,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                          "data": "forms.fields.x_accept.sub_checkbox2",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -8368,7 +8368,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                        "data": "forms.fields.x_accept.sub_checkbox2",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -8465,7 +8465,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                              "data": "forms.fields.x_accept.optional_checkbox",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -8527,7 +8527,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                            "data": "forms.fields.x_accept.optional_checkbox",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -8592,7 +8592,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                          "data": "forms.fields.x_accept.optional_checkbox",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -8689,7 +8689,7 @@ initialize {
                             },
                             "children": Array [
                               Object {
-                                "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                                "data": "forms.fields.x_accept.skip_checkbox",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
@@ -8751,7 +8751,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                              "data": "forms.fields.x_accept.skip_checkbox",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -8816,7 +8816,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                            "data": "forms.fields.x_accept.skip_checkbox",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -8988,7 +8988,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.warning\\" translation]",
+                  "data": "forms.fields.x_accept.warning",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -9005,7 +9005,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.info\\" translation]",
+                    "data": "forms.fields.x_accept.info",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -9022,7 +9022,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.label\\" translation]",
+                      "data": "forms.fields.x_accept.label",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -9099,7 +9099,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                    "data": "forms.fields.x_accept.checkbox1",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -9161,7 +9161,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                  "data": "forms.fields.x_accept.checkbox1",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -9226,7 +9226,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                "data": "forms.fields.x_accept.checkbox1",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -9300,7 +9300,7 @@ initialize {
           },
           "children": Array [
             Object {
-              "data": "[missing \\"en.forms.fields.x_accept.label_with_context\\" translation]",
+              "data": "forms.fields.x_accept.label_with_context",
               "next": null,
               "parent": [Circular],
               "prev": null,
@@ -9338,7 +9338,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                        "data": "forms.fields.x_accept.sub_checkbox",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -9400,7 +9400,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                      "data": "forms.fields.x_accept.sub_checkbox",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -9465,7 +9465,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                    "data": "forms.fields.x_accept.sub_checkbox",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -9562,7 +9562,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                          "data": "forms.fields.x_accept.sub_checkbox2",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -9624,7 +9624,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                        "data": "forms.fields.x_accept.sub_checkbox2",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -9689,7 +9689,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                      "data": "forms.fields.x_accept.sub_checkbox2",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -9786,7 +9786,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                            "data": "forms.fields.x_accept.optional_checkbox",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -9848,7 +9848,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                          "data": "forms.fields.x_accept.optional_checkbox",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -9913,7 +9913,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                        "data": "forms.fields.x_accept.optional_checkbox",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -10010,7 +10010,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                              "data": "forms.fields.x_accept.skip_checkbox",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -10072,7 +10072,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                            "data": "forms.fields.x_accept.skip_checkbox",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -10137,7 +10137,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                          "data": "forms.fields.x_accept.skip_checkbox",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -10339,7 +10339,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.warning\\" translation]",
+                    "data": "forms.fields.x_accept.warning",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -10356,7 +10356,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.info\\" translation]",
+                      "data": "forms.fields.x_accept.info",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -10373,7 +10373,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.label\\" translation]",
+                        "data": "forms.fields.x_accept.label",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -10435,7 +10435,7 @@ initialize {
         },
         "children": Array [
           Object {
-            "data": "[missing \\"en.forms.fields.x_accept.label_with_context\\" translation]",
+            "data": "forms.fields.x_accept.label_with_context",
             "next": null,
             "parent": [Circular],
             "prev": null,
@@ -10473,7 +10473,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                      "data": "forms.fields.x_accept.sub_checkbox",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -10535,7 +10535,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                    "data": "forms.fields.x_accept.sub_checkbox",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -10600,7 +10600,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                  "data": "forms.fields.x_accept.sub_checkbox",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -10697,7 +10697,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                        "data": "forms.fields.x_accept.sub_checkbox2",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -10759,7 +10759,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                      "data": "forms.fields.x_accept.sub_checkbox2",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -10824,7 +10824,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                    "data": "forms.fields.x_accept.sub_checkbox2",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -10921,7 +10921,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                          "data": "forms.fields.x_accept.optional_checkbox",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -10983,7 +10983,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                        "data": "forms.fields.x_accept.optional_checkbox",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -11048,7 +11048,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                      "data": "forms.fields.x_accept.optional_checkbox",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -11145,7 +11145,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                            "data": "forms.fields.x_accept.skip_checkbox",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -11207,7 +11207,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                          "data": "forms.fields.x_accept.skip_checkbox",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -11272,7 +11272,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                        "data": "forms.fields.x_accept.skip_checkbox",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -11411,7 +11411,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                      "data": "forms.fields.x_accept.checkbox1",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -11473,7 +11473,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                    "data": "forms.fields.x_accept.checkbox1",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -11538,7 +11538,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                  "data": "forms.fields.x_accept.checkbox1",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -11690,7 +11690,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.warning\\" translation]",
+                      "data": "forms.fields.x_accept.warning",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -11707,7 +11707,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.info\\" translation]",
+                        "data": "forms.fields.x_accept.info",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -11724,7 +11724,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.label\\" translation]",
+                          "data": "forms.fields.x_accept.label",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -11817,7 +11817,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                    "data": "forms.fields.x_accept.sub_checkbox",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -11879,7 +11879,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                  "data": "forms.fields.x_accept.sub_checkbox",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -11944,7 +11944,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                "data": "forms.fields.x_accept.sub_checkbox",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -12041,7 +12041,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                      "data": "forms.fields.x_accept.sub_checkbox2",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -12103,7 +12103,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                    "data": "forms.fields.x_accept.sub_checkbox2",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -12168,7 +12168,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                  "data": "forms.fields.x_accept.sub_checkbox2",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -12265,7 +12265,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                        "data": "forms.fields.x_accept.optional_checkbox",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -12327,7 +12327,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                      "data": "forms.fields.x_accept.optional_checkbox",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -12392,7 +12392,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                    "data": "forms.fields.x_accept.optional_checkbox",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -12489,7 +12489,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                          "data": "forms.fields.x_accept.skip_checkbox",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -12551,7 +12551,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                        "data": "forms.fields.x_accept.skip_checkbox",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -12616,7 +12616,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                      "data": "forms.fields.x_accept.skip_checkbox",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -12722,7 +12722,7 @@ initialize {
           },
           "children": Array [
             Object {
-              "data": "[missing \\"en.forms.fields.x_accept.label_with_context\\" translation]",
+              "data": "forms.fields.x_accept.label_with_context",
               "next": null,
               "parent": [Circular],
               "prev": null,
@@ -12762,7 +12762,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                        "data": "forms.fields.x_accept.checkbox1",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -12824,7 +12824,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                      "data": "forms.fields.x_accept.checkbox1",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -12889,7 +12889,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                    "data": "forms.fields.x_accept.checkbox1",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -13041,7 +13041,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.warning\\" translation]",
+                        "data": "forms.fields.x_accept.warning",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -13058,7 +13058,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.info\\" translation]",
+                          "data": "forms.fields.x_accept.info",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -13075,7 +13075,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.label\\" translation]",
+                            "data": "forms.fields.x_accept.label",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -13176,7 +13176,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                    "data": "forms.fields.x_accept.sub_checkbox2",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -13238,7 +13238,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                  "data": "forms.fields.x_accept.sub_checkbox2",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -13303,7 +13303,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                "data": "forms.fields.x_accept.sub_checkbox2",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -13400,7 +13400,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                      "data": "forms.fields.x_accept.optional_checkbox",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -13462,7 +13462,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                    "data": "forms.fields.x_accept.optional_checkbox",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -13527,7 +13527,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                  "data": "forms.fields.x_accept.optional_checkbox",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -13624,7 +13624,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                        "data": "forms.fields.x_accept.skip_checkbox",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -13686,7 +13686,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                      "data": "forms.fields.x_accept.skip_checkbox",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -13751,7 +13751,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                    "data": "forms.fields.x_accept.skip_checkbox",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -13870,7 +13870,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                      "data": "forms.fields.x_accept.sub_checkbox",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -13932,7 +13932,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                    "data": "forms.fields.x_accept.sub_checkbox",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -13997,7 +13997,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                  "data": "forms.fields.x_accept.sub_checkbox",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -14073,7 +14073,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "[missing \\"en.forms.fields.x_accept.label_with_context\\" translation]",
+                "data": "forms.fields.x_accept.label_with_context",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -14113,7 +14113,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                          "data": "forms.fields.x_accept.checkbox1",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -14175,7 +14175,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                        "data": "forms.fields.x_accept.checkbox1",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -14240,7 +14240,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                      "data": "forms.fields.x_accept.checkbox1",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -14392,7 +14392,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.warning\\" translation]",
+                          "data": "forms.fields.x_accept.warning",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -14409,7 +14409,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.info\\" translation]",
+                            "data": "forms.fields.x_accept.info",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -14426,7 +14426,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.label\\" translation]",
+                              "data": "forms.fields.x_accept.label",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -14535,7 +14535,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                    "data": "forms.fields.x_accept.optional_checkbox",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -14597,7 +14597,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                  "data": "forms.fields.x_accept.optional_checkbox",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -14662,7 +14662,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                "data": "forms.fields.x_accept.optional_checkbox",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -14759,7 +14759,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                      "data": "forms.fields.x_accept.skip_checkbox",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -14821,7 +14821,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                    "data": "forms.fields.x_accept.skip_checkbox",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -14886,7 +14886,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                  "data": "forms.fields.x_accept.skip_checkbox",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -14995,7 +14995,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                      "data": "forms.fields.x_accept.sub_checkbox2",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -15057,7 +15057,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                    "data": "forms.fields.x_accept.sub_checkbox2",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -15122,7 +15122,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                  "data": "forms.fields.x_accept.sub_checkbox2",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -15221,7 +15221,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                        "data": "forms.fields.x_accept.sub_checkbox",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -15283,7 +15283,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                      "data": "forms.fields.x_accept.sub_checkbox",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -15348,7 +15348,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                    "data": "forms.fields.x_accept.sub_checkbox",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -15424,7 +15424,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.label_with_context\\" translation]",
+                  "data": "forms.fields.x_accept.label_with_context",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -15464,7 +15464,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                            "data": "forms.fields.x_accept.checkbox1",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -15526,7 +15526,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                          "data": "forms.fields.x_accept.checkbox1",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -15591,7 +15591,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                        "data": "forms.fields.x_accept.checkbox1",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -15743,7 +15743,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.warning\\" translation]",
+                            "data": "forms.fields.x_accept.warning",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -15760,7 +15760,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.info\\" translation]",
+                              "data": "forms.fields.x_accept.info",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -15777,7 +15777,7 @@ initialize {
                             },
                             "children": Array [
                               Object {
-                                "data": "[missing \\"en.forms.fields.x_accept.label\\" translation]",
+                                "data": "forms.fields.x_accept.label",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
@@ -15894,7 +15894,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                    "data": "forms.fields.x_accept.skip_checkbox",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -15956,7 +15956,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                  "data": "forms.fields.x_accept.skip_checkbox",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -16021,7 +16021,7 @@ initialize {
             },
             "children": Array [
               Object {
-                "data": "[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]",
+                "data": "forms.fields.x_accept.skip_checkbox",
                 "next": null,
                 "parent": [Circular],
                 "prev": null,
@@ -16120,7 +16120,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                      "data": "forms.fields.x_accept.optional_checkbox",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -16182,7 +16182,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                    "data": "forms.fields.x_accept.optional_checkbox",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -16247,7 +16247,7 @@ initialize {
               },
               "children": Array [
                 Object {
-                  "data": "[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]",
+                  "data": "forms.fields.x_accept.optional_checkbox",
                   "next": null,
                   "parent": [Circular],
                   "prev": null,
@@ -16346,7 +16346,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                        "data": "forms.fields.x_accept.sub_checkbox2",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -16408,7 +16408,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                      "data": "forms.fields.x_accept.sub_checkbox2",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -16473,7 +16473,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]",
+                    "data": "forms.fields.x_accept.sub_checkbox2",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -16572,7 +16572,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                          "data": "forms.fields.x_accept.sub_checkbox",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -16634,7 +16634,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                        "data": "forms.fields.x_accept.sub_checkbox",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -16699,7 +16699,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]",
+                      "data": "forms.fields.x_accept.sub_checkbox",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -16775,7 +16775,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "[missing \\"en.forms.fields.x_accept.label_with_context\\" translation]",
+                    "data": "forms.fields.x_accept.label_with_context",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -16815,7 +16815,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                              "data": "forms.fields.x_accept.checkbox1",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -16877,7 +16877,7 @@ initialize {
                         },
                         "children": Array [
                           Object {
-                            "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                            "data": "forms.fields.x_accept.checkbox1",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
@@ -16942,7 +16942,7 @@ initialize {
                       },
                       "children": Array [
                         Object {
-                          "data": "[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]",
+                          "data": "forms.fields.x_accept.checkbox1",
                           "next": null,
                           "parent": [Circular],
                           "prev": null,
@@ -17094,7 +17094,7 @@ initialize {
                           },
                           "children": Array [
                             Object {
-                              "data": "[missing \\"en.forms.fields.x_accept.warning\\" translation]",
+                              "data": "forms.fields.x_accept.warning",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
@@ -17111,7 +17111,7 @@ initialize {
                             },
                             "children": Array [
                               Object {
-                                "data": "[missing \\"en.forms.fields.x_accept.info\\" translation]",
+                                "data": "forms.fields.x_accept.info",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
@@ -17128,7 +17128,7 @@ initialize {
                               },
                               "children": Array [
                                 Object {
-                                  "data": "[missing \\"en.forms.fields.x_accept.label\\" translation]",
+                                  "data": "forms.fields.x_accept.label",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": null,

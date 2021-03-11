@@ -18,7 +18,6 @@ import "components/inputForms/UserInputForm.scss";
 import { EuiButton, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { SubscriptionsContextProvider } from "components/subscriptionContext";
-import I18n from "i18n-js";
 import invariant from "invariant";
 import { JSONSchema6 } from "json-schema";
 import {
@@ -39,9 +38,11 @@ import {
     SummaryField,
     VlanField,
 } from "lib/uniforms-surfnet/src";
+import { intl } from "locale/i18n";
 import cloneDeep from "lodash/cloneDeep";
 import get from "lodash/get";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { RouteComponentProps, withRouter } from "react-router";
 import { filterDOMProps, joinName } from "uniforms";
 import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
@@ -250,7 +251,7 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
     getProps(name: string) {
         let props = super.getProps(name);
         const translation_key = name.replace(/\.\d+(.\d+)*/, "_fields");
-        let label = I18n.t(`forms.fields.${translation_key}`);
+        let label = intl.formatMessage({ id: `forms.fields.${translation_key}` });
 
         // Mark required inputs. Might be delegated to the form components itself in the future.
         if (props.required && !props.readOnly && !props.isDisabled && !name.includes(".")) {
@@ -258,7 +259,7 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
         }
 
         props.label = label;
-        props.description = I18n.t(`forms.fields.${translation_key}_info`, { defaultValue: "" });
+        props.description = intl.formatMessage({ id: `forms.fields.${translation_key}_info` }, { defaultValue: "" });
         props.id = `input-${name}`;
 
         if (props.const) {
@@ -410,12 +411,12 @@ class UserInputForm extends React.Component<IProps, IState> {
 
         const prevButton = hasPrev ? (
             <EuiButton id="button-prev-form-submit" fill onClick={this.props.previous}>
-                {I18n.t("process.previous")}
+                <FormattedMessage id="process.previous" />
             </EuiButton>
         ) : (
             <EuiFlexItem>
                 <EuiButton id="button-cancel-form-submit" color="warning" onClick={this.cancel}>
-                    {I18n.t("process.cancel")}
+                    <FormattedMessage id="process.cancel" />
                 </EuiButton>
             </EuiFlexItem>
         );
@@ -429,7 +430,7 @@ class UserInputForm extends React.Component<IProps, IState> {
                 isLoading={this.state.processing}
                 type="submit"
             >
-                {I18n.t("process.next")}
+                <FormattedMessage id="process.next" />
             </EuiButton>
         ) : (
             <EuiButton
@@ -440,7 +441,7 @@ class UserInputForm extends React.Component<IProps, IState> {
                 isLoading={this.state.processing}
                 type="submit"
             >
-                {I18n.t("process.submit")}
+                <FormattedMessage id="process.submit" />
             </EuiButton>
         );
 
@@ -481,9 +482,10 @@ class UserInputForm extends React.Component<IProps, IState> {
                             {nrOfValidationErrors > 0 && (
                                 <section className="form-errors">
                                     <em className="error backend-validation-metadata">
-                                        {I18n.t("process.input_fields_have_validation_errors", {
-                                            nrOfValidationErrors: nrOfValidationErrors,
-                                        })}
+                                        <FormattedMessage
+                                            id="process.input_fields_have_validation_errors"
+                                            values={{ nrOfValidationErrors: nrOfValidationErrors }}
+                                        />
                                     </em>
                                 </section>
                             )}

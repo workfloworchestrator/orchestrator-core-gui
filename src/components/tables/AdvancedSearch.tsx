@@ -15,8 +15,8 @@
 
 import { EuiFieldSearch, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import { ActionType, TableSettingsAction } from "components/tables/NwaTable";
-import I18n from "i18n-js";
 import React, { Dispatch } from "react";
+import { useIntl } from "react-intl";
 import { TableState } from "react-table";
 
 interface IProps<T extends object> {
@@ -25,6 +25,8 @@ interface IProps<T extends object> {
 }
 
 function AdvancedSearch<T extends object>({ state, dispatch }: IProps<T>) {
+    const intl = useIntl();
+
     return (
         <EuiFlexGroup alignItems="center" className="advanced-search-container">
             <EuiFlexItem>
@@ -32,7 +34,7 @@ function AdvancedSearch<T extends object>({ state, dispatch }: IProps<T>) {
             </EuiFlexItem>
             <EuiFlexItem grow={10}>
                 <EuiFieldSearch
-                    placeholder={I18n.t("subscriptions.advancedSearchPlaceHolder")}
+                    placeholder={intl.formatMessage({ id: "subscriptions.advancedSearchPlaceHolder" })}
                     value={state.filterBy.find((column) => column.id === "tsv")?.values[0] ?? ""}
                     onChange={(searchPhrase) => {
                         if (searchPhrase) {

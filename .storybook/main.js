@@ -11,5 +11,6 @@ module.exports = {
         "@storybook/addon-knobs",
         "@sambego/storybook-state",
         "@storybook/addon-viewport/register",
+        "storybook-addon-intl/register",
     ],
 };

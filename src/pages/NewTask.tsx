@@ -18,9 +18,9 @@ import "pages/NewTask.scss";
 import { EuiPage, EuiPageBody } from "@elastic/eui";
 import { catchErrorStatus, startProcess, workflowsByTarget } from "api";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
-import I18n from "i18n-js";
 import { JSONSchema6 } from "json-schema";
 import React from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { EngineStatus, InputForm } from "utils/types";
@@ -30,7 +30,7 @@ interface IState {
     hasNext?: boolean;
 }
 
-export default class NewTask extends React.Component<{}, IState> {
+class NewTask extends React.Component<WrappedComponentProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
 
     state: IState = {};
@@ -57,15 +57,21 @@ export default class NewTask extends React.Component<{}, IState> {
     };
 
     validSubmit = (taskInput: {}[]) => {
+        const { intl } = this.props;
         const { select_task } = taskInput[0] as { select_task: string };
 
         let promise = startProcess(select_task, taskInput.slice(1)).then((process) => {
             this.context.redirect(`/tasks?highlight=${process.id}`);
-            setFlash(I18n.t("task.flash.create", { name: I18n.t(`workflow.${select_task}`), pid: process.id }));
+            setFlash(
+                intl.formatMessage(
+                    { id: "task.flash.create" },
+                    { name: intl.formatMessage({ id: `workflow.${select_task}` }), pid: process.id }
+                )
+            );
         });
 
         return catchErrorStatus<EngineStatus>(promise, 503, (json) => {
-            setFlash(I18n.t("settings.status.engine.paused"), "error");
+            setFlash(intl.formatMessage({ id: "settings.status.engine.paused" }), "error");
             this.context.redirect("/processes");
         });
     };
@@ -77,7 +83,9 @@ export default class NewTask extends React.Component<{}, IState> {
                 <EuiPageBody component="div" className="mod-new-task">
                     <section className="card">
                         <section className="form-step">
-                            <h1>{I18n.t("task.new_task")}</h1>
+                            <h1>
+                                <FormattedMessage id="task.new_task" />
+                            </h1>
 
                             {stepUserInput && (
                                 <UserInputFormWizard
@@ -96,3 +104,5 @@ export default class NewTask extends React.Component<{}, IState> {
 }
 
 NewTask.contextType = ApplicationContext;
+
+export default injectIntl(NewTask);

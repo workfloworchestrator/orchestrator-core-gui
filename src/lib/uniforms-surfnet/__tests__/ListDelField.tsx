@@ -44,7 +44,7 @@ test("<ListDelField> - renders label when outerList", () => {
 
     expect(wrapper.find(ListDelField)).toHaveLength(1);
     expect(wrapper.find("label")).toHaveLength(1);
-    expect(wrapper.find("label").text()).toBe('[missing "en.forms.fields.x_del" translation]');
+    expect(wrapper.find("label").text()).toBe("forms.fields.x_del");
 });
 
 test("<ListDelField> - prevents onClick when disabled", () => {

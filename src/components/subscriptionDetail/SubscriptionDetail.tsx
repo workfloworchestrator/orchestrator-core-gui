@@ -28,9 +28,9 @@ import NetworkDiagram from "components/Diagram";
 import SubscriptionDetails from "components/subscriptionDetail/SubscriptionDetails";
 import SubscriptionInstance from "components/subscriptionDetail/SubscriptionInstance";
 import TopologyDiagram from "components/TopologyDiagram";
-import I18n from "i18n-js";
 import { isArray } from "lodash";
 import React from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { enrichSubscription, organisationNameByUuid, renderDate, renderDateTime } from "utils/Lookups";
 import {
@@ -44,7 +44,7 @@ import {
 } from "utils/types";
 import { applyIdNamingConvention, isEmpty, stop } from "utils/Utils";
 
-interface IProps {
+interface IProps extends WrappedComponentProps {
     subscriptionId: string;
     confirmation?: (question: string, action: (e: React.MouseEvent) => void) => void;
 }
@@ -69,13 +69,15 @@ function SubscriptionDetailSection({
 }>) {
     return (
         <section className="details">
-            <h2>{I18n.t(name)}</h2>
+            <h2>
+                <FormattedMessage id={name} />
+            </h2>
             <div className={className}>{children}</div>
         </section>
     );
 }
 
-export default class SubscriptionDetail extends React.PureComponent<IProps, IState> {
+class SubscriptionDetail extends React.PureComponent<IProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
 
     state: IState = {
@@ -149,24 +151,34 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
 
     terminate = (subscription: SubscriptionModel) => (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
+        const { intl } = this.props;
+
         this.props.confirmation!(
-            I18n.t("subscription.terminateConfirmation", {
-                name: subscription.product.name,
-                customer: organisationNameByUuid(subscription.customer_id, this.context.organisations),
-            }),
+            intl.formatMessage(
+                { id: "subscription.terminateConfirmation" },
+                {
+                    name: subscription.product.name,
+                    customer: organisationNameByUuid(subscription.customer_id, this.context.organisations),
+                }
+            ),
             () => this.context.redirect(`/terminate-subscription?subscription=${subscription.subscription_id}`)
         );
     };
 
     modify = (subscription: SubscriptionModel, workflow_name: string) => (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
-        const change = I18n.t(`workflow.${workflow_name}`).toLowerCase();
+        const { intl } = this.props;
+
+        const change = intl.formatMessage({ id: `workflow.${workflow_name}` }).toLowerCase();
         this.props.confirmation!(
-            I18n.t("subscription.modifyConfirmation", {
-                name: subscription.product.name,
-                customer: organisationNameByUuid(subscription.customer_id, this.context.organisations),
-                change: change,
-            }),
+            intl.formatMessage(
+                { id: "subscription.modifyConfirmation" },
+                {
+                    name: subscription.product.name,
+                    customer: organisationNameByUuid(subscription.customer_id, this.context.organisations),
+                    change: change,
+                }
+            ),
             () =>
                 this.context.redirect(
                     `/modify-subscription?workflow=${workflow_name}&subscription=${subscription.subscription_id}`
@@ -185,15 +197,21 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                     <thead />
                     <tbody>
                         <tr>
-                            <td>{I18n.t("subscriptions.dienstafnameGuid")}</td>
+                            <td>
+                                <FormattedMessage id="subscriptions.dienstafnameGuid" />
+                            </td>
                             <td>{this.state.dienstafname.guid}</td>
                         </tr>
                         <tr>
-                            <td>{I18n.t("subscriptions.dienstafnameCode")}</td>
+                            <td>
+                                <FormattedMessage id="subscriptions.dienstafnameCode" />
+                            </td>
                             <td>{this.state.dienstafname.code}</td>
                         </tr>
                         <tr>
-                            <td>{I18n.t("subscriptions.dienstafnameStatus")}</td>
+                            <td>
+                                <FormattedMessage id="subscriptions.dienstafnameStatus" />
+                            </td>
                             <td>{this.state.dienstafname.status}</td>
                         </tr>
                     </tbody>
@@ -206,6 +224,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         if (isEmpty(parentSubscriptions)) {
             return null;
         }
+        const { intl } = this.props;
 
         const columns = [
             "customer_name",
@@ -221,7 +240,9 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
             const name = columns[index];
             return (
                 <th key={index} className={name}>
-                    <span>{I18n.t(`subscriptions.${name}`)}</span>
+                    <span>
+                        <FormattedMessage id={`subscriptions.${name}`} />
+                    </span>
                 </th>
             );
         };
@@ -237,10 +258,16 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                     <tbody>
                         {parentSubscriptions.map((subscription: SubscriptionWithDetails, index: number) => (
                             <tr key={index}>
-                                <td data-label={I18n.t("subscriptions.customer_name")} className="customer_name">
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.customer_name" })}
+                                    className="customer_name"
+                                >
                                     {subscription.customer_name}
                                 </td>
-                                <td data-label={I18n.t("subscriptions.subscription_id")} className="subscription_id">
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.subscription_id" })}
+                                    className="subscription_id"
+                                >
                                     <a
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -249,22 +276,34 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                         {subscription.subscription_id.substring(0, 8)}
                                     </a>
                                 </td>
-                                <td data-label={I18n.t("subscriptions.description")} className="description">
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.description" })}
+                                    className="description"
+                                >
                                     {subscription.description}
                                 </td>
-                                <td data-label={I18n.t("subscriptions.insync")} className="insync">
+                                <td data-label={intl.formatMessage({ id: "subscriptions.insync" })} className="insync">
                                     <CheckBox value={subscription.insync} name="insync" readOnly={true} />
                                 </td>
-                                <td data-label={I18n.t("subscriptions.product_name")} className="product_name">
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.product_name" })}
+                                    className="product_name"
+                                >
                                     {subscription.product.name}
                                 </td>
-                                <td data-label={I18n.t("subscriptions.status")} className="status">
+                                <td data-label={intl.formatMessage({ id: "subscriptions.status" })} className="status">
                                     {subscription.status}
                                 </td>
-                                <td data-label={I18n.t("subscriptions.product_tag")} className="tag">
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.product_tag" })}
+                                    className="tag"
+                                >
                                     {subscription.product.tag}
                                 </td>
-                                <td data-label={I18n.t("subscriptions.start_date_epoch")} className="start_date_epoch">
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.start_date_epoch" })}
+                                    className="start_date_epoch"
+                                >
                                     {renderDate(subscription.start_date)}
                                 </td>
                             </tr>
@@ -285,7 +324,9 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                     <thead />
                     <tbody>
                         <tr>
-                            <td id="sub-prod-name-k">{I18n.t("subscription.product.name")}</td>
+                            <td id="sub-prod-name-k">
+                                <FormattedMessage id="subscription.product.name" />
+                            </td>
                             <td id="sub-prod-name-v">
                                 <a target="_blank" rel="noopener noreferrer" href={`/product/${product.product_id}`}>
                                     {product.name || ""}
@@ -293,27 +334,39 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                             </td>
                         </tr>
                         <tr>
-                            <td id="description-k">{I18n.t("subscription.product.description")}</td>
+                            <td id="description-k">
+                                <FormattedMessage id="subscription.product.description" />
+                            </td>
                             <td id="description-v">{product.description}</td>
                         </tr>
                         <tr>
-                            <td id="product-type-k">{I18n.t("subscription.product.product_type")}</td>
+                            <td id="product-type-k">
+                                <FormattedMessage id="subscription.product.product_type" />
+                            </td>
                             <td id="product-type-v">{product.product_type}</td>
                         </tr>
                         <tr>
-                            <td id="tag-k">{I18n.t("subscription.product.tag")}</td>
+                            <td id="tag-k">
+                                <FormattedMessage id="subscription.product.tag" />
+                            </td>
                             <td id="tag-v">{product.tag || ""}</td>
                         </tr>
                         <tr>
-                            <td id="status-k">{I18n.t("subscription.product.status")}</td>
+                            <td id="status-k">
+                                <FormattedMessage id="subscription.product.status" />
+                            </td>
                             <td id="status-v">{product.status || ""}</td>
                         </tr>
                         <tr>
-                            <td id="created-k">{I18n.t("subscription.product.created")}</td>
+                            <td id="created-k">
+                                <FormattedMessage id="subscription.product.created" />
+                            </td>
                             <td id="created-v">{renderDateTime(product.created_at)}</td>
                         </tr>
                         <tr>
-                            <td id="end-date-k">{I18n.t("subscription.product.end_date")}</td>
+                            <td id="end-date-k">
+                                <FormattedMessage id="subscription.product.end_date" />
+                            </td>
                             <td id="end-date-v">{renderDateTime(product.end_date)}</td>
                         </tr>
                     </tbody>
@@ -338,20 +391,30 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                             key={wf.name}
                                             onClick={this.terminate(subscription)}
                                         >
-                                            {I18n.t(`subscription.terminate`)}
+                                            <FormattedMessage id="subscription.terminate" />
                                         </a>
                                     )}
-                                    {wf.reason && <span>{I18n.t(`subscription.terminate`)}</span>}
+                                    {wf.reason && (
+                                        <span>
+                                            <FormattedMessage id="subscription.terminate" />
+                                        </span>
+                                    )}
                                 </td>
                                 <td id={`${index}-v`}>
-                                    {wf.reason && <em className="error">{I18n.t(wf.reason, wf)}</em>}
+                                    {wf.reason && (
+                                        <em className="error">
+                                            <FormattedMessage id={wf.reason} values={wf as any} />
+                                        </em>
+                                    )}
                                 </td>
                             </tr>
                         ))}
                         {isEmpty(workflows.terminate) && (
                             <tr>
                                 <td>
-                                    <em className="error">{I18n.t("subscription.no_termination_workflow")}</em>
+                                    <em className="error">
+                                        <FormattedMessage id="subscription.no_termination_workflow" />
+                                    </em>
                                 </td>
                             </tr>
                         )}
@@ -365,18 +428,30 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                             key={wf.name}
                                             onClick={this.modify(subscription, wf.name)}
                                         >
-                                            {I18n.t(`workflow.${wf.name}`)}
+                                            <FormattedMessage id={`workflow.${wf.name}`} />
                                         </a>
                                     )}
-                                    {wf.reason && <span>{I18n.t(`workflow.${wf.name}`)}</span>}
+                                    {wf.reason && (
+                                        <span>
+                                            <FormattedMessage id={`workflow.${wf.name}`} />
+                                        </span>
+                                    )}
                                 </td>
-                                <td>{wf.reason && <em className="error">{I18n.t(wf.reason, wf)}</em>}</td>
+                                <td>
+                                    {wf.reason && (
+                                        <em className="error">
+                                            <FormattedMessage id={wf.reason} values={wf as any} />
+                                        </em>
+                                    )}
+                                </td>
                             </tr>
                         ))}
                         {isEmpty(workflows.modify) && (
                             <tr>
                                 <td>
-                                    <em className="error">{I18n.t("subscription.no_modify_workflow")}</em>
+                                    <em className="error">
+                                        <FormattedMessage id="subscription.no_modify_workflow" />
+                                    </em>
                                 </td>
                             </tr>
                         )}
@@ -390,18 +465,30 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                             key={wf.name}
                                             onClick={this.modify(subscription, wf.name)}
                                         >
-                                            {I18n.t(`workflow.${wf.name}`)}
+                                            <FormattedMessage id={`workflow.${wf.name}`} />
                                         </a>
                                     )}
-                                    {wf.reason && <span>{I18n.t(`workflow.${wf.name}`)}</span>}
+                                    {wf.reason && (
+                                        <span>
+                                            <FormattedMessage id={`workflow.${wf.name}`} />
+                                        </span>
+                                    )}
                                 </td>
-                                <td>{wf.reason && <em className="error">{I18n.t(wf.reason, wf)}</em>}</td>
+                                <td>
+                                    {wf.reason && (
+                                        <em className="error">
+                                            <FormattedMessage id={wf.reason} values={wf as any} />
+                                        </em>
+                                    )}
+                                </td>
                             </tr>
                         ))}
                         {isEmpty(workflows.system) && (
                             <tr>
                                 <td>
-                                    <em className="error">{I18n.t("subscription.no_validate_workflow")}</em>
+                                    <em className="error">
+                                        <FormattedMessage id="subscription.no_validate_workflow" />
+                                    </em>
                                 </td>
                             </tr>
                         )}
@@ -418,7 +505,9 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
             const name = columns[index];
             return (
                 <th key={index} className={name}>
-                    <span>{I18n.t(`subscription.process.${name}`)}</span>
+                    <span>
+                        <FormattedMessage id={`subscription.process.${name}`} />
+                    </span>
                 </th>
             );
         };
@@ -450,7 +539,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                             <tr>
                                 <td colSpan={3}>
                                     <span className="no_process_link">
-                                        {I18n.t("subscription.no_process_link_text")}
+                                        <FormattedMessage id="subscription.no_process_link_text" />
                                     </span>
                                 </td>
                             </tr>
@@ -488,7 +577,11 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         const { organisations, products } = this.context;
 
         if (subscription.status === "active" && subscription.insync) {
-            const header = <h2>{I18n.t("subscription.network_diagrams")}</h2>;
+            const header = (
+                <h2>
+                    <FormattedMessage id="subscription.network_diagrams" />
+                </h2>
+            );
             const enrichedSubscription = enrichSubscription(subscription, organisations, products);
             if (subscription.product.product_type === "LightPath") {
                 return (
@@ -526,7 +619,11 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         }
 
         if (notFound) {
-            return <h2>{I18n.t("subscription.notFound")}</h2>;
+            return (
+                <h2>
+                    <FormattedMessage id="subscription.notFound" />
+                </h2>
+            );
         }
 
         return (
@@ -566,3 +663,5 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
 }
 
 SubscriptionDetail.contextType = ApplicationContext;
+
+export default injectIntl(SubscriptionDetail);

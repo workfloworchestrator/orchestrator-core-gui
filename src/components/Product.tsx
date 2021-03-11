@@ -23,8 +23,8 @@ import { allWorkflows, productBlocks, productById, products, saveProduct } from 
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { isDate } from "date-fns";
 import { formDate, formInput, formSelect } from "forms/Builder";
-import I18n from "i18n-js";
 import React from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { RouteComponentProps } from "react-router";
 import { ValueType } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
@@ -39,7 +39,7 @@ interface MatchParams {
     id: string;
 }
 
-interface IProps extends Partial<RouteComponentProps<MatchParams>> {
+interface IProps extends Partial<RouteComponentProps<MatchParams>>, WrappedComponentProps {
     subscriptionId?: string;
 }
 
@@ -73,7 +73,7 @@ interface IState {
     fixedInputConf?: FixedInputConfiguration;
 }
 
-export default class Product extends React.Component<IProps, IState> {
+class Product extends React.Component<IProps, IState> {
     state: IState = {
         confirmationDialogOpen: false,
         confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
@@ -170,20 +170,18 @@ export default class Product extends React.Component<IProps, IState> {
     handleDeleteProduct = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
         const { product } = this.state;
+        const { intl } = this.props;
 
-        const question = I18n.t("metadata.deleteConfirmation", {
-            type: "Product",
-            name: product!.name,
-        });
+        const question = intl.formatMessage(
+            { id: "metadata.deleteConfirmation" },
+            { type: "Product", name: product!.name }
+        );
         const action = () =>
             deleteProduct(product!.product_id)
                 .then(() => {
                     this.context.redirect("/metadata/products");
                     setFlash(
-                        I18n.t("metadata.flash.delete", {
-                            name: product!.name,
-                            type: "Product",
-                        })
+                        intl.formatMessage({ id: "metadata.flash.delete" }, { name: product!.name, type: "Product" })
                     );
                 })
                 .catch((err) => {
@@ -208,6 +206,7 @@ export default class Product extends React.Component<IProps, IState> {
     submit = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
         const { product, processing } = this.state;
+        const { intl } = this.props;
 
         const invalid = this.isInvalid(true) || processing;
         if (!invalid) {
@@ -215,10 +214,10 @@ export default class Product extends React.Component<IProps, IState> {
             saveProduct(product!).then(() => {
                 this.context.redirect("/metadata/products");
                 setFlash(
-                    I18n.t(product!.product_id ? "metadata.flash.updated" : "metadata.flash.created", {
-                        type: "Product",
-                        name: product!.name,
-                    })
+                    intl.formatMessage(
+                        { id: product!.product_id ? "metadata.flash.updated" : "metadata.flash.created" },
+                        { type: "Product", name: product!.name }
+                    )
                 );
             });
         } else {
@@ -231,7 +230,7 @@ export default class Product extends React.Component<IProps, IState> {
             return (
                 <section className="buttons">
                     <EuiButton className="button" onClick={() => this.context.redirect("/metadata/products")}>
-                        {I18n.t("metadata.products.back")}
+                        <FormattedMessage id="metadata.products.back" />
                     </EuiButton>
                 </section>
             );
@@ -240,18 +239,18 @@ export default class Product extends React.Component<IProps, IState> {
         return (
             <section className="buttons">
                 <EuiButton className="button" onClick={this.cancel}>
-                    {I18n.t("process.cancel")}
+                    <FormattedMessage id="processes.cancel" />
                 </EuiButton>
                 <EuiButton
                     tabIndex={0}
                     className={`button ${invalid ? "grey disabled" : "blue"}`}
                     onClick={this.submit}
                 >
-                    {I18n.t("process.submit")}
+                    <FormattedMessage id="processes.submit" />
                 </EuiButton>
                 {product.product_id && (
                     <EuiButton className="button red" onClick={this.handleDeleteProduct}>
-                        {I18n.t("processes.delete")}
+                        <FormattedMessage id="processes.delete" />
                     </EuiButton>
                 )}
             </section>
@@ -322,6 +321,7 @@ export default class Product extends React.Component<IProps, IState> {
             confirmationDialogQuestion,
             statuses,
         } = this.state;
+        const { intl } = this.props;
 
         if (!product) {
             return null;
@@ -351,7 +351,7 @@ export default class Product extends React.Component<IProps, IState> {
                         this.state.errors,
                         this.changeProperty("name"),
                         this.validateProperty("name"),
-                        duplicateName ? I18n.t("metadata.products.duplicate_name") : undefined
+                        duplicateName ? intl.formatMessage({ id: "metadata.products.duplicate_name" }) : undefined
                     )}
                     {formInput(
                         "metadata.products.description",
@@ -384,3 +384,5 @@ export default class Product extends React.Component<IProps, IState> {
 }
 
 Product.contextType = ApplicationContext;
+
+export default injectIntl(Product);

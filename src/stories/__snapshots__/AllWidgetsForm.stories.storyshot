@@ -48,13 +48,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-product"
                       >
-                        Product
+                        forms.fields.product
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Search and select the product
+                        forms.fields.product_info
                       </div>
                     </div>
                     <div
@@ -187,13 +187,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-product2"
                       >
-                        product2
+                        forms.fields.product2
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.product2_info
                       </div>
                     </div>
                     <div
@@ -313,12 +313,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                   <label
                     className="euiFormLabel euiFormRow__label"
                   >
-                    accept
+                    forms.fields.accept
                   </label>
                   <div
                     className="euiText euiText--medium"
                   >
-                    accept info
+                    forms.fields.accept_info
                   </div>
                   <div
                     className="euiCheckbox"
@@ -340,7 +340,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="euiCheckbox__label"
                       htmlFor="accept"
                     >
-                      accept
+                      forms.fields.accept
                     </label>
                   </div>
                 </section>
@@ -359,13 +359,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-bandwidth1"
                       >
-                        bandwidth1
+                        forms.fields.bandwidth1
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.bandwidth1_info
                       </div>
                     </div>
                     <div
@@ -411,7 +411,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <span
                         className="euiTitle euiTitle--xsmall euiDescribedFormGroup__title"
                       >
-                        BFD
+                        forms.fields.bfd.title
                       </span>
                       <div
                         className="euiText euiText--small euiDescribedFormGroup__description"
@@ -419,7 +419,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         <div
                           className="euiTextColor euiTextColor--subdued"
                         >
-                          Bidirectional Forwarding Detection
+                          forms.fields.bfd.info
                         </div>
                       </div>
                     </div>
@@ -453,13 +453,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     className="euiFormLabel euiFormRow__label"
                                     htmlFor="bfd"
                                   >
-                                    Enable BFD
+                                    forms.fields.bfd.enabled
                                   </label>
                                    
                                   <div
                                     className="euiText euiText--medium"
                                   >
-                                    
+                                    forms.fields.bfd.enabled_info
                                   </div>
                                 </div>
                                 <div
@@ -513,13 +513,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-boolean1"
                       >
-                        boolean1
+                        forms.fields.boolean1
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.boolean1_info
                       </div>
                     </div>
                     <div
@@ -567,13 +567,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-boolean2"
                       >
-                        boolean2
+                        forms.fields.boolean2
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.boolean2_info
                       </div>
                     </div>
                     <div
@@ -622,13 +622,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-contact_persons"
                       >
-                        Customer contact persons
+                        forms.fields.contact_persons
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        The persons to notify when the process is finished. You can add multiple emails, names and phone numbers.
+                        forms.fields.contact_persons_info
                       </div>
                     </div>
                     <div
@@ -658,13 +658,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-contact_persons.0.name"
                                 >
-                                  Name
+                                  forms.fields.contact_persons_fields.name
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.contact_persons_fields.name_info
                                 </div>
                               </div>
                               <div
@@ -715,13 +715,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-contact_persons.0.email"
                                 >
-                                  Email
+                                  forms.fields.contact_persons_fields.email
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.contact_persons_fields.email_info
                                 </div>
                               </div>
                               <div
@@ -767,13 +767,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-contact_persons.0.phone"
                                 >
-                                  Phone number
+                                  forms.fields.contact_persons_fields.phone
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.contact_persons_fields.phone_info
                                 </div>
                               </div>
                               <div
@@ -842,13 +842,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-corelink_add_link1"
                       >
-                        corelink add_link1
+                        forms.fields.corelink_add_link1
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.corelink_add_link1_info
                       </div>
                     </div>
                     <div
@@ -1138,13 +1138,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-corelink_add_link2"
                       >
-                        corelink add_link2
+                        forms.fields.corelink_add_link2
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.corelink_add_link2_info
                       </div>
                     </div>
                     <div
@@ -1434,13 +1434,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-corelink"
                       >
-                        corelink
+                        forms.fields.corelink
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.corelink_info
                       </div>
                     </div>
                     <div
@@ -1725,13 +1725,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-generic_select"
                       >
-                        generic select
+                        forms.fields.generic_select
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.generic_select_info
                       </div>
                     </div>
                     <div
@@ -1883,13 +1883,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-ip_prefix"
                       >
-                        Select a free subnet
+                        forms.fields.ip_prefix
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        In the next step you can allocate any prefix under the subnet you select here
+                        forms.fields.ip_prefix_info
                       </div>
                     </div>
                     <div
@@ -2071,7 +2071,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     <span>
                                       id
                                     </span>
-                                     
                                     <i />
                                   </th>
                                   <th
@@ -2081,7 +2080,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     <span>
                                       prefix
                                     </span>
-                                     
                                     <i
                                       className="fas fa-sort-up"
                                     />
@@ -2093,7 +2091,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     <span>
                                       description
                                     </span>
-                                     
                                     <i />
                                   </th>
                                   <th
@@ -2103,7 +2100,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     <span>
                                       status
                                     </span>
-                                     
                                     <i />
                                   </th>
                                 </tr>
@@ -3265,13 +3261,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-isalias"
                       >
-                        isalias
+                        forms.fields.isalias
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.isalias_info
                       </div>
                     </div>
                     <div
@@ -3315,13 +3311,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-jira_ticket"
                       >
-                        jira ticket
+                        forms.fields.jira_ticket
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.jira_ticket_info
                       </div>
                     </div>
                     <div
@@ -3357,7 +3353,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                     className="euiFormLabel euiFormRow__label"
                     id="input-label"
                   >
-                    label
+                    forms.fields.label
                   </label>
                 </section>
                 <section
@@ -3375,13 +3371,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-location_code"
                       >
-                        Location code
+                        forms.fields.location_code
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        Provide a valid location code
+                        forms.fields.location_code_info
                       </div>
                     </div>
                     <div
@@ -3513,13 +3509,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-migration_summary1"
                       >
-                        migration summary1
+                        forms.fields.migration_summary1
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.migration_summary1_info
                       </div>
                     </div>
                     <div
@@ -3598,13 +3594,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-migration_summary2"
                       >
-                        migration summary2
+                        forms.fields.migration_summary2
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.migration_summary2_info
                       </div>
                     </div>
                     <div
@@ -3675,13 +3671,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-migration_summary3"
                       >
-                        migration summary3
+                        forms.fields.migration_summary3
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.migration_summary3_info
                       </div>
                     </div>
                     <div
@@ -3750,13 +3746,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-node_id_port_select"
                       >
-                        node id_port_select
+                        forms.fields.node_id_port_select
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.node_id_port_select_info
                       </div>
                     </div>
                     <div
@@ -4041,13 +4037,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-nodes_for_location_code_and_status"
                       >
-                        nodes for_location_code_and_status
+                        forms.fields.nodes_for_location_code_and_status
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.nodes_for_location_code_and_status_info
                       </div>
                     </div>
                     <div
@@ -4180,13 +4176,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-numeric1"
                       >
-                        numeric1
+                        forms.fields.numeric1
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.numeric1_info
                       </div>
                     </div>
                     <div
@@ -4231,13 +4227,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-numeric2"
                       >
-                        numeric2
+                        forms.fields.numeric2
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.numeric2_info
                       </div>
                     </div>
                     <div
@@ -4283,13 +4279,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-organisation1"
                       >
-                        organisation1
+                        forms.fields.organisation1
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.organisation1_info
                       </div>
                     </div>
                     <div
@@ -4422,13 +4418,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-organisation2"
                       >
-                        organisation2
+                        forms.fields.organisation2
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.organisation2_info
                       </div>
                     </div>
                     <div
@@ -4557,13 +4553,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports1"
                       >
-                        service ports1
+                        forms.fields.service_ports1
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports1_info
                       </div>
                     </div>
                     <div
@@ -4595,13 +4591,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports1.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports1_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports1_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -4613,7 +4609,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-forms.fields.service_ports1_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports1.0.subscription_id"
                                     onClick={[Function]}
@@ -4765,13 +4761,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports1.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports1_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports1_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -4850,7 +4846,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports1_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -5020,7 +5016,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports1_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -5097,13 +5093,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports2"
                       >
-                        service ports2
+                        forms.fields.service_ports2
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports2_info
                       </div>
                     </div>
                     <div
@@ -5135,13 +5131,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports2.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports2_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports2_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -5153,7 +5149,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-forms.fields.service_ports2_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports2.0.subscription_id"
                                     onClick={[Function]}
@@ -5305,13 +5301,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports2.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports2_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports2_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -5390,7 +5386,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports2_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -5560,7 +5556,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports2_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -5637,13 +5633,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports3"
                       >
-                        service ports3
+                        forms.fields.service_ports3
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports3_info
                       </div>
                     </div>
                     <div
@@ -5675,13 +5671,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports3.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports3_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports3_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -5817,13 +5813,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports3.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports3_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports3_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -5900,13 +5896,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports4"
                       >
-                        service ports4
+                        forms.fields.service_ports4
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports4_info
                       </div>
                     </div>
                     <div
@@ -5938,13 +5934,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports4.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports4_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports4_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -5956,7 +5952,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-forms.fields.service_ports4_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports4.0.subscription_id"
                                     onClick={[Function]}
@@ -6108,13 +6104,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports4.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports4_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports4_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -6167,13 +6163,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports4.0.bandwidth"
                                 >
-                                  bandwidth
+                                  forms.fields.service_ports4_fields.bandwidth
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports4_fields.bandwidth_info
                                 </div>
                               </div>
                               <div
@@ -6248,7 +6244,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports4_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -6418,7 +6414,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports4_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -6477,7 +6473,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports4_fields.bandwidth_info
                                 </div>
                               </div>
                               <div
@@ -6550,13 +6546,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports5"
                       >
-                        service ports5
+                        forms.fields.service_ports5
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports5_info
                       </div>
                     </div>
                     <div
@@ -6588,13 +6584,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports5.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports5_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports5_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -6606,7 +6602,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-forms.fields.service_ports5_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports5.0.subscription_id"
                                     onClick={[Function]}
@@ -6758,13 +6754,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports5.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports5_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports5_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -6841,13 +6837,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports6"
                       >
-                        service ports6
+                        forms.fields.service_ports6
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports6_info
                       </div>
                     </div>
                     <div
@@ -6879,13 +6875,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports6.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports6_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports6_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -7021,13 +7017,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports6.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports6_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports6_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -7104,13 +7100,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports7"
                       >
-                        service ports7
+                        forms.fields.service_ports7
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports7_info
                       </div>
                     </div>
                     <div
@@ -7142,13 +7138,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports7.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports7_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports7_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -7284,13 +7280,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports7.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports7_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports7_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -7367,13 +7363,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports8"
                       >
-                        service ports8
+                        forms.fields.service_ports8
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports8_info
                       </div>
                     </div>
                     <div
@@ -7405,13 +7401,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports8.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports8_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports8_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -7423,7 +7419,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-forms.fields.service_ports8_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports8.0.subscription_id"
                                     onClick={[Function]}
@@ -7575,13 +7571,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports8.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports8_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports8_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -7660,7 +7656,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports8_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -7830,7 +7826,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports8_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -7909,7 +7905,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports8_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -8079,7 +8075,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports8_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -8158,7 +8154,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports8_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -8328,7 +8324,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports8_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -8405,13 +8401,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports9"
                       >
-                        service ports9
+                        forms.fields.service_ports9
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports9_info
                       </div>
                     </div>
                     <div
@@ -8443,13 +8439,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports9.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports9_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports9_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -8585,13 +8581,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports9.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports9_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports9_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -8668,13 +8664,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports10"
                       >
-                        service ports10
+                        forms.fields.service_ports10
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports10_info
                       </div>
                     </div>
                     <div
@@ -8706,13 +8702,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports10.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports10_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports10_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -8848,13 +8844,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports10.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports10_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports10_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -8931,13 +8927,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports_sn81"
                       >
-                        service ports_sn81
+                        forms.fields.service_ports_sn81
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports_sn81_info
                       </div>
                     </div>
                     <div
@@ -8969,13 +8965,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn81.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports_sn81_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_sn81_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -8987,7 +8983,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-forms.fields.service_ports_sn81_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports_sn81.0.subscription_id"
                                     onClick={[Function]}
@@ -9163,13 +9159,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn81.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports_sn81_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_sn81_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -9246,13 +9242,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports_sn82"
                       >
-                        service ports_sn82
+                        forms.fields.service_ports_sn82
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports_sn82_info
                       </div>
                     </div>
                     <div
@@ -9284,13 +9280,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn82.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports_sn82_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_sn82_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -9302,7 +9298,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-forms.fields.service_ports_sn82_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports_sn82.0.subscription_id"
                                     onClick={[Function]}
@@ -9478,13 +9474,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn82.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports_sn82_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_sn82_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -9561,13 +9557,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports_sn83"
                       >
-                        service ports_sn83
+                        forms.fields.service_ports_sn83
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports_sn83_info
                       </div>
                     </div>
                     <div
@@ -9599,13 +9595,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn83.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports_sn83_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_sn83_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -9617,7 +9613,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-forms.fields.service_ports_sn83_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports_sn83.0.subscription_id"
                                     onClick={[Function]}
@@ -9793,13 +9789,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn83.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports_sn83_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_sn83_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -9876,13 +9872,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports_sn84"
                       >
-                        service ports_sn84
+                        forms.fields.service_ports_sn84
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports_sn84_info
                       </div>
                     </div>
                     <div
@@ -9914,13 +9910,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn84.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports_sn84_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_sn84_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -9932,7 +9928,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-forms.fields.service_ports_sn84_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports_sn84.0.subscription_id"
                                     onClick={[Function]}
@@ -10108,13 +10104,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn84.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports_sn84_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_sn84_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -10191,13 +10187,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports_sn85"
                       >
-                        service ports_sn85
+                        forms.fields.service_ports_sn85
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports_sn85_info
                       </div>
                     </div>
                     <div
@@ -10229,13 +10225,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn85.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports_sn85_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_sn85_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -10371,13 +10367,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn85.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports_sn85_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_sn85_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -10454,13 +10450,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports_sn86"
                       >
-                        service ports_sn86
+                        forms.fields.service_ports_sn86
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports_sn86_info
                       </div>
                     </div>
                     <div
@@ -10492,13 +10488,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn86.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports_sn86_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_sn86_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -10510,7 +10506,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   onFocus={[Function]}
                                 >
                                   <button
-                                    aria-label="reload-subscription id"
+                                    aria-label="reload-forms.fields.service_ports_sn86_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                                     id="refresh-icon-input-service_ports_sn86.0.subscription_id"
                                     onClick={[Function]}
@@ -10686,13 +10682,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn86.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports_sn86_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_sn86_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -10769,13 +10765,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-service_ports_sn87"
                       >
-                        service ports_sn87
+                        forms.fields.service_ports_sn87
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.service_ports_sn87_info
                       </div>
                     </div>
                     <div
@@ -10807,13 +10803,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn87.0.subscription_id"
                                 >
-                                  subscription id
+                                  forms.fields.service_ports_sn87_fields.subscription_id
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_sn87_fields.subscription_id_info
                                 </div>
                               </div>
                               <div
@@ -10949,13 +10945,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   className="euiFormLabel euiFormRow__label"
                                   htmlFor="input-service_ports_sn87.0.vlan"
                                 >
-                                  vlan
+                                  forms.fields.service_ports_sn87_fields.vlan
                                 </label>
                                  
                                 <div
                                   className="euiText euiText--medium"
                                 >
-                                  
+                                  forms.fields.service_ports_sn87_fields.vlan_info
                                 </div>
                               </div>
                               <div
@@ -11031,13 +11027,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-stp"
                       >
-                        stp
+                        forms.fields.stp
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.stp_info
                       </div>
                     </div>
                     <div
@@ -11081,13 +11077,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-string1"
                       >
-                        string1
+                        forms.fields.string1
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.string1_info
                       </div>
                     </div>
                     <div
@@ -11131,13 +11127,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-string2"
                       >
-                        string2
+                        forms.fields.string2
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.string2_info
                       </div>
                     </div>
                     <div
@@ -11181,13 +11177,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-string3"
                       >
-                        string3
+                        forms.fields.string3
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.string3_info
                       </div>
                     </div>
                     <div
@@ -11230,13 +11226,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-subscription_id"
                       >
-                        Subscription
+                        forms.fields.subscription_id
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        The subscription for this action
+                        forms.fields.subscription_id_info
                       </div>
                     </div>
                     <div
@@ -11259,13 +11255,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-subscription_product_tag1"
                       >
-                        subscription product_tag1
+                        forms.fields.subscription_product_tag1
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.subscription_product_tag1_info
                       </div>
                     </div>
                     <div
@@ -11277,7 +11273,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         onFocus={[Function]}
                       >
                         <button
-                          aria-label="reload-subscription product_tag1"
+                          aria-label="reload-forms.fields.subscription_product_tag1"
                           className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                           id="refresh-icon-input-subscription_product_tag1"
                           onClick={[Function]}
@@ -11427,13 +11423,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-subscription_product_tag2"
                       >
-                        subscription product_tag2
+                        forms.fields.subscription_product_tag2
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.subscription_product_tag2_info
                       </div>
                     </div>
                     <div
@@ -11445,7 +11441,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         onFocus={[Function]}
                       >
                         <button
-                          aria-label="reload-subscription product_tag2"
+                          aria-label="reload-forms.fields.subscription_product_tag2"
                           className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
                           id="refresh-icon-input-subscription_product_tag2"
                           onClick={[Function]}
@@ -11596,13 +11592,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-subscriptions1"
                       >
-                        subscriptions1
+                        forms.fields.subscriptions1
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.subscriptions1_info
                       </div>
                     </div>
                     <div
@@ -11632,7 +11628,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className="euiText euiText--medium"
                             >
-                              
+                              forms.fields.subscriptions1_fields_info
                             </div>
                           </div>
                           <div
@@ -11812,7 +11808,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className="euiText euiText--medium"
                             >
-                              
+                              forms.fields.subscriptions1_fields_info
                             </div>
                           </div>
                           <div
@@ -11998,13 +11994,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="formrow-subscriptions2"
                       >
-                        subscriptions2
+                        forms.fields.subscriptions2
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.subscriptions2_info
                       </div>
                     </div>
                     <div
@@ -12034,7 +12030,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className="euiText euiText--medium"
                             >
-                              
+                              forms.fields.subscriptions2_fields_info
                             </div>
                           </div>
                           <div
@@ -12214,7 +12210,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className="euiText euiText--medium"
                             >
-                              
+                              forms.fields.subscriptions2_fields_info
                             </div>
                           </div>
                           <div
@@ -12399,13 +12395,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-transition_product1"
                       >
-                        transition product1
+                        forms.fields.transition_product1
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.transition_product1_info
                       </div>
                     </div>
                     <div
@@ -12557,13 +12553,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-uuid"
                       >
-                        uuid
+                        forms.fields.uuid
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.uuid_info
                       </div>
                     </div>
                     <div
@@ -12607,13 +12603,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-bandwidth2"
                       >
-                        bandwidth2
+                        forms.fields.bandwidth2
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.bandwidth2_info
                       </div>
                     </div>
                     <div
@@ -12660,13 +12656,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-bandwidth3"
                       >
-                        bandwidth3
+                        forms.fields.bandwidth3
                       </label>
                        
                       <div
                         className="euiText euiText--medium"
                       >
-                        
+                        forms.fields.bandwidth3_info
                       </div>
                     </div>
                     <div

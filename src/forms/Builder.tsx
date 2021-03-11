@@ -14,7 +14,7 @@
  */
 
 import { EuiDatePicker, EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
-import I18n from "i18n-js";
+import { intl } from "locale/i18n";
 import moment, { Moment } from "moment";
 import React from "react";
 import Select, { ValueType } from "react-select";
@@ -33,8 +33,8 @@ export function formInput<T extends { [index: string]: any }>(
     return (
         <section className="form-divider">
             <EuiFormRow
-                label={I18n.t(i18nKey)}
-                labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}
+                label={intl.formatMessage({ id: i18nKey })}
+                labelAppend={<EuiText size="m">{intl.formatMessage({ id: `${i18nKey}_info` })}</EuiText>}
                 isInvalid={false}
                 fullWidth={true}
             >
@@ -49,7 +49,7 @@ export function formInput<T extends { [index: string]: any }>(
                 />
             </EuiFormRow>
             {/*Todo: refactor to use EuiForm error handling*/}
-            {errors[name] && <em className="error">{I18n.t("process.format_error")}</em>}
+            {errors[name] && <em className="error">{intl.formatMessage({ id: "process.format_error" })}</em>}
             {additionalError && <em className="error">{additionalError}</em>}
         </section>
     );
@@ -82,8 +82,8 @@ export function formSelect(
         <section className="form-divider">
             <EuiFormRow
                 fullWidth={true}
-                label={I18n.t(i18nKey)}
-                labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}
+                label={intl.formatMessage({ id: i18nKey })}
+                labelAppend={<EuiText size="m">{intl.formatMessage({ id: `${i18nKey}_info` })}</EuiText>}
             >
                 <Select
                     className="select-status"
@@ -120,8 +120,8 @@ export function formDate(
         <section className="form-divider">
             <EuiFormRow
                 id={i18nKey}
-                label={I18n.t(i18nKey)}
-                labelAppend={<EuiText size="m">{I18n.t(`${i18nKey}_info`)}</EuiText>}
+                label={intl.formatMessage({ id: i18nKey })}
+                labelAppend={<EuiText size="m">{intl.formatMessage({ id: `${i18nKey}_info` })}</EuiText>}
                 fullWidth={true}
             >
                 <EuiDatePicker
