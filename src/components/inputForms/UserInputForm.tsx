@@ -259,7 +259,7 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
         }
 
         props.label = label;
-        props.description = intl.formatMessage({ id: `forms.fields.${translation_key}_info` }, { defaultValue: "" });
+        props.description = intl.formatMessage({ id: `forms.fields.${translation_key}_info`, defaultMessage: " " }); // Default must contain a space as not to be Falsy
         props.id = `input-${name}`;
 
         if (props.const) {

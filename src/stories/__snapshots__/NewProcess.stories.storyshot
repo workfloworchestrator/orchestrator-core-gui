@@ -54,7 +54,7 @@ exports[`Storyshots NewProcess Default 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.product_info
+                         
                       </div>
                     </div>
                     <div
@@ -294,7 +294,7 @@ exports[`Storyshots NewProcess Preselected 1`] = `
                       <div
                         className="euiText euiText--medium"
                       >
-                        forms.fields.organisation_info
+                         
                       </div>
                     </div>
                     <div
