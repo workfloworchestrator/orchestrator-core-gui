@@ -1,7 +1,7 @@
 image: alpine:latest
 
 .auto-deploy:
-  image: "git.ia.surfsara.nl:5050/automation/projects/build-container/master"
+  image: "git.ia.surfsara.nl:5050/netdev/automation/projects/build-container/master"
 
 variables:
   DOCKER_DRIVER: overlay2
