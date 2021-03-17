@@ -6,6 +6,7 @@ replicaCount: 1
 
 image:
   repository: git.ia.surfsara.nl:5050/netdev/automation/projects/orchestrator-client/dev
+  setTag: true
   tag: latest
   secrets:
     - name: gitlab-registry-orchestrator-client
