@@ -42,7 +42,7 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
                 <div
                   className="euiText euiText--medium"
                 >
-                  forms.fields.ims_port_id_1_info
+                   
                 </div>
               </div>
               <div

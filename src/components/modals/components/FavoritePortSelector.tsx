@@ -122,7 +122,7 @@ class FavoritePortSelector extends React.PureComponent<IProps, IState> {
         } else {
             this.setState({
                 message: `The selected subscription is not in the allowed list.`,
-                messageHelp: `Check the bandwidth in the workflow form.`,
+                messageHelp: `Check the speed in the workflow form.`,
                 errors: true,
             });
             setTimeout(() => {
@@ -160,7 +160,7 @@ class FavoritePortSelector extends React.PureComponent<IProps, IState> {
                 sortable: true,
             },
             {
-                field: "port_mode",
+                field: "sp.port_mode",
                 name: "Mode",
                 sortable: true,
                 render: (port_mode: any) => <EuiBadge color="primary">{port_mode}</EuiBadge>,
