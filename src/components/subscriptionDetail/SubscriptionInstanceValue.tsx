@@ -47,6 +47,7 @@ interface IPAMPrefix {
     prefix: string;
     addresses: IPAMAddress[];
     tags: string[];
+    state: number;
 }
 
 function DataTable({ children }: React.PropsWithChildren<{}>) {
@@ -282,7 +283,7 @@ function IpamPrefix({ prefix }: { prefix: IPAMPrefix }) {
             <DataRow type="ipam_prefix" label="prefix" value={prefix.prefix} />
             <DataRow type="ipam_prefix" label="afi" value={prefix.afi} />
             <DataRow type="ipam_prefix" label="asn" value={prefix.asn} />
-            <DataRow type="ipam_prefix" label="state" value={ipamStates[prefix.asn]} />
+            <DataRow type="ipam_prefix" label="state" value={ipamStates[prefix.state]} />
             <DataRow type="ipam_prefix" label="tags" value={prefix.tags.join(", ")} />
             {prefix.addresses &&
                 prefix.addresses.map((address, idx) => (
