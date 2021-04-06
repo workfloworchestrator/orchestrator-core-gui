@@ -250,7 +250,7 @@ export function internalPortByImsPortId(portId: number) {
 }
 
 export function portByImsServiceId(serviceId: number): Promise<IMSPort> {
-    return fetchJson(`ims/port_by_ims_service/${serviceId}`);
+    return fetchJson(`surf/ims/port_by_ims_service/${serviceId}`);
 }
 
 export function serviceByImsServiceId(serviceId: number): Promise<IMSService> {

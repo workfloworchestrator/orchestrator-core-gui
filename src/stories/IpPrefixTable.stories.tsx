@@ -31,12 +31,12 @@ export default {
 
 export const Definition = () => {
     mock.reset();
-    mock.onGet(/ipam\/prefix_filters/).reply(200, [
+    mock.onGet(/surf\/ipam\/prefix_filters/).reply(200, [
         { id: 1, prefix: "10.0.0.0/16", version: 4 },
         { id: 2, prefix: "2010::/32", version: 6 },
     ]);
-    mock.onGet("ipam/ip_blocks/1").reply(200, IP_BLOCKS);
-    mock.onGet("ipam/ip_blocks/2").reply(200, IP_BLOCKS_V6);
+    mock.onGet("surf/ipam/ip_blocks/1").reply(200, IP_BLOCKS);
+    mock.onGet("surf/ipam/ip_blocks/2").reply(200, IP_BLOCKS_V6);
 
     return (
         <IpPrefixTable

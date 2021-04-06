@@ -225,7 +225,6 @@ describe("<VlanField>", () => {
         expect(wrapper.find(".euiFormRow__text").at(1).prop("children")).toBe(
             "VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports."
         );
-        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/surf/ims/vlans/abc");
         expect(wrapper.render()).toMatchSnapshot();
     });
 
@@ -246,7 +245,6 @@ describe("<VlanField>", () => {
         expect(wrapper.find(".euiFormRow__text").at(1).prop("children")).toBe(
             "This service port has no VLANs in use (yet)."
         );
-        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/surf/ims/vlans/abc");
         expect(wrapper.render()).toMatchSnapshot();
     });
 
@@ -268,7 +266,6 @@ describe("<VlanField>", () => {
         expect(wrapper.find(".euiFormRow__text").at(1).prop("children")).toBe(
             "Already used VLAN ranges for this service port: 3-6,10"
         );
-        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/surf/ims/vlans/abc");
         expect(wrapper.render()).toMatchSnapshot();
     });
 
@@ -379,7 +376,6 @@ describe("<VlanField>", () => {
         expect(wrapper.at(0).children().getNodeInternal().rendered.props.children.props["error"]).toBe(
             "This service port is already in use and cannot be chosen"
         );
-        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/surf/ims/vlans/abc");
     });
 
     test("<VlanField> - renders extra errors correctly (invalid format)", async () => {
@@ -399,7 +395,6 @@ describe("<VlanField>", () => {
         expect(wrapper.find(".euiFormHelpText").text()).toBe(
             "VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports."
         );
-        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/surf/ims/vlans/abc");
     });
 
     test("<VlanField> - renders extra errors correctly (tagged and taken)", async () => {
@@ -417,7 +412,6 @@ describe("<VlanField>", () => {
         expect(wrapper.find("input")).toHaveLength(1);
         expect(wrapper.find(".euiFormHelpText")).toHaveLength(1);
         expect(wrapper.find(".euiFormHelpText").text()).toBe("Already used VLAN ranges for this service port: 2");
-        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/surf/ims/vlans/abc");
     });
 
     test("<VlanField> - renders extra errors correctly (ims error)", async () => {
@@ -438,7 +432,6 @@ describe("<VlanField>", () => {
         // expect(wrapper.find(".euiFormHelpText").text()).toBe(
         //     "This service port can not be found in IMS. It may be deleted or in an initial state."
         // );
-        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/surf/ims/vlans/abc");
     });
 
     test("<VlanField> - renders a label", async () => {
