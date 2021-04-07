@@ -30,7 +30,7 @@ spec:
 {{ toYaml .Values.image.secrets | indent 10 }}
       containers:
         - name: {{ .Values.nameOverride }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: {{ .Values.image.repository }}{{- if .Values.image.setTag }}:{{ .Values.image.tag }}{{ end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
             - configMapRef:
