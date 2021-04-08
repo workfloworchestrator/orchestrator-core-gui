@@ -35,18 +35,18 @@ export default {
 
 function prepare() {
     mock.reset();
-    mock.onGet("ipam/prefix_filters").reply(200, [{ id: 1, prefix: "10.0.0.0/8", version: 4 }]);
-    mock.onGet("ipam/ip_blocks/1").reply(200, IP_BLOCKS);
-    mock.onGet("ipam/free_subnets/10.0.0.0/24/25").reply(200, ["10.0.0.0/25"]);
+    mock.onGet("surf/ipam/prefix_filters").reply(200, [{ id: 1, prefix: "10.0.0.0/8", version: 4 }]);
+    mock.onGet("surf/ipam/ip_blocks/1").reply(200, IP_BLOCKS);
+    mock.onGet("surf/ipam/free_subnets/10.0.0.0/24/25").reply(200, ["10.0.0.0/25"]);
     mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, { allNodeSubscriptions });
-    mock.onGet("subscriptions/ports?filter=tags%2CMSP-MSPNL-SSP%2Cstatuses%2Cactive").reply(
+    mock.onGet("surf/subscriptions/ports?filter=tags%2CMSP-MSPNL-SSP%2Cstatuses%2Cactive").reply(
         200,
         SN7PortSubscriptions.filter((p) => p.status === "active").filter((p) =>
             ["MSP", "MSPNL", "SSP"].includes(p.product.tag)
         )
     );
     mock.onGet("subscriptions?filter=tags%2CIP_PREFIX%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("subscriptions/ports?filter=tags%2CMSP-MSPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("surf/subscriptions/ports?filter=tags%2CMSP-MSPNL%2Cstatuses%2Cactive").reply(
         200,
         SN7PortSubscriptions.filter((p) => p.status === "active").filter((p) =>
             ["MSP", "MSPNL"].includes(p.product.tag)
@@ -72,25 +72,25 @@ function prepare() {
         200,
         SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => ["IPBGP"].includes(p.product.tag))
     );
-    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP-AGGSPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP-AGGSPNL%2Cstatuses%2Cactive").reply(
         200,
         SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) =>
             ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"].includes(p.product.tag)
         )
     );
-    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
         200,
         SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => ["SP", "SPNL"].includes(p.product.tag))
     );
-    mock.onGet(/crm\/contacts\/.*/).reply(200, contactPersons);
+    mock.onGet(/surf\/crm\/contacts\/.*/).reply(200, contactPersons);
 
     mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
-    mock.onGet(/ims\/free_ports\/.*\/1000\/.*/).reply(200, freeCorelinkPorts);
-    mock.onGet("ims/nodes/MT001A/PL").reply(200, imsNodes);
-    mock.onGet("ims/nodes/Asd001a/IS").reply(200, imsNodes);
-    mock.onGet("ims/nodes/Asd001a/PL").reply(200, imsNodes);
-    mock.onGet("subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653").reply(200, SUBSCRIPTION_JSON);
-    mock.onGet("subscriptions/e89776be-16c3-4bee-af98-8e73bf6492a7").reply(200, SUBSCRIPTION_JSON);
+    mock.onGet(/surf\/ims\/free_ports\/.*\/1000\/.*/).reply(200, freeCorelinkPorts);
+    mock.onGet("surf/ims/nodes/MT001A/PL").reply(200, imsNodes);
+    mock.onGet("surf/ims/nodes/Asd001a/IS").reply(200, imsNodes);
+    mock.onGet("surf/ims/nodes/Asd001a/PL").reply(200, imsNodes);
+    mock.onGet("surf/subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653").reply(200, SUBSCRIPTION_JSON);
+    mock.onGet("surf/subscriptions/e89776be-16c3-4bee-af98-8e73bf6492a7").reply(200, SUBSCRIPTION_JSON);
     mock.onGet("subscriptions/workflows/e89776be-16c3-4bee-af98-8e73bf6492a7").reply(200, {
         create: [{ description: "Create SN8 IP BGP", name: "create_sn8_ip_bgp" }],
         modify: [
@@ -100,12 +100,12 @@ function prepare() {
         terminate: [{ description: "Terminate SN8 IP BGP", name: "terminate_sn8_ip_bgp" }],
         system: [{ description: "Validate SN8 IP BGP", name: "validate_sn8_ip_bgp" }],
     });
-    mock.onGet("subscriptions/product/2b2125f2-a074-4e44-8d4b-edc677381d46").reply(200, imsNodes);
-    mock.onGet("subscriptions/tag/IPS/").reply(200, []);
-    mock.onGet("subscriptions/tag/IPBGP/").reply(200, []);
-    mock.onGet("products/ieee_interface_types/e89776be-16c3-4bee-af98-8e73bf6492a7").reply(200, ["1000BASE-T"]);
+    mock.onGet("surf/subscriptions/product/2b2125f2-a074-4e44-8d4b-edc677381d46").reply(200, imsNodes);
+    mock.onGet("surf/subscriptions/tag/IPS/").reply(200, []);
+    mock.onGet("surf/subscriptions/tag/IPBGP/").reply(200, []);
+    mock.onGet("surf/products/ieee_interface_types/e89776be-16c3-4bee-af98-8e73bf6492a7").reply(200, ["1000BASE-T"]);
     mock.onGet("products/a3bf8b26-50a6-4586-8e58-ad552cb39798").reply(200, PRODUCTS[0]);
-    mock.onGet(/ims\/vlans\/.*/).reply(200, [[3, 5]]);
+    mock.onGet(/surf\/ims\/vlans\/.*/).reply(200, [[3, 5]]);
 }
 
 export const AllWidgetsForm = () => {

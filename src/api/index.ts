@@ -184,7 +184,7 @@ export function portSubscriptions(
 
     if (filters.length) params.set("filter", filters.join(","));
 
-    return fetchJson(`subscriptions/ports${filters.length ? "?" : ""}${params.toString()}`);
+    return fetchJson(`surf/subscriptions/ports${filters.length ? "?" : ""}${params.toString()}`);
 }
 
 export function subscriptions(
@@ -213,7 +213,7 @@ export function subscriptionWorkflows(subscription_id: string): Promise<Workflow
 
 export function organisations(): Promise<Organization[] | undefined> {
     //@ts-ignore
-    return fetchJson("crm/organisations", {}, {}, false).catch(() => {
+    return fetchJson("surf/crm/organisations", {}, {}, false).catch(() => {
         setTimeout(() => {
             setFlash(intl.formatMessage({ id: "external.errors.crm_unavailable" }, { type: "Organisations" }), "error");
         });
@@ -222,11 +222,11 @@ export function organisations(): Promise<Organization[] | undefined> {
 }
 
 export function getPortSubscriptionsForNode(id: string): Promise<ServicePortFilterItem[]> {
-    return fetchJson(`subscriptions/port-services-by-node/${id}`);
+    return fetchJson(`surf/subscriptions/port-services-by-node/${id}`);
 }
 
 export function getNodesByLocationAndStatus(locationCode: string, status: string): Promise<IMSNode[]> {
-    return fetchJson(`ims/nodes/${locationCode}/${status}`);
+    return fetchJson(`surf/ims/nodes/${locationCode}/${status}`);
 }
 
 export function getFreePortsByNodeSubscriptionIdAndSpeed(
@@ -234,27 +234,27 @@ export function getFreePortsByNodeSubscriptionIdAndSpeed(
     interfaceSpeed: number,
     mode: string
 ): Promise<IMSPort[]> {
-    return fetchJson(`ims/free_ports/${nodeSubscriptionId}/${interfaceSpeed}/${mode}`);
+    return fetchJson(`surf/ims/free_ports/${nodeSubscriptionId}/${interfaceSpeed}/${mode}`);
 }
 
 export function usedVlans(subscriptionId: string): Promise<number[][]> {
-    return fetchJsonWithCustomErrorHandling(`ims/vlans/${subscriptionId}`);
+    return fetchJsonWithCustomErrorHandling(`surf/ims/vlans/${subscriptionId}`);
 }
 
 export function portByImsPortId(portId: number) {
-    return fetchJson(`ims/port_by_ims_port/${portId}`);
+    return fetchJson(`surf/ims/port_by_ims_port/${portId}`);
 }
 
 export function internalPortByImsPortId(portId: number) {
-    return fetchJson(`ims/internal_port_by_ims_port/${portId}`);
+    return fetchJson(`surf/ims/internal_port_by_ims_port/${portId}`);
 }
 
 export function portByImsServiceId(serviceId: number): Promise<IMSPort> {
-    return fetchJson(`ims/port_by_ims_service/${serviceId}`);
+    return fetchJson(`surf/ims/port_by_ims_service/${serviceId}`);
 }
 
 export function serviceByImsServiceId(serviceId: number): Promise<IMSService> {
-    return fetchJson(`ims/service_by_ims_service_id/${serviceId}`);
+    return fetchJson(`surf/ims/service_by_ims_service_id/${serviceId}`);
 }
 
 export function parentSubscriptions(childSubscriptionId: string): Promise<Subscription[]> {
@@ -275,7 +275,7 @@ export function processSubscriptionsByProcessId(processId: string): Promise<Proc
 
 export function locationCodes(): Promise<string[] | undefined> {
     // @ts-ignore
-    return fetchJson("crm/location_codes", {}, {}, false).catch(() => {
+    return fetchJson("surf/crm/location_codes", {}, {}, false).catch(() => {
         setTimeout(() => {
             setFlash(intl.formatMessage({ id: "external.errors.crm_unavailable" }, { type: "Locations" }), "error");
         });
@@ -309,40 +309,40 @@ export function deleteSubscription(subscriptionId: string) {
 
 //IPAM IP Prefixes
 export function ip_blocks(parentPrefix: number): Promise<IpBlock[]> {
-    return fetchJson("ipam/ip_blocks/" + parentPrefix);
+    return fetchJson("surf/ipam/ip_blocks/" + parentPrefix);
 }
 
 //IPAM the user-defined filters as configured in the database for the IP PREFIX product
 export function prefix_filters(): Promise<IpPrefix[]> {
-    return fetchJson("ipam/prefix_filters");
+    return fetchJson("surf/ipam/prefix_filters");
 }
 
 export function prefixSubscriptionsByRootPrefix(parentId: number): Promise<IpPrefixSubscription[]> {
-    return fetchJson(`ipam/prefix_subscriptions/${parentId}`);
+    return fetchJson(`surf/ipam/prefix_subscriptions/${parentId}`);
 }
 
 export function prefixSubscriptions() {
-    return fetchJson(`ipam/prefix_subscriptions/`);
+    return fetchJson(`surf/ipam/prefix_subscriptions/`);
 }
 
 export function prefixById(prefixId: number) {
-    return fetchJsonWithCustomErrorHandling(`ipam/prefix_by_id/${prefixId}`);
+    return fetchJsonWithCustomErrorHandling(`surf/ipam/prefix_by_id/${prefixId}`);
 }
 
 export function addressById(addressId: number) {
-    return fetchJsonWithCustomErrorHandling(`ipam/address_by_id/${addressId}`);
+    return fetchJsonWithCustomErrorHandling(`surf/ipam/address_by_id/${addressId}`);
 }
 
 export function freeSubnets(supernet: string): Promise<string[]> {
-    return fetchJson(`ipam/free_subnets/${supernet}`);
+    return fetchJson(`surf/ipam/free_subnets/${supernet}`);
 }
 
 export function subnets(subnet: string, netmask: number, prefixlen: number) {
-    return fetchJson("ipam/subnets/" + subnet + "/" + netmask + "/" + prefixlen);
+    return fetchJson("surf/ipam/subnets/" + subnet + "/" + netmask + "/" + prefixlen);
 }
 
 export function free_subnets(subnet: string, netmask: number, prefixlen: number): Promise<string[]> {
-    return fetchJson("ipam/free_subnets/" + subnet + "/" + netmask + "/" + prefixlen);
+    return fetchJson("surf/ipam/free_subnets/" + subnet + "/" + netmask + "/" + prefixlen);
 }
 
 export function deleteProcess(processId: string) {
@@ -374,7 +374,7 @@ export function fixedInputConfiguration(): Promise<FixedInputConfiguration> {
 }
 
 export function contacts(organisationId: string): Promise<ContactPerson[]> {
-    return fetchJson<ContactPerson[]>(`crm/contacts/${organisationId}`, {}, {}, false, true).catch((err) =>
+    return fetchJson<ContactPerson[]>(`surf/crm/contacts/${organisationId}`, {}, {}, false, true).catch((err) =>
         Promise.resolve([])
     );
 }
@@ -400,7 +400,7 @@ export function logUserInfo(username: string, message: string) {
 }
 
 export function dienstafnameBySubscription(subscriptionId: string): Promise<Dienstafname | undefined> {
-    return fetchJson<Dienstafname>(`crm/dienstafname/${subscriptionId}`, {}, {}, false).catch((err) =>
+    return fetchJson<Dienstafname>(`surf/crm/dienstafname/${subscriptionId}`, {}, {}, false).catch((err) =>
         Promise.resolve(undefined)
     );
 }
