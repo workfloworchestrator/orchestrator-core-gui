@@ -51,7 +51,7 @@ describe("<ImsPortIdField>", () => {
         mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, [
             { subscription_id: "abcdefghij", name: "name", status: "active", description: "description" },
         ] as Subscription[]);
-        mock.onGet("ims/free_ports/abcdefghij/1000/all").reply(200, [
+        mock.onGet("surf/ims/free_ports/abcdefghij/1000/all").reply(200, [
             { id: 1, iface_type: "iface_type", port: "0/0/0", status: "IS" },
         ] as IMSPort[]);
         const element = <ImsPortIdField name="x" interfaceSpeed={1000} nodeStatuses={["active", "provisioning"]} />;
@@ -79,7 +79,7 @@ describe("<ImsPortIdField>", () => {
         mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, [
             { subscription_id: "abcdefghij", name: "name", status: "active", description: "description" },
         ] as Subscription[]);
-        mock.onGet("ims/free_ports/abcdefghij/1000/all").reply(200, [
+        mock.onGet("surf/ims/free_ports/abcdefghij/1000/all").reply(200, [
             { id: 1, iface_type: "iface_type", port: "0/0/0", status: "IS" },
         ] as IMSPort[]);
 

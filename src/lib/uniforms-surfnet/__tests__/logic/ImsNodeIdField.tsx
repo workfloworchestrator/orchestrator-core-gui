@@ -26,7 +26,7 @@ jest.mock("lib/uniforms-surfnet/src/SelectField", () => {
 
 describe("<ImsNodeIdField>", () => {
     test("<ImsNodeIdField> - shows loading placeholder", async () => {
-        mock.onGet("ims/nodes/kb001a/PL").reply(200, []);
+        mock.onGet("surf/ims/nodes/kb001a/PL").reply(200, []);
 
         const element = <ImsNodeIdField name="x" locationCode="kb001a" />;
         const wrapper = mount(element, createContext({ x: { type: Number } }));
@@ -40,7 +40,7 @@ describe("<ImsNodeIdField>", () => {
         await waitForComponentToPaint(wrapper);
     });
     test("<ImsNodeIdField> - calls selectField with all nodes", async () => {
-        mock.onGet("ims/nodes/kb001a/PL").reply(200, [{ id: 1, name: "Some Node" }]);
+        mock.onGet("surf/ims/nodes/kb001a/PL").reply(200, [{ id: 1, name: "Some Node" }]);
 
         const element = <ImsNodeIdField name="x" locationCode="kb001a" />;
         const wrapper = mount(element, createContext({ x: { type: Number } }));
@@ -63,7 +63,7 @@ describe("<ImsNodeIdField>", () => {
     });
 
     test("<ImsNodeIdField> - calls api with right status", async () => {
-        mock.onGet("ims/nodes/kb001a/IS").reply(200, [{ id: 1, name: "Some Node" }]);
+        mock.onGet("surf/ims/nodes/kb001a/IS").reply(200, [{ id: 1, name: "Some Node" }]);
 
         const element = <ImsNodeIdField name="x" locationCode="kb001a" status="IS" />;
         const wrapper = mount(element, createContext({ x: { type: Number } }));

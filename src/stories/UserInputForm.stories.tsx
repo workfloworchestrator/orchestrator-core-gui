@@ -44,10 +44,10 @@ export default {
 };
 
 export const Contactpersons = () => {
-    mock.onGet("subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("surf/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
     mock.onGet("subscriptions/all").reply(200, []);
-    mock.onGet(/crm\/contacts\/.*/).reply(200, contactPersons);
+    mock.onGet(/surf\/crm\/contacts\/.*/).reply(200, contactPersons);
 
     const form = createForm({ organisation: Organisation, contact_persons: ContactPerson });
 
@@ -57,7 +57,7 @@ export const Contactpersons = () => {
 export const Corelink = () => {
     mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, allNodeSubscriptions);
     mock.onGet("subscriptions?filter=tags,Node,statuses,active-provisioning").reply(200, allNodeSubscriptions);
-    mock.onGet(/ims\/free_ports\/.*\/10000\/all/).reply(200, corelinkPorts10G);
+    mock.onGet(/surf\/ims\/free_ports\/.*\/10000\/all/).reply(200, corelinkPorts10G);
 
     const form = createForm({
         ims_port_id_1: imsPortIdProperty({ interfaceSpeed: 10000, nodeStatuses: ["active", "provisioning"] }),
@@ -69,7 +69,7 @@ export const Corelink = () => {
 
 export const CorelinkAddLink = () => {
     mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, allNodeSubscriptions);
-    mock.onGet(/ims\/free_ports\/.*\/10000\/all/).reply(200, freeCorelinkPorts);
+    mock.onGet(/surf\/ims\/free_ports\/.*\/10000\/all/).reply(200, freeCorelinkPorts);
 
     const form = createForm({
         ims_port_id_1: imsPortIdProperty({
@@ -92,10 +92,10 @@ CorelinkAddLink.story = {
 };
 
 export const Nodes = () => {
-    mock.onGet("subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("surf/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
     mock.onGet("subscriptions/all").reply(200, allNodeSubscriptions);
-    mock.onGet("ims/nodes/MT001A/PL").reply(200, imsNodes);
+    mock.onGet("surf/ims/nodes/MT001A/PL").reply(200, imsNodes);
 
     const form = createForm({
         ims_node_id: ImsNodeId,
@@ -105,8 +105,8 @@ export const Nodes = () => {
 };
 
 export const Sn8PortselectAllOrganisations = () => {
-    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP%2Cstatuses%2Cactive").reply(200, []);
-    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
         200,
         SN8PortSubscriptions.filter((p) => p.status === "active")
     );
@@ -132,7 +132,7 @@ Sn8PortselectAllOrganisations.story = {
 };
 
 export const Sn8PortselectTagged = () => {
-    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
         200,
         SN8PortSubscriptions.filter((p) => p.status === "active")
             .filter((p) => ["SP", "SPNL"].includes(p.product.tag))
@@ -156,7 +156,7 @@ Sn8PortselectTagged.story = {
 };
 
 export const Sn8PortselectUntagged = () => {
-    mock.onGet("/api/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
+    mock.onGet("/api/surf/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
         200,
         SN8PortSubscriptions.filter((p) => p.status === "active")
             .filter((p) => ["SP", "SPNL"].includes(p.product.tag))
@@ -180,7 +180,7 @@ Sn8PortselectUntagged.story = {
 };
 
 export const Sn8PortselectSelectedOrganisation = () => {
-    mock.onGet("subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP%2Cstatuses%2Cactive").reply(
+    mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP%2Cstatuses%2Cactive").reply(
         200,
         SN8PortSubscriptions.filter((p) => p.status === "active")
     );

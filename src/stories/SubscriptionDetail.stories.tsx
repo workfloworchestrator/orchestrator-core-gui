@@ -73,7 +73,7 @@ export const Subscription = () => {
     });
 
     mock.onGet("subscriptions/parent_subscriptions/pid").reply(200, []);
-    mock.onGet("ims/service_by_ims_service_id/36261").reply(200, {
+    mock.onGet("surf/ims/service_by_ims_service_id/36261").reply(200, {
         aliases: ["SUBSCRIPTION_ID=9C8C13D5-6954-461A-A931-32894C193AA0"],
         customer_id: "5203E539-0A11-E511-80D0-005056956C1A",
         domain: "SURFNET8",
@@ -90,7 +90,7 @@ export const Subscription = () => {
         speed: "SERVICE",
         status: "3",
     });
-    mock.onGet("ims/service_by_ims_service_id/36260").reply(200, {
+    mock.onGet("surf/ims/service_by_ims_service_id/36260").reply(200, {
         aliases: ["SUBSCRIPTION_ID=F9ACBF45-4BFD-45DB-892C-774EB967B033"],
         customer_id: "5203E539-0A11-E511-80D0-005056956C1A",
         domain: null,
@@ -104,7 +104,7 @@ export const Subscription = () => {
         speed: "10GBASE-SR",
         status: "3",
     });
-    mock.onGet("ims/service_by_ims_service_id/62409").reply(200, {
+    mock.onGet("surf/ims/service_by_ims_service_id/62409").reply(200, {
         customer_descriptions: [],
         aliases: ["SUBSCRIPTION_ID=86AB6D33-C06F-4C3F-9614-36F6171475C1"],
         customer_id: "88503161-0911-E511-80D0-005056956C1A",
@@ -154,7 +154,7 @@ export const Subscription = () => {
         status: "IS",
     });
 
-    mock.onGet(/ims\/service_by_ims_service_id\/(31420|44835|45045)/).reply(200, {
+    mock.onGet(/surf\/ims\/service_by_ims_service_id\/(31420|44835|45045)/).reply(200, {
         customer_descriptions: [],
         aliases: [],
         customer_id: "C9B5E717-0B11-E511-80D0-005056956C1A",
@@ -169,7 +169,7 @@ export const Subscription = () => {
         speed: "INTERNETWOLK",
         status: "3",
     });
-    mock.onGet("ims/port_by_ims_service/36260").reply(200, {
+    mock.onGet("/surf/ims/port_by_ims_service/36260").reply(200, {
         connector_type: "LC/PC",
         fiber_type: "multi-mode",
         id: 683015,
@@ -181,7 +181,7 @@ export const Subscription = () => {
         port: "0/1/1",
         status: "3",
     });
-    mock.onGet("ims/port_by_ims_port/683015").reply(200, {
+    mock.onGet("/surf/ims/port_by_ims_port/683015").reply(200, {
         connector_type: "LC/PC",
         fiber_type: "multi-mode",
         id: 683015,
@@ -193,8 +193,8 @@ export const Subscription = () => {
         port: "0/1/1",
         status: "IS",
     });
-    mock.onGet("subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653").reply(200, SN8PortSubscriptions[0]);
-    mock.onGet("ipam/prefix_by_id/166").reply(200, {
+    mock.onGet("surf/subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653").reply(200, SN8PortSubscriptions[0]);
+    mock.onGet("surf/ipam/prefix_by_id/166").reply(200, {
         addresses: [
             {
                 address: "145.145.4.26",
@@ -242,7 +242,7 @@ export const Subscription = () => {
         vrf: 1,
         vrf__label: "global",
     });
-    mock.onGet("crm/dienstafname/9c8c13d5-6954-461a-a931-32894c193aa0").reply(200, {
+    mock.onGet("surf/crm/dienstafname/9c8c13d5-6954-461a-a931-32894c193aa0").reply(200, {
         guid: "d9713a9f-bab6-4e78-b56e-5c5cc2c1fb26",
         code: "MSP",
         status: "_Opgezegd",
