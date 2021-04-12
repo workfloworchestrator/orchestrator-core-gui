@@ -17,7 +17,7 @@ When typing in the field an autosuggest should pop up that can be navigated with
 <Story name="standalone">
     {() => {
         mock.reset();
-        mock.onGet("/api/crm/contacts/abc").reply(200, [
+        mock.onGet("/api/surf/crm/contacts/abc").reply(200, [
             { name: "Someone", email: "a@b.nl", phone: "1234567890" },
             { name: "Another one", email: "b@b.nl", phone: "0987654321" }
         ]);
@@ -57,7 +57,7 @@ When used as part of a larger structure this field will filter already chosen va
 <Story name="complete">
     {() => {
         mock.reset();
-        mock.onGet("/api/crm/contacts/abc").reply(200, [
+        mock.onGet("/api/surf/crm/contacts/abc").reply(200, [
             { name: "Someone", email: "a@b.nl", phone: "1234567890" },
             { name: "Another one", email: "b@b.nl", phone: "0987654321" }
         ]);

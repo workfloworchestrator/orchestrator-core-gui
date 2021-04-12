@@ -152,7 +152,7 @@ test("<ContactPersonNameField> - renders a wrapper with unknown props", () => {
 });
 
 test("<ContactPersonNameField> - renders autocomplete based on key", async () => {
-    mock.onGet("crm/contacts/abc").reply(200, [{ name: "name", email: "a@b.nl", phone: "" }]);
+    mock.onGet("surf/crm/contacts/abc").reply(200, [{ name: "name", email: "a@b.nl", phone: "" }]);
 
     const element = <ContactPersonNameField name="x" organisationKey="key" />;
     const wrapper = mount(element, createContext({ x: { type: String } }, { model: { x: "n", key: "abc" } }));
@@ -170,7 +170,7 @@ test("<ContactPersonNameField> - renders autocomplete based on key", async () =>
 });
 
 test("<ContactPersonNameField> - renders autocomplete based on id", async () => {
-    mock.onGet("crm/contacts/abc").reply(200, [{ name: "name", email: "a@b.nl", phone: "" }]);
+    mock.onGet("surf/crm/contacts/abc").reply(200, [{ name: "name", email: "a@b.nl", phone: "" }]);
 
     const element = <ContactPersonNameField name="x" organisationId="abc" />;
     const wrapper = mount(element, createContext({ x: { type: String } }, { model: { x: "n" } }));
@@ -190,7 +190,7 @@ test("<ContactPersonNameField> - renders autocomplete based on id", async () => 
 test("<ContactPersonNameField> - selects item with keystrokes", async () => {
     const onChange = jest.fn();
 
-    mock.onGet("crm/contacts/abc").reply(200, [{ name: "name", email: "a@b.nl", phone: "p" }]);
+    mock.onGet("surf/crm/contacts/abc").reply(200, [{ name: "name", email: "a@b.nl", phone: "p" }]);
 
     const element = <ContactPersonNameField name="x" organisationId="abc" />;
     const wrapper = mount(element, createContext({ x: { type: String } }, { model: { x: "n" }, onChange }));
