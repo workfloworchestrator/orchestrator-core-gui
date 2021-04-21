@@ -15,6 +15,7 @@
 
 import { isArray, partition } from "lodash";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 import SubscriptionInstanceValue from "./SubscriptionInstanceValue";
 
@@ -27,9 +28,10 @@ interface ISubscriptionInstance {
 
 interface IProps {
     subscription_instance: ISubscriptionInstance;
+    field_name?: string;
 }
 
-export default function SubscriptionInstance({ subscription_instance }: IProps) {
+export default function SubscriptionInstance({ subscription_instance, field_name }: IProps) {
     if (!subscription_instance) {
         return null;
     }
@@ -42,6 +44,12 @@ export default function SubscriptionInstance({ subscription_instance }: IProps) 
     return (
         <section className="product-block">
             <h3>{subscription_instance.name}</h3>
+            {field_name && (
+                // Default must contain a space as not to be Falsy
+                <p className="label">
+                    <FormattedMessage id={`subscription_instance.${field_name}`} defaultMessage=" " />
+                </p>
+            )}
             {subscription_instance.label && <p className="label">{`Label: ${subscription_instance.label}`}</p>}
             <p className="label">{`Instance ID: ${subscription_instance.subscription_instance_id}`}</p>
             <table className="detail-block multiple-tbody">
@@ -54,9 +62,13 @@ export default function SubscriptionInstance({ subscription_instance }: IProps) 
                     ))}
             </table>
             {instance_fields
-                .flatMap((entry) => entry[1])
-                .map((instance: ISubscriptionInstance, i: number) => (
-                    <SubscriptionInstance key={i} subscription_instance={instance} />
+                .flatMap((entry) => entry[1].map((value: any) => [entry[0], value]))
+                .map((entry: [string, ISubscriptionInstance], i: number) => (
+                    <SubscriptionInstance
+                        key={i}
+                        subscription_instance={entry[1]}
+                        field_name={field_name ? `${field_name}.${entry[0]}` : entry[0]}
+                    />
                 ))}
         </section>
     );
