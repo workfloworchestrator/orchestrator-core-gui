@@ -12,18 +12,22 @@
  * limitations under the License.
  *
  */
+
+import { autoFieldFunction } from "components/inputForms/UserInputForm";
 import { mount as enzyme } from "enzyme";
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import en from "locale/en";
 import { parse_translations_dict } from "locale/i18n";
 import React, { ReactElement } from "react";
 import { IntlProvider } from "react-intl";
 import { context } from "uniforms";
-
-import en from "../../../locale/en";
-import createContext from "./_createContext";
+import { AutoField } from "uniforms-unstyled";
 
 test("Test suite must contain at least one test", () => {});
 
 function TestWrapper({ uniformsOptions, children }: any) {
+    const AutoFieldProvider = AutoField.componentDetectorContext.Provider;
+
     return (
         <context.Provider value={uniformsOptions.context}>
             <IntlProvider // Locale of the application
@@ -33,7 +37,7 @@ function TestWrapper({ uniformsOptions, children }: any) {
                 messages={parse_translations_dict(en)}
                 onError={(_) => {}}
             >
-                {children}
+                <AutoFieldProvider value={autoFieldFunction}>{children}</AutoFieldProvider>
             </IntlProvider>
         </context.Provider>
     );

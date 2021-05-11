@@ -1,4 +1,3 @@
-import AutoField from "lib/uniforms-surfnet/src/AutoField";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,8 +12,10 @@ import AutoField from "lib/uniforms-surfnet/src/AutoField";
  * limitations under the License.
  *
  */
+
 import { ComponentType, createElement } from "react";
 import { useForm } from "uniforms";
+import { AutoField } from "uniforms-unstyled";
 
 export type AutoFieldsProps = {
     autoField?: ComponentType<{ className: string; name: string }>;

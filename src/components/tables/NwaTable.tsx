@@ -23,7 +23,7 @@ import Preferences from "components/tables/Preferences";
 import { TableRenderer } from "components/tables/TableRenderer";
 import useFilterableDataFetcher from "components/tables/useFilterableDataFetcher";
 import useInterval from "components/tables/useInterval";
-import produce from "immer";
+import { produce } from "immer";
 import React, { useEffect } from "react";
 import { FormattedMessage } from "react-intl";
 import {

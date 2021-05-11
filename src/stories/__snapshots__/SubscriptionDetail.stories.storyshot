@@ -67,6 +67,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           >
                             <button
                               className="euiButton euiButton--primary euiButton--small"
+                              disabled={false}
                               id="subscriptions-copy-button"
                               onBlur={[Function]}
                               onClick={[Function]}
@@ -113,6 +114,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                         >
                           <button
                             className="euiButton euiButton--primary euiButton--small"
+                            disabled={false}
                             id="subscriptions-favorite-toggle"
                             onClick={[Function]}
                             style={

@@ -65,6 +65,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         id="input-product"
                         onKeyDown={[Function]}
                       >
+                        <span
+                          aria-atomic="false"
+                          aria-live="polite"
+                          aria-relevant="additions text"
+                          className="css-1f43avz-a11yText-A11yText"
+                        />
                         <div
                           className=" css-yk16xz-control"
                           onMouseDown={[Function]}
@@ -150,7 +156,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -204,6 +210,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         id="input-product2"
                         onKeyDown={[Function]}
                       >
+                        <span
+                          aria-atomic="false"
+                          aria-live="polite"
+                          aria-relevant="additions text"
+                          className="css-1f43avz-a11yText-A11yText"
+                        />
                         <div
                           className=" css-1fhf3k1-control"
                           onMouseDown={[Function]}
@@ -218,7 +230,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               Search and select a product...
                             </div>
                             <div
-                              className="css-b8ldur-Input"
+                              className="css-1bwsx9e-Input"
                             >
                               <div
                                 className=""
@@ -289,7 +301,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -309,6 +321,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="form-input accept-field"
                   id="input-accept"
+                  readOnly={false}
                 >
                   <label
                     className="euiFormLabel euiFormRow__label"
@@ -388,6 +401,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             step={1}
                             type="number"
                             value={1}
@@ -609,6 +623,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-contact_persons"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -640,8 +655,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-contact_persons.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -687,6 +702,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onFocus={[Function]}
                                       onKeyDown={[Function]}
                                       placeholder="Search and add contact persons..."
+                                      readOnly={false}
                                       type="text"
                                       value="a"
                                     />
@@ -742,6 +758,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder=""
+                                      readOnly={false}
                                       type="text"
                                       value="a@b.nl"
                                     />
@@ -794,6 +811,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder=""
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -808,6 +826,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-contact_persons.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -819,6 +840,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-contact_persons.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus "
@@ -885,6 +909,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 id="input-corelink_add_link1.node"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-1fhf3k1-control"
                                   onMouseDown={[Function]}
@@ -899,7 +929,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       Select a node
                                     </div>
                                     <div
-                                      className="css-b8ldur-Input"
+                                      className="css-1bwsx9e-Input"
                                     >
                                       <div
                                         className=""
@@ -970,7 +1000,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -1012,6 +1042,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 id="input-corelink_add_link1"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-yk16xz-control"
                                   onMouseDown={[Function]}
@@ -1097,7 +1133,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -1181,6 +1217,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 id="input-corelink_add_link2.node"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-1fhf3k1-control"
                                   onMouseDown={[Function]}
@@ -1195,7 +1237,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       Select a node
                                     </div>
                                     <div
-                                      className="css-b8ldur-Input"
+                                      className="css-1bwsx9e-Input"
                                     >
                                       <div
                                         className=""
@@ -1266,7 +1308,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -1308,6 +1350,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 id="input-corelink_add_link2"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-yk16xz-control"
                                   onMouseDown={[Function]}
@@ -1393,7 +1441,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -1477,6 +1525,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 id="input-corelink.node"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-1fhf3k1-control"
                                   onMouseDown={[Function]}
@@ -1491,7 +1545,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       Select a node
                                     </div>
                                     <div
-                                      className="css-b8ldur-Input"
+                                      className="css-1bwsx9e-Input"
                                     >
                                       <div
                                         className=""
@@ -1562,7 +1616,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -1604,6 +1658,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 id="input-corelink"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-1fhf3k1-control"
                                   onMouseDown={[Function]}
@@ -1618,7 +1678,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       First select a node
                                     </div>
                                     <div
-                                      className="css-b8ldur-Input"
+                                      className="css-1bwsx9e-Input"
                                     >
                                       <div
                                         className=""
@@ -1689,7 +1749,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -1742,6 +1802,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         id="input-generic_select"
                         onKeyDown={[Function]}
                       >
+                        <span
+                          aria-atomic="false"
+                          aria-live="polite"
+                          aria-relevant="additions text"
+                          className="css-1f43avz-a11yText-A11yText"
+                        />
                         <div
                           className=" css-yk16xz-control"
                           onMouseDown={[Function]}
@@ -1824,7 +1890,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -1846,7 +1912,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -1953,6 +2019,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   id="input-ip_prefix.root-filter"
                                   onKeyDown={[Function]}
                                 >
+                                  <span
+                                    aria-atomic="false"
+                                    aria-live="polite"
+                                    aria-relevant="additions text"
+                                    className="css-1f43avz-a11yText-A11yText"
+                                  />
                                   <div
                                     className=" css-yk16xz-control"
                                     onMouseDown={[Function]}
@@ -2038,7 +2110,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       >
                                         <svg
                                           aria-hidden="true"
-                                          className="css-6q0nyr-Svg"
+                                          className="css-tj5bde-Svg"
                                           focusable="false"
                                           height={20}
                                           viewBox="0 0 20 20"
@@ -3022,6 +3094,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               id="input-ip_prefix.desired-netmask"
                               onKeyDown={[Function]}
                             >
+                              <span
+                                aria-atomic="false"
+                                aria-live="polite"
+                                aria-relevant="additions text"
+                                className="css-1f43avz-a11yText-A11yText"
+                              />
                               <div
                                 className=" css-yk16xz-control"
                                 onMouseDown={[Function]}
@@ -3107,7 +3185,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden="true"
-                                      className="css-6q0nyr-Svg"
+                                      className="css-tj5bde-Svg"
                                       focusable="false"
                                       height={20}
                                       viewBox="0 0 20 20"
@@ -3135,6 +3213,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 id="input-ip_prefix.desired-prefix"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-yk16xz-control"
                                   onMouseDown={[Function]}
@@ -3220,7 +3304,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -3288,6 +3372,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             type="text"
                             value="urn:ogf:network:bla"
                           />
@@ -3338,6 +3423,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             type="text"
                             value="SNNP-123456"
                           />
@@ -3348,6 +3434,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 </section>
                 <section
                   className="form-input"
+                  readOnly={false}
                 >
                   <label
                     className="euiFormLabel euiFormRow__label"
@@ -3388,6 +3475,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         id="input-location_code"
                         onKeyDown={[Function]}
                       >
+                        <span
+                          aria-atomic="false"
+                          aria-live="polite"
+                          aria-relevant="additions text"
+                          className="css-1f43avz-a11yText-A11yText"
+                        />
                         <div
                           className=" css-yk16xz-control"
                           onMouseDown={[Function]}
@@ -3473,7 +3566,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -3497,6 +3590,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 </section>
                 <section
                   className="form-input"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -3582,6 +3676,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 </section>
                 <section
                   className="form-input"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -3615,9 +3710,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         <table
                           id="input-migration_summary2-table"
                         >
-                          <thead>
-                            
-                          </thead>
+                          <thead />
                           <tbody>
                             <tr>
                               <td
@@ -3659,6 +3752,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 </section>
                 <section
                   className="form-input"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -3789,6 +3883,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 id="input-node_id_port_select.node"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-1fhf3k1-control"
                                   onMouseDown={[Function]}
@@ -3803,7 +3903,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       Select a node
                                     </div>
                                     <div
-                                      className="css-b8ldur-Input"
+                                      className="css-1bwsx9e-Input"
                                     >
                                       <div
                                         className=""
@@ -3874,7 +3974,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -3916,6 +4016,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 id="input-node_id_port_select"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-1fhf3k1-control"
                                   onMouseDown={[Function]}
@@ -3930,7 +4036,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       First select a node
                                     </div>
                                     <div
-                                      className="css-b8ldur-Input"
+                                      className="css-1bwsx9e-Input"
                                     >
                                       <div
                                         className=""
@@ -4001,7 +4107,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -4054,6 +4160,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         id="input-nodes_for_location_code_and_status"
                         onKeyDown={[Function]}
                       >
+                        <span
+                          aria-atomic="false"
+                          aria-live="polite"
+                          aria-relevant="additions text"
+                          className="css-1f43avz-a11yText-A11yText"
+                        />
                         <div
                           className=" css-yk16xz-control"
                           onMouseDown={[Function]}
@@ -4139,7 +4251,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -4203,6 +4315,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             step={1}
                             type="number"
                             value={1234}
@@ -4255,6 +4368,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             step={1}
                             type="number"
                             value={1234}
@@ -4296,6 +4410,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         id="input-organisation1"
                         onKeyDown={[Function]}
                       >
+                        <span
+                          aria-atomic="false"
+                          aria-live="polite"
+                          aria-relevant="additions text"
+                          className="css-1f43avz-a11yText-A11yText"
+                        />
                         <div
                           className=" css-yk16xz-control"
                           onMouseDown={[Function]}
@@ -4381,7 +4501,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -4435,6 +4555,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         id="input-organisation2"
                         onKeyDown={[Function]}
                       >
+                        <span
+                          aria-atomic="false"
+                          aria-live="polite"
+                          aria-relevant="additions text"
+                          className="css-1f43avz-a11yText-A11yText"
+                        />
                         <div
                           className=" css-1fhf3k1-control"
                           onMouseDown={[Function]}
@@ -4449,7 +4575,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               Search and select a customer...
                             </div>
                             <div
-                              className="css-b8ldur-Input"
+                              className="css-1bwsx9e-Input"
                             >
                               <div
                                 className=""
@@ -4520,7 +4646,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -4540,6 +4666,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports1"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -4571,8 +4698,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports1.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -4611,6 +4738,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-forms.fields.service_ports1_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports1.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -4636,6 +4764,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports1.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -4721,7 +4855,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -4789,6 +4923,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -4809,6 +4944,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports1.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus "
@@ -4820,8 +4958,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports1.1"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -4860,6 +4998,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports1.1.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -4885,6 +5024,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports1.1.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -4970,7 +5115,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -5038,6 +5183,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -5058,6 +5204,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports1.1.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus "
@@ -5069,6 +5218,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports1.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -5080,6 +5232,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports2"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -5111,8 +5264,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports2.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -5151,6 +5304,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-forms.fields.service_ports2_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports2.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -5176,6 +5330,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports2.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -5261,7 +5421,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -5329,6 +5489,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value="1,2-3"
                                     />
@@ -5349,6 +5510,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports2.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus "
@@ -5360,8 +5524,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports2.1"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -5400,6 +5564,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports2.1.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -5425,6 +5590,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports2.1.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -5510,7 +5681,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -5578,6 +5749,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value="1,2-3"
                                     />
@@ -5598,6 +5770,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports2.1.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus "
@@ -5609,6 +5784,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports2.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -5620,6 +5798,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports3"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -5651,8 +5830,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports3.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -5693,6 +5872,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports3.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-1fhf3k1-control"
                                       onMouseDown={[Function]}
@@ -5707,7 +5892,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                           Search and select a subscription...
                                         </div>
                                         <div
-                                          className="css-b8ldur-Input"
+                                          className="css-1bwsx9e-Input"
                                         >
                                           <div
                                             className=""
@@ -5778,7 +5963,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -5841,6 +6026,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -5861,6 +6047,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports3.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -5872,6 +6061,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports3.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -5883,6 +6075,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports4"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -5914,8 +6107,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports4.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -5954,6 +6147,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-forms.fields.service_ports4_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports4.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -5979,6 +6173,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports4.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -6064,7 +6264,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -6132,6 +6332,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value="1,2-3"
                                     />
@@ -6192,6 +6393,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder=""
+                                      readOnly={false}
                                       step={1}
                                       type="number"
                                       value={1000}
@@ -6207,6 +6409,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports4.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus "
@@ -6218,8 +6423,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports4.1"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -6258,6 +6463,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports4.1.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -6283,6 +6489,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports4.1.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -6368,7 +6580,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -6436,6 +6648,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value="1,2-3"
                                     />
@@ -6496,6 +6709,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder=""
+                                      readOnly={false}
                                       step={1}
                                       type="number"
                                       value={1000}
@@ -6511,6 +6725,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports4.1.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus "
@@ -6522,6 +6739,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports4.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus "
@@ -6533,6 +6753,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports5"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -6564,8 +6785,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports5.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -6604,6 +6825,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-forms.fields.service_ports5_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports5.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -6629,6 +6851,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports5.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -6714,7 +6942,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -6782,6 +7010,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -6802,6 +7031,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports5.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -6813,6 +7045,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports5.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -6824,6 +7059,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports6"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -6855,8 +7091,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports6.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -6897,6 +7133,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports6.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-1fhf3k1-control"
                                       onMouseDown={[Function]}
@@ -6911,7 +7153,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                           Search and select a subscription...
                                         </div>
                                         <div
-                                          className="css-b8ldur-Input"
+                                          className="css-1bwsx9e-Input"
                                         >
                                           <div
                                             className=""
@@ -6982,7 +7224,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -7045,6 +7287,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -7065,6 +7308,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports6.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -7076,6 +7322,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports6.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -7087,6 +7336,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports7"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -7118,8 +7368,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports7.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -7160,6 +7410,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports7.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-1fhf3k1-control"
                                       onMouseDown={[Function]}
@@ -7174,7 +7430,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                           Search and select a subscription...
                                         </div>
                                         <div
-                                          className="css-b8ldur-Input"
+                                          className="css-1bwsx9e-Input"
                                         >
                                           <div
                                             className=""
@@ -7245,7 +7501,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -7308,6 +7564,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -7328,6 +7585,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports7.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -7339,6 +7599,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports7.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -7350,6 +7613,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports8"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -7381,8 +7645,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports8.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -7421,6 +7685,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-forms.fields.service_ports8_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports8.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -7446,6 +7711,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports8.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -7531,7 +7802,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -7599,6 +7870,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -7619,6 +7891,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports8.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus "
@@ -7630,8 +7905,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports8.1"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -7670,6 +7945,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports8.1.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -7695,6 +7971,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports8.1.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -7780,7 +8062,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -7848,6 +8130,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value="1,2-3"
                                     />
@@ -7868,6 +8151,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports8.1.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus "
@@ -7879,8 +8165,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports8.2"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -7919,6 +8205,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports8.2.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -7944,6 +8231,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports8.2.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -8029,7 +8322,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -8097,6 +8390,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -8117,6 +8411,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports8.2.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus "
@@ -8128,8 +8425,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports8.3"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -8168,6 +8465,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports8.3.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -8193,6 +8491,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports8.3.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -8278,7 +8582,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -8346,6 +8650,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value="1,2-3"
                                     />
@@ -8366,6 +8671,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports8.3.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus "
@@ -8377,6 +8685,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports8.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus "
@@ -8388,6 +8699,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports9"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -8419,8 +8731,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports9.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -8461,6 +8773,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports9.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-1fhf3k1-control"
                                       onMouseDown={[Function]}
@@ -8475,7 +8793,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                           Search and select a subscription...
                                         </div>
                                         <div
-                                          className="css-b8ldur-Input"
+                                          className="css-1bwsx9e-Input"
                                         >
                                           <div
                                             className=""
@@ -8546,7 +8864,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -8609,6 +8927,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -8629,6 +8948,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports9.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -8640,6 +8962,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports9.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -8651,6 +8976,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports10"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -8682,8 +9008,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports10.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -8724,6 +9050,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports10.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-1fhf3k1-control"
                                       onMouseDown={[Function]}
@@ -8738,7 +9070,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                           Search and select a subscription...
                                         </div>
                                         <div
-                                          className="css-b8ldur-Input"
+                                          className="css-1bwsx9e-Input"
                                         >
                                           <div
                                             className=""
@@ -8809,7 +9141,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -8872,6 +9204,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -8892,6 +9225,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports10.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -8903,6 +9239,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports10.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -8914,6 +9253,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports_sn81"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -8945,8 +9285,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports_sn81.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -8985,6 +9325,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-forms.fields.service_ports_sn81_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports_sn81.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -9008,6 +9349,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="service-port-modal-service_ports_sn81.0.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary show-service-port-modal-icon-button"
+                                    disabled={false}
                                     id="filter-icon-input-service_ports_sn81.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -9034,6 +9376,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports_sn81.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -9119,7 +9467,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -9187,6 +9535,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="First select a Service Port..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -9207,6 +9556,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports_sn81.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus "
@@ -9218,6 +9570,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports_sn81.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus "
@@ -9229,6 +9584,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports_sn82"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -9260,8 +9616,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports_sn82.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -9300,6 +9656,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-forms.fields.service_ports_sn82_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports_sn82.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -9323,6 +9680,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="service-port-modal-service_ports_sn82.0.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary show-service-port-modal-icon-button"
+                                    disabled={false}
                                     id="filter-icon-input-service_ports_sn82.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -9349,6 +9707,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports_sn82.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -9434,7 +9798,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -9502,6 +9866,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -9522,6 +9887,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports_sn82.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -9533,6 +9901,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports_sn82.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -9544,6 +9915,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports_sn83"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -9575,8 +9947,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports_sn83.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -9615,6 +9987,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-forms.fields.service_ports_sn83_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports_sn83.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -9638,6 +10011,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="service-port-modal-service_ports_sn83.0.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary show-service-port-modal-icon-button"
+                                    disabled={false}
                                     id="filter-icon-input-service_ports_sn83.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -9664,6 +10038,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports_sn83.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -9749,7 +10129,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -9817,6 +10197,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -9837,6 +10218,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports_sn83.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -9848,6 +10232,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports_sn83.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -9859,6 +10246,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports_sn84"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -9890,8 +10278,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports_sn84.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -9930,6 +10318,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-forms.fields.service_ports_sn84_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports_sn84.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -9953,6 +10342,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="service-port-modal-service_ports_sn84.0.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary show-service-port-modal-icon-button"
+                                    disabled={false}
                                     id="filter-icon-input-service_ports_sn84.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -9979,6 +10369,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports_sn84.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -10064,7 +10460,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -10132,6 +10528,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -10152,6 +10549,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports_sn84.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -10163,6 +10563,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports_sn84.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -10174,6 +10577,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports_sn85"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -10205,8 +10609,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports_sn85.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -10247,6 +10651,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports_sn85.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-1fhf3k1-control"
                                       onMouseDown={[Function]}
@@ -10261,7 +10671,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                           Search and select a subscription...
                                         </div>
                                         <div
-                                          className="css-b8ldur-Input"
+                                          className="css-1bwsx9e-Input"
                                         >
                                           <div
                                             className=""
@@ -10332,7 +10742,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -10395,6 +10805,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value="2"
                                     />
@@ -10415,6 +10826,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports_sn85.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -10426,6 +10840,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports_sn85.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -10437,6 +10854,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports_sn86"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -10468,8 +10886,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports_sn86.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -10508,6 +10926,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="reload-forms.fields.service_ports_sn86_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports_sn86.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -10531,6 +10950,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   <button
                                     aria-label="service-port-modal-service_ports_sn86.0.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary show-service-port-modal-icon-button"
+                                    disabled={false}
                                     id="filter-icon-input-service_ports_sn86.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -10557,6 +10977,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports_sn86.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -10642,7 +11068,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -10710,6 +11136,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -10730,6 +11157,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports_sn86.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -10741,6 +11171,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports_sn86.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus "
@@ -10752,6 +11185,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports_sn87"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -10783,8 +11217,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports_sn87.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -10825,6 +11259,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     id="input-service_ports_sn87.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-1fhf3k1-control"
                                       onMouseDown={[Function]}
@@ -10839,7 +11279,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                           Search and select a subscription...
                                         </div>
                                         <div
-                                          className="css-b8ldur-Input"
+                                          className="css-1bwsx9e-Input"
                                         >
                                           <div
                                             className=""
@@ -10910,7 +11350,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -10973,6 +11413,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="Enter a valid VLAN range..."
+                                      readOnly={false}
                                       type="text"
                                       value="2"
                                     />
@@ -10993,6 +11434,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-service_ports_sn87.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -11004,6 +11448,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-service_ports_sn87.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -11054,6 +11501,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             type="text"
                             value="urn:ogf:network:vlan=1:fu:bar"
                           />
@@ -11104,6 +11552,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             type="text"
                             value="something"
                           />
@@ -11154,6 +11603,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             type="text"
                             value="1000"
                           />
@@ -11204,6 +11654,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             type="text"
                             value=""
                           />
@@ -11214,6 +11665,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 </section>
                 <section
                   className="form-input"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -11275,6 +11727,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         <button
                           aria-label="reload-forms.fields.subscription_product_tag1"
                           className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                          disabled={false}
                           id="refresh-icon-input-subscription_product_tag1"
                           onClick={[Function]}
                           type="button"
@@ -11300,6 +11753,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                           id="input-subscription_product_tag1"
                           onKeyDown={[Function]}
                         >
+                          <span
+                            aria-atomic="false"
+                            aria-live="polite"
+                            aria-relevant="additions text"
+                            className="css-1f43avz-a11yText-A11yText"
+                          />
                           <div
                             className=" css-yk16xz-control"
                             onMouseDown={[Function]}
@@ -11385,7 +11844,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               >
                                 <svg
                                   aria-hidden="true"
-                                  className="css-6q0nyr-Svg"
+                                  className="css-tj5bde-Svg"
                                   focusable="false"
                                   height={20}
                                   viewBox="0 0 20 20"
@@ -11443,6 +11902,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         <button
                           aria-label="reload-forms.fields.subscription_product_tag2"
                           className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                          disabled={false}
                           id="refresh-icon-input-subscription_product_tag2"
                           onClick={[Function]}
                           type="button"
@@ -11468,6 +11928,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                           id="input-subscription_product_tag2"
                           onKeyDown={[Function]}
                         >
+                          <span
+                            aria-atomic="false"
+                            aria-live="polite"
+                            aria-relevant="additions text"
+                            className="css-1f43avz-a11yText-A11yText"
+                          />
                           <div
                             className=" css-yk16xz-control"
                             onMouseDown={[Function]}
@@ -11553,7 +12019,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               >
                                 <svg
                                   aria-hidden="true"
-                                  className="css-6q0nyr-Svg"
+                                  className="css-tj5bde-Svg"
                                   focusable="false"
                                   height={20}
                                   viewBox="0 0 20 20"
@@ -11579,6 +12045,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-subscriptions1"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -11621,9 +12088,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               aria-invalid={null}
                               className="euiFormLabel euiFormRow__label"
                               htmlFor="input-subscriptions1.0"
-                            >
-                              
-                            </label>
+                            />
                              
                             <div
                               className="euiText euiText--medium"
@@ -11640,8 +12105,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               onFocus={[Function]}
                             >
                               <button
-                                aria-label="reload-"
+                                aria-label="reload-null"
                                 className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                disabled={false}
                                 id="refresh-icon-input-subscriptions1.0"
                                 onClick={[Function]}
                                 type="button"
@@ -11667,6 +12133,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 id="input-subscriptions1.0"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-yk16xz-control"
                                   onMouseDown={[Function]}
@@ -11752,7 +12224,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -11779,6 +12251,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-subscriptions1.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus "
@@ -11801,9 +12276,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               aria-invalid={null}
                               className="euiFormLabel euiFormRow__label"
                               htmlFor="input-subscriptions1.1"
-                            >
-                              
-                            </label>
+                            />
                              
                             <div
                               className="euiText euiText--medium"
@@ -11820,8 +12293,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               onFocus={[Function]}
                             >
                               <button
-                                aria-label="reload-"
+                                aria-label="reload-null"
                                 className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                disabled={false}
                                 id="refresh-icon-input-subscriptions1.1"
                                 onClick={[Function]}
                                 type="button"
@@ -11847,6 +12321,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 id="input-subscriptions1.1"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-yk16xz-control"
                                   onMouseDown={[Function]}
@@ -11932,7 +12412,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -11959,6 +12439,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-subscriptions1.1.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus "
@@ -11970,6 +12453,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-subscriptions1.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus "
@@ -11981,6 +12467,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-subscriptions2"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -12023,9 +12510,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               aria-invalid={null}
                               className="euiFormLabel euiFormRow__label"
                               htmlFor="input-subscriptions2.0"
-                            >
-                              
-                            </label>
+                            />
                              
                             <div
                               className="euiText euiText--medium"
@@ -12042,8 +12527,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               onFocus={[Function]}
                             >
                               <button
-                                aria-label="reload-"
+                                aria-label="reload-null"
                                 className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                disabled={false}
                                 id="refresh-icon-input-subscriptions2.0"
                                 onClick={[Function]}
                                 type="button"
@@ -12069,6 +12555,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 id="input-subscriptions2.0"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-yk16xz-control"
                                   onMouseDown={[Function]}
@@ -12154,7 +12646,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -12181,6 +12673,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-subscriptions2.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus "
@@ -12203,9 +12698,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               aria-invalid={null}
                               className="euiFormLabel euiFormRow__label"
                               htmlFor="input-subscriptions2.1"
-                            >
-                              
-                            </label>
+                            />
                              
                             <div
                               className="euiText euiText--medium"
@@ -12222,8 +12715,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               onFocus={[Function]}
                             >
                               <button
-                                aria-label="reload-"
+                                aria-label="reload-null"
                                 className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                disabled={false}
                                 id="refresh-icon-input-subscriptions2.1"
                                 onClick={[Function]}
                                 type="button"
@@ -12249,6 +12743,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 id="input-subscriptions2.1"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-yk16xz-control"
                                   onMouseDown={[Function]}
@@ -12334,7 +12834,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -12361,6 +12861,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         className="del-item"
                         id="input-subscriptions2.1.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus "
@@ -12372,6 +12875,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       className="add-item"
                       id="input-subscriptions2.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus "
@@ -12412,6 +12918,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         id="input-transition_product1"
                         onKeyDown={[Function]}
                       >
+                        <span
+                          aria-atomic="false"
+                          aria-live="polite"
+                          aria-relevant="additions text"
+                          className="css-1f43avz-a11yText-A11yText"
+                        />
                         <div
                           className=" css-yk16xz-control"
                           onMouseDown={[Function]}
@@ -12494,7 +13006,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -12516,7 +13028,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -12580,6 +13092,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             type="text"
                             value="e89776be-16c3-4bee-af98-8e73bf6492a7"
                           />
@@ -12632,6 +13145,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             step={1}
                             type="number"
                             value={2}
@@ -12685,6 +13199,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             step={1}
                             type="number"
                             value="1000"
@@ -12706,6 +13221,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                   >
                     <button
                       className="euiButton euiButton--warning"
+                      disabled={false}
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       style={
@@ -12732,6 +13248,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 >
                   <button
                     className="euiButton euiButton--primary euiButton--fill"
+                    disabled={false}
                     id="button-submit-form-submit"
                     style={
                       Object {

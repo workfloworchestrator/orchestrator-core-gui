@@ -59,6 +59,7 @@ function ImsPortId({
     value,
     disabled,
     placeholder,
+    readOnly,
     error,
     showInlineError,
     errorMessage,
@@ -75,10 +76,10 @@ function ImsPortId({
     const [loading, setLoading] = useState(true);
 
     const onChangeNodes = useCallback(
-        (option: ValueType<Option>) => {
-            let value = option ? (option as Option).value : null;
+        (option: ValueType<Option, false>) => {
+            let value = option?.value;
 
-            if (value === null) {
+            if (value === undefined) {
                 return;
             }
 
@@ -149,7 +150,7 @@ function ImsPortId({
                 <section className="node-port">
                     <div className="node-select">
                         <EuiFormRow label="Node" id={`${id}.node`} fullWidth>
-                            <Select
+                            <Select<Option, false>
                                 inputId={`${id}.node.search`}
                                 name={`${name}.node`}
                                 onChange={onChangeNodes}
@@ -157,24 +158,23 @@ function ImsPortId({
                                 placeholder={nodesPlaceholder}
                                 value={node_value}
                                 isSearchable={true}
-                                isDisabled={disabled || !!nodeSubscriptionId || nodes.length === 0}
+                                isDisabled={disabled || readOnly || !!nodeSubscriptionId || nodes.length === 0}
                             />
                         </EuiFormRow>
                     </div>
                     <div className="port-select">
                         <EuiFormRow label="Port" id={id} fullWidth>
-                            <Select
+                            <Select<Option<number>, false>
                                 inputId={`${id}.search`}
                                 name={name}
-                                onChange={(selected: ValueType<Option<number>>) => {
-                                    const value = (selected as Option<number> | null)?.value;
-                                    onChange(value ? value : undefined);
+                                onChange={(selected) => {
+                                    onChange(selected?.value);
                                 }}
                                 options={port_options}
                                 placeholder={portPlaceholder}
                                 value={port_value}
                                 isSearchable={true}
-                                isDisabled={disabled || ports.length === 0}
+                                isDisabled={disabled || readOnly || ports.length === 0}
                             />
                         </EuiFormRow>
                     </div>

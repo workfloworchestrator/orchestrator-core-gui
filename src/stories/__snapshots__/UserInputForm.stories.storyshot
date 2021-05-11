@@ -65,6 +65,12 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                         id="input-organisation"
                         onKeyDown={[Function]}
                       >
+                        <span
+                          aria-atomic="false"
+                          aria-live="polite"
+                          aria-relevant="additions text"
+                          className="css-1f43avz-a11yText-A11yText"
+                        />
                         <div
                           className=" css-yk16xz-control"
                           onMouseDown={[Function]}
@@ -150,7 +156,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -175,6 +181,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                 <section
                   className="list-field"
                   id="input-contact_persons"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -206,8 +213,8 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-contact_persons.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -251,6 +258,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder=""
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -305,6 +313,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                                       onFocus={[Function]}
                                       onKeyDown={[Function]}
                                       placeholder="Search and add contact persons..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -360,6 +369,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder=""
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -374,6 +384,9 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                         className="del-item"
                         id="input-contact_persons.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -385,6 +398,9 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                       className="add-item"
                       id="input-contact_persons.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus "
@@ -405,6 +421,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                   >
                     <button
                       className="euiButton euiButton--warning"
+                      disabled={false}
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       style={
@@ -431,6 +448,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                 >
                   <button
                     className="euiButton euiButton--primary euiButton--fill"
+                    disabled={false}
                     id="button-submit-form-submit"
                     style={
                       Object {
@@ -552,6 +570,12 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                                 id="input-ims_port_id_1.node"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-yk16xz-control"
                                   onMouseDown={[Function]}
@@ -637,7 +661,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -684,6 +708,12 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                                 id="input-ims_port_id_1"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-1fhf3k1-control"
                                   onMouseDown={[Function]}
@@ -698,7 +728,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                                       First select a node
                                     </div>
                                     <div
-                                      className="css-b8ldur-Input"
+                                      className="css-1bwsx9e-Input"
                                     >
                                       <div
                                         className=""
@@ -769,7 +799,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -848,6 +878,12 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                                 id="input-ims_port_id_2.node"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-yk16xz-control"
                                   onMouseDown={[Function]}
@@ -933,7 +969,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -980,6 +1016,12 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                                 id="input-ims_port_id_2"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-1fhf3k1-control"
                                   onMouseDown={[Function]}
@@ -994,7 +1036,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                                       First select a node
                                     </div>
                                     <div
-                                      className="css-b8ldur-Input"
+                                      className="css-1bwsx9e-Input"
                                     >
                                       <div
                                         className=""
@@ -1065,7 +1107,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -1098,6 +1140,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                   >
                     <button
                       className="euiButton euiButton--warning"
+                      disabled={false}
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       style={
@@ -1124,6 +1167,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                 >
                   <button
                     className="euiButton euiButton--primary euiButton--fill"
+                    disabled={false}
                     id="button-submit-form-submit"
                     style={
                       Object {
@@ -1245,6 +1289,12 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                                 id="input-ims_port_id_1.node"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-1fhf3k1-control"
                                   onMouseDown={[Function]}
@@ -1259,7 +1309,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                                       5e3341c2 Node Planned MT001A mt001a-jnx-acid81-vtb
                                     </div>
                                     <div
-                                      className="css-b8ldur-Input"
+                                      className="css-1bwsx9e-Input"
                                     >
                                       <div
                                         className=""
@@ -1330,7 +1380,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -1372,6 +1422,12 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                                 id="input-ims_port_id_1"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-yk16xz-control"
                                   onMouseDown={[Function]}
@@ -1457,7 +1513,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -1541,6 +1597,12 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                                 id="input-ims_port_id_2.node"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-1fhf3k1-control"
                                   onMouseDown={[Function]}
@@ -1555,7 +1617,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                                       faf4766b Node Planned MT001A mt001a-jnx-acid82-vtb
                                     </div>
                                     <div
-                                      className="css-b8ldur-Input"
+                                      className="css-1bwsx9e-Input"
                                     >
                                       <div
                                         className=""
@@ -1626,7 +1688,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -1668,6 +1730,12 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                                 id="input-ims_port_id_2"
                                 onKeyDown={[Function]}
                               >
+                                <span
+                                  aria-atomic="false"
+                                  aria-live="polite"
+                                  aria-relevant="additions text"
+                                  className="css-1f43avz-a11yText-A11yText"
+                                />
                                 <div
                                   className=" css-yk16xz-control"
                                   onMouseDown={[Function]}
@@ -1753,7 +1821,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                                     >
                                       <svg
                                         aria-hidden="true"
-                                        className="css-6q0nyr-Svg"
+                                        className="css-tj5bde-Svg"
                                         focusable="false"
                                         height={20}
                                         viewBox="0 0 20 20"
@@ -1791,6 +1859,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                   >
                     <button
                       className="euiButton euiButton--warning"
+                      disabled={false}
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       style={
@@ -1817,6 +1886,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                 >
                   <button
                     className="euiButton euiButton--primary euiButton--fill"
+                    disabled={false}
                     id="button-submit-form-submit"
                     style={
                       Object {
@@ -1912,6 +1982,12 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                         id="input-ims_node_id"
                         onKeyDown={[Function]}
                       >
+                        <span
+                          aria-atomic="false"
+                          aria-live="polite"
+                          aria-relevant="additions text"
+                          className="css-1f43avz-a11yText-A11yText"
+                        />
                         <div
                           className=" css-yk16xz-control"
                           onMouseDown={[Function]}
@@ -1997,7 +2073,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -2031,6 +2107,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                   >
                     <button
                       className="euiButton euiButton--warning"
+                      disabled={false}
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       style={
@@ -2057,6 +2134,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                 >
                   <button
                     className="euiButton euiButton--primary euiButton--fill"
+                    disabled={false}
                     id="button-submit-form-submit"
                     style={
                       Object {
@@ -2152,6 +2230,12 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                         id="input-organisation"
                         onKeyDown={[Function]}
                       >
+                        <span
+                          aria-atomic="false"
+                          aria-live="polite"
+                          aria-relevant="additions text"
+                          className="css-1f43avz-a11yText-A11yText"
+                        />
                         <div
                           className=" css-yk16xz-control"
                           onMouseDown={[Function]}
@@ -2237,7 +2321,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -2303,6 +2387,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             step={1}
                             type="number"
                             value=""
@@ -2315,6 +2400,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -2346,8 +2432,8 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -2386,6 +2472,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                   <button
                                     aria-label="reload-forms.fields.service_ports_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -2409,6 +2496,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                   <button
                                     aria-label="service-port-modal-service_ports.0.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary show-service-port-modal-icon-button"
+                                    disabled={false}
                                     id="filter-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -2435,6 +2523,12 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                     id="input-service_ports.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -2520,7 +2614,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -2588,6 +2682,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="First select a Service Port..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -2608,6 +2703,9 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                         className="del-item"
                         id="input-service_ports.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -2619,8 +2717,8 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports.1"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -2659,6 +2757,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                   <button
                                     aria-label="reload-"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports.1.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -2682,6 +2781,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                   <button
                                     aria-label="service-port-modal-service_ports.1.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary show-service-port-modal-icon-button"
+                                    disabled={false}
                                     id="filter-icon-input-service_ports.1.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -2708,6 +2808,12 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                     id="input-service_ports.1.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -2793,7 +2899,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -2861,6 +2967,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="First select a Service Port..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -2881,6 +2988,9 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                         className="del-item"
                         id="input-service_ports.1.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -2892,6 +3002,9 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                       className="add-item"
                       id="input-service_ports.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -2912,6 +3025,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                   >
                     <button
                       className="euiButton euiButton--warning"
+                      disabled={false}
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       style={
@@ -2938,6 +3052,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                 >
                   <button
                     className="euiButton euiButton--primary euiButton--fill"
+                    disabled={false}
                     id="button-submit-form-submit"
                     style={
                       Object {
@@ -3033,6 +3148,12 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                         id="input-organisation"
                         onKeyDown={[Function]}
                       >
+                        <span
+                          aria-atomic="false"
+                          aria-live="polite"
+                          aria-relevant="additions text"
+                          className="css-1f43avz-a11yText-A11yText"
+                        />
                         <div
                           className=" css-yk16xz-control"
                           onMouseDown={[Function]}
@@ -3118,7 +3239,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -3184,6 +3305,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             step={1}
                             type="number"
                             value=""
@@ -3196,6 +3318,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -3227,8 +3350,8 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -3267,6 +3390,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                                   <button
                                     aria-label="reload-forms.fields.service_ports_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -3290,6 +3414,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                                   <button
                                     aria-label="service-port-modal-service_ports.0.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary show-service-port-modal-icon-button"
+                                    disabled={false}
                                     id="filter-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -3316,6 +3441,12 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                                     id="input-service_ports.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -3401,7 +3532,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -3469,6 +3600,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="First select a Service Port..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -3489,6 +3621,9 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                         className="del-item"
                         id="input-service_ports.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -3500,6 +3635,9 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                       className="add-item"
                       id="input-service_ports.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus "
@@ -3520,6 +3658,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                   >
                     <button
                       className="euiButton euiButton--warning"
+                      disabled={false}
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       style={
@@ -3546,6 +3685,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                 >
                   <button
                     className="euiButton euiButton--primary euiButton--fill"
+                    disabled={false}
                     id="button-submit-form-submit"
                     style={
                       Object {
@@ -3641,6 +3781,12 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                         id="input-organisation"
                         onKeyDown={[Function]}
                       >
+                        <span
+                          aria-atomic="false"
+                          aria-live="polite"
+                          aria-relevant="additions text"
+                          className="css-1f43avz-a11yText-A11yText"
+                        />
                         <div
                           className=" css-yk16xz-control"
                           onMouseDown={[Function]}
@@ -3726,7 +3872,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -3792,6 +3938,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             step={1}
                             type="number"
                             value=""
@@ -3804,6 +3951,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -3835,8 +3983,8 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -3875,6 +4023,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                   <button
                                     aria-label="reload-forms.fields.service_ports_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -3898,6 +4047,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                   <button
                                     aria-label="service-port-modal-service_ports.0.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary show-service-port-modal-icon-button"
+                                    disabled={false}
                                     id="filter-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -3924,6 +4074,12 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                     id="input-service_ports.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -4009,7 +4165,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -4077,6 +4233,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="First select a Service Port..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -4097,6 +4254,9 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                         className="del-item"
                         id="input-service_ports.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -4108,8 +4268,8 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports.1"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -4148,6 +4308,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                   <button
                                     aria-label="reload-"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports.1.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -4171,6 +4332,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                   <button
                                     aria-label="service-port-modal-service_ports.1.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary show-service-port-modal-icon-button"
+                                    disabled={false}
                                     id="filter-icon-input-service_ports.1.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -4197,6 +4359,12 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                     id="input-service_ports.1.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -4282,7 +4450,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -4350,6 +4518,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="First select a Service Port..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -4370,6 +4539,9 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                         className="del-item"
                         id="input-service_ports.1.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -4381,6 +4553,9 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                       className="add-item"
                       id="input-service_ports.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus "
@@ -4401,6 +4576,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                   >
                     <button
                       className="euiButton euiButton--warning"
+                      disabled={false}
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       style={
@@ -4427,6 +4603,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                 >
                   <button
                     className="euiButton euiButton--primary euiButton--fill"
+                    disabled={false}
                     id="button-submit-form-submit"
                     style={
                       Object {
@@ -4522,6 +4699,12 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                         id="input-organisation"
                         onKeyDown={[Function]}
                       >
+                        <span
+                          aria-atomic="false"
+                          aria-live="polite"
+                          aria-relevant="additions text"
+                          className="css-1f43avz-a11yText-A11yText"
+                        />
                         <div
                           className=" css-yk16xz-control"
                           onMouseDown={[Function]}
@@ -4607,7 +4790,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-6q0nyr-Svg"
+                                className="css-tj5bde-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -4673,6 +4856,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                             onChange={[Function]}
                             onFocus={[Function]}
                             placeholder=""
+                            readOnly={false}
                             step={1}
                             type="number"
                             value=""
@@ -4685,6 +4869,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports"
+                  readOnly={false}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -4716,8 +4901,8 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                       <div
                         className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
                         id="input-service_ports.0"
+                        readOnly={false}
                       >
-                        
                         <div
                           className="euiFlexItem"
                         >
@@ -4756,6 +4941,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                                   <button
                                     aria-label="reload-forms.fields.service_ports_fields.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    disabled={false}
                                     id="refresh-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -4779,6 +4965,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                                   <button
                                     aria-label="service-port-modal-service_ports.0.subscription_id"
                                     className="euiButtonIcon euiButtonIcon--primary show-service-port-modal-icon-button"
+                                    disabled={false}
                                     id="filter-icon-input-service_ports.0.subscription_id"
                                     onClick={[Function]}
                                     type="button"
@@ -4805,6 +4992,12 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                                     id="input-service_ports.0.subscription_id"
                                     onKeyDown={[Function]}
                                   >
+                                    <span
+                                      aria-atomic="false"
+                                      aria-live="polite"
+                                      aria-relevant="additions text"
+                                      className="css-1f43avz-a11yText-A11yText"
+                                    />
                                     <div
                                       className=" css-yk16xz-control"
                                       onMouseDown={[Function]}
@@ -4890,7 +5083,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                                         >
                                           <svg
                                             aria-hidden="true"
-                                            className="css-6q0nyr-Svg"
+                                            className="css-tj5bde-Svg"
                                             focusable="false"
                                             height={20}
                                             viewBox="0 0 20 20"
@@ -4958,6 +5151,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       placeholder="First select a Service Port..."
+                                      readOnly={false}
                                       type="text"
                                       value=""
                                     />
@@ -4978,6 +5172,9 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                         className="del-item"
                         id="input-service_ports.0.remove"
                         onClick={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-minus disabled"
@@ -4989,6 +5186,9 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                       className="add-item"
                       id="input-service_ports.$"
                       onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="button"
+                      tabIndex={0}
                     >
                       <i
                         className="fa fa-plus "
@@ -5009,6 +5209,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                   >
                     <button
                       className="euiButton euiButton--warning"
+                      disabled={false}
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       style={
@@ -5035,6 +5236,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                 >
                   <button
                     className="euiButton euiButton--primary euiButton--fill"
+                    disabled={false}
                     id="button-submit-form-submit"
                     style={
                       Object {

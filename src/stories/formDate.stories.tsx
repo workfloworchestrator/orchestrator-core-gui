@@ -13,14 +13,9 @@
  *
  */
 
-import { State, Store } from "@sambego/storybook-state";
 import { action } from "@storybook/addon-actions";
 import { formDate } from "forms/Builder";
-import React from "react";
-
-const store = new Store({
-    date: new Date(1),
-});
+import { useState } from "react";
 
 export default {
     title: "DatePicker",
@@ -30,18 +25,15 @@ export default {
     },
 };
 
-export const _Definition = () => (
-    <State store={store}>
-        {(state) =>
-            formDate(
-                "metadata.productBlocks.created_at",
-                (e: any) => {
-                    action("onChange")(e);
-                    store.set({ date: e });
-                },
-                false,
-                state.date
-            )
-        }
-    </State>
-);
+export const DatePicker = () => {
+    const [date, setDate] = useState(new Date(1));
+    return formDate(
+        "metadata.productBlocks.created_at",
+        (d: any) => {
+            action("onChange")(d);
+            setDate(d);
+        },
+        false,
+        date
+    );
+};

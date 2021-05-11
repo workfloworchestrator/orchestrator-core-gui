@@ -18,7 +18,6 @@ it("exports everything", () => {
     expect(surfnet).toEqual({
         AcceptField: expect.any(Function),
         AutoFields: expect.any(Function),
-        AutoField: expect.any(Function),
         BoolField: expect.any(Function),
         ContactPersonNameField: expect.any(Function),
         DateField: expect.any(Function),

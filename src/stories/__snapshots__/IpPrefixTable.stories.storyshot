@@ -53,6 +53,12 @@ exports[`Storyshots IpPrefixTable Definition 1`] = `
           id="ip_prefix_table.root-filter"
           onKeyDown={[Function]}
         >
+          <span
+            aria-atomic="false"
+            aria-live="polite"
+            aria-relevant="additions text"
+            className="css-1f43avz-a11yText-A11yText"
+          />
           <div
             className=" css-yk16xz-control"
             onMouseDown={[Function]}
@@ -138,7 +144,7 @@ exports[`Storyshots IpPrefixTable Definition 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="css-6q0nyr-Svg"
+                  className="css-tj5bde-Svg"
                   focusable="false"
                   height={20}
                   viewBox="0 0 20 20"

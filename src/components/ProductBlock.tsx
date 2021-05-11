@@ -225,7 +225,7 @@ class ProductBlock extends React.Component<IProps, IState> {
             | React.MouseEvent<HTMLSpanElement | HTMLButtonElement>
             | null
             | React.ChangeEvent<HTMLInputElement>
-            | ValueType<Option>
+            | ValueType<Option, false>
     ) => {
         const { productBlock } = this.state;
         let value;

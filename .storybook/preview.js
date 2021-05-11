@@ -1,10 +1,8 @@
 import "../src/pages/App.scss";
 import "./storybook.scss";
 
-import { withState } from "@sambego/storybook-state";
 import { action } from "@storybook/addon-actions";
 import { withKnobs } from "@storybook/addon-knobs";
-import { addDecorator } from "@storybook/react";
 import mock from "axios-mock";
 import React from "react";
 import { setIntlConfig, withIntl } from "storybook-addon-intl";
@@ -17,14 +15,9 @@ import ORGANISATIONS from "../src/stories/data/organisations.json";
 import PRODUCTS from "../src/stories/data/products.json";
 import ApplicationContext from "../src/utils/ApplicationContext";
 
-addDecorator(withKnobs);
-
-addDecorator(withState());
-
 const withContainerSection = (cb) => <section className="storybook-container">{cb()}</section>;
-addDecorator(withContainerSection);
 
-function withContext(storyFn) {
+function withContext(Story) {
     return (
         <ApplicationContext.Provider
             value={{
@@ -34,11 +27,10 @@ function withContext(storyFn) {
                 redirect: action("Change url"),
             }}
         >
-            {storyFn()}
+            <Story />
         </ApplicationContext.Provider>
     );
 }
-addDecorator(withContext);
 
 const messages = {
     en: parse_translations_dict(en),
@@ -54,8 +46,7 @@ setIntlConfig({
     onError: (_) => {},
 });
 
-// Register decorator
-addDecorator(withIntl);
+export const decorators = [withKnobs, withContainerSection, withContext, withIntl];
 
 // Set runtime config
 window.__env__ = {};

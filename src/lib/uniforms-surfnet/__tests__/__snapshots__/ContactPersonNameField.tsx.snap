@@ -2,23 +2,21 @@
 
 exports[`<ContactPersonNameField> - selects item with keystrokes 1`] = `
 initialize {
-  "0": Object {
-    "attribs": Object {
-      "required": "",
-    },
+  "0": Node {
+    "attribs": Object {},
     "children": Array [
-      Object {
+      Node {
         "attribs": Object {
           "class": "euiFormRow euiFormRow--fullWidth",
           "id": "uniforms-0000-000y-row",
         },
         "children": Array [
-          Object {
+          Node {
             "attribs": Object {
               "class": "euiFormRow__labelWrapper",
             },
             "children": Array [
-              Object {
+              Node {
                 "attribs": Object {
                   "class": "euiFormLabel euiFormRow__label",
                   "for": "uniforms-0000-000y",
@@ -26,9 +24,9 @@ initialize {
                 "children": Array [],
                 "name": "label",
                 "namespace": "http://www.w3.org/1999/xhtml",
-                "next": Object {
+                "next": Node {
                   "data": " ",
-                  "next": Object {
+                  "next": Node {
                     "attribs": Object {
                       "class": "euiText euiText--medium",
                     },
@@ -62,9 +60,9 @@ initialize {
                   "for": undefined,
                 },
               },
-              Object {
+              Node {
                 "data": " ",
-                "next": Object {
+                "next": Node {
                   "attribs": Object {
                     "class": "euiText euiText--medium",
                   },
@@ -83,7 +81,7 @@ initialize {
                   },
                 },
                 "parent": [Circular],
-                "prev": Object {
+                "prev": Node {
                   "attribs": Object {
                     "class": "euiFormLabel euiFormRow__label",
                     "for": "uniforms-0000-000y",
@@ -106,7 +104,7 @@ initialize {
                 },
                 "type": "text",
               },
-              Object {
+              Node {
                 "attribs": Object {
                   "class": "euiText euiText--medium",
                 },
@@ -115,11 +113,11 @@ initialize {
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": null,
                 "parent": [Circular],
-                "prev": Object {
+                "prev": Node {
                   "data": " ",
                   "next": [Circular],
                   "parent": [Circular],
-                  "prev": Object {
+                  "prev": Node {
                     "attribs": Object {
                       "class": "euiFormLabel euiFormRow__label",
                       "for": "uniforms-0000-000y",
@@ -153,22 +151,22 @@ initialize {
             ],
             "name": "div",
             "namespace": "http://www.w3.org/1999/xhtml",
-            "next": Object {
+            "next": Node {
               "attribs": Object {
                 "class": "euiFormRow__fieldWrapper",
               },
               "children": Array [
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
                   },
                   "children": Array [
-                    Object {
+                    Node {
                       "attribs": Object {
                         "class": "euiFormControlLayout__childrenWrapper",
                       },
                       "children": Array [
-                        Object {
+                        Node {
                           "attribs": Object {
                             "autocomplete": "off",
                             "class": "euiFieldText euiFieldText--fullWidth",
@@ -256,22 +254,22 @@ initialize {
               "class": undefined,
             },
           },
-          Object {
+          Node {
             "attribs": Object {
               "class": "euiFormRow__fieldWrapper",
             },
             "children": Array [
-              Object {
+              Node {
                 "attribs": Object {
                   "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
                 },
                 "children": Array [
-                  Object {
+                  Node {
                     "attribs": Object {
                       "class": "euiFormControlLayout__childrenWrapper",
                     },
                     "children": Array [
-                      Object {
+                      Node {
                         "attribs": Object {
                           "autocomplete": "off",
                           "class": "euiFieldText euiFieldText--fullWidth",
@@ -340,12 +338,12 @@ initialize {
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": null,
             "parent": [Circular],
-            "prev": Object {
+            "prev": Node {
               "attribs": Object {
                 "class": "euiFormRow__labelWrapper",
               },
               "children": Array [
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "euiFormLabel euiFormRow__label",
                     "for": "uniforms-0000-000y",
@@ -353,9 +351,9 @@ initialize {
                   "children": Array [],
                   "name": "label",
                   "namespace": "http://www.w3.org/1999/xhtml",
-                  "next": Object {
+                  "next": Node {
                     "data": " ",
-                    "next": Object {
+                    "next": Node {
                       "attribs": Object {
                         "class": "euiText euiText--medium",
                       },
@@ -389,9 +387,9 @@ initialize {
                     "for": undefined,
                   },
                 },
-                Object {
+                Node {
                   "data": " ",
-                  "next": Object {
+                  "next": Node {
                     "attribs": Object {
                       "class": "euiText euiText--medium",
                     },
@@ -410,7 +408,7 @@ initialize {
                     },
                   },
                   "parent": [Circular],
-                  "prev": Object {
+                  "prev": Node {
                     "attribs": Object {
                       "class": "euiFormLabel euiFormRow__label",
                       "for": "uniforms-0000-000y",
@@ -433,7 +431,7 @@ initialize {
                   },
                   "type": "text",
                 },
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "euiText euiText--medium",
                   },
@@ -442,11 +440,11 @@ initialize {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": null,
                   "parent": [Circular],
-                  "prev": Object {
+                  "prev": Node {
                     "data": " ",
                     "next": [Circular],
                     "parent": [Circular],
-                    "prev": Object {
+                    "prev": Node {
                       "attribs": Object {
                         "class": "euiFormLabel euiFormRow__label",
                         "for": "uniforms-0000-000y",
@@ -502,41 +500,41 @@ initialize {
         ],
         "name": "div",
         "namespace": "http://www.w3.org/1999/xhtml",
-        "next": Object {
+        "next": Node {
           "attribs": Object {
             "class": "autocomplete-container",
           },
           "children": Array [
-            Object {
+            Node {
               "attribs": Object {
                 "class": "autocomplete ",
               },
               "children": Array [
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "result",
                   },
                   "children": Array [
-                    Object {
+                    Node {
                       "attribs": Object {},
                       "children": Array [
-                        Object {
+                        Node {
                           "attribs": Object {
                             "class": "",
                           },
                           "children": Array [
-                            Object {
+                            Node {
                               "attribs": Object {},
                               "children": Array [
-                                Object {
+                                Node {
                                   "attribs": Object {},
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "attribs": Object {
                                         "class": "matched",
                                       },
                                       "children": Array [
-                                        Object {
+                                        Node {
                                           "data": "n",
                                           "next": null,
                                           "parent": [Circular],
@@ -546,7 +544,7 @@ initialize {
                                       ],
                                       "name": "span",
                                       "namespace": "http://www.w3.org/1999/xhtml",
-                                      "next": Object {
+                                      "next": Node {
                                         "data": "ame",
                                         "next": null,
                                         "parent": [Circular],
@@ -563,16 +561,16 @@ initialize {
                                         "class": undefined,
                                       },
                                     },
-                                    Object {
+                                    Node {
                                       "data": "ame",
                                       "next": null,
                                       "parent": [Circular],
-                                      "prev": Object {
+                                      "prev": Node {
                                         "attribs": Object {
                                           "class": "matched",
                                         },
                                         "children": Array [
-                                          Object {
+                                          Node {
                                             "data": "n",
                                             "next": null,
                                             "parent": [Circular],
@@ -608,10 +606,10 @@ initialize {
                               ],
                               "name": "td",
                               "namespace": "http://www.w3.org/1999/xhtml",
-                              "next": Object {
+                              "next": Node {
                                 "attribs": Object {},
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "data": "a@b.nl",
                                     "next": null,
                                     "parent": [Circular],
@@ -634,10 +632,10 @@ initialize {
                               "x-attribsNamespace": Object {},
                               "x-attribsPrefix": Object {},
                             },
-                            Object {
+                            Node {
                               "attribs": Object {},
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "a@b.nl",
                                   "next": null,
                                   "parent": [Circular],
@@ -649,18 +647,18 @@ initialize {
                               "namespace": "http://www.w3.org/1999/xhtml",
                               "next": null,
                               "parent": [Circular],
-                              "prev": Object {
+                              "prev": Node {
                                 "attribs": Object {},
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "attribs": Object {},
                                     "children": Array [
-                                      Object {
+                                      Node {
                                         "attribs": Object {
                                           "class": "matched",
                                         },
                                         "children": Array [
-                                          Object {
+                                          Node {
                                             "data": "n",
                                             "next": null,
                                             "parent": [Circular],
@@ -670,7 +668,7 @@ initialize {
                                         ],
                                         "name": "span",
                                         "namespace": "http://www.w3.org/1999/xhtml",
-                                        "next": Object {
+                                        "next": Node {
                                           "data": "ame",
                                           "next": null,
                                           "parent": [Circular],
@@ -687,16 +685,16 @@ initialize {
                                           "class": undefined,
                                         },
                                       },
-                                      Object {
+                                      Node {
                                         "data": "ame",
                                         "next": null,
                                         "parent": [Circular],
-                                        "prev": Object {
+                                        "prev": Node {
                                           "attribs": Object {
                                             "class": "matched",
                                           },
                                           "children": Array [
-                                            Object {
+                                            Node {
                                               "data": "n",
                                               "next": null,
                                               "parent": [Circular],
@@ -821,41 +819,41 @@ initialize {
           "id": undefined,
         },
       },
-      Object {
+      Node {
         "attribs": Object {
           "class": "autocomplete-container",
         },
         "children": Array [
-          Object {
+          Node {
             "attribs": Object {
               "class": "autocomplete ",
             },
             "children": Array [
-              Object {
+              Node {
                 "attribs": Object {
                   "class": "result",
                 },
                 "children": Array [
-                  Object {
+                  Node {
                     "attribs": Object {},
                     "children": Array [
-                      Object {
+                      Node {
                         "attribs": Object {
                           "class": "",
                         },
                         "children": Array [
-                          Object {
+                          Node {
                             "attribs": Object {},
                             "children": Array [
-                              Object {
+                              Node {
                                 "attribs": Object {},
                                 "children": Array [
-                                  Object {
+                                  Node {
                                     "attribs": Object {
                                       "class": "matched",
                                     },
                                     "children": Array [
-                                      Object {
+                                      Node {
                                         "data": "n",
                                         "next": null,
                                         "parent": [Circular],
@@ -865,7 +863,7 @@ initialize {
                                     ],
                                     "name": "span",
                                     "namespace": "http://www.w3.org/1999/xhtml",
-                                    "next": Object {
+                                    "next": Node {
                                       "data": "ame",
                                       "next": null,
                                       "parent": [Circular],
@@ -882,16 +880,16 @@ initialize {
                                       "class": undefined,
                                     },
                                   },
-                                  Object {
+                                  Node {
                                     "data": "ame",
                                     "next": null,
                                     "parent": [Circular],
-                                    "prev": Object {
+                                    "prev": Node {
                                       "attribs": Object {
                                         "class": "matched",
                                       },
                                       "children": Array [
-                                        Object {
+                                        Node {
                                           "data": "n",
                                           "next": null,
                                           "parent": [Circular],
@@ -927,10 +925,10 @@ initialize {
                             ],
                             "name": "td",
                             "namespace": "http://www.w3.org/1999/xhtml",
-                            "next": Object {
+                            "next": Node {
                               "attribs": Object {},
                               "children": Array [
-                                Object {
+                                Node {
                                   "data": "a@b.nl",
                                   "next": null,
                                   "parent": [Circular],
@@ -953,10 +951,10 @@ initialize {
                             "x-attribsNamespace": Object {},
                             "x-attribsPrefix": Object {},
                           },
-                          Object {
+                          Node {
                             "attribs": Object {},
                             "children": Array [
-                              Object {
+                              Node {
                                 "data": "a@b.nl",
                                 "next": null,
                                 "parent": [Circular],
@@ -968,18 +966,18 @@ initialize {
                             "namespace": "http://www.w3.org/1999/xhtml",
                             "next": null,
                             "parent": [Circular],
-                            "prev": Object {
+                            "prev": Node {
                               "attribs": Object {},
                               "children": Array [
-                                Object {
+                                Node {
                                   "attribs": Object {},
                                   "children": Array [
-                                    Object {
+                                    Node {
                                       "attribs": Object {
                                         "class": "matched",
                                       },
                                       "children": Array [
-                                        Object {
+                                        Node {
                                           "data": "n",
                                           "next": null,
                                           "parent": [Circular],
@@ -989,7 +987,7 @@ initialize {
                                       ],
                                       "name": "span",
                                       "namespace": "http://www.w3.org/1999/xhtml",
-                                      "next": Object {
+                                      "next": Node {
                                         "data": "ame",
                                         "next": null,
                                         "parent": [Circular],
@@ -1006,16 +1004,16 @@ initialize {
                                         "class": undefined,
                                       },
                                     },
-                                    Object {
+                                    Node {
                                       "data": "ame",
                                       "next": null,
                                       "parent": [Circular],
-                                      "prev": Object {
+                                      "prev": Node {
                                         "attribs": Object {
                                           "class": "matched",
                                         },
                                         "children": Array [
-                                          Object {
+                                          Node {
                                             "data": "n",
                                             "next": null,
                                             "parent": [Circular],
@@ -1119,18 +1117,18 @@ initialize {
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": null,
         "parent": [Circular],
-        "prev": Object {
+        "prev": Node {
           "attribs": Object {
             "class": "euiFormRow euiFormRow--fullWidth",
             "id": "uniforms-0000-000y-row",
           },
           "children": Array [
-            Object {
+            Node {
               "attribs": Object {
                 "class": "euiFormRow__labelWrapper",
               },
               "children": Array [
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "euiFormLabel euiFormRow__label",
                     "for": "uniforms-0000-000y",
@@ -1138,9 +1136,9 @@ initialize {
                   "children": Array [],
                   "name": "label",
                   "namespace": "http://www.w3.org/1999/xhtml",
-                  "next": Object {
+                  "next": Node {
                     "data": " ",
-                    "next": Object {
+                    "next": Node {
                       "attribs": Object {
                         "class": "euiText euiText--medium",
                       },
@@ -1174,9 +1172,9 @@ initialize {
                     "for": undefined,
                   },
                 },
-                Object {
+                Node {
                   "data": " ",
-                  "next": Object {
+                  "next": Node {
                     "attribs": Object {
                       "class": "euiText euiText--medium",
                     },
@@ -1195,7 +1193,7 @@ initialize {
                     },
                   },
                   "parent": [Circular],
-                  "prev": Object {
+                  "prev": Node {
                     "attribs": Object {
                       "class": "euiFormLabel euiFormRow__label",
                       "for": "uniforms-0000-000y",
@@ -1218,7 +1216,7 @@ initialize {
                   },
                   "type": "text",
                 },
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "euiText euiText--medium",
                   },
@@ -1227,11 +1225,11 @@ initialize {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": null,
                   "parent": [Circular],
-                  "prev": Object {
+                  "prev": Node {
                     "data": " ",
                     "next": [Circular],
                     "parent": [Circular],
-                    "prev": Object {
+                    "prev": Node {
                       "attribs": Object {
                         "class": "euiFormLabel euiFormRow__label",
                         "for": "uniforms-0000-000y",
@@ -1265,22 +1263,22 @@ initialize {
               ],
               "name": "div",
               "namespace": "http://www.w3.org/1999/xhtml",
-              "next": Object {
+              "next": Node {
                 "attribs": Object {
                   "class": "euiFormRow__fieldWrapper",
                 },
                 "children": Array [
-                  Object {
+                  Node {
                     "attribs": Object {
                       "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
                     },
                     "children": Array [
-                      Object {
+                      Node {
                         "attribs": Object {
                           "class": "euiFormControlLayout__childrenWrapper",
                         },
                         "children": Array [
-                          Object {
+                          Node {
                             "attribs": Object {
                               "autocomplete": "off",
                               "class": "euiFieldText euiFieldText--fullWidth",
@@ -1368,22 +1366,22 @@ initialize {
                 "class": undefined,
               },
             },
-            Object {
+            Node {
               "attribs": Object {
                 "class": "euiFormRow__fieldWrapper",
               },
               "children": Array [
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
                   },
                   "children": Array [
-                    Object {
+                    Node {
                       "attribs": Object {
                         "class": "euiFormControlLayout__childrenWrapper",
                       },
                       "children": Array [
-                        Object {
+                        Node {
                           "attribs": Object {
                             "autocomplete": "off",
                             "class": "euiFieldText euiFieldText--fullWidth",
@@ -1452,12 +1450,12 @@ initialize {
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": null,
               "parent": [Circular],
-              "prev": Object {
+              "prev": Node {
                 "attribs": Object {
                   "class": "euiFormRow__labelWrapper",
                 },
                 "children": Array [
-                  Object {
+                  Node {
                     "attribs": Object {
                       "class": "euiFormLabel euiFormRow__label",
                       "for": "uniforms-0000-000y",
@@ -1465,9 +1463,9 @@ initialize {
                     "children": Array [],
                     "name": "label",
                     "namespace": "http://www.w3.org/1999/xhtml",
-                    "next": Object {
+                    "next": Node {
                       "data": " ",
-                      "next": Object {
+                      "next": Node {
                         "attribs": Object {
                           "class": "euiText euiText--medium",
                         },
@@ -1501,9 +1499,9 @@ initialize {
                       "for": undefined,
                     },
                   },
-                  Object {
+                  Node {
                     "data": " ",
-                    "next": Object {
+                    "next": Node {
                       "attribs": Object {
                         "class": "euiText euiText--medium",
                       },
@@ -1522,7 +1520,7 @@ initialize {
                       },
                     },
                     "parent": [Circular],
-                    "prev": Object {
+                    "prev": Node {
                       "attribs": Object {
                         "class": "euiFormLabel euiFormRow__label",
                         "for": "uniforms-0000-000y",
@@ -1545,7 +1543,7 @@ initialize {
                     },
                     "type": "text",
                   },
-                  Object {
+                  Node {
                     "attribs": Object {
                       "class": "euiText euiText--medium",
                     },
@@ -1554,11 +1552,11 @@ initialize {
                     "namespace": "http://www.w3.org/1999/xhtml",
                     "next": null,
                     "parent": [Circular],
-                    "prev": Object {
+                    "prev": Node {
                       "data": " ",
                       "next": [Circular],
                       "parent": [Circular],
-                      "prev": Object {
+                      "prev": Node {
                         "attribs": Object {
                           "class": "euiFormLabel euiFormRow__label",
                           "for": "uniforms-0000-000y",
@@ -1639,36 +1637,25 @@ initialize {
     "name": "section",
     "namespace": "http://www.w3.org/1999/xhtml",
     "next": null,
-    "parent": null,
-    "prev": null,
-    "root": Object {
-      "attribs": Object {},
+    "parent": Node {
       "children": Array [
         [Circular],
       ],
       "name": "root",
-      "namespace": "http://www.w3.org/1999/xhtml",
       "next": null,
       "parent": null,
       "prev": null,
       "type": "root",
-      "x-attribsNamespace": Object {},
-      "x-attribsPrefix": Object {},
     },
+    "prev": null,
     "type": "tag",
-    "x-attribsNamespace": Object {
-      "required": undefined,
-    },
-    "x-attribsPrefix": Object {
-      "required": undefined,
-    },
+    "x-attribsNamespace": Object {},
+    "x-attribsPrefix": Object {},
   },
   "_root": [Circular],
   "length": 1,
   "options": Object {
     "decodeEntities": true,
-    "normalizeWhitespace": false,
-    "withDomLvl1": true,
     "xml": false,
   },
 }
@@ -1676,23 +1663,21 @@ initialize {
 
 exports[`<ContactPersonNameField> - selects item with keystrokes 2`] = `
 initialize {
-  "0": Object {
-    "attribs": Object {
-      "required": "",
-    },
+  "0": Node {
+    "attribs": Object {},
     "children": Array [
-      Object {
+      Node {
         "attribs": Object {
           "class": "euiFormRow euiFormRow--fullWidth",
           "id": "uniforms-0000-000y-row",
         },
         "children": Array [
-          Object {
+          Node {
             "attribs": Object {
               "class": "euiFormRow__labelWrapper",
             },
             "children": Array [
-              Object {
+              Node {
                 "attribs": Object {
                   "class": "euiFormLabel euiFormRow__label",
                   "for": "uniforms-0000-000y",
@@ -1700,9 +1685,9 @@ initialize {
                 "children": Array [],
                 "name": "label",
                 "namespace": "http://www.w3.org/1999/xhtml",
-                "next": Object {
+                "next": Node {
                   "data": " ",
-                  "next": Object {
+                  "next": Node {
                     "attribs": Object {
                       "class": "euiText euiText--medium",
                     },
@@ -1736,9 +1721,9 @@ initialize {
                   "for": undefined,
                 },
               },
-              Object {
+              Node {
                 "data": " ",
-                "next": Object {
+                "next": Node {
                   "attribs": Object {
                     "class": "euiText euiText--medium",
                   },
@@ -1757,7 +1742,7 @@ initialize {
                   },
                 },
                 "parent": [Circular],
-                "prev": Object {
+                "prev": Node {
                   "attribs": Object {
                     "class": "euiFormLabel euiFormRow__label",
                     "for": "uniforms-0000-000y",
@@ -1780,7 +1765,7 @@ initialize {
                 },
                 "type": "text",
               },
-              Object {
+              Node {
                 "attribs": Object {
                   "class": "euiText euiText--medium",
                 },
@@ -1789,11 +1774,11 @@ initialize {
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": null,
                 "parent": [Circular],
-                "prev": Object {
+                "prev": Node {
                   "data": " ",
                   "next": [Circular],
                   "parent": [Circular],
-                  "prev": Object {
+                  "prev": Node {
                     "attribs": Object {
                       "class": "euiFormLabel euiFormRow__label",
                       "for": "uniforms-0000-000y",
@@ -1827,22 +1812,22 @@ initialize {
             ],
             "name": "div",
             "namespace": "http://www.w3.org/1999/xhtml",
-            "next": Object {
+            "next": Node {
               "attribs": Object {
                 "class": "euiFormRow__fieldWrapper",
               },
               "children": Array [
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
                   },
                   "children": Array [
-                    Object {
+                    Node {
                       "attribs": Object {
                         "class": "euiFormControlLayout__childrenWrapper",
                       },
                       "children": Array [
-                        Object {
+                        Node {
                           "attribs": Object {
                             "autocomplete": "off",
                             "class": "euiFieldText euiFieldText--fullWidth",
@@ -1930,22 +1915,22 @@ initialize {
               "class": undefined,
             },
           },
-          Object {
+          Node {
             "attribs": Object {
               "class": "euiFormRow__fieldWrapper",
             },
             "children": Array [
-              Object {
+              Node {
                 "attribs": Object {
                   "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
                 },
                 "children": Array [
-                  Object {
+                  Node {
                     "attribs": Object {
                       "class": "euiFormControlLayout__childrenWrapper",
                     },
                     "children": Array [
-                      Object {
+                      Node {
                         "attribs": Object {
                           "autocomplete": "off",
                           "class": "euiFieldText euiFieldText--fullWidth",
@@ -2014,12 +1999,12 @@ initialize {
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": null,
             "parent": [Circular],
-            "prev": Object {
+            "prev": Node {
               "attribs": Object {
                 "class": "euiFormRow__labelWrapper",
               },
               "children": Array [
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "euiFormLabel euiFormRow__label",
                     "for": "uniforms-0000-000y",
@@ -2027,9 +2012,9 @@ initialize {
                   "children": Array [],
                   "name": "label",
                   "namespace": "http://www.w3.org/1999/xhtml",
-                  "next": Object {
+                  "next": Node {
                     "data": " ",
-                    "next": Object {
+                    "next": Node {
                       "attribs": Object {
                         "class": "euiText euiText--medium",
                       },
@@ -2063,9 +2048,9 @@ initialize {
                     "for": undefined,
                   },
                 },
-                Object {
+                Node {
                   "data": " ",
-                  "next": Object {
+                  "next": Node {
                     "attribs": Object {
                       "class": "euiText euiText--medium",
                     },
@@ -2084,7 +2069,7 @@ initialize {
                     },
                   },
                   "parent": [Circular],
-                  "prev": Object {
+                  "prev": Node {
                     "attribs": Object {
                       "class": "euiFormLabel euiFormRow__label",
                       "for": "uniforms-0000-000y",
@@ -2107,7 +2092,7 @@ initialize {
                   },
                   "type": "text",
                 },
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "euiText euiText--medium",
                   },
@@ -2116,11 +2101,11 @@ initialize {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": null,
                   "parent": [Circular],
-                  "prev": Object {
+                  "prev": Node {
                     "data": " ",
                     "next": [Circular],
                     "parent": [Circular],
-                    "prev": Object {
+                    "prev": Node {
                       "attribs": Object {
                         "class": "euiFormLabel euiFormRow__label",
                         "for": "uniforms-0000-000y",
@@ -2176,7 +2161,7 @@ initialize {
         ],
         "name": "div",
         "namespace": "http://www.w3.org/1999/xhtml",
-        "next": Object {
+        "next": Node {
           "attribs": Object {
             "class": "autocomplete-container",
           },
@@ -2206,7 +2191,7 @@ initialize {
           "id": undefined,
         },
       },
-      Object {
+      Node {
         "attribs": Object {
           "class": "autocomplete-container",
         },
@@ -2215,18 +2200,18 @@ initialize {
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": null,
         "parent": [Circular],
-        "prev": Object {
+        "prev": Node {
           "attribs": Object {
             "class": "euiFormRow euiFormRow--fullWidth",
             "id": "uniforms-0000-000y-row",
           },
           "children": Array [
-            Object {
+            Node {
               "attribs": Object {
                 "class": "euiFormRow__labelWrapper",
               },
               "children": Array [
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "euiFormLabel euiFormRow__label",
                     "for": "uniforms-0000-000y",
@@ -2234,9 +2219,9 @@ initialize {
                   "children": Array [],
                   "name": "label",
                   "namespace": "http://www.w3.org/1999/xhtml",
-                  "next": Object {
+                  "next": Node {
                     "data": " ",
-                    "next": Object {
+                    "next": Node {
                       "attribs": Object {
                         "class": "euiText euiText--medium",
                       },
@@ -2270,9 +2255,9 @@ initialize {
                     "for": undefined,
                   },
                 },
-                Object {
+                Node {
                   "data": " ",
-                  "next": Object {
+                  "next": Node {
                     "attribs": Object {
                       "class": "euiText euiText--medium",
                     },
@@ -2291,7 +2276,7 @@ initialize {
                     },
                   },
                   "parent": [Circular],
-                  "prev": Object {
+                  "prev": Node {
                     "attribs": Object {
                       "class": "euiFormLabel euiFormRow__label",
                       "for": "uniforms-0000-000y",
@@ -2314,7 +2299,7 @@ initialize {
                   },
                   "type": "text",
                 },
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "euiText euiText--medium",
                   },
@@ -2323,11 +2308,11 @@ initialize {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": null,
                   "parent": [Circular],
-                  "prev": Object {
+                  "prev": Node {
                     "data": " ",
                     "next": [Circular],
                     "parent": [Circular],
-                    "prev": Object {
+                    "prev": Node {
                       "attribs": Object {
                         "class": "euiFormLabel euiFormRow__label",
                         "for": "uniforms-0000-000y",
@@ -2361,22 +2346,22 @@ initialize {
               ],
               "name": "div",
               "namespace": "http://www.w3.org/1999/xhtml",
-              "next": Object {
+              "next": Node {
                 "attribs": Object {
                   "class": "euiFormRow__fieldWrapper",
                 },
                 "children": Array [
-                  Object {
+                  Node {
                     "attribs": Object {
                       "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
                     },
                     "children": Array [
-                      Object {
+                      Node {
                         "attribs": Object {
                           "class": "euiFormControlLayout__childrenWrapper",
                         },
                         "children": Array [
-                          Object {
+                          Node {
                             "attribs": Object {
                               "autocomplete": "off",
                               "class": "euiFieldText euiFieldText--fullWidth",
@@ -2464,22 +2449,22 @@ initialize {
                 "class": undefined,
               },
             },
-            Object {
+            Node {
               "attribs": Object {
                 "class": "euiFormRow__fieldWrapper",
               },
               "children": Array [
-                Object {
+                Node {
                   "attribs": Object {
                     "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
                   },
                   "children": Array [
-                    Object {
+                    Node {
                       "attribs": Object {
                         "class": "euiFormControlLayout__childrenWrapper",
                       },
                       "children": Array [
-                        Object {
+                        Node {
                           "attribs": Object {
                             "autocomplete": "off",
                             "class": "euiFieldText euiFieldText--fullWidth",
@@ -2548,12 +2533,12 @@ initialize {
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": null,
               "parent": [Circular],
-              "prev": Object {
+              "prev": Node {
                 "attribs": Object {
                   "class": "euiFormRow__labelWrapper",
                 },
                 "children": Array [
-                  Object {
+                  Node {
                     "attribs": Object {
                       "class": "euiFormLabel euiFormRow__label",
                       "for": "uniforms-0000-000y",
@@ -2561,9 +2546,9 @@ initialize {
                     "children": Array [],
                     "name": "label",
                     "namespace": "http://www.w3.org/1999/xhtml",
-                    "next": Object {
+                    "next": Node {
                       "data": " ",
-                      "next": Object {
+                      "next": Node {
                         "attribs": Object {
                           "class": "euiText euiText--medium",
                         },
@@ -2597,9 +2582,9 @@ initialize {
                       "for": undefined,
                     },
                   },
-                  Object {
+                  Node {
                     "data": " ",
-                    "next": Object {
+                    "next": Node {
                       "attribs": Object {
                         "class": "euiText euiText--medium",
                       },
@@ -2618,7 +2603,7 @@ initialize {
                       },
                     },
                     "parent": [Circular],
-                    "prev": Object {
+                    "prev": Node {
                       "attribs": Object {
                         "class": "euiFormLabel euiFormRow__label",
                         "for": "uniforms-0000-000y",
@@ -2641,7 +2626,7 @@ initialize {
                     },
                     "type": "text",
                   },
-                  Object {
+                  Node {
                     "attribs": Object {
                       "class": "euiText euiText--medium",
                     },
@@ -2650,11 +2635,11 @@ initialize {
                     "namespace": "http://www.w3.org/1999/xhtml",
                     "next": null,
                     "parent": [Circular],
-                    "prev": Object {
+                    "prev": Node {
                       "data": " ",
                       "next": [Circular],
                       "parent": [Circular],
-                      "prev": Object {
+                      "prev": Node {
                         "attribs": Object {
                           "class": "euiFormLabel euiFormRow__label",
                           "for": "uniforms-0000-000y",
@@ -2735,36 +2720,25 @@ initialize {
     "name": "section",
     "namespace": "http://www.w3.org/1999/xhtml",
     "next": null,
-    "parent": null,
-    "prev": null,
-    "root": Object {
-      "attribs": Object {},
+    "parent": Node {
       "children": Array [
         [Circular],
       ],
       "name": "root",
-      "namespace": "http://www.w3.org/1999/xhtml",
       "next": null,
       "parent": null,
       "prev": null,
       "type": "root",
-      "x-attribsNamespace": Object {},
-      "x-attribsPrefix": Object {},
     },
+    "prev": null,
     "type": "tag",
-    "x-attribsNamespace": Object {
-      "required": undefined,
-    },
-    "x-attribsPrefix": Object {
-      "required": undefined,
-    },
+    "x-attribsNamespace": Object {},
+    "x-attribsPrefix": Object {},
   },
   "_root": [Circular],
   "length": 1,
   "options": Object {
     "decodeEntities": true,
-    "normalizeWhitespace": false,
-    "withDomLvl1": true,
     "xml": false,
   },
 }

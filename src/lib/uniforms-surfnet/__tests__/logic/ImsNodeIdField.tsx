@@ -21,7 +21,7 @@ import { ImsNodeIdField, SelectField } from "lib/uniforms-surfnet/src";
 import React from "react";
 
 jest.mock("lib/uniforms-surfnet/src/SelectField", () => {
-    return { __esModule: true, default: jest.fn(() => <br />) };
+    return { __esModule: true, default: () => <br /> };
 });
 
 describe("<ImsNodeIdField>", () => {

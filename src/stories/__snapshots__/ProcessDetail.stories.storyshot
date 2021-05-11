@@ -39,6 +39,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
               >
                 <button
                   className="euiButton euiButton--secondary euiButton--fill"
+                  disabled={false}
                   id="retry"
                   onClick={[Function]}
                   style={
@@ -79,6 +80,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
               >
                 <button
                   className="euiButton euiButton--danger euiButton--fill"
+                  disabled={false}
                   id="abort"
                   onClick={[Function]}
                   style={
@@ -119,6 +121,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
               >
                 <button
                   className="euiButton euiButton--primary"
+                  disabled={false}
                   onClick={[Function]}
                   style={
                     Object {
@@ -158,6 +161,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
               >
                 <button
                   className="euiButton euiButton--primary"
+                  disabled={false}
                   onClick={[Function]}
                   style={
                     Object {
@@ -198,6 +202,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
               >
                 <button
                   className="euiButton euiButton--primary"
+                  disabled={false}
                   onClick={[Function]}
                   style={
                     Object {
@@ -521,9 +526,9 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                                     Object {
                                       "__html": "[
    {
-      <span class=\\"hljs-attr\\">\\"email\\"</span>: <span class=\\"hljs-string\\">\\"hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl\\"</span>,
-      <span class=\\"hljs-attr\\">\\"name\\"</span>: <span class=\\"hljs-string\\">\\"Hiram\\"</span>,
-      <span class=\\"hljs-attr\\">\\"phone\\"</span>: <span class=\\"hljs-string\\">\\"\\"</span>
+      <span class=\\"hljs-attr\\">&quot;email&quot;</span>: <span class=\\"hljs-string\\">&quot;hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;name&quot;</span>: <span class=\\"hljs-string\\">&quot;Hiram&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;phone&quot;</span>: <span class=\\"hljs-string\\">&quot;&quot;</span>
    }
 ]",
                                     }
@@ -618,8 +623,8 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                                   dangerouslySetInnerHTML={
                                     Object {
                                       "__html": "{
-   <span class=\\"hljs-attr\\">\\"ieee_interface_type\\"</span>: <span class=\\"hljs-string\\">\\"10GBASE-SR\\"</span>,
-   <span class=\\"hljs-attr\\">\\"location_code\\"</span>: <span class=\\"hljs-string\\">\\"Zp001A\\"</span>
+   <span class=\\"hljs-attr\\">&quot;ieee_interface_type&quot;</span>: <span class=\\"hljs-string\\">&quot;10GBASE-SR&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;location_code&quot;</span>: <span class=\\"hljs-string\\">&quot;Zp001A&quot;</span>
 }",
                                     }
                                   }
@@ -1456,10 +1461,10 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                                   dangerouslySetInnerHTML={
                                     Object {
                                       "__html": "{
-   <span class=\\"hljs-attr\\">\\"device_port_name\\"</span>: <span class=\\"hljs-string\\">\\"CU  FNAL_Zp001A SP\\"</span>,
-   <span class=\\"hljs-attr\\">\\"ims_circuit_id\\"</span>: <span class=\\"hljs-string\\">\\"44251\\"</span>,
-   <span class=\\"hljs-attr\\">\\"ims_circuit_name\\"</span>: <span class=\\"hljs-string\\">\\"Zp001A_SP_tagged_FNAL_ae6cb63d\\"</span>,
-   <span class=\\"hljs-attr\\">\\"ims_extra_info\\"</span>: <span class=\\"hljs-string\\">\\"10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory\\"</span>
+   <span class=\\"hljs-attr\\">&quot;device_port_name&quot;</span>: <span class=\\"hljs-string\\">&quot;CU  FNAL_Zp001A SP&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;ims_circuit_id&quot;</span>: <span class=\\"hljs-string\\">&quot;44251&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;ims_circuit_name&quot;</span>: <span class=\\"hljs-string\\">&quot;Zp001A_SP_tagged_FNAL_ae6cb63d&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;ims_extra_info&quot;</span>: <span class=\\"hljs-string\\">&quot;10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory&quot;</span>
 }",
                                     }
                                   }
@@ -1641,16 +1646,16 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                                   dangerouslySetInnerHTML={
                                     Object {
                                       "__html": "{
-   <span class=\\"hljs-attr\\">\\"connector_type\\"</span>: <span class=\\"hljs-string\\">\\"LC/PC\\"</span>,
-   <span class=\\"hljs-attr\\">\\"fiber_type\\"</span>: <span class=\\"hljs-string\\">\\"multi-mode\\"</span>,
-   <span class=\\"hljs-attr\\">\\"id\\"</span>: <span class=\\"hljs-number\\">680884</span>,
-   <span class=\\"hljs-attr\\">\\"iface_type\\"</span>: <span class=\\"hljs-string\\">\\"10GBASE-SR\\"</span>,
-   <span class=\\"hljs-attr\\">\\"line_name\\"</span>: <span class=\\"hljs-string\\">\\"ZP001A_SP_TAGGED_FNAL_AE6CB63D\\"</span>,
-   <span class=\\"hljs-attr\\">\\"location\\"</span>: <span class=\\"hljs-string\\">\\"ZP001A\\"</span>,
-   <span class=\\"hljs-attr\\">\\"node\\"</span>: <span class=\\"hljs-string\\">\\"ZP001A-JNX-ACC-TEST\\"</span>,
-   <span class=\\"hljs-attr\\">\\"patchposition\\"</span>: <span class=\\"hljs-string\\">\\"DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)\\"</span>,
-   <span class=\\"hljs-attr\\">\\"port\\"</span>: <span class=\\"hljs-string\\">\\"1/0/0\\"</span>,
-   <span class=\\"hljs-attr\\">\\"status\\"</span>: <span class=\\"hljs-string\\">\\"3\\"</span>
+   <span class=\\"hljs-attr\\">&quot;connector_type&quot;</span>: <span class=\\"hljs-string\\">&quot;LC/PC&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;fiber_type&quot;</span>: <span class=\\"hljs-string\\">&quot;multi-mode&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;id&quot;</span>: <span class=\\"hljs-number\\">680884</span>,
+   <span class=\\"hljs-attr\\">&quot;iface_type&quot;</span>: <span class=\\"hljs-string\\">&quot;10GBASE-SR&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;line_name&quot;</span>: <span class=\\"hljs-string\\">&quot;ZP001A_SP_TAGGED_FNAL_AE6CB63D&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;location&quot;</span>: <span class=\\"hljs-string\\">&quot;ZP001A&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;node&quot;</span>: <span class=\\"hljs-string\\">&quot;ZP001A-JNX-ACC-TEST&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;patchposition&quot;</span>: <span class=\\"hljs-string\\">&quot;DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;port&quot;</span>: <span class=\\"hljs-string\\">&quot;1/0/0&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;status&quot;</span>: <span class=\\"hljs-string\\">&quot;3&quot;</span>
 }",
                                     }
                                   }
@@ -1746,14 +1751,14 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                                   dangerouslySetInnerHTML={
                                     Object {
                                       "__html": "{
-   <span class=\\"hljs-attr\\">\\"ptp:ptp\\"</span>: {
-      <span class=\\"hljs-attr\\">\\"customer_name\\"</span>: <span class=\\"hljs-string\\">\\"FNAL\\"</span>,
-      <span class=\\"hljs-attr\\">\\"device\\"</span>: <span class=\\"hljs-string\\">\\"zp001a-jnx-acc-test\\"</span>,
-      <span class=\\"hljs-attr\\">\\"interface\\"</span>: <span class=\\"hljs-string\\">\\"xe-1/0/0\\"</span>,
-      <span class=\\"hljs-attr\\">\\"name\\"</span>: <span class=\\"hljs-string\\">\\"54fd79f5-947f-459f-9b02-e463c2e69134\\"</span>,
-      <span class=\\"hljs-attr\\">\\"ptptype\\"</span>: <span class=\\"hljs-string\\">\\"tagged\\"</span>,
-      <span class=\\"hljs-attr\\">\\"speed\\"</span>: <span class=\\"hljs-string\\">\\"10g\\"</span>,
-      <span class=\\"hljs-attr\\">\\"subscription_id\\"</span>: <span class=\\"hljs-string\\">\\"ae6cb63d-a7fa-4167-b0e9-ee311d757397\\"</span>
+   <span class=\\"hljs-attr\\">&quot;ptp:ptp&quot;</span>: {
+      <span class=\\"hljs-attr\\">&quot;customer_name&quot;</span>: <span class=\\"hljs-string\\">&quot;FNAL&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;device&quot;</span>: <span class=\\"hljs-string\\">&quot;zp001a-jnx-acc-test&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;interface&quot;</span>: <span class=\\"hljs-string\\">&quot;xe-1/0/0&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;name&quot;</span>: <span class=\\"hljs-string\\">&quot;54fd79f5-947f-459f-9b02-e463c2e69134&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;ptptype&quot;</span>: <span class=\\"hljs-string\\">&quot;tagged&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;speed&quot;</span>: <span class=\\"hljs-string\\">&quot;10g&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;subscription_id&quot;</span>: <span class=\\"hljs-string\\">&quot;ae6cb63d-a7fa-4167-b0e9-ee311d757397&quot;</span>
    }
 }",
                                     }
@@ -2122,8 +2127,8 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                                   dangerouslySetInnerHTML={
                                     Object {
                                       "__html": "[
-   <span class=\\"hljs-string\\">\\"2019-11-15 12:37:14.186858+01:00\\"</span>,
-   <span class=\\"hljs-string\\">\\"2019-11-15 12:37:15.775995+01:00\\"</span>
+   <span class=\\"hljs-string\\">&quot;2019-11-15 12:37:14.186858+01:00&quot;</span>,
+   <span class=\\"hljs-string\\">&quot;2019-11-15 12:37:15.775995+01:00&quot;</span>
 ]",
                                     }
                                   }
@@ -2393,6 +2398,7 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
                 <section>
                   <section
                     className="form-input"
+                    readOnly={false}
                   >
                     <label
                       className="euiFormLabel euiFormRow__label"
@@ -2413,6 +2419,7 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
                     >
                       <button
                         className="euiButton euiButton--warning"
+                        disabled={false}
                         id="button-cancel-form-submit"
                         onClick={[Function]}
                         style={
@@ -2439,6 +2446,7 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
                   >
                     <button
                       className="euiButton euiButton--primary euiButton--fill"
+                      disabled={false}
                       id="button-submit-form-submit"
                       style={
                         Object {
@@ -2586,6 +2594,7 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
                 <section>
                   <section
                     className="form-input"
+                    readOnly={false}
                   >
                     <label
                       className="euiFormLabel euiFormRow__label"
@@ -2606,6 +2615,7 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
                     >
                       <button
                         className="euiButton euiButton--warning"
+                        disabled={false}
                         id="button-cancel-form-submit"
                         onClick={[Function]}
                         style={
@@ -2632,6 +2642,7 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
                   >
                     <button
                       className="euiButton euiButton--primary euiButton--fill"
+                      disabled={false}
                       id="button-submit-form-submit"
                       style={
                         Object {
@@ -2751,6 +2762,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
               >
                 <button
                   className="euiButton euiButton--secondary euiButton--fill"
+                  disabled={false}
                   id="retry"
                   onClick={[Function]}
                   style={
@@ -2791,6 +2803,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
               >
                 <button
                   className="euiButton euiButton--danger euiButton--fill"
+                  disabled={false}
                   id="abort"
                   onClick={[Function]}
                   style={
@@ -2831,6 +2844,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
               >
                 <button
                   className="euiButton euiButton--primary"
+                  disabled={false}
                   onClick={[Function]}
                   style={
                     Object {
@@ -2870,6 +2884,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
               >
                 <button
                   className="euiButton euiButton--primary"
+                  disabled={false}
                   onClick={[Function]}
                   style={
                     Object {
@@ -2910,6 +2925,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
               >
                 <button
                   className="euiButton euiButton--primary"
+                  disabled={false}
                   onClick={[Function]}
                   style={
                     Object {
@@ -3233,9 +3249,9 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                                     Object {
                                       "__html": "[
    {
-      <span class=\\"hljs-attr\\">\\"email\\"</span>: <span class=\\"hljs-string\\">\\"hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl\\"</span>,
-      <span class=\\"hljs-attr\\">\\"name\\"</span>: <span class=\\"hljs-string\\">\\"Hiram\\"</span>,
-      <span class=\\"hljs-attr\\">\\"phone\\"</span>: <span class=\\"hljs-string\\">\\"\\"</span>
+      <span class=\\"hljs-attr\\">&quot;email&quot;</span>: <span class=\\"hljs-string\\">&quot;hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;name&quot;</span>: <span class=\\"hljs-string\\">&quot;Hiram&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;phone&quot;</span>: <span class=\\"hljs-string\\">&quot;&quot;</span>
    }
 ]",
                                     }
@@ -3330,8 +3346,8 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                                   dangerouslySetInnerHTML={
                                     Object {
                                       "__html": "{
-   <span class=\\"hljs-attr\\">\\"ieee_interface_type\\"</span>: <span class=\\"hljs-string\\">\\"10GBASE-SR\\"</span>,
-   <span class=\\"hljs-attr\\">\\"location_code\\"</span>: <span class=\\"hljs-string\\">\\"Zp001A\\"</span>
+   <span class=\\"hljs-attr\\">&quot;ieee_interface_type&quot;</span>: <span class=\\"hljs-string\\">&quot;10GBASE-SR&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;location_code&quot;</span>: <span class=\\"hljs-string\\">&quot;Zp001A&quot;</span>
 }",
                                     }
                                   }
@@ -4168,10 +4184,10 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                                   dangerouslySetInnerHTML={
                                     Object {
                                       "__html": "{
-   <span class=\\"hljs-attr\\">\\"device_port_name\\"</span>: <span class=\\"hljs-string\\">\\"CU  FNAL_Zp001A SP\\"</span>,
-   <span class=\\"hljs-attr\\">\\"ims_circuit_id\\"</span>: <span class=\\"hljs-string\\">\\"44251\\"</span>,
-   <span class=\\"hljs-attr\\">\\"ims_circuit_name\\"</span>: <span class=\\"hljs-string\\">\\"Zp001A_SP_tagged_FNAL_ae6cb63d\\"</span>,
-   <span class=\\"hljs-attr\\">\\"ims_extra_info\\"</span>: <span class=\\"hljs-string\\">\\"10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory\\"</span>
+   <span class=\\"hljs-attr\\">&quot;device_port_name&quot;</span>: <span class=\\"hljs-string\\">&quot;CU  FNAL_Zp001A SP&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;ims_circuit_id&quot;</span>: <span class=\\"hljs-string\\">&quot;44251&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;ims_circuit_name&quot;</span>: <span class=\\"hljs-string\\">&quot;Zp001A_SP_tagged_FNAL_ae6cb63d&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;ims_extra_info&quot;</span>: <span class=\\"hljs-string\\">&quot;10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory&quot;</span>
 }",
                                     }
                                   }
@@ -4353,16 +4369,16 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                                   dangerouslySetInnerHTML={
                                     Object {
                                       "__html": "{
-   <span class=\\"hljs-attr\\">\\"connector_type\\"</span>: <span class=\\"hljs-string\\">\\"LC/PC\\"</span>,
-   <span class=\\"hljs-attr\\">\\"fiber_type\\"</span>: <span class=\\"hljs-string\\">\\"multi-mode\\"</span>,
-   <span class=\\"hljs-attr\\">\\"id\\"</span>: <span class=\\"hljs-number\\">680884</span>,
-   <span class=\\"hljs-attr\\">\\"iface_type\\"</span>: <span class=\\"hljs-string\\">\\"10GBASE-SR\\"</span>,
-   <span class=\\"hljs-attr\\">\\"line_name\\"</span>: <span class=\\"hljs-string\\">\\"ZP001A_SP_TAGGED_FNAL_AE6CB63D\\"</span>,
-   <span class=\\"hljs-attr\\">\\"location\\"</span>: <span class=\\"hljs-string\\">\\"ZP001A\\"</span>,
-   <span class=\\"hljs-attr\\">\\"node\\"</span>: <span class=\\"hljs-string\\">\\"ZP001A-JNX-ACC-TEST\\"</span>,
-   <span class=\\"hljs-attr\\">\\"patchposition\\"</span>: <span class=\\"hljs-string\\">\\"DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)\\"</span>,
-   <span class=\\"hljs-attr\\">\\"port\\"</span>: <span class=\\"hljs-string\\">\\"1/0/0\\"</span>,
-   <span class=\\"hljs-attr\\">\\"status\\"</span>: <span class=\\"hljs-string\\">\\"3\\"</span>
+   <span class=\\"hljs-attr\\">&quot;connector_type&quot;</span>: <span class=\\"hljs-string\\">&quot;LC/PC&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;fiber_type&quot;</span>: <span class=\\"hljs-string\\">&quot;multi-mode&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;id&quot;</span>: <span class=\\"hljs-number\\">680884</span>,
+   <span class=\\"hljs-attr\\">&quot;iface_type&quot;</span>: <span class=\\"hljs-string\\">&quot;10GBASE-SR&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;line_name&quot;</span>: <span class=\\"hljs-string\\">&quot;ZP001A_SP_TAGGED_FNAL_AE6CB63D&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;location&quot;</span>: <span class=\\"hljs-string\\">&quot;ZP001A&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;node&quot;</span>: <span class=\\"hljs-string\\">&quot;ZP001A-JNX-ACC-TEST&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;patchposition&quot;</span>: <span class=\\"hljs-string\\">&quot;DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;port&quot;</span>: <span class=\\"hljs-string\\">&quot;1/0/0&quot;</span>,
+   <span class=\\"hljs-attr\\">&quot;status&quot;</span>: <span class=\\"hljs-string\\">&quot;3&quot;</span>
 }",
                                     }
                                   }
@@ -4458,14 +4474,14 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                                   dangerouslySetInnerHTML={
                                     Object {
                                       "__html": "{
-   <span class=\\"hljs-attr\\">\\"ptp:ptp\\"</span>: {
-      <span class=\\"hljs-attr\\">\\"customer_name\\"</span>: <span class=\\"hljs-string\\">\\"FNAL\\"</span>,
-      <span class=\\"hljs-attr\\">\\"device\\"</span>: <span class=\\"hljs-string\\">\\"zp001a-jnx-acc-test\\"</span>,
-      <span class=\\"hljs-attr\\">\\"interface\\"</span>: <span class=\\"hljs-string\\">\\"xe-1/0/0\\"</span>,
-      <span class=\\"hljs-attr\\">\\"name\\"</span>: <span class=\\"hljs-string\\">\\"54fd79f5-947f-459f-9b02-e463c2e69134\\"</span>,
-      <span class=\\"hljs-attr\\">\\"ptptype\\"</span>: <span class=\\"hljs-string\\">\\"tagged\\"</span>,
-      <span class=\\"hljs-attr\\">\\"speed\\"</span>: <span class=\\"hljs-string\\">\\"10g\\"</span>,
-      <span class=\\"hljs-attr\\">\\"subscription_id\\"</span>: <span class=\\"hljs-string\\">\\"ae6cb63d-a7fa-4167-b0e9-ee311d757397\\"</span>
+   <span class=\\"hljs-attr\\">&quot;ptp:ptp&quot;</span>: {
+      <span class=\\"hljs-attr\\">&quot;customer_name&quot;</span>: <span class=\\"hljs-string\\">&quot;FNAL&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;device&quot;</span>: <span class=\\"hljs-string\\">&quot;zp001a-jnx-acc-test&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;interface&quot;</span>: <span class=\\"hljs-string\\">&quot;xe-1/0/0&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;name&quot;</span>: <span class=\\"hljs-string\\">&quot;54fd79f5-947f-459f-9b02-e463c2e69134&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;ptptype&quot;</span>: <span class=\\"hljs-string\\">&quot;tagged&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;speed&quot;</span>: <span class=\\"hljs-string\\">&quot;10g&quot;</span>,
+      <span class=\\"hljs-attr\\">&quot;subscription_id&quot;</span>: <span class=\\"hljs-string\\">&quot;ae6cb63d-a7fa-4167-b0e9-ee311d757397&quot;</span>
    }
 }",
                                     }
@@ -4834,8 +4850,8 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                                   dangerouslySetInnerHTML={
                                     Object {
                                       "__html": "[
-   <span class=\\"hljs-string\\">\\"2019-11-15 12:37:14.186858+01:00\\"</span>,
-   <span class=\\"hljs-string\\">\\"2019-11-15 12:37:15.775995+01:00\\"</span>
+   <span class=\\"hljs-string\\">&quot;2019-11-15 12:37:14.186858+01:00&quot;</span>,
+   <span class=\\"hljs-string\\">&quot;2019-11-15 12:37:15.775995+01:00&quot;</span>
 ]",
                                     }
                                   }

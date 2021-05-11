@@ -21,7 +21,7 @@ import { connectField, filterDOMProps, joinName, useField } from "uniforms";
 export type ListDelFieldProps = FieldProps<null, { initialCount?: number; itemProps?: {}; outerList?: boolean }>;
 
 // onChange not used on purpose
-function ListDel({ disabled, name, id, onChange, outerList = false, ...props }: ListDelFieldProps) {
+function ListDel({ disabled, name, readOnly, id, onChange, outerList = false, ...props }: ListDelFieldProps) {
     const nameParts = joinName(null, name);
     const nameIndex = +nameParts[nameParts.length - 1];
     const parentName = joinName(nameParts.slice(0, -1));
@@ -29,18 +29,23 @@ function ListDel({ disabled, name, id, onChange, outerList = false, ...props }: 
 
     const limitNotReached = !disabled && !(parent.minCount! >= parent.value!.length);
 
+    function onAction(event: React.KeyboardEvent | React.MouseEvent) {
+        if (limitNotReached && !readOnly && (!("key" in event) || event.key === "Enter")) {
+            const value = parent.value!.slice();
+            value.splice(nameIndex, 1);
+            parent.onChange(value);
+        }
+    }
+
     return (
         <div
             {...filterDOMProps(props)}
             className="del-item"
             id={`${id}.remove`}
-            onClick={() => {
-                if (limitNotReached) {
-                    const value = parent.value!.slice();
-                    value.splice(nameIndex, 1);
-                    parent.onChange(value);
-                }
-            }}
+            onClick={onAction}
+            onKeyDown={onAction}
+            role="button"
+            tabIndex={0}
         >
             <i className={`fa fa-minus ${!limitNotReached ? "disabled" : ""}`} />
 

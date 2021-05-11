@@ -87,9 +87,7 @@ export const CorelinkAddLink = () => {
     return <UserInputContainer formName="Corelink add link form" stepUserInput={form} />;
 };
 
-CorelinkAddLink.story = {
-    name: "Corelink add link",
-};
+CorelinkAddLink.storyName = "Corelink add link";
 
 export const Nodes = () => {
     mock.onGet("surf/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(200, []);
@@ -127,9 +125,7 @@ export const Sn8PortselectAllOrganisations = () => {
     return <UserInputContainer formName="SN8 portselect form, showing all ports" stepUserInput={form} />;
 };
 
-Sn8PortselectAllOrganisations.story = {
-    name: "SN8 Portselect all organisations",
-};
+Sn8PortselectAllOrganisations.storyName = "SN8 Portselect all organisations";
 
 export const Sn8PortselectTagged = () => {
     mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
@@ -151,9 +147,7 @@ export const Sn8PortselectTagged = () => {
     return <UserInputContainer formName="SN8 portselect form, showing all ports" stepUserInput={form} />;
 };
 
-Sn8PortselectTagged.story = {
-    name: "SN8 Portselect tagged",
-};
+Sn8PortselectTagged.storyName = "SN8 Portselect tagged";
 
 export const Sn8PortselectUntagged = () => {
     mock.onGet("/api/surf/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
@@ -175,9 +169,7 @@ export const Sn8PortselectUntagged = () => {
     return <UserInputContainer formName="SN8 portselect form, showing all ports" stepUserInput={form} />;
 };
 
-Sn8PortselectUntagged.story = {
-    name: "SN8 Portselect untagged",
-};
+Sn8PortselectUntagged.storyName = "SN8 Portselect untagged";
 
 export const Sn8PortselectSelectedOrganisation = () => {
     mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP%2Cstatuses%2Cactive").reply(
@@ -210,6 +202,4 @@ export const Sn8PortselectSelectedOrganisation = () => {
     );
 };
 
-Sn8PortselectSelectedOrganisation.story = {
-    name: "SN8 Portselect selected organisation",
-};
+Sn8PortselectSelectedOrganisation.storyName = "SN8 Portselect selected organisation";

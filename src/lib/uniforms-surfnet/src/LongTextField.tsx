@@ -28,6 +28,7 @@ function LongText({
     name,
     onChange,
     placeholder,
+    readOnly,
     value,
     error,
     showInlineError,
@@ -50,6 +51,7 @@ function LongText({
                     isInvalid={error}
                     onChange={(event) => onChange(event.target.value)}
                     placeholder={placeholder}
+                    readOnly={readOnly}
                     value={value ?? ""}
                     fullWidth
                 />

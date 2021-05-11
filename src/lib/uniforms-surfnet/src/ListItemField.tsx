@@ -1,5 +1,3 @@
-import AutoField from "lib/uniforms-surfnet/src/AutoField";
-import ListDelField from "lib/uniforms-surfnet/src/ListDelField";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +12,11 @@ import ListDelField from "lib/uniforms-surfnet/src/ListDelField";
  * limitations under the License.
  *
  */
+
+import ListDelField from "lib/uniforms-surfnet/src/ListDelField";
 import React, { ReactNode } from "react";
 import { connectField } from "uniforms";
+import { AutoField } from "uniforms-unstyled";
 
 export type ListItemFieldProps = {
     children?: ReactNode;

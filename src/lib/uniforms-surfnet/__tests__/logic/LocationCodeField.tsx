@@ -20,7 +20,7 @@ import React from "react";
 import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
 jest.mock("lib/uniforms-surfnet/src/SelectField", () => {
-    return { __esModule: true, default: jest.fn(() => <br />) };
+    return { __esModule: true, default: () => <br /> };
 });
 
 describe("<LocationCodeField>", () => {

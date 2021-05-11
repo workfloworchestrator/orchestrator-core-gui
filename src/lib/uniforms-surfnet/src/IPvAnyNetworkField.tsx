@@ -32,6 +32,7 @@ function IPvAnyNetwork({
     name,
     onChange,
     placeholder,
+    readOnly,
     type,
     value,
     error,
@@ -63,10 +64,12 @@ function IPvAnyNetwork({
                                 id={id}
                                 name={name}
                                 onChange={(prefix: IpBlock) => {
-                                    if (prefix.state === 0 || prefix.state === 1) {
-                                        setSelectedPrefix(prefix);
+                                    if (!readOnly) {
+                                        if (prefix.state === 0 || prefix.state === 1) {
+                                            setSelectedPrefix(prefix);
+                                        }
+                                        onChange(prefix.prefix);
                                     }
-                                    onChange(prefix.prefix);
                                 }}
                                 selected_prefix_id={selectedPrefix?.id}
                             />
@@ -79,7 +82,9 @@ function IPvAnyNetwork({
                                 prefixlen={parseInt(netmask, 10)}
                                 prefixMin={usedPrefixMin}
                                 onChange={(prefix: string) => {
-                                    onChange(prefix);
+                                    if (!readOnly) {
+                                        onChange(prefix);
+                                    }
                                 }}
                                 selectedSubnet={usePrefix}
                             />
