@@ -49,6 +49,7 @@ import { IntlShape, RawIntlProvider } from "react-intl";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { QueryParamProvider } from "use-query-params";
 import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
+import { createPolicyCheck } from "utils/policy";
 import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
 
@@ -56,6 +57,9 @@ import { assignees, locationCodes, organisations, processStatuses, products, rep
 
 export const history = createBrowserHistory();
 
+interface IProps {
+    user?: Partial<Oidc.Profile> & { [index: string]: any };
+}
 interface IState {
     loading: boolean;
     loaded: boolean;
@@ -66,8 +70,8 @@ interface IState {
     intl?: IntlShape;
 }
 
-class App extends React.PureComponent<{}, IState> {
-    constructor(props: {}, context: ApplicationContextInterface) {
+class App extends React.PureComponent<IProps, IState> {
+    constructor(props: IProps, context: ApplicationContextInterface) {
         super(props, context);
         this.state = {
             loading: true,
@@ -83,6 +87,7 @@ class App extends React.PureComponent<{}, IState> {
                     const intl = await setLocale(locale);
                     this.setState({ intl: intl });
                 },
+                allowed: (_resource: string) => false,
             },
             error: false,
             errorDialogOpen: false,
@@ -140,6 +145,7 @@ class App extends React.PureComponent<{}, IState> {
             allAssignees,
             allProcessStatuses,
             language,
+            allowed,
         ] = await Promise.all([
             organisations(),
             products(),
@@ -147,6 +153,7 @@ class App extends React.PureComponent<{}, IState> {
             assignees(),
             processStatuses(),
             setLocale("en-GB"),
+            createPolicyCheck(this.props.user),
         ]);
 
         const filterdProducts = (allProducts || []).sort((a, b) => a.name.localeCompare(b.name));
@@ -166,6 +173,7 @@ class App extends React.PureComponent<{}, IState> {
                     const intl = await setLocale(locale);
                     this.setState({ intl: intl });
                 },
+                allowed: allowed,
             },
         });
     }

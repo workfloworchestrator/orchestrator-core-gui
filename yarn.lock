@@ -1994,6 +1994,14 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.9.2.tgz#adea7b6953cbb34651766b0548468e743c6a2353"
   integrity sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==
 
+"@open-policy-agent/opa-wasm@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@open-policy-agent/opa-wasm/-/opa-wasm-1.2.0.tgz#481b766093f70b00efefbee1e4192f375fd34ca2"
+  integrity sha512-CtUBTnzvDrT0NASa8IuGQTxFGgt2vxbLnMYuTA+uDFxOcA4uK4mGFgrhHJtxUZnWHiwemOvKKSY3BMCo7qiAsQ==
+  dependencies:
+    sprintf-js "^1.1.2"
+    utf8 "^3.0.0"
+
 "@reach/router@^1.2.1", "@reach/router@^1.3.4":
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/@reach/router/-/router-1.3.4.tgz#d2574b19370a70c80480ed91f3da840136d10f8c"
@@ -16493,6 +16501,11 @@ split-string@^3.0.1, split-string@^3.0.2:
   dependencies:
     extend-shallow "^3.0.0"
 
+sprintf-js@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.1.2.tgz#da1765262bf8c0f571749f2ad6c26300207ae673"
+  integrity sha512-VE0SOVEHCk7Qc8ulkWw3ntAzXuqf7S2lvwQaDLRnUeIEaKNQJzV6BwmLKhOqT61aGhfUMrXeaBk+oDGCzvhcug==
+
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
@@ -17932,6 +17945,11 @@ use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
   integrity sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==
+
+utf8@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/utf8/-/utf8-3.0.0.tgz#f052eed1364d696e769ef058b183df88c87f69d1"
+  integrity sha512-E8VjFIQ/TyQgp+TZfS6l8yp/xWppSAHzidGiRrqe4bK4XP9pTRyKFgGJpO3SN7zdX4DeomTrwaseCHovfpFcqQ==
 
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
