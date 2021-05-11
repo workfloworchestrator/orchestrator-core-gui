@@ -30,6 +30,7 @@ function Date({
     min,
     name,
     onChange,
+    readOnly,
     placeholder,
     value,
     ...props
@@ -53,6 +54,7 @@ function Date({
                     }
                 }}
                 placeholder={placeholder}
+                readOnly={readOnly}
                 ref={inputRef}
                 type="datetime-local"
                 value={dateFormat(value) ?? ""}

@@ -57,12 +57,10 @@ export function formInput<T extends { [index: string]: any }>(
 
 export function formSelect(
     i18nKey: string,
-    onChange: (value: ValueType<Option>) => void,
+    onChange: (value: ValueType<Option, false>) => void,
     values: (Option | string)[],
     readOnly: boolean,
-    selected_value?: string | string[],
-    clearable = false,
-    multiple = false
+    selected_value?: string | string[]
 ) {
     const options: Option[] = !values.length
         ? []
@@ -70,13 +68,7 @@ export function formSelect(
         ? (values as string[]).map((val) => ({ value: val, label: val }))
         : (values as Option[]);
 
-    const value = !selected_value
-        ? undefined
-        : multiple
-        ? ((selected_value as string[])
-              .map((value) => options.find((option) => option.value === value))
-              .filter((value) => !!value) as ReadonlyArray<Option>)
-        : options.find((option) => option.value === (selected_value as string));
+    const value = !selected_value ? undefined : options.find((option) => option.value === (selected_value as string));
 
     return (
         <section className="form-divider">
@@ -85,15 +77,13 @@ export function formSelect(
                 label={intl.formatMessage({ id: i18nKey })}
                 labelAppend={<EuiText size="m">{intl.formatMessage({ id: `${i18nKey}_info` })}</EuiText>}
             >
-                <Select
+                <Select<Option, false>
                     className="select-status"
                     onChange={onChange}
                     options={options}
                     isSearchable={false}
                     value={value}
-                    isClearable={clearable}
                     isDisabled={readOnly}
-                    isMulti={multiple}
                 />
             </EuiFormRow>
         </section>

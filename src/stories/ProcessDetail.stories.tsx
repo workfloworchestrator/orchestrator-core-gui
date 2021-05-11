@@ -13,21 +13,30 @@
  *
  */
 
+import { Meta } from "@storybook/react";
 import mock from "axios-mock";
 import ProcessDetail from "pages/ProcessDetail";
 import React from "react";
 import FAILED_PROCESS_JSON from "stories/data/process-failed.json";
 import SUSPENDED_PROCESS_JSON from "stories/data/process-suspended.json";
 import StoryRouter from "storybook-react-router";
+import { QueryParamProvider } from "use-query-params";
 
 export default {
     title: "ProcessDetail",
-    decorators: [StoryRouter()],
+    decorators: [
+        StoryRouter(),
+        (Story) => (
+            <QueryParamProvider>
+                <Story />
+            </QueryParamProvider>
+        ),
+    ],
     // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
     parameters: {
         fileName: __filename,
     },
-};
+} as Meta;
 
 export const Process = () => {
     mock.reset();

@@ -1,4 +1,3 @@
-import { FieldProps } from "lib/uniforms-surfnet/src/types";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,9 @@ import { FieldProps } from "lib/uniforms-surfnet/src/types";
  * limitations under the License.
  *
  */
+
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
+import { omit } from "lodash";
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
 
@@ -26,18 +28,18 @@ export type RadioFieldProps = FieldProps<
 
 function Radio({
     allowedValues,
-    checkboxes, // eslint-disable-line no-unused-vars
     disabled,
     id,
     label,
     name,
     onChange,
+    readOnly,
     transform,
     value,
     ...props
 }: RadioFieldProps) {
     return (
-        <div {...filterDOMProps(props)}>
+        <div {...omit(filterDOMProps(props), ["checkboxes"])}>
             {label && <label>{label}</label>}
 
             {allowedValues?.map((item) => (
@@ -47,7 +49,11 @@ function Radio({
                         disabled={disabled}
                         id={`${id}-${escape(item)}`}
                         name={name}
-                        onChange={() => onChange(item)}
+                        onChange={() => {
+                            if (!readOnly) {
+                                onChange(item);
+                            }
+                        }}
                         type="radio"
                     />
 

@@ -129,3 +129,14 @@ test("<ListField> - renders correctly when child is list", () => {
     expect(wrapper.find("section").at(1).prop("className")).toBe("list-field");
     expect(wrapper.find(ListField).at(0).render()).toMatchSnapshot();
 });
+
+test("<ListField> - renders proper number of optional values after add new value (with initialCount)", () => {
+    const element = <ListField name="x" initialCount={3} label="ListFieldLabel" />;
+    const onChange = jest.fn();
+    const wrapper = mount(
+        element,
+        createContext({ x: { type: Array, optional: true }, "x.$": { type: String } }, { onChange })
+    );
+    expect(wrapper.find(ListAddField).simulate("click")).toBeTruthy();
+    expect(onChange).toHaveBeenNthCalledWith(1, "x", [undefined, undefined, undefined, undefined]);
+});

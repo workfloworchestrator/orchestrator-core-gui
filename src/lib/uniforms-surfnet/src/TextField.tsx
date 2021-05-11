@@ -20,6 +20,7 @@ import { connectField, filterDOMProps } from "uniforms";
 export type TextFieldProps = FieldProps<string>;
 
 function Text({
+    autoComplete,
     disabled,
     id,
     inputRef,
@@ -28,6 +29,7 @@ function Text({
     name,
     onChange,
     placeholder,
+    readOnly,
     type,
     value,
     error,
@@ -46,11 +48,13 @@ function Text({
                 fullWidth
             >
                 <EuiFieldText
+                    autoComplete={autoComplete}
                     disabled={disabled}
                     name={name}
                     isInvalid={error}
                     onChange={(event) => onChange(event.target.value)}
                     placeholder={placeholder}
+                    readOnly={readOnly}
                     type={type}
                     value={value ?? ""}
                     fullWidth

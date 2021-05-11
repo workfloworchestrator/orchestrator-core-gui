@@ -14,16 +14,15 @@
  */
 
 import { EuiFormRow, EuiText } from "@elastic/eui";
+import { ListField, ListItemField, SelectField } from "lib/uniforms-surfnet/src";
 import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { get } from "lodash";
 import React from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
-import ReactSelect, { ValueType } from "react-select";
+import ReactSelect from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import { Option } from "utils/types";
-
-import { ListField, ListItemField, SelectField } from ".";
 
 export type SelectFieldProps = FieldProps<
     string | string[],
@@ -41,6 +40,7 @@ function Select({
     name,
     onChange,
     placeholder,
+    readOnly,
     required,
     transform,
     value,
@@ -96,19 +96,21 @@ function Select({
                     id={id}
                     fullWidth
                 >
-                    <ReactSelect
+                    <ReactSelect<Option, false>
                         id={id}
                         inputId={`${id}.search`}
                         name={name}
-                        onChange={(option: ValueType<Option>) => {
-                            onChange((option as Option | null)?.value);
+                        onChange={(option) => {
+                            if (!readOnly) {
+                                onChange(option?.value);
+                            }
                         }}
                         options={options}
                         value={selectedValue}
                         isSearchable={true}
                         isClearable={true}
                         placeholder={placeholder || intl.formatMessage({ id: "forms.widgets.select.placeholder" })}
-                        isDisabled={disabled}
+                        isDisabled={disabled || readOnly}
                         required={required}
                         inputRef={inputRef}
                     />

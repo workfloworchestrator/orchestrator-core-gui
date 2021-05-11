@@ -36,6 +36,7 @@ function Num({
     name,
     onChange,
     placeholder,
+    readOnly,
     step,
     value,
     error,
@@ -57,6 +58,7 @@ function Num({
                     name={name}
                     isInvalid={error}
                     placeholder={placeholder}
+                    readOnly={readOnly}
                     onChange={(event) => onChange(parseInt(event.target.value))}
                     min={min}
                     max={max}

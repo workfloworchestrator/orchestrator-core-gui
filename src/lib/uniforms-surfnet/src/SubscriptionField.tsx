@@ -24,7 +24,7 @@ import { intl } from "locale/i18n";
 import get from "lodash/get";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
-import ReactSelect, { ValueType } from "react-select";
+import ReactSelect from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { productById } from "utils/Lookups";
@@ -103,6 +103,7 @@ function Subscription({
     name,
     onChange,
     placeholder,
+    readOnly,
     required,
     type,
     value,
@@ -278,19 +279,19 @@ function Subscription({
                         </EuiOverlayMask>
                     )}
 
-                    <ReactSelect
+                    <ReactSelect<Option, false>
                         id={id}
                         inputId={`${id}.search`}
                         name={name}
-                        onChange={(option: ValueType<Option>) => {
-                            onChange((option as Option | null)?.value);
+                        onChange={(option) => {
+                            onChange(option?.value);
                         }}
                         options={options}
                         value={selectedValue}
                         isSearchable={true}
                         isClearable={false}
                         placeholder={intl.formatMessage({ id: "forms.widgets.subscription.placeholder" })}
-                        isDisabled={disabled}
+                        isDisabled={disabled || readOnly}
                         required={required}
                         inputRef={inputRef}
                         className="subscription-field-select"

@@ -69,7 +69,11 @@ function ImsNodeId({ name, value, onChange, locationCode, status, ...props }: Im
             allowedValues={Object.keys(imsNodeIdLabelLookup)}
             value={value?.toString()}
             transform={(id: string) => get(imsNodeIdLabelLookup, id, id)}
-            onChange={(str: string) => onChange(parseInt(str, 10))}
+            onChange={
+                (((str: string) => onChange(parseInt(str, 10))) as unknown) as (
+                    v: string | string[] | undefined
+                ) => void
+            }
             placeholder={placeholder}
         />
     );

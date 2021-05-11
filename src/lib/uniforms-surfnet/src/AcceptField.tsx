@@ -80,7 +80,6 @@ function Accept({
 
     let [state, dispatch] = useReducer(
         (state: AcceptState, action: Action) => {
-            debugger;
             if (action.type === "skip") {
                 state.skip = action.value;
                 state.checks = {};

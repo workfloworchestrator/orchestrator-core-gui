@@ -14,10 +14,10 @@
  */
 
 import { EuiDescribedFormGroup, EuiFlexGroup, EuiFlexItem, EuiText } from "@elastic/eui";
-import AutoField from "lib/uniforms-surfnet/src/AutoField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import { connectField, filterDOMProps, joinName } from "uniforms";
+import { AutoField } from "uniforms-unstyled";
 
 export type NestFieldProps = FieldProps<null, { fields?: any[]; itemProps?: object }>;
 

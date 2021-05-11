@@ -19,7 +19,7 @@ test("Test suite must contain at least one test", () => {});
 
 const randomId = randomIds();
 
-export default function createContext(schema: {} = {}, context?: Partial<Context<{}>>): { context: Context<{}> } {
+export default function createContext(schema?: object, context?: Partial<Context<{}>>): { context: Context<{}> } {
     return {
         context: {
             changed: false,
@@ -30,6 +30,7 @@ export default function createContext(schema: {} = {}, context?: Partial<Context
             onChange() {},
             onSubmit() {},
             randomId,
+            submitted: false,
             submitting: false,
             validating: false,
             ...context,
@@ -38,6 +39,7 @@ export default function createContext(schema: {} = {}, context?: Partial<Context
                 disabled: false,
                 label: false,
                 placeholder: false,
+                readOnly: false,
                 showInlineError: false,
                 ...context?.state,
             },

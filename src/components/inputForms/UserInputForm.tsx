@@ -23,19 +23,27 @@ import { JSONSchema6 } from "json-schema";
 import {
     AcceptField,
     AutoFields,
+    BoolField,
     ContactPersonNameField,
+    DateField,
     IPvAnyNetworkField,
     ImsNodeIdField,
     ImsPortIdField,
     LabelField,
+    ListField,
     LocationCodeField,
     LongTextField,
+    NestField,
+    NumField,
     OptGroupField,
     OrganisationField,
     ProductField,
+    RadioField,
+    SelectField,
     SubscriptionField,
     SubscriptionSummaryField,
     SummaryField,
+    TextField,
     VlanField,
 } from "lib/uniforms-surfnet/src";
 import { intl } from "locale/i18n";
@@ -44,25 +52,15 @@ import get from "lodash/get";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { RouteComponentProps, withRouter } from "react-router";
-import { filterDOMProps, joinName } from "uniforms";
+import { Context, GuaranteedProps, filterDOMProps, joinName } from "uniforms";
 import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
-import { AutoForm } from "uniforms-unstyled";
+import { AutoField, AutoForm } from "uniforms-unstyled";
 import ApplicationContext from "utils/ApplicationContext";
 import { getQueryParameters } from "utils/QueryParameters";
 import { ValidationError } from "utils/types";
 import { stop } from "utils/Utils";
 
 type JSONSchemaFormProperty = JSONSchema6 & { uniforms: any; defaultValue: any };
-
-interface FieldError {
-    message: string;
-    params: {};
-    dataPath: string;
-}
-
-interface UniformsError {
-    details: FieldError[];
-}
 
 interface IProps extends RouteComponentProps {
     stepUserInput: JSONSchema6;
@@ -102,6 +100,81 @@ filterDOMProps.register("examples");
 filterDOMProps.register("allOf");
 filterDOMProps.register("options");
 
+export function autoFieldFunction(props: GuaranteedProps<unknown> & Record<string, any>, uniforms: Context<unknown>) {
+    const { allowedValues, checkboxes, fieldType, field } = props;
+    const { format } = field;
+
+    switch (fieldType) {
+        case Number:
+            switch (format) {
+                case "imsPortId":
+                    return ImsPortIdField;
+                case "imsNodeId":
+                    return ImsNodeIdField;
+            }
+            break;
+        case Object:
+            switch (format) {
+                case "optGroup":
+                    return OptGroupField;
+            }
+            break;
+        case String:
+            switch (format) {
+                case "subscriptionId":
+                    return SubscriptionField;
+                case "productId":
+                    return ProductField;
+                case "locationCode":
+                    return LocationCodeField;
+                case "organisationId":
+                    return OrganisationField;
+                case "contactPersonName":
+                    return ContactPersonNameField;
+                case "vlan":
+                    return VlanField;
+                case "long":
+                    return LongTextField;
+                case "label":
+                    return LabelField;
+                case "summary":
+                    return SummaryField;
+                case "subscription":
+                    return SubscriptionSummaryField;
+                case "accept":
+                    return AcceptField;
+                case "ipvanynetwork":
+                    return IPvAnyNetworkField;
+            }
+            break;
+    }
+
+    if (allowedValues && format !== "accept") {
+        if (checkboxes && fieldType !== Array) {
+            return RadioField;
+        } else {
+            return SelectField;
+        }
+    } else {
+        switch (fieldType) {
+            case Array:
+                return ListField;
+            case Boolean:
+                return BoolField;
+            case Date:
+                return DateField;
+            case Number:
+                return NumField;
+            case Object:
+                return NestField;
+            case String:
+                return TextField;
+        }
+    }
+
+    return AutoField.defaultComponentDetector(props, uniforms);
+}
+
 function resolveRef(reference: string, schema: Record<string, any>) {
     invariant(
         reference.startsWith("#"),
@@ -119,57 +192,8 @@ function resolveRef(reference: string, schema: Record<string, any>) {
     return resolvedReference;
 }
 class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
-    getField(name: string) {
-        const field = this.getFieldFixed(name);
-        //@ts-ignore
-        const { type = field.type } = this._compiledSchema[name];
-        const { format = field.format } = this._compiledSchema[name];
-
-        if (!field.component) {
-            if (type === "string") {
-                if (format === "subscriptionId") {
-                    field.component = SubscriptionField;
-                } else if (format === "productId") {
-                    field.component = ProductField;
-                } else if (format === "locationCode") {
-                    field.component = LocationCodeField;
-                } else if (format === "organisationId") {
-                    field.component = OrganisationField;
-                } else if (format === "contactPersonName") {
-                    field.component = ContactPersonNameField;
-                } else if (format === "vlan") {
-                    field.component = VlanField;
-                } else if (format === "long") {
-                    field.component = LongTextField;
-                } else if (format === "label") {
-                    field.component = LabelField;
-                } else if (format === "summary") {
-                    field.component = SummaryField;
-                } else if (format === "subscription") {
-                    field.component = SubscriptionSummaryField;
-                } else if (format === "accept") {
-                    field.component = AcceptField;
-                } else if (format === "ipvanynetwork") {
-                    field.component = IPvAnyNetworkField;
-                }
-            } else if (type === "integer") {
-                if (format === "imsPortId") {
-                    field.component = ImsPortIdField;
-                } else if (format === "imsNodeId") {
-                    field.component = ImsNodeIdField;
-                }
-            } else if (type === "object") {
-                if (format === "optGroup") {
-                    field.component = OptGroupField;
-                }
-            }
-        }
-
-        return field;
-    }
-
     // This a copy of the super class function to provide a fix for https://github.com/vazco/uniforms/issues/863
-    getFieldFixed(name: string) {
+    getField(name: string) {
         return joinName(null, name).reduce((definition, next, nextIndex, array) => {
             const previous = joinName(array.slice(0, nextIndex));
             const isRequired = get(
@@ -222,24 +246,32 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
                 .filter(Boolean);
 
             if (combinedPartials.length) {
-                _definition.properties = definition.properties ?? {};
-                _definition.required = definition.required ?? [];
+                const localProperties = definition.properties ? { ...definition.properties } : {};
+                const localRequired = definition.required ? definition.required.slice() : [];
 
                 combinedPartials.forEach((combinedPartial) => {
                     const { properties, required } = combinedPartial;
                     if (properties) {
-                        Object.assign(_definition.properties, properties);
+                        Object.assign(localProperties, properties);
                     }
                     if (required) {
-                        _definition.required.push(...required);
+                        localRequired.push(...required);
                     }
 
+                    // Copy all properties instead of only type
                     for (const key in combinedPartial) {
                         if (combinedPartial[key] && !_definition[key]) {
                             _definition[key] = combinedPartial[key];
                         }
                     }
                 });
+
+                if (Object.keys(localProperties).length > 0) {
+                    _definition.properties = localProperties;
+                }
+                if (localRequired.length > 0) {
+                    _definition.required = localRequired;
+                }
             }
 
             this._compiledSchema[_key] = Object.assign(_definition, { isRequired });
@@ -275,7 +307,7 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
         return props;
     }
 
-    getInitialValue(name: string, props: any = {}): any {
+    getInitialValue(name: string, props: Record<string, any> = {}): any {
         const { default: _default, const: _const, type: _type } = this.getField(name);
         let {
             default: defaultValue = _default !== undefined ? _default : get(this.schema.default, name),
@@ -306,8 +338,9 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
             return Array(items).fill(item);
         }
 
-        if (type === "object") return {};
-
+        if (type === "object") {
+            return {};
+        }
         return undefined;
     }
 }
@@ -459,6 +492,8 @@ class UserInputForm extends React.Component<IProps, IState> {
         const prefilledForm = fillPreselection(stepUserInput, location.search);
         const bridge = new CustomTitleJSONSchemaBridge(prefilledForm, () => {});
 
+        const AutoFieldProvider = AutoField.componentDetectorContext.Provider;
+
         return (
             <div className="user-input-form">
                 <ConfirmationDialog
@@ -470,27 +505,29 @@ class UserInputForm extends React.Component<IProps, IState> {
                 <section className="form-fieldset">
                     {stepUserInput.title && stepUserInput.title !== "unknown" && <h3>{stepUserInput.title}</h3>}
                     <SubscriptionsContextProvider>
-                        <AutoForm
-                            schema={bridge}
-                            onSubmit={this.submit}
-                            showInlineError={true}
-                            validate="onSubmit"
-                            model={userInput}
-                        >
-                            <AutoFields />
-                            {/* Show top level validation info about backend validation */}
-                            {nrOfValidationErrors > 0 && (
-                                <section className="form-errors">
-                                    <em className="error backend-validation-metadata">
-                                        <FormattedMessage
-                                            id="process.input_fields_have_validation_errors"
-                                            values={{ nrOfValidationErrors: nrOfValidationErrors }}
-                                        />
-                                    </em>
-                                </section>
-                            )}
-                            {this.renderButtons()}
-                        </AutoForm>
+                        <AutoFieldProvider value={autoFieldFunction}>
+                            <AutoForm
+                                schema={bridge}
+                                onSubmit={this.submit}
+                                showInlineError={true}
+                                validate="onSubmit"
+                                model={userInput}
+                            >
+                                <AutoFields />
+                                {/* Show top level validation info about backend validation */}
+                                {nrOfValidationErrors > 0 && (
+                                    <section className="form-errors">
+                                        <em className="error backend-validation-metadata">
+                                            <FormattedMessage
+                                                id="process.input_fields_have_validation_errors"
+                                                values={{ nrOfValidationErrors: nrOfValidationErrors }}
+                                            />
+                                        </em>
+                                    </section>
+                                )}
+                                {this.renderButtons()}
+                            </AutoForm>
+                        </AutoFieldProvider>
                     </SubscriptionsContextProvider>
                 </section>
             </div>

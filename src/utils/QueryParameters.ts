@@ -87,10 +87,12 @@ export function getQueryParameters(windowLocationSearch: Search): LocationSearch
 
 export const CommaSeparatedNumericArrayParam: QueryParamConfig<number[] | undefined> = {
     encode: (value?: number[]) => encodeDelimitedNumericArray(value, ","),
+    //@ts-ignore
     decode: (strValue: string | string[]) => decodeDelimitedNumericArray(strValue, ","),
 };
 
 export const CommaSeparatedStringArrayParam: QueryParamConfig<string[] | undefined> = {
     encode: (value?: string[]) => encodeDelimitedArray(value, ","),
+    //@ts-ignore
     decode: (strValue: string | string[]) => decodeDelimitedArray(strValue, ","),
 };

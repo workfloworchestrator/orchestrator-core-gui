@@ -19,12 +19,13 @@ import { filterDOMProps, useForm } from "uniforms";
 export type SubmitFieldProps = FieldProps<null, {}, HTMLInputElement, HTMLInputElement>;
 
 // onChange not used on purpose
-export default function SubmitField({ disabled, inputRef, value, onChange, ...props }: SubmitFieldProps) {
+export default function SubmitField({ disabled, inputRef, readOnly, value, onChange, ...props }: SubmitFieldProps) {
     const { error, state } = useForm();
 
     return (
         <input
             disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
+            readOnly={readOnly}
             ref={inputRef}
             type="submit"
             {...(value ? { value } : {})}
