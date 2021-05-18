@@ -44,6 +44,7 @@ function ContactPersonName({
     name,
     onChange,
     placeholder,
+    readOnly,
     value,
     error,
     showInlineError,
@@ -121,7 +122,7 @@ function ContactPersonName({
         setSelectedIndex(-1);
     }
 
-    function onAutocompleteKeyDown(e: React.KeyboardEvent<HTMLElement>) {
+    function onAutocompleteKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
         if (!suggestions) {
             return;
         }
@@ -174,6 +175,7 @@ function ContactPersonName({
                     placeholder={
                         placeholder || intl.formatMessage({ id: "forms.widgets.contactPersonName.placeholder" })
                     }
+                    readOnly={readOnly}
                     type="text"
                     value={value ?? ""}
                     onKeyDown={onAutocompleteKeyDown}

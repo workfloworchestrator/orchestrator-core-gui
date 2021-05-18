@@ -36,6 +36,17 @@ describe("<SelectField>", () => {
         expect(wrapper.find(ReactSelect).prop("isDisabled")).toBe(true);
     });
 
+    test("<SelectField> - renders a select with correct readOnly state", () => {
+        const onChange = jest.fn();
+
+        const element = <SelectField name="x" readOnly />;
+        const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }, { onChange }));
+
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        wrapper.find(ReactSelect).invoke("onChange")({ value: "b" });
+        expect(onChange).not.toHaveBeenCalled();
+    });
+
     test("<SelectField> - renders a select with correct id (inherited)", () => {
         const element = <SelectField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));

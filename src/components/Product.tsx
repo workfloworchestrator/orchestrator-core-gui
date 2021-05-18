@@ -103,13 +103,13 @@ class Product extends React.Component<IProps, IState> {
             const clone = id === "clone";
             productById(clone ? getParameterByName("productId", window.location.search) : id!).then((product) => {
                 if (clone) {
-                    delete product.name;
-                    delete product.product_id;
-                    delete product.created_at;
+                    product.name = "";
+                    product.product_id = "";
+                    product.created_at = 0;
                     (product.fixed_inputs || []).forEach((fixedInput) => {
-                        delete fixedInput.created_at;
-                        delete fixedInput.fixed_input_id;
-                        delete fixedInput.product_id;
+                        fixedInput.created_at = 0;
+                        fixedInput.fixed_input_id = "";
+                        fixedInput.product_id = "";
                     });
                 }
                 this.setState({ product: product, readOnly: readOnly });
@@ -290,7 +290,7 @@ class Product extends React.Component<IProps, IState> {
             | React.MouseEvent<HTMLSpanElement | HTMLButtonElement>
             | null
             | React.ChangeEvent<HTMLInputElement>
-            | ValueType<Option>
+            | ValueType<Option, false>
     ) => {
         const { product, fixedInputConf } = this.state;
         let value: any;
@@ -367,7 +367,7 @@ class Product extends React.Component<IProps, IState> {
                         this.changeProperty("status"),
                         statuses,
                         readOnly,
-                        product.status || "active"
+                        product.status ?? "active"
                     )}
                     {formDate(
                         "metadata.products.created_at",

@@ -19,12 +19,12 @@ import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import { SubscriptionSummaryField } from "lib/uniforms-surfnet/src";
 import React from "react";
 
+jest.mock("components/subscriptionDetail/SubscriptionDetail", () => {
+    return { __esModule: true, default: () => <br /> };
+});
+
 describe("<SubscriptionSummaryField>", () => {
     test("<SubscriptionSummaryField> - renders inputs", () => {
-        jest.mock("components/subscriptionDetail/SubscriptionDetail", () => {
-            return { __esModule: true, default: jest.fn(() => <br />) };
-        });
-
         const element = <SubscriptionSummaryField name="x" />;
 
         const wrapper = mount(

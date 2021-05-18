@@ -12,28 +12,26 @@
  * limitations under the License.
  *
  */
-interface Window {
-    __env__: {
-        BACKEND_URL: string;
-        OAUTH2_ENABLED: string;
-        OAUTH2_OPENID_CONNECT_URL: string;
-        OAUTH2_CLIENT_ID: string;
-        OAUTH2_SCOPE: string;
-        CHECK_STATUS_INTERVAL: number;
-        NETWORKDASHBOARD_URL: string;
-        SENTRY_DSN: string;
-        TRACING_ENABLED: boolean;
-        TRACE_SAMPLE_RATE: number;
-        RELEASE: string;
-        ENVIRONMENT: string;
-        TRACING_ORIGINS: string;
-    };
+interface Env {
+    BACKEND_URL: string;
+    OAUTH2_ENABLED: string;
+    OAUTH2_OPENID_CONNECT_URL: string;
+    OAUTH2_CLIENT_ID: string;
+    OAUTH2_SCOPE: string;
+    CHECK_STATUS_INTERVAL: number;
+    NETWORKDASHBOARD_URL: string;
+    SENTRY_DSN: string;
+    TRACING_ENABLED: boolean;
+    TRACE_SAMPLE_RATE: number;
+    RELEASE: string;
+    ENVIRONMENT: string;
+    TRACING_ORIGINS: string;
 }
 
 // We normally load env from window.__env__ as defined in public/env.js which
 // is generated on server startup (see Dockerfile) for development we fall back to process.env
 // @ts-ignore
-export const ENV = window.__env__ || {
+export const ENV: Env = window.__env__ || {
     BACKEND_URL: process.env.REACT_APP_BACKEND_URL,
     OAUTH2_ENABLED: ["true", "1", "yes", "on"].includes(
         (process.env.REACT_APP_OAUTH2_ENABLED || "true").toLocaleLowerCase()

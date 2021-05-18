@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots DatePicker Definition 1`] = `
+exports[`Storyshots DatePicker Date Picker 1`] = `
 <section
   className="storybook-container"
 >

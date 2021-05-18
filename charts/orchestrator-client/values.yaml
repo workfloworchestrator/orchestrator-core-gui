@@ -59,12 +59,14 @@ tolerations: []
 affinity: {}
 
 livenessProbe:
+  enable: true
   path: /api/user/config
   failureThreshold: 3
   periodSeconds: 30
   timeoutSeconds: 10
 
 readinessProbe:
+  enable: true
   path: /api/user/config
   failureThreshold: 3
   periodSeconds: 30

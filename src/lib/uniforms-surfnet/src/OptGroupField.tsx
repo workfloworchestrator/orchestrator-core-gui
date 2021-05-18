@@ -14,11 +14,12 @@
  */
 
 import { EuiDescribedFormGroup, EuiFlexItem, EuiFormRow } from "@elastic/eui";
-import { AutoField, BoolField } from "lib/uniforms-surfnet/src";
+import { BoolField } from "lib/uniforms-surfnet/src";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import { useIntl } from "react-intl";
 import { connectField, filterDOMProps, useField } from "uniforms";
+import { AutoField } from "uniforms-unstyled";
 
 export type OptGroupFieldProps = FieldProps<null, { fields?: any[]; itemProps?: object }>;
 
@@ -29,6 +30,7 @@ function OptGroup({
     itemProps,
     name,
     onChange, // Not used on purpose
+    readOnly,
     className = "",
     ...props
 }: OptGroupFieldProps) {
@@ -48,7 +50,7 @@ function OptGroup({
                     isInvalid={false}
                     id={name} // Not sure if this is always unique...
                 >
-                    <BoolField name="enabled" />
+                    <BoolField name="enabled" readOnly={readOnly} />
                 </EuiFormRow>
             </EuiFlexItem>
             {enabled &&

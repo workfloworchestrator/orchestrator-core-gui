@@ -30,6 +30,7 @@ function Bool({
     description,
     name,
     onChange,
+    readOnly,
     value,
     error,
     showInlineError,
@@ -52,7 +53,7 @@ function Bool({
                     id={id}
                     name={name}
                     label={name}
-                    onChange={(event) => onChange(event.target.checked)}
+                    onChange={() => !disabled && !readOnly && onChange(!value)}
                 />
             </EuiFormRow>
         </section>

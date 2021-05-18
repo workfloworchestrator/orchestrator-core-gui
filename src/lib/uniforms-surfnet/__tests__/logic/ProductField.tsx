@@ -21,7 +21,7 @@ import PRODUCTS_JSON from "stories/data/products.json";
 import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
 jest.mock("lib/uniforms-surfnet/src/SelectField", () => {
-    return { __esModule: true, default: jest.fn(() => <br />) };
+    return { __esModule: true, default: () => <br /> };
 });
 
 describe("<ProductField>", () => {

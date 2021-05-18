@@ -124,8 +124,8 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         });
     };
 
-    filterParentPrefix = (e: ValueType<Option>) => {
-        const parentPrefix = parseInt((e as Option).value, 10);
+    filterParentPrefix = (e: ValueType<Option, false>) => {
+        const parentPrefix = parseInt(e!.value, 10);
         let { filter, filter_prefixes } = this.state;
         let the_prefix: IpPrefix | undefined = undefined;
         filter_prefixes.forEach((prefix) => (the_prefix = prefix["id"] === parentPrefix ? prefix : the_prefix));

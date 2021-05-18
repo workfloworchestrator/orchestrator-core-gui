@@ -32,6 +32,14 @@ test("<NumField> - renders an input with correct disabled state", () => {
     expect(wrapper.find("input").prop("disabled")).toBe(true);
 });
 
+test("<NumField> - renders an input with correct readOnly state", () => {
+    const element = <NumField name="x" readOnly />;
+    const wrapper = mount(element, createContext({ x: { type: Number } }));
+
+    expect(wrapper.find("input")).toHaveLength(1);
+    expect(wrapper.find("input").prop("readOnly")).toBe(true);
+});
+
 test("<NumField> - renders an input with correct id (inherited)", () => {
     const element = <NumField name="x" />;
     const wrapper = mount(element, createContext({ x: { type: Number } }));
@@ -78,6 +86,14 @@ test("<NumField> - renders an input with correct placeholder", () => {
 
     expect(wrapper.find("input")).toHaveLength(1);
     expect(wrapper.find("input").prop("placeholder")).toBe("y");
+});
+
+test("<NumField> - renders an input with correct step (set)", () => {
+    const element = <NumField name="x" step={3} />;
+    const wrapper = mount(element, createContext({ x: { type: Number } }));
+
+    expect(wrapper.find("input")).toHaveLength(1);
+    expect(wrapper.find("input").prop("step")).toBe(3);
 });
 
 test("<NumField> - renders an input with correct type", () => {

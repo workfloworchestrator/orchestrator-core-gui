@@ -70,13 +70,6 @@ const edgeColorMap = [
 let pathColorMap: any = {};
 const pathWidthMap: any = {};
 
-interface IpamPrefix {
-    prefix: string;
-    asn: number;
-    description: string;
-    tags: string[];
-}
-
 interface TopologyName {
     capacity: string;
     label_dx: number | null;

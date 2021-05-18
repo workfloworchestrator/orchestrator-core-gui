@@ -48,9 +48,7 @@ function Summary({ id, name, label, description, onChange, data, ...props }: Sum
         </tr>
     ));
 
-    const table_header = isEmpty(headers) ? (
-        ""
-    ) : (
+    const table_header = isEmpty(headers) ? null : (
         <tr>
             {labels && <th />}
             {headers.map((header, idx) => (

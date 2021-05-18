@@ -67,6 +67,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           >
                             <button
                               className="euiButton euiButton--primary euiButton--small"
+                              disabled={false}
                               id="subscriptions-copy-button"
                               onBlur={[Function]}
                               onClick={[Function]}
@@ -113,6 +114,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                         >
                           <button
                             className="euiButton euiButton--primary euiButton--small"
+                            disabled={false}
                             id="subscriptions-favorite-toggle"
                             onClick={[Function]}
                             style={
@@ -433,6 +435,11 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                 <p
                   className="label"
                 >
+                   
+                </p>
+                <p
+                  className="label"
+                >
                   Instance ID: 5414e6f2-e9a2-47a6-94ef-20f426bf65a2
                 </p>
                 <table
@@ -502,6 +509,11 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                   className="product-block"
                 >
                   <h3 />
+                  <p
+                    className="label"
+                  >
+                     
+                  </p>
                   <p
                     className="label"
                   >
@@ -589,6 +601,11 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                   className="product-block"
                 >
                   <h3 />
+                  <p
+                    className="label"
+                  >
+                     
+                  </p>
                   <p
                     className="label"
                   >
@@ -830,6 +847,11 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                   className="product-block"
                 >
                   <h3 />
+                  <p
+                    className="label"
+                  >
+                     
+                  </p>
                   <p
                     className="label"
                   >

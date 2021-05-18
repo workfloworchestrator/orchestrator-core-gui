@@ -611,8 +611,7 @@ class SubscriptionDetail extends React.PureComponent<IProps, IState> {
                     !["product", "customer_descriptions"].includes(entry[0]) &&
                     entry[1] !== null
             )
-            .map((entry) => entry[1])
-            .flatMap((entry) => (isArray(entry) ? entry : [entry]));
+            .flatMap((entry) => (isArray(entry[1]) ? entry[1].map((value: any) => [entry[0], value]) : [entry]));
 
         if (!subscription || !workflows || !subscriptionProcesses || !parentSubscriptions) {
             return null;
@@ -644,11 +643,12 @@ class SubscriptionDetail extends React.PureComponent<IProps, IState> {
                         name="subscriptions.productBlocks"
                         className="subscription-product-blocks"
                     >
-                        {subscription_instances.map((instance, index) => (
+                        {subscription_instances.map((entry, index) => (
                             <SubscriptionInstance
                                 //@ts-ignore
                                 key={index}
-                                subscription_instance={instance}
+                                subscription_instance={entry[1]}
+                                field_name={entry[0]}
                             />
                         ))}
                     </SubscriptionDetailSection>

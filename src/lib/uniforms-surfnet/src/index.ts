@@ -13,7 +13,6 @@
  *
  */
 //@ts-nocheck
-export { default as AutoField } from "lib/uniforms-surfnet/src/AutoField";
 export { default as AutoFields } from "lib/uniforms-surfnet/src/AutoFields";
 export { default as BoolField } from "lib/uniforms-surfnet/src/BoolField";
 export { default as DateField } from "lib/uniforms-surfnet/src/DateField";

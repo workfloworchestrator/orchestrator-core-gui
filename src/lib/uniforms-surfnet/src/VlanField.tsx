@@ -94,6 +94,7 @@ function Vlan({
     description,
     name,
     onChange,
+    readOnly,
     value,
     error,
     showInlineError,
@@ -195,6 +196,7 @@ function Vlan({
                     isInvalid={error}
                     onChange={(event) => onChange(event.target.value)}
                     placeholder={placeholder}
+                    readOnly={readOnly}
                     type="text"
                     value={value ?? ""}
                 />

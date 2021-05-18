@@ -77,11 +77,11 @@ function CustomersFilter({
             title={column.id}
             renderButtonContent={renderFilterIcon(filtering)}
             renderContent={(disabled: boolean, reset) => (
-                <Select
+                <Select<Option, false>
                     ref={(ref) => ref?.focus()}
                     id={`filter-${state.name}.${column.id}`}
                     inputID={`input-filter-${state.name}.${column.id}`}
-                    onChange={(selected: ValueType<Option>, action: ActionMeta<Option>) => {
+                    onChange={(selected, action) => {
                         // See https://github.com/JedWatson/react-select/issues/2902 why we need this.
                         if (Array.isArray(selected)) {
                             throw new Error("Expected a single value from react-select");
@@ -140,11 +140,11 @@ export function renderMultiSelectFilter(
         : allOptions.map((val) => ({ value: val, label: val }));
     const selected = currentFilter ? options.filter(({ value }) => currentFilter.includes(value)) : [];
     const filtering = selected.length > 0;
-    const onChange = (selected: any, action: any) => {
+    const onChange = (selected: ValueType<Option, true>, action: ActionMeta<Option>) => {
         if (action && action.action === "select-option") {
-            dispatch({ type: ActionType.FILTER_ADD, id: column.id, value: action.option.value });
+            dispatch({ type: ActionType.FILTER_ADD, id: column.id, value: action.option!.value });
         } else if (action.action === "remove-value") {
-            dispatch({ type: ActionType.FILTER_REMOVE, id: column.id, value: action.removedValue.value });
+            dispatch({ type: ActionType.FILTER_REMOVE, id: column.id, value: action.removedValue!.value });
         } else if (action.action === "clear") {
             dispatch({ type: ActionType.FILTER_CLEAR, id: column.id });
         }
@@ -154,7 +154,7 @@ export function renderMultiSelectFilter(
             title={column.id}
             renderButtonContent={renderFilterIcon(filtering)}
             renderContent={(disabled, reset) => (
-                <Select
+                <Select<Option, true>
                     ref={(ref) => ref?.focus()}
                     id={`filter-${state.name}.${column.id}`}
                     inputId={`input-filter-${state.name}.${column.id}`}
@@ -195,14 +195,14 @@ export function renderSingleSelectFilter(
         : allOptions.map((val) => ({ value: val, label: val }));
     const selected = currentFilter ? options.filter(({ value }) => currentFilter.includes(value)) : [];
     const filtering = selected.length > 0;
-    const onChange = (selected: any, action: any) => {
+    const onChange = (selected: ValueType<Option, true>, action: ActionMeta<Option>) => {
         if (action && action.action === "select-option") {
             if (filtering) {
                 dispatch({ type: ActionType.FILTER_CLEAR, id: column.id });
             }
-            dispatch({ type: ActionType.FILTER_ADD, id: column.id, value: action.option.value });
+            dispatch({ type: ActionType.FILTER_ADD, id: column.id, value: action.option!.value });
         } else if (action.action === "remove-value") {
-            dispatch({ type: ActionType.FILTER_REMOVE, id: column.id, value: action.removedValue.value });
+            dispatch({ type: ActionType.FILTER_REMOVE, id: column.id, value: action.removedValue!.value });
         } else if (action.action === "clear") {
             dispatch({ type: ActionType.FILTER_CLEAR, id: column.id });
         }
@@ -212,7 +212,7 @@ export function renderSingleSelectFilter(
             title={column.id}
             renderButtonContent={renderFilterIcon(filtering)}
             renderContent={(disabled, reset) => (
-                <Select
+                <Select<Option, true>
                     ref={(ref) => ref?.focus()}
                     id={`filter-${state.name}.${column.id}`}
                     inputId={`input-filter-${state.name}.${column.id}`}
