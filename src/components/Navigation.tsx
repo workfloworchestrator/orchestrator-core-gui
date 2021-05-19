@@ -28,15 +28,17 @@ import {
 } from "@elastic/eui";
 import { Control } from "@elastic/eui/src/components/control_bar/control_bar";
 import mySpinner from "lib/Spin";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { Spinner } from "spin.js";
+import ApplicationContext from "utils/ApplicationContext";
 
 import FavoritesManagementModal from "./modals/FavoritesManagementModal";
 
 const Navigation = () => {
+    const { allowed } = useContext(ApplicationContext);
     const [loading, setLoading] = useState(false);
     const location = useLocation();
     const spinnerTarget = useRef();
@@ -73,19 +75,21 @@ const Navigation = () => {
         const controls: Control[] = [];
 
         navItems.forEach((navItem) => {
-            controls.push({
-                "aria-label": `${navItem}-tab`,
-                controlType: "text",
-                id: `main-navigation-${navItem}-tab`,
-                text: (
-                    <Link to={`/${navItem}`}>
-                        <FormattedMessage id={`navigation.${navItem}`} />
-                    </Link>
-                ),
-                className: location.pathname.startsWith(`/${navItem.replace("_", "-")}`)
-                    ? "navigation__active navigation__item"
-                    : "navigation__item",
-            });
+            if (allowed(`/orchestrator/${navItem}`)) {
+                controls.push({
+                    "aria-label": `${navItem}-tab`,
+                    controlType: "text",
+                    id: `main-navigation-${navItem}-tab`,
+                    text: (
+                        <Link to={`/${navItem}`}>
+                            <FormattedMessage id={`navigation.${navItem}`} />
+                        </Link>
+                    ),
+                    className: location.pathname.startsWith(`/${navItem.replace("_", "-")}`)
+                        ? "navigation__active navigation__item"
+                        : "navigation__item",
+                });
+            }
         });
 
         controls.push({

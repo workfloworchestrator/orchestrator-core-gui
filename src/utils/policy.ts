@@ -1,5 +1,6 @@
 import { loadPolicy } from "@open-policy-agent/opa-wasm";
 import { ENV } from "env";
+import { join } from "lodash";
 
 export async function createPolicyCheck(user?: Partial<Oidc.Profile>) {
     if (!user) {
@@ -13,7 +14,19 @@ export async function createPolicyCheck(user?: Partial<Oidc.Profile>) {
         const policy = await loadPolicy(policyWasm);
 
         function allowed(resource: string): boolean {
-            const input = { resource: resource, active: true, client_id: ENV.OAUTH2_CLIENT_ID, method: "GET", ...user };
+            const input: any = {
+                resource: resource,
+                active: true,
+                client_id: ENV.OAUTH2_CLIENT_ID,
+                method: "GET",
+                ...user,
+            };
+
+            // Fix unexpected scope array
+            if (Array.isArray(input.scope)) {
+                input.scope = join(input.scope, " ");
+            }
+
             const resultSet = policy.evaluate(input);
             if (resultSet == null || resultSet.length === 0) {
                 console.error("evaluation error", resultSet);
