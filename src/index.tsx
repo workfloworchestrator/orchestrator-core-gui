@@ -97,7 +97,7 @@ if (ENV.OAUTH2_ENABLED) {
 
                     // @ts-ignore
                     if (props.userData && !props.userData.expired) {
-                        return <App />;
+                        return <App user={props?.userData.profile} />;
                     }
                 }}
             </AuthContext.Consumer>
