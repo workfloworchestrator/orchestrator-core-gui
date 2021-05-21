@@ -15,6 +15,7 @@
 
 import "./SubscriptionDetail.scss";
 
+import { EuiFlexGroup, EuiFlexItem, EuiSwitch } from "@elastic/eui";
 import {
     dienstafnameBySubscription,
     parentSubscriptions,
@@ -29,8 +30,8 @@ import SubscriptionDetails from "components/subscriptionDetail/SubscriptionDetai
 import SubscriptionInstance from "components/subscriptionDetail/SubscriptionInstance";
 import TopologyDiagram from "components/TopologyDiagram";
 import { isArray } from "lodash";
-import React from "react";
-import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
+import React, { useState } from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl, useIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { enrichSubscription, organisationNameByUuid, renderDate, renderDateTime } from "utils/Lookups";
 import {
@@ -64,16 +65,126 @@ function SubscriptionDetailSection({
     children,
     className = "",
 }: React.PropsWithChildren<{
-    name: string;
+    name: React.ReactNode;
     className?: string;
 }>) {
     return (
         <section className="details">
-            <h2>
-                <FormattedMessage id={name} />
-            </h2>
+            <h2>{name}</h2>
             <div className={className}>{children}</div>
         </section>
+    );
+}
+
+function RenderSubscriptions({ parentSubscriptions }: { parentSubscriptions?: SubscriptionWithDetails[] }) {
+    const intl = useIntl();
+    const [filterTerminated, setFilterTerminated] = useState(true);
+
+    if (!parentSubscriptions || parentSubscriptions.length === 0) {
+        return null;
+    }
+
+    const filteredSubscriptions = filterTerminated
+        ? parentSubscriptions?.filter((subscription) => subscription.status !== "terminated")
+        : parentSubscriptions;
+
+    const columns = [
+        "customer_name",
+        "subscription_id",
+        "description",
+        "insync",
+        "product_name",
+        "status",
+        "product_tag",
+        "start_date",
+    ];
+    const th = (index: number) => {
+        const name = columns[index];
+        return (
+            <th key={index} className={name}>
+                <span>
+                    <FormattedMessage id={`subscriptions.${name}`} />
+                </span>
+            </th>
+        );
+    };
+    return (
+        <SubscriptionDetailSection
+            name={
+                <EuiFlexGroup justifyContent="spaceBetween">
+                    <EuiFlexItem grow={false}>
+                        <FormattedMessage id="subscription.parent_subscriptions" />
+                    </EuiFlexItem>
+                    <EuiFlexItem>
+                        <EuiSwitch
+                            label={<FormattedMessage id="subscription.toggle_hide_child_subscriptions" />}
+                            checked={filterTerminated}
+                            onChange={(e) => {
+                                setFilterTerminated(e.target.checked);
+                            }}
+                        />
+                    </EuiFlexItem>
+                </EuiFlexGroup>
+            }
+            className="subscription-parent-subscriptions"
+        >
+            <table className="subscriptions">
+                <thead>
+                    <tr>{columns.map((column, index) => th(index))}</tr>
+                </thead>
+                <tbody>
+                    {filteredSubscriptions.map((subscription: SubscriptionWithDetails, index: number) => (
+                        <tr key={index}>
+                            <td
+                                data-label={intl.formatMessage({ id: "subscriptions.customer_name" })}
+                                className="customer_name"
+                            >
+                                {subscription.customer_name}
+                            </td>
+                            <td
+                                data-label={intl.formatMessage({ id: "subscriptions.subscription_id" })}
+                                className="subscription_id"
+                            >
+                                <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href={`/subscriptions/${subscription.subscription_id}`}
+                                >
+                                    {subscription.subscription_id.substring(0, 8)}
+                                </a>
+                            </td>
+                            <td
+                                data-label={intl.formatMessage({ id: "subscriptions.description" })}
+                                className="description"
+                            >
+                                {subscription.description}
+                            </td>
+                            <td data-label={intl.formatMessage({ id: "subscriptions.insync" })} className="insync">
+                                <CheckBox value={subscription.insync} name="insync" readOnly={true} />
+                            </td>
+                            <td
+                                data-label={intl.formatMessage({ id: "subscriptions.product_name" })}
+                                className="product_name"
+                            >
+                                {subscription.product.name}
+                            </td>
+                            <td data-label={intl.formatMessage({ id: "subscriptions.status" })} className="status">
+                                {subscription.status}
+                            </td>
+                            <td data-label={intl.formatMessage({ id: "subscriptions.product_tag" })} className="tag">
+                                {subscription.product.tag}
+                            </td>
+                            <td
+                                data-label={intl.formatMessage({ id: "subscriptions.start_date_epoch" })}
+                                className="start_date_epoch"
+                            >
+                                {renderDate(subscription.start_date)}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </SubscriptionDetailSection>
     );
 }
 
@@ -192,7 +303,10 @@ class SubscriptionDetail extends React.PureComponent<IProps, IState> {
         }
 
         return (
-            <SubscriptionDetailSection name="subscriptions.dienstafname" className="subscription-service">
+            <SubscriptionDetailSection
+                name={<FormattedMessage id="subscriptions.dienstafname" />}
+                className="subscription-service"
+            >
                 <table className={"detail-block"}>
                     <thead />
                     <tbody>
@@ -220,106 +334,15 @@ class SubscriptionDetail extends React.PureComponent<IProps, IState> {
         );
     };
 
-    renderSubscriptions = (parentSubscriptions: SubscriptionWithDetails[], subscription: Subscription) => {
-        if (isEmpty(parentSubscriptions)) {
-            return null;
-        }
-        const { intl } = this.props;
-
-        const columns = [
-            "customer_name",
-            "subscription_id",
-            "description",
-            "insync",
-            "product_name",
-            "status",
-            "product_tag",
-            "start_date",
-        ];
-        const th = (index: number) => {
-            const name = columns[index];
-            return (
-                <th key={index} className={name}>
-                    <span>
-                        <FormattedMessage id={`subscriptions.${name}`} />
-                    </span>
-                </th>
-            );
-        };
-        return (
-            <SubscriptionDetailSection
-                name="subscription.parent_subscriptions"
-                className="subscription-parent-subscriptions"
-            >
-                <table className="subscriptions">
-                    <thead>
-                        <tr>{columns.map((column, index) => th(index))}</tr>
-                    </thead>
-                    <tbody>
-                        {parentSubscriptions.map((subscription: SubscriptionWithDetails, index: number) => (
-                            <tr key={index}>
-                                <td
-                                    data-label={intl.formatMessage({ id: "subscriptions.customer_name" })}
-                                    className="customer_name"
-                                >
-                                    {subscription.customer_name}
-                                </td>
-                                <td
-                                    data-label={intl.formatMessage({ id: "subscriptions.subscription_id" })}
-                                    className="subscription_id"
-                                >
-                                    <a
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        href={`/subscriptions/${subscription.subscription_id}`}
-                                    >
-                                        {subscription.subscription_id.substring(0, 8)}
-                                    </a>
-                                </td>
-                                <td
-                                    data-label={intl.formatMessage({ id: "subscriptions.description" })}
-                                    className="description"
-                                >
-                                    {subscription.description}
-                                </td>
-                                <td data-label={intl.formatMessage({ id: "subscriptions.insync" })} className="insync">
-                                    <CheckBox value={subscription.insync} name="insync" readOnly={true} />
-                                </td>
-                                <td
-                                    data-label={intl.formatMessage({ id: "subscriptions.product_name" })}
-                                    className="product_name"
-                                >
-                                    {subscription.product.name}
-                                </td>
-                                <td data-label={intl.formatMessage({ id: "subscriptions.status" })} className="status">
-                                    {subscription.status}
-                                </td>
-                                <td
-                                    data-label={intl.formatMessage({ id: "subscriptions.product_tag" })}
-                                    className="tag"
-                                >
-                                    {subscription.product.tag}
-                                </td>
-                                <td
-                                    data-label={intl.formatMessage({ id: "subscriptions.start_date_epoch" })}
-                                    className="start_date_epoch"
-                                >
-                                    {renderDate(subscription.start_date)}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </SubscriptionDetailSection>
-        );
-    };
-
     renderProduct = (product?: Product) => {
         if (!product) {
             return null;
         }
         return (
-            <SubscriptionDetailSection name="subscription.product_title" className="subscription-product-information">
+            <SubscriptionDetailSection
+                name={<FormattedMessage id="subscription.product_title" />}
+                className="subscription-product-information"
+            >
                 <table className="detail-block">
                     <thead />
                     <tbody>
@@ -377,7 +400,10 @@ class SubscriptionDetail extends React.PureComponent<IProps, IState> {
 
     renderActions = (subscription: SubscriptionModel, workflows: WorkflowReasons) => {
         return (
-            <SubscriptionDetailSection name="subscription.actions" className="subscription-actions">
+            <SubscriptionDetailSection
+                name={<FormattedMessage id="subscription.actions" />}
+                className="subscription-actions"
+            >
                 <table className="detail-block">
                     <thead />
                     <tbody>
@@ -515,7 +541,10 @@ class SubscriptionDetail extends React.PureComponent<IProps, IState> {
         subscriptionProcesses = subscriptionProcesses.filter((sp) => !sp.process.is_task);
 
         return (
-            <SubscriptionDetailSection name="subscription.process_link" className="subscription-processes">
+            <SubscriptionDetailSection
+                name={<FormattedMessage id="subscription.process_link" />}
+                className="subscription-processes"
+            >
                 <table className="processes">
                     <thead>
                         <tr>{columns.map((column, index) => th(index))}</tr>
@@ -555,7 +584,10 @@ class SubscriptionDetail extends React.PureComponent<IProps, IState> {
             return null;
         }
         return (
-            <SubscriptionDetailSection name="subscriptions.fixedInputs" className="subscription-fixed-inputs">
+            <SubscriptionDetailSection
+                name={<FormattedMessage id="subscriptions.fixedInputs" />}
+                className="subscription-fixed-inputs"
+            >
                 <table className="detail-block">
                     <thead />
                     <tbody>
@@ -627,7 +659,10 @@ class SubscriptionDetail extends React.PureComponent<IProps, IState> {
 
         return (
             <div className="mod-subscription-detail">
-                <SubscriptionDetailSection name="subscription.subscription_title" className="subscription-details">
+                <SubscriptionDetailSection
+                    name={<FormattedMessage id="subscription.subscription_title" />}
+                    className="subscription-details"
+                >
                     <SubscriptionDetails
                         subscription={subscription}
                         subscriptionProcesses={subscriptionProcesses}
@@ -640,7 +675,7 @@ class SubscriptionDetail extends React.PureComponent<IProps, IState> {
 
                 {subscription_instances && (
                     <SubscriptionDetailSection
-                        name="subscriptions.productBlocks"
+                        name={<FormattedMessage id="subscriptions.productBlocks" />}
                         className="subscription-product-blocks"
                     >
                         {subscription_instances.map((entry, index) => (
@@ -656,7 +691,7 @@ class SubscriptionDetail extends React.PureComponent<IProps, IState> {
                 {this.props.confirmation && this.renderActions(subscription, workflows)}
                 {this.renderProduct(product)}
                 {this.renderProcesses(subscriptionProcesses)}
-                {this.renderSubscriptions(parentSubscriptions, subscription!)}
+                <RenderSubscriptions parentSubscriptions={parentSubscriptions} />
             </div>
         );
     }
