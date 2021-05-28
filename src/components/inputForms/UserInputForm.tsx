@@ -419,7 +419,7 @@ class UserInputForm extends React.Component<IProps, IState> {
                         nrOfValidationErrors: json.validation_errors.length,
                         rootErrors: json.validation_errors
                             .filter((e: ValidationError) => e.loc[0] === "__root__")
-                            .map((e: ValidationError) => e.msg)
+                            .map((e: ValidationError) => e.msg),
                     });
 
                     // eslint-disable-next-line no-throw-literal
