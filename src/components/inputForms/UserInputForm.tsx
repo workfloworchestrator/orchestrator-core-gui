@@ -415,12 +415,11 @@ class UserInputForm extends React.Component<IProps, IState> {
                 if (error.response.status === 400) {
                     let json = error.response.data;
 
-                    // TODO: @ Thijs -> hier moet een keer door de json gelopen worden om de root errors naar state te zetten
-                    // + Double check: of nrOfValidationErrors die al meetelt
-                    // + Check of nrOfValidationErrors omgenoemd moet worden naar nrOfFieldValidationErrors
                     this.setState({
                         nrOfValidationErrors: json.validation_errors.length,
-                        rootErrors: ["Root error 1", "Root error 2"],
+                        rootErrors: json.validation_errors.filter(
+                                        function(e: ValidationError) {return e.loc[0] === "__root__"})
+                                        .map(function(e: ValidationError) {return e.msg}),
                     });
 
                     // eslint-disable-next-line no-throw-literal
