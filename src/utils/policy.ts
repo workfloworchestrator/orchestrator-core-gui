@@ -16,7 +16,6 @@ export async function createPolicyCheck(user?: Partial<Oidc.Profile>) {
         function allowed(resource: string): boolean {
             const input: any = {
                 resource: resource,
-                active: true,
                 client_id: ENV.OAUTH2_CLIENT_ID,
                 method: "GET",
                 ...user,
