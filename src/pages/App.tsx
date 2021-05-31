@@ -28,6 +28,7 @@ import ProductBlock from "components/ProductBlock";
 import ProtectedRoute from "components/ProtectedRoute";
 import { createBrowserHistory } from "history";
 import { setLocale } from "locale/i18n";
+import { memoize } from "lodash";
 import MetaData from "pages/MetaData";
 import ModifySubscription from "pages/ModifySubscription";
 import NewProcess from "pages/NewProcess";
@@ -173,7 +174,7 @@ class App extends React.PureComponent<IProps, IState> {
                     const intl = await setLocale(locale);
                     this.setState({ intl: intl });
                 },
-                allowed: allowed,
+                allowed: memoize(allowed),
             },
         });
     }
