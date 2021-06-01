@@ -20,162 +20,28 @@ import HighlightCode from "components/HighlightCode";
 import StepDetails from "components/Step";
 import isEqual from "lodash/isEqual";
 import { CustomProcessWithDetails } from "pages/ProcessDetail";
-import React from "react";
+import { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { capitalize, renderDateTime } from "utils/Lookups";
 import { ProcessSubscription, ProcessWithDetails, State, Step, prop } from "utils/types";
 import { applyIdNamingConvention, isEmpty } from "utils/Utils";
 
-interface IProps {
-    process: CustomProcessWithDetails;
+function ProcessSubscriptionLink({
+    subscriptionProcesses,
+    isProcess,
+}: {
     subscriptionProcesses: ProcessSubscription[];
-    collapsed?: number[];
-    onChangeCollapsed: (index: number) => void; // when provided it will toggle the collapse functionality
     isProcess: boolean;
-}
+}) {
 
-interface IState {
-    raw: boolean;
-    details: boolean;
-    stateChanges: boolean;
-    traceback: boolean;
-}
+    if (isEmpty(subscriptionProcesses)) {
+        return null;
+    }
 
-class ProcessStateDetails extends React.PureComponent<IProps, IState> {
-    public static defaultProps = {
-        collapsed: [],
-    };
-
-    state: IState = {
-        raw: false,
-        details: true,
-        stateChanges: true,
-        traceback: false,
-    };
-
-    renderRaw = (process: CustomProcessWithDetails) => {
-        const json = JSON.stringify(process, null, 4);
-        return (
-            <section>
-                <EuiCopy textToCopy={json}>
-                    {(copy) => (
-                        <span className="copy-to-clipboard-container">
-                            <button data-for="copy-to-clipboard" onClick={copy}>
-                                <i className={`far fa-clone`} />
-                            </button>
-                        </span>
-                    )}
-                </EuiCopy>
-                <HighlightCode data={JSON.stringify(process, null, 2)} />
-            </section>
-        );
-    };
-
-    renderProcessHeaderInformation = (process: CustomProcessWithDetails) => {
-        const { raw, traceback, details, stateChanges } = this.state;
-        return (
-            <section className="header-information">
-                <ul>
-                    <li className="process-wording">
-                        <EuiText>
-                            <h3>
-                                {this.props.isProcess && (
-                                    <FormattedMessage
-                                        id="process_state.wording_process"
-                                        values={{
-                                            product: process.productName,
-                                            customer: process.customerName,
-                                            workflow: process.workflow_name,
-                                        }}
-                                    />
-                                )}
-                                {!this.props.isProcess && (
-                                    <FormattedMessage
-                                        id="process_state.wording_task"
-                                        values={{ workflow: process.workflow_name }}
-                                    />
-                                )}
-                            </h3>
-                        </EuiText>
-                    </li>
-                </ul>
-                <ul>
-                    {!raw && (
-                        <li className="toggle-details">
-                            <EuiCheckbox
-                                id="show-details-toggle"
-                                aria-label="toggle-details"
-                                name="details"
-                                checked={details}
-                                label={<FormattedMessage id="process_state.details" />}
-                                onChange={() => this.setState({ details: !details })}
-                            />
-                        </li>
-                    )}
-                    {!raw && (
-                        <li className="toggle-state-changes">
-                            <EuiCheckbox
-                                id="show-state-delta-toggle"
-                                aria-label="toggle-state-delta"
-                                name="state-changes"
-                                checked={stateChanges}
-                                label={<FormattedMessage id="process_state.stateChanges" />}
-                                onChange={() => this.setState({ stateChanges: !stateChanges })}
-                            />
-                        </li>
-                    )}
-                    <li>
-                        <EuiCheckbox
-                            id="show-raw-json-toggle"
-                            aria-label="toggle-raw-json"
-                            name="raw"
-                            checked={raw}
-                            label={<FormattedMessage id="process_state.raw" />}
-                            onChange={() => this.setState({ raw: !raw })}
-                        />
-                    </li>
-                    {process.traceback && (
-                        <li>
-                            <EuiCheckbox
-                                id="show-traceback-toggle"
-                                aria-label="toggle-traceback"
-                                name="traceback"
-                                checked={traceback}
-                                label={<FormattedMessage id="process_state.traceback" />}
-                                onChange={() => this.setState({ traceback: !traceback })}
-                            />
-                        </li>
-                    )}
-                </ul>
-            </section>
-        );
-    };
-
-    renderSummaryValue = (value: string | number | any) =>
-        typeof value === "string" ? capitalize(value) : typeof value === "number" ? renderDateTime(value) : value;
-
-    stateDelta = (prev: State, curr: State) => {
-        const prevKeys = Object.keys(prev);
-        const currKeys = Object.keys(curr);
-        const newKeys = currKeys.filter((key) => prevKeys.indexOf(key) === -1 || !isEqual(prev[key], curr[key]));
-        const newState = newKeys.sort().reduce((acc: State, key) => {
-            if (curr[key] === Object(curr[key]) && !Array.isArray(curr[key]) && prev[key]) {
-                acc[key] = this.stateDelta(prev[key], curr[key]);
-            } else {
-                acc[key] = curr[key];
-            }
-            return acc;
-        }, {});
-        return newState;
-    };
-
-    renderProcessSubscriptionLink = (subscriptionProcesses: ProcessSubscription[]) => {
-        if (isEmpty(subscriptionProcesses)) {
-            return null;
-        }
-        return (
-            <section className="subscription-link">
-                {subscriptionProcesses.map((ps, index: number) => (
+    return (
+        <section className="subscription-link">
+            {
+                subscriptionProcesses.map((ps, index: number) => (
                     <div key={index}>
                         <EuiButton
                             id="to-subscription"
@@ -185,24 +51,25 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                             iconType="link"
                         >
                             <FormattedMessage
-                                id={`${this.props.isProcess ? "process" : "task"}.subscription_link_txt`}
+                                id={`${isProcess ? "process" : "task"}.subscription_link_txt`}
                                 values={{ target: ps.workflow_target }}
                             />
                         </EuiButton>
                     </div>
                 ))}
-            </section>
-        );
-    };
+        </section>
+    );
+}
 
-    displayStateValue = (value: any) => {
+function StateChanges({ steps, index, collapsed = false }: { steps: Step[]; index: number; collapsed?: boolean }) {
+    const displayStateValue = (value: any) => {
         if (isEmpty(value)) {
             return "";
         }
         return typeof value === "object" ? <HighlightCode data={JSON.stringify(value, null, 3)} /> : value.toString();
     };
 
-    displayMailConfirmation = (value: any) => {
+    const displayMailConfirmation = (value: any) => {
         if (isEmpty(value)) {
             return "";
         }
@@ -232,160 +99,306 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
         );
     };
 
-    renderStateChanges = (steps: Step[], index: number) => {
-        const step = steps[index];
-        const status = step.status;
-        let json: {
-            [index: string]: any;
-        } = {};
-        switch (status) {
-            case "suspend":
-            case "abort":
-            case "skipped":
-                return null;
-            case "pending":
-                if (!step.form) {
-                    return null;
-                }
-                Object.keys(step.form.properties as {})
-                    .sort()
-                    .reduce<{ [index: string]: any }>((acc, field) => {
-                        acc[field] = "";
-                        return acc;
-                    }, {});
+    const stateDelta = (prev: State, curr: State) => {
+        const prevKeys = Object.keys(prev);
+        const currKeys = Object.keys(curr);
+        const newKeys = currKeys.filter((key) => prevKeys.indexOf(key) === -1 || !isEqual(prev[key], curr[key]));
+        const newState = newKeys.sort().reduce((acc: State, key) => {
+            if (curr[key] === Object(curr[key]) && !Array.isArray(curr[key]) && prev[key]) {
+                acc[key] = stateDelta(prev[key], curr[key]);
+            } else {
+                acc[key] = curr[key];
+            }
+            return acc;
+        }, {});
+        return newState;
+    };
 
-                break;
-            case "failed":
-            case "waiting":
-                json = step.state;
-                break;
-            case "success":
-                let prevState = {};
-
-                if (index > 0) {
-                    let prev_index = index - 1;
-                    while (
-                        prev_index > 0 &&
-                        (steps[prev_index].status === "failed" || steps[prev_index].status === "waiting")
-                    ) {
-                        prev_index--;
-                    }
-                    prevState = steps[prev_index].state;
-                }
-
-                json = this.stateDelta(prevState, step.state);
-                break;
-            default:
-        }
-        if (isEmpty(json)) {
+    const step = steps[index];
+    const status = step.status;
+    let json: {
+        [index: string]: any;
+    } = {};
+    switch (status) {
+        case "suspend":
+        case "abort":
+        case "skipped":
             return null;
-        }
-        const iconName = index === 0 || steps[index - 1].status === "suspend" ? "user" : "pipelineApp";
-        const stepIsCollapsed = this.props.collapsed && this.props.collapsed.includes(index);
+        case "pending":
+            if (!step.form) {
+                return null;
+            }
+            Object.keys(step.form.properties as {})
+                .sort()
+                .reduce<{ [index: string]: any }>((acc, field) => {
+                    acc[field] = "";
+                    return acc;
+                }, {});
 
-        return (
-            <section className="state-changes">
-                <section className="state-divider">
-                    <EuiIcon type={iconName} size="xxl" className="step-type" color="primary" fill="dark" />
-                </section>
+            break;
+        case "failed":
+        case "waiting":
+            json = step.state;
+            break;
+        case "success":
+            let prevState = {};
 
-                <section className={stepIsCollapsed ? "state-delta collapsed" : "state-delta"}>
-                    <table>
-                        <tbody>
-                            {Object.keys(json).map((key) => (
-                                <tr key={key}>
-                                    <td id={`${index}-${applyIdNamingConvention(key)}-k`} className="key">
-                                        {key}
-                                    </td>
-                                    <td id={`${index}-${applyIdNamingConvention(key)}-v`} className="value">
-                                        {key === "confirmation_mail"
-                                            ? this.displayMailConfirmation(json[key])
-                                            : this.displayStateValue(json[key])}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </section>
-            </section>
-        );
-    };
+            if (index > 0) {
+                let prev_index = index - 1;
+                while (
+                    prev_index > 0 &&
+                    (steps[prev_index].status === "failed" || steps[prev_index].status === "waiting")
+                ) {
+                    prev_index--;
+                }
+                prevState = steps[prev_index].state;
+            }
 
-    toggleStep = (index: number) => {
-        if (this.props.onChangeCollapsed) {
-            // console.log(`Calling provided prop function with step: ${index}`)
-            this.props.onChangeCollapsed(index);
-        }
-    };
-
-    renderProcessOverview = (process: CustomProcessWithDetails, details: boolean, stateChanges: boolean) => {
-        const last = (i: number) => i === process.steps.length - 1;
-        const summaryKeys: (keyof ProcessWithDetails)[] = [
-            "status",
-            this.props.isProcess ? "assignee" : "created_by",
-            "step",
-            "started",
-            "last_modified",
-        ];
-        return (
-            <section className="process-overview">
-                {details && (
-                    <section className="process-summary">
-                        <table>
-                            <tbody>
-                                {summaryKeys.map((key) => (
-                                    <tr key={key}>
-                                        <td className="title">
-                                            <FormattedMessage id={`process_state.summary.${key}`} />
-                                        </td>
-                                        <td className="value">{this.renderSummaryValue(prop(process, key))}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </section>
-                )}
-                <section className="steps">
-                    {process.steps.map((step: Step, index: number) => {
-                        return (
-                            <div key={index} id={`step-index-${index}`} className="details-container">
-                                <div className="step-container" onClick={() => this.toggleStep(index)}>
-                                    <StepDetails step={step} />
-                                    {!last(index) && (
-                                        <section className="step-divider">
-                                            <i className="fa fa-arrow-down" />
-                                        </section>
-                                    )}
-                                </div>
-                                {stateChanges && this.renderStateChanges(process.steps, index)}
-                            </div>
-                        );
-                    })}
-                </section>
-            </section>
-        );
-    };
-
-    renderTraceback = (process: CustomProcessWithDetails) => {
-        return (
-            <section className="traceback-container">
-                <pre>{process.traceback}</pre>
-            </section>
-        );
-    };
-
-    render() {
-        const { process, subscriptionProcesses } = this.props;
-        const { raw, details, stateChanges, traceback } = this.state;
-        return (
-            <section className="process-state-detail">
-                {this.renderProcessHeaderInformation(process)}
-                {this.renderProcessSubscriptionLink(subscriptionProcesses)}
-                {traceback && this.renderTraceback(process)}
-                {raw ? this.renderRaw(process) : this.renderProcessOverview(process, details, stateChanges)}
-            </section>
-        );
+            json = stateDelta(prevState, step.state);
+            break;
+        default:
     }
+    if (isEmpty(json)) {
+        return null;
+    }
+    const iconName = index === 0 || steps[index - 1].status === "suspend" ? "user" : "pipelineApp";
+
+    return (
+        <section className="state-changes">
+            <section className="state-divider">
+                <EuiIcon type={iconName} size="xxl" className="step-type" color="primary" fill="dark" />
+            </section>
+
+            <section className={collapsed ? "state-delta collapsed" : "state-delta"}>
+                <table>
+                    <tbody>
+                        {Object.keys(json).map((key) => (
+                            <tr key={key}>
+                                <td id={`${index}-${applyIdNamingConvention(key)}-k`} className="key">
+                                    {key}
+                                </td>
+                                <td id={`${index}-${applyIdNamingConvention(key)}-v`} className="value">
+                                    {key === "confirmation_mail"
+                                        ? displayMailConfirmation(json[key])
+                                        : displayStateValue(json[key])}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </section>
+        </section>
+    );
+}
+
+function ProcessOverview({
+    steps,
+    stateChanges,
+    onChangeCollapsed,
+    collapsed,
+}: {
+    steps: Step[];
+    stateChanges: boolean;
+    onChangeCollapsed?: (index: number) => void;
+    collapsed?: number[];
+}) {
+    const last = (i: number) => i === steps.length - 1;
+
+    return (
+        <section className="process-overview">
+            <section className="steps">
+                {steps.map((step: Step, index: number) => {
+                    return (
+                        <div key={index} id={`step-index-${index}`} className="details-container">
+                            <div
+                                className="step-container"
+                                onClick={onChangeCollapsed ? () => onChangeCollapsed(index) : undefined}
+                            >
+                                <StepDetails step={step} />
+                                {!last(index) && (
+                                    <section className="step-divider">
+                                        <i className="fa fa-arrow-down" />
+                                    </section>
+                                )}
+                            </div>
+                            {stateChanges && (
+                                <StateChanges
+                                    steps={steps}
+                                    key={index}
+                                    index={index}
+                                    collapsed={collapsed && collapsed.includes(index)}
+                                />
+                            )}
+                        </div>
+                    );
+                })}
+            </section>
+        </section>
+    );
+}
+
+interface IProps {
+    process: CustomProcessWithDetails;
+    subscriptionProcesses: ProcessSubscription[];
+    collapsed?: number[];
+    onChangeCollapsed: (index: number) => void; // when provided it will toggle the collapse functionality
+    isProcess: boolean;
+}
+
+function ProcessStateDetails({ process, subscriptionProcesses, isProcess, onChangeCollapsed, collapsed = [] }: IProps) {
+    const [raw, setRaw] = useState(false);
+    const [details, setDetails] = useState(true);
+    const [stateChanges, setStateChanges] = useState(true);
+    const [traceback, setTraceback] = useState(false);
+
+    const summaryKeys: (keyof ProcessWithDetails)[] = [
+        "status",
+        isProcess ? "assignee" : "created_by",
+        "step",
+        "started",
+        "last_modified",
+    ];
+    const renderSummaryValue = (value: string | number | any) =>
+        typeof value === "string" ? capitalize(value) : typeof value === "number" ? renderDateTime(value) : value;
+
+
+    const renderRaw = (process: CustomProcessWithDetails) => {
+        const json = JSON.stringify(process, null, 4);
+        return (
+            <section>
+                <EuiCopy textToCopy={json}>
+                    {(copy) => (
+                        <span className="copy-to-clipboard-container">
+                            <button data-for="copy-to-clipboard" onClick={copy}>
+                                <i className={`far fa-clone`} />
+                            </button>
+                        </span>
+                    )}
+                </EuiCopy>
+                <HighlightCode data={JSON.stringify(process, null, 2)} />
+            </section>
+        );
+    };
+
+    const renderProcessHeaderInformation = (process: CustomProcessWithDetails) => {
+        return (
+            <section className="header-information">
+                <ul>
+                    <li className="process-wording">
+                        <EuiText>
+                            <h3>
+                                {isProcess && (
+                                    <FormattedMessage
+                                        id="process_state.wording_process"
+                                        values={{
+                                            product: process.productName,
+                                            customer: process.customerName,
+                                            workflow: process.workflow_name,
+                                        }}
+                                    />
+                                )}
+                                {!isProcess && (
+                                    <FormattedMessage
+                                        id="process_state.wording_task"
+                                        values={{ workflow: process.workflow_name }}
+                                    />
+                                )}
+                            </h3>
+                        </EuiText>
+                    </li>
+                </ul>
+                <ul>
+                    {!raw && (
+                        <li className="toggle-details">
+                            <EuiCheckbox
+                                id="show-details-toggle"
+                                aria-label="toggle-details"
+                                name="details"
+                                checked={details}
+                                label={<FormattedMessage id="process_state.details" />}
+                                onChange={() => setDetails(!details)}
+                            />
+                        </li>
+                    )}
+                    {!raw && (
+                        <li className="toggle-state-changes">
+                            <EuiCheckbox
+                                id="show-state-delta-toggle"
+                                aria-label="toggle-state-delta"
+                                name="state-changes"
+                                checked={stateChanges}
+                                label={<FormattedMessage id="process_state.stateChanges" />}
+                                onChange={() => setStateChanges(!stateChanges)}
+                            />
+                        </li>
+                    )}
+                    <li>
+                        <EuiCheckbox
+                            id="show-raw-json-toggle"
+                            aria-label="toggle-raw-json"
+                            name="raw"
+                            checked={raw}
+                            label={<FormattedMessage id="process_state.raw" />}
+                            onChange={() => setRaw(!raw)}
+                        />
+                    </li>
+                    {process.traceback && (
+                        <li>
+                            <EuiCheckbox
+                                id="show-traceback-toggle"
+                                aria-label="toggle-traceback"
+                                name="traceback"
+                                checked={traceback}
+                                label={<FormattedMessage id="process_state.traceback" />}
+                                onChange={() => setTraceback(!traceback)}
+                            />
+                        </li>
+                    )}
+                </ul>
+            </section>
+        );
+    };
+
+
+    return (
+        <section className="process-state-detail">
+            {renderProcessHeaderInformation(process)}
+            <ProcessSubscriptionLink subscriptionProcesses={subscriptionProcesses} isProcess={isProcess} />
+            {traceback && (
+                <section className="traceback-container">
+                    <pre>{process.traceback}</pre>
+                </section>
+            )}
+            {raw ? (
+                renderRaw(process)
+            ) : (
+                <>
+                    {details && (
+                        <section className="process-summary">
+                            <table>
+                                <tbody>
+                                    {summaryKeys.map((key) => (
+                                        <tr key={key}>
+                                            <td className="title">
+                                                <FormattedMessage id={`process_state.summary.${key}`} />
+                                            </td>
+                                            <td className="value">{renderSummaryValue(prop(process, key))}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </section>
+                    )}
+                    <ProcessOverview
+                        steps={process.steps}
+                        stateChanges={stateChanges}
+                        onChangeCollapsed={onChangeCollapsed}
+                        collapsed={collapsed}
+                    />
+                </>
+            )}
+        </section>
+    );
 }
 
 export default ProcessStateDetails;
