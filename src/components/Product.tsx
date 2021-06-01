@@ -18,8 +18,8 @@ import "components/Product.scss";
 import "./Product.scss";
 
 import { EuiButton } from "@elastic/eui";
-import { deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes } from "api";
-import { allWorkflows, productBlocks, productById, products, saveProduct } from "api/index";
+import { allWorkflows, deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes } from "api";
+import { productBlocks, products, saveProduct } from "api/index";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { isDate } from "date-fns";
 import { formDate, formInput, formSelect } from "forms/Builder";
@@ -29,11 +29,8 @@ import { RouteComponentProps } from "react-router";
 import { ValueType } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
-import { getParameterByName } from "utils/QueryParameters";
 import { FixedInputConfiguration, Option, ProductBlock, Workflow, Product as iProduct } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
-
-const TAG_LIGHTPATH = "LightPath";
 
 interface MatchParams {
     id: string;
@@ -96,31 +93,10 @@ class Product extends React.Component<IProps, IState> {
     };
 
     componentDidMount() {
-        const id = this.props.match?.params.id;
-        const isExistingProduct = id !== "new";
-        if (isExistingProduct) {
-            const readOnly = getParameterByName("readOnly", window.location.search) === "true";
-            const clone = id === "clone";
-            productById(clone ? getParameterByName("productId", window.location.search) : id!).then((product) => {
-                if (clone) {
-                    product.name = "";
-                    product.product_id = "";
-                    product.created_at = 0;
-                    (product.fixed_inputs || []).forEach((fixedInput) => {
-                        fixedInput.created_at = 0;
-                        fixedInput.fixed_input_id = "";
-                        fixedInput.product_id = "";
-                    });
-                }
-                this.setState({ product: product, readOnly: readOnly });
-                this.fetchAllConstants(product.tag);
-            });
-        } else {
-            this.fetchAllConstants(TAG_LIGHTPATH);
-        }
+        this.fetchAllConstants(this.props.match?.params.id);
     }
 
-    fetchAllConstants = (productTag: string) =>
+    fetchAllConstants = (product_id?: string) =>
         Promise.all([
             productBlocks(),
             allWorkflows(),
@@ -129,20 +105,23 @@ class Product extends React.Component<IProps, IState> {
             productTypes(),
             productStatuses(),
             fixedInputConfiguration(),
-        ]).then((res) =>
+        ]).then((res) => {
+            const product = res[2].find((value) => value.product_id === product_id);
+
             this.setState({
                 productBlocks: res[0],
                 workflows: res[1],
                 products: res[2],
+                product: product,
                 tags: res[3],
                 types: res[4],
                 statuses: res[5],
                 fixedInputConf: res[6],
-                allowedFixedInputs: this.determineAllowedFixedInputs(productTag, res[6]),
-            })
-        );
+                allowedFixedInputs: this.determineAllowedFixedInputs(res[6], product?.tag),
+            });
+        });
 
-    determineAllowedFixedInputs = (productTag: string, fixedInputConf: FixedInputConfiguration) => {
+    determineAllowedFixedInputs = (fixedInputConf: FixedInputConfiguration, productTag?: string) => {
         const ourTag = Object.keys(fixedInputConf.by_tag).find((tag) => tag === productTag);
         if (!ourTag) {
             return this.state.allowedFixedInputs;
@@ -225,34 +204,28 @@ class Product extends React.Component<IProps, IState> {
         }
     };
 
-    renderButtons = (readOnly: boolean, initial: boolean, product: iProduct) => {
-        if (readOnly) {
-            return (
-                <section className="buttons">
-                    <EuiButton className="button" onClick={() => this.context.redirect("/metadata/products")}>
-                        <FormattedMessage id="metadata.products.back" />
-                    </EuiButton>
-                </section>
-            );
-        }
+    renderButtons = (initial: boolean, product: iProduct) => {
         const invalid = !initial && (this.isInvalid() || this.state.processing);
         return (
             <section className="buttons">
                 <EuiButton className="button" onClick={this.cancel}>
-                    <FormattedMessage id="processes.cancel" />
+                    <FormattedMessage id="metadata.products.back" />
                 </EuiButton>
-                <EuiButton
-                    tabIndex={0}
-                    className={`button ${invalid ? "grey disabled" : "blue"}`}
-                    onClick={this.submit}
-                >
-                    <FormattedMessage id="processes.submit" />
-                </EuiButton>
-                {product.product_id && (
-                    <EuiButton className="button red" onClick={this.handleDeleteProduct}>
-                        <FormattedMessage id="processes.delete" />
+                {this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id) && (
+                    <EuiButton
+                        tabIndex={0}
+                        className={`button ${invalid ? "grey disabled" : "blue"}`}
+                        onClick={this.submit}
+                    >
+                        <FormattedMessage id="metadata.products.submit" />
                     </EuiButton>
                 )}
+                {this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id) &&
+                    product.product_id && (
+                        <EuiButton className="button red" onClick={this.handleDeleteProduct}>
+                            <FormattedMessage id="metadata.products.delete" />
+                        </EuiButton>
+                    )}
             </section>
         );
     };
@@ -304,7 +277,7 @@ class Product extends React.Component<IProps, IState> {
         product![name] = value;
         this.setState({ product: product });
         if (name === "tag") {
-            this.determineAllowedFixedInputs(value, fixedInputConf!);
+            this.determineAllowedFixedInputs(fixedInputConf!, value);
         }
     };
 
@@ -315,7 +288,6 @@ class Product extends React.Component<IProps, IState> {
             cancelDialogAction,
             product,
             leavePage,
-            readOnly,
             duplicateName,
             initial,
             confirmationDialogQuestion,
@@ -326,6 +298,8 @@ class Product extends React.Component<IProps, IState> {
         if (!product) {
             return null;
         }
+
+        const readOnly = !this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id + "/");
 
         const endDate = !product.end_date
             ? null
@@ -376,7 +350,7 @@ class Product extends React.Component<IProps, IState> {
                         product.created_at ? new Date(product.created_at * 1000) : new Date()
                     )}
                     {formDate("metadata.products.end_date", this.changeProperty("end_date"), readOnly, endDate)}
-                    {this.renderButtons(readOnly, initial, product)}
+                    {this.renderButtons(initial, product)}
                 </section>
             </div>
         );

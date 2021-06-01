@@ -292,7 +292,7 @@ export function processStatuses(): Promise<string[]> {
 }
 
 export function allWorkflows(): Promise<Workflow[]> {
-    return fetchJson("workflows");
+    return fetchJson("workflows/");
 }
 
 export function allWorkflowsWithProductTags(): Promise<WorkflowWithProductTags[]> {

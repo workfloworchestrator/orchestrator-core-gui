@@ -254,19 +254,20 @@ class App extends React.PureComponent<IProps, IState> {
                                     />
                                     <Route path="/subscriptions" render={(props) => <SubscriptionsPage {...props} />} />
                                     <Route exact path="/metadata" render={() => <Redirect to="/metadata/products" />} />
+
+                                    <ProtectedRoute
+                                        path="/metadata/product-block/:id"
+                                        render={(props) => <ProductBlock {...props} />}
+                                    />
+                                    <ProtectedRoute
+                                        path="/metadata/product/:id"
+                                        render={(props) => <ProductPage {...props} />}
+                                    />
                                     <ProtectedRoute
                                         path="/metadata/:type"
                                         render={(props) => (
                                             <MetaData selectedTab={props.match.params.type} {...props} />
                                         )}
-                                    />
-                                    <ProtectedRoute
-                                        path="/product/:id"
-                                        render={(props) => <ProductPage {...props} />}
-                                    />
-                                    <ProtectedRoute
-                                        path="/product-block/:id"
-                                        render={(props) => <ProductBlock {...props} />}
                                     />
                                     <ProtectedRoute path="/settings" render={() => <Settings />} />
                                     <ProtectedRoute path="/prefixes" render={() => <Prefixes />} />

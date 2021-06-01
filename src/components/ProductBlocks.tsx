@@ -24,11 +24,12 @@ import {
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import React from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
+import ApplicationContext from "utils/ApplicationContext";
 
 import { deleteProductBlock, productBlocks } from "../api/index";
 import { setFlash } from "../utils/Flash";
 import { renderDateTime } from "../utils/Lookups";
-import { ProductBlock } from "../utils/types";
+import { ProductBlock, ResourceType } from "../utils/types";
 import { stop } from "../utils/Utils";
 
 const data = productBlocks;
@@ -45,6 +46,8 @@ interface IState {
 }
 
 class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
+    context!: React.ContextType<typeof ApplicationContext>;
+
     state: IState = {
         productBlocks: [],
         productBlocksLoaded: true,
@@ -157,8 +160,8 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
                 name: "RESOURCE TYPES",
                 sortable: true,
                 truncateText: false,
-                render: (resource_types: any) => {
-                    const renderPB = resource_types.map((item: any) => (
+                render: (resource_types: ResourceType[]) => {
+                    const renderPB = resource_types.map((item) => (
                         <EuiBadge color="primary" isDisabled={false}>
                             {item.resource_type}
                         </EuiBadge>
@@ -172,7 +175,7 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
                 name: "CREATED ",
                 sortable: true,
                 truncateText: false,
-                render: (created_at: any) => {
+                render: (created_at: number) => {
                     const renderCA = renderDateTime(created_at);
                     return <div>{renderCA}</div>;
                 },
@@ -182,14 +185,22 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
                 field: "product_block_id",
                 name: "",
                 width: "2.5%",
-                render: (product_block_id: any) => {
-                    const Edit = (
+                render: (product_block_id: string) => {
+                    const Edit = this.context.allowed(
+                        "/orchestrator/metadata/product-block/edit/" + product_block_id + "/"
+                    ) ? (
                         <EuiButtonIcon
-                            href={`/product-block/${product_block_id}?readOnly=false`}
+                            href={`/metadata/product-block/${product_block_id}`}
                             iconType="pencil"
                             aria-label="Edit"
                         />
-                    );
+                    ) : this.context.allowed("/orchestrator/metadata/product-block/view/" + product_block_id) + "/" ? (
+                        <EuiButtonIcon
+                            href={`/metadata/product-block/${product_block_id}`}
+                            iconType="eye"
+                            aria-label="View"
+                        />
+                    ) : null;
                     return <div>{Edit}</div>;
                 },
             },
@@ -197,14 +208,16 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
                 field: "product_block_id",
                 name: "",
                 width: "2%",
-                render: (product_block_id: any, record: any) => {
-                    const Delete = (
+                render: (product_block_id: string, record: ProductBlock) => {
+                    const Delete = this.context.allowed(
+                        "/orchestrator/metadata/product-block/delete/" + product_block_id + "/"
+                    ) ? (
                         <EuiButtonIcon
                             onClick={this.handleDeleteProductBlock(record)}
                             iconType="trash"
                             aria-label="Delete"
                         />
-                    );
+                    ) : null;
                     return <div>{Delete}</div>;
                 },
             },
@@ -234,5 +247,6 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
         );
     }
 }
+ProductBlocks.contextType = ApplicationContext;
 
 export default injectIntl(ProductBlocks);
