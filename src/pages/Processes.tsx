@@ -105,6 +105,7 @@ class Processes extends React.PureComponent<IProps, IState> {
 
     renderActions = (process: ProcessV2) => {
         let options = actionOptions(
+            this.context.allowed,
             process,
             this.showProcess(process),
             this.handleRetryProcess(process),

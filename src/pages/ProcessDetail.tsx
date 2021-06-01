@@ -253,8 +253,10 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
     renderActions = (process: CustomProcessWithDetails) => {
         const { intl } = this.props;
+        const { allowed } = this.context;
 
         let options = actionOptions(
+            allowed,
             process,
             () => false,
             this.handleRetryProcess(process),

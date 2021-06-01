@@ -28,9 +28,6 @@ import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
 import { Subscription } from "utils/types";
 
-// TODO investigate dynamic actions : start, stop workflows
-// import { actionOptions } from "validations/Subscriptions";
-
 interface IProps {}
 
 interface IState {
@@ -71,12 +68,6 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
     };
 
     renderActions = (subscription: Subscription) => {
-        // let options = actionOptions(
-        //     subscription,
-        //     this.showSubscription(subscription),
-        //     () => null,
-        // );
-        // return <DropDownActions options={options} i18nPrefix="subscriptions" />;
         return <div>test</div>;
     };
 

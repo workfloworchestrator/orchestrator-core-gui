@@ -20,8 +20,9 @@ import HighlightCode from "components/HighlightCode";
 import StepDetails from "components/Step";
 import isEqual from "lodash/isEqual";
 import { CustomProcessWithDetails } from "pages/ProcessDetail";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FormattedMessage } from "react-intl";
+import ApplicationContext from "utils/ApplicationContext";
 import { capitalize, renderDateTime } from "utils/Lookups";
 import { ProcessSubscription, ProcessWithDetails, State, Step, prop } from "utils/types";
 import { applyIdNamingConvention, isEmpty } from "utils/Utils";
@@ -33,6 +34,7 @@ function ProcessSubscriptionLink({
     subscriptionProcesses: ProcessSubscription[];
     isProcess: boolean;
 }) {
+    const { allowed } = useContext(ApplicationContext);
 
     if (isEmpty(subscriptionProcesses)) {
         return null;
@@ -40,7 +42,7 @@ function ProcessSubscriptionLink({
 
     return (
         <section className="subscription-link">
-            {
+            {allowed("/orchestrator/subscriptions/view/from-process") &&
                 subscriptionProcesses.map((ps, index: number) => (
                     <div key={index}>
                         <EuiButton
@@ -261,7 +263,6 @@ function ProcessStateDetails({ process, subscriptionProcesses, isProcess, onChan
     const renderSummaryValue = (value: string | number | any) =>
         typeof value === "string" ? capitalize(value) : typeof value === "number" ? renderDateTime(value) : value;
 
-
     const renderRaw = (process: CustomProcessWithDetails) => {
         const json = JSON.stringify(process, null, 4);
         return (
@@ -358,7 +359,6 @@ function ProcessStateDetails({ process, subscriptionProcesses, isProcess, onChan
             </section>
         );
     };
-
 
     return (
         <section className="process-state-detail">
