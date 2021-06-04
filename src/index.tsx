@@ -15,7 +15,7 @@
 
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
-import { logUserInfo } from "api";
+import { ApiClient } from "api";
 import { setUser } from "api/axios";
 import { ENV } from "env";
 import Oidc, { UserManager, UserManagerSettings, WebStorageStateStore } from "oidc-client";
@@ -72,7 +72,8 @@ if (ENV.OAUTH2_ENABLED) {
                     setUser(user);
 
                     if (user.profile.email) {
-                        logUserInfo(user.profile.email, "logged in");
+                        // Todo: remove this ugliness
+                        new ApiClient().logUserInfo(user.profile.email, "logged in").then();
                     }
                 }
 

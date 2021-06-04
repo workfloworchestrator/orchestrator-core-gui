@@ -26,13 +26,9 @@ import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import React from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
-
-import { deleteProduct, products } from "../api/index";
-import { setFlash } from "../utils/Flash";
-import { renderDateTime } from "../utils/Lookups";
-import { Product, ProductBlock } from "../utils/types";
-
-const data = products;
+import { setFlash } from "utils/Flash";
+import { renderDateTime } from "utils/Lookups";
+import { Product, ProductBlock } from "utils/types";
 
 interface IState {
     products: Product[];
@@ -60,7 +56,7 @@ class Products extends React.Component<WrappedComponentProps, IState> {
     };
 
     componentDidMount() {
-        data().then((products) => {
+        this.context.apiClient.products().then((products: Product[]) => {
             this.setState({ products: products, productsLoaded: false });
         });
     }
@@ -72,14 +68,15 @@ class Products extends React.Component<WrappedComponentProps, IState> {
         this.confirmation(
             intl.formatMessage({ id: "metadata.deleteConfirmation" }, { type: "Product", name: product.name }),
             () =>
-                deleteProduct(product.product_id)
+                this.context.apiClient
+                    .deleteProduct(product.product_id)
                     .then(() => {
                         this.componentDidMount();
                         setFlash(
                             intl.formatMessage({ id: "metadata.flash.delete" }, { name: product.name, type: "Product" })
                         );
                     })
-                    .catch((err) => {
+                    .catch((err: any) => {
                         if (err.response && err.response.status === 400) {
                             if (err.response.data) {
                                 setFlash(err.response.data.error);
@@ -276,6 +273,6 @@ class Products extends React.Component<WrappedComponentProps, IState> {
         );
     }
 }
-Products.contextType = ApplicationContext;
 
+Products.contextType = ApplicationContext;
 export default injectIntl(Products);

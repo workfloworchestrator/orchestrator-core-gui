@@ -14,9 +14,9 @@ import {
     EuiSwitch,
     EuiText,
 } from "@elastic/eui";
-import { getPortSubscriptionsForNode, subscriptions } from "api";
 import { FAVORITE_STORAGE_KEY } from "components/modals/components/FavoritePortSelector";
 import React, { MouseEvent } from "react";
+import ApplicationContext from "utils/ApplicationContext";
 import { FavoriteSubscriptionStorage, ServicePortFilterItem, Subscription } from "utils/types";
 import { capitalizeFirstLetter, timeStampToDate } from "utils/Utils";
 
@@ -70,7 +70,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
 
     componentDidMount() {
         // Fetch Node subscriptions and prepare it for usage as EuiSuggestItems
-        subscriptions(["Node"], ["provisioning", "active"]).then((result) => {
+        this.context.apiClient.subscriptions(["Node"], ["provisioning", "active"]).then((result: Subscription[]) => {
             this.setState({ nodesLoading: false, nodes: result });
             // Preselect first one and fetch Ports (debug stuff)
             // this.setState({ nodesLoading: false, nodes: result, selectedNode: result[0] });
@@ -80,35 +80,37 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
 
     fetchPortData = (selectedNode: Subscription) => {
         this.setState({ portsLoading: true });
-        getPortSubscriptionsForNode(selectedNode.subscription_id).then((result) => {
-            console.log(result);
-            // Todo: move to render
-            const portOptions = result.map((port) => ({
-                value: port.subscription_id,
-                inputDisplay: port.port_name,
-                dropdownDisplay: (
-                    <>
-                        <strong>
-                            {port.port_name} - {port.subscription_id.slice(0, 8)} {port.description}
-                        </strong>
-                        <EuiText size="s" color="subdued">
-                            <p className="euiTextColor--subdued">
-                                {port.product_name} <EuiBadge color="primary">{port.port_mode}</EuiBadge>
-                                <EuiBadge
-                                    iconType={port.status === "active" ? "check" : "questionInCircle"}
-                                    color={port.status === "active" ? "default" : "danger"}
-                                >
-                                    {capitalizeFirstLetter(port.status)}
-                                </EuiBadge>
-                                <br />
-                                Start date: <i>{timeStampToDate(port.start_date)}</i>
-                            </p>
-                        </EuiText>
-                    </>
-                ),
-            }));
-            this.setState({ portsLoading: false, portOptions: portOptions, ports: result });
-        });
+        this.context.apiClient
+            .getPortSubscriptionsForNode(selectedNode.subscription_id)
+            .then((result: ServicePortFilterItem[]) => {
+                console.log(result);
+                // Todo: move to render
+                const portOptions = result.map((port) => ({
+                    value: port.subscription_id,
+                    inputDisplay: port.port_name,
+                    dropdownDisplay: (
+                        <>
+                            <strong>
+                                {port.port_name} - {port.subscription_id.slice(0, 8)} {port.description}
+                            </strong>
+                            <EuiText size="s" color="subdued">
+                                <p className="euiTextColor--subdued">
+                                    {port.product_name} <EuiBadge color="primary">{port.port_mode}</EuiBadge>
+                                    <EuiBadge
+                                        iconType={port.status === "active" ? "check" : "questionInCircle"}
+                                        color={port.status === "active" ? "default" : "danger"}
+                                    >
+                                        {capitalizeFirstLetter(port.status)}
+                                    </EuiBadge>
+                                    <br />
+                                    Start date: <i>{timeStampToDate(port.start_date)}</i>
+                                </p>
+                            </EuiText>
+                        </>
+                    ),
+                }));
+                this.setState({ portsLoading: false, portOptions: portOptions, ports: result });
+            });
     };
 
     onNodeClick = (item: EuiSuggestItemProps) => {
@@ -339,3 +341,4 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         );
     }
 }
+ServicePortSelector.contextType = ApplicationContext;

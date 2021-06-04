@@ -13,10 +13,12 @@
  *
  */
 
-import { portSubscriptions, subscriptions } from "api";
 import { memoize, merge } from "lodash";
 import React, { HTMLProps } from "react";
 import { ServicePortSubscription } from "utils/types";
+
+import { ApiClient } from "../api";
+import { CustomApiClient } from "../api/custom";
 
 let subscriptionsCache: { [index: string]: ServicePortSubscription } = {};
 
@@ -27,7 +29,12 @@ let data: Omit<SubscriptionsContextType, "getSubscriptions"> & { getSubscription
     getSubscriptions: undefined,
 };
 
-function getSubscriptionsHandler(tags?: string[], statuses: string[] = ["active"]): Promise<ServicePortSubscription[]> {
+function getSubscriptionsHandler(
+    apiClient: ApiClient,
+    customApiClient: CustomApiClient,
+    tags?: string[],
+    statuses: string[] = ["active"]
+): Promise<ServicePortSubscription[]> {
     function updateSubscriptions(subscriptions: ServicePortSubscription[]) {
         subscriptions.forEach((subscription) => {
             // We merge instead of overwriting to preserve values like port_mode that might not be set in one call but are in
@@ -45,9 +52,9 @@ function getSubscriptionsHandler(tags?: string[], statuses: string[] = ["active"
         tags?.filter((tag) => ["SSP", "MSP", "MSPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL", "SP", "SPNL"].includes(tag))
             .length
     ) {
-        return portSubscriptions(tags, statuses).then(updateSubscriptions);
+        return customApiClient.portSubscriptions(tags, statuses).then(updateSubscriptions);
     } else {
-        return subscriptions(tags, statuses).then(updateSubscriptions);
+        return apiClient.subscriptions(tags, statuses).then(updateSubscriptions);
     }
 }
 
@@ -57,7 +64,7 @@ function getSubscription(subscriptionId: string): ServicePortSubscription {
 
 const getSubscriptions = memoize(
     getSubscriptionsHandler,
-    (tags?: string[], statuses?: string[]) => (tags || []).join() + statuses?.join()
+    (apiClient, customApiClient, tags?: string[], statuses?: string[]) => (tags || []).join() + statuses?.join()
 );
 
 function clearSubscriptions(): void {

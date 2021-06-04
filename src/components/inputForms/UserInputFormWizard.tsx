@@ -13,7 +13,6 @@
  *
  */
 
-import { catchErrorStatus } from "api/index";
 import UserInputForm from "components/inputForms/UserInputForm";
 import isEqual from "lodash/isEqual";
 import hash from "object-hash";
@@ -76,7 +75,7 @@ class UserInputFormWizard extends React.Component<IProps, IState> {
         newUserInputs.push(currentFormData);
 
         let result = this.props.validSubmit(newUserInputs);
-        return catchErrorStatus<FormNotCompleteResponse>(result, 510, (json) => {
+        return this.context.apiClient.catchErrorStatus<FormNotCompleteResponse>(result, 510, (json) => {
             // Scroll to top when navigating to next screen of wizard
             window.scrollTo(0, 0);
             setFlash(intl.formatMessage({ id: "process.flash.wizard_next_step" }));

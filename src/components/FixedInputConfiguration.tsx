@@ -15,10 +15,10 @@
 
 import "components/FixedInputConfiguration.scss";
 
-import { fixedInputConfiguration } from "api";
 import CheckBox from "components/CheckBox";
 import React from "react";
 import { FormattedMessage } from "react-intl";
+import ApplicationContext from "utils/ApplicationContext";
 import { FixedInputConfiguration as iFixedInputConfiguration } from "utils/types";
 
 interface IState {
@@ -30,7 +30,10 @@ export default class FixedInputConfiguration extends React.Component<{}, IState>
         configuration: { by_tag: {}, fixed_inputs: [] },
     };
 
-    componentDidMount = () => fixedInputConfiguration().then((res) => this.setState({ configuration: res }));
+    componentDidMount = () =>
+        this.context.apiClient
+            .fixedInputConfiguration()
+            .then((res: iFixedInputConfiguration) => this.setState({ configuration: res }));
 
     fixedInputValues = (name: string, configuration: iFixedInputConfiguration) => {
         return configuration.fixed_inputs.find((fi) => fi.name === name)!.values.join(", ");
@@ -81,3 +84,4 @@ export default class FixedInputConfiguration extends React.Component<{}, IState>
         ));
     }
 }
+FixedInputConfiguration.contextType = ApplicationContext;

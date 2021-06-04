@@ -15,7 +15,6 @@
 
 import "components/SubscriptionValidation.scss";
 
-import { deleteSubscription } from "api/index";
 import CheckBox from "components/CheckBox";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import React from "react";
@@ -126,7 +125,7 @@ class SubscriptionValidation extends React.Component<IProps, IState> {
                 }
             ),
             () =>
-                deleteSubscription(subscription.subscription_id).then(() => {
+                this.context.apiClient.deleteSubscription(subscription.subscription_id).then(() => {
                     this.props.onChange();
                     setFlash(
                         intl.formatMessage({ id: "subscriptions.flash.delete" }, { name: subscription.product.name })

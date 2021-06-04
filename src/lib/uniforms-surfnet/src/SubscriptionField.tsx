@@ -140,7 +140,7 @@ function Subscription({
     let [subscriptions, updateSubscriptions] = useState<iSubscription[]>([]);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let [loading, setLoading] = useState<boolean>(false);
-    const { organisations, products: allProducts } = useContext(ApplicationContext);
+    const { organisations, products: allProducts, apiClient, customApiClient } = useContext(ApplicationContext);
     const { getSubscriptions, clearSubscriptions } = useContext(SubscriptionsContext);
 
     const bandwithFromField = bandwidthKey
@@ -172,8 +172,8 @@ function Subscription({
     }, [allProducts, usedBandwidth, productIds, tags]);
 
     useEffect(() => {
-        getSubscriptions(tags, statuses).then((result) => updateSubscriptions(result));
-    }, [getSubscriptions, tags, statuses]);
+        getSubscriptions(apiClient, customApiClient, tags, statuses).then((result) => updateSubscriptions(result));
+    }, [getSubscriptions, tags, statuses, apiClient, customApiClient]);
 
     // Filter by product, needed because getSubscriptions might return more than we want
     subscriptions =
@@ -248,7 +248,7 @@ function Subscription({
                                 onClick={() => {
                                     setLoading(true);
                                     clearSubscriptions();
-                                    getSubscriptions(tags, statuses).then((result) => {
+                                    getSubscriptions(apiClient, customApiClient, tags, statuses).then((result) => {
                                         updateSubscriptions(result);
                                         setLoading(false);
                                     });

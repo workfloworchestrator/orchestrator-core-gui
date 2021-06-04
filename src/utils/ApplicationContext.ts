@@ -13,8 +13,11 @@
  *
  */
 
+import { ApiClient } from "api";
 import React from "react";
 import { Organization, Product } from "utils/types";
+
+import { CustomApiClient } from "../api/custom";
 
 export interface ApplicationContextInterface {
     organisations?: Organization[];
@@ -25,7 +28,12 @@ export interface ApplicationContextInterface {
     redirect: (_url: string) => void;
     setLocale: (locale: string) => Promise<void>;
     allowed: (resource: string) => boolean;
+    apiClient: ApiClient;
+    customApiClient: CustomApiClient;
 }
+
+export const apiClient: ApiClient = new ApiClient();
+export const customApiClient: CustomApiClient = new CustomApiClient();
 
 // Don't just add stuff here. This is reserved for things that don't change during the lifetime of the application
 let ApplicationContext = React.createContext<ApplicationContextInterface>({
@@ -37,6 +45,8 @@ let ApplicationContext = React.createContext<ApplicationContextInterface>({
     redirect: (_url: string) => {},
     setLocale: async (_locale: string) => {},
     allowed: (_resource: string) => false,
+    apiClient: apiClient,
+    customApiClient: customApiClient,
 });
 
 export default ApplicationContext;

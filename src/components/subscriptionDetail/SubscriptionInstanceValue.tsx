@@ -13,15 +13,8 @@
  *
  */
 
-import {
-    addressById,
-    internalPortByImsPortId,
-    portByImsPortId,
-    portByImsServiceId,
-    prefixById,
-    serviceByImsServiceId,
-    subscriptionsDetailWithModel,
-} from "api";
+import { ApiClient } from "api";
+import { CustomApiClient } from "api/custom";
 import { isEmpty } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -169,7 +162,7 @@ function EndpointDetail({ endpoint }: { endpoint: IMSEndpoint }) {
 }
 
 function ImsServiceDetail({ service, recursive = false }: { service: IMSService; recursive?: boolean }) {
-    const { organisations } = useContext(ApplicationContext);
+    const { organisations, apiClient, customApiClient } = useContext(ApplicationContext);
     const [endpoints, setEndpoints] = useState<IMSEndpoint[]>([]);
     const intl = useIntl();
 
@@ -180,24 +173,24 @@ function ImsServiceDetail({ service, recursive = false }: { service: IMSService;
 
         const uniquePortPromises = (service.endpoints || []).map(async (endpoint) => {
             if (endpoint.type === "port") {
-                return portByImsPortId(endpoint.id).then((result) =>
+                return customApiClient.portByImsPortId(endpoint.id).then((result) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
                         endpointType: endpoint.type,
                     })
                 );
             } else if (endpoint.type === "internal_port") {
-                return internalPortByImsPortId(endpoint.id).then((result) =>
+                return customApiClient.internalPortByImsPortId(endpoint.id).then((result) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
                         endpointType: endpoint.type,
                     })
                 );
             } else {
-                return serviceByImsServiceId(endpoint.id).then((result) => {
+                return customApiClient.serviceByImsServiceId(endpoint.id).then((result) => {
                     if (["SP", "MSP", "SSP"].includes(result.product)) {
                         // In case of port product we just resolve the underlying port
-                        return portByImsServiceId(endpoint.id).then((result) =>
+                        return customApiClient.portByImsServiceId(endpoint.id).then((result) =>
                             Object.assign(result, {
                                 serviceId: endpoint.id,
                                 endpointType: "port",
@@ -214,7 +207,7 @@ function ImsServiceDetail({ service, recursive = false }: { service: IMSService;
         });
         //@ts-ignore
         Promise.all(uniquePortPromises).then((result) => setEndpoints(result.flat()));
-    }, [recursive, service]);
+    }, [recursive, service, apiClient, customApiClient]);
 
     return (
         <DataTable>
@@ -300,14 +293,16 @@ function IpamPrefix({ prefix }: { prefix: IPAMPrefix }) {
 }
 
 export function getExternalTypeData(
-    type: string
+    type: string,
+    apiClient: ApiClient,
+    customApiClient: CustomApiClient
 ): { getter: (identifier: string) => Promise<any>; render?: (data: any) => React.ReactNode; i18nKey: string } {
     switch (type) {
         case "ims_port_id":
         case "ims_port_id_1":
         case "ims_port_id_2":
             return {
-                getter: (identifier: string) => portByImsPortId(parseInt(identifier)),
+                getter: (identifier: string) => customApiClient.portByImsPortId(parseInt(identifier)),
                 render: (data: IMSEndpoint) => {
                     data.endpointType = "port";
                     return <EndpointDetail endpoint={data} />;
@@ -317,7 +312,7 @@ export function getExternalTypeData(
         case "ims_circuit_id":
         case "ims_corelink_trunk_id":
             return {
-                getter: (identifier: string) => serviceByImsServiceId(parseInt(identifier)),
+                getter: (identifier: string) => customApiClient.serviceByImsServiceId(parseInt(identifier)),
                 render: (data: IMSService) => <ImsServiceDetail service={data} recursive={true} />,
                 i18nKey: "ims_service",
             };
@@ -328,7 +323,7 @@ export function getExternalTypeData(
         case "internetpinnen_prefix_subscription_id":
         case "parent_ip_prefix_subscription_id":
             return {
-                getter: (identifier: string) => subscriptionsDetailWithModel(identifier),
+                getter: (identifier: string) => apiClient.subscriptionsDetailWithModel(identifier),
                 render: (data: SubscriptionModel) => (
                     <SubscriptionDetails subscription={data} className="related-subscription" />
                 ),
@@ -340,7 +335,7 @@ export function getExternalTypeData(
         case "customer_ptp_ipv4_ipam_id":
         case "customer_ptp_ipv6_ipam_id":
             return {
-                getter: (identifier: string) => prefixById(parseInt(identifier)),
+                getter: (identifier: string) => customApiClient.prefixById(parseInt(identifier)),
                 render: (data: IPAMPrefix) => <IpamPrefix prefix={data} />,
                 i18nKey: "ipam_prefix",
             };
@@ -351,13 +346,13 @@ export function getExternalTypeData(
         case "corelink_ipv4_ipam_id":
         case "corelink_ipv6_ipam_id":
             return {
-                getter: (identifier: string) => addressById(parseInt(identifier)),
+                getter: (identifier: string) => customApiClient.addressById(parseInt(identifier)),
                 render: (data: IPAMAddress) => <IpamAddress address={data} />,
                 i18nKey: "ipam_address",
             };
         case "ims_aggregate_port_id":
             return {
-                getter: (identifier: string) => internalPortByImsPortId(parseInt(identifier)),
+                getter: (identifier: string) => customApiClient.internalPortByImsPortId(parseInt(identifier)),
                 render: (data: IMSEndpoint) => {
                     data.endpointType = "internal_port";
                     return <EndpointDetail endpoint={data} />;
@@ -382,9 +377,8 @@ export default function SubscriptionInstanceValue({ label, value }: IProps) {
     const [collapsed, setCollapsed] = useState(true);
     const [data, setData] = useState<any | null | undefined>(undefined);
 
-    const { render, i18nKey, getter } = getExternalTypeData(label);
-
-    const { organisations, products } = useContext(ApplicationContext);
+    const { organisations, products, apiClient, customApiClient } = useContext(ApplicationContext);
+    const { render, i18nKey, getter } = getExternalTypeData(label, apiClient, customApiClient);
 
     const isSubscriptionValue = label.endsWith("subscription_id");
     const isExternalLinkValue = !!render;

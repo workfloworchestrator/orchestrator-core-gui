@@ -18,8 +18,6 @@ import "components/ProductBlock.scss";
 import "./ProductBlock.scss";
 
 import { EuiButton } from "@elastic/eui";
-import { deleteProductBlock } from "api";
-import { productBlockById, productBlocks, resourceTypes, saveProductBlock } from "api/index";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { isDate } from "date-fns";
 import { formDate, formInput, formSelect } from "forms/Builder";
@@ -79,9 +77,11 @@ class ProductBlock extends React.Component<IProps, IState> {
     componentDidMount() {
         const id = this.props.match?.params.id;
         if (id !== "new") {
-            productBlockById(id!).then((res) => this.setState({ productBlock: res, isNew: false }));
+            this.context.apiClient
+                .productBlockById(id!)
+                .then((res: iProductBlock) => this.setState({ productBlock: res, isNew: false }));
         }
-        Promise.all([resourceTypes(), productBlocks()]).then((res) =>
+        Promise.all([this.context.apiClient.resourceTypes(), this.context.apiClient.productBlocks()]).then((res) =>
             this.setState({ resourceTypes: res[0], productBlocks: res[1] })
         );
     }
@@ -105,7 +105,8 @@ class ProductBlock extends React.Component<IProps, IState> {
             { type: "Product Block", name: productBlock!.name }
         );
         const action = () =>
-            deleteProductBlock(productBlock!.product_block_id)
+            this.context.apiClient
+                .deleteProductBlock(productBlock!.product_block_id)
                 .then(() => {
                     this.context.redirect("/metadata/product_blocks");
                     setFlash(
@@ -115,7 +116,7 @@ class ProductBlock extends React.Component<IProps, IState> {
                         )
                     );
                 })
-                .catch((err) => {
+                .catch((err: any) => {
                     if (err.response && err.response.status === 400) {
                         this.setState({ confirmationDialogOpen: false });
                         if (err.response.data) {
@@ -141,7 +142,7 @@ class ProductBlock extends React.Component<IProps, IState> {
         const invalid = this.isInvalid(true) || processing;
         if (!invalid) {
             this.setState({ processing: true });
-            saveProductBlock(productBlock!).then(() => {
+            this.context.apiClient.saveProductBlock(productBlock!).then(() => {
                 this.context.redirect("/metadata/product_blocks");
                 setFlash(
                     intl.formatMessage(

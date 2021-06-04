@@ -14,16 +14,17 @@
  */
 
 import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
-import { contacts } from "api";
 import Autocomplete from "components/inputForms/Autocomplete";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { isFunction } from "lodash";
 import get from "lodash/get";
-import React, { Ref, useEffect, useState } from "react";
+import React, { Ref, useContext, useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import { ContactPerson } from "utils/types";
 import { stop } from "utils/Utils";
+
+import ApplicationContext from "../../../utils/ApplicationContext";
 
 export type ContactPersonNameFieldProps = FieldProps<string, { organisationId?: string; organisationKey?: string }>;
 
@@ -54,6 +55,7 @@ function ContactPersonName({
     ...props
 }: ContactPersonNameFieldProps) {
     const intl = useIntl();
+    const { customApiClient } = useContext(ApplicationContext);
     const { model, onChange: formOnChange, schema } = useForm();
 
     const contactsPersonFieldNameArray = joinName(null, name).slice(0, -1);
@@ -92,11 +94,11 @@ function ContactPersonName({
 
     useEffect(() => {
         if (organisationIdValue) {
-            contacts(organisationIdValue).then((contactPersons) => {
+            customApiClient.contacts(organisationIdValue).then((contactPersons) => {
                 setContactPersons(contactPersons);
             });
         }
-    }, [organisationIdValue]);
+    }, [organisationIdValue, customApiClient]);
 
     useEffect(() => {
         // Set focus to the last name component to be created
