@@ -76,6 +76,7 @@ interface IState {
     confirmationDialogOpen: boolean;
     nrOfValidationErrors: number;
     processing: boolean;
+    rootErrors: string[];
 }
 
 declare module "uniforms" {
@@ -384,6 +385,7 @@ class UserInputForm extends React.Component<IProps, IState> {
         confirmationDialogOpen: false,
         processing: false,
         nrOfValidationErrors: 0,
+        rootErrors: [],
     };
 
     public static defaultProps = {
@@ -413,7 +415,12 @@ class UserInputForm extends React.Component<IProps, IState> {
                 if (error.response.status === 400) {
                     let json = error.response.data;
 
-                    this.setState({ nrOfValidationErrors: json.validation_errors.length });
+                    this.setState({
+                        nrOfValidationErrors: json.validation_errors.length,
+                        rootErrors: json.validation_errors
+                            .filter((e: ValidationError) => e.loc[0] === "__root__")
+                            .map((e: ValidationError) => e.msg),
+                    });
 
                     // eslint-disable-next-line no-throw-literal
                     throw {
@@ -431,7 +438,7 @@ class UserInputForm extends React.Component<IProps, IState> {
                 }, 0);
 
                 // The form will clear the errors so also remove the warning
-                this.setState({ nrOfValidationErrors: 0 });
+                this.setState({ nrOfValidationErrors: 0, rootErrors: [] });
 
                 // The error we got contains no validation errors so don't send it to uniforms
                 return null;
@@ -487,7 +494,7 @@ class UserInputForm extends React.Component<IProps, IState> {
     };
 
     render() {
-        const { confirmationDialogOpen, nrOfValidationErrors } = this.state;
+        const { confirmationDialogOpen, nrOfValidationErrors, rootErrors } = this.state;
         const { cancel, stepUserInput, userInput, location } = this.props;
         const prefilledForm = fillPreselection(stepUserInput, location.search);
         const bridge = new CustomTitleJSONSchemaBridge(prefilledForm, () => {});
@@ -525,6 +532,16 @@ class UserInputForm extends React.Component<IProps, IState> {
                                         </em>
                                     </section>
                                 )}
+                                {rootErrors.length > 0 && (
+                                    <section className="form-errors">
+                                        <em className="error backend-validation-metadata">
+                                            {rootErrors.map((error) => (
+                                                <div className="euiFormErrorText euiFormRow__text">{error}</div>
+                                            ))}
+                                        </em>
+                                    </section>
+                                )}
+
                                 {this.renderButtons()}
                             </AutoForm>
                         </AutoFieldProvider>

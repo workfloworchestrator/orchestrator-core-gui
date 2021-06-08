@@ -89,6 +89,9 @@
     }
     section.details {
         padding-bottom: 20px;
+        > div {
+            padding-left: 30px;
+        }
     }
     section.not-found-related-objects {
         padding-bottom: 20px;
@@ -98,11 +101,16 @@
     }
     table {
         table-layout: fixed;
+        margin-top: 20px;
+        width: 100%;
+        word-break: break-all;
+
+        td,
+        th {
+            text-align: left;
+        }
     }
     table.detail-block {
-        margin-top: 20px;
-        margin-left: 30px;
-        width: 90%;
         &.related-subscription {
             margin: 0;
             width: 100%;
@@ -110,7 +118,6 @@
         thead {
             th {
                 padding: 5px 0 10px;
-                text-align: left;
                 &.insync {
                     width: 10%;
                 }
@@ -129,7 +136,6 @@
                 }
             }
             td {
-                text-align: left;
                 vertical-align: middle;
                 padding: 8px 15px;
                 em.error {
@@ -200,14 +206,6 @@
         }
     }
     table.subscriptions {
-        margin-top: 20px;
-        margin-left: 30px;
-        width: 90%;
-        word-break: break-all;
-        td,
-        th {
-            text-align: left;
-        }
         tr {
             border-bottom: 1px solid vars.$light-grey;
             border-left: 1px solid vars.$primary;
@@ -266,14 +264,6 @@
         }
     }
     table.processes {
-        margin-top: 20px;
-        margin-left: 30px;
-        width: 90%;
-        word-break: break-all;
-        td,
-        th {
-            text-align: left;
-        }
         tr {
             border-bottom: 1px solid vars.$light-grey;
             border-left: 1px solid vars.$primary;
