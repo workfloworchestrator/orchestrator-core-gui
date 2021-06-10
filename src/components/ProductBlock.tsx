@@ -29,7 +29,6 @@ import { RouteComponentProps } from "react-router";
 import { ValueType } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
-import { getParameterByName } from "utils/QueryParameters";
 import { Option, ResourceType, ProductBlock as iProductBlock } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
@@ -54,7 +53,6 @@ interface IState {
     duplicateName: boolean;
     initial: boolean;
     isNew: boolean;
-    readOnly: boolean;
     productBlock?: iProductBlock;
     processing: boolean;
     resourceTypes: ResourceType[];
@@ -73,7 +71,6 @@ class ProductBlock extends React.Component<IProps, IState> {
         duplicateName: false,
         initial: true,
         isNew: true,
-        readOnly: false,
         processing: false,
         resourceTypes: [],
         productBlocks: [],
@@ -82,8 +79,7 @@ class ProductBlock extends React.Component<IProps, IState> {
     componentDidMount() {
         const id = this.props.match?.params.id;
         if (id !== "new") {
-            const readOnly = getParameterByName("readOnly", window.location.search) === "true";
-            productBlockById(id!).then((res) => this.setState({ productBlock: res, isNew: false, readOnly: readOnly }));
+            productBlockById(id!).then((res) => this.setState({ productBlock: res, isNew: false }));
         }
         Promise.all([resourceTypes(), productBlocks()]).then((res) =>
             this.setState({ resourceTypes: res[0], productBlocks: res[1] })
@@ -159,34 +155,32 @@ class ProductBlock extends React.Component<IProps, IState> {
         }
     };
 
-    renderButtons = (readOnly: boolean, initial: boolean, productBlock: iProductBlock) => {
-        if (readOnly) {
-            return (
-                <section className="buttons">
-                    <EuiButton className="button" onClick={() => this.context.redirect("/metadata/product_blocks")}>
-                        <FormattedMessage id="metadata.productBlocks.back" />
-                    </EuiButton>
-                </section>
-            );
-        }
+    renderButtons = (initial: boolean, productBlock: iProductBlock) => {
         const invalid = !initial && (this.isInvalid() || this.state.processing);
         return (
             <section className="buttons">
                 <EuiButton className="button" onClick={this.cancel}>
-                    <FormattedMessage id="process.cancel" />
+                    <FormattedMessage id="metadata.productBlocks.back" />
                 </EuiButton>
-                <EuiButton
-                    tabIndex={0}
-                    className={`button ${invalid ? "grey disabled" : "blue"}`}
-                    onClick={this.submit}
-                >
-                    <FormattedMessage id="process.submit" />
-                </EuiButton>
-                {productBlock.product_block_id && (
-                    <EuiButton className="button red" onClick={this.handleDeleteProductBlock}>
-                        <FormattedMessage id="processes.delete" />
+                {this.context.allowed(
+                    "/orchestrator/metadata/product-block/edit/" + productBlock.product_block_id + "/"
+                ) && (
+                    <EuiButton
+                        tabIndex={0}
+                        className={`button ${invalid ? "grey disabled" : "blue"}`}
+                        onClick={this.submit}
+                    >
+                        <FormattedMessage id="metadata.productBlocks.submit" />
                     </EuiButton>
                 )}
+                {this.context.allowed(
+                    "/orchestrator/metadata/product-block/delete/" + productBlock.product_block_id + "/"
+                ) &&
+                    productBlock.product_block_id && (
+                        <EuiButton className="button red" onClick={this.handleDeleteProductBlock}>
+                            <FormattedMessage id="metadata.productBlocks.delete" />
+                        </EuiButton>
+                    )}
             </section>
         );
     };
@@ -247,7 +241,6 @@ class ProductBlock extends React.Component<IProps, IState> {
             cancelDialogAction,
             productBlock,
             leavePage,
-            readOnly,
             duplicateName,
             initial,
             confirmationDialogQuestion,
@@ -263,6 +256,11 @@ class ProductBlock extends React.Component<IProps, IState> {
             : isDate(productBlock.end_date)
             ? ((productBlock.end_date as unknown) as Date)
             : new Date(productBlock.end_date * 1000);
+
+        const readOnly = !this.context.allowed(
+            "/orchestrator/metadata/product-block/edit/" + productBlock.product_block_id + "/"
+        );
+
         return (
             <div className="mod-product-block">
                 <ConfirmationDialog
@@ -306,7 +304,7 @@ class ProductBlock extends React.Component<IProps, IState> {
                         productBlock.created_at ? new Date(productBlock.created_at * 1000) : new Date()
                     )}
                     {formDate("metadata.productBlocks.end_date", this.changeProperty("end_date"), readOnly, endDate)}
-                    {this.renderButtons(readOnly, initial, productBlock)}
+                    {this.renderButtons(initial, productBlock)}
                 </section>
             </div>
         );

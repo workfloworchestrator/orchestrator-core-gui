@@ -366,76 +366,76 @@ exports[`Storyshots ProcessDetail Process 1`] = `
               </ul>
             </section>
             <section
+              className="process-summary"
+            >
+              <table>
+                <tbody>
+                  <tr>
+                    <td
+                      className="title"
+                    >
+                      Status
+                    </td>
+                    <td
+                      className="value"
+                    >
+                      Failed
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      className="title"
+                    >
+                      Assignee
+                    </td>
+                    <td
+                      className="value"
+                    >
+                      SYSTEM
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      className="title"
+                    >
+                      Current step
+                    </td>
+                    <td
+                      className="value"
+                    >
+                      Send confirmation mail to customer
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      className="title"
+                    >
+                      Started
+                    </td>
+                    <td
+                      className="value"
+                    >
+                      15-11-2019 12:36:33 CET
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      className="title"
+                    >
+                      Last updated
+                    </td>
+                    <td
+                      className="value"
+                    >
+                      18-11-2019 18:02:18 CET
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+            <section
               className="process-overview"
             >
-              <section
-                className="process-summary"
-              >
-                <table>
-                  <tbody>
-                    <tr>
-                      <td
-                        className="title"
-                      >
-                        Status
-                      </td>
-                      <td
-                        className="value"
-                      >
-                        Failed
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        className="title"
-                      >
-                        Assignee
-                      </td>
-                      <td
-                        className="value"
-                      >
-                        SYSTEM
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        className="title"
-                      >
-                        Current step
-                      </td>
-                      <td
-                        className="value"
-                      >
-                        Send confirmation mail to customer
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        className="title"
-                      >
-                        Started
-                      </td>
-                      <td
-                        className="value"
-                      >
-                        15-11-2019 12:36:33 CET
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        className="title"
-                      >
-                        Last updated
-                      </td>
-                      <td
-                        className="value"
-                      >
-                        18-11-2019 18:02:18 CET
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
               <section
                 className="steps"
               >
@@ -3089,76 +3089,76 @@ exports[`Storyshots ProcessDetail Task 1`] = `
               </ul>
             </section>
             <section
+              className="process-summary"
+            >
+              <table>
+                <tbody>
+                  <tr>
+                    <td
+                      className="title"
+                    >
+                      Status
+                    </td>
+                    <td
+                      className="value"
+                    >
+                      Failed
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      className="title"
+                    >
+                      Assignee
+                    </td>
+                    <td
+                      className="value"
+                    >
+                      SYSTEM
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      className="title"
+                    >
+                      Current step
+                    </td>
+                    <td
+                      className="value"
+                    >
+                      Send confirmation mail to customer
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      className="title"
+                    >
+                      Started
+                    </td>
+                    <td
+                      className="value"
+                    >
+                      15-11-2019 12:36:33 CET
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      className="title"
+                    >
+                      Last updated
+                    </td>
+                    <td
+                      className="value"
+                    >
+                      18-11-2019 18:02:18 CET
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+            <section
               className="process-overview"
             >
-              <section
-                className="process-summary"
-              >
-                <table>
-                  <tbody>
-                    <tr>
-                      <td
-                        className="title"
-                      >
-                        Status
-                      </td>
-                      <td
-                        className="value"
-                      >
-                        Failed
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        className="title"
-                      >
-                        Assignee
-                      </td>
-                      <td
-                        className="value"
-                      >
-                        SYSTEM
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        className="title"
-                      >
-                        Current step
-                      </td>
-                      <td
-                        className="value"
-                      >
-                        Send confirmation mail to customer
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        className="title"
-                      >
-                        Started
-                      </td>
-                      <td
-                        className="value"
-                      >
-                        15-11-2019 12:36:33 CET
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        className="title"
-                      >
-                        Last updated
-                      </td>
-                      <td
-                        className="value"
-                      >
-                        18-11-2019 18:02:18 CET
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
               <section
                 className="steps"
               >

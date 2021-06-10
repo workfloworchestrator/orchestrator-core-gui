@@ -149,6 +149,7 @@ class Tasks extends React.PureComponent<IProps, IState> {
 
     renderActions = (process: ProcessV2) => {
         let options = actionOptions(
+            this.context.allowed,
             process,
             this.showProcess(process),
             this.handleRetryProcess(process),
@@ -168,6 +169,7 @@ class Tasks extends React.PureComponent<IProps, IState> {
 
     render() {
         const { confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion } = this.state;
+        const { allowed } = this.context;
 
         const tasksSettings = initialProcessTableSettings(
             "table.tasks",
@@ -199,29 +201,22 @@ class Tasks extends React.PureComponent<IProps, IState> {
                         question={confirmationDialogQuestion}
                     />
                     <EuiFlexGroup className="actions actions-buttons">
-                        <EuiFlexItem>
-                            <EuiButton onClick={this.runAllTasks} fill color="primary" iconType="refresh">
-                                <FormattedMessage id="tasks.runall" />
-                            </EuiButton>
-                        </EuiFlexItem>
-                        <EuiFlexItem>
-                            <EuiButton onClick={this.newTask} fill color="secondary" iconType="plusInCircle">
-                                <FormattedMessage id="tasks.new" />
-                            </EuiButton>
-                        </EuiFlexItem>
+                        {allowed("/orchestrator/processes/retry/all-tasks") && (
+                            <EuiFlexItem>
+                                <EuiButton onClick={this.runAllTasks} fill color="primary" iconType="refresh">
+                                    <FormattedMessage id="tasks.runall" />
+                                </EuiButton>
+                            </EuiFlexItem>
+                        )}
+                        {allowed("/orchestrator/processes/create/task") && (
+                            <EuiFlexItem>
+                                <EuiButton onClick={this.newTask} fill color="secondary" iconType="plusInCircle">
+                                    <FormattedMessage id="tasks.new" />
+                                </EuiButton>
+                            </EuiFlexItem>
+                        )}
                         <EuiFlexItem className="explain">{this.renderExplain()}</EuiFlexItem>
                     </EuiFlexGroup>
-                    {/* <div className="actions">
-                        <button className="button blue" onClick={this.runAllTasks}>
-                            <FormattedMessage id="tasks.runall"/>
-                            <i className="fa fa-sync" />
-                        </button>
-                        <button className="new button green" onClick={this.newTask}>
-                            <FormattedMessage id="tasks.new"/>
-                            <i className="fa fa-plus" />
-                        </button>
-                        {this.renderExplain()}
-                    </div> */}
                     <ProcessesTable
                         initialTableSettings={tasksSettings}
                         renderActions={this.renderActions}

@@ -27,7 +27,7 @@ import ProductPage from "components/Product";
 import ProductBlock from "components/ProductBlock";
 import ProtectedRoute from "components/ProtectedRoute";
 import { createBrowserHistory } from "history";
-import { setLocale } from "locale/i18n";
+import { intl, setLocale } from "locale/i18n";
 import { memoize } from "lodash";
 import MetaData from "pages/MetaData";
 import ModifySubscription from "pages/ModifySubscription";
@@ -131,7 +131,7 @@ class App extends React.PureComponent<IProps, IState> {
 
     async loadData() {
         if (window.location.pathname.endsWith("/error") || window.location.pathname.endsWith("/not-allowed")) {
-            this.setState({ loading: false });
+            this.setState({ loading: false, intl: intl });
             return;
         }
 
@@ -180,9 +180,9 @@ class App extends React.PureComponent<IProps, IState> {
     }
 
     render() {
-        const { loading, errorDialogAction, errorDialogOpen, applicationContext } = this.state;
+        const { loading, errorDialogAction, errorDialogOpen, applicationContext, intl } = this.state;
 
-        if (loading || !this.state.intl) {
+        if (loading || !intl) {
             return null; // render null when app is not ready yet for static mySpinner
         }
 
@@ -190,7 +190,7 @@ class App extends React.PureComponent<IProps, IState> {
             <Router history={history}>
                 <QueryParamProvider ReactRouterRoute={Route}>
                     <ApplicationContext.Provider value={applicationContext}>
-                        <RawIntlProvider value={this.state.intl}>
+                        <RawIntlProvider value={intl}>
                             {loading && (
                                 <EuiToast className="sync" color="primary">
                                     <EuiLoadingSpinner size="m" />
@@ -254,19 +254,20 @@ class App extends React.PureComponent<IProps, IState> {
                                     />
                                     <Route path="/subscriptions" render={(props) => <SubscriptionsPage {...props} />} />
                                     <Route exact path="/metadata" render={() => <Redirect to="/metadata/products" />} />
+
+                                    <ProtectedRoute
+                                        path="/metadata/product-block/:id"
+                                        render={(props) => <ProductBlock {...props} />}
+                                    />
+                                    <ProtectedRoute
+                                        path="/metadata/product/:id"
+                                        render={(props) => <ProductPage {...props} />}
+                                    />
                                     <ProtectedRoute
                                         path="/metadata/:type"
                                         render={(props) => (
                                             <MetaData selectedTab={props.match.params.type} {...props} />
                                         )}
-                                    />
-                                    <ProtectedRoute
-                                        path="/product/:id"
-                                        render={(props) => <ProductPage {...props} />}
-                                    />
-                                    <ProtectedRoute
-                                        path="/product-block/:id"
-                                        render={(props) => <ProductBlock {...props} />}
                                     />
                                     <ProtectedRoute path="/settings" render={() => <Settings />} />
                                     <ProtectedRoute path="/prefixes" render={() => <Prefixes />} />

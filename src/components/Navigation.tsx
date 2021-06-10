@@ -75,7 +75,7 @@ const Navigation = () => {
         const controls: Control[] = [];
 
         navItems.forEach((navItem) => {
-            if (allowed(`/orchestrator/${navItem}`)) {
+            if (allowed(`/orchestrator/${navItem}/`)) {
                 controls.push({
                     "aria-label": `${navItem}-tab`,
                     controlType: "text",
@@ -108,7 +108,7 @@ const Navigation = () => {
             {
                 controlType: "text",
                 id: "main-navigation-new-process-tab",
-                text: (
+                text: allowed("/orchestrator/processes/create/process/menu") ? (
                     <Link to="/new-process">
                         <EuiButton
                             aria-label="create process"
@@ -121,7 +121,7 @@ const Navigation = () => {
                             <FormattedMessage id="navigation.new_process" />
                         </EuiButton>
                     </Link>
-                ),
+                ) : null,
                 className: "navigation__cta",
             },
         ];

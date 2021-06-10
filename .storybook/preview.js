@@ -25,6 +25,7 @@ function withContext(Story) {
                 locationCodes: LOCATION_CODES,
                 products: PRODUCTS,
                 redirect: action("Change url"),
+                allowed: (resource) => true,
             }}
         >
             <Story />
