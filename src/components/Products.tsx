@@ -25,11 +25,12 @@ import {
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import React from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
+import ApplicationContext from "utils/ApplicationContext";
 
 import { deleteProduct, products } from "../api/index";
 import { setFlash } from "../utils/Flash";
 import { renderDateTime } from "../utils/Lookups";
-import { Product } from "../utils/types";
+import { Product, ProductBlock } from "../utils/types";
 
 const data = products;
 
@@ -45,6 +46,8 @@ interface IState {
 }
 
 class Products extends React.Component<WrappedComponentProps, IState> {
+    context!: React.ContextType<typeof ApplicationContext>;
+
     state: IState = {
         products: [],
         productsLoaded: true,
@@ -150,7 +153,7 @@ class Products extends React.Component<WrappedComponentProps, IState> {
                 sortable: true,
                 truncateText: false,
                 width: "5%",
-                render: (status: any) => {
+                render: (status: string) => {
                     switch (status) {
                         case "end of life":
                             return (
@@ -190,10 +193,10 @@ class Products extends React.Component<WrappedComponentProps, IState> {
                 name: "PRODUCT BLOCKS",
                 sortable: true,
                 truncateText: false,
-                render: (product_blocks: any) => {
-                    const renderPB = product_blocks.map((item: any) => (
+                render: (product_blocks: ProductBlock[]) => {
+                    const renderPB = product_blocks.map((item) => (
                         <EuiBadge color="primary" isDisabled={false}>
-                            <EuiLink color="text" href={`/product-block/${item.product_block_id}?readOnly=false`}>
+                            <EuiLink color="text" href={`/metadata/product-block/${item.product_block_id}`}>
                                 {item.name}
                             </EuiLink>
                         </EuiBadge>
@@ -207,7 +210,7 @@ class Products extends React.Component<WrappedComponentProps, IState> {
                 name: "CREATE DATE",
                 sortable: true,
                 truncateText: false,
-                render: (created_at: any) => {
+                render: (created_at: number) => {
                     const renderCA = renderDateTime(created_at);
                     return <div>{renderCA}</div>;
                 },
@@ -217,14 +220,17 @@ class Products extends React.Component<WrappedComponentProps, IState> {
                 field: "product_id",
                 name: "",
                 width: "2.5%",
-                render: (product_id: any) => {
-                    const Edit = (
-                        <EuiButtonIcon
-                            href={`/product/${product_id}?readOnly=false`}
-                            iconType="pencil"
-                            aria-label="Edit"
-                        />
-                    );
+                render: (product_id: string) => {
+                    const Edit =
+                        this.context.allowed("/orchestrator/metadata/product/edit/" + product_id) + "/" ? (
+                            <EuiButtonIcon
+                                href={`/metadata/product/${product_id}`}
+                                iconType="pencil"
+                                aria-label="Edit"
+                            />
+                        ) : this.context.allowed("/orchestrator/metadata/product/view/" + product_id) + "/" ? (
+                            <EuiButtonIcon href={`/metadata/product/${product_id}`} iconType="eye" aria-label="View" />
+                        ) : null;
                     return <div>{Edit}</div>;
                 },
             },
@@ -232,14 +238,15 @@ class Products extends React.Component<WrappedComponentProps, IState> {
                 field: "product_id",
                 name: "",
                 width: "2%",
-                render: (product_id: any, record: any) => {
-                    const Delete = (
-                        <EuiButtonIcon
-                            onClick={this.handleDeleteProduct(record)}
-                            iconType="trash"
-                            aria-label="Delete"
-                        />
-                    );
+                render: (product_id: string, record: Product) => {
+                    const Delete =
+                        this.context.allowed("/orchestrator/metadata/product/delete/" + product_id) + "/" ? (
+                            <EuiButtonIcon
+                                onClick={this.handleDeleteProduct(record)}
+                                iconType="trash"
+                                aria-label="Delete"
+                            />
+                        ) : null;
                     return <div>{Delete}</div>;
                 },
             },
@@ -269,5 +276,6 @@ class Products extends React.Component<WrappedComponentProps, IState> {
         );
     }
 }
+Products.contextType = ApplicationContext;
 
 export default injectIntl(Products);

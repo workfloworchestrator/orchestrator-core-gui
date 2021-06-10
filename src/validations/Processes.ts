@@ -20,6 +20,7 @@ const isProcessWithDetails = (process: any): process is ProcessWithDetails =>
     (process as ProcessWithDetails).status !== undefined;
 
 export function actionOptions(
+    allowed: (resource: string) => boolean,
     process: ProcessWithStatus,
     showAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
     retryAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
@@ -69,17 +70,7 @@ export function actionOptions(
 
     switch (status) {
         case "failed":
-            options = [details, retry, abort];
-            if (process.is_task) {
-                options.push(_delete);
-            }
-            break;
         case "api_unavailable":
-            options = [details, retry, abort];
-            if (process.is_task) {
-                options.push(_delete);
-            }
-            break;
         case "inconsistent_data":
             options = [details, retry, abort];
             if (process.is_task) {
@@ -117,5 +108,11 @@ export function actionOptions(
         default:
             throw new Error(`Unknown status: ${status}`);
     }
+
+    //@ts-ignore
+    const process_id = process.id ?? process.pid;
+
+    options = options.filter((option) => allowed("/orchestrator/processes/" + option.label + "/" + process_id + "/"));
+
     return options;
 }
