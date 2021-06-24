@@ -13,12 +13,11 @@
  *
  */
 
+import { ApiClient } from "api";
+import { CustomApiClient } from "api/custom";
 import { memoize, merge } from "lodash";
 import React, { HTMLProps } from "react";
 import { ServicePortSubscription } from "utils/types";
-
-import { ApiClient } from "../api";
-import { CustomApiClient } from "../api/custom";
 
 let subscriptionsCache: { [index: string]: ServicePortSubscription } = {};
 

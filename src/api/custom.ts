@@ -1,3 +1,4 @@
+import { BaseApiClient } from "api";
 import { intl } from "locale/i18n";
 import { setFlash } from "utils/Flash";
 import {
@@ -15,7 +16,6 @@ import {
 } from "utils/types";
 
 import axiosInstance from "./axios";
-import { BaseApiClient } from "./index";
 
 abstract class CustomApiClientInterface extends BaseApiClient {
     abstract portSubscriptions: (

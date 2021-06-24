@@ -116,7 +116,7 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
         if (!isLoading && vcs.length > 0 && isEmpty(imsServices)) {
             this.setState({ isLoading: true });
             vcs.forEach((vc: any, vcIndex: number) => {
-                this.context.apiClient.serviceByImsServiceId(vc.ims_circuit_id).then((result: IMSService) => {
+                this.context.customApiClient.serviceByImsServiceId(vc.ims_circuit_id).then((result: IMSService) => {
                     imsServices[vcIndex] = result;
                     this.setState({ imsServices: imsServices });
                     if (isEmpty(imsEndpoints[vcIndex])) {
@@ -142,24 +142,24 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
 
         const uniquePortPromises = (service.endpoints || []).map(async (endpoint) => {
             if (endpoint.type === "port") {
-                return this.context.apiClient.portByImsPortId(endpoint.id).then((result: IMSPort) =>
+                return this.context.customApiClient.portByImsPortId(endpoint.id).then((result: IMSPort) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
                         endpointType: endpoint.type,
                     })
                 );
             } else if (endpoint.type === "internal_port") {
-                return this.context.apiClient.internalPortByImsPortId(endpoint.id).then((result: any) =>
+                return this.context.customApiClient.internalPortByImsPortId(endpoint.id).then((result: any) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
                         endpointType: endpoint.type,
                     })
                 );
             } else {
-                return this.context.apiClient.serviceByImsServiceId(endpoint.id).then((result: IMSService) => {
+                return this.context.customApiClient.serviceByImsServiceId(endpoint.id).then((result: IMSService) => {
                     if (["SP", "MSP", "SSP"].includes(result.product)) {
                         // In case of port product we just resolve the underlying port
-                        return this.context.apiClient.portByImsServiceId(endpoint.id).then((result: IMSPort) =>
+                        return this.context.customApiClient.portByImsServiceId(endpoint.id).then((result: IMSPort) =>
                             Object.assign(result, {
                                 serviceId: endpoint.id,
                                 endpointType: "port",

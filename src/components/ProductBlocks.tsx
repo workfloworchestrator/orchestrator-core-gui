@@ -27,7 +27,7 @@ import { WrappedComponentProps, injectIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { renderDateTime } from "utils/Lookups";
-import { ProductBlock } from "utils/types";
+import { ProductBlock, ResourceType } from "utils/types";
 import { stop } from "utils/Utils";
 
 interface IState {

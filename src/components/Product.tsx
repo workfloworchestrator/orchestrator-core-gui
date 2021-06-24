@@ -104,7 +104,7 @@ class Product extends React.Component<IProps, IState> {
             this.context.apiClient.productStatuses(),
             this.context.apiClient.fixedInputConfiguration(),
         ]).then((res) => {
-            const product = res[2].find((value) => value.product_id === product_id);
+            const product = res[2].find((value: iProduct) => value.product_id === product_id);
 
             this.setState({
                 productBlocks: res[0],
