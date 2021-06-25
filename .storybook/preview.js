@@ -7,15 +7,13 @@ import mock from "axios-mock";
 import React from "react";
 import { setIntlConfig, withIntl } from "storybook-addon-intl";
 
-import { ApiClient } from "../src/api";
-import { CustomApiClient } from "../src/api/custom";
 import en from "../src/locale/en";
 import { parse_translations_dict } from "../src/locale/i18n";
 import nl from "../src/locale/nl";
 import LOCATION_CODES from "../src/stories/data/location_codes.json";
 import ORGANISATIONS from "../src/stories/data/organisations.json";
 import PRODUCTS from "../src/stories/data/products.json";
-import ApplicationContext from "../src/utils/ApplicationContext";
+import ApplicationContext, { apiClient, customApiClient } from "../src/utils/ApplicationContext";
 
 const withContainerSection = (cb) => <section className="storybook-container">{cb()}</section>;
 
@@ -28,8 +26,8 @@ function withContext(Story) {
                 products: PRODUCTS,
                 redirect: action("Change url"),
                 allowed: (resource) => true,
-                apiClient: new ApiClient(),
-                customApiClient: new CustomApiClient(),
+                apiClient: apiClient,
+                customApiClient: customApiClient,
             }}
         >
             <Story />

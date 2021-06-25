@@ -15,8 +15,6 @@ import {
     ServicePortSubscription,
 } from "utils/types";
 
-import axiosInstance from "./axios";
-
 abstract class CustomApiClientInterface extends BaseApiClient {
     abstract portSubscriptions: (
         tagList?: string[],
@@ -51,62 +49,6 @@ abstract class CustomApiClientInterface extends BaseApiClient {
 }
 
 export class CustomApiClient extends CustomApiClientInterface {
-    // Todo: maybe move top functions to own class?
-    axiosFetch = <R = {}>(
-        path: string,
-        options = {},
-        headers = {},
-        showErrorDialog = true,
-        result = true
-    ): Promise<R> => {
-        // preset the config with the relative URL and a GET type.
-        // presets can be overridden with `options`.
-        return axiosInstance({ url: path, method: "GET", ...options })
-            .then((res) => res.data)
-            .catch((err) => {
-                if (showErrorDialog) {
-                    setTimeout(() => {
-                        throw err;
-                    }, 250);
-                }
-                throw err;
-            });
-    };
-
-    catchErrorStatus = <T>(promise: Promise<any>, status: number, callback: (json: T) => void) => {
-        return promise.catch((err) => {
-            if (err.response && err.response.status === status) {
-                callback(err.response.data);
-            } else {
-                throw err;
-            }
-        });
-    };
-
-    fetchJson = <R = {}>(
-        path: string,
-        options = {},
-        headers = {},
-        showErrorDialog = true,
-        result = true
-    ): Promise<R> => {
-        return this.axiosFetch(path, options, headers, showErrorDialog, result);
-    };
-
-    fetchJsonWithCustomErrorHandling = <R = {}>(path: string): Promise<R> => {
-        return this.fetchJson(path, {}, {}, false, true);
-    };
-
-    postPutJson = <R = {}>(
-        path: string,
-        body: {},
-        method: string,
-        showErrorDialog = true,
-        result = true
-    ): Promise<R> => {
-        return this.axiosFetch(path, { method: method, data: body }, {}, showErrorDialog, result);
-    };
-
     portSubscriptions = (
         tagList: string[] = [],
         statusList: string[] = [],

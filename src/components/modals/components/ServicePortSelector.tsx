@@ -84,7 +84,6 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
             .getPortSubscriptionsForNode(selectedNode.subscription_id)
             .then((result: ServicePortFilterItem[]) => {
                 console.log(result);
-                // Todo: move to render
                 const portOptions = result.map((port) => ({
                     value: port.subscription_id,
                     inputDisplay: port.port_name,

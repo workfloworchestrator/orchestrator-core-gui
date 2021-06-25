@@ -15,7 +15,6 @@
 
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
-import { ApiClient } from "api";
 import { setUser } from "api/axios";
 import { ENV } from "env";
 import Oidc, { UserManager, UserManagerSettings, WebStorageStateStore } from "oidc-client";
@@ -23,6 +22,7 @@ import { AuthContext, AuthProvider } from "oidc-react";
 import App, { history } from "pages/App";
 import React from "react";
 import ReactDOM from "react-dom";
+import { apiClient } from "utils/ApplicationContext";
 
 const appElement = document.getElementById("app");
 
@@ -73,7 +73,7 @@ if (ENV.OAUTH2_ENABLED) {
 
                     if (user.profile.email) {
                         // Todo: remove this ugliness
-                        new ApiClient().logUserInfo(user.profile.email, "logged in").then();
+                        apiClient.logUserInfo(user.profile.email, "logged in").then();
                     }
                 }
 

@@ -19,7 +19,6 @@ import "pages/App.scss";
 
 import { EuiLoadingSpinner, EuiToast } from "@elastic/eui";
 import * as Sentry from "@sentry/react";
-import { ApiClient } from "api";
 import Flash from "components/Flash";
 import Header from "components/Header";
 import ErrorDialog from "components/modals/ErrorDialog";
@@ -50,16 +49,12 @@ import React from "react";
 import { IntlShape, RawIntlProvider } from "react-intl";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { QueryParamProvider } from "use-query-params";
-import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
+import ApplicationContext, { ApplicationContextInterface, apiClient, customApiClient } from "utils/ApplicationContext";
 import { createPolicyCheck } from "utils/policy";
 import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
 
-import { CustomApiClient } from "../api/custom";
-
 export const history = createBrowserHistory();
-export const apiClient: ApiClient = new ApiClient();
-export const customApiClient: CustomApiClient = new CustomApiClient();
 
 interface IProps {
     user?: Partial<Oidc.Profile> & { [index: string]: any };
@@ -80,7 +75,6 @@ class App extends React.PureComponent<IProps, IState> {
         this.state = {
             loading: true,
             loaded: false,
-            // Todo: investigate possibility to make app context optional
             applicationContext: {
                 organisations: [],
                 locationCodes: [],
@@ -121,7 +115,6 @@ class App extends React.PureComponent<IProps, IState> {
                 targetUrl: response.url,
                 status: response.status,
             };
-            // Todo: fix error handling
             apiClient.reportError(error).then();
         };
 
@@ -155,7 +148,7 @@ class App extends React.PureComponent<IProps, IState> {
             language,
             allowed,
         ] = await Promise.all([
-            // Todo: move to dynamic loading part
+            // Todo GPL: move to dynamic loading part
             this.state.applicationContext.customApiClient.organisations(),
             this.state.applicationContext.customApiClient.locationCodes(),
             this.state.applicationContext.apiClient.products(),

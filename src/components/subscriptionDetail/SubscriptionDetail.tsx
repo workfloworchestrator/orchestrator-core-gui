@@ -582,7 +582,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                 );
                 setEnrichedParentSubscriptions(enrichedParentSubscriptions);
             }),
-            // Todo: move to dynamic loading part
+            // Todo GPL: move to dynamic loading part
             customApiClient.dienstafnameBySubscription(subscriptionId).then(setDienstafname),
         ];
 

@@ -135,7 +135,7 @@ abstract class ApiClientInterface extends BaseApiClient {
 }
 
 export class ApiClient extends ApiClientInterface {
-    // Todo: add a constructor that handles user
+    // Todo GPL: add a constructor that handles user
 
     products = (): Promise<Product[]> => {
         return this.fetchJson<Product[]>("products/");
@@ -199,7 +199,6 @@ export class ApiClient extends ApiClientInterface {
 
     //API
     subscriptionsDetailWithModel = (subscription_id: string): Promise<SubscriptionModel> => {
-        // Todo: investigate why some
         return this.fetchJsonWithCustomErrorHandling<SubscriptionModel>(
             `subscriptions/domain-model/${subscription_id}`
         );
@@ -238,10 +237,9 @@ export class ApiClient extends ApiClientInterface {
     };
 
     processSubscriptionsBySubscriptionId = (subscriptionId: string): Promise<SubscriptionProcesses[]> => {
-        // Todo: here we catch and extra err -> but then resolve it anyway?
         return this.fetchJsonWithCustomErrorHandling<SubscriptionProcesses[]>(
             `processes/process-subscriptions-by-subscription-id/${subscriptionId}`
-        ).catch((err) => Promise.resolve([]));
+        ).catch((err) => Promise.resolve([])); // Ignore non existing subscriptions
     };
 
     processSubscriptionsByProcessId = (processId: string): Promise<ProcessSubscription[]> => {

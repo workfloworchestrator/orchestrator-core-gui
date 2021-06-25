@@ -14,10 +14,9 @@
  */
 
 import { ApiClient } from "api";
+import { CustomApiClient } from "api/custom";
 import React from "react";
 import { Organization, Product } from "utils/types";
-
-import { CustomApiClient } from "../api/custom";
 
 export interface ApplicationContextInterface {
     organisations?: Organization[];
