@@ -208,14 +208,14 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
 
         const uniquePortPromises = (service.endpoints || []).map(async (endpoint) => {
             if (endpoint.type === "port") {
-                return this.context.apiClient.portByImsPortId(endpoint.id).then((result: IMSPort) =>
+                return this.context.customApiClient.portByImsPortId(endpoint.id).then((result: IMSPort) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
                         endpointType: endpoint.type,
                     })
                 );
             } else if (endpoint.type === "internal_port") {
-                return this.context.apiClient.internalPortByImsPortId(endpoint.id).then((result: any) =>
+                return this.context.customApiClient.internalPortByImsPortId(endpoint.id).then((result: any) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
                         endpointType: endpoint.type,
@@ -377,7 +377,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
 
         this.prefixesLoaded.push(prefixSubscriptionId);
         this.context.apiClient.subscriptionsDetailWithModel(prefixSubscriptionId).then((result: SubscriptionModel) => {
-            this.context.apiClient.prefixById(result.ip_prefix.ipam_prefix_id).then((prefixData: any) => {
+            this.context.customApiClient.prefixById(result.ip_prefix.ipam_prefix_id).then((prefixData: any) => {
                 const { prefix } = this.state;
                 prefix[prefixSubscriptionId] = prefixData;
                 this.setState({ prefix: prefix });

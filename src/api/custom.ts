@@ -198,13 +198,11 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.fetchJson(`surf/ipam/prefix_subscriptions/${parentId}`);
     };
 
-    // @ts-ignore
-    prefixSubscriptions = () => {
+    prefixSubscriptions = (): Promise<IpPrefixSubscription[]> => {
         return this.fetchJson(`surf/ipam/prefix_subscriptions/`);
     };
 
-    // @ts-ignore
-    prefixById = (prefixId: number) => {
+    prefixById = (prefixId: number): Promise<IpPrefix> => {
         return this.fetchJsonWithCustomErrorHandling(`surf/ipam/prefix_by_id/${prefixId}`);
     };
 
