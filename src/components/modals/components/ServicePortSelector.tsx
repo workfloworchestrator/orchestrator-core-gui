@@ -80,7 +80,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
 
     fetchPortData = (selectedNode: Subscription) => {
         this.setState({ portsLoading: true });
-        this.context.apiClient
+        this.context.customApiClient
             .getPortSubscriptionsForNode(selectedNode.subscription_id)
             .then((result: ServicePortFilterItem[]) => {
                 console.log(result);
