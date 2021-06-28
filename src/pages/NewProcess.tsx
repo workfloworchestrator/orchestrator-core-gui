@@ -16,7 +16,6 @@
 import "pages/NewProcess.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
-import { catchErrorStatus, startProcess } from "api";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import { JSONSchema6 } from "json-schema";
 import React, { useCallback, useContext, useEffect, useState } from "react";
@@ -48,7 +47,7 @@ interface Form {
 export default function NewProcess(props: IProps) {
     const intl = useIntl();
     const { preselectedInput } = props;
-    const { products, redirect } = useContext(ApplicationContext);
+    const { products, redirect, apiClient } = useContext(ApplicationContext);
     const [form, setForm] = useState<Form>({});
     const { stepUserInput, hasNext } = form;
 
@@ -62,7 +61,7 @@ export default function NewProcess(props: IProps) {
             const product = productById(productId, products);
             const workflow = product.workflows.find((wf) => wf.target === TARGET_CREATE)!.name;
 
-            let promise = startProcess(workflow, processInput).then(
+            let promise = apiClient.startProcess(workflow, processInput).then(
                 (process) => {
                     redirect(`/processes?highlight=${process.id}`);
                     setFlash(
@@ -77,7 +76,7 @@ export default function NewProcess(props: IProps) {
                 }
             );
 
-            return catchErrorStatus<EngineStatus>(promise, 503, (json) => {
+            return apiClient.catchErrorStatus<EngineStatus>(promise, 503, (json) => {
                 setFlash(
                     intl.formatMessage({ id: `settings.status.engine.${json.global_status.toLowerCase()}` }),
                     "error"
@@ -85,12 +84,12 @@ export default function NewProcess(props: IProps) {
                 redirect("/processes");
             });
         },
-        [redirect, products, preselectedInput, intl]
+        [redirect, products, preselectedInput, intl, apiClient]
     );
 
     useEffect(() => {
         if (preselectedInput.product) {
-            catchErrorStatus<FormNotCompleteResponse>(submit([]), 510, (json) => {
+            apiClient.catchErrorStatus<FormNotCompleteResponse>(submit([]), 510, (json) => {
                 setForm({
                     stepUserInput: json.form,
                     hasNext: json.hasNext ?? false,
@@ -115,7 +114,7 @@ export default function NewProcess(props: IProps) {
                 hasNext: true,
             });
         }
-    }, [products, submit, preselectedInput, intl]);
+    }, [products, submit, preselectedInput, intl, apiClient]);
 
     return (
         <EuiPage>

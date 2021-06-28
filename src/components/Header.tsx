@@ -16,7 +16,6 @@
 import "components/Header.scss";
 
 import { EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderSectionItem, EuiText } from "@elastic/eui";
-import { getGlobalStatus, logUserInfo } from "api";
 import UserProfile from "components/UserProfile";
 import { ENV } from "env";
 import logo from "images/network-automation.png";
@@ -27,7 +26,7 @@ import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl"
 import { Link } from "react-router-dom";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
-import { GlobalStatus } from "utils/types";
+import { EngineStatus, GlobalStatus } from "utils/types";
 
 interface IState {
     dropDownActive: boolean;
@@ -63,7 +62,7 @@ class Header extends React.PureComponent<IProps, IState> {
 
     logout = () => {
         if (this.props.userData && this.props.userData.profile.email) {
-            logUserInfo(this.props.userData.profile.email, "logged out");
+            this.context.apiClient.logUserInfo(this.props.userData.profile.email, "logged out");
         }
         this.props.signOut();
     };
@@ -87,7 +86,7 @@ class Header extends React.PureComponent<IProps, IState> {
     }
 
     refeshStatus = () => {
-        getGlobalStatus().then((globalStatus) => {
+        this.context.apiClient.getGlobalStatus().then((globalStatus: EngineStatus) => {
             const { globalLock } = this.state;
             const { intl } = this.props;
             if (!globalStatus.global_lock && globalLock) {

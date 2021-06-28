@@ -26,9 +26,9 @@ import {
     EuiSelect,
     EuiSpacer,
 } from "@elastic/eui";
-import { clearCache, getGlobalStatus, setGlobalStatus } from "api";
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
+import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { EngineStatus } from "utils/types";
 
@@ -45,6 +45,7 @@ export const Settings: FunctionComponent = (props: IProps) => {
     const intl = useIntl();
     const [cache, setCache] = useState<Cache>(Cache.ims);
     const [engineStatus, setEngineStatus] = useState<EngineStatus>();
+    const { apiClient } = useContext(ApplicationContext);
 
     useEffect(() => {
         getEngineStatus();
@@ -53,16 +54,16 @@ export const Settings: FunctionComponent = (props: IProps) => {
         return () => {
             clearInterval(interval);
         };
-    }, []);
+    });
 
     const getEngineStatus = () => {
-        getGlobalStatus().then((newEngineStatus) => {
+        apiClient.getGlobalStatus().then((newEngineStatus) => {
             setEngineStatus(newEngineStatus);
         });
     };
 
     const lockEngine = (isLocked: boolean) => {
-        setGlobalStatus(isLocked).then(() => {
+        apiClient.setGlobalStatus(isLocked).then(() => {
             setFlash(intl.formatMessage({ id: `settings.status.engine.${isLocked ? "pausing" : "restarted"}` }));
         });
     };
@@ -86,7 +87,7 @@ export const Settings: FunctionComponent = (props: IProps) => {
     ];
 
     const flushCache = () => {
-        clearCache(cache).then(() => {
+        apiClient.clearCache(cache).then(() => {
             setFlash(
                 intl.formatMessage(
                     { id: "settings.cache.flushed" },

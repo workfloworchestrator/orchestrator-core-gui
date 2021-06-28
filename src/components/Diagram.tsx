@@ -1,10 +1,10 @@
 import { EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPanel } from "@elastic/eui";
-import { internalPortByImsPortId, portByImsPortId, portByImsServiceId, serviceByImsServiceId } from "api";
 import React from "react";
 import { ConcatenatedCircuit } from "react-network-diagrams";
 import { Link } from "react-router-dom";
 import {
     IMSEndpoint,
+    IMSPort,
     IMSService,
     SubscriptionInstance,
     SubscriptionInstanceParentRelation,
@@ -13,6 +13,7 @@ import {
 } from "utils/types";
 import { isEmpty } from "utils/Utils";
 
+import ApplicationContext from "../utils/ApplicationContext";
 import { lineShapeMap, stylesMap } from "./DiagramStyles";
 
 interface IProps {
@@ -115,7 +116,7 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
         if (!isLoading && vcs.length > 0 && isEmpty(imsServices)) {
             this.setState({ isLoading: true });
             vcs.forEach((vc: any, vcIndex: number) => {
-                serviceByImsServiceId(vc.ims_circuit_id).then((result) => {
+                this.context.customApiClient.serviceByImsServiceId(vc.ims_circuit_id).then((result: IMSService) => {
                     imsServices[vcIndex] = result;
                     this.setState({ imsServices: imsServices });
                     if (isEmpty(imsEndpoints[vcIndex])) {
@@ -141,24 +142,24 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
 
         const uniquePortPromises = (service.endpoints || []).map(async (endpoint) => {
             if (endpoint.type === "port") {
-                return portByImsPortId(endpoint.id).then((result) =>
+                return this.context.customApiClient.portByImsPortId(endpoint.id).then((result: IMSPort) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
                         endpointType: endpoint.type,
                     })
                 );
             } else if (endpoint.type === "internal_port") {
-                return internalPortByImsPortId(endpoint.id).then((result) =>
+                return this.context.customApiClient.internalPortByImsPortId(endpoint.id).then((result: any) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
                         endpointType: endpoint.type,
                     })
                 );
             } else {
-                return serviceByImsServiceId(endpoint.id).then((result) => {
+                return this.context.customApiClient.serviceByImsServiceId(endpoint.id).then((result: IMSService) => {
                     if (["SP", "MSP", "SSP"].includes(result.product)) {
                         // In case of port product we just resolve the underlying port
-                        return portByImsServiceId(endpoint.id).then((result) =>
+                        return this.context.customApiClient.portByImsServiceId(endpoint.id).then((result: IMSPort) =>
                             Object.assign(result, {
                                 serviceId: endpoint.id,
                                 endpointType: "port",
@@ -406,3 +407,4 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
         );
     }
 }
+NetworkDiagram.contextType = ApplicationContext;

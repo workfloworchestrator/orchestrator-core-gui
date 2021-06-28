@@ -1,15 +1,8 @@
 import { EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPanel } from "@elastic/eui";
-import {
-    internalPortByImsPortId,
-    portByImsPortId,
-    portByImsServiceId,
-    prefixById,
-    serviceByImsServiceId,
-    subscriptionsDetailWithModel,
-} from "api";
 import React from "react";
 import { TrafficMap } from "react-network-diagrams";
-import { IMSEndpoint, IMSService, Subscription, SubscriptionModel } from "utils/types";
+import ApplicationContext from "utils/ApplicationContext";
+import { IMSEndpoint, IMSPort, IMSService, Subscription, SubscriptionModel } from "utils/types";
 import { isEmpty } from "utils/Utils";
 
 import { stylesMap } from "./DiagramStyles";
@@ -161,7 +154,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         if (!isLoading && vcs.length > 0 && isEmpty(imsServices)) {
             this.setState({ isLoading: true });
             vcs.forEach((vc: any, vcIndex: number) => {
-                serviceByImsServiceId(vc.ims_circuit_id).then((result) => {
+                this.context.customApiClient.serviceByImsServiceId(vc.ims_circuit_id).then((result: IMSService) => {
                     imsServices[vcIndex] = result;
                     this.setState({ imsServices: imsServices });
                     if (isEmpty(imsEndpoints[vcIndex])) {
@@ -184,14 +177,16 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         (backlog || []).forEach((esi: any) => {
             (esi.saps || []).forEach((sap: any) => {
                 promises.push(
-                    subscriptionsDetailWithModel(sap.port_subscription_id).then((result: SubscriptionModel) => {
-                        if (result.product.tag === "AGGSP") {
-                            return subscriptionsDetailWithModel(
-                                result.aggsp.port_subscription_id[0]
-                            ).then((port: SubscriptionModel) => Object.assign(result, { sp: port.sp }));
-                        }
-                        return result;
-                    })
+                    this.context.apiClient
+                        .subscriptionsDetailWithModel(sap.port_subscription_id)
+                        .then((result: SubscriptionModel) => {
+                            if (result.product.tag === "AGGSP") {
+                                return this.context.apiClient
+                                    .subscriptionsDetailWithModel(result.aggsp.port_subscription_id[0])
+                                    .then((port: SubscriptionModel) => Object.assign(result, { sp: port.sp }));
+                            }
+                            return result;
+                        })
                 );
             });
         });
@@ -213,24 +208,24 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
 
         const uniquePortPromises = (service.endpoints || []).map(async (endpoint) => {
             if (endpoint.type === "port") {
-                return portByImsPortId(endpoint.id).then((result) =>
+                return this.context.customApiClient.portByImsPortId(endpoint.id).then((result: IMSPort) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
                         endpointType: endpoint.type,
                     })
                 );
             } else if (endpoint.type === "internal_port") {
-                return internalPortByImsPortId(endpoint.id).then((result) =>
+                return this.context.customApiClient.internalPortByImsPortId(endpoint.id).then((result: any) =>
                     Object.assign(result, {
                         serviceId: endpoint.id,
                         endpointType: endpoint.type,
                     })
                 );
             } else {
-                return serviceByImsServiceId(endpoint.id).then((result) => {
+                return this.context.customApiClient.serviceByImsServiceId(endpoint.id).then((result: IMSService) => {
                     if (["SP", "MSP", "SSP"].includes(result.product)) {
                         // In case of port product we just resolve the underlying port
-                        return portByImsServiceId(endpoint.id).then((result) =>
+                        return this.context.customApiClient.portByImsServiceId(endpoint.id).then((result: IMSPort) =>
                             Object.assign(result, {
                                 serviceId: endpoint.id,
                                 endpointType: "port",
@@ -240,11 +235,13 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                         const internalPortId = result.endpoints.find((e) => e.type === "service");
                         if (internalPortId) {
                             console.log("discard", result);
-                            return portByImsServiceId(internalPortId.id).then((port: any) =>
-                                Object.assign(port, {
-                                    serviceId: endpoint.id,
-                                })
-                            );
+                            return this.context.customApiClient
+                                .portByImsServiceId(internalPortId.id)
+                                .then((port: any) =>
+                                    Object.assign(port, {
+                                        serviceId: endpoint.id,
+                                    })
+                                );
                         } else {
                             return result;
                         }
@@ -379,8 +376,8 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         const prefixSubscriptionId = sap.ip_prefix_subscription_id[0];
 
         this.prefixesLoaded.push(prefixSubscriptionId);
-        subscriptionsDetailWithModel(prefixSubscriptionId).then((result: SubscriptionModel) => {
-            prefixById(result.ip_prefix.ipam_prefix_id).then((prefixData: any) => {
+        this.context.apiClient.subscriptionsDetailWithModel(prefixSubscriptionId).then((result: SubscriptionModel) => {
+            this.context.customApiClient.prefixById(result.ip_prefix.ipam_prefix_id).then((prefixData: any) => {
                 const { prefix } = this.state;
                 prefix[prefixSubscriptionId] = prefixData;
                 this.setState({ prefix: prefix });
@@ -565,3 +562,4 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         );
     }
 }
+TopologyDiagram.contextType = ApplicationContext;

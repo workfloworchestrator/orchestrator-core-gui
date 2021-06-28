@@ -16,10 +16,8 @@
 import { EuiInMemoryTable, EuiPageContent, EuiPageContentHeader, EuiSpacer } from "@elastic/eui";
 import React from "react";
 
-import { resourceTypes } from "../api/index";
+import ApplicationContext from "../utils/ApplicationContext";
 import { ResourceType } from "../utils/types";
-
-const data = resourceTypes;
 
 interface IState {
     resourceTypes: ResourceType[];
@@ -35,7 +33,7 @@ export default class ResourceTypes extends React.Component {
     };
 
     componentDidMount() {
-        data().then((resourceTypes) => {
+        this.context.apiClient.resourceTypes().then((resourceTypes: ResourceType[]) => {
             this.setState({ resourceTypes: resourceTypes, resourceTypesLoaded: false });
         });
     }
@@ -91,3 +89,5 @@ export default class ResourceTypes extends React.Component {
         );
     }
 }
+
+ResourceTypes.contextType = ApplicationContext;

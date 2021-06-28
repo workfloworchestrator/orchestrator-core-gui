@@ -15,12 +15,9 @@
 
 import { EuiBadge, EuiInMemoryTable, EuiPageContent, EuiPageContentHeader, EuiSpacer } from "@elastic/eui";
 import React from "react";
-
-import { allWorkflowsWithProductTags } from "../api/index";
-import { renderDateTime } from "../utils/Lookups";
-import { WorkflowWithProductTags } from "../utils/types";
-
-const data = allWorkflowsWithProductTags;
+import ApplicationContext from "utils/ApplicationContext";
+import { renderDateTime } from "utils/Lookups";
+import { WorkflowWithProductTags } from "utils/types";
 
 interface IState {
     workFlows: WorkflowWithProductTags[];
@@ -36,7 +33,7 @@ export default class WorkFlows extends React.Component {
     };
 
     componentDidMount() {
-        data().then((workFlows) => {
+        this.context.apiClient.allWorkflowsWithProductTags().then((workFlows: WorkflowWithProductTags) => {
             this.setState({ workFlows: workFlows, workFlowsLoaded: false });
         });
     }
@@ -116,3 +113,4 @@ export default class WorkFlows extends React.Component {
         );
     }
 }
+WorkFlows.contextType = ApplicationContext;

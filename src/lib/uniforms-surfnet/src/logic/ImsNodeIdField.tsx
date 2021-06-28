@@ -13,12 +13,12 @@
  *
  */
 
-import { getNodesByLocationAndStatus } from "api";
 import SelectField, { SelectFieldProps } from "lib/uniforms-surfnet/src/SelectField";
 import { get } from "lodash";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { connectField, filterDOMProps } from "uniforms";
+import ApplicationContext from "utils/ApplicationContext";
 import { IMSNode } from "utils/types";
 
 export type ImsNodeIdFieldProps = {
@@ -37,17 +37,20 @@ declare module "uniforms" {
 filterDOMProps.register("locationCode", "status");
 
 function ImsNodeId({ name, value, onChange, locationCode, status, ...props }: ImsNodeIdFieldProps) {
+    const { customApiClient } = useContext(ApplicationContext);
+
     const intl = useIntl();
     const [loading, setLoading] = useState(true);
     const [nodes, setNodes] = useState<IMSNode[]>([]);
 
     useEffect(() => {
         if (locationCode) {
-            getNodesByLocationAndStatus(locationCode, status ?? "PL")
+            customApiClient
+                .getNodesByLocationAndStatus(locationCode, status ?? "PL")
                 .then(setNodes)
                 .then(() => setLoading(false));
         }
-    }, [locationCode, status]);
+    }, [locationCode, status, customApiClient]);
 
     const placeholder =
         loading && locationCode

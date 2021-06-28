@@ -16,13 +16,14 @@
 import "pages/ModifySubscription.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
-import { catchErrorStatus, startProcess } from "api/index";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import { setFlash } from "utils/Flash";
 import { FormNotCompleteResponse, InputForm } from "utils/types";
+
+import ApplicationContext from "../utils/ApplicationContext";
 
 interface IProps extends RouteComponentProps, WrappedComponentProps {
     subscriptionId: string;
@@ -40,10 +41,13 @@ class ModifySubscription extends React.Component<IProps, IState> {
     componentDidMount = () => {
         const { subscriptionId, workflowName } = this.props;
 
-        let promise = startProcess(workflowName, [{ subscription_id: subscriptionId }]).then((res) => {
-            this.setState({ pid: res.id });
-        });
-        catchErrorStatus<FormNotCompleteResponse>(promise, 510, (json) => {
+        let promise = this.context.apiClient
+            .startProcess(workflowName, [{ subscription_id: subscriptionId }])
+            .then((res: { id: string }) => {
+                this.setState({ pid: res.id });
+            });
+        // @ts-ignore
+        this.context.apiClient.catchErrorStatus<FormNotCompleteResponse>(promise, 510, (json) => {
             this.setState({ stepUserInput: json.form });
         });
     };
@@ -55,9 +59,11 @@ class ModifySubscription extends React.Component<IProps, IState> {
     submit = (processInput: {}[]) => {
         const { subscriptionId, workflowName } = this.props;
 
-        return startProcess(workflowName, [{ subscription_id: subscriptionId }, ...processInput]).then((res) => {
-            this.setState({ pid: res.id });
-        });
+        return this.context.apiClient
+            .startProcess(workflowName, [{ subscription_id: subscriptionId }, ...processInput])
+            .then((res: { id: string }) => {
+                this.setState({ pid: res.id });
+            });
     };
 
     render() {
@@ -101,5 +107,7 @@ class ModifySubscription extends React.Component<IProps, IState> {
         );
     }
 }
+
+ModifySubscription.contextType = ApplicationContext;
 
 export default injectIntl(withRouter(ModifySubscription));

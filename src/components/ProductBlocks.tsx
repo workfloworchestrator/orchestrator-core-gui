@@ -25,14 +25,10 @@ import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import React from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
-
-import { deleteProductBlock, productBlocks } from "../api/index";
-import { setFlash } from "../utils/Flash";
-import { renderDateTime } from "../utils/Lookups";
-import { ProductBlock, ResourceType } from "../utils/types";
-import { stop } from "../utils/Utils";
-
-const data = productBlocks;
+import { setFlash } from "utils/Flash";
+import { renderDateTime } from "utils/Lookups";
+import { ProductBlock, ResourceType } from "utils/types";
+import { stop } from "utils/Utils";
 
 interface IState {
     productBlocks: ProductBlock[];
@@ -60,7 +56,7 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
     };
 
     componentDidMount() {
-        data().then((productBlocks) => {
+        this.context.apiClient.productBlocks().then((productBlocks: ProductBlock[]) => {
             this.setState({ productBlocks: productBlocks, productBlocksLoaded: false });
         });
     }
@@ -77,7 +73,8 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
                 { type: "Product Block", name: productBlock.name }
             ),
             () =>
-                deleteProductBlock(productBlock.product_block_id)
+                this.context.apiClient
+                    .deleteProductBlock(productBlock.product_block_id)
                     .then(() => {
                         this.componentDidMount();
                         setFlash(
@@ -87,7 +84,7 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
                             )
                         );
                     })
-                    .catch((err) => {
+                    .catch((err: any) => {
                         if (err.response && err.response.status === 400) {
                             if (err.response.data) {
                                 setFlash(err.response.data.error);

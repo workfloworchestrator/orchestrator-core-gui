@@ -14,7 +14,6 @@
  */
 
 import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
-import { usedVlans as getUsedVlans } from "api";
 import { SubscriptionsContext } from "components/subscriptionContext";
 import { getPortMode } from "lib/uniforms-surfnet/src/SubscriptionField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
@@ -105,7 +104,7 @@ function Vlan({
     const intl = useIntl();
     const { model, schema } = useForm();
     const initialValue = schema.getInitialValue(name, {});
-    const { products } = useContext(ApplicationContext);
+    const { products, customApiClient } = useContext(ApplicationContext);
     const { getSubscription } = useContext(SubscriptionsContext);
     const nameArray = joinName(null, name);
     const selfName = nameArray.slice(-1);
@@ -136,7 +135,8 @@ function Vlan({
 
     useEffect(() => {
         if (subscriptionId) {
-            getUsedVlans(subscriptionId)
+            customApiClient
+                .usedVlans(subscriptionId)
                 .then((result) => {
                     setUsedVlansInIms(result);
                     setMissingInIms(false);
@@ -145,7 +145,7 @@ function Vlan({
                     setMissingInIms(true);
                 });
         }
-    }, [subscriptionId]);
+    }, [subscriptionId, customApiClient]);
 
     // Filter currently used vlans because they are probably from the current subscription
     const currentVlans = getAllNumbersForVlanRange(initialValue);
