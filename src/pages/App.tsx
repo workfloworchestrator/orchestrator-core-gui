@@ -35,7 +35,6 @@ import NewProcess from "pages/NewProcess";
 import NewTask from "pages/NewTask";
 import NotAllowed from "pages/NotAllowed";
 import NotFound from "pages/NotFound";
-import Prefixes from "pages/Prefixes";
 import ProcessDetail from "pages/ProcessDetail";
 import Processes from "pages/Processes";
 import ServerError from "pages/ServerError";
@@ -45,7 +44,7 @@ import SubscriptionDetailPage from "pages/SubscriptionDetailPage";
 import SubscriptionsPage from "pages/Subscriptions";
 import Tasks from "pages/Tasks";
 import TerminateSubscription from "pages/TerminateSubscription";
-import React from "react";
+import React, { Suspense } from "react";
 import { IntlShape, RawIntlProvider } from "react-intl";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { QueryParamProvider } from "use-query-params";
@@ -53,6 +52,8 @@ import ApplicationContext, { ApplicationContextInterface, apiClient, customApiCl
 import { createPolicyCheck } from "utils/policy";
 import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
+
+const ExtraRoutes = React.lazy(() => import("custom/routes"));
 
 export const history = createBrowserHistory();
 
@@ -273,7 +274,11 @@ class App extends React.PureComponent<IProps, IState> {
                                         )}
                                     />
                                     <ProtectedRoute path="/settings" render={() => <Settings />} />
-                                    <ProtectedRoute path="/prefixes" render={() => <Prefixes />} />
+
+                                    <Suspense fallback={<div>Loading...</div>}>
+                                        <ExtraRoutes />
+                                    </Suspense>                                    
+                                    
                                     <ProtectedRoute path="/new-task" render={() => <NewTask />} />
 
                                     <ProtectedRoute path="/tasks" render={() => <Tasks />} />
