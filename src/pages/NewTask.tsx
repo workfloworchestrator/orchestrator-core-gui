@@ -16,7 +16,6 @@
 import "pages/NewTask.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
-import { catchErrorStatus, startProcess, workflowsByTarget } from "api";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import { JSONSchema6 } from "json-schema";
 import React from "react";
@@ -36,7 +35,7 @@ class NewTask extends React.Component<WrappedComponentProps, IState> {
     state: IState = {};
 
     componentDidMount = () => {
-        workflowsByTarget("SYSTEM").then((workflows) => {
+        this.context.apiClient.workflowsByTarget("SYSTEM").then((workflows) => {
             const options = workflows.reduce<{ [index: string]: string }>((acc, wf) => {
                 acc[wf.name] = wf.description;
                 return acc;
@@ -60,7 +59,7 @@ class NewTask extends React.Component<WrappedComponentProps, IState> {
         const { intl } = this.props;
         const { select_task } = taskInput[0] as { select_task: string };
 
-        let promise = startProcess(select_task, taskInput.slice(1)).then((process) => {
+        let promise = this.context.apiClient.startProcess(select_task, taskInput.slice(1)).then((process) => {
             this.context.redirect(`/tasks?highlight=${process.id}`);
             setFlash(
                 intl.formatMessage(
@@ -70,7 +69,7 @@ class NewTask extends React.Component<WrappedComponentProps, IState> {
             );
         });
 
-        return catchErrorStatus<EngineStatus>(promise, 503, (json) => {
+        return this.context.apiClient.catchErrorStatus<EngineStatus>(promise, 503, (json) => {
             setFlash(intl.formatMessage({ id: "settings.status.engine.paused" }), "error");
             this.context.redirect("/processes");
         });

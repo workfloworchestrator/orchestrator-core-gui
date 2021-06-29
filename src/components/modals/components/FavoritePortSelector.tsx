@@ -10,10 +10,11 @@ import {
     EuiSpacer,
     EuiText,
 } from "@elastic/eui";
-import { subscriptionsDetailWithModel } from "api";
 import React, { MouseEvent } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import { FavoriteSubscriptionStorage, Subscription, SubscriptionModel } from "utils/types";
+
+import ApplicationContext from "../../../utils/ApplicationContext";
 
 export const FAVORITE_STORAGE_KEY = "favoritePortsArray-v4";
 
@@ -64,7 +65,7 @@ class FavoritePortSelector extends React.PureComponent<IProps, IState> {
         let portSubscriptionIds: FavoriteSubscriptionStorage[];
         portSubscriptionIds = JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
         let promises = portSubscriptionIds.map((subscription) =>
-            subscriptionsDetailWithModel(subscription.subscription_id)
+            this.context.apiClient.subscriptionsDetailWithModel(subscription.subscription_id)
         );
         Promise.all(promises).then((result) => {
             this.setState({ ports: result, portsLoaded: true });
@@ -280,5 +281,6 @@ class FavoritePortSelector extends React.PureComponent<IProps, IState> {
         );
     }
 }
+FavoritePortSelector.contextType = ApplicationContext;
 
 export default injectIntl(FavoritePortSelector);

@@ -16,7 +16,6 @@
 import "pages/Tasks.scss";
 
 import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody } from "@elastic/eui";
-import { abortProcess, deleteProcess, retryProcess } from "api";
 import { filterableEndpoint } from "api/filterable";
 import DropDownActions from "components/DropDownActions";
 import Explain from "components/Explain";
@@ -79,7 +78,7 @@ class Tasks extends React.PureComponent<IProps, IState> {
             )
                 .then(([tasks]) => {
                     if (tasks && tasks.length > 0) {
-                        return Promise.all(tasks.map((task) => retryProcess(task.pid)));
+                        return Promise.all(tasks.map((task) => this.context.apiClient.retryProcess(task.pid)));
                     } else {
                         return Promise.reject();
                     }
@@ -110,7 +109,7 @@ class Tasks extends React.PureComponent<IProps, IState> {
         this.confirmation(
             intl.formatMessage({ id: "processes.abortConfirmation" }, { name: product_name, customer: customer_name }),
             () =>
-                abortProcess(process.pid).then(() => {
+                this.context.apiClient.abortProcess(process.pid).then(() => {
                     setFlash(intl.formatMessage({ id: "processes.flash.abort" }, { name: product_name }));
                 })
         );
@@ -122,7 +121,7 @@ class Tasks extends React.PureComponent<IProps, IState> {
 
         const workflow_name = process.workflow;
         this.confirmation(intl.formatMessage({ id: "tasks.deleteConfirmation" }, { name: workflow_name }), () =>
-            deleteProcess(process.pid).then(() => {
+            this.context.apiClient.deleteProcess(process.pid).then(() => {
                 setFlash(intl.formatMessage({ id: "tasks.flash.delete" }, { name: workflow_name }));
             })
         );
@@ -137,7 +136,7 @@ class Tasks extends React.PureComponent<IProps, IState> {
         this.confirmation(
             intl.formatMessage({ id: "processes.retryConfirmation" }, { name: product_name, customer: customer_name }),
             () =>
-                retryProcess(process.pid).then(() => {
+                this.context.apiClient.retryProcess(process.pid).then(() => {
                     setFlash(intl.formatMessage({ id: "processes.flash.retry" }, { name: product_name }));
                 })
         );

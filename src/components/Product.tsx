@@ -18,8 +18,6 @@ import "components/Product.scss";
 import "./Product.scss";
 
 import { EuiButton } from "@elastic/eui";
-import { allWorkflows, deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes } from "api";
-import { productBlocks, products, saveProduct } from "api/index";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { isDate } from "date-fns";
 import { formDate, formInput, formSelect } from "forms/Builder";
@@ -98,15 +96,15 @@ class Product extends React.Component<IProps, IState> {
 
     fetchAllConstants = (product_id?: string) =>
         Promise.all([
-            productBlocks(),
-            allWorkflows(),
-            products(),
-            productTags(),
-            productTypes(),
-            productStatuses(),
-            fixedInputConfiguration(),
+            this.context.apiClient.productBlocks(),
+            this.context.apiClient.allWorkflows(),
+            this.context.apiClient.products(),
+            this.context.apiClient.productTags(),
+            this.context.apiClient.productTypes(),
+            this.context.apiClient.productStatuses(),
+            this.context.apiClient.fixedInputConfiguration(),
         ]).then((res) => {
-            const product = res[2].find((value) => value.product_id === product_id);
+            const product = res[2].find((value: iProduct) => value.product_id === product_id);
 
             this.setState({
                 productBlocks: res[0],
@@ -156,14 +154,15 @@ class Product extends React.Component<IProps, IState> {
             { type: "Product", name: product!.name }
         );
         const action = () =>
-            deleteProduct(product!.product_id)
+            this.context.apiClient
+                .deleteProduct(product!.product_id)
                 .then(() => {
                     this.context.redirect("/metadata/products");
                     setFlash(
                         intl.formatMessage({ id: "metadata.flash.delete" }, { name: product!.name, type: "Product" })
                     );
                 })
-                .catch((err) => {
+                .catch((err: any) => {
                     if (err.response && err.response.status === 400) {
                         this.setState({ confirmationDialogOpen: false });
                         if (err.response.data) {
@@ -190,7 +189,7 @@ class Product extends React.Component<IProps, IState> {
         const invalid = this.isInvalid(true) || processing;
         if (!invalid) {
             this.setState({ processing: true });
-            saveProduct(product!).then(() => {
+            this.context.apiClient.saveProduct(product!).then(() => {
                 this.context.redirect("/metadata/products");
                 setFlash(
                     intl.formatMessage(

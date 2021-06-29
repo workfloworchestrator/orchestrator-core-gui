@@ -15,10 +15,10 @@
 
 import "components/inputForms/IpPrefixTable.scss";
 
-import { ip_blocks, prefix_filters } from "api";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import Select, { ValueType } from "react-select";
+import ApplicationContext from "utils/ApplicationContext";
 import { ipamStates } from "utils/Lookups";
 import { IpBlock, IpPrefix, Option, SortOption, prop } from "utils/types";
 import { stop } from "utils/Utils";
@@ -63,7 +63,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
     };
 
     componentDidMount() {
-        prefix_filters().then((result) => {
+        this.context.customApiClient.prefix_filters().then((result: IpPrefix[]) => {
             let { filter } = this.state;
             filter.prefix = result[0];
             this.setState({
@@ -72,7 +72,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                 filteredIpBlocks: this.filterAndSortBlocks(),
             });
         });
-        ip_blocks(1).then((result) => {
+        this.context.customApiClient.ip_blocks(1).then((result: IpBlock[]) => {
             this.setState({ ipBlocks: result, loading: false });
         });
     }
@@ -130,7 +130,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         let the_prefix: IpPrefix | undefined = undefined;
         filter_prefixes.forEach((prefix) => (the_prefix = prefix["id"] === parentPrefix ? prefix : the_prefix));
         filter.prefix = the_prefix;
-        ip_blocks(parentPrefix).then((result) => {
+        this.context.customApiClient.ip_blocks(parentPrefix).then((result: IpBlock[]) => {
             this.setState({
                 ipBlocks: result,
                 filteredIpBlocks: this.filterAndSortBlocks(),
@@ -272,3 +272,4 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         );
     }
 }
+IPPrefixTable.contextType = ApplicationContext;

@@ -1,12 +1,13 @@
-import { translations } from "api";
 import en from "locale/en";
 import { merge } from "lodash";
 import { createIntl, createIntlCache } from "react-intl";
 
+import { apiClient } from "../utils/ApplicationContext";
+
 async function loadLocaleData(locale: string): Promise<Record<string, string>> {
     let backend_messages;
     try {
-        backend_messages = await translations(locale);
+        backend_messages = await apiClient.translations(locale);
     } catch (e) {
         backend_messages = {};
     }

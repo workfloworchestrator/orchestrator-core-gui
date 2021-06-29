@@ -12,27 +12,14 @@
  * limitations under the License.
  *
  */
-import { intl } from "locale/i18n";
-import { setFlash } from "utils/Flash";
 import {
-    ContactPerson,
-    Dienstafname,
     EngineStatus,
     FixedInputConfiguration,
-    IMSNode,
-    IMSPort,
-    IMSService,
-    IpBlock,
-    IpPrefix,
-    IpPrefixSubscription,
-    Organization,
     ProcessSubscription,
     ProcessWithDetails,
     Product,
     ProductBlock,
     ResourceType,
-    ServicePortFilterItem,
-    ServicePortSubscription,
     Subscription,
     SubscriptionModel,
     SubscriptionProcesses,
@@ -44,367 +31,299 @@ import { isEmpty } from "utils/Utils";
 
 import axiosInstance from "./axios";
 
-export function catchErrorStatus<T>(promise: Promise<any>, status: number, callback: (json: T) => void) {
-    return promise.catch((err) => {
-        if (err.response && err.response.status === status) {
-            callback(err.response.data);
-        } else {
-            throw err;
-        }
-    });
-}
+export class BaseApiClient {
+    axiosFetch = <R = {}>(
+        path: string,
+        options = {},
+        headers = {},
+        showErrorDialog = true,
+        result = true
+    ): Promise<R> => {
+        // preset the config with the relative URL and a GET type.
+        // presets can be overridden with `options`.
+        return axiosInstance({ url: path, method: "GET", ...options })
+            .then((res) => res.data)
+            .catch((err) => {
+                if (showErrorDialog) {
+                    setTimeout(() => {
+                        throw err;
+                    }, 250);
+                }
+                throw err;
+            });
+    };
 
-function fetchJson<R = {}>(
-    path: string,
-    options = {},
-    headers = {},
-    showErrorDialog = true,
-    result = true
-): Promise<R> {
-    return axiosFetch(path, options, headers, showErrorDialog, result);
-}
-
-function fetchJsonWithCustomErrorHandling<R = {}>(path: string): Promise<R> {
-    return fetchJson<R>(path, {}, {}, false, true);
-}
-
-function postPutJson<R = {}>(
-    path: string,
-    body: {},
-    method: string,
-    showErrorDialog = true,
-    result = true
-): Promise<R> {
-    return axiosFetch<R>(path, { method: method, data: body }, {}, showErrorDialog, result);
-}
-
-function axiosFetch<R = {}>(
-    path: string,
-    options = {},
-    headers = {},
-    showErrorDialog = true,
-    result = true
-): Promise<R> {
-    // preset the config with the relative URL and a GET type.
-    // presets can be overridden with `options`.
-    return axiosInstance({ url: path, method: "GET", ...options })
-        .then((res) => res.data)
-        .catch((err) => {
-            if (showErrorDialog) {
-                setTimeout(() => {
-                    throw err;
-                }, 250);
+    catchErrorStatus = <T>(promise: Promise<any>, status: number, callback: (json: T) => void) => {
+        return promise.catch((err) => {
+            if (err.response && err.response.status === status) {
+                callback(err.response.data);
+            } else {
+                throw err;
             }
-            throw err;
         });
+    };
+
+    fetchJson = <R = {}>(
+        path: string,
+        options = {},
+        headers = {},
+        showErrorDialog = true,
+        result = true
+    ): Promise<R> => {
+        return this.axiosFetch(path, options, headers, showErrorDialog, result);
+    };
+
+    fetchJsonWithCustomErrorHandling = <R = {}>(path: string): Promise<R> => {
+        return this.fetchJson(path, {}, {}, false, true);
+    };
+
+    postPutJson = <R = {}>(
+        path: string,
+        body: {},
+        method: string,
+        showErrorDialog = true,
+        result = true
+    ): Promise<R> => {
+        return this.axiosFetch(path, { method: method, data: body }, {}, showErrorDialog, result);
+    };
 }
 
-//API metadata
-export function products(): Promise<Product[]> {
-    return fetchJson("products/");
+abstract class ApiClientInterface extends BaseApiClient {
+    abstract products: () => Promise<Product[]>;
+    abstract productTags: () => Promise<string[]>;
+    abstract productTypes: () => Promise<string[]>;
+    abstract productStatuses: () => Promise<string[]>;
+    abstract productById: (productId: string) => Promise<Product>;
+    abstract saveProduct: (product: Product) => Promise<any>;
+    abstract deleteProduct: (id: string) => Promise<null>;
+    abstract productBlocks: () => Promise<ProductBlock[]>;
+    abstract productBlockById: (id: string) => Promise<ProductBlock>;
+    abstract saveProductBlock: (productBlock: ProductBlock) => Promise<any>;
+    abstract deleteProductBlock: (id: string) => Promise<null>;
+    abstract resourceTypes: () => Promise<ResourceType[]>;
+    abstract resourceType: (id: string) => Promise<ResourceType>;
+    abstract subscriptionsDetailWithModel: (subscription_id: string) => Promise<SubscriptionModel>;
+    abstract nodeSubscriptions: (statusList?: string[]) => Promise<Subscription[]>;
+    abstract subscriptions: (
+        tagList?: string[],
+        statusList?: string[],
+        productList?: string[]
+    ) => Promise<Subscription[]>;
+    abstract subscriptionWorkflows: (subscription_id: string) => Promise<WorkflowReasons>;
+    abstract parentSubscriptions: (childSubscriptionId: string) => Promise<Subscription[]>;
+    abstract processSubscriptionsBySubscriptionId: (subscriptionId: string) => Promise<SubscriptionProcesses[]>;
+    abstract processSubscriptionsByProcessId: (processId: string) => Promise<ProcessSubscription[]>;
+    abstract assignees: () => Promise<string[]>;
+    abstract processStatuses: () => Promise<string[]>;
+    abstract allWorkflows: () => Promise<Workflow[]>;
+    abstract allWorkflowsWithProductTags: () => Promise<WorkflowWithProductTags[]>;
+    abstract workflowsByTarget: (target: string) => Promise<Workflow[]>;
+    abstract deleteSubscription: (subscriptionId: string) => Promise<null>;
+    abstract deleteProcess: (processId: string) => Promise<null>;
+    abstract abortProcess: (processId: string) => Promise<any>;
+    abstract process: (processId: string) => Promise<ProcessWithDetails>;
+    abstract startProcess: (workflow_name: string, process: {}[]) => Promise<{ id: string }>;
+    abstract resumeProcess: (processId: string, userInput: {}[]) => Promise<any>;
+    abstract retryProcess: (processId: string) => Promise<any>;
+    abstract fixedInputConfiguration: () => Promise<FixedInputConfiguration>;
+    abstract reportError: (error: {}) => Promise<any>;
+    abstract clearCache: (name: string) => Promise<any>;
+    abstract getGlobalStatus: () => Promise<EngineStatus>;
+    abstract setGlobalStatus: (new_global_lock: boolean) => Promise<any>;
+    abstract logUserInfo: (username: string, message: string) => Promise<any>;
+    abstract translations: (locale: string) => Promise<Record<string, any>>;
 }
 
-export function productTags(): Promise<string[]> {
-    return fetchJson("products/tags/all");
-}
+export class ApiClient extends ApiClientInterface {
+    // Todo GPL: add a constructor that handles user
 
-export function productTypes(): Promise<string[]> {
-    return fetchJson("products/types/all");
-}
+    products = (): Promise<Product[]> => {
+        return this.fetchJson<Product[]>("products/");
+    };
 
-export function productStatuses(): Promise<string[]> {
-    return fetchJson("products/statuses/all");
-}
+    productTags = (): Promise<string[]> => {
+        return this.fetchJson("products/tags/all");
+    };
 
-export function productById(productId: string): Promise<Product> {
-    return fetchJson(`products/${productId}`);
-}
+    productTypes = (): Promise<string[]> => {
+        return this.fetchJson("products/types/all");
+    };
 
-export function saveProduct(product: Product) {
-    return postPutJson("products", product, isEmpty(product.product_id) ? "post" : "put", true, false);
-}
+    productStatuses = (): Promise<string[]> => {
+        return this.fetchJson("products/statuses/all");
+    };
 
-export function deleteProduct(id: string): Promise<null> {
-    return fetchJson(`products/${id}`, { method: "DELETE" }, {}, false, false);
-}
+    productById = (productId: string): Promise<Product> => {
+        return this.fetchJson(`products/${productId}`);
+    };
 
-export function productBlocks(): Promise<ProductBlock[]> {
-    return fetchJson("product_blocks/");
-}
+    saveProduct = (product: Product) => {
+        return this.postPutJson("products", product, isEmpty(product.product_id) ? "post" : "put", true, false);
+    };
 
-export function productBlockById(id: string): Promise<ProductBlock> {
-    return fetchJson(`product_blocks/${id}`);
-}
+    deleteProduct = (id: string): Promise<null> => {
+        return this.fetchJson(`products/${id}`, { method: "DELETE" }, {}, false, false);
+    };
 
-export function saveProductBlock(productBlock: ProductBlock) {
-    return postPutJson(
-        "product_blocks",
-        productBlock,
-        isEmpty(productBlock.product_block_id) ? "post" : "put",
-        true,
-        false
-    );
-}
+    productBlocks = (): Promise<ProductBlock[]> => {
+        return this.fetchJson("product_blocks/");
+    };
 
-export function deleteProductBlock(id: string) {
-    return fetchJson(`product_blocks/${id}`, { method: "DELETE" }, {}, false, false);
-}
+    productBlockById = (id: string): Promise<ProductBlock> => {
+        return this.fetchJson(`product_blocks/${id}`);
+    };
 
-export function resourceTypes(): Promise<ResourceType[]> {
-    return fetchJson("resource_types/");
-}
+    saveProductBlock = (productBlock: ProductBlock) => {
+        return this.postPutJson(
+            "product_blocks",
+            productBlock,
+            isEmpty(productBlock.product_block_id) ? "post" : "put",
+            true,
+            false
+        );
+    };
 
-export function resourceType(id: string) {
-    return fetchJson(`resource_types/${id}`);
-}
-
-//API
-export function subscriptionsDetailWithModel(subscription_id: string): Promise<SubscriptionModel> {
-    return fetchJsonWithCustomErrorHandling<SubscriptionModel>(`subscriptions/domain-model/${subscription_id}`);
-}
-
-export function nodeSubscriptions(statusList: string[] = []): Promise<Subscription[]> {
-    return subscriptions(["Node"], statusList);
-}
-
-export function portSubscriptions(
-    tagList: string[] = [],
-    statusList: string[] = [],
-    productList: string[] = []
-): Promise<ServicePortSubscription[]> {
-    const statusFilter = `statuses,${encodeURIComponent(statusList.join("-"))}`;
-    const tagsFilter = `tags,${encodeURIComponent(tagList.join("-"))}`;
-    const productsFilter = `products,${encodeURIComponent(productList.join("-"))}`;
-
-    const params = new URLSearchParams();
-    const filters = [];
-    if (tagList.length) filters.push(tagsFilter);
-    if (statusList.length) filters.push(statusFilter);
-    if (productList.length) filters.push(productsFilter);
-
-    if (filters.length) params.set("filter", filters.join(","));
-
-    return fetchJson(`surf/subscriptions/ports${filters.length ? "?" : ""}${params.toString()}`);
-}
-
-export function subscriptions(
-    tagList: string[] = [],
-    statusList: string[] = [],
-    productList: string[] = []
-): Promise<Subscription[]> {
-    const statusFilter = `statuses,${encodeURIComponent(statusList.join("-"))}`;
-    const tagsFilter = `tags,${encodeURIComponent(tagList.join("-"))}`;
-    const productsFilter = `products,${encodeURIComponent(productList.join("-"))}`;
-
-    const params = new URLSearchParams();
-    const filters = [];
-    if (tagList.length) filters.push(tagsFilter);
-    if (statusList.length) filters.push(statusFilter);
-    if (productList.length) filters.push(productsFilter);
-
-    if (filters.length) params.set("filter", filters.join(","));
-
-    return fetchJson(`subscriptions${filters.length ? "?" : ""}${params.toString()}`);
-}
-
-export function subscriptionWorkflows(subscription_id: string): Promise<WorkflowReasons> {
-    return fetchJson(`subscriptions/workflows/${subscription_id}`);
-}
-
-export function organisations(): Promise<Organization[] | undefined> {
-    //@ts-ignore
-    return fetchJson("surf/crm/organisations", {}, {}, false).catch(() => {
-        setTimeout(() => {
-            setFlash(intl.formatMessage({ id: "external.errors.crm_unavailable" }, { type: "Organisations" }), "error");
-        });
-        return undefined;
-    });
-}
-
-export function getPortSubscriptionsForNode(id: string): Promise<ServicePortFilterItem[]> {
-    return fetchJson(`surf/subscriptions/port-services-by-node/${id}`);
-}
-
-export function getNodesByLocationAndStatus(locationCode: string, status: string): Promise<IMSNode[]> {
-    return fetchJson(`surf/ims/nodes/${locationCode}/${status}`);
-}
-
-export function getFreePortsByNodeSubscriptionIdAndSpeed(
-    nodeSubscriptionId: string,
-    interfaceSpeed: number,
-    mode: string
-): Promise<IMSPort[]> {
-    return fetchJson(`surf/ims/free_ports/${nodeSubscriptionId}/${interfaceSpeed}/${mode}`);
-}
-
-export function usedVlans(subscriptionId: string): Promise<number[][]> {
-    return fetchJsonWithCustomErrorHandling(`surf/ims/vlans/${subscriptionId}`);
-}
-
-export function portByImsPortId(portId: number) {
-    return fetchJson(`surf/ims/port_by_ims_port/${portId}`);
-}
-
-export function internalPortByImsPortId(portId: number) {
-    return fetchJson(`surf/ims/internal_port_by_ims_port/${portId}`);
-}
-
-export function portByImsServiceId(serviceId: number): Promise<IMSPort> {
-    return fetchJson(`surf/ims/port_by_ims_service/${serviceId}`);
-}
-
-export function serviceByImsServiceId(serviceId: number): Promise<IMSService> {
-    return fetchJson(`surf/ims/service_by_ims_service_id/${serviceId}`);
-}
-
-export function parentSubscriptions(childSubscriptionId: string): Promise<Subscription[]> {
-    return fetchJson(`subscriptions/parent_subscriptions/${childSubscriptionId}`);
-}
-
-export function processSubscriptionsBySubscriptionId(subscriptionId: string): Promise<SubscriptionProcesses[]> {
-    return fetchJsonWithCustomErrorHandling<SubscriptionProcesses[]>(
-        `processes/process-subscriptions-by-subscription-id/${subscriptionId}`
-    ).catch((err) => Promise.resolve([]));
-}
-
-export function processSubscriptionsByProcessId(processId: string): Promise<ProcessSubscription[]> {
-    return fetchJsonWithCustomErrorHandling<ProcessSubscription[]>(
-        `processes/process-subscriptions-by-pid/${processId}`
-    ).catch((err) => []);
-}
-
-export function locationCodes(): Promise<string[] | undefined> {
     // @ts-ignore
-    return fetchJson("surf/crm/location_codes", {}, {}, false).catch(() => {
-        setTimeout(() => {
-            setFlash(intl.formatMessage({ id: "external.errors.crm_unavailable" }, { type: "Locations" }), "error");
-        });
-        return undefined;
-    });
-}
+    deleteProductBlock = (id: string) => {
+        return this.fetchJson(`product_blocks/${id}`, { method: "DELETE" }, {}, false, false);
+    };
 
-export function assignees(): Promise<string[]> {
-    return fetchJson("processes/assignees");
-}
+    resourceTypes = (): Promise<ResourceType[]> => {
+        return this.fetchJson("resource_types/");
+    };
 
-export function processStatuses(): Promise<string[]> {
-    return axiosFetch("processes/statuses");
-}
+    // @ts-ignore
+    resourceType = (id: string) => {
+        return this.fetchJson(`resource_types/${id}`);
+    };
 
-export function allWorkflows(): Promise<Workflow[]> {
-    return fetchJson("workflows/");
-}
+    //API
+    subscriptionsDetailWithModel = (subscription_id: string): Promise<SubscriptionModel> => {
+        return this.fetchJsonWithCustomErrorHandling<SubscriptionModel>(
+            `subscriptions/domain-model/${subscription_id}`
+        );
+    };
 
-export function allWorkflowsWithProductTags(): Promise<WorkflowWithProductTags[]> {
-    return fetchJson("workflows/with_product_tags");
-}
+    nodeSubscriptions = (statusList: string[] = []): Promise<Subscription[]> => {
+        return this.subscriptions(["Node"], statusList);
+    };
 
-export function workflowsByTarget(target: string): Promise<Workflow[]> {
-    return fetchJson(`workflows?target=${target}`);
-}
+    subscriptions = (
+        tagList: string[] = [],
+        statusList: string[] = [],
+        productList: string[] = []
+    ): Promise<Subscription[]> => {
+        const statusFilter = `statuses,${encodeURIComponent(statusList.join("-"))}`;
+        const tagsFilter = `tags,${encodeURIComponent(tagList.join("-"))}`;
+        const productsFilter = `products,${encodeURIComponent(productList.join("-"))}`;
 
-export function deleteSubscription(subscriptionId: string) {
-    return fetchJson(`subscriptions/${subscriptionId}`, { method: "DELETE" }, {}, true, false);
-}
+        const params = new URLSearchParams();
+        const filters = [];
+        if (tagList.length) filters.push(tagsFilter);
+        if (statusList.length) filters.push(statusFilter);
+        if (productList.length) filters.push(productsFilter);
 
-//IPAM IP Prefixes
-export function ip_blocks(parentPrefix: number): Promise<IpBlock[]> {
-    return fetchJson("surf/ipam/ip_blocks/" + parentPrefix);
-}
+        if (filters.length) params.set("filter", filters.join(","));
 
-//IPAM the user-defined filters as configured in the database for the IP PREFIX product
-export function prefix_filters(): Promise<IpPrefix[]> {
-    return fetchJson("surf/ipam/prefix_filters");
-}
+        return this.fetchJson(`subscriptions${filters.length ? "?" : ""}${params.toString()}`);
+    };
 
-export function prefixSubscriptionsByRootPrefix(parentId: number): Promise<IpPrefixSubscription[]> {
-    return fetchJson(`surf/ipam/prefix_subscriptions/${parentId}`);
-}
+    subscriptionWorkflows = (subscription_id: string): Promise<WorkflowReasons> => {
+        return this.fetchJson(`subscriptions/workflows/${subscription_id}`);
+    };
 
-export function prefixSubscriptions() {
-    return fetchJson(`surf/ipam/prefix_subscriptions/`);
-}
+    parentSubscriptions = (childSubscriptionId: string): Promise<Subscription[]> => {
+        return this.fetchJson(`subscriptions/parent_subscriptions/${childSubscriptionId}`);
+    };
 
-export function prefixById(prefixId: number) {
-    return fetchJsonWithCustomErrorHandling(`surf/ipam/prefix_by_id/${prefixId}`);
-}
+    processSubscriptionsBySubscriptionId = (subscriptionId: string): Promise<SubscriptionProcesses[]> => {
+        return this.fetchJsonWithCustomErrorHandling<SubscriptionProcesses[]>(
+            `processes/process-subscriptions-by-subscription-id/${subscriptionId}`
+        ).catch((err) => Promise.resolve([])); // Ignore non existing subscriptions
+    };
 
-export function addressById(addressId: number) {
-    return fetchJsonWithCustomErrorHandling(`surf/ipam/address_by_id/${addressId}`);
-}
+    processSubscriptionsByProcessId = (processId: string): Promise<ProcessSubscription[]> => {
+        return this.fetchJsonWithCustomErrorHandling<ProcessSubscription[]>(
+            `processes/process-subscriptions-by-pid/${processId}`
+        ).catch((err) => []);
+    };
 
-export function freeSubnets(supernet: string): Promise<string[]> {
-    return fetchJson(`surf/ipam/free_subnets/${supernet}`);
-}
+    assignees = (): Promise<string[]> => {
+        return this.fetchJson("processes/assignees");
+    };
 
-export function subnets(subnet: string, netmask: number, prefixlen: number) {
-    return fetchJson("surf/ipam/subnets/" + subnet + "/" + netmask + "/" + prefixlen);
-}
+    processStatuses = (): Promise<string[]> => {
+        // Todo: Test status (refactored from axios fetch)
+        return this.fetchJson("processes/statuses");
+    };
 
-export function free_subnets(subnet: string, netmask: number, prefixlen: number): Promise<string[]> {
-    return fetchJson("surf/ipam/free_subnets/" + subnet + "/" + netmask + "/" + prefixlen);
-}
+    allWorkflows = (): Promise<Workflow[]> => {
+        return this.fetchJson("workflows");
+    };
 
-export function deleteProcess(processId: string) {
-    return fetchJson(`processes/${processId}`, { method: "DELETE" }, {}, true, false);
-}
+    allWorkflowsWithProductTags = (): Promise<WorkflowWithProductTags[]> => {
+        return this.fetchJson("workflows/with_product_tags");
+    };
 
-export function abortProcess(processId: string) {
-    return fetchJson(`processes/${processId}/abort`, { method: "PUT" }, {}, true, false);
-}
+    workflowsByTarget = (target: string): Promise<Workflow[]> => {
+        return this.fetchJson(`workflows?target=${target}`);
+    };
 
-export function process(processId: string): Promise<ProcessWithDetails> {
-    return fetchJsonWithCustomErrorHandling("processes/" + processId);
-}
+    // @ts-ignore
+    deleteSubscription = (subscriptionId: string) => {
+        return this.fetchJson(`subscriptions/${subscriptionId}`, { method: "DELETE" }, {}, true, false);
+    };
 
-export function startProcess(workflow_name: string, process: {}[]): Promise<{ id: string }> {
-    return postPutJson("processes/" + workflow_name, process, "post", false, true);
-}
+    // @ts-ignore
+    deleteProcess = (processId: string) => {
+        return this.fetchJson(`processes/${processId}`, { method: "DELETE" }, {}, true, false);
+    };
 
-export function resumeProcess(processId: string, userInput: {}[]) {
-    return postPutJson(`processes/${processId}/resume`, userInput, "put", false, false);
-}
+    abortProcess = (processId: string) => {
+        return this.fetchJson(`processes/${processId}/abort`, { method: "PUT" }, {}, true, false);
+    };
 
-export function retryProcess(processId: string) {
-    return postPutJson(`processes/${processId}/resume`, {}, "put", true, false);
-}
+    process = (processId: string): Promise<ProcessWithDetails> => {
+        return this.fetchJsonWithCustomErrorHandling("processes/" + processId);
+    };
 
-export function fixedInputConfiguration(): Promise<FixedInputConfiguration> {
-    return fetchJson("fixed_inputs/configuration");
-}
+    startProcess = (workflow_name: string, process: {}[]): Promise<{ id: string }> => {
+        return this.postPutJson("processes/" + workflow_name, process, "post", false, true);
+    };
 
-export function contacts(organisationId: string): Promise<ContactPerson[]> {
-    return fetchJson<ContactPerson[]>(`surf/crm/contacts/${organisationId}`, {}, {}, false, true).catch((err) =>
-        Promise.resolve([])
-    );
-}
+    resumeProcess = (processId: string, userInput: {}[]) => {
+        return this.postPutJson(`processes/${processId}/resume`, userInput, "put", false, false);
+    };
 
-export function reportError(error: {}) {
-    return postPutJson("user/error", error, "post", false);
-}
+    retryProcess = (processId: string) => {
+        return this.postPutJson(`processes/${processId}/resume`, {}, "put", true, false);
+    };
 
-export function clearCache(name: string) {
-    return postPutJson(`settings/cache/${name}`, {}, "delete", true, false);
-}
+    fixedInputConfiguration = (): Promise<FixedInputConfiguration> => {
+        return this.fetchJson("fixed_inputs/configuration");
+    };
 
-export function getGlobalStatus(): Promise<EngineStatus> {
-    return fetchJson("settings/status", {}, {}, false, true);
-}
+    reportError = (error: {}) => {
+        return this.postPutJson("user/error", error, "post", false);
+    };
 
-export function setGlobalStatus(new_global_lock: boolean) {
-    return postPutJson("settings/status", { global_lock: new_global_lock }, "put");
-}
+    clearCache = (name: string) => {
+        return this.postPutJson(`settings/cache/${name}`, {}, "delete", true, false);
+    };
 
-export function logUserInfo(username: string, message: string) {
-    return postPutJson(`user/log/${username}`, { message: message }, "post", true, false);
-}
+    getGlobalStatus = (): Promise<EngineStatus> => {
+        return this.fetchJson("settings/status", {}, {}, false, true);
+    };
 
-export function dienstafnameBySubscription(subscriptionId: string): Promise<Dienstafname | undefined> {
-    return fetchJson<Dienstafname>(`surf/crm/dienstafname/${subscriptionId}`, {}, {}, false).catch((err) =>
-        Promise.resolve(undefined)
-    );
-}
+    setGlobalStatus = (new_global_lock: boolean) => {
+        return this.postPutJson("settings/status", { global_lock: new_global_lock }, "put");
+    };
 
-export function translations(locale: string): Promise<Record<string, any>> {
-    return fetchJson<Record<string, any>>(`translations/${locale}`, {}, {}, true, true);
+    logUserInfo = (username: string, message: string) => {
+        return this.postPutJson(`user/log/${username}`, { message: message }, "post", true, false);
+    };
+
+    translations = (locale: string): Promise<Record<string, any>> => {
+        return this.fetchJson<Record<string, any>>(`translations/${locale}`, {}, {}, true, true);
+    };
 }

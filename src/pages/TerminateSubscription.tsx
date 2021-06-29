@@ -16,14 +16,15 @@
 import "pages/TerminateSubscription.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
-import { catchErrorStatus, productById, startProcess, subscriptionsDetailWithModel } from "api/index";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { Redirect, RouteComponentProps, withRouter } from "react-router";
 import { setFlash } from "utils/Flash";
-import { FormNotCompleteResponse, InputForm, Product } from "utils/types";
+import { FormNotCompleteResponse, InputForm, Product, SubscriptionModel } from "utils/types";
 import { TARGET_TERMINATE } from "validations/Products";
+
+import ApplicationContext from "../utils/ApplicationContext";
 
 interface IProps extends RouteComponentProps, WrappedComponentProps {
     subscriptionId: string;
@@ -45,15 +46,16 @@ class TerminateSubscription extends React.Component<IProps, IState> {
     componentDidMount = () => {
         const { subscriptionId } = this.props;
 
-        subscriptionsDetailWithModel(subscriptionId).then((sub) =>
-            productById(sub.product.product_id).then((product) => {
+        this.context.apiClient.subscriptionsDetailWithModel(subscriptionId).then((sub: SubscriptionModel) =>
+            this.context.apiClient.productById(sub.product.product_id).then((product: Product) => {
                 const terminate_workflow = getTerminateWorkflow(product);
-                let promise = startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }]).then(
-                    (res) => {
+                let promise = this.context.apiClient
+                    .startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }])
+                    .then((res: { id: string }) => {
                         this.setState({ pid: res.id, product: product });
-                    }
-                );
-                catchErrorStatus<FormNotCompleteResponse>(promise, 510, (json) => {
+                    });
+                // @ts-ignore
+                this.context.apiClient.catchErrorStatus<FormNotCompleteResponse>(promise, 510, (json) => {
                     this.setState({ stepUserInput: json.form, product: product });
                 });
             })
@@ -69,11 +71,11 @@ class TerminateSubscription extends React.Component<IProps, IState> {
         const { product } = this.state;
         const terminate_workflow = getTerminateWorkflow(product!);
 
-        return startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }, ...processInput]).then(
-            (res) => {
+        return this.context.apiClient
+            .startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }, ...processInput])
+            .then((res: { id: string }) => {
                 this.setState({ pid: res.id });
-            }
-        );
+            });
     };
 
     render() {
@@ -124,5 +126,6 @@ class TerminateSubscription extends React.Component<IProps, IState> {
         );
     }
 }
+TerminateSubscription.contextType = ApplicationContext;
 
 export default injectIntl(withRouter(TerminateSubscription));

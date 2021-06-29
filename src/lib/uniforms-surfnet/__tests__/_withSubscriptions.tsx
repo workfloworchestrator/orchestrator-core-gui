@@ -13,6 +13,8 @@
  *
  */
 
+import { ApiClient } from "api";
+import { CustomApiClient } from "api/custom";
 import { SubscriptionsContext } from "components/subscriptionContext";
 import React from "react";
 import { ServicePortSubscription } from "utils/types";
@@ -23,7 +25,7 @@ export default function withSubscriptions(component: JSX.Element) {
     const getSubscription = jest.fn<Partial<ServicePortSubscription>, [string]>();
     const getSubscriptions = jest.fn<
         Partial<ServicePortSubscription>[],
-        [string[] | undefined, string[] | undefined]
+        [ApiClient, CustomApiClient, string[] | undefined, string[] | undefined]
     >();
     const clearSubscriptions = jest.fn();
     const subscriptions: { [index: string]: Partial<ServicePortSubscription> } = {};
@@ -34,8 +36,12 @@ export default function withSubscriptions(component: JSX.Element) {
                 value={
                     {
                         getSubscription,
-                        getSubscriptions: (tags?: string[], statuses?: string[]) =>
-                            Promise.resolve(getSubscriptions(tags, statuses)),
+                        getSubscriptions: (
+                            apiClient: ApiClient,
+                            customApiClient: CustomApiClient,
+                            tags?: string[],
+                            statuses?: string[]
+                        ) => Promise.resolve(getSubscriptions(apiClient, customApiClient, tags, statuses)),
                         clearSubscriptions,
                         subscriptions,
                     } as any

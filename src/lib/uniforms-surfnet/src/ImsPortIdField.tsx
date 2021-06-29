@@ -15,12 +15,12 @@
 import "lib/uniforms-surfnet/src/ImsPortIdField.scss";
 
 import { EuiFormRow, EuiText } from "@elastic/eui";
-import { getFreePortsByNodeSubscriptionIdAndSpeed, nodeSubscriptions } from "api";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import Select, { ValueType } from "react-select";
 import { connectField, filterDOMProps } from "uniforms";
+import ApplicationContext from "utils/ApplicationContext";
 import { IMSNode, IMSPort, Option, Subscription } from "utils/types";
 
 export type ImsPortFieldProps = FieldProps<
@@ -70,6 +70,8 @@ function ImsPortId({
     intl,
     ...props
 }: ImsPortFieldProps) {
+    const { apiClient, customApiClient } = useContext(ApplicationContext);
+
     const [nodes, setNodes] = useState<IMSNode[] | Subscription[]>([]);
     const [nodeId, setNodeId] = useState<number | string | undefined>(nodeSubscriptionId);
     const [ports, setPorts] = useState<IMSPort[]>([]);
@@ -87,20 +89,20 @@ function ImsPortId({
             setNodeId(value);
             setPorts([]);
 
-            getFreePortsByNodeSubscriptionIdAndSpeed(value as string, interfaceSpeed as number, imsPortMode).then(
-                (result) => {
+            customApiClient
+                .getFreePortsByNodeSubscriptionIdAndSpeed(value as string, interfaceSpeed as number, imsPortMode)
+                .then((result) => {
                     setPorts(result);
                     setLoading(false);
-                }
-            );
+                });
         },
-        [interfaceSpeed, imsPortMode]
+        [interfaceSpeed, imsPortMode, customApiClient]
     );
 
     useEffect(() => {
         setLoading(true);
 
-        const nodesPromise = nodeSubscriptions(nodeStatuses ?? ["active"]);
+        const nodesPromise = apiClient.nodeSubscriptions(nodeStatuses ?? ["active"]);
         if (nodeSubscriptionId) {
             nodesPromise.then((result) => {
                 setNodes(result.filter((subscription) => subscription.subscription_id === nodeSubscriptionId));
@@ -113,7 +115,7 @@ function ImsPortId({
                 setLoading(false);
             });
         }
-    }, [onChangeNodes, nodeStatuses, nodeSubscriptionId]);
+    }, [onChangeNodes, nodeStatuses, nodeSubscriptionId, apiClient]);
     const nodesPlaceholder = loading
         ? intl.formatMessage({ id: "forms.widgets.nodePort.loading" })
         : intl.formatMessage({ id: "forms.widgets.nodePort.selectNode" });

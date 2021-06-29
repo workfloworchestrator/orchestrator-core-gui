@@ -49,12 +49,10 @@ import React from "react";
 import { IntlShape, RawIntlProvider } from "react-intl";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { QueryParamProvider } from "use-query-params";
-import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
+import ApplicationContext, { ApplicationContextInterface, apiClient, customApiClient } from "utils/ApplicationContext";
 import { createPolicyCheck } from "utils/policy";
 import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
-
-import { assignees, locationCodes, organisations, processStatuses, products, reportError } from "../api";
 
 export const history = createBrowserHistory();
 
@@ -89,6 +87,8 @@ class App extends React.PureComponent<IProps, IState> {
                     this.setState({ intl: intl });
                 },
                 allowed: (_resource: string) => false,
+                apiClient: apiClient,
+                customApiClient: customApiClient,
             },
             error: false,
             errorDialogOpen: false,
@@ -115,7 +115,7 @@ class App extends React.PureComponent<IProps, IState> {
                 targetUrl: response.url,
                 status: response.status,
             };
-            reportError(error);
+            apiClient.reportError(error).then();
         };
 
         history.listen(() => {
@@ -141,18 +141,19 @@ class App extends React.PureComponent<IProps, IState> {
 
         const [
             allOrganisations,
-            allProducts,
             allLocationCodes,
+            allProducts,
             allAssignees,
             allProcessStatuses,
             language,
             allowed,
         ] = await Promise.all([
-            organisations(),
-            products(),
-            locationCodes(),
-            assignees(),
-            processStatuses(),
+            // Todo GPL: move to dynamic loading part
+            this.state.applicationContext.customApiClient.organisations(),
+            this.state.applicationContext.customApiClient.locationCodes(),
+            this.state.applicationContext.apiClient.products(),
+            this.state.applicationContext.apiClient.assignees(),
+            this.state.applicationContext.apiClient.processStatuses(),
             setLocale("en-GB"),
             createPolicyCheck(this.props.user),
         ]);
@@ -175,6 +176,8 @@ class App extends React.PureComponent<IProps, IState> {
                     this.setState({ intl: intl });
                 },
                 allowed: memoize(allowed),
+                apiClient: apiClient,
+                customApiClient: customApiClient,
             },
         });
     }

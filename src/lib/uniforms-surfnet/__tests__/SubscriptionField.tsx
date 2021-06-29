@@ -15,7 +15,6 @@
 
 import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 import withApplicationContext from "__tests__/withApplicationContext";
-import mock from "axios-mock";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import withSubscriptions from "lib/uniforms-surfnet/__tests__/_withSubscriptions";
@@ -24,6 +23,10 @@ import { getPortMode, makeLabel } from "lib/uniforms-surfnet/src/SubscriptionFie
 import React from "react";
 import ReactSelect from "react-select";
 import { Product, ServicePortSubscription } from "utils/types";
+
+import { ApiClient } from "../../../api";
+import { CustomApiClient } from "../../../api/custom";
+import { apiClient, customApiClient } from "../../../utils/ApplicationContext";
 
 const APP_CONTEXT = {
     products: [
@@ -36,52 +39,52 @@ const APP_CONTEXT = {
 
 describe("<SubscriptionField>", () => {
     test("<SubscriptionField> - renders an input", async () => {
-        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
+        const elementWithContext = withApplicationContext(<SubscriptionField name="x" />, APP_CONTEXT);
+        const { element, getSubscriptions } = withSubscriptions(elementWithContext);
+        getSubscriptions.mockReturnValue([]);
 
-        const element = <SubscriptionField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
         await waitForComponentToPaint(wrapper);
-
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
     });
 
     test("<SubscriptionField> - renders a select with correct disabled state", async () => {
-        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
+        const elementWithContext = withApplicationContext(<SubscriptionField name="x" disabled />, APP_CONTEXT);
+        const { element, getSubscriptions } = withSubscriptions(elementWithContext);
+        getSubscriptions.mockReturnValue([]);
 
-        const element = <SubscriptionField name="x" disabled />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
         await waitForComponentToPaint(wrapper);
-
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
         expect(wrapper.find(ReactSelect).prop("isDisabled")).toBe(true);
     });
 
     test("<SubscriptionField> - renders a select with correct id (inherited)", async () => {
-        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
+        const elementWithContext = withApplicationContext(<SubscriptionField name="x" />, APP_CONTEXT);
+        const { element, getSubscriptions } = withSubscriptions(elementWithContext);
+        getSubscriptions.mockReturnValue([]);
 
-        const element = <SubscriptionField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
         await waitForComponentToPaint(wrapper);
-
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
         expect(wrapper.find(ReactSelect).prop("id")).toBeTruthy();
     });
 
     test("<SubscriptionField> - renders a select with correct id (specified)", async () => {
-        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
+        const elementWithContext = withApplicationContext(<SubscriptionField name="x" id="y" />, APP_CONTEXT);
+        const { element, getSubscriptions } = withSubscriptions(elementWithContext);
+        getSubscriptions.mockReturnValue([]);
 
-        const element = <SubscriptionField name="x" id="y" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
         await waitForComponentToPaint(wrapper);
-
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
         expect(wrapper.find(ReactSelect).prop("id")).toBe("y");
     });
 
     test("<SubscriptionField> - renders a select with correct name", async () => {
-        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
-
-        const element = <SubscriptionField name="x" />;
+        const elementWithContext = withApplicationContext(<SubscriptionField name="x" />, APP_CONTEXT);
+        const { element, getSubscriptions } = withSubscriptions(elementWithContext);
+        getSubscriptions.mockReturnValue([]);
         const wrapper = mount(element, createContext({ x: { type: String } }));
         await waitForComponentToPaint(wrapper);
 
@@ -100,7 +103,7 @@ describe("<SubscriptionField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined);
+        expect(getSubscriptions).toHaveBeenCalledWith(apiClient, customApiClient, undefined, undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "d1", value: "a" },
             { label: "d2", value: "b" },
@@ -130,7 +133,7 @@ describe("<SubscriptionField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(getSubscriptions).toHaveBeenCalledWith(["A"], undefined);
+        expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined, ["A"], undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "d1", value: "a" },
             { label: "d2", value: "b" },
@@ -148,7 +151,7 @@ describe("<SubscriptionField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(getSubscriptions).toHaveBeenCalledWith(undefined, ["active"]);
+        expect(getSubscriptions).toHaveBeenCalledWith(apiClient, customApiClient, undefined, ["active"]);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "d1", value: "a" },
             { label: "d2", value: "b" },
@@ -168,7 +171,7 @@ describe("<SubscriptionField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined);
+        expect(getSubscriptions).toHaveBeenCalledWith(apiClient, customApiClient, undefined, undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([{ label: "d2", value: "b" }]);
     });
 
@@ -193,7 +196,7 @@ describe("<SubscriptionField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined);
+        expect(getSubscriptions).toHaveBeenCalledWith(apiClient, customApiClient, undefined, undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([{ label: "d2", value: "b" }]);
     });
 
@@ -218,7 +221,7 @@ describe("<SubscriptionField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined);
+        expect(getSubscriptions).toHaveBeenCalledWith(apiClient, customApiClient, undefined, undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([]);
     });
 
@@ -243,7 +246,7 @@ describe("<SubscriptionField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined);
+        expect(getSubscriptions).toHaveBeenCalledWith(apiClient, customApiClient, undefined, undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([{ label: "d2", value: "b" }]);
     });
 
@@ -271,7 +274,7 @@ describe("<SubscriptionField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined);
+        expect(getSubscriptions).toHaveBeenCalledWith(apiClient, customApiClient, undefined, undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([{ label: "b TAGGED d2 c2", value: "b" }]);
     });
 
@@ -307,14 +310,14 @@ describe("<SubscriptionField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined);
+        expect(getSubscriptions).toHaveBeenCalledWith(apiClient, customApiClient, undefined, undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "a UNTAGGED d1 c1", value: "a" },
             { label: "b TAGGED d2 c2", value: "b" },
         ]);
     });
 
-    test("<SubscriptionField> - renders a select with correct options (productIds filterd products)", async () => {
+    test("<SubscriptionField> - renders a select with correct options (productIds filtered products)", async () => {
         const elementWithContext = withApplicationContext(
             <SubscriptionField name="x" productIds={["P1", "P2"]} />,
             APP_CONTEXT
@@ -341,7 +344,8 @@ describe("<SubscriptionField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined);
+        // Ignore application context api clients due to withApplicationContext
+        expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined, undefined, undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([{ label: "d1", value: "a" }]);
     });
     test("<SubscriptionField> - renders a select with correct options (bandwith filterd products)", async () => {
@@ -371,7 +375,8 @@ describe("<SubscriptionField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined);
+        // Ignore application context api clients due to withApplicationContext
+        expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined, undefined, undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "d1", value: "a" },
             { label: "d2", value: "b" },
@@ -404,7 +409,8 @@ describe("<SubscriptionField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined);
+        // Ignore application context api clients due to withApplicationContext
+        expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined, undefined, undefined);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
             { label: "d1", value: "a" },
             { label: "d2", value: "b" },
@@ -412,9 +418,9 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select with correct placeholder", async () => {
-        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
-
-        const element = <SubscriptionField name="x" placeholder="" />;
+        const elementWithContext = withApplicationContext(<SubscriptionField name="x" placeholder="" />, APP_CONTEXT);
+        const { element, getSubscriptions } = withSubscriptions(elementWithContext);
+        getSubscriptions.mockReturnValue([]);
 
         const wrapper = mount(
             element,
@@ -429,9 +435,9 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select with correct value (default)", async () => {
-        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
-
-        const element = <SubscriptionField name="x" />;
+        const elementWithContext = withApplicationContext(<SubscriptionField name="x" />, APP_CONTEXT);
+        const { element, getSubscriptions } = withSubscriptions(elementWithContext);
+        getSubscriptions.mockReturnValue([]);
         const wrapper = mount(element, createContext({ x: { type: String } }));
         await waitForComponentToPaint(wrapper);
 
@@ -466,11 +472,12 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select which correctly reacts on change", async () => {
-        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
+        const elementWithContext = withApplicationContext(<SubscriptionField name="x" />, APP_CONTEXT);
+        const { element, getSubscriptions } = withSubscriptions(elementWithContext);
+        getSubscriptions.mockReturnValue([]);
 
         const onChange = jest.fn();
 
-        const element = <SubscriptionField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }, { onChange }));
         await waitForComponentToPaint(wrapper);
 
@@ -481,11 +488,11 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select which correctly reacts on change (empty)", async () => {
-        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
-
+        const elementWithContext = withApplicationContext(<SubscriptionField name="x" />, APP_CONTEXT);
+        const { element, getSubscriptions } = withSubscriptions(elementWithContext);
+        getSubscriptions.mockReturnValue([]);
         const onChange = jest.fn();
 
-        const element = <SubscriptionField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }, { onChange }));
         await waitForComponentToPaint(wrapper);
 
@@ -496,11 +503,11 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select which correctly reacts on change (same value)", async () => {
-        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
-
+        const elementWithContext = withApplicationContext(<SubscriptionField name="x" />, APP_CONTEXT);
+        const { element, getSubscriptions } = withSubscriptions(elementWithContext);
+        getSubscriptions.mockReturnValue([]);
         const onChange = jest.fn();
 
-        const element = <SubscriptionField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }, { model: { x: "b" }, onChange }));
         await waitForComponentToPaint(wrapper);
 
@@ -511,9 +518,9 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a label", async () => {
-        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
-
-        const element = <SubscriptionField name="x" label="y" />;
+        const elementWithContext = withApplicationContext(<SubscriptionField name="x" label="y" />, APP_CONTEXT);
+        const { element, getSubscriptions } = withSubscriptions(elementWithContext);
+        getSubscriptions.mockReturnValue([]);
         const wrapper = mount(element, createContext({ x: { type: String } }));
         await waitForComponentToPaint(wrapper);
 
@@ -523,9 +530,9 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a sync button", async () => {
-        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
-
-        const element = <SubscriptionField name="x" />;
+        const elementWithContext = withApplicationContext(<SubscriptionField name="x" />, APP_CONTEXT);
+        const { element, getSubscriptions } = withSubscriptions(elementWithContext);
+        getSubscriptions.mockReturnValue([]);
         const wrapper = mount(element, createContext({ x: { type: String } }));
         await waitForComponentToPaint(wrapper);
 
@@ -537,12 +544,15 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a wrapper with unknown props", async () => {
-        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
+        const elementWithContext = withApplicationContext(
+            <SubscriptionField name="x" data-x="x" data-y="y" data-z="z" />,
+            APP_CONTEXT
+        );
+        const { element, getSubscriptions } = withSubscriptions(elementWithContext);
+        getSubscriptions.mockReturnValue([]);
 
-        const element = <SubscriptionField name="x" data-x="x" data-y="y" data-z="z" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
         await waitForComponentToPaint(wrapper);
-
         expect(wrapper.find("section").at(0).prop("data-x")).toBe("x");
         expect(wrapper.find("section").at(0).prop("data-y")).toBe("y");
         expect(wrapper.find("section").at(0).prop("data-z")).toBe("z");

@@ -16,8 +16,6 @@
 import "pages/ProcessDetail.scss";
 
 import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody, EuiPanel, EuiText } from "@elastic/eui";
-import { process, resumeProcess } from "api";
-import { abortProcess, deleteProcess, processSubscriptionsByProcessId, retryProcess } from "api/index";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import ProcessStateDetails from "components/ProcessStateDetails";
@@ -85,7 +83,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
     }
 
     componentDidMount = () => {
-        process(this.props.match.params.id).then((processInstance: ProcessWithDetails) => {
+        this.context.apiClient.process(this.props.match.params.id).then((processInstance: ProcessWithDetails) => {
             /**
              * Ensure correct user memberships and populate UserInput form with values
              */
@@ -107,7 +105,8 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                 selectedTab: selectedTab,
                 product: productById(enrichedProcess.product, products),
             });
-            processSubscriptionsByProcessId(enrichedProcess.id)
+            this.context.apiClient
+                .processSubscriptionsByProcessId(enrichedProcess.id)
                 .then((res) => {
                     this.setState({ subscriptionProcesses: res, loaded: true });
                 })
@@ -136,7 +135,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         }
 
         this.confirmation(message, () =>
-            deleteProcess(process.id).then(() => {
+            this.context.apiClient.deleteProcess(process.id).then(() => {
                 this.context.redirect(`/${process.is_task ? "tasks" : "processes"}`);
                 setFlash(
                     intl.formatMessage(
@@ -163,7 +162,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         }
 
         this.confirmation(message, () =>
-            abortProcess(process.id).then(() => {
+            this.context.apiClient.abortProcess(process.id).then(() => {
                 this.context.redirect(process.is_task ? "/tasks" : "/processes");
                 setFlash(
                     intl.formatMessage(
@@ -190,7 +189,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         }
 
         this.confirmation(message, () =>
-            retryProcess(process.id).then(() => {
+            this.context.apiClient.retryProcess(process.id).then(() => {
                 this.context.redirect(process.is_task ? "/tasks" : `/processes?highlight=${process.id}`);
                 setFlash(
                     intl.formatMessage(
@@ -318,7 +317,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             return Promise.reject();
         }
 
-        return resumeProcess(process.id, processInput).then((e) => {
+        return this.context.apiClient.resumeProcess(process.id, processInput).then((e) => {
             this.context.redirect(`/${process.is_task ? "tasks" : `processes?highlight=${process.id}`}`);
             setFlash(
                 intl.formatMessage(

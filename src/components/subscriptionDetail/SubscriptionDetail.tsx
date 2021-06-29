@@ -16,14 +16,6 @@
 import "./SubscriptionDetail.scss";
 
 import { EuiFlexGroup, EuiFlexItem, EuiSwitch } from "@elastic/eui";
-import {
-    dienstafnameBySubscription,
-    parentSubscriptions,
-    processSubscriptionsBySubscriptionId,
-    productById,
-    subscriptionWorkflows,
-    subscriptionsDetailWithModel,
-} from "api";
 import CheckBox from "components/CheckBox";
 import NetworkDiagram from "components/Diagram";
 import SubscriptionDetails from "components/subscriptionDetail/SubscriptionDetails";
@@ -564,7 +556,7 @@ function RenderSubscriptions({ parentSubscriptions }: { parentSubscriptions?: Su
 }
 
 function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
-    const { organisations, products } = useContext(ApplicationContext);
+    const { organisations, products, apiClient, customApiClient } = useContext(ApplicationContext);
 
     const [subscription, setSubscription] = useState<SubscriptionModel>();
     const [product, setProduct] = useState<Product>();
@@ -576,21 +568,22 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
 
     useEffect(() => {
         const promises = [
-            subscriptionsDetailWithModel(subscriptionId).then((subscription) => {
+            apiClient.subscriptionsDetailWithModel(subscriptionId).then((subscription) => {
                 subscription.product_id = subscription.product.product_id;
                 setSubscription(enrichSubscription(subscription, organisations, products));
-                productById(subscription.product_id).then(setProduct);
+                apiClient.productById(subscription.product_id).then(setProduct);
             }),
-            processSubscriptionsBySubscriptionId(subscriptionId).then(setSubscriptionProcesses),
-            subscriptionWorkflows(subscriptionId).then(setWorkflows),
-            parentSubscriptions(subscriptionId).then((parentSubscriptions) => {
+            apiClient.processSubscriptionsBySubscriptionId(subscriptionId).then(setSubscriptionProcesses),
+            apiClient.subscriptionWorkflows(subscriptionId).then(setWorkflows),
+            apiClient.parentSubscriptions(subscriptionId).then((parentSubscriptions) => {
                 // Enrich parent subscriptions
                 const enrichedParentSubscriptions = parentSubscriptions.map((sub: Subscription) =>
                     enrichSubscription(sub, organisations, products)
                 );
                 setEnrichedParentSubscriptions(enrichedParentSubscriptions);
             }),
-            dienstafnameBySubscription(subscriptionId).then(setDienstafname),
+            // Todo GPL: move to dynamic loading part
+            customApiClient.dienstafnameBySubscription(subscriptionId).then(setDienstafname),
         ];
 
         Promise.all(promises).catch((err) => {
@@ -600,7 +593,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                 throw err;
             }
         });
-    }, [subscriptionId, organisations, products]);
+    }, [subscriptionId, organisations, products, apiClient, customApiClient]);
 
     if (notFound) {
         return (

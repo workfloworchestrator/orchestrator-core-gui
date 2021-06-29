@@ -16,7 +16,6 @@
 import "pages/Prefixes.scss";
 
 import { EuiFieldSearch, EuiPage, EuiPageBody } from "@elastic/eui";
-import { freeSubnets, prefixSubscriptionsByRootPrefix, prefix_filters } from "api";
 import FilterDropDown from "components/FilterDropDown";
 import constant from "lodash/constant";
 import debounce from "lodash/debounce";
@@ -87,7 +86,7 @@ class Prefixes extends React.PureComponent<IProps, IState> {
     componentDidMount() {
         this.setState({});
 
-        prefix_filters().then((result) => {
+        this.context.customApiClient.prefix_filters().then((result) => {
             const prefixFilters = result.map((p, idx) => ({
                 name: p.prefix,
                 selected: idx === 0,
@@ -113,7 +112,8 @@ class Prefixes extends React.PureComponent<IProps, IState> {
     getPrefixSubscriptions = async (roots: IpPrefix[]) => {
         const { organisations } = this.context;
         const mapper = async (root: IpPrefix) => {
-            await prefixSubscriptionsByRootPrefix(root.id)
+            await this.context.customApiClient
+                .prefixSubscriptionsByRootPrefix(root.id)
                 .then((result) =>
                     result.map((prefix) => {
                         const { customer_id, start_date, subscription_id } = prefix;
@@ -150,7 +150,7 @@ class Prefixes extends React.PureComponent<IProps, IState> {
         const now = Math.floor(Date.now() / 1000);
         const nowString = renderDate(now);
         return roots.map((p) =>
-            freeSubnets(p.prefix).then((result) => {
+            this.context.customApiClient.freeSubnets(p.prefix).then((result) => {
                 const { availablePrefixId } = this.state;
                 const free = result.map((r, idx) => {
                     const [networkAddress, prefixlen] = r.split("/");

@@ -15,10 +15,10 @@
 
 import "components/inputForms/SplitPrefix.scss";
 
-import { free_subnets } from "api";
 import { range } from "lodash";
 import React from "react";
 import Select, { ValueType } from "react-select";
+import ApplicationContext from "utils/ApplicationContext";
 import { Option } from "utils/types";
 
 interface IProps {
@@ -43,7 +43,7 @@ export default class SplitPrefix extends React.PureComponent<IProps> {
     };
 
     fetchFreePrefixes(subnet: string, prefixlen: number, desiredPrefixlen: number) {
-        free_subnets(subnet, prefixlen, desiredPrefixlen).then((result) => {
+        this.context.customApiClient.free_subnets(subnet, prefixlen, desiredPrefixlen).then((result: string[]) => {
             let subnets = result.filter((x) => parseInt(x.split("/")[1], 10) === desiredPrefixlen);
             this.setState({
                 subnets: subnets,
@@ -120,3 +120,4 @@ export default class SplitPrefix extends React.PureComponent<IProps> {
         );
     }
 }
+SplitPrefix.contextType = ApplicationContext;

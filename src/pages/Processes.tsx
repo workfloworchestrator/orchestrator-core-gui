@@ -34,8 +34,6 @@ import { ProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
 
-import { abortProcess, retryProcess } from "../api";
-
 interface IProps extends WrappedComponentProps {}
 
 interface IState {
@@ -79,7 +77,7 @@ class Processes extends React.PureComponent<IProps, IState> {
         this.confirmation(
             intl.formatMessage({ id: "processes.abortConfirmation" }, { name: product_name, customer: customer_name }),
             () =>
-                abortProcess(process.pid).then(() => {
+                this.context.apiClient.abortProcess(process.pid).then(() => {
                     setFlash(intl.formatMessage({ id: "processes.flash.abort" }, { name: product_name }));
                 })
         );
@@ -93,7 +91,7 @@ class Processes extends React.PureComponent<IProps, IState> {
         this.confirmation(
             intl.formatMessage({ id: "processes.retryConfirmation" }, { name: product_name, customer: customer_name }),
             () =>
-                retryProcess(process.pid).then(() => {
+                this.context.apiClient.retryProcess(process.pid).then(() => {
                     setFlash(intl.formatMessage({ id: "processes.flash.retry" }, { name: product_name }));
                 })
         );
