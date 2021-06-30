@@ -277,8 +277,8 @@ class App extends React.PureComponent<IProps, IState> {
 
                                     <Suspense fallback={<div>Loading...</div>}>
                                         <ExtraRoutes />
-                                    </Suspense>                                    
-                                    
+                                    </Suspense>
+
                                     <ProtectedRoute path="/new-task" render={() => <NewTask />} />
 
                                     <ProtectedRoute path="/tasks" render={() => <Tasks />} />

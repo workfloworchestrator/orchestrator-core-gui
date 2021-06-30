@@ -14,7 +14,7 @@
  */
 
 import { ApiClient } from "api";
-import { CustomApiClient } from "api/custom";
+import { CustomApiClient } from "custom/api";
 import { ENV } from "env";
 import { isEmpty } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
