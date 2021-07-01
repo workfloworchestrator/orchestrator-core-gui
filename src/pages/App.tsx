@@ -53,7 +53,8 @@ import { createPolicyCheck } from "utils/policy";
 import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
 
-const ExtraRoutes = React.lazy(() => import("custom/routes"));
+import { customPages } from "custom/manifest.json";
+import {isEmpty} from "../utils/Utils";
 
 export const history = createBrowserHistory();
 
@@ -63,6 +64,7 @@ interface IProps {
 interface IState {
     loading: boolean;
     loaded: boolean;
+    importedModules: any[];
     applicationContext: ApplicationContextInterface;
     error: boolean;
     errorDialogOpen: boolean;
@@ -76,6 +78,7 @@ class App extends React.PureComponent<IProps, IState> {
         this.state = {
             loading: true,
             loaded: false,
+            importedModules: [],
             applicationContext: {
                 organisations: [],
                 locationCodes: [],
@@ -126,8 +129,32 @@ class App extends React.PureComponent<IProps, IState> {
         });
     }
 
+    importCustomPages = () => {
+        if (customPages) {
+            try {
+                const importedModules:any[] = [];
+                const importPromises = customPages.map(page =>
+                    // console.log(`../custom/${page.path}/${page.file}`)
+                    import(`../custom/${page.path}/${page.file}`).then(module => {
+                        importedModules.push({ ...page, Component: module.default });
+                    })
+                );
+
+                Promise.all(importPromises).then(() =>
+                    this.setState(prevState => ({
+                        ...prevState,
+                        importedModules
+                    }))
+                );
+            } catch (err) {
+                console.error(err.toString());
+            }
+        }
+    };
+
     async componentDidMount() {
         await this.loadData();
+        this.importCustomPages();
     }
 
     async loadData() {
@@ -184,7 +211,7 @@ class App extends React.PureComponent<IProps, IState> {
     }
 
     render() {
-        const { loading, errorDialogAction, errorDialogOpen, applicationContext, intl } = this.state;
+        const { loading, errorDialogAction, errorDialogOpen, applicationContext, intl, importedModules } = this.state;
 
         if (loading || !intl) {
             return null; // render null when app is not ready yet for static mySpinner
@@ -275,9 +302,16 @@ class App extends React.PureComponent<IProps, IState> {
                                     />
                                     <ProtectedRoute path="/settings" render={() => <Settings />} />
 
-                                    <Suspense fallback={<div>Loading...</div>}>
-                                        <ExtraRoutes />
-                                    </Suspense>
+                                    {/*{!isEmpty(importedModules) &&*/}
+                                    {/*importedModules.map(({ path, name, Component }) => (*/}
+                                    {/*    <Route key={path} exact path={`/${name}`} component={Component} />*/}
+                                    {/*))}*/}
+
+
+
+                                    {/*<Suspense fallback={<div>Loading...</div>}>*/}
+                                    {/*    <ExtraRoutes />*/}
+                                    {/*</Suspense>*/}
 
                                     <ProtectedRoute path="/new-task" render={() => <NewTask />} />
 
