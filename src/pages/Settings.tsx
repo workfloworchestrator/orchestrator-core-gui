@@ -48,19 +48,16 @@ export const Settings: FunctionComponent = (props: IProps) => {
     const { apiClient } = useContext(ApplicationContext);
 
     useEffect(() => {
-        getEngineStatus();
+        const getEngineStatus = () => {
+            apiClient.getGlobalStatus().then((newEngineStatus) => {
+                setEngineStatus(newEngineStatus);
+            });
+        };
         const interval = window.setInterval(getEngineStatus, 3000);
-
         return () => {
             clearInterval(interval);
         };
     });
-
-    const getEngineStatus = () => {
-        apiClient.getGlobalStatus().then((newEngineStatus) => {
-            setEngineStatus(newEngineStatus);
-        });
-    };
 
     const lockEngine = (isLocked: boolean) => {
         apiClient.setGlobalStatus(isLocked).then(() => {
