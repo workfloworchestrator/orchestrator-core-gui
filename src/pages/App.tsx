@@ -26,6 +26,7 @@ import Navigation from "components/Navigation";
 import ProductPage from "components/Product";
 import ProductBlock from "components/ProductBlock";
 import ProtectedRoute from "components/ProtectedRoute";
+import { customPages } from "custom/manifest.json";
 import { createBrowserHistory } from "history";
 import { intl, setLocale } from "locale/i18n";
 import { memoize } from "lodash";
@@ -44,7 +45,7 @@ import SubscriptionDetailPage from "pages/SubscriptionDetailPage";
 import SubscriptionsPage from "pages/Subscriptions";
 import Tasks from "pages/Tasks";
 import TerminateSubscription from "pages/TerminateSubscription";
-import React, { Suspense } from "react";
+import React from "react";
 import { IntlShape, RawIntlProvider } from "react-intl";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { QueryParamProvider } from "use-query-params";
@@ -52,9 +53,7 @@ import ApplicationContext, { ApplicationContextInterface, apiClient, customApiCl
 import { createPolicyCheck } from "utils/policy";
 import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
-
-import { customPages } from "custom/manifest.json";
-import {isEmpty} from "../utils/Utils";
+import { isEmpty } from "utils/Utils";
 
 export const history = createBrowserHistory();
 
@@ -132,18 +131,18 @@ class App extends React.PureComponent<IProps, IState> {
     importCustomPages = () => {
         if (customPages) {
             try {
-                const importedModules:any[] = [];
-                const importPromises = customPages.map(page =>
+                const importedModules: any[] = [];
+                const importPromises = customPages.map((page) =>
                     // console.log(`../custom/${page.path}/${page.file}`)
-                    import(`../custom/${page.path}/${page.file}`).then(module => {
+                    import(`../custom/${page.path}/${page.file}`).then((module) => {
                         importedModules.push({ ...page, Component: module.default });
                     })
                 );
 
                 Promise.all(importPromises).then(() =>
-                    this.setState(prevState => ({
+                    this.setState((prevState) => ({
                         ...prevState,
-                        importedModules
+                        importedModules,
                     }))
                 );
             } catch (err) {
@@ -302,12 +301,10 @@ class App extends React.PureComponent<IProps, IState> {
                                     />
                                     <ProtectedRoute path="/settings" render={() => <Settings />} />
 
-                                    {/*{!isEmpty(importedModules) &&*/}
-                                    {/*importedModules.map(({ path, name, Component }) => (*/}
-                                    {/*    <Route key={path} exact path={`/${name}`} component={Component} />*/}
-                                    {/*))}*/}
-
-
+                                    {!isEmpty(importedModules) &&
+                                        importedModules.map(({ path, name, Component }) => (
+                                            <Route key={path} exact path={`/${name}`} component={Component} />
+                                        ))}
 
                                     {/*<Suspense fallback={<div>Loading...</div>}>*/}
                                     {/*    <ExtraRoutes />*/}
