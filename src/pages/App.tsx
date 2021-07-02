@@ -26,7 +26,7 @@ import Navigation from "components/Navigation";
 import ProductPage from "components/Product";
 import ProductBlock from "components/ProductBlock";
 import ProtectedRoute from "components/ProtectedRoute";
-import { customPages } from "custom/manifest.json";
+import { customPages, disabledRoutes } from "custom/manifest.json";
 import { createBrowserHistory } from "history";
 import { intl, setLocale } from "locale/i18n";
 import { memoize } from "lodash";
@@ -278,13 +278,23 @@ class App extends React.PureComponent<IProps, IState> {
                                         path="/subscription/:id"
                                         render={(props) => <Redirect to={`/subscriptions/${props.match.params.id}`} />}
                                     />
-                                    <Route
+                                    {!disabledRoutes.includes("/subscriptions") && <Route
                                         path="/subscriptions/:id"
                                         render={(props) => <SubscriptionDetailPage {...props} />}
-                                    />
-                                    <Route path="/subscriptions" render={(props) => <SubscriptionsPage {...props} />} />
-                                    <Route exact path="/metadata" render={() => <Redirect to="/metadata/products" />} />
-
+                                    />}
+                                    {!disabledRoutes.includes("/subscriptions") && (
+                                        <Route
+                                            path="/subscriptions"
+                                            render={(props) => <SubscriptionsPage {...props} />}
+                                        />
+                                    )}
+                                    {!disabledRoutes.includes("/metadata") && (
+                                        <Route
+                                            exact
+                                            path="/metadata"
+                                            render={() => <Redirect to="/metadata/products" />}
+                                        />
+                                    )}
                                     <ProtectedRoute
                                         path="/metadata/product-block/:id"
                                         render={(props) => <ProductBlock {...props} />}
@@ -299,7 +309,9 @@ class App extends React.PureComponent<IProps, IState> {
                                             <MetaData selectedTab={props.match.params.type} {...props} />
                                         )}
                                     />
-                                    <ProtectedRoute path="/settings" render={() => <Settings />} />
+                                    {!disabledRoutes.includes("/metadata") && (
+                                        <ProtectedRoute path="/settings" render={() => <Settings />} />
+                                    )}
 
                                     {!isEmpty(importedModules) &&
                                         importedModules.map(({ path, name, Component }) => (

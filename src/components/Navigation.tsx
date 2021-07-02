@@ -27,6 +27,7 @@ import {
     EuiToast,
 } from "@elastic/eui";
 import { Control } from "@elastic/eui/src/components/control_bar/control_bar";
+import { disabledMenuItems } from "custom/manifest.json";
 import mySpinner from "lib/Spin";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { FormattedMessage } from "react-intl";
@@ -43,7 +44,9 @@ const Navigation = () => {
     const location = useLocation();
     const spinnerTarget = useRef();
     const spinnerElement = useRef<Spinner>();
-    const navItems = ["processes", "subscriptions", "metadata", "tasks", "prefixes", "settings"];
+    const navItems = ["processes", "subscriptions", "metadata", "tasks", "prefixes", "settings"].filter(
+        (i) => !disabledMenuItems.includes(i)
+    );
     const [isModalVisible, setIsModalVisible] = useState(false);
     const closeModal = () => setIsModalVisible(false);
     const showModal = () => setIsModalVisible(true);

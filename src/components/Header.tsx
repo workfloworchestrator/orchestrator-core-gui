@@ -124,7 +124,7 @@ class Header extends React.PureComponent<IProps, IState> {
                 </EuiHeaderSectionItem>
 
                 <EuiHeaderSectionItem>
-                    <EuiHeaderLinks aria-label="App navigation links example">
+                    <EuiHeaderLinks aria-label="App navigation links extra">
                         <EuiHeaderLink href="#">
                             <FormattedMessage id={`settings.status.engine.${engineStatus.toLowerCase()}`} />
                             <i className={`fa fa-circle header__status ${engineStatus.toLowerCase()}`}></i>
