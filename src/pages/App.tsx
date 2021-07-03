@@ -133,8 +133,9 @@ class App extends React.PureComponent<IProps, IState> {
             try {
                 const importedModules: any[] = [];
                 const importPromises = customPages.map((page) =>
-                    // console.log(`../custom/${page.path}/${page.file}`)
+                    // @ts-ignore
                     import(`../custom/${page.path}/${page.file}`).then((module) => {
+                        // @ts-ignore
                         importedModules.push({ ...page, Component: module.default });
                     })
                 );
@@ -278,10 +279,12 @@ class App extends React.PureComponent<IProps, IState> {
                                         path="/subscription/:id"
                                         render={(props) => <Redirect to={`/subscriptions/${props.match.params.id}`} />}
                                     />
-                                    {!disabledRoutes.includes("/subscriptions") && <Route
-                                        path="/subscriptions/:id"
-                                        render={(props) => <SubscriptionDetailPage {...props} />}
-                                    />}
+                                    {!disabledRoutes.includes("/subscriptions") && (
+                                        <Route
+                                            path="/subscriptions/:id"
+                                            render={(props) => <SubscriptionDetailPage {...props} />}
+                                        />
+                                    )}
                                     {!disabledRoutes.includes("/subscriptions") && (
                                         <Route
                                             path="/subscriptions"

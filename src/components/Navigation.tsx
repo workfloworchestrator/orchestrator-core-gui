@@ -45,6 +45,7 @@ const Navigation = () => {
     const spinnerTarget = useRef();
     const spinnerElement = useRef<Spinner>();
     const navItems = ["processes", "subscriptions", "metadata", "tasks", "prefixes", "settings"].filter(
+        // @ts-ignore
         (i) => !disabledMenuItems.includes(i)
     );
     const [isModalVisible, setIsModalVisible] = useState(false);

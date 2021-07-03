@@ -12,6 +12,12 @@ package: located in `lib/themes/surfnet_light`. It has its own README.
 
 ### Installing
 
+The first time you clone this package you have to run:
+```sh
+./switch
+```
+It will copy the `custom-example` folder to `custom` so the app can find the plugin stubs.
+
 #### Mac
 
 Using Brew:
