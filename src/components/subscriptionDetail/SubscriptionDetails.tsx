@@ -258,6 +258,7 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                         </td>
                     </tr>
                 )}
+
                 {renderGrafanaLink(subscription, subscription.product)}
                 {renderNetworkDashboardLink(subscription, subscription.product)}
                 <tr>
