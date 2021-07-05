@@ -31,8 +31,8 @@ FROM base AS builder
 
 RUN yarn --network-concurrency 1 --frozen-lockfile
 COPY . .
-RUN bash -c "cd /opt; git clone git@git.ia.surfsara.nl:netdev/automation/projects/orchestrator-client-surf.git"
-RUN ln -s /opt/orchestrator-client/surf/src /app/src/custom
+RUN wget "https://www.dropbox.com/s/k9f9aarp9dypxyl/custom.tgz?dl=0" -O custom.tgz
+RUN tar -xzvf custom.tgz src/
 RUN yarn build
 
 ########################
