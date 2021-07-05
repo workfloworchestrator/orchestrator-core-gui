@@ -30,6 +30,7 @@ unit test:
     TZ: Europe/Amsterdam
   script:
     - yarn install --frozen-lockfile
+    - apt update  && apt install wget -y
     - wget "https://www.dropbox.com/s/k9f9aarp9dypxyl/custom.tgz?dl=0" -O custom.tgz
     - tar -xzvf custom.tgz --directory src
     - yarn prettier
