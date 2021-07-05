@@ -29,7 +29,7 @@ CMD [ "yarn", "start" ]
 ### BUILDER LAYER TO PREPARE FOR PRODUCTION
 FROM base AS builder
 
-RUN apk update && apk add wget curl
+RUN apt update  && apt install wget -y
 RUN yarn --network-concurrency 1 --frozen-lockfile
 COPY . .
 RUN wget "https://www.dropbox.com/s/k9f9aarp9dypxyl/custom.tgz?dl=0" -O custom.tgz
