@@ -19,11 +19,8 @@ EXPOSE 3000
 FROM base AS local-test
 
 COPY . .
-RUN apt update  && apt install wget -y
-
 RUN yarn install
-RUN wget "https://www.dropbox.com/s/k9f9aarp9dypxyl/custom.tgz?dl=0" -O custom.tgz
-RUN tar -xzvf custom.tgz --directory src
+
 EXPOSE 3000
 CMD [ "yarn", "start" ]
 

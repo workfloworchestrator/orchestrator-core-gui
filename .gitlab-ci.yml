@@ -30,6 +30,8 @@ unit test:
     TZ: Europe/Amsterdam
   script:
     - yarn install --frozen-lockfile
+    - wget "https://www.dropbox.com/s/k9f9aarp9dypxyl/custom.tgz?dl=0" -O custom.tgz
+    - tar -xzvf custom.tgz --directory src
     - yarn prettier
     - yarn test --coverage
     - yarn run license-check-and-add check
