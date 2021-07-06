@@ -268,15 +268,15 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
                 });
 
                 // Small hack to reinstate title and format attributes for optGroup.
-                _definition.title = combinedPartials[0].title ? combinedPartials[0].title: "";
-                _definition.format = combinedPartials[0].format ? combinedPartials[0].format: "";
+                _definition.title = combinedPartials[0].title ? combinedPartials[0].title : "";
+                _definition.format = combinedPartials[0].format ? combinedPartials[0].format : "";
                 if (Object.keys(localProperties).length > 0) {
                     _definition.properties = localProperties;
                 }
                 if (localRequired.length > 0) {
                     _definition.required = localRequired;
                 }
-                definition = _definition
+                definition = _definition;
             }
 
             this._compiledSchema[_key] = Object.assign(_definition, { isRequired });
