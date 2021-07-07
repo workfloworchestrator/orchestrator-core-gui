@@ -17,10 +17,8 @@ import "./SubscriptionDetail.scss";
 
 import { EuiFlexGroup, EuiFlexItem, EuiSwitch } from "@elastic/eui";
 import CheckBox from "components/CheckBox";
-import NetworkDiagram from "components/Diagram";
 import SubscriptionDetails from "components/subscriptionDetail/SubscriptionDetails";
 import SubscriptionInstance from "components/subscriptionDetail/SubscriptionInstance";
-import TopologyDiagram from "components/TopologyDiagram";
 import { isArray } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -36,94 +34,11 @@ import {
     WorkflowReasons,
 } from "utils/types";
 import { applyIdNamingConvention, isEmpty, stop } from "utils/Utils";
+import {SubscriptionDetailSection} from "components/subscriptionDetail/SubscriptionDetailSection";
 
 interface IProps {
     subscriptionId: string;
     confirmation?: (question: string, action: (e: React.MouseEvent) => void) => void;
-}
-
-function SubscriptionDetailSection({
-    name,
-    children,
-    className = "",
-}: React.PropsWithChildren<{
-    name: React.ReactNode;
-    className?: string;
-}>) {
-    return (
-        <section className="details">
-            <h2>{name}</h2>
-            <div className={className}>{children}</div>
-        </section>
-    );
-}
-
-function RenderDiagram({ subscription }: { subscription: SubscriptionModel }) {
-    const { organisations, products } = useContext(ApplicationContext);
-
-    if (subscription.status !== "active" || !subscription.insync) {
-        return null;
-    }
-    const header = (
-        <h2>
-            <FormattedMessage id="subscription.network_diagrams" />
-        </h2>
-    );
-    const enrichedSubscription = enrichSubscription(subscription, organisations, products);
-    if (subscription.product.product_type === "LightPath") {
-        return (
-            <div>
-                {header}
-                <NetworkDiagram type="patchpanel" subscription={enrichedSubscription} />
-            </div>
-        );
-    } else if (["L2VPN", "IP"].includes(subscription.product.product_type)) {
-        return (
-            <div>
-                {header}
-                <TopologyDiagram subscription={subscription} />
-            </div>
-        );
-    } else {
-        return null;
-    }
-}
-
-function RenderDienstafname({ dienstafname }: { dienstafname?: Dienstafname }) {
-    if (!dienstafname) {
-        return null;
-    }
-
-    return (
-        <SubscriptionDetailSection
-            name={<FormattedMessage id="subscriptions.dienstafname" />}
-            className="subscription-service"
-        >
-            <table className={"detail-block"}>
-                <thead />
-                <tbody>
-                    <tr>
-                        <td>
-                            <FormattedMessage id="subscriptions.dienstafnameGuid" />
-                        </td>
-                        <td>{dienstafname.guid}</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <FormattedMessage id="subscriptions.dienstafnameCode" />
-                        </td>
-                        <td>{dienstafname.code}</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <FormattedMessage id="subscriptions.dienstafnameStatus" />
-                        </td>
-                        <td>{dienstafname.status}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </SubscriptionDetailSection>
-    );
 }
 
 function RenderFixedInputs({ product }: { product?: Product }) {
