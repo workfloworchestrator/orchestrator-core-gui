@@ -8,3 +8,4 @@ env:
     REACT_APP_NETWORKDASHBOARD_URL: https://netwerkdashboard.review.automation.surf.net
     REACT_APP_TRACING_ENABLED: "false"
     REACT_APP_ENVIRONMENT: "review"
+    REACT_APP_IMS_URL: "https://ims-01.surfnet.nl:4445/form/"

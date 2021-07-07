@@ -15,6 +15,7 @@
 
 import { ApiClient } from "api";
 import { CustomApiClient } from "api/custom";
+import { ENV } from "env";
 import { isEmpty } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -89,8 +90,11 @@ function SubscriptionInstanceValueRow({
     toggleCollapsed: () => void;
     type: string;
 }>) {
-    const isSubscriptionValue = label.endsWith("subscription_id");
     const icon = children ? "minus" : "plus";
+    const imsCircuitIdLink = isExternalLinkValue && label === "ims_circuit_id";
+    const imsLink = imsCircuitIdLink
+        ? ENV.IMS_URL.concat("ims_circuit_id" ? "circuit" : "ims_node_id", "/", value)
+        : "";
 
     return (
         <tbody>
@@ -101,12 +105,12 @@ function SubscriptionInstanceValueRow({
                         {isExternalLinkValue && !isDeleted && (
                             <i className={`fa fa-${icon}-circle`} onClick={toggleCollapsed} />
                         )}
-                        {isSubscriptionValue && (
-                            <a target="_blank" rel="noopener noreferrer" href={`/subscriptions/${value}`}>
+                        {imsLink && (
+                            <a target="_blank" rel="noopener noreferrer" href={imsLink}>
                                 {value}
                             </a>
                         )}
-                        {!isSubscriptionValue && <span>{value.toString()}</span>}
+                        {!imsLink && <span>{value.toString()}</span>}
                     </div>
                 </td>
                 {isDeleted && (

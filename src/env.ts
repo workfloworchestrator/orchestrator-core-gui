@@ -26,6 +26,7 @@ interface Env {
     RELEASE: string;
     ENVIRONMENT: string;
     TRACING_ORIGINS: string;
+    IMS_URL: string;
 }
 
 // We normally load env from window.__env__ as defined in public/env.js which
@@ -47,4 +48,5 @@ export const ENV: Env = window.__env__ || {
     RELEASE: process.env.REACT_APP_RELEASE,
     ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
     TRACING_ORIGINS: process.env.REACT_APP_TRACING_ORIGINS,
+    IMS_URL: process.env.REACT_APP_IMS_URL,
 };

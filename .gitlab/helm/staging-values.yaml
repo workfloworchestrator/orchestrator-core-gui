@@ -11,3 +11,4 @@ env:
     REACT_APP_TRACE_SAMPLE_RATE: "1"
     REACT_APP_ENVIRONMENT: "staging"
     REACT_APP_TRACING_ORIGINS: "https://orchestrator.staging.automation.surf.net/*"
+    REACT_APP_IMS_URL: "https://ims-01.surfnet.nl:4444/form/"
