@@ -35,6 +35,9 @@ import {
 } from "utils/types";
 import { applyIdNamingConvention, isEmpty, stop } from "utils/Utils";
 import {SubscriptionDetailSection} from "components/subscriptionDetail/SubscriptionDetailSection";
+import {subscriptionDetailPlugins} from "custom/manifest.json";
+import {RenderDiagram} from "custom/components/RenderDiagram";
+import {RenderDienstafname} from "custom/components/RenderDienstafname";
 
 interface IProps {
     subscriptionId: string;
@@ -480,6 +483,35 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     const [workflows, setWorkflows] = useState<WorkflowReasons>();
     const [enrichedParentSubscriptions, setEnrichedParentSubscriptions] = useState<SubscriptionWithDetails[]>();
     const [dienstafname, setDienstafname] = useState<Dienstafname>();
+    const [plugins, setPlugins] = useState<any []>()
+
+
+    // const importPlugins = () => {
+    //     if (customPages) {
+    //         try {
+    //             const importedModules: any[] = [];
+    //             const importPromises = customPages.map((page) =>
+    //                 // @ts-ignore
+    //                 import(`../custom/${page.path}/${page.file}`).then((module) => {
+    //                     // @ts-ignore
+    //                     importedModules.push({ ...page, Component: module.default });
+    //                 })
+    //             );
+    //
+    //             Promise.all(importPromises).then(() =>
+    //                 setPlugins(importedModules)
+    //                 // this.setState((prevState) => ({
+    //                 //     ...prevState,
+    //                 //     importedModules,
+    //                 // }))
+    //             );
+    //         } catch (err) {
+    //             console.error(err.toString());
+    //         }
+    //     }
+    // };
+
+
 
     useEffect(() => {
         const promises = [
