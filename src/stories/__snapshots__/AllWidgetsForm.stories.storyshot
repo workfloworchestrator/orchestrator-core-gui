@@ -412,9 +412,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                   </div>
                 </div>
                 <div
-                  className="euiDescribedFormGroup form-input nest-field"
+                  className="euiDescribedFormGroup form-input optgroup-field"
                   id="input-bfd"
-                  readOnly={false}
                   role="group"
                 >
                   <div
@@ -426,7 +425,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       <span
                         className="euiTitle euiTitle--xsmall euiDescribedFormGroup__title"
                       >
-                        forms.fields.bfd *
+                        forms.fields.bfd.title
                       </span>
                       <div
                         className="euiText euiText--small euiDescribedFormGroup__description"
@@ -434,168 +433,79 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         <div
                           className="euiTextColor euiTextColor--subdued"
                         >
-                           
+                          forms.fields.bfd.info
                         </div>
                       </div>
                     </div>
                     <div
                       className="euiFlexItem euiDescribedFormGroup__fields euiDescribedFormGroup__fieldPadding--xsmall"
                     >
-                      <section
-                        className=" bool-field"
+                      <div
+                        className="euiFlexItem"
                       >
                         <div
-                          className="euiFormRow euiFormRow--fullWidth"
-                          id="input-bfd.enabled-row"
+                          className="euiFormRow"
+                          id="bfd-row"
                         >
-                          <div
-                            className="euiFormRow__labelWrapper"
-                          >
-                            <label
-                              aria-invalid={null}
-                              className="euiFormLabel euiFormRow__label"
-                              htmlFor="input-bfd.enabled"
-                            >
-                              forms.fields.bfd.enabled
-                            </label>
-                             
-                            <div
-                              className="euiText euiText--medium"
-                            >
-                               
-                            </div>
-                          </div>
                           <div
                             className="euiFormRow__fieldWrapper"
                           >
-                            <div
-                              className="euiCheckbox"
-                            >
-                              <input
-                                checked={false}
-                                className="euiCheckbox__input"
-                                disabled={false}
-                                id="input-bfd.enabled"
-                                name="bfd.enabled"
-                                onBlur={[Function]}
-                                onChange={[Function]}
-                                onFocus={[Function]}
-                                type="checkbox"
-                              />
-                              <div
-                                className="euiCheckbox__square"
-                              />
-                              <label
-                                className="euiCheckbox__label"
-                                htmlFor="input-bfd.enabled"
-                              >
-                                bfd.enabled
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                      </section>
-                      <div>
-                        <div
-                          className="euiFormRow euiFormRow--fullWidth"
-                          id="input-bfd.minimum_interval-row"
-                        >
-                          <div
-                            className="euiFormRow__labelWrapper"
-                          >
-                            <label
-                              aria-invalid={null}
-                              className="euiFormLabel euiFormRow__label"
-                              htmlFor="input-bfd.minimum_interval"
-                            >
-                              forms.fields.bfd.minimum_interval
-                            </label>
-                             
-                            <div
-                              className="euiText euiText--medium"
-                            >
-                               
-                            </div>
-                          </div>
-                          <div
-                            className="euiFormRow__fieldWrapper"
-                          >
-                            <div
-                              className="euiFormControlLayout"
+                            <section
+                              className=" bool-field"
+                              onBlur={[Function]}
+                              onFocus={[Function]}
                             >
                               <div
-                                className="euiFormControlLayout__childrenWrapper"
+                                className="euiFormRow euiFormRow--fullWidth"
+                                id="bfd-row"
                               >
-                                <input
-                                  className="euiFieldNumber"
-                                  disabled={false}
-                                  id="input-bfd.minimum_interval"
-                                  max={255000}
-                                  min={1}
-                                  name="bfd.minimum_interval"
-                                  onBlur={[Function]}
-                                  onChange={[Function]}
-                                  onFocus={[Function]}
-                                  placeholder=""
-                                  readOnly={false}
-                                  step={1}
-                                  type="number"
-                                  value={900}
-                                />
+                                <div
+                                  className="euiFormRow__labelWrapper"
+                                >
+                                  <label
+                                    aria-invalid={null}
+                                    className="euiFormLabel euiFormRow__label"
+                                    htmlFor="bfd"
+                                  >
+                                    forms.fields.bfd.enabled
+                                  </label>
+                                   
+                                  <div
+                                    className="euiText euiText--medium"
+                                  >
+                                     
+                                  </div>
+                                </div>
+                                <div
+                                  className="euiFormRow__fieldWrapper"
+                                >
+                                  <div
+                                    className="euiCheckbox"
+                                  >
+                                    <input
+                                      checked={false}
+                                      className="euiCheckbox__input"
+                                      disabled={false}
+                                      id="bfd"
+                                      name="bfd.enabled"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      type="checkbox"
+                                    />
+                                    <div
+                                      className="euiCheckbox__square"
+                                    />
+                                    <label
+                                      className="euiCheckbox__label"
+                                      htmlFor="bfd"
+                                    >
+                                      bfd.enabled
+                                    </label>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <div
-                          className="euiFormRow euiFormRow--fullWidth"
-                          id="input-bfd.multiplier-row"
-                        >
-                          <div
-                            className="euiFormRow__labelWrapper"
-                          >
-                            <label
-                              aria-invalid={null}
-                              className="euiFormLabel euiFormRow__label"
-                              htmlFor="input-bfd.multiplier"
-                            >
-                              forms.fields.bfd.multiplier
-                            </label>
-                             
-                            <div
-                              className="euiText euiText--medium"
-                            >
-                               
-                            </div>
-                          </div>
-                          <div
-                            className="euiFormRow__fieldWrapper"
-                          >
-                            <div
-                              className="euiFormControlLayout"
-                            >
-                              <div
-                                className="euiFormControlLayout__childrenWrapper"
-                              >
-                                <input
-                                  className="euiFieldNumber"
-                                  disabled={false}
-                                  id="input-bfd.multiplier"
-                                  max={255}
-                                  min={1}
-                                  name="bfd.multiplier"
-                                  onBlur={[Function]}
-                                  onChange={[Function]}
-                                  onFocus={[Function]}
-                                  placeholder=""
-                                  readOnly={false}
-                                  step={1}
-                                  type="number"
-                                  value={3}
-                                />
-                              </div>
-                            </div>
+                            </section>
                           </div>
                         </div>
                       </div>
