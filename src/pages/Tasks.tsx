@@ -200,7 +200,7 @@ class Tasks extends React.PureComponent<IProps, IState> {
                         question={confirmationDialogQuestion}
                     />
                     <EuiFlexGroup className="actions actions-buttons">
-                        {allowed("/orchestrator/processes/retry/all-tasks") && (
+                        {allowed("/orchestrator/processes/all-tasks/retry") && (
                             <EuiFlexItem>
                                 <EuiButton onClick={this.runAllTasks} fill color="primary" iconType="refresh">
                                     <FormattedMessage id="tasks.runall" />
