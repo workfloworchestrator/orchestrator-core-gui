@@ -35,9 +35,9 @@ import {
 } from "utils/types";
 import { applyIdNamingConvention, isEmpty, stop } from "utils/Utils";
 import {SubscriptionDetailSection} from "components/subscriptionDetail/SubscriptionDetailSection";
-import {subscriptionDetailPlugins} from "custom/manifest.json";
-import {RenderDiagram} from "custom/components/RenderDiagram";
-import {RenderDienstafname} from "custom/components/RenderDienstafname";
+// import {subscriptionDetailPlugins} from "custom/manifest.json";
+// import {RenderDiagram} from "custom/components/subscriptionDetailPlugins/RenderDiagram";
+// import {RenderDienstafname} from "custom/components/subscriptionDetailPlugins/RenderDienstafname";
 
 interface IProps {
     subscriptionId: string;
@@ -474,7 +474,7 @@ function RenderSubscriptions({ parentSubscriptions }: { parentSubscriptions?: Su
 }
 
 function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
-    const { organisations, products, apiClient, customApiClient } = useContext(ApplicationContext);
+    const { organisations, products, apiClient, customApiClient, plugins } = useContext(ApplicationContext);
 
     const [subscription, setSubscription] = useState<SubscriptionModel>();
     const [product, setProduct] = useState<Product>();
@@ -483,35 +483,6 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     const [workflows, setWorkflows] = useState<WorkflowReasons>();
     const [enrichedParentSubscriptions, setEnrichedParentSubscriptions] = useState<SubscriptionWithDetails[]>();
     const [dienstafname, setDienstafname] = useState<Dienstafname>();
-    const [plugins, setPlugins] = useState<any []>()
-
-
-    // const importPlugins = () => {
-    //     if (customPages) {
-    //         try {
-    //             const importedModules: any[] = [];
-    //             const importPromises = customPages.map((page) =>
-    //                 // @ts-ignore
-    //                 import(`../custom/${page.path}/${page.file}`).then((module) => {
-    //                     // @ts-ignore
-    //                     importedModules.push({ ...page, Component: module.default });
-    //                 })
-    //             );
-    //
-    //             Promise.all(importPromises).then(() =>
-    //                 setPlugins(importedModules)
-    //                 // this.setState((prevState) => ({
-    //                 //     ...prevState,
-    //                 //     importedModules,
-    //                 // }))
-    //             );
-    //         } catch (err) {
-    //             console.error(err.toString());
-    //         }
-    //     }
-    // };
-
-
 
     useEffect(() => {
         const promises = [
@@ -573,8 +544,13 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                 ></SubscriptionDetails>
             </SubscriptionDetailSection>
 
-            <RenderDiagram subscription={subscription} />
-            <RenderDienstafname dienstafname={dienstafname} />
+            <div>
+                {plugins["subscriptionDetail"].map((Comp: any) => <Comp subscription={subscription}/>)}
+            </div>
+
+
+            {/*<RenderDiagram subscription={subscription} />*/}
+            {/*<RenderDienstafname dienstafname={dienstafname} />*/}
             <RenderFixedInputs product={product} />
 
             {subscription_instances && (

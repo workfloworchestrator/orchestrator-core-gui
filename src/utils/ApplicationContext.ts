@@ -29,6 +29,7 @@ export interface ApplicationContextInterface {
     allowed: (resource: string) => boolean;
     apiClient: ApiClient;
     customApiClient: CustomApiClient;
+    plugins: any;
 }
 
 export const apiClient: ApiClient = new ApiClient();
@@ -46,6 +47,7 @@ let ApplicationContext = React.createContext<ApplicationContextInterface>({
     allowed: (_resource: string) => false,
     apiClient: apiClient,
     customApiClient: customApiClient,
+    plugins: {}
 });
 
 export default ApplicationContext;
