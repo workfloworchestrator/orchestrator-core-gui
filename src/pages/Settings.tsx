@@ -26,7 +26,7 @@ import {
     EuiSelect,
     EuiSpacer,
 } from "@elastic/eui";
-import React, { FunctionComponent, useContext, useEffect, useState } from "react";
+import React, { FunctionComponent, useCallback, useContext, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
@@ -47,20 +47,19 @@ export const Settings: FunctionComponent = (props: IProps) => {
     const [engineStatus, setEngineStatus] = useState<EngineStatus>();
     const { apiClient } = useContext(ApplicationContext);
 
-    useEffect(() => {
-        getEngineStatus();
-        const interval = window.setInterval(getEngineStatus, 3000);
-
-        return () => {
-            clearInterval(interval);
-        };
-    });
-
-    const getEngineStatus = () => {
+    const getEngineStatus = useCallback(() => {
         apiClient.getGlobalStatus().then((newEngineStatus) => {
             setEngineStatus(newEngineStatus);
         });
-    };
+    }, [setEngineStatus, apiClient]);
+
+    useEffect(() => {
+        getEngineStatus();
+        const interval = window.setInterval(getEngineStatus, 3000);
+        return () => {
+            clearInterval(interval);
+        };
+    }, [getEngineStatus]);
 
     const lockEngine = (isLocked: boolean) => {
         apiClient.setGlobalStatus(isLocked).then(() => {
