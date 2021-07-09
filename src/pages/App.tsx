@@ -26,7 +26,7 @@ import Navigation from "components/Navigation";
 import ProductPage from "components/Product";
 import ProductBlock from "components/ProductBlock";
 import ProtectedRoute from "components/ProtectedRoute";
-import { customPages, disabledRoutes,plugins } from "custom/manifest.json";
+import { customPages, disabledRoutes } from "custom/manifest.json";
 import { createBrowserHistory } from "history";
 import { intl, setLocale } from "locale/i18n";
 import { memoize } from "lodash";
@@ -94,7 +94,6 @@ class App extends React.PureComponent<IProps, IState> {
                 allowed: (_resource: string) => false,
                 apiClient: apiClient,
                 customApiClient: customApiClient,
-                plugins: {},
             },
             error: false,
             errorDialogOpen: false,
@@ -155,36 +154,9 @@ class App extends React.PureComponent<IProps, IState> {
         }
     };
 
-    importPlugins = () => {
-        if (plugins) {
-            try {
-                const importedPlugins: any[] = [];
-                const importPromises = plugins.subscriptionDetailPlugins.map((plugin) =>
-                    // @ts-ignore
-                    import(`../custom/components/subscriptionDetailPlugins/${plugin}`).then((module) => {
-                        // @ts-ignore
-                        importedPlugins.push({ Component: module.default });
-                    })
-                );
-
-                Promise.all(importPromises).then(() => {
-                    this.state.applicationContext.plugins["subscriptionDetail"]=importedPlugins
-                    this.setState((prevState) => ({
-                        ...prevState,
-                        importedPlugins,
-                    }))}
-                );
-            } catch (err) {
-                console.error(err.toString());
-            }
-        }
-    };
-
-
     async componentDidMount() {
         await this.loadData();
         this.importCustomPages();
-        this.importPlugins();
     }
 
     async loadData() {
@@ -236,7 +208,6 @@ class App extends React.PureComponent<IProps, IState> {
                 allowed: memoize(allowed),
                 apiClient: apiClient,
                 customApiClient: customApiClient,
-                plugins: {}
             },
         });
     }

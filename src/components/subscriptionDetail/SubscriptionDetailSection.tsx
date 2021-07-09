@@ -1,10 +1,10 @@
 import React from "react";
 
 export function SubscriptionDetailSection({
-                                              name,
-                                              children,
-                                              className = "",
-                                          }: React.PropsWithChildren<{
+    name,
+    children,
+    className = "",
+}: React.PropsWithChildren<{
     name: React.ReactNode;
     className?: string;
 }>) {

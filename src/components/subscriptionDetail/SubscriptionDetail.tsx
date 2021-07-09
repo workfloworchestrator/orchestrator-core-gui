@@ -18,9 +18,11 @@ import "./SubscriptionDetail.scss";
 import { EuiFlexGroup, EuiFlexItem, EuiSwitch } from "@elastic/eui";
 import CheckBox from "components/CheckBox";
 import SubscriptionDetails from "components/subscriptionDetail/SubscriptionDetails";
+import { SubscriptionDetailSection } from "components/subscriptionDetail/SubscriptionDetailSection";
 import SubscriptionInstance from "components/subscriptionDetail/SubscriptionInstance";
+import { plugins } from "custom/manifest.json";
 import { isArray } from "lodash";
-import React, { useContext, useEffect, useState } from "react";
+import React, { lazy, useContext, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { enrichSubscription, organisationNameByUuid, renderDate, renderDateTime } from "utils/Lookups";
@@ -34,10 +36,8 @@ import {
     WorkflowReasons,
 } from "utils/types";
 import { applyIdNamingConvention, isEmpty, stop } from "utils/Utils";
-import {SubscriptionDetailSection} from "components/subscriptionDetail/SubscriptionDetailSection";
-// import {subscriptionDetailPlugins} from "custom/manifest.json";
-// import {RenderDiagram} from "custom/components/subscriptionDetailPlugins/RenderDiagram";
-// import {RenderDienstafname} from "custom/components/subscriptionDetailPlugins/RenderDienstafname";
+
+import { RenderActions } from "./RenderActions";
 
 interface IProps {
     subscriptionId: string;
@@ -64,178 +64,6 @@ function RenderFixedInputs({ product }: { product?: Product }) {
                                 <td id={`${applyIdNamingConvention(fi.name)}-v`}>{fi.value}</td>
                             </tr>
                         ))}
-                </tbody>
-            </table>
-        </SubscriptionDetailSection>
-    );
-}
-
-function RenderActions({
-    subscription,
-    workflows,
-    confirmation,
-}: {
-    subscription: SubscriptionModel;
-    workflows: WorkflowReasons;
-    confirmation?: (message: string, callback: () => void) => void;
-}) {
-    const intl = useIntl();
-    const { organisations, redirect, allowed } = useContext(ApplicationContext);
-
-    if (!confirmation) {
-        return null;
-    }
-
-    const terminate = (e: React.MouseEvent<HTMLElement>) => {
-        stop(e);
-
-        confirmation(
-            intl.formatMessage(
-                { id: "subscription.terminateConfirmation" },
-                {
-                    name: subscription.product.name,
-                    customer: organisationNameByUuid(subscription.customer_id, organisations),
-                }
-            ),
-            () => redirect(`/terminate-subscription?subscription=${subscription.subscription_id}`)
-        );
-    };
-
-    const modify = (workflow_name: string) => (e: React.MouseEvent<HTMLElement>) => {
-        stop(e);
-
-        const change = intl.formatMessage({ id: `workflow.${workflow_name}` }).toLowerCase();
-        confirmation(
-            intl.formatMessage(
-                { id: "subscription.modifyConfirmation" },
-                {
-                    name: subscription.product.name,
-                    customer: organisationNameByUuid(subscription.customer_id, organisations),
-                    change: change,
-                }
-            ),
-            () =>
-                redirect(`/modify-subscription?workflow=${workflow_name}&subscription=${subscription.subscription_id}`)
-        );
-    };
-
-    return (
-        <SubscriptionDetailSection
-            name={<FormattedMessage id="subscription.actions" />}
-            className="subscription-actions"
-        >
-            <table className="detail-block">
-                <thead />
-                <tbody>
-                    {allowed("/orchestrator/subscriptions/terminate/" + subscription.subscription_id + "/") &&
-                        workflows.terminate.map((wf, index: number) => (
-                            <tr key={index}>
-                                <td id={`${index}-k`}>
-                                    {!wf.reason && (
-                                        <a id="terminate-link" href="/modify" key={wf.name} onClick={terminate}>
-                                            <FormattedMessage id="subscription.terminate" />
-                                        </a>
-                                    )}
-                                    {wf.reason && (
-                                        <span>
-                                            <FormattedMessage id="subscription.terminate" />
-                                        </span>
-                                    )}
-                                </td>
-                                <td id={`${index}-v`}>
-                                    {wf.reason && (
-                                        <em className="error">
-                                            <FormattedMessage id={wf.reason} values={wf as any} />
-                                        </em>
-                                    )}
-                                </td>
-                            </tr>
-                        ))}
-                    {isEmpty(workflows.terminate) && (
-                        <tr>
-                            <td>
-                                <em className="error">
-                                    <FormattedMessage id="subscription.no_termination_workflow" />
-                                </em>
-                            </td>
-                        </tr>
-                    )}
-                    {allowed("/orchestrator/subscriptions/modify/" + subscription.subscription_id + "/") &&
-                        workflows.modify.map((wf, index: number) => (
-                            <tr key={index}>
-                                <td>
-                                    {!wf.reason && (
-                                        <a
-                                            id={`modify-link-${wf.name.replace(/_/g, "-")}`}
-                                            href="/modify"
-                                            key={wf.name}
-                                            onClick={modify(wf.name)}
-                                        >
-                                            <FormattedMessage id={`workflow.${wf.name}`} />
-                                        </a>
-                                    )}
-                                    {wf.reason && (
-                                        <span>
-                                            <FormattedMessage id={`workflow.${wf.name}`} />
-                                        </span>
-                                    )}
-                                </td>
-                                <td>
-                                    {wf.reason && (
-                                        <em className="error">
-                                            <FormattedMessage id={wf.reason} values={wf as any} />
-                                        </em>
-                                    )}
-                                </td>
-                            </tr>
-                        ))}
-                    {isEmpty(workflows.modify) && (
-                        <tr>
-                            <td>
-                                <em className="error">
-                                    <FormattedMessage id="subscription.no_modify_workflow" />
-                                </em>
-                            </td>
-                        </tr>
-                    )}
-                    {allowed("/orchestrator/subscriptions/validate/" + subscription.subscription_id + "/") &&
-                        workflows.system.map((wf, index: number) => (
-                            <tr key={index}>
-                                <td>
-                                    {!wf.reason && (
-                                        <a
-                                            id={`validate-link-${wf.name.replace(/_/g, "-")}`}
-                                            href="/modify"
-                                            key={wf.name}
-                                            onClick={modify(wf.name)}
-                                        >
-                                            <FormattedMessage id={`workflow.${wf.name}`} />
-                                        </a>
-                                    )}
-                                    {wf.reason && (
-                                        <span>
-                                            <FormattedMessage id={`workflow.${wf.name}`} />
-                                        </span>
-                                    )}
-                                </td>
-                                <td>
-                                    {wf.reason && (
-                                        <em className="error">
-                                            <FormattedMessage id={wf.reason} values={wf as any} />
-                                        </em>
-                                    )}
-                                </td>
-                            </tr>
-                        ))}
-                    {isEmpty(workflows.system) && (
-                        <tr>
-                            <td>
-                                <em className="error">
-                                    <FormattedMessage id="subscription.no_validate_workflow" />
-                                </em>
-                            </td>
-                        </tr>
-                    )}
                 </tbody>
             </table>
         </SubscriptionDetailSection>
@@ -473,8 +301,16 @@ function RenderSubscriptions({ parentSubscriptions }: { parentSubscriptions?: Su
     );
 }
 
+export const importPlugin = (plugin: string) =>
+    lazy(() =>
+        import(`custom/components/subscriptionDetailPlugins/${plugin}`).catch(() => import(`components/RenderNull`))
+    );
+
 function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
-    const { organisations, products, apiClient, customApiClient, plugins } = useContext(ApplicationContext);
+    const [loadedPlugins, setLoadedPlugins] = useState([]);
+    const [loadedSubscriptionModel, setLoadedSubscriptionModel] = useState(false);
+
+    const { organisations, products, apiClient, customApiClient } = useContext(ApplicationContext);
 
     const [subscription, setSubscription] = useState<SubscriptionModel>();
     const [product, setProduct] = useState<Product>();
@@ -500,18 +336,37 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                 );
                 setEnrichedParentSubscriptions(enrichedParentSubscriptions);
             }),
-            // Todo GPL: move to dynamic loading part
+            // Todo GPL: move this to the actual plugin and fetch the dienstafname there with based on the subscriptionmodel
             customApiClient.dienstafnameBySubscription(subscriptionId).then(setDienstafname),
         ];
 
-        Promise.all(promises).catch((err) => {
-            if (err.response && err.response.status === 404) {
-                setNotFound(true);
-            } else {
-                throw err;
-            }
-        });
+        Promise.all(promises)
+            .then(() => setLoadedSubscriptionModel(true))
+            .catch((err) => {
+                console.log("Yes yes, loading plugins with datta");
+                if (err.response && err.response.status === 404) {
+                    setNotFound(true);
+                } else {
+                    throw err;
+                }
+            });
     }, [subscriptionId, organisations, products, apiClient, customApiClient]);
+
+    useEffect(() => {
+        if (loadedSubscriptionModel) {
+            async function loadViews() {
+                console.log("Fetch of subscripton model complete: loading plugins");
+                const componentPromises = plugins["subscriptionDetailPlugins"].map(async (plugin) => {
+                    const View = await importPlugin(plugin);
+                    // Todo fix diensafname: only "subscription" data will be avilable in the plugin
+                    return <View subscription={subscription} />;
+                });
+                // @ts-ignore
+                Promise.all(componentPromises).then(setLoadedPlugins);
+            }
+            loadViews();
+        }
+    }, [loadedSubscriptionModel, subscription]);
 
     if (notFound) {
         return (
@@ -544,13 +399,8 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                 ></SubscriptionDetails>
             </SubscriptionDetailSection>
 
-            <div>
-                {plugins["subscriptionDetail"].map((Comp: any) => <Comp subscription={subscription}/>)}
-            </div>
+            <React.Suspense fallback="Loading plugins...">{loadedPlugins}</React.Suspense>
 
-
-            {/*<RenderDiagram subscription={subscription} />*/}
-            {/*<RenderDienstafname dienstafname={dienstafname} />*/}
             <RenderFixedInputs product={product} />
 
             {subscription_instances && (
