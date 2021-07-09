@@ -359,6 +359,7 @@ I18n.translations.en = {
         go_to_networkdashboard_url: "Go to Networkdashboard",
     },
     subscription: {
+        external_links: "External Links",
         acquiring_insync_info_about_relations: "Acquiring 'insync' info of related subscriptions...",
         notFound: "No Subscription found (e.g. 404)",
         subscription_title: "Subscription",

@@ -1,7 +1,9 @@
 import React from "react";
 
-export default ({ children = "-- Plugin loading problem --" }) => (
-    <div>
+function RenderNull({ children = "-- Plugin loading problem --" }) {
+    return (<div>
         <b>{children}</b>
-    </div>
-);
+    </div>)
+};
+
+export default RenderNull
