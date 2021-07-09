@@ -86,9 +86,9 @@ function prepare() {
 
     mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
     mock.onGet(/surf\/ims\/free_ports\/.*\/1000\/.*/).reply(200, freeCorelinkPorts);
-    mock.onGet("surf/ims/nodes/MT001A/PL").reply(200, imsNodes);
+    mock.onGet("surf/ims/nodes/MT001A/PL?unsubscribed_only=true").reply(200, imsNodes);
     mock.onGet("surf/ims/nodes/Asd001a/IS").reply(200, imsNodes);
-    mock.onGet("surf/ims/nodes/Asd001a/PL").reply(200, imsNodes);
+    mock.onGet("surf/ims/nodes/Asd001a/PL?unsubscribed_only=true").reply(200, imsNodes);
     mock.onGet("surf/subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653").reply(200, SUBSCRIPTION_JSON);
     mock.onGet("surf/subscriptions/e89776be-16c3-4bee-af98-8e73bf6492a7").reply(200, SUBSCRIPTION_JSON);
     mock.onGet("subscriptions/workflows/e89776be-16c3-4bee-af98-8e73bf6492a7").reply(200, {

@@ -86,8 +86,12 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.fetchJson(`surf/subscriptions/port-services-by-node/${id}`);
     };
 
-    getNodesByLocationAndStatus = (locationCode: string, status: string): Promise<IMSNode[]> => {
-        return this.fetchJson(`surf/ims/nodes/${locationCode}/${status}`);
+    getNodesByLocationAndStatus = (
+        locationCode: string,
+        status: string,
+        unsubscribedOnly: boolean = true
+    ): Promise<IMSNode[]> => {
+        return this.fetchJson(`surf/ims/nodes/${locationCode}/${status}?unsubscribed_only=${unsubscribedOnly}`);
     };
 
     getFreePortsByNodeSubscriptionIdAndSpeed = (
