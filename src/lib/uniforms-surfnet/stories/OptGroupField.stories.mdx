@@ -31,3 +31,53 @@ import { OptGroupField } from "../src";
     }
 }
 ```
+
+<Story name="BFD Field">
+    <UserInputContainer
+        stepUserInput={{
+            title: "SN8 SURFinternet BGP",
+            type: "object",
+            properties: {
+                bfd: {
+                    title: "Bfd",
+                    default: {
+                        enabled: false,
+                    },
+                    allOf: [
+                        {
+                            $ref: "#/definitions/BFD",
+                        },
+                    ],
+                },
+            },
+            definitions: {
+                BFD: {
+                    title: "BFD",
+                    type: "object",
+                    properties: {
+                        enabled: {
+                            title: "Enabled",
+                            type: "boolean",
+                        },
+                        minimum_interval: {
+                            title: "Minimum Interval",
+                            default: 900,
+                            minimum: 1,
+                            maximum: 255000,
+                            type: "integer",
+                        },
+                        multiplier: {
+                            title: "Multiplier",
+                            default: 3,
+                            minimum: 1,
+                            maximum: 255,
+                            type: "integer",
+                        },
+                    },
+                    required: ["enabled"],
+                    format: "optGroup",
+                },
+            },
+        }}
+    />
+</Story>
