@@ -1,6 +1,7 @@
 {
     "customPages": [],
-    "disabledPages": [],
+    "disabledRoutes": ["some_non_existing_route"],
     "disabledMenuItems": [],
-    "subscriptionDetailItems": []
+    "subscriptionDetailItems": [],
+    "plugins": {}
 }

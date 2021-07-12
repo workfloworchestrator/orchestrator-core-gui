@@ -91,16 +91,19 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     useEffect(() => {
         if (loadedSubscriptionModel) {
             async function loadViews() {
-                console.log("Fetch of subscripton model complete: loading plugins");
-                const componentPromises = plugins["subscriptionDetailPlugins"].map(async (plugin) => {
-                    const View = await importPlugin(plugin);
-                    // Todo fix dienstafname: only "subscription" data will be available in the plugin
-                    return <View subscription={subscription} />;
-                });
-                // @ts-ignore
-                Promise.all(componentPromises).then(setLoadedPlugins);
+                if(plugins.hasOwnProperty("subscriptionDetailPlugins")) {
+                    console.log("Fetch of subscripton model complete: loading plugins");
+                    // @ts-ignore
+                    const componentPromises = plugins["subscriptionDetailPlugins"].map(async (plugin) => {
+                        const View = await importPlugin(plugin);
+                        // Todo fix dienstafname: only "subscription" data will be available in the plugin
+                        return <View subscription={subscription} />;
+                    });
+                    // @ts-ignore
+                    Promise.all(componentPromises).then(setLoadedPlugins);
+                }
             }
-            loadViews();
+            loadViews().then();
         }
     }, [loadedSubscriptionModel, subscription]);
 

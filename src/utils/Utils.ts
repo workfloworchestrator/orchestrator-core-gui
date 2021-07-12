@@ -80,5 +80,5 @@ export function capitalizeFirstLetter(word: string): string {
 
 export const importPlugin = (plugin: string) =>
     lazy(() =>
-        import(`custom/components/subscriptionDetailPlugins/${plugin}`).catch(() => import(`components/RenderNull`))
+        import(`custom/plugins/${plugin}`).catch(() => import(`components/RenderNull`))
     );
