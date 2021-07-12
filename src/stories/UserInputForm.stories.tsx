@@ -93,7 +93,7 @@ export const Nodes = () => {
     mock.onGet("surf/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(200, []);
     mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
     mock.onGet("subscriptions/all").reply(200, allNodeSubscriptions);
-    mock.onGet("surf/ims/nodes/MT001A/PL").reply(200, imsNodes);
+    mock.onGet("surf/ims/nodes/MT001A/PL?unsubscribed_only=true").reply(200, imsNodes);
 
     const form = createForm({
         ims_node_id: ImsNodeId,
