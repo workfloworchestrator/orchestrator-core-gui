@@ -15,6 +15,13 @@
 
 import "./SubscriptionDetail.scss";
 
+import {
+    RenderActions,
+    RenderFixedInputs,
+    RenderProcesses,
+    RenderProduct,
+    RenderSubscriptions,
+} from "components/subscriptionDetail/Renderers";
 import SubscriptionDetails from "components/subscriptionDetail/SubscriptionDetails";
 import { SubscriptionDetailSection } from "components/subscriptionDetail/SubscriptionDetailSection";
 import SubscriptionInstance from "components/subscriptionDetail/SubscriptionInstance";
@@ -32,15 +39,12 @@ import {
     SubscriptionWithDetails,
     WorkflowReasons,
 } from "utils/types";
-
-import {RenderActions, RenderFixedInputs, RenderProduct, RenderProcesses, RenderSubscriptions} from "components/subscriptionDetail/Renderers";
-import {importPlugin} from "utils/Utils";
+import { importPlugin } from "utils/Utils";
 
 interface IProps {
     subscriptionId: string;
     confirmation?: (question: string, action: (e: React.MouseEvent) => void) => void;
 }
-
 
 function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     const [loadedPlugins, setLoadedPlugins] = useState([]);
@@ -82,7 +86,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                     throw err;
                 }
             });
-    }, [subscriptionId, organisations, products, apiClient ]);
+    }, [subscriptionId, organisations, products, apiClient]);
 
     useEffect(() => {
         if (loadedSubscriptionModel) {

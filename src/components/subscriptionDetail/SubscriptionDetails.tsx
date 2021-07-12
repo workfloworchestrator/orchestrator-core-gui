@@ -21,11 +21,7 @@ import { FormattedMessage } from "react-intl";
 import { useStorageState } from "react-storage-hooks";
 import ApplicationContext from "utils/ApplicationContext";
 import { organisationNameByUuid, renderDate } from "utils/Lookups";
-import {
-    FavoriteSubscriptionStorage,
-    SubscriptionModel,
-    SubscriptionProcesses,
-} from "utils/types";
+import { FavoriteSubscriptionStorage, SubscriptionModel, SubscriptionProcesses } from "utils/types";
 
 function renderFailedTask(subscriptionProcesses: SubscriptionProcesses[]) {
     let failed_tasks = subscriptionProcesses
