@@ -225,7 +225,7 @@ export class ApiClient extends ApiClientInterface {
 
         if (filters.length) params.set("filter", filters.join(","));
 
-        return this.fetchJson(`subscriptions${filters.length ? "?" : ""}${params.toString()}`);
+        return this.fetchJson(`subscriptions/${filters.length ? "?" : ""}${params.toString()}`);
     };
 
     subscriptionWorkflows = (subscription_id: string): Promise<WorkflowReasons> => {
