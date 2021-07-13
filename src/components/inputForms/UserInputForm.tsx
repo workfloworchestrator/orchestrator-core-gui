@@ -263,6 +263,7 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
                     for (const key in combinedPartial) {
                         if (combinedPartial[key] && !_definition[key]) {
                             _definition[key] = combinedPartial[key];
+                            definition[key] = combinedPartial[key];
                         }
                     }
                 });

@@ -66,7 +66,7 @@ class Tasks extends React.PureComponent<IProps, IState> {
         const { intl } = this.props;
         this.confirmation(intl.formatMessage({ id: "tasks.runallConfirmation" }), () => {
             filterableEndpoint<ProcessV2>(
-                "processes",
+                "processes/",
                 null,
                 null,
                 null,

@@ -55,8 +55,8 @@ export const Contactpersons = () => {
 };
 
 export const Corelink = () => {
-    mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, allNodeSubscriptions);
-    mock.onGet("subscriptions?filter=tags,Node,statuses,active-provisioning").reply(200, allNodeSubscriptions);
+    mock.onGet("subscriptions/?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, allNodeSubscriptions);
+    mock.onGet("subscriptions/?filter=tags,Node,statuses,active-provisioning").reply(200, allNodeSubscriptions);
     mock.onGet(/surf\/ims\/free_ports\/.*\/10000\/all/).reply(200, corelinkPorts10G);
 
     const form = createForm({
@@ -68,7 +68,7 @@ export const Corelink = () => {
 };
 
 export const CorelinkAddLink = () => {
-    mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, allNodeSubscriptions);
+    mock.onGet("subscriptions/?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, allNodeSubscriptions);
     mock.onGet(/surf\/ims\/free_ports\/.*\/10000\/all/).reply(200, freeCorelinkPorts);
 
     const form = createForm({
@@ -93,7 +93,7 @@ export const Nodes = () => {
     mock.onGet("surf/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(200, []);
     mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
     mock.onGet("subscriptions/all").reply(200, allNodeSubscriptions);
-    mock.onGet("surf/ims/nodes/MT001A/PL").reply(200, imsNodes);
+    mock.onGet("surf/ims/nodes/MT001A/PL?unsubscribed_only=true").reply(200, imsNodes);
 
     const form = createForm({
         ims_node_id: ImsNodeId,
