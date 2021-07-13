@@ -38,37 +38,37 @@ function prepare() {
     mock.onGet("surf/ipam/prefix_filters").reply(200, [{ id: 1, prefix: "10.0.0.0/8", version: 4 }]);
     mock.onGet("surf/ipam/ip_blocks/1").reply(200, IP_BLOCKS);
     mock.onGet("surf/ipam/free_subnets/10.0.0.0/24/25").reply(200, ["10.0.0.0/25"]);
-    mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, { allNodeSubscriptions });
+    mock.onGet("subscriptions/?filter=statuses%2Cactive").reply(200, { allNodeSubscriptions });
     mock.onGet("surf/subscriptions/ports?filter=tags%2CMSP-MSPNL-SSP%2Cstatuses%2Cactive").reply(
         200,
         SN7PortSubscriptions.filter((p) => p.status === "active").filter((p) =>
             ["MSP", "MSPNL", "SSP"].includes(p.product.tag)
         )
     );
-    mock.onGet("subscriptions?filter=tags%2CIP_PREFIX%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("subscriptions/?filter=tags%2CIP_PREFIX%2Cstatuses%2Cactive").reply(200, []);
     mock.onGet("surf/subscriptions/ports?filter=tags%2CMSP-MSPNL%2Cstatuses%2Cactive").reply(
         200,
         SN7PortSubscriptions.filter((p) => p.status === "active").filter((p) =>
             ["MSP", "MSPNL"].includes(p.product.tag)
         )
     );
-    mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive").reply(
+    mock.onGet("subscriptions/?filter=tags%2CNode%2Cstatuses%2Cactive").reply(
         200,
         SN8PortSubscriptions.filter((p) => ["active"].includes(p.status)).filter((p) =>
             ["Node"].includes(p.product.tag)
         )
     );
-    mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(
+    mock.onGet("subscriptions/?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(
         200,
         SN8PortSubscriptions.filter((p) => ["active", "provisioning"].includes(p.status)).filter((p) =>
             ["Node"].includes(p.product.tag)
         )
     );
-    mock.onGet("subscriptions?filter=tags%2CIPS%2Cstatuses%2Cactive-provisioning").reply(
+    mock.onGet("subscriptions/?filter=tags%2CIPS%2Cstatuses%2Cactive-provisioning").reply(
         200,
         SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => ["IPS"].includes(p.product.tag))
     );
-    mock.onGet("subscriptions?filter=tags%2CIPBGP%2Cstatuses%2Cactive-provisioning").reply(
+    mock.onGet("subscriptions/?filter=tags%2CIPBGP%2Cstatuses%2Cactive-provisioning").reply(
         200,
         SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => ["IPBGP"].includes(p.product.tag))
     );
