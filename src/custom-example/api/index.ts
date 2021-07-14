@@ -3,15 +3,11 @@ import { intl } from "locale/i18n";
 import { setFlash } from "utils/Flash";
 import {
     ContactPerson,
-    Dienstafname,
     IMSNode,
     IMSPort,
     IMSService,
-    IpBlock,
     IpPrefix,
-    IpPrefixSubscription,
     Organization,
-    ServicePortFilterItem,
     ServicePortSubscription,
 } from "utils/types";
 
