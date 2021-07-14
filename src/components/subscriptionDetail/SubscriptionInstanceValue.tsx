@@ -77,6 +77,7 @@ function DataRow({
 function SubscriptionInstanceValueRow({
     label,
     value,
+    isSubscriptionValue,
     isDeleted,
     isExternalLinkValue,
     toggleCollapsed,
@@ -85,12 +86,12 @@ function SubscriptionInstanceValueRow({
 }: React.PropsWithChildren<{
     label: string;
     value: string;
+    isSubscriptionValue: boolean;
     isDeleted: boolean;
     isExternalLinkValue: boolean;
     toggleCollapsed: () => void;
     type: string;
 }>) {
-    const isSubscriptionValue = label.endsWith("subscription_id");
     const icon = children ? "minus" : "plus";
     var imsLink = "";
     if (isExternalLinkValue) {
@@ -109,7 +110,17 @@ function SubscriptionInstanceValueRow({
                         {isExternalLinkValue && !isDeleted && (
                             <i className={`fa fa-${icon}-circle`} onClick={toggleCollapsed} />
                         )}
-                        {!isSubscriptionValue && <span>{value.toString()}</span>}
+                        {isSubscriptionValue && (
+                            <a target="_blank" rel="noopener noreferrer" href={`/subscriptions/${value}`}>
+                                {value}
+                            </a>
+                        )}
+                        {imsLink && (
+                            <a target="_blank" rel="noopener noreferrer" href={imsLink}>
+                                {value}
+                            </a>
+                        )}
+                        {!(isSubscriptionValue || imsLink) && <span>{value.toString()}</span>}
                     </div>
                 </td>
                 {isDeleted && (
@@ -406,6 +417,7 @@ export default function SubscriptionInstanceValue({ label, value }: IProps) {
         <SubscriptionInstanceValueRow
             label={label}
             value={value}
+            isSubscriptionValue={isSubscriptionValue}
             isDeleted={isDeleted}
             isExternalLinkValue={isExternalLinkValue}
             toggleCollapsed={() => setCollapsed(!collapsed)}
