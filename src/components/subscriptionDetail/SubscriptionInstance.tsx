@@ -13,11 +13,10 @@
  *
  */
 
+import SubscriptionInstanceValue from "custom/components/subscriptionDetail/SubscriptionInstanceValue";
 import { isArray, partition } from "lodash";
 import React from "react";
 import { FormattedMessage } from "react-intl";
-
-import SubscriptionInstanceValue from "custom/components/subscriptionDetail/SubscriptionInstanceValue";
 
 interface ISubscriptionInstance {
     subscription_instance_id: string;

@@ -14,6 +14,7 @@
  */
 
 import { ApiClient } from "api";
+import SubscriptionDetails from "components/subscriptionDetail/SubscriptionDetails";
 import { CustomApiClient } from "custom/api";
 import { ENV } from "env";
 import { isEmpty } from "lodash";
@@ -23,8 +24,6 @@ import ApplicationContext from "utils/ApplicationContext";
 import { enrichSubscription, ipamStates, organisationNameByUuid } from "utils/Lookups";
 import { IMSEndpoint, IMSService, SubscriptionModel, prop } from "utils/types";
 import { applyIdNamingConvention } from "utils/Utils";
-
-import SubscriptionDetails from "components/subscriptionDetail/SubscriptionDetails";
 
 interface IPAMAddress {
     id: number;
