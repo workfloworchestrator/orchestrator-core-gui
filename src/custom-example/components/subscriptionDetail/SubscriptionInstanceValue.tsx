@@ -24,7 +24,7 @@ import { enrichSubscription, ipamStates, organisationNameByUuid } from "utils/Lo
 import { IMSEndpoint, IMSService, SubscriptionModel, prop } from "utils/types";
 import { applyIdNamingConvention } from "utils/Utils";
 
-import SubscriptionDetails from "./SubscriptionDetails";
+import SubscriptionDetails from "components/subscriptionDetail/SubscriptionDetails";
 
 interface IPAMAddress {
     id: number;
