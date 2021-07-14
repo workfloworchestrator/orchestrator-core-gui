@@ -754,10 +754,14 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                               className="fa fa-plus-circle"
                               onClick={[Function]}
                             />
-                            
-                            <span>
+                            <a
+                              href="/subscriptions/2d58c52e-db35-4bd9-882d-5b4deb7a697b"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
                               2d58c52e-db35-4bd9-882d-5b4deb7a697b
-                            </span>
+                            </a>
+                            
                           </div>
                         </td>
                       </tr>
@@ -777,10 +781,14 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                               className="fa fa-plus-circle"
                               onClick={[Function]}
                             />
-                            
-                            <span>
+                            <a
+                              href="/subscriptions/6fd8aae2-37f6-481e-81cd-0e17a15f5494"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
                               6fd8aae2-37f6-481e-81cd-0e17a15f5494
-                            </span>
+                            </a>
+                            
                           </div>
                         </td>
                       </tr>
@@ -800,10 +808,14 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                               className="fa fa-plus-circle"
                               onClick={[Function]}
                             />
-                            
-                            <span>
+                            <a
+                              href="/subscriptions/07cf8b2a-7602-4ca8-b3c9-9ff6ec0aee5d"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
                               07cf8b2a-7602-4ca8-b3c9-9ff6ec0aee5d
-                            </span>
+                            </a>
+                            
                           </div>
                         </td>
                       </tr>
@@ -999,10 +1011,14 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                               className="fa fa-plus-circle"
                               onClick={[Function]}
                             />
-                            
-                            <span>
+                            <a
+                              href="/subscriptions/2d58c52e-db35-4bd9-882d-5b4deb7a697b"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
                               2d58c52e-db35-4bd9-882d-5b4deb7a697b
-                            </span>
+                            </a>
+                            
                           </div>
                         </td>
                       </tr>
@@ -1022,10 +1038,14 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                               className="fa fa-plus-circle"
                               onClick={[Function]}
                             />
-                            
-                            <span>
+                            <a
+                              href="/subscriptions/6fd8aae2-37f6-481e-81cd-0e17a15f5494"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
                               6fd8aae2-37f6-481e-81cd-0e17a15f5494
-                            </span>
+                            </a>
+                            
                           </div>
                         </td>
                       </tr>
@@ -1045,10 +1065,14 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                               className="fa fa-plus-circle"
                               onClick={[Function]}
                             />
-                            
-                            <span>
+                            <a
+                              href="/subscriptions/2b0d8128-4dce-42da-a3a3-b97deddf9ae2"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
                               2b0d8128-4dce-42da-a3a3-b97deddf9ae2
-                            </span>
+                            </a>
+                            
                           </div>
                         </td>
                       </tr>

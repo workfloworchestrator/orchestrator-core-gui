@@ -93,11 +93,14 @@ function SubscriptionInstanceValueRow({
     type: string;
 }>) {
     const icon = children ? "minus" : "plus";
-    const imsCircuitIdLink = isExternalLinkValue && label === "ims_circuit_id";
-    const imsLink = imsCircuitIdLink
-        ? ENV.IMS_URL.concat("ims_circuit_id" ? "circuit" : "ims_node_id", "/", value)
-        : "";
-
+    var imsLink = "";
+    if (isExternalLinkValue) {
+        if (label === "ims_circuit_id") {
+            imsLink = ENV.IMS_URL.concat("circuit", "/", value);
+        } else if (label === "ims_node_id") {
+            imsLink = ENV.IMS_URL.concat("node", "/", value);
+        }
+    }
     return (
         <tbody>
             <tr>
@@ -321,6 +324,7 @@ export function getExternalTypeData(
                 i18nKey: "ims_port",
             };
         case "ims_circuit_id":
+        case "ims_node_id":
         case "ims_corelink_trunk_id":
             return {
                 getter: (identifier: string) => customApiClient.serviceByImsServiceId(parseInt(identifier)),
