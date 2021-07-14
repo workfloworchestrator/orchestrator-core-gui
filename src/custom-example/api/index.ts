@@ -23,7 +23,11 @@ abstract class CustomApiClientInterface extends BaseApiClient {
     ) => Promise<ServicePortSubscription[]>;
     abstract organisations: () => Promise<Organization[] | undefined>;
     // abstract getPortSubscriptionsForNode: (id: string) => Promise<ServicePortFilterItem[]>;
-    abstract getNodesByLocationAndStatus: (locationCode: string, status: string) => Promise<IMSNode[]>;
+    abstract getNodesByLocationAndStatus: (
+        locationCode: string,
+        status: string,
+        unsubscribedOnly: boolean
+    ) => Promise<IMSNode[]>;
     abstract getFreePortsByNodeSubscriptionIdAndSpeed: (
         nodeSubscriptionId: string,
         interfaceSpeed: number,
@@ -83,8 +87,12 @@ export class CustomApiClient extends CustomApiClientInterface {
     //     return this.fetchJson(`surf/subscriptions/port-services-by-node/${id}`);
     // };
     //
-    getNodesByLocationAndStatus = (locationCode: string, status: string): Promise<IMSNode[]> => {
-        return this.fetchJson(`surf/ims/nodes/${locationCode}/${status}`);
+    getNodesByLocationAndStatus = (
+        locationCode: string,
+        status: string,
+        unsubscribedOnly: boolean = true
+    ): Promise<IMSNode[]> => {
+        return this.fetchJson(`surf/ims/nodes/${locationCode}/${status}?unsubscribed_only=${unsubscribedOnly}`);
     };
     //
     getFreePortsByNodeSubscriptionIdAndSpeed = (
