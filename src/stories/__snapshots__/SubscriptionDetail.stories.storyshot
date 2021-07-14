@@ -461,9 +461,13 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                             className="fa fa-plus-circle"
                             onClick={[Function]}
                           />
-                          <span>
+                          <a
+                            href="https://ims-01.surfnet.nl:4443/form/circuit/62409"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
                             62409
-                          </span>
+                          </a>
                         </div>
                       </td>
                     </tr>
@@ -479,6 +483,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                         <div
                           className="resource-type"
                         >
+                          
                           <span>
                             436b4833-7593-4751-8158-a90adfc3dd2c
                           </span>
@@ -497,6 +502,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                         <div
                           className="resource-type"
                         >
+                          
                           <span>
                             1000
                           </span>
@@ -534,6 +540,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               2324
                             </span>
@@ -552,6 +559,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               false
                             </span>
@@ -570,6 +578,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               true
                             </span>
@@ -588,6 +597,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               default
                             </span>
@@ -626,6 +636,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               false
                             </span>
@@ -644,6 +655,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               default
                             </span>
@@ -662,6 +674,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               no
                             </span>
@@ -680,6 +693,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               primary
                             </span>
@@ -698,6 +712,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               1500
                             </span>
@@ -716,6 +731,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               1500
                             </span>
@@ -745,6 +761,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                             >
                               2d58c52e-db35-4bd9-882d-5b4deb7a697b
                             </a>
+                            
                           </div>
                         </td>
                       </tr>
@@ -771,6 +788,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                             >
                               6fd8aae2-37f6-481e-81cd-0e17a15f5494
                             </a>
+                            
                           </div>
                         </td>
                       </tr>
@@ -797,6 +815,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                             >
                               07cf8b2a-7602-4ca8-b3c9-9ff6ec0aee5d
                             </a>
+                            
                           </div>
                         </td>
                       </tr>
@@ -816,6 +835,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                               className="fa fa-plus-circle"
                               onClick={[Function]}
                             />
+                            
                             <span>
                               26208
                             </span>
@@ -834,6 +854,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               0
                             </span>
@@ -872,6 +893,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               false
                             </span>
@@ -890,6 +912,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               default
                             </span>
@@ -908,6 +931,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               no
                             </span>
@@ -926,6 +950,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               primary
                             </span>
@@ -944,6 +969,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               1500
                             </span>
@@ -962,6 +988,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               1500
                             </span>
@@ -991,6 +1018,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                             >
                               2d58c52e-db35-4bd9-882d-5b4deb7a697b
                             </a>
+                            
                           </div>
                         </td>
                       </tr>
@@ -1017,6 +1045,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                             >
                               6fd8aae2-37f6-481e-81cd-0e17a15f5494
                             </a>
+                            
                           </div>
                         </td>
                       </tr>
@@ -1043,6 +1072,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                             >
                               2b0d8128-4dce-42da-a3a3-b97deddf9ae2
                             </a>
+                            
                           </div>
                         </td>
                       </tr>
@@ -1062,6 +1092,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                               className="fa fa-plus-circle"
                               onClick={[Function]}
                             />
+                            
                             <span>
                               26209
                             </span>
@@ -1080,6 +1111,7 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                           <div
                             className="resource-type"
                           >
+                            
                             <span>
                               0
                             </span>

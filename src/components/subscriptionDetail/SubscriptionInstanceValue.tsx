@@ -15,6 +15,7 @@
 
 import { ApiClient } from "api";
 import { CustomApiClient } from "api/custom";
+import { ENV } from "env";
 import { isEmpty } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -76,6 +77,7 @@ function DataRow({
 function SubscriptionInstanceValueRow({
     label,
     value,
+    isSubscriptionValue,
     isDeleted,
     isExternalLinkValue,
     toggleCollapsed,
@@ -84,14 +86,21 @@ function SubscriptionInstanceValueRow({
 }: React.PropsWithChildren<{
     label: string;
     value: string;
+    isSubscriptionValue: boolean;
     isDeleted: boolean;
     isExternalLinkValue: boolean;
     toggleCollapsed: () => void;
     type: string;
 }>) {
-    const isSubscriptionValue = label.endsWith("subscription_id");
     const icon = children ? "minus" : "plus";
-
+    var imsLink = "";
+    if (isExternalLinkValue) {
+        if (label === "ims_circuit_id") {
+            imsLink = ENV.IMS_URL.concat("circuit", "/", value);
+        } else if (label === "ims_node_id") {
+            imsLink = ENV.IMS_URL.concat("node", "/", value);
+        }
+    }
     return (
         <tbody>
             <tr>
@@ -106,7 +115,12 @@ function SubscriptionInstanceValueRow({
                                 {value}
                             </a>
                         )}
-                        {!isSubscriptionValue && <span>{value.toString()}</span>}
+                        {imsLink && (
+                            <a target="_blank" rel="noopener noreferrer" href={imsLink}>
+                                {value}
+                            </a>
+                        )}
+                        {!(isSubscriptionValue || imsLink) && <span>{value.toString()}</span>}
                     </div>
                 </td>
                 {isDeleted && (
@@ -310,6 +324,7 @@ export function getExternalTypeData(
                 i18nKey: "ims_port",
             };
         case "ims_circuit_id":
+        case "ims_node_id":
         case "ims_corelink_trunk_id":
             return {
                 getter: (identifier: string) => customApiClient.serviceByImsServiceId(parseInt(identifier)),
@@ -402,6 +417,7 @@ export default function SubscriptionInstanceValue({ label, value }: IProps) {
         <SubscriptionInstanceValueRow
             label={label}
             value={value}
+            isSubscriptionValue={isSubscriptionValue}
             isDeleted={isDeleted}
             isExternalLinkValue={isExternalLinkValue}
             toggleCollapsed={() => setCollapsed(!collapsed)}
