@@ -14,7 +14,7 @@
  */
 
 import { EuiDescribedFormGroup, EuiFlexItem, EuiFormRow } from "@elastic/eui";
-import { BoolField } from "lib/uniforms-surfnet/src";
+import { BoolField } from "custom/uniforms";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import { useIntl } from "react-intl";

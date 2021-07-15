@@ -18,17 +18,12 @@ import "components/inputForms/UserInputForm.scss";
 import { EuiButton, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { SubscriptionsContextProvider } from "components/subscriptionContext";
-import invariant from "invariant";
-import { JSONSchema6 } from "json-schema";
 import {
     AcceptField,
     AutoFields,
     BoolField,
-    ContactPersonNameField,
     DateField,
     IPvAnyNetworkField,
-    ImsNodeIdField,
-    ImsPortIdField,
     LabelField,
     ListField,
     LocationCodeField,
@@ -44,8 +39,9 @@ import {
     SubscriptionSummaryField,
     SummaryField,
     TextField,
-    VlanField,
-} from "lib/uniforms-surfnet/src";
+} from "custom/uniforms";
+import invariant from "invariant";
+import { JSONSchema6 } from "json-schema";
 import { intl } from "locale/i18n";
 import cloneDeep from "lodash/cloneDeep";
 import get from "lodash/get";
@@ -107,11 +103,13 @@ export function autoFieldFunction(props: GuaranteedProps<unknown> & Record<strin
 
     switch (fieldType) {
         case Number:
-            switch (format) {
-                case "imsPortId":
-                    return ImsPortIdField;
-                case "imsNodeId":
-                    return ImsNodeIdField;
+            switch (
+                format
+                // case "imsPortId":
+                //     return ImsPortIdField;
+                // case "imsNodeId":
+                //     return ImsNodeIdField;
+            ) {
             }
             break;
         case Object:
@@ -130,10 +128,10 @@ export function autoFieldFunction(props: GuaranteedProps<unknown> & Record<strin
                     return LocationCodeField;
                 case "organisationId":
                     return OrganisationField;
-                case "contactPersonName":
-                    return ContactPersonNameField;
-                case "vlan":
-                    return VlanField;
+                // case "contactPersonName":
+                //     return ContactPersonNameField;
+                // case "vlan":
+                //     return VlanField;
                 case "long":
                     return LongTextField;
                 case "label":

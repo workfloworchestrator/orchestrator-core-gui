@@ -13,9 +13,9 @@
  *
  */
 
+import { ProductField, SelectField } from "custom/uniforms";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
-import { ProductField, SelectField } from "lib/uniforms-surfnet/src";
 import React from "react";
 import PRODUCTS_JSON from "stories/data/products.json";
 import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";

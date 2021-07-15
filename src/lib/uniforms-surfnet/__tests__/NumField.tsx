@@ -1,3 +1,4 @@
+import { NumField } from "custom/uniforms";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +15,6 @@
  */
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
-import { NumField } from "lib/uniforms-surfnet/src";
 import React from "react";
 
 test("<NumField> - renders an input", () => {

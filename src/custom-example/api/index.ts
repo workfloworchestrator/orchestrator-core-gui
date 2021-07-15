@@ -1,7 +1,7 @@
 import { BaseApiClient } from "api";
 import { intl } from "locale/i18n";
 import { setFlash } from "utils/Flash";
-import { ContactPerson, IMSNode, IMSPort, Organization, ServicePortSubscription } from "utils/types";
+import { Organization, ServicePortSubscription } from "utils/types";
 
 abstract class CustomApiClientInterface extends BaseApiClient {
     abstract portSubscriptions: (
@@ -10,19 +10,7 @@ abstract class CustomApiClientInterface extends BaseApiClient {
         productList?: string[]
     ) => Promise<ServicePortSubscription[]>;
     abstract organisations: () => Promise<Organization[] | undefined>;
-    abstract getNodesByLocationAndStatus: (
-        locationCode: string,
-        status: string,
-        unsubscribedOnly: boolean
-    ) => Promise<IMSNode[]>;
-    abstract getFreePortsByNodeSubscriptionIdAndSpeed: (
-        nodeSubscriptionId: string,
-        interfaceSpeed: number,
-        mode: string
-    ) => Promise<IMSPort[]>;
-    abstract usedVlans: (subscriptionId: string) => Promise<number[][]>;
     abstract locationCodes: () => Promise<string[] | undefined>;
-    abstract contacts: (organisationId: string) => Promise<ContactPerson[]>;
 }
 
 export class CustomApiClient extends CustomApiClientInterface {
@@ -59,26 +47,6 @@ export class CustomApiClient extends CustomApiClientInterface {
         });
     };
 
-    getNodesByLocationAndStatus = (
-        locationCode: string,
-        status: string,
-        unsubscribedOnly: boolean = true
-    ): Promise<IMSNode[]> => {
-        return this.fetchJson(`surf/ims/nodes/${locationCode}/${status}?unsubscribed_only=${unsubscribedOnly}`);
-    };
-
-    getFreePortsByNodeSubscriptionIdAndSpeed = (
-        nodeSubscriptionId: string,
-        interfaceSpeed: number,
-        mode: string
-    ): Promise<IMSPort[]> => {
-        return this.fetchJson(`surf/ims/free_ports/${nodeSubscriptionId}/${interfaceSpeed}/${mode}`);
-    };
-
-    usedVlans = (subscriptionId: string): Promise<number[][]> => {
-        return this.fetchJsonWithCustomErrorHandling(`surf/ims/vlans/${subscriptionId}`);
-    };
-
     locationCodes = (): Promise<string[] | undefined> => {
         // @ts-ignore
         return this.fetchJson("surf/crm/location_codes", {}, {}, false).catch(() => {
@@ -87,15 +55,5 @@ export class CustomApiClient extends CustomApiClientInterface {
             });
             return undefined;
         });
-    };
-
-    contacts = (organisationId: string): Promise<ContactPerson[]> => {
-        return this.fetchJson<ContactPerson[]>(
-            `surf/crm/contacts/${organisationId}`,
-            {},
-            {},
-            false,
-            true
-        ).catch((err) => Promise.resolve([]));
     };
 }

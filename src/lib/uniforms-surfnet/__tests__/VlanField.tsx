@@ -15,10 +15,10 @@
 
 import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 import mock from "axios-mock";
+import { ListField, VlanField } from "custom/uniforms";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import withSubscriptions from "lib/uniforms-surfnet/__tests__/_withSubscriptions";
-import { ListField, VlanField } from "lib/uniforms-surfnet/src";
 import React from "react";
 import { NestField } from "uniforms-unstyled";
 

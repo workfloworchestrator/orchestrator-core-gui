@@ -15,10 +15,10 @@
 
 import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 import withApplicationContext from "__tests__/withApplicationContext";
+import { ListField, SubscriptionField } from "custom/uniforms";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import withSubscriptions from "lib/uniforms-surfnet/__tests__/_withSubscriptions";
-import { ListField, SubscriptionField } from "lib/uniforms-surfnet/src";
 import { getPortMode, makeLabel } from "lib/uniforms-surfnet/src/SubscriptionField";
 import React from "react";
 import ReactSelect from "react-select";

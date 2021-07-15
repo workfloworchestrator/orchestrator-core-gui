@@ -14,9 +14,9 @@
  */
 
 import SubscriptionDetail from "components/subscriptionDetail/SubscriptionDetail";
+import { SubscriptionSummaryField } from "custom/uniforms";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
-import { SubscriptionSummaryField } from "lib/uniforms-surfnet/src";
 import React from "react";
 
 jest.mock("components/subscriptionDetail/SubscriptionDetail", () => {

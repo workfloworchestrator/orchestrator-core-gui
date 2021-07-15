@@ -13,9 +13,9 @@
  *
  */
 
+import { ListDelField, ListItemField } from "custom/uniforms";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
-import { ListDelField, ListItemField } from "lib/uniforms-surfnet/src";
 import React from "react";
 import { AutoField } from "uniforms-unstyled";
 

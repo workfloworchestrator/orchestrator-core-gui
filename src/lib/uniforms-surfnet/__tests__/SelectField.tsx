@@ -14,9 +14,9 @@
  */
 
 import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
+import { ListField, SelectField } from "custom/uniforms";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
-import { ListField, SelectField } from "lib/uniforms-surfnet/src";
 import React from "react";
 import ReactSelect from "react-select";
 

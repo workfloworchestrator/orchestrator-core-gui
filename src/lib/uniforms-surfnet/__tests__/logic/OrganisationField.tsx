@@ -13,9 +13,9 @@
  *
  */
 
+import { OrganisationField, SelectField } from "custom/uniforms";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
-import { OrganisationField, SelectField } from "lib/uniforms-surfnet/src";
 import React from "react";
 import ORGANISATIONS_JSON from "stories/data/organisations.json";
 import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";

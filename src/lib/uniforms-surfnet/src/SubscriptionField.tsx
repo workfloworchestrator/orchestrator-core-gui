@@ -70,6 +70,7 @@ declare module "uniforms" {
 filterDOMProps.register(
     "productIds",
     "excludedSubscriptionIds",
+    // @ts-ignore
     "organisationId",
     "organisationKey",
     "visiblePortMode",
