@@ -30,6 +30,7 @@ unit test:
     TZ: Europe/Amsterdam
   script:
     - yarn install --frozen-lockfile
+    - apt update  && apt install git -y
     - git clone https://gitlab+deploy-token-243:$DEPLOY_TOKEN_SURF_CUSTOM@git.ia.surfsara.nl/netdev/automation/projects/orchestrator-client-surf.git
     - cp -r orchestrator-client-surf/src src/custom
     - yarn prettier

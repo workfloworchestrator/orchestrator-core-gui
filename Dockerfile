@@ -28,11 +28,11 @@ CMD [ "yarn", "start" ]
 ### BUILDER LAYER TO PREPARE FOR PRODUCTION
 FROM base AS builder
 
-RUN apt update  && apt install wget -y
+RUN apt update  && apt install git -y
 RUN yarn --network-concurrency 1 --frozen-lockfile
 COPY . .
-RUN wget "https://www.dropbox.com/s/k9f9aarp9dypxyl/custom.tgz?dl=0" -O custom.tgz
-RUN tar -xzvf custom.tgz --directory src
+RUN git clone https://gitlab+deploy-token-243:$DEPLOY_TOKEN_SURF_CUSTOM@git.ia.surfsara.nl/netdev/automation/projects/orchestrator-client-surf.git
+RUN cp -r orchestrator-client-surf/src /app/src/custom
 RUN yarn build
 
 ########################
