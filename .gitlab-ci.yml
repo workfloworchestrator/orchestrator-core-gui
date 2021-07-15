@@ -9,7 +9,7 @@ variables:
   ROLLOUT_RESOURCE_TYPE: "deployment"
 
 stages:
-  - build
+#  - build
   - test
   - review
   - development
