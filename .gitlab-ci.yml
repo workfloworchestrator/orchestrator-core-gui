@@ -9,7 +9,7 @@ variables:
   ROLLOUT_RESOURCE_TYPE: "deployment"
 
 stages:
-#  - build
+  - build
   - test
   - review
   - development
@@ -33,6 +33,7 @@ unit test:
     - apt update  && apt install git -y
     - git clone https://gitlab+deploy-token-243:$DEPLOY_TOKEN_SURF_CUSTOM@git.ia.surfsara.nl/netdev/automation/projects/orchestrator-client-surf.git
     - cp -r orchestrator-client-surf/src src/custom
+    - rm -rf orchestrator-client-surf
     - yarn prettier
     - yarn test --coverage
     - yarn run license-check-and-add check
