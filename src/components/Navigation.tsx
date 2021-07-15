@@ -38,16 +38,19 @@ import ApplicationContext from "utils/ApplicationContext";
 
 import FavoritesManagementModal from "./modals/FavoritesManagementModal";
 
-const Navigation = () => {
+const Navigation = ({ extraPages = [] }: { extraPages: string[] }) => {
+    console.log("Extrapages", extraPages);
     const { allowed } = useContext(ApplicationContext);
     const [loading, setLoading] = useState(false);
     const location = useLocation();
     const spinnerTarget = useRef();
     const spinnerElement = useRef<Spinner>();
-    const navItems = ["processes", "subscriptions", "metadata", "tasks", "prefixes", "settings"].filter(
-        // @ts-ignore
-        (i) => !disabledMenuItems.includes(i)
-    );
+    const navItems = ["processes", "subscriptions", "metadata", "tasks", "settings"]
+        .filter(
+            // @ts-ignore
+            (i) => !disabledMenuItems.includes(i)
+        )
+        .concat(extraPages);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const closeModal = () => setIsModalVisible(false);
     const showModal = () => setIsModalVisible(true);

@@ -234,7 +234,7 @@ class App extends React.PureComponent<IProps, IState> {
                                 <div>
                                     <Flash />
                                     <Header />
-                                    <Navigation />
+                                    <Navigation extraPages={importedModules.map((i) => i.name)} />
                                     <ErrorDialog isOpen={errorDialogOpen} close={errorDialogAction} />
                                 </div>
                                 <Switch>
@@ -322,10 +322,6 @@ class App extends React.PureComponent<IProps, IState> {
                                         importedModules.map(({ path, name, Component }) => (
                                             <Route key={path} exact path={`/${name}`} component={Component} />
                                         ))}
-
-                                    {/*<Suspense fallback={<div>Loading...</div>}>*/}
-                                    {/*    <ExtraRoutes />*/}
-                                    {/*</Suspense>*/}
 
                                     <ProtectedRoute path="/new-task" render={() => <NewTask />} />
 
