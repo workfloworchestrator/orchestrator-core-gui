@@ -13,47 +13,8 @@
  *
  */
 
-import { ApiClient } from "api";
-import SubscriptionDetails from "components/subscriptionDetail/SubscriptionDetails";
-import { CustomApiClient } from "custom/api";
-import { ENV } from "env";
-import { isEmpty } from "lodash";
-import React, { useContext, useEffect, useState } from "react";
-import { FormattedMessage, useIntl } from "react-intl";
-import ApplicationContext from "utils/ApplicationContext";
-import { enrichSubscription, ipamStates, organisationNameByUuid } from "utils/Lookups";
-import { IMSEndpoint, IMSService, SubscriptionModel, prop } from "utils/types";
-import { applyIdNamingConvention } from "utils/Utils";
-
-function DataTable({ children }: React.PropsWithChildren<{}>) {
-    return (
-        <table className="detail-block related-subscription">
-            <thead />
-            <tbody>{children}</tbody>
-        </table>
-    );
-}
-
-function DataRow({
-    type,
-    label,
-    value,
-    rawLabel,
-}: {
-    type: string;
-    label: string;
-    value: React.ReactNode;
-    rawLabel?: React.ReactNode;
-}) {
-    return (
-        <tr>
-            <td className={`${applyIdNamingConvention(`${type}-${label}`)}-k`}>
-                {rawLabel ?? <FormattedMessage id={`subscription.${type}.${label}`} />}
-            </td>
-            <td className={`${applyIdNamingConvention(`${type}-${label}`)}-v`}>{value}</td>
-        </tr>
-    );
-}
+import React, { useState } from "react";
+import { FormattedMessage } from "react-intl";
 
 function SubscriptionInstanceValueRow({
     label,
@@ -120,29 +81,11 @@ interface IProps {
 
 export default function SubscriptionInstanceValue({ label, value }: IProps) {
     const [collapsed, setCollapsed] = useState(true);
-    const [data, setData] = useState<any | null | undefined>(undefined);
-
-    // const { organisations, products, apiClient, customApiClient } = useContext(ApplicationContext);
-    // const { render, i18nKey, getter } = getExternalTypeData(label, apiClient, customApiClient);
-    // const { render, i18nKey, getter } = getExternalTypeData(label, apiClient, customApiClient);
+    const [data] = useState<any | null | undefined>(undefined);
 
     const isSubscriptionValue = label.endsWith("subscription_id");
     const isExternalLinkValue = false;
     const isDeleted = isExternalLinkValue && data === null;
-
-    // useEffect(() => {
-    //     if (data === undefined && !collapsed && isExternalLinkValue) {
-    //         getter(value)
-    //             .catch((err) => Promise.resolve(null))
-    //             .then((data) => {
-    //                 if (data && isSubscriptionValue) {
-    //                     data.product_id = data.product.product_id;
-    //                     enrichSubscription(data as SubscriptionModel, organisations, products);
-    //                 }
-    //                 setData(data);
-    //             });
-    //     }
-    // }, [data, collapsed, isSubscriptionValue, isExternalLinkValue, getter, value, organisations, products]);
 
     return (
         <SubscriptionInstanceValueRow
