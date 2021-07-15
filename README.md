@@ -10,13 +10,22 @@ The client is a ReactJS user interface. This project was bootstrapped with
 When you need to work on the theming it's good to know that we split the theme into a separate
 package: located in `lib/themes/surfnet_light`. It has its own README.
 
-### Installing
+### Pre install
 
 The first time you clone this package you have to run:
 ```sh
-./switch
+./bootstrap
 ```
-It will copy the `custom-example` folder to `custom` so the app can find the plugin stubs.
+It will symlink the `custom-example` folder to `custom` so the app can find the plugin manifest file.
+
+If you have access to the SURF repo's and cloned it to `../orchestrator-client-surf` you can switch
+to the SURF specific variant with all the SURF goodies by running:
+
+```sh
+./bootstrap surf
+```
+
+### Installing
 
 #### Mac
 
