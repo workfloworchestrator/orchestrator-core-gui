@@ -182,8 +182,8 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                         .then((result: SubscriptionModel) => {
                             if (result.product.tag === "AGGSP") {
                                 return this.context.apiClient
-                                    .subscriptionsDetailWithModel(result.aggsp.port_subscription_id[0])
-                                    .then((port: SubscriptionModel) => Object.assign(result, { sp: port.sp }));
+                                    .subscriptionsDetailWithModel(result.port.port_subscription_id[0])
+                                    .then((port: SubscriptionModel) => Object.assign(result, { port: port.port }));
                             }
                             return result;
                         })
@@ -299,7 +299,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
     }
 
     _makeConnectionExplanation = (endpoint: IMSEndpoint, sap: any, sub: SubscriptionModel): JSX.Element => {
-        const block = sub.sp ?? sub.aggsp ?? sub.irb;
+        const block = sub.port;
         const portmode = block.port_mode ? block.port_mode : "N/A";
         const vlanRange = sap.vlanrange;
         return (
@@ -407,7 +407,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                 return;
             }
 
-            const block = portSubscription.sp ?? portSubscription.aggsp ?? portSubscription.irb;
+            const block = portSubscription.port;
             const endpoint = imsEndpoints[0].find((e: IMSEndpoint) => e.serviceId === block.ims_circuit_id);
             const label = endpoint?.port ? `${endpoint?.node}__${endpoint?.port.replace(/\//g, "_")}` : endpoint?.name;
             const point = this._calculatePositionFor(radius, index, subscription.vc.saps.length);
@@ -456,9 +456,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                     }
 
                     let endpointId: number;
-                    endpointId = portSubscription.aggsp
-                        ? portSubscription.aggsp.ims_circuit_id
-                        : portSubscription.sp.ims_circuit_id;
+                    endpointId = portSubscription.port.ims_circuit_id;
                     //console.log(`find service ${endpointId}`, portSubscription);
                     const endpoint = imsEndpoints[0].find((e: IMSEndpoint) => e.serviceId === endpointId);
                     const portName = endpoint.port ? endpoint.port.replace(/\//g, "_") : "AGGSP";
