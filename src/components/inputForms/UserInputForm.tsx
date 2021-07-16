@@ -21,8 +21,8 @@ import { SubscriptionsContextProvider } from "components/subscriptionContext";
 import {
     AcceptField,
     AutoFields,
-    BoolField,
-    DateField,
+    BoolField, ContactPersonNameField,
+    DateField, ImsNodeIdField, ImsPortIdField,
     IPvAnyNetworkField,
     LabelField,
     ListField,
@@ -38,7 +38,7 @@ import {
     SubscriptionField,
     SubscriptionSummaryField,
     SummaryField,
-    TextField,
+    TextField, VlanField,
 } from "custom/uniforms";
 import invariant from "invariant";
 import { JSONSchema6 } from "json-schema";
@@ -104,13 +104,13 @@ export function autoFieldFunction(props: GuaranteedProps<unknown> & Record<strin
     switch (fieldType) {
         case Number:
             switch (
-                format
-                // case "imsPortId":
-                //     return ImsPortIdField;
-                // case "imsNodeId":
-                //     return ImsNodeIdField;
-            ) {
-            }
+                format) {
+        case "imsPortId":
+            return ImsPortIdField;
+        case "imsNodeId":
+            return ImsNodeIdField;
+    }
+
             break;
         case Object:
             switch (format) {
@@ -128,10 +128,10 @@ export function autoFieldFunction(props: GuaranteedProps<unknown> & Record<strin
                     return LocationCodeField;
                 case "organisationId":
                     return OrganisationField;
-                // case "contactPersonName":
-                //     return ContactPersonNameField;
-                // case "vlan":
-                //     return VlanField;
+                case "contactPersonName":
+                    return ContactPersonNameField;
+                case "vlan":
+                    return VlanField;
                 case "long":
                     return LongTextField;
                 case "label":

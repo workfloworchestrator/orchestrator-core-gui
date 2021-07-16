@@ -60,6 +60,8 @@ export function getPortMode(subscription: ServicePortSubscription, products: Pro
 declare module "uniforms" {
     interface FilterDOMProps {
         excludedSubscriptionIds: never;
+        organisationId: never;
+        organisationKey: never;
         visiblePortMode: never;
         bandwidth: never;
         bandwidthKey: never;
@@ -70,7 +72,6 @@ declare module "uniforms" {
 filterDOMProps.register(
     "productIds",
     "excludedSubscriptionIds",
-    // @ts-ignore
     "organisationId",
     "organisationKey",
     "visiblePortMode",
