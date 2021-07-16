@@ -32,7 +32,6 @@ export { default as SubmitField } from "lib/uniforms-surfnet/src/SubmitField";
 export { default as TextField } from "lib/uniforms-surfnet/src/TextField";
 
 export { default as AcceptField } from "lib/uniforms-surfnet/src/AcceptField";
-export { default as IPvAnyNetworkField } from "lib/uniforms-surfnet/src/IPvAnyNetworkField";
 export { default as LabelField } from "lib/uniforms-surfnet/src/LabelField";
 export { default as OptGroupField } from "lib/uniforms-surfnet/src/OptGroupField";
 export { default as SubscriptionField } from "lib/uniforms-surfnet/src/SubscriptionField";
