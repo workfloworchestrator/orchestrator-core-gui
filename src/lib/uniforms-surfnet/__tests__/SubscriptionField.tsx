@@ -24,9 +24,7 @@ import React from "react";
 import ReactSelect from "react-select";
 import { Product, ServicePortSubscription } from "utils/types";
 
-import { ApiClient } from "../../../api";
-import { CustomApiClient } from "../../../api/custom";
-import { apiClient, customApiClient } from "../../../utils/ApplicationContext";
+import { apiClient, customApiClient } from "utils/ApplicationContext";
 
 const APP_CONTEXT = {
     products: [
