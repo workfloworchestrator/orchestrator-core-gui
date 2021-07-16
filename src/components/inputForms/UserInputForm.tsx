@@ -15,27 +15,27 @@
 
 import "components/inputForms/UserInputForm.scss";
 
-import {EuiButton, EuiFlexGroup, EuiFlexItem} from "@elastic/eui";
+import { EuiButton, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
-import {SubscriptionsContextProvider} from "components/subscriptionContext";
-import {AutoFields,} from "custom/uniforms";
+import { SubscriptionsContextProvider } from "components/subscriptionContext";
+import { AutoFields } from "custom/uniforms";
 import invariant from "invariant";
-import {JSONSchema6} from "json-schema";
-import {intl} from "locale/i18n";
+import { JSONSchema6 } from "json-schema";
+import { intl } from "locale/i18n";
 import cloneDeep from "lodash/cloneDeep";
 import get from "lodash/get";
 import React from "react";
-import {FormattedMessage} from "react-intl";
-import {RouteComponentProps, withRouter} from "react-router";
-import {filterDOMProps, joinName} from "uniforms";
-import {JSONSchemaBridge} from "uniforms-bridge-json-schema";
-import {AutoField, AutoForm} from "uniforms-unstyled";
+import { FormattedMessage } from "react-intl";
+import { RouteComponentProps, withRouter } from "react-router";
+import { filterDOMProps, joinName } from "uniforms";
+import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
+import { AutoField, AutoForm } from "uniforms-unstyled";
 import ApplicationContext from "utils/ApplicationContext";
-import {getQueryParameters} from "utils/QueryParameters";
-import {ValidationError} from "utils/types";
-import {stop} from "utils/Utils";
+import { getQueryParameters } from "utils/QueryParameters";
+import { ValidationError } from "utils/types";
+import { stop } from "utils/Utils";
 
-import {autoFieldFunction} from "../../custom/uniforms/AutoFieldLoader";
+import { autoFieldFunction } from "../../custom/uniforms/AutoFieldLoader";
 
 type JSONSchemaFormProperty = JSONSchema6 & { uniforms: any; defaultValue: any };
 

@@ -13,6 +13,7 @@
  *
  */
 
+import { autoFieldFunction } from "custom/uniforms/AutoFieldLoader";
 import { mount as enzyme } from "enzyme";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import en from "locale/en";
@@ -21,7 +22,6 @@ import React, { ReactElement } from "react";
 import { IntlProvider } from "react-intl";
 import { context } from "uniforms";
 import { AutoField } from "uniforms-unstyled";
-import {autoFieldFunction} from "custom/uniforms/AutoFieldLoader";
 
 test("Test suite must contain at least one test", () => {});
 
