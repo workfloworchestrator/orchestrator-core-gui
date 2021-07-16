@@ -13,8 +13,8 @@
  *
  */
 import mock from "axios-mock";
-import IPPrefixTable from "components/inputForms/IpPrefixTable";
-import SplitPrefix from "components/inputForms/SplitPrefix";
+import IPPrefixTable from "custom/components/inputForms/IpPrefixTable";
+import SplitPrefix from "custom/components/inputForms/SplitPrefix";
 import { IPvAnyNetworkField } from "custom/uniforms";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";

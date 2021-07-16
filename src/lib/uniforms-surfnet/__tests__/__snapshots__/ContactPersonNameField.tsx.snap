@@ -3,7 +3,9 @@
 exports[`<ContactPersonNameField> - selects item with keystrokes 1`] = `
 initialize {
   "0": Node {
-    "attribs": Object {},
+    "attribs": Object {
+      "required": "",
+    },
     "children": Array [
       Node {
         "attribs": Object {
@@ -1649,8 +1651,12 @@ initialize {
     },
     "prev": null,
     "type": "tag",
-    "x-attribsNamespace": Object {},
-    "x-attribsPrefix": Object {},
+    "x-attribsNamespace": Object {
+      "required": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "required": undefined,
+    },
   },
   "_root": [Circular],
   "length": 1,
@@ -1664,7 +1670,9 @@ initialize {
 exports[`<ContactPersonNameField> - selects item with keystrokes 2`] = `
 initialize {
   "0": Node {
-    "attribs": Object {},
+    "attribs": Object {
+      "required": "",
+    },
     "children": Array [
       Node {
         "attribs": Object {
@@ -2732,8 +2740,12 @@ initialize {
     },
     "prev": null,
     "type": "tag",
-    "x-attribsNamespace": Object {},
-    "x-attribsPrefix": Object {},
+    "x-attribsNamespace": Object {
+      "required": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "required": undefined,
+    },
   },
   "_root": [Circular],
   "length": 1,

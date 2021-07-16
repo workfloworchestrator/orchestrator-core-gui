@@ -22,9 +22,8 @@ import withSubscriptions from "lib/uniforms-surfnet/__tests__/_withSubscriptions
 import { getPortMode, makeLabel } from "lib/uniforms-surfnet/src/SubscriptionField";
 import React from "react";
 import ReactSelect from "react-select";
-import { Product, ServicePortSubscription } from "utils/types";
-
 import { apiClient, customApiClient } from "utils/ApplicationContext";
+import { Product, ServicePortSubscription } from "utils/types";
 
 const APP_CONTEXT = {
     products: [

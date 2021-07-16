@@ -6,6 +6,7 @@ initialize {
     "attribs": Object {
       "class": "euiDescribedFormGroup  optgroup-field",
       "id": "uniforms-0000-0000",
+      "required": "",
       "role": "group",
     },
     "children": Array [
@@ -186,6 +187,7 @@ initialize {
                             Node {
                               "attribs": Object {
                                 "class": " bool-field",
+                                "required": "",
                               },
                               "children": Array [
                                 Node {
@@ -1027,9 +1029,11 @@ initialize {
                               "type": "tag",
                               "x-attribsNamespace": Object {
                                 "class": undefined,
+                                "required": undefined,
                               },
                               "x-attribsPrefix": Object {
                                 "class": undefined,
+                                "required": undefined,
                               },
                             },
                           ],
@@ -1124,6 +1128,7 @@ initialize {
                           Node {
                             "attribs": Object {
                               "class": " bool-field",
+                              "required": "",
                             },
                             "children": Array [
                               Node {
@@ -1965,9 +1970,11 @@ initialize {
                             "type": "tag",
                             "x-attribsNamespace": Object {
                               "class": undefined,
+                              "required": undefined,
                             },
                             "x-attribsPrefix": Object {
                               "class": undefined,
+                              "required": undefined,
                             },
                           },
                         ],
@@ -2219,11 +2226,13 @@ initialize {
     "x-attribsNamespace": Object {
       "class": undefined,
       "id": undefined,
+      "required": undefined,
       "role": undefined,
     },
     "x-attribsPrefix": Object {
       "class": undefined,
       "id": undefined,
+      "required": undefined,
       "role": undefined,
     },
   },
@@ -2242,6 +2251,7 @@ initialize {
     "attribs": Object {
       "class": "euiDescribedFormGroup  optgroup-field",
       "id": "uniforms-0000-0003",
+      "required": "",
       "role": "group",
     },
     "children": Array [
@@ -2422,6 +2432,7 @@ initialize {
                             Node {
                               "attribs": Object {
                                 "class": " bool-field",
+                                "required": "",
                               },
                               "children": Array [
                                 Node {
@@ -3281,9 +3292,11 @@ initialize {
                               "type": "tag",
                               "x-attribsNamespace": Object {
                                 "class": undefined,
+                                "required": undefined,
                               },
                               "x-attribsPrefix": Object {
                                 "class": undefined,
+                                "required": undefined,
                               },
                             },
                           ],
@@ -3325,7 +3338,9 @@ initialize {
                     },
                     "children": Array [
                       Node {
-                        "attribs": Object {},
+                        "attribs": Object {
+                          "required": "",
+                        },
                         "children": Array [
                           Node {
                             "attribs": Object {
@@ -3842,8 +3857,12 @@ initialize {
                         "parent": [Circular],
                         "prev": null,
                         "type": "tag",
-                        "x-attribsNamespace": Object {},
-                        "x-attribsPrefix": Object {},
+                        "x-attribsNamespace": Object {
+                          "required": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "required": undefined,
+                        },
                       },
                     ],
                     "name": "div",
@@ -3854,7 +3873,9 @@ initialize {
                       },
                       "children": Array [
                         Node {
-                          "attribs": Object {},
+                          "attribs": Object {
+                            "required": "",
+                          },
                           "children": Array [
                             Node {
                               "attribs": Object {
@@ -4371,8 +4392,12 @@ initialize {
                           "parent": [Circular],
                           "prev": null,
                           "type": "tag",
-                          "x-attribsNamespace": Object {},
-                          "x-attribsPrefix": Object {},
+                          "x-attribsNamespace": Object {
+                            "required": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "required": undefined,
+                          },
                         },
                       ],
                       "name": "div",
@@ -4414,7 +4439,9 @@ initialize {
                   },
                   "children": Array [
                     Node {
-                      "attribs": Object {},
+                      "attribs": Object {
+                        "required": "",
+                      },
                       "children": Array [
                         Node {
                           "attribs": Object {
@@ -4931,8 +4958,12 @@ initialize {
                       "parent": [Circular],
                       "prev": null,
                       "type": "tag",
-                      "x-attribsNamespace": Object {},
-                      "x-attribsPrefix": Object {},
+                      "x-attribsNamespace": Object {
+                        "required": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "required": undefined,
+                      },
                     },
                   ],
                   "name": "div",
@@ -4943,7 +4974,9 @@ initialize {
                     },
                     "children": Array [
                       Node {
-                        "attribs": Object {},
+                        "attribs": Object {
+                          "required": "",
+                        },
                         "children": Array [
                           Node {
                             "attribs": Object {
@@ -5460,8 +5493,12 @@ initialize {
                         "parent": [Circular],
                         "prev": null,
                         "type": "tag",
-                        "x-attribsNamespace": Object {},
-                        "x-attribsPrefix": Object {},
+                        "x-attribsNamespace": Object {
+                          "required": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "required": undefined,
+                        },
                       },
                     ],
                     "name": "div",
@@ -5497,6 +5534,7 @@ initialize {
                               Node {
                                 "attribs": Object {
                                   "class": " bool-field",
+                                  "required": "",
                                 },
                                 "children": Array [
                                   Node {
@@ -6356,9 +6394,11 @@ initialize {
                                 "type": "tag",
                                 "x-attribsNamespace": Object {
                                   "class": undefined,
+                                  "required": undefined,
                                 },
                                 "x-attribsPrefix": Object {
                                   "class": undefined,
+                                  "required": undefined,
                                 },
                               },
                             ],
@@ -6419,7 +6459,9 @@ initialize {
                   },
                   "children": Array [
                     Node {
-                      "attribs": Object {},
+                      "attribs": Object {
+                        "required": "",
+                      },
                       "children": Array [
                         Node {
                           "attribs": Object {
@@ -6936,8 +6978,12 @@ initialize {
                       "parent": [Circular],
                       "prev": null,
                       "type": "tag",
-                      "x-attribsNamespace": Object {},
-                      "x-attribsPrefix": Object {},
+                      "x-attribsNamespace": Object {
+                        "required": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "required": undefined,
+                      },
                     },
                   ],
                   "name": "div",
@@ -6950,7 +6996,9 @@ initialize {
                     },
                     "children": Array [
                       Node {
-                        "attribs": Object {},
+                        "attribs": Object {
+                          "required": "",
+                        },
                         "children": Array [
                           Node {
                             "attribs": Object {
@@ -7467,8 +7515,12 @@ initialize {
                         "parent": [Circular],
                         "prev": null,
                         "type": "tag",
-                        "x-attribsNamespace": Object {},
-                        "x-attribsPrefix": Object {},
+                        "x-attribsNamespace": Object {
+                          "required": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "required": undefined,
+                        },
                       },
                     ],
                     "name": "div",
@@ -7494,6 +7546,7 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": " bool-field",
+                                    "required": "",
                                   },
                                   "children": Array [
                                     Node {
@@ -8353,9 +8406,11 @@ initialize {
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
                                     "class": undefined,
+                                    "required": undefined,
                                   },
                                   "x-attribsPrefix": Object {
                                     "class": undefined,
+                                    "required": undefined,
                                   },
                                 },
                               ],
@@ -8466,6 +8521,7 @@ initialize {
                           Node {
                             "attribs": Object {
                               "class": " bool-field",
+                              "required": "",
                             },
                             "children": Array [
                               Node {
@@ -9325,9 +9381,11 @@ initialize {
                             "type": "tag",
                             "x-attribsNamespace": Object {
                               "class": undefined,
+                              "required": undefined,
                             },
                             "x-attribsPrefix": Object {
                               "class": undefined,
+                              "required": undefined,
                             },
                           },
                         ],
@@ -9369,7 +9427,9 @@ initialize {
                   },
                   "children": Array [
                     Node {
-                      "attribs": Object {},
+                      "attribs": Object {
+                        "required": "",
+                      },
                       "children": Array [
                         Node {
                           "attribs": Object {
@@ -9886,8 +9946,12 @@ initialize {
                       "parent": [Circular],
                       "prev": null,
                       "type": "tag",
-                      "x-attribsNamespace": Object {},
-                      "x-attribsPrefix": Object {},
+                      "x-attribsNamespace": Object {
+                        "required": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "required": undefined,
+                      },
                     },
                   ],
                   "name": "div",
@@ -9898,7 +9962,9 @@ initialize {
                     },
                     "children": Array [
                       Node {
-                        "attribs": Object {},
+                        "attribs": Object {
+                          "required": "",
+                        },
                         "children": Array [
                           Node {
                             "attribs": Object {
@@ -10415,8 +10481,12 @@ initialize {
                         "parent": [Circular],
                         "prev": null,
                         "type": "tag",
-                        "x-attribsNamespace": Object {},
-                        "x-attribsPrefix": Object {},
+                        "x-attribsNamespace": Object {
+                          "required": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "required": undefined,
+                        },
                       },
                     ],
                     "name": "div",
@@ -10458,7 +10528,9 @@ initialize {
                 },
                 "children": Array [
                   Node {
-                    "attribs": Object {},
+                    "attribs": Object {
+                      "required": "",
+                    },
                     "children": Array [
                       Node {
                         "attribs": Object {
@@ -10975,8 +11047,12 @@ initialize {
                     "parent": [Circular],
                     "prev": null,
                     "type": "tag",
-                    "x-attribsNamespace": Object {},
-                    "x-attribsPrefix": Object {},
+                    "x-attribsNamespace": Object {
+                      "required": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "required": undefined,
+                    },
                   },
                 ],
                 "name": "div",
@@ -10987,7 +11063,9 @@ initialize {
                   },
                   "children": Array [
                     Node {
-                      "attribs": Object {},
+                      "attribs": Object {
+                        "required": "",
+                      },
                       "children": Array [
                         Node {
                           "attribs": Object {
@@ -11504,8 +11582,12 @@ initialize {
                       "parent": [Circular],
                       "prev": null,
                       "type": "tag",
-                      "x-attribsNamespace": Object {},
-                      "x-attribsPrefix": Object {},
+                      "x-attribsNamespace": Object {
+                        "required": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "required": undefined,
+                      },
                     },
                   ],
                   "name": "div",
@@ -11541,6 +11623,7 @@ initialize {
                             Node {
                               "attribs": Object {
                                 "class": " bool-field",
+                                "required": "",
                               },
                               "children": Array [
                                 Node {
@@ -12400,9 +12483,11 @@ initialize {
                               "type": "tag",
                               "x-attribsNamespace": Object {
                                 "class": undefined,
+                                "required": undefined,
                               },
                               "x-attribsPrefix": Object {
                                 "class": undefined,
+                                "required": undefined,
                               },
                             },
                           ],
@@ -12463,7 +12548,9 @@ initialize {
                 },
                 "children": Array [
                   Node {
-                    "attribs": Object {},
+                    "attribs": Object {
+                      "required": "",
+                    },
                     "children": Array [
                       Node {
                         "attribs": Object {
@@ -12980,8 +13067,12 @@ initialize {
                     "parent": [Circular],
                     "prev": null,
                     "type": "tag",
-                    "x-attribsNamespace": Object {},
-                    "x-attribsPrefix": Object {},
+                    "x-attribsNamespace": Object {
+                      "required": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "required": undefined,
+                    },
                   },
                 ],
                 "name": "div",
@@ -12994,7 +13085,9 @@ initialize {
                   },
                   "children": Array [
                     Node {
-                      "attribs": Object {},
+                      "attribs": Object {
+                        "required": "",
+                      },
                       "children": Array [
                         Node {
                           "attribs": Object {
@@ -13511,8 +13604,12 @@ initialize {
                       "parent": [Circular],
                       "prev": null,
                       "type": "tag",
-                      "x-attribsNamespace": Object {},
-                      "x-attribsPrefix": Object {},
+                      "x-attribsNamespace": Object {
+                        "required": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "required": undefined,
+                      },
                     },
                   ],
                   "name": "div",
@@ -13538,6 +13635,7 @@ initialize {
                               Node {
                                 "attribs": Object {
                                   "class": " bool-field",
+                                  "required": "",
                                 },
                                 "children": Array [
                                   Node {
@@ -14397,9 +14495,11 @@ initialize {
                                 "type": "tag",
                                 "x-attribsNamespace": Object {
                                   "class": undefined,
+                                  "required": undefined,
                                 },
                                 "x-attribsPrefix": Object {
                                   "class": undefined,
+                                  "required": undefined,
                                 },
                               },
                             ],
@@ -14667,11 +14767,13 @@ initialize {
     "x-attribsNamespace": Object {
       "class": undefined,
       "id": undefined,
+      "required": undefined,
       "role": undefined,
     },
     "x-attribsPrefix": Object {
       "class": undefined,
       "id": undefined,
+      "required": undefined,
       "role": undefined,
     },
   },
