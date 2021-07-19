@@ -136,8 +136,9 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                     subscriptionProcesses={subscriptionProcesses}
                 ></SubscriptionDetails>
             </SubscriptionDetailSection>
-
-            <React.Suspense fallback="Loading plugins...">{loadedPlugins}</React.Suspense>
+            {plugins.hasOwnProperty("subscriptionDetailPlugins") && (
+                <React.Suspense fallback="Loading plugins...">{loadedPlugins}</React.Suspense>
+            )}
 
             <RenderFixedInputs product={product} />
 

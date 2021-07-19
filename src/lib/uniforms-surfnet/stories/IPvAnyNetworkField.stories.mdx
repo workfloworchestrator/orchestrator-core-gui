@@ -14,13 +14,13 @@ import IPvAnyNetworkField from "../../../custom/uniforms/IPvAnyNetworkField";
 <Story name="IPvAnyNetworkField">
     {() => {
         mock.reset();
-        mock.onGet("ipam/prefix_filters").reply(200, [
+        mock.onGet("surf/ipam/prefix_filters").reply(200, [
             { id: 1, prefix: "10.0.0.0/16", version: 4 },
             { id: 2, prefix: "2010::/32", version: 6 }
         ]);
-        mock.onGet("ipam/ip_blocks/1").reply(200, IP_BLOCKS);
-        mock.onGet("ipam/ip_blocks/2").reply(200, IP_BLOCKS_V6);
-        mock.onGet(/ipam\/free_subnets\/.*?\/.*?\/.*/).reply((config) => {
+        mock.onGet("surf/ipam/ip_blocks/1").reply(200, IP_BLOCKS);
+        mock.onGet("surf/ipam/ip_blocks/2").reply(200, IP_BLOCKS_V6);
+        mock.onGet(/surf\/ipam\/free_subnets\/.*?\/.*?\/.*/).reply((config) => {
             const m = config.url.substring(18, config.url.length - 6) + config.url.substring(config.url.length - 3);
             return [200, [m]];
         });
@@ -44,9 +44,9 @@ import IPvAnyNetworkField from "../../../custom/uniforms/IPvAnyNetworkField";
 <Story name="IPvAnyNetworkFieldPreselected">
     {() => {
         mock.reset();
-        mock.onGet("ipam/prefix_filters").reply(200, []);
-        mock.onGet("ipam/ip_blocks/1").reply(200, []);
-        mock.onGet(/ipam\/free_subnets\/.*?\/.*?\/.*/).reply((config) => {
+        mock.onGet("surf/ipam/prefix_filters").reply(200, []);
+        mock.onGet("surf/ipam/ip_blocks/1").reply(200, []);
+        mock.onGet(/surf\/ipam\/free_subnets\/.*?\/.*?\/.*/).reply((config) => {
             const m = config.url.substring(18, config.url.length - 6) + config.url.substring(config.url.length - 3);
             return [200, [m]];
         });

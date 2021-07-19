@@ -13,8 +13,6 @@
  *
  */
 
-import {} from "api";
-
 import { EuiPage, EuiPageBody, EuiPanel } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import SubscriptionDetail from "components/subscriptionDetail/SubscriptionDetail";
