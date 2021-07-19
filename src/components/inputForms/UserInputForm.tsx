@@ -18,6 +18,7 @@ import "components/inputForms/UserInputForm.scss";
 import { EuiButton, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { SubscriptionsContextProvider } from "components/subscriptionContext";
+import { autoFieldFunction } from "custom/uniforms/AutoFieldLoader";
 import invariant from "invariant";
 import { JSONSchema6 } from "json-schema";
 import { AutoFields } from "lib/uniforms-surfnet/src";
@@ -34,8 +35,6 @@ import ApplicationContext from "utils/ApplicationContext";
 import { getQueryParameters } from "utils/QueryParameters";
 import { ValidationError } from "utils/types";
 import { stop } from "utils/Utils";
-
-import { autoFieldFunction } from "../../custom/uniforms/AutoFieldLoader";
 
 type JSONSchemaFormProperty = JSONSchema6 & { uniforms: any; defaultValue: any };
 

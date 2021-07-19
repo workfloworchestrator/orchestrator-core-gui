@@ -15,9 +15,10 @@
 
 import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 import mock from "axios-mock";
+import ImsNodeIdField from "custom/uniforms/logic/ImsNodeIdField";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
-import { ImsNodeIdField, SelectField } from "lib/uniforms-surfnet/src";
+import { SelectField } from "lib/uniforms-surfnet/src";
 import React from "react";
 
 jest.mock("lib/uniforms-surfnet/src/SelectField", () => {

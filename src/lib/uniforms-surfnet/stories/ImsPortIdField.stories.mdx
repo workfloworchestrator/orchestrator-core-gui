@@ -4,13 +4,13 @@ import mock from "axios-mock";
 
 import UserInputContainer from "../../../stories/UserInputContainer";
 import { createForm } from "../../../stories/utils";
-import { ImsPortIdField } from "../src";
+import ImsPortIdField from "../../../custom/uniforms/ImsPortIdField";
 
 <Meta title="Uniforms/ImsPortIdField" component={ImsPortIdField} />
 
 ## ImsPortIdField Corelink
 
-With this version you can choose a port based on an node subscription. Optionally the node can be preselected.
+With this version you can choose a port based on a node subscription. Optionally the node can be preselected.
 
 <Story name="ImsPortIdFieldCorelink">
     {() => {

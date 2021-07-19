@@ -15,7 +15,7 @@
 
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
-import { LocationCodeField, SelectField } from "lib/uniforms-surfnet/src";
+import { SelectField } from "lib/uniforms-surfnet/src";
 import React from "react";
 import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
