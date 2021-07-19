@@ -14,7 +14,7 @@
  */
 
 import { EuiFormRow, EuiText } from "@elastic/eui";
-import { ListField, ListItemField, SelectField } from "custom/uniforms";
+import { ListField, ListItemField, SelectField } from "lib/uniforms-surfnet/src";
 import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { get } from "lodash";

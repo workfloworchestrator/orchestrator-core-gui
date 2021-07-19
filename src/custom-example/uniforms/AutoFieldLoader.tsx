@@ -1,3 +1,6 @@
+import { Context, GuaranteedProps } from "uniforms";
+import { AutoField } from "uniforms-unstyled";
+
 import {
     AcceptField,
     BoolField,
@@ -17,9 +20,7 @@ import {
     SubscriptionSummaryField,
     SummaryField,
     TextField,
-} from "custom/uniforms";
-import { Context, GuaranteedProps } from "uniforms";
-import { AutoField } from "uniforms-unstyled";
+} from "../../lib/uniforms-surfnet/src";
 
 export function autoFieldFunction(props: GuaranteedProps<unknown> & Record<string, any>, uniforms: Context<unknown>) {
     const { allowedValues, checkboxes, fieldType, field } = props;

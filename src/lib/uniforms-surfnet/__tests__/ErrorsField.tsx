@@ -1,6 +1,6 @@
-import { ErrorsField } from "custom/uniforms";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import { ErrorsField } from "lib/uniforms-surfnet/src";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
