@@ -21,6 +21,7 @@ import SUBSCRIPTION_MODEL_JSON from "stories/data/subscription-model.json";
 import SN8PortSubscriptions from "stories/data/subscriptions-sn8-ports.json";
 import StoryRouter from "storybook-react-router";
 
+
 export default {
     title: "SubscriptionDetailPage",
     decorators: [StoryRouter()],
@@ -63,13 +64,13 @@ export const Subscription = () => {
     );
 
     mock.onGet("subscriptions/workflows/pid").reply(200, {
-        create: [{ description: "Create SN8 IP BGP", name: "create_sn8_ip_bgp" }],
+        create: [{description: "Create SN8 IP BGP", name: "create_sn8_ip_bgp"}],
         modify: [
-            { description: "Change port", name: "modify_sn8_ip_bgp_change_port" },
-            { description: "Change a SN8 IP BGP subscription", name: "modify_sn8_ip_bgp" },
+            {description: "Change port", name: "modify_sn8_ip_bgp_change_port"},
+            {description: "Change a SN8 IP BGP subscription", name: "modify_sn8_ip_bgp"},
         ],
-        terminate: [{ description: "Terminate SN8 IP BGP", name: "terminate_sn8_ip_bgp" }],
-        system: [{ description: "Validate SN8 IP BGP", name: "validate_sn8_ip_bgp" }],
+        terminate: [{description: "Terminate SN8 IP BGP", name: "terminate_sn8_ip_bgp"}],
+        system: [{description: "Validate SN8 IP BGP", name: "validate_sn8_ip_bgp"}],
     });
 
     mock.onGet("subscriptions/parent_subscriptions/pid").reply(200, []);
@@ -78,8 +79,8 @@ export const Subscription = () => {
         customer_id: "5203E539-0A11-E511-80D0-005056956C1A",
         domain: "SURFNET8",
         endpoints: [
-            { id: 36260, type: "service", vlanranges: [{ end: 0, start: 0, sub_circuit_id: null }] },
-            { id: 31420, type: "internet", vlanranges: [{ end: 0, start: 0, sub_circuit_id: null }] },
+            {id: 36260, type: "service", vlanranges: [{end: 0, start: 0, sub_circuit_id: null}]},
+            {id: 31420, type: "internet", vlanranges: [{end: 0, start: 0, sub_circuit_id: null}]},
         ],
         extra_info: "10 Gbit/s SN8 SURFinternet BGP in DOETINCHEM van Graafschap College",
         id: 36261,
@@ -94,7 +95,7 @@ export const Subscription = () => {
         aliases: ["SUBSCRIPTION_ID=F9ACBF45-4BFD-45DB-892C-774EB967B033"],
         customer_id: "5203E539-0A11-E511-80D0-005056956C1A",
         domain: null,
-        endpoints: [{ id: 683015, type: "port", vlanranges: null }],
+        endpoints: [{id: 683015, type: "port", vlanranges: null}],
         extra_info: "10 Gbit/s SP te DOETINCHEM van Graafschap College",
         id: 36260,
         location: null,
@@ -169,7 +170,7 @@ export const Subscription = () => {
         speed: "INTERNETWOLK",
         status: "3",
     });
-    mock.onGet("/surf/ims/port_by_ims_service/36260").reply(200, {
+    mock.onGet("surf/ims/port_by_ims_service/36260").reply(200, {
         connector_type: "LC/PC",
         fiber_type: "multi-mode",
         id: 683015,
@@ -181,7 +182,7 @@ export const Subscription = () => {
         port: "0/1/1",
         status: "3",
     });
-    mock.onGet("/surf/ims/port_by_ims_port/683015").reply(200, {
+    mock.onGet("surf/ims/port_by_ims_port/683015").reply(200, {
         connector_type: "LC/PC",
         fiber_type: "multi-mode",
         id: 683015,
@@ -249,5 +250,5 @@ export const Subscription = () => {
     });
 
     //@ts-ignore
-    return <SubscriptionDetailPage match={{ params: { id: "pid" } }} />;
+    return <SubscriptionDetailPage match={{params: {id: "pid"}}}/>;
 };
