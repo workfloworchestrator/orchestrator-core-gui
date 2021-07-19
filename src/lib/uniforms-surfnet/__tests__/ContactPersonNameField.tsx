@@ -16,7 +16,7 @@
 import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 import mock from "axios-mock";
 import Autocomplete from "custom/components/inputForms/Autocomplete";
-import { ContactPersonNameField } from "custom/uniforms";
+import ContactPersonNameField from "custom/uniforms/ContactPersonNameField";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import React from "react";
