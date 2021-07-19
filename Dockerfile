@@ -31,6 +31,7 @@ CMD [ "yarn", "start" ]
 ### BUILDER LAYER TO PREPARE FOR PRODUCTION
 FROM base AS builder
 ARG DEPLOY_TOKEN_SURF_CUSTOM
+RUN echo $DEPLOY_TOKEN_SURF_CUSTOM
 
 RUN apt update  && apt install git -y
 RUN yarn --network-concurrency 1 --frozen-lockfile
