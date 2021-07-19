@@ -15,9 +15,9 @@
 import mock from "axios-mock";
 import IPPrefixTable from "custom/components/inputForms/IpPrefixTable";
 import SplitPrefix from "custom/components/inputForms/SplitPrefix";
+import IPvAnyNetworkField from "custom/uniforms/IPvAnyNetworkField";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
-import { IPvAnyNetworkField } from "lib/uniforms-surfnet/src";
 import React from "react";
 
 test("<IPvAnyNetworkField> - renders an table", () => {
