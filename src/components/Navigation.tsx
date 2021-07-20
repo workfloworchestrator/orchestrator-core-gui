@@ -39,7 +39,6 @@ import ApplicationContext from "utils/ApplicationContext";
 import FavoritesManagementModal from "./modals/FavoritesManagementModal";
 
 const Navigation = ({ extraPages = [] }: { extraPages: string[] }) => {
-    console.log("Extrapages", extraPages);
     const { allowed } = useContext(ApplicationContext);
     const [loading, setLoading] = useState(false);
     const location = useLocation();
