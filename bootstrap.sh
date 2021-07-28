@@ -6,7 +6,7 @@ if [ "$1" = "surf" ]; then
     ln -s ../../orchestrator-client-surf/src custom
 elif [ "$1" = "test" ]; then
     echo "Switching to test mode; with SURF specific modules"
-    echo "This is a temporary workaround as jest has problems with symlinks and the tests aren't splitted yet"
+    echo "This is a temporary workaround as jest has problems with symlinks so the tests aren't split yet"
     rm -rf custom
     cp -r ../../orchestrator-client-surf/src custom
 else

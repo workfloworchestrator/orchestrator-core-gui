@@ -281,7 +281,7 @@ class App extends React.PureComponent<IProps, IState> {
                                         path="/subscription/:id"
                                         render={(props) => <Redirect to={`/subscriptions/${props.match.params.id}`} />}
                                     />
-                                    {!disabledRoutes.includes("/subscriptions") && (
+                                    {!disabledRoutes.includes("/subscriptions/:id") && (
                                         <Route
                                             path="/subscriptions/:id"
                                             render={(props) => <SubscriptionDetailPage {...props} />}

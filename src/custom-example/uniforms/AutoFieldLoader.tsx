@@ -27,7 +27,7 @@ export function autoFieldFunction(props: GuaranteedProps<unknown> & Record<strin
 
     switch (fieldType) {
         case Number:
-            // If you need custom field for numeric resource types add a swithc here
+            // If you need custom field for numeric resource types add a switch here
             break;
         case Object:
             switch (format) {
