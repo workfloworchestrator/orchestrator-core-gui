@@ -14,6 +14,7 @@
  */
 
 import { isDate } from "date-fns";
+import { lazy } from "react";
 
 export function stop(e: React.SyntheticEvent) {
     if (e !== undefined && e !== null) {
@@ -76,3 +77,6 @@ export function timeStampToDate(timestamp: number) {
 export function capitalizeFirstLetter(word: string): string {
     return word.charAt(0).toUpperCase() + word.slice(1);
 }
+
+export const importPlugin = (plugin: string) =>
+    lazy(() => import(`custom/plugins/${plugin}`).catch(() => import(`components/RenderNull`)));

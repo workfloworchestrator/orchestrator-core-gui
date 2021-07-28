@@ -32,17 +32,12 @@ export { default as SubmitField } from "lib/uniforms-surfnet/src/SubmitField";
 export { default as TextField } from "lib/uniforms-surfnet/src/TextField";
 
 export { default as AcceptField } from "lib/uniforms-surfnet/src/AcceptField";
-export { default as ContactPersonNameField } from "lib/uniforms-surfnet/src/ContactPersonNameField";
-export { default as ImsPortIdField } from "lib/uniforms-surfnet/src/ImsPortIdField";
-export { default as IPvAnyNetworkField } from "lib/uniforms-surfnet/src/IPvAnyNetworkField";
 export { default as LabelField } from "lib/uniforms-surfnet/src/LabelField";
 export { default as OptGroupField } from "lib/uniforms-surfnet/src/OptGroupField";
 export { default as SubscriptionField } from "lib/uniforms-surfnet/src/SubscriptionField";
 export { default as SubscriptionSummaryField } from "lib/uniforms-surfnet/src/SubscriptionSummaryField";
 export { default as SummaryField } from "lib/uniforms-surfnet/src/SummaryField";
-export { default as VlanField } from "lib/uniforms-surfnet/src/VlanField";
-
-export { default as ImsNodeIdField } from "lib/uniforms-surfnet/src/logic/ImsNodeIdField";
+// ???
 export { default as LocationCodeField } from "lib/uniforms-surfnet/src/logic/LocationCodeField";
 export { default as OrganisationField } from "lib/uniforms-surfnet/src/logic/OrganisationField";
 export { default as ProductField } from "lib/uniforms-surfnet/src/logic/ProductField";

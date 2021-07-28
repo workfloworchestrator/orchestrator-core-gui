@@ -16,11 +16,12 @@
 import { action } from "@storybook/addon-actions";
 import { number } from "@storybook/addon-knobs";
 import mock from "axios-mock";
-import IpPrefixTable from "components/inputForms/IpPrefixTable";
+import IpPrefixTable from "custom/components/inputForms/IpPrefixTable";
 import React from "react";
 import IP_BLOCKS_V6 from "stories/data/ip_blocks_v6.json";
 import IP_BLOCKS from "stories/data/ip_blocks.json";
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     title: "IpPrefixTable",
     // Needed to match snapshot file to story, should be done by injectFileNames but that does not work

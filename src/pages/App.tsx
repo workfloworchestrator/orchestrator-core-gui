@@ -26,6 +26,7 @@ import Navigation from "components/Navigation";
 import ProductPage from "components/Product";
 import ProductBlock from "components/ProductBlock";
 import ProtectedRoute from "components/ProtectedRoute";
+import { customPages, disabledRoutes } from "custom/manifest.json";
 import { createBrowserHistory } from "history";
 import { intl, setLocale } from "locale/i18n";
 import { memoize } from "lodash";
@@ -35,7 +36,6 @@ import NewProcess from "pages/NewProcess";
 import NewTask from "pages/NewTask";
 import NotAllowed from "pages/NotAllowed";
 import NotFound from "pages/NotFound";
-import Prefixes from "pages/Prefixes";
 import ProcessDetail from "pages/ProcessDetail";
 import Processes from "pages/Processes";
 import ServerError from "pages/ServerError";
@@ -53,6 +53,7 @@ import ApplicationContext, { ApplicationContextInterface, apiClient, customApiCl
 import { createPolicyCheck } from "utils/policy";
 import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
+import { isEmpty } from "utils/Utils";
 
 export const history = createBrowserHistory();
 
@@ -62,6 +63,8 @@ interface IProps {
 interface IState {
     loading: boolean;
     loaded: boolean;
+    importedModules: any[];
+    importedPlugins: any[];
     applicationContext: ApplicationContextInterface;
     error: boolean;
     errorDialogOpen: boolean;
@@ -75,6 +78,8 @@ class App extends React.PureComponent<IProps, IState> {
         this.state = {
             loading: true,
             loaded: false,
+            importedModules: [],
+            importedPlugins: [],
             applicationContext: {
                 organisations: [],
                 locationCodes: [],
@@ -125,8 +130,33 @@ class App extends React.PureComponent<IProps, IState> {
         });
     }
 
+    importCustomPages = () => {
+        if (customPages) {
+            try {
+                const importedModules: any[] = [];
+                const importPromises = customPages.map((page) =>
+                    // @ts-ignore
+                    import(`../custom/${page.path}/${page.file}`).then((module) => {
+                        // @ts-ignore
+                        importedModules.push({ ...page, Component: module.default });
+                    })
+                );
+
+                Promise.all(importPromises).then(() =>
+                    this.setState((prevState) => ({
+                        ...prevState,
+                        importedModules,
+                    }))
+                );
+            } catch (err) {
+                console.error(err.toString());
+            }
+        }
+    };
+
     async componentDidMount() {
         await this.loadData();
+        this.importCustomPages();
     }
 
     async loadData() {
@@ -183,7 +213,7 @@ class App extends React.PureComponent<IProps, IState> {
     }
 
     render() {
-        const { loading, errorDialogAction, errorDialogOpen, applicationContext, intl } = this.state;
+        const { loading, errorDialogAction, errorDialogOpen, applicationContext, intl, importedModules } = this.state;
 
         if (loading || !intl) {
             return null; // render null when app is not ready yet for static mySpinner
@@ -204,7 +234,7 @@ class App extends React.PureComponent<IProps, IState> {
                                 <div>
                                     <Flash />
                                     <Header />
-                                    <Navigation />
+                                    <Navigation extraPages={importedModules.map((i) => i.name)} />
                                     <ErrorDialog isOpen={errorDialogOpen} close={errorDialogAction} />
                                 </div>
                                 <Switch>
@@ -251,13 +281,25 @@ class App extends React.PureComponent<IProps, IState> {
                                         path="/subscription/:id"
                                         render={(props) => <Redirect to={`/subscriptions/${props.match.params.id}`} />}
                                     />
-                                    <Route
-                                        path="/subscriptions/:id"
-                                        render={(props) => <SubscriptionDetailPage {...props} />}
-                                    />
-                                    <Route path="/subscriptions" render={(props) => <SubscriptionsPage {...props} />} />
-                                    <Route exact path="/metadata" render={() => <Redirect to="/metadata/products" />} />
-
+                                    {!disabledRoutes.includes("/subscriptions/:id") && (
+                                        <Route
+                                            path="/subscriptions/:id"
+                                            render={(props) => <SubscriptionDetailPage {...props} />}
+                                        />
+                                    )}
+                                    {!disabledRoutes.includes("/subscriptions") && (
+                                        <Route
+                                            path="/subscriptions"
+                                            render={(props) => <SubscriptionsPage {...props} />}
+                                        />
+                                    )}
+                                    {!disabledRoutes.includes("/metadata") && (
+                                        <Route
+                                            exact
+                                            path="/metadata"
+                                            render={() => <Redirect to="/metadata/products" />}
+                                        />
+                                    )}
                                     <ProtectedRoute
                                         path="/metadata/product-block/:id"
                                         render={(props) => <ProductBlock {...props} />}
@@ -272,8 +314,15 @@ class App extends React.PureComponent<IProps, IState> {
                                             <MetaData selectedTab={props.match.params.type} {...props} />
                                         )}
                                     />
-                                    <ProtectedRoute path="/settings" render={() => <Settings />} />
-                                    <ProtectedRoute path="/prefixes" render={() => <Prefixes />} />
+                                    {!disabledRoutes.includes("/metadata") && (
+                                        <ProtectedRoute path="/settings" render={() => <Settings />} />
+                                    )}
+
+                                    {!isEmpty(importedModules) &&
+                                        importedModules.map(({ path, name, Component }) => (
+                                            <Route key={path} exact path={`/${name}`} component={Component} />
+                                        ))}
+
                                     <ProtectedRoute path="/new-task" render={() => <NewTask />} />
 
                                     <ProtectedRoute path="/tasks" render={() => <Tasks />} />

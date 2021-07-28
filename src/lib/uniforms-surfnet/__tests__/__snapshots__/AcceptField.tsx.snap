@@ -6,6 +6,7 @@ initialize {
     "attribs": Object {
       "class": " accept-field",
       "id": "uniforms-0000-0000",
+      "required": "",
     },
     "children": Array [
       Node {
@@ -882,10 +883,12 @@ initialize {
     "x-attribsNamespace": Object {
       "class": undefined,
       "id": undefined,
+      "required": undefined,
     },
     "x-attribsPrefix": Object {
       "class": undefined,
       "id": undefined,
+      "required": undefined,
     },
   },
   "_root": [Circular],
@@ -903,6 +906,7 @@ initialize {
     "attribs": Object {
       "class": " accept-field",
       "id": "uniforms-0000-0002",
+      "required": "",
     },
     "children": Array [
       Node {
@@ -17232,10 +17236,12 @@ initialize {
     "x-attribsNamespace": Object {
       "class": undefined,
       "id": undefined,
+      "required": undefined,
     },
     "x-attribsPrefix": Object {
       "class": undefined,
       "id": undefined,
+      "required": undefined,
     },
   },
   "_root": [Circular],

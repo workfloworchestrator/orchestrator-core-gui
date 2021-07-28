@@ -22,11 +22,8 @@ import { ListField, SubscriptionField } from "lib/uniforms-surfnet/src";
 import { getPortMode, makeLabel } from "lib/uniforms-surfnet/src/SubscriptionField";
 import React from "react";
 import ReactSelect from "react-select";
+import { apiClient, customApiClient } from "utils/ApplicationContext";
 import { Product, ServicePortSubscription } from "utils/types";
-
-import { ApiClient } from "../../../api";
-import { CustomApiClient } from "../../../api/custom";
-import { apiClient, customApiClient } from "../../../utils/ApplicationContext";
 
 const APP_CONTEXT = {
     products: [

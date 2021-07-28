@@ -27,6 +27,7 @@ import {
     EuiToast,
 } from "@elastic/eui";
 import { Control } from "@elastic/eui/src/components/control_bar/control_bar";
+import { disabledMenuItems } from "custom/manifest.json";
 import mySpinner from "lib/Spin";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { FormattedMessage } from "react-intl";
@@ -37,13 +38,18 @@ import ApplicationContext from "utils/ApplicationContext";
 
 import FavoritesManagementModal from "./modals/FavoritesManagementModal";
 
-const Navigation = () => {
+const Navigation = ({ extraPages = [] }: { extraPages: string[] }) => {
     const { allowed } = useContext(ApplicationContext);
     const [loading, setLoading] = useState(false);
     const location = useLocation();
     const spinnerTarget = useRef();
     const spinnerElement = useRef<Spinner>();
-    const navItems = ["processes", "subscriptions", "metadata", "tasks", "prefixes", "settings"];
+    const navItems = ["processes", "subscriptions", "metadata", "tasks", "settings"]
+        .filter(
+            // @ts-ignore
+            (i) => !disabledMenuItems.includes(i)
+        )
+        .concat(extraPages);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const closeModal = () => setIsModalVisible(false);
     const showModal = () => setIsModalVisible(true);

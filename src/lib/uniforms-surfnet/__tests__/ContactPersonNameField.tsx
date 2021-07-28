@@ -15,10 +15,10 @@
 
 import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 import mock from "axios-mock";
-import Autocomplete from "components/inputForms/Autocomplete";
+import Autocomplete from "custom/components/inputForms/Autocomplete";
+import ContactPersonNameField from "custom/uniforms/ContactPersonNameField";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
-import { ContactPersonNameField } from "lib/uniforms-surfnet/src";
 import React from "react";
 
 test("<ContactPersonNameField> - renders an input", () => {

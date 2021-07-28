@@ -18,41 +18,17 @@ import "components/inputForms/UserInputForm.scss";
 import { EuiButton, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { SubscriptionsContextProvider } from "components/subscriptionContext";
+import { autoFieldFunction } from "custom/uniforms/AutoFieldLoader";
 import invariant from "invariant";
 import { JSONSchema6 } from "json-schema";
-import {
-    AcceptField,
-    AutoFields,
-    BoolField,
-    ContactPersonNameField,
-    DateField,
-    IPvAnyNetworkField,
-    ImsNodeIdField,
-    ImsPortIdField,
-    LabelField,
-    ListField,
-    LocationCodeField,
-    LongTextField,
-    NestField,
-    NumField,
-    OptGroupField,
-    OrganisationField,
-    ProductField,
-    RadioField,
-    SelectField,
-    SubscriptionField,
-    SubscriptionSummaryField,
-    SummaryField,
-    TextField,
-    VlanField,
-} from "lib/uniforms-surfnet/src";
+import { AutoFields } from "lib/uniforms-surfnet/src";
 import { intl } from "locale/i18n";
 import cloneDeep from "lodash/cloneDeep";
 import get from "lodash/get";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { RouteComponentProps, withRouter } from "react-router";
-import { Context, GuaranteedProps, filterDOMProps, joinName } from "uniforms";
+import { filterDOMProps, joinName } from "uniforms";
 import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
 import { AutoField, AutoForm } from "uniforms-unstyled";
 import ApplicationContext from "utils/ApplicationContext";
@@ -100,81 +76,6 @@ filterDOMProps.register("pattern");
 filterDOMProps.register("examples");
 filterDOMProps.register("allOf");
 filterDOMProps.register("options");
-
-export function autoFieldFunction(props: GuaranteedProps<unknown> & Record<string, any>, uniforms: Context<unknown>) {
-    const { allowedValues, checkboxes, fieldType, field } = props;
-    const { format } = field;
-
-    switch (fieldType) {
-        case Number:
-            switch (format) {
-                case "imsPortId":
-                    return ImsPortIdField;
-                case "imsNodeId":
-                    return ImsNodeIdField;
-            }
-            break;
-        case Object:
-            switch (format) {
-                case "optGroup":
-                    return OptGroupField;
-            }
-            break;
-        case String:
-            switch (format) {
-                case "subscriptionId":
-                    return SubscriptionField;
-                case "productId":
-                    return ProductField;
-                case "locationCode":
-                    return LocationCodeField;
-                case "organisationId":
-                    return OrganisationField;
-                case "contactPersonName":
-                    return ContactPersonNameField;
-                case "vlan":
-                    return VlanField;
-                case "long":
-                    return LongTextField;
-                case "label":
-                    return LabelField;
-                case "summary":
-                    return SummaryField;
-                case "subscription":
-                    return SubscriptionSummaryField;
-                case "accept":
-                    return AcceptField;
-                case "ipvanynetwork":
-                    return IPvAnyNetworkField;
-            }
-            break;
-    }
-
-    if (allowedValues && format !== "accept") {
-        if (checkboxes && fieldType !== Array) {
-            return RadioField;
-        } else {
-            return SelectField;
-        }
-    } else {
-        switch (fieldType) {
-            case Array:
-                return ListField;
-            case Boolean:
-                return BoolField;
-            case Date:
-                return DateField;
-            case Number:
-                return NumField;
-            case Object:
-                return NestField;
-            case String:
-                return TextField;
-        }
-    }
-
-    return AutoField.defaultComponentDetector(props, uniforms);
-}
 
 function resolveRef(reference: string, schema: Record<string, any>) {
     invariant(

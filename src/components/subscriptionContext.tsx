@@ -14,7 +14,7 @@
  */
 
 import { ApiClient } from "api";
-import { CustomApiClient } from "api/custom";
+import { CustomApiClient } from "custom/api";
 import { memoize, merge } from "lodash";
 import React, { HTMLProps } from "react";
 import { ServicePortSubscription } from "utils/types";

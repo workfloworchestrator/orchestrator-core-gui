@@ -16,80 +16,12 @@
 import { EuiButton, EuiCopy, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import CheckBox from "components/CheckBox";
 import { FAVORITE_STORAGE_KEY } from "components/modals/components/FavoritePortSelector";
-import { ENV } from "env";
 import React, { useContext } from "react";
 import { FormattedMessage } from "react-intl";
 import { useStorageState } from "react-storage-hooks";
 import ApplicationContext from "utils/ApplicationContext";
 import { organisationNameByUuid, renderDate } from "utils/Lookups";
-import {
-    FavoriteSubscriptionStorage,
-    Product,
-    Subscription,
-    SubscriptionModel,
-    SubscriptionProcesses,
-} from "utils/types";
-
-function renderGrafanaLink(subscription: Subscription, product: Product) {
-    var url_grafana = `https://grafana.surf.net/d/v6yLvaQmk/surfnet8-subscription-id?orgId=1&refresh=30s&var-datasource=SURFnet-Subscriptions&var-measurement=NetworkMeasurements_bps_5min&var-subid=${subscription.subscription_id}`;
-    if (
-        (product.product_type === "Port" ||
-            product.product_type === "LightPath" ||
-            product.product_type === "IP" ||
-            product.product_type === "L2VPN" ||
-            product.product_type === "Firewall" ||
-            product.product_type === "Node") &&
-        product.tag !== "MSC"
-    ) {
-        if (product.product_type === "Node") {
-            const node_name = subscription.description.split(" ").slice(-1);
-            url_grafana = `https://grafana.surf.net/d/000000020/?&var-Hostname=${node_name}.dcn.surf.net`;
-        }
-        return (
-            <tr>
-                <td id="subscriptions-stats_in_grafana-k">
-                    <FormattedMessage id="subscriptions.stats_in_grafana" />
-                </td>
-                <td id="subscriptions-stats_in_grafana-v">
-                    <a href={`${url_grafana}`} target="_blank" rel="noopener noreferrer">
-                        <FormattedMessage id="subscriptions.go_to_grafana" />
-                    </a>
-                </td>
-            </tr>
-        );
-    } else {
-        return null;
-    }
-}
-
-function renderNetworkDashboardLink(subscription: Subscription, product: Product) {
-    if (
-        product.product_type === "Port" ||
-        product.product_type === "LightPath" ||
-        product.product_type === "IP" ||
-        product.product_type === "L2VPN" ||
-        product.product_type === "Firewall"
-    ) {
-        return (
-            <tr>
-                <td id="subscriptions-in_networkdashboard-k">
-                    <FormattedMessage id="subscriptions.networkdashboard_url" />
-                </td>
-                <td id="subscriptions-in_networkdashboard-v">
-                    <a
-                        href={`${ENV.NETWORKDASHBOARD_URL}/subscription/${subscription.subscription_id}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <FormattedMessage id="subscriptions.go_to_networkdashboard_url" />
-                    </a>
-                </td>
-            </tr>
-        );
-    } else {
-        return null;
-    }
-}
+import { FavoriteSubscriptionStorage, SubscriptionModel, SubscriptionProcesses } from "utils/types";
 
 function renderFailedTask(subscriptionProcesses: SubscriptionProcesses[]) {
     let failed_tasks = subscriptionProcesses
@@ -258,8 +190,6 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                         </td>
                     </tr>
                 )}
-                {renderGrafanaLink(subscription, subscription.product)}
-                {renderNetworkDashboardLink(subscription, subscription.product)}
                 <tr>
                     <td id="subscriptions-note-k">
                         <FormattedMessage id="subscriptions.note" />

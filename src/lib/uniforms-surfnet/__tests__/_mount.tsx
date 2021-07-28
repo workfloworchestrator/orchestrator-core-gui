@@ -13,7 +13,7 @@
  *
  */
 
-import { autoFieldFunction } from "components/inputForms/UserInputForm";
+import { autoFieldFunction } from "custom/uniforms/AutoFieldLoader";
 import { mount as enzyme } from "enzyme";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import en from "locale/en";

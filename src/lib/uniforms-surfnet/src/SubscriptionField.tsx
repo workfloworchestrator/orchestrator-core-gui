@@ -60,6 +60,8 @@ export function getPortMode(subscription: ServicePortSubscription, products: Pro
 declare module "uniforms" {
     interface FilterDOMProps {
         excludedSubscriptionIds: never;
+        organisationId: never;
+        organisationKey: never;
         visiblePortMode: never;
         bandwidth: never;
         bandwidthKey: never;

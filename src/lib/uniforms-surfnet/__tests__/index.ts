@@ -19,14 +19,10 @@ it("exports everything", () => {
         AcceptField: expect.any(Function),
         AutoFields: expect.any(Function),
         BoolField: expect.any(Function),
-        ContactPersonNameField: expect.any(Function),
         DateField: expect.any(Function),
         ErrorField: expect.any(Function),
         ErrorsField: expect.any(Function),
         HiddenField: expect.any(Function),
-        ImsNodeIdField: expect.any(Function),
-        ImsPortIdField: expect.any(Function),
-        IPvAnyNetworkField: expect.any(Function),
         LabelField: expect.any(Function),
         ListAddField: expect.any(Function),
         ListDelField: expect.any(Function),
@@ -46,6 +42,5 @@ it("exports everything", () => {
         SummaryField: expect.any(Function),
         SubmitField: expect.any(Function),
         TextField: expect.any(Function),
-        VlanField: expect.any(Function),
     });
 });

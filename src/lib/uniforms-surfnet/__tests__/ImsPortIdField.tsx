@@ -15,9 +15,9 @@
 
 import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 import mock from "axios-mock";
+import ImsPortIdField from "custom/uniforms/ImsPortIdField";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
-import { ImsPortIdField } from "lib/uniforms-surfnet/src";
 import React from "react";
 import ReactSelect from "react-select";
 import { IMSPort, Subscription } from "utils/types";
