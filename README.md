@@ -109,7 +109,7 @@ We are using Prettier as a code formatter. You can run prettier like this:
     yarn prettier-fix
 ```
 
-Similarly you can run other packages that can be found in the package.json
+Similarly you can run other scripts that can be found in the package.json
 
 ### Running the tests
 

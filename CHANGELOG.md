@@ -8,8 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
--   added Grafana link for SN8 nodes on subscription detail page
+- `#231` Moved LIR Prefix page to dynamically loaded route
+- `#231` Moved the SURF links on the subscription detail page to plugins
+- `#231` Moved the Network diagrams on the subscription detail page to plugins
+- `#231` Moved SURF specific GUI functionality to an own git [repo](https://git.ia.surfsara.nl/netdev/automation/projects/orchestrator-client-surf)
+- `#231` Published the GUI code to a public git [repo](https://github.com/workfloworchestrator/orchestrator-client)
+- Simplified and fixed L2VPN network diagram in the GUI
+- Improved error handling in the GUI for network diagrams when not all resource types can't be fetched
+- Added Grafana link for SN8 nodes on subscription detail page
 
 ## [7.2.0] - 2020-01-05
 
