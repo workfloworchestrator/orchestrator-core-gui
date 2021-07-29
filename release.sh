@@ -6,6 +6,7 @@ rm .env
 rm .env.local.example
 rm .gitlab-ci.yml
 cp README_GPL.md README.md
+rm README_GPL.md
 rm Dockerfile
 rm -rf .git
 git init
