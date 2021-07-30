@@ -7,7 +7,7 @@ This project contains the workflow GUI SURFnet Network Automation.
 The client is a ReactJS user interface. This project was bootstrapped with
 [Create React App](https://github.com/facebookincubator/create-react-app).
 
-When you need to work on the theming it's good to know that we split the theme into a separate
+When you need to work on the theming it's good to know that the theme is split into a separate
 package: located in `lib/themes/surfnet_light`. It has its own README.
 
 ### Pre install
@@ -18,7 +18,7 @@ The first time you clone this package you have to run:
 ```
 It will symlink the `custom-example` folder to `custom` so the app can find the plugin manifest file.
 
-If you have access to the SURF repo's and cloned it to `../orchestrator-client-surf` you can switch
+If you have access to the SURF repositories and cloned it to `../orchestrator-client-surf` you can switch
 to the SURF specific variant with all the SURF goodies by running:
 
 ```sh
@@ -109,7 +109,7 @@ We are using Prettier as a code formatter. You can run prettier like this:
     yarn prettier-fix
 ```
 
-Similarly you can run other packages that can be found in the package.json
+Similarly you can run other scripts that can be found in the package.json
 
 ### Running the tests
 
