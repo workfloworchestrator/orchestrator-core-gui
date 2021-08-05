@@ -7,7 +7,8 @@ reference the gitlab/github issue that is related to the change.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [7.4.0] - 2020-08-05
+
 - `#231` Moved LIR Prefix page to dynamically loaded route
 - `#231` Moved the SURF links on the subscription detail page to plugins
 - `#231` Moved the Network diagrams on the subscription detail page to plugins
@@ -16,6 +17,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Simplified and fixed L2VPN network diagram in the GUI
 - Improved error handling in the GUI for network diagrams when not all external resource types can be found
 - Added Grafana link for SN8 nodes on subscription detail page
+
+## [v7.3.1]
+
+-   Added new handling of Translations
+-   added Grafana link for SN8 nodes on subscription detail page
 
 ## [7.2.0] - 2020-01-05
 
