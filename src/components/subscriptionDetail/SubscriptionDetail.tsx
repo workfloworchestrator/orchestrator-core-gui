@@ -58,6 +58,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     const [notFound, setNotFound] = useState(false);
     const [workflows, setWorkflows] = useState<WorkflowReasons>();
     const [enrichedParentSubscriptions, setEnrichedParentSubscriptions] = useState<SubscriptionWithDetails[]>();
+    const [childSubscriptions, setChildSubscriptions] = useState<Subscription[]>(); // Todo: check types
 
     useEffect(() => {
         const promises = [
@@ -75,6 +76,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                 );
                 setEnrichedParentSubscriptions(enrichedParentSubscriptions);
             }),
+            apiClient.childSubscriptions(subscriptionId).then(setChildSubscriptions),
         ];
 
         Promise.all(promises)

@@ -110,7 +110,8 @@ abstract class ApiClientInterface extends BaseApiClient {
         productList?: string[]
     ) => Promise<Subscription[]>;
     abstract subscriptionWorkflows: (subscription_id: string) => Promise<WorkflowReasons>;
-    abstract parentSubscriptions: (childSubscriptionId: string) => Promise<Subscription[]>;
+    abstract childSubscriptions: (subscriptionId: string) => Promise<Subscription[]>;
+    abstract parentSubscriptions: (subscriptionId: string) => Promise<Subscription[]>;
     abstract processSubscriptionsBySubscriptionId: (subscriptionId: string) => Promise<SubscriptionProcesses[]>;
     abstract processSubscriptionsByProcessId: (processId: string) => Promise<ProcessSubscription[]>;
     abstract assignees: () => Promise<string[]>;
@@ -232,8 +233,12 @@ export class ApiClient extends ApiClientInterface {
         return this.fetchJson(`subscriptions/workflows/${subscription_id}`);
     };
 
-    parentSubscriptions = (childSubscriptionId: string): Promise<Subscription[]> => {
-        return this.fetchJson(`subscriptions/parent_subscriptions/${childSubscriptionId}`);
+    parentSubscriptions = (subscriptionId: string): Promise<Subscription[]> => {
+        return this.fetchJson(`subscriptions/parent_subscriptions/${subscriptionId}`);
+    };
+
+    childSubscriptions = (subscriptionId: string): Promise<Subscription[]> => {
+        return this.fetchJson(`subscriptions/child_subscriptions/${subscriptionId}`);
     };
 
     processSubscriptionsBySubscriptionId = (subscriptionId: string): Promise<SubscriptionProcesses[]> => {
