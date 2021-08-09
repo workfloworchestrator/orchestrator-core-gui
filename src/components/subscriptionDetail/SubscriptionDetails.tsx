@@ -21,7 +21,7 @@ import { FormattedMessage } from "react-intl";
 import { useStorageState } from "react-storage-hooks";
 import ApplicationContext from "utils/ApplicationContext";
 import { organisationNameByUuid, renderDate } from "utils/Lookups";
-import { FavoriteSubscriptionStorage, SubscriptionModel, SubscriptionProcesses } from "utils/types";
+import {FavoriteSubscriptionStorage, Subscription, SubscriptionModel, SubscriptionProcesses} from "utils/types";
 
 function renderFailedTask(subscriptionProcesses: SubscriptionProcesses[]) {
     let failed_tasks = subscriptionProcesses
@@ -39,9 +39,10 @@ interface IProps {
     subscription: SubscriptionModel;
     className?: string;
     subscriptionProcesses?: SubscriptionProcesses[];
+    childSubscriptions?: Subscription[];
 }
 
-export default function SubscriptionDetails({ subscription, className = "", subscriptionProcesses = [] }: IProps) {
+export default function SubscriptionDetails({ subscription, className = "", subscriptionProcesses = [], childSubscriptions=[] }: IProps) {
     const { organisations } = useContext(ApplicationContext);
 
     const [favoritesList, setFavoritesList] = useStorageState<FavoriteSubscriptionStorage[]>(

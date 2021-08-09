@@ -92,6 +92,8 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
 
     useEffect(() => {
         if (loadedSubscriptionModel) {
+            // TODO: remove before merge
+            console.log("All promises resolved. Child sub info:", childSubscriptions)
             async function loadViews() {
                 if (plugins.hasOwnProperty("subscriptionDetailPlugins")) {
                     console.log("Fetch of subscription model complete: loading plugins");
@@ -136,6 +138,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                 <SubscriptionDetails
                     subscription={subscription}
                     subscriptionProcesses={subscriptionProcesses}
+                    childSubscriptions={childSubscriptions}
                 ></SubscriptionDetails>
             </SubscriptionDetailSection>
             {plugins.hasOwnProperty("subscriptionDetailPlugins") && (
