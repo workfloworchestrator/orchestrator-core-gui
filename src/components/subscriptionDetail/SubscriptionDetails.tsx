@@ -54,6 +54,8 @@ export default function SubscriptionDetails({ subscription, className = "", subs
         const v = favoritesList.find((s) => s.subscription_id === subscription_id);
         return v !== undefined;
     }
+    // Todo: use react query here instead of subscription prop? (e.g. refactor to subscription_id via prop and data
+    //  loading here so cache is re-used )
 
     const customer_name = organisationNameByUuid(subscription.customer_id, organisations);
     return (
