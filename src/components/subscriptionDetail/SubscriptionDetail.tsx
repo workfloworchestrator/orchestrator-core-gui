@@ -58,7 +58,6 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     const [notFound, setNotFound] = useState(false);
     const [workflows, setWorkflows] = useState<WorkflowReasons>();
     const [enrichedParentSubscriptions, setEnrichedParentSubscriptions] = useState<SubscriptionWithDetails[]>();
-    const [childSubscriptions, setChildSubscriptions] = useState<Subscription[]>(); // Todo: check types
 
     useEffect(() => {
         const promises = [
@@ -76,7 +75,6 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                 );
                 setEnrichedParentSubscriptions(enrichedParentSubscriptions);
             }),
-            apiClient.childSubscriptions(subscriptionId).then(setChildSubscriptions),
         ];
 
         Promise.all(promises)
@@ -93,7 +91,6 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     useEffect(() => {
         if (loadedSubscriptionModel) {
             // TODO: remove before merge
-            console.log("All promises resolved. Child sub info:", childSubscriptions);
             async function loadViews() {
                 if (plugins.hasOwnProperty("subscriptionDetailPlugins")) {
                     console.log("Fetch of subscription model complete: loading plugins");
@@ -157,8 +154,6 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                             key={index}
                             subscription_instance={entry[1]}
                             field_name={entry[0]}
-                            // Todo: add to SubscriptionContext??
-                            // options={{subscriptionLabels: [{"c8947761-9e46-4168-b75d-e94e6dc5db1d": "Label 1", "221022b9-072f-41e6-b063-70bb61d0c5f1": "Label 2"}]}}
                         />
                     ))}
                 </SubscriptionDetailSection>
