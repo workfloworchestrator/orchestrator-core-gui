@@ -29,6 +29,7 @@ import { plugins } from "custom/manifest.json";
 import { isArray } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
+import { useQuery } from "react-query";
 import ApplicationContext from "utils/ApplicationContext";
 import { enrichSubscription } from "utils/Lookups";
 import {
@@ -59,13 +60,19 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     const [workflows, setWorkflows] = useState<WorkflowReasons>();
     const [enrichedParentSubscriptions, setEnrichedParentSubscriptions] = useState<SubscriptionWithDetails[]>();
 
+    useQuery<SubscriptionModel, Error>(
+        ["subscription", { id: subscriptionId }],
+        () => apiClient.subscriptionsDetailWithModel(subscriptionId),
+        {
+            onSuccess: (subscription) => {
+                setSubscription(enrichSubscription(subscription, organisations, products));
+                setProduct(subscription.product);
+            },
+        }
+    );
+
     useEffect(() => {
         const promises = [
-            apiClient.subscriptionsDetailWithModel(subscriptionId).then((subscription) => {
-                subscription.product_id = subscription.product.product_id;
-                setSubscription(enrichSubscription(subscription, organisations, products));
-                apiClient.productById(subscription.product_id).then(setProduct);
-            }),
             apiClient.processSubscriptionsBySubscriptionId(subscriptionId).then(setSubscriptionProcesses),
             apiClient.subscriptionWorkflows(subscriptionId).then(setWorkflows),
             apiClient.parentSubscriptions(subscriptionId).then((parentSubscriptions) => {
@@ -89,8 +96,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     }, [subscriptionId, organisations, products, apiClient]);
 
     useEffect(() => {
-        if (loadedSubscriptionModel) {
-            // TODO: remove before merge
+        if (loadedSubscriptionModel && subscription) {
             async function loadViews() {
                 if (plugins.hasOwnProperty("subscriptionDetailPlugins")) {
                     console.log("Fetch of subscription model complete: loading plugins");

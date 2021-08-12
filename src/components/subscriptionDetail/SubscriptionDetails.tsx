@@ -126,7 +126,7 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                     <td id="subscriptions-name-k">
                         <FormattedMessage id="subscriptions.name" />
                     </td>
-                    <td id="subscriptions-name-v">{subscription.product.name}</td>
+                    <td id="subscriptions-name-v">{subscription.product?.name}</td>
                 </tr>
                 <tr>
                     <td id="subscriptions-description-k">

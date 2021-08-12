@@ -26,7 +26,7 @@ export function enrichSubscription(
     products: Product[]
 ): SubscriptionWithDetails {
     subscription.customer_name = organisationNameByUuid(subscription.customer_id!, organisations);
-    subscription.product = productById(subscription.product_id!, products);
+    subscription.product = productById(subscription.product?.product_id!, products);
     subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date).getTime() : 0;
     subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : 0;
     return subscription as SubscriptionWithDetails;

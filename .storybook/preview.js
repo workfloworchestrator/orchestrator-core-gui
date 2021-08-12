@@ -5,6 +5,7 @@ import { action } from "@storybook/addon-actions";
 import { withKnobs } from "@storybook/addon-knobs";
 import mock from "axios-mock";
 import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { setIntlConfig, withIntl } from "storybook-addon-intl";
 
 import en from "../src/locale/en";
@@ -16,22 +17,25 @@ import PRODUCTS from "../src/stories/data/products.json";
 import ApplicationContext, { apiClient, customApiClient } from "../src/utils/ApplicationContext";
 
 const withContainerSection = (cb) => <section className="storybook-container">{cb()}</section>;
+const queryClient = new QueryClient();
 
 function withContext(Story) {
     return (
-        <ApplicationContext.Provider
-            value={{
-                organisations: ORGANISATIONS,
-                locationCodes: LOCATION_CODES,
-                products: PRODUCTS,
-                redirect: action("Change url"),
-                allowed: (resource) => true,
-                apiClient: apiClient,
-                customApiClient: customApiClient,
-            }}
-        >
-            <Story />
-        </ApplicationContext.Provider>
+        <QueryClientProvider client={queryClient}>
+            <ApplicationContext.Provider
+                value={{
+                    organisations: ORGANISATIONS,
+                    locationCodes: LOCATION_CODES,
+                    products: PRODUCTS,
+                    redirect: action("Change url"),
+                    allowed: (resource) => true,
+                    apiClient: apiClient,
+                    customApiClient: customApiClient,
+                }}
+            >
+                <Story />
+            </ApplicationContext.Provider>
+        </QueryClientProvider>
     );
 }
 

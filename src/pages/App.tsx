@@ -48,6 +48,7 @@ import TerminateSubscription from "pages/TerminateSubscription";
 import React from "react";
 import { IntlShape, RawIntlProvider } from "react-intl";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { QueryParamProvider } from "use-query-params";
 import ApplicationContext, { ApplicationContextInterface, apiClient, customApiClient } from "utils/ApplicationContext";
@@ -190,7 +191,7 @@ class App extends React.PureComponent<IProps, IState> {
             createPolicyCheck(this.props.user),
         ]);
 
-        const filterdProducts = (allProducts || []).sort((a, b) => a.name.localeCompare(b.name));
+        const filteredProducts = (allProducts || []).sort((a, b) => a.name.localeCompare(b.name));
 
         this.setState({
             loading: false,
@@ -201,7 +202,7 @@ class App extends React.PureComponent<IProps, IState> {
                 locationCodes: allLocationCodes || [],
                 assignees: allAssignees || [],
                 processStatuses: allProcessStatuses || [],
-                products: filterdProducts || [],
+                products: filteredProducts || [],
                 redirect: (url) => history.push(url),
                 setLocale: async (locale: string) => {
                     const intl = await setLocale(locale);
@@ -234,6 +235,7 @@ class App extends React.PureComponent<IProps, IState> {
                                     </EuiToast>
                                 )}
                                 <div>
+                                    <ReactQueryDevtools initialIsOpen={false} position={"bottom-right"} />
                                     <div>
                                         <Flash />
                                         <Header />
