@@ -74,7 +74,6 @@ data.getSubscriptions = getSubscriptions;
 
 export interface SubscriptionsContextType {
     subscriptions: { [index: string]: ServicePortSubscription };
-    // Todo: maybe add extra label info for subscriptions here?
     clearSubscriptions: typeof clearSubscriptions;
     getSubscription: typeof getSubscription;
     getSubscriptions: typeof getSubscriptionsHandler;
