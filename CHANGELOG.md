@@ -7,6 +7,11 @@ reference the gitlab/github issue that is related to the change.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [7.5.0] - unreleased
+
+- `#orchestrator:1044` Show subscription description on subscription detail page for resource types
+- Added react-query to easily cache double REST calls to endpoints and used it on the subscription detail page
+
 ## [7.4.0] - 2020-08-05
 
 - `#231` Moved LIR Prefix page to dynamically loaded route
