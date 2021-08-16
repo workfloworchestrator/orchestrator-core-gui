@@ -11689,11 +11689,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                     </div>
                     <div
                       className="euiFormRow__fieldWrapper"
-                    >
-                      <h2>
-                        No Subscription found (e.g. 404)
-                      </h2>
-                    </div>
+                    />
                   </div>
                 </section>
                 <section

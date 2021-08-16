@@ -47,6 +47,8 @@ import Tasks from "pages/Tasks";
 import TerminateSubscription from "pages/TerminateSubscription";
 import React from "react";
 import { IntlShape, RawIntlProvider } from "react-intl";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { QueryParamProvider } from "use-query-params";
 import ApplicationContext, { ApplicationContextInterface, apiClient, customApiClient } from "utils/ApplicationContext";
@@ -71,6 +73,7 @@ interface IState {
     errorDialogAction: () => void;
     intl?: IntlShape;
 }
+const queryClient = new QueryClient();
 
 class App extends React.PureComponent<IProps, IState> {
     constructor(props: IProps, context: ApplicationContextInterface) {
@@ -188,7 +191,7 @@ class App extends React.PureComponent<IProps, IState> {
             createPolicyCheck(this.props.user),
         ]);
 
-        const filterdProducts = (allProducts || []).sort((a, b) => a.name.localeCompare(b.name));
+        const filteredProducts = (allProducts || []).sort((a, b) => a.name.localeCompare(b.name));
 
         this.setState({
             loading: false,
@@ -199,7 +202,7 @@ class App extends React.PureComponent<IProps, IState> {
                 locationCodes: allLocationCodes || [],
                 assignees: allAssignees || [],
                 processStatuses: allProcessStatuses || [],
-                products: filterdProducts || [],
+                products: filteredProducts || [],
                 redirect: (url) => history.push(url),
                 setLocale: async (locale: string) => {
                     const intl = await setLocale(locale);
@@ -220,123 +223,130 @@ class App extends React.PureComponent<IProps, IState> {
         }
 
         return (
-            <Router history={history}>
-                <QueryParamProvider ReactRouterRoute={Route}>
-                    <ApplicationContext.Provider value={applicationContext}>
-                        <RawIntlProvider value={intl}>
-                            {loading && (
-                                <EuiToast className="sync" color="primary">
-                                    <EuiLoadingSpinner size="m" />
-                                    <h6 className="sync__label">Syncing</h6>
-                                </EuiToast>
-                            )}
-                            <div>
+            <QueryClientProvider client={queryClient}>
+                <Router history={history}>
+                    <QueryParamProvider ReactRouterRoute={Route}>
+                        <ApplicationContext.Provider value={applicationContext}>
+                            <RawIntlProvider value={intl}>
+                                {loading && (
+                                    <EuiToast className="sync" color="primary">
+                                        <EuiLoadingSpinner size="m" />
+                                        <h6 className="sync__label">Syncing</h6>
+                                    </EuiToast>
+                                )}
                                 <div>
-                                    <Flash />
-                                    <Header />
-                                    <Navigation extraPages={importedModules.map((i) => i.name)} />
-                                    <ErrorDialog isOpen={errorDialogOpen} close={errorDialogAction} />
+                                    <ReactQueryDevtools initialIsOpen={false} position={"bottom-right"} />
+                                    <div>
+                                        <Flash />
+                                        <Header />
+                                        <Navigation extraPages={importedModules.map((i) => i.name)} />
+                                        <ErrorDialog isOpen={errorDialogOpen} close={errorDialogAction} />
+                                    </div>
+                                    <Switch>
+                                        <Route exact path="/authorize" render={() => <Redirect to="/" />} />
+                                        <Route exact path="/" render={() => <Redirect to="/processes" />} />
+                                        <ProtectedRoute
+                                            path="/new-process"
+                                            render={(props) => (
+                                                <NewProcess
+                                                    preselectedInput={getQueryParameters(props.location.search)}
+                                                />
+                                            )}
+                                        />
+                                        <ProtectedRoute
+                                            path="/modify-subscription"
+                                            render={(props) => (
+                                                <ModifySubscription
+                                                    workflowName={getParameterByName("workflow", props.location.search)}
+                                                    subscriptionId={getParameterByName(
+                                                        "subscription",
+
+                                                        props.location.search
+                                                    )}
+                                                />
+                                            )}
+                                        />
+                                        <ProtectedRoute
+                                            path="/terminate-subscription"
+                                            render={(props) => (
+                                                <TerminateSubscription
+                                                    subscriptionId={getParameterByName(
+                                                        "subscription",
+
+                                                        props.location.search
+                                                    )}
+                                                />
+                                            )}
+                                        />
+                                        <Route
+                                            path="/process/:id"
+                                            render={(props) => <Redirect to={`/processes/${props.match.params.id}`} />}
+                                        />
+                                        <Route path="/processes/:id" render={(props) => <ProcessDetail {...props} />} />
+                                        <ProtectedRoute path="/processes" render={(props) => <Processes />} />
+                                        <Route
+                                            path="/subscription/:id"
+                                            render={(props) => (
+                                                <Redirect to={`/subscriptions/${props.match.params.id}`} />
+                                            )}
+                                        />
+                                        {!disabledRoutes.includes("/subscriptions/:id") && (
+                                            <Route
+                                                path="/subscriptions/:id"
+                                                render={(props) => <SubscriptionDetailPage {...props} />}
+                                            />
+                                        )}
+                                        {!disabledRoutes.includes("/subscriptions") && (
+                                            <Route
+                                                path="/subscriptions"
+                                                render={(props) => <SubscriptionsPage {...props} />}
+                                            />
+                                        )}
+                                        {!disabledRoutes.includes("/metadata") && (
+                                            <Route
+                                                exact
+                                                path="/metadata"
+                                                render={() => <Redirect to="/metadata/products" />}
+                                            />
+                                        )}
+                                        <ProtectedRoute
+                                            path="/metadata/product-block/:id"
+                                            render={(props) => <ProductBlock {...props} />}
+                                        />
+                                        <ProtectedRoute
+                                            path="/metadata/product/:id"
+                                            render={(props) => <ProductPage {...props} />}
+                                        />
+                                        <ProtectedRoute
+                                            path="/metadata/:type"
+                                            render={(props) => (
+                                                <MetaData selectedTab={props.match.params.type} {...props} />
+                                            )}
+                                        />
+                                        {!disabledRoutes.includes("/metadata") && (
+                                            <ProtectedRoute path="/settings" render={() => <Settings />} />
+                                        )}
+
+                                        {!isEmpty(importedModules) &&
+                                            importedModules.map(({ path, name, Component }) => (
+                                                <Route key={path} exact path={`/${name}`} component={Component} />
+                                            ))}
+
+                                        <ProtectedRoute path="/new-task" render={() => <NewTask />} />
+
+                                        <ProtectedRoute path="/tasks" render={() => <Tasks />} />
+                                        <Route path="/task/:id" render={(props) => <ProcessDetail {...props} />} />
+                                        <Route path="/not-allowed" render={() => <NotAllowed />} />
+                                        <Route path="/error" render={(props) => <ServerError {...props} />} />
+                                        <Route path="/styleguide" render={(props) => <StyleGuide {...props} />} />
+                                        <Route component={NotFound} />
+                                    </Switch>
                                 </div>
-                                <Switch>
-                                    <Route exact path="/authorize" render={() => <Redirect to="/" />} />
-                                    <Route exact path="/" render={() => <Redirect to="/processes" />} />
-                                    <ProtectedRoute
-                                        path="/new-process"
-                                        render={(props) => (
-                                            <NewProcess preselectedInput={getQueryParameters(props.location.search)} />
-                                        )}
-                                    />
-                                    <ProtectedRoute
-                                        path="/modify-subscription"
-                                        render={(props) => (
-                                            <ModifySubscription
-                                                workflowName={getParameterByName("workflow", props.location.search)}
-                                                subscriptionId={getParameterByName(
-                                                    "subscription",
-
-                                                    props.location.search
-                                                )}
-                                            />
-                                        )}
-                                    />
-                                    <ProtectedRoute
-                                        path="/terminate-subscription"
-                                        render={(props) => (
-                                            <TerminateSubscription
-                                                subscriptionId={getParameterByName(
-                                                    "subscription",
-
-                                                    props.location.search
-                                                )}
-                                            />
-                                        )}
-                                    />
-                                    <Route
-                                        path="/process/:id"
-                                        render={(props) => <Redirect to={`/processes/${props.match.params.id}`} />}
-                                    />
-                                    <Route path="/processes/:id" render={(props) => <ProcessDetail {...props} />} />
-                                    <ProtectedRoute path="/processes" render={(props) => <Processes />} />
-                                    <Route
-                                        path="/subscription/:id"
-                                        render={(props) => <Redirect to={`/subscriptions/${props.match.params.id}`} />}
-                                    />
-                                    {!disabledRoutes.includes("/subscriptions/:id") && (
-                                        <Route
-                                            path="/subscriptions/:id"
-                                            render={(props) => <SubscriptionDetailPage {...props} />}
-                                        />
-                                    )}
-                                    {!disabledRoutes.includes("/subscriptions") && (
-                                        <Route
-                                            path="/subscriptions"
-                                            render={(props) => <SubscriptionsPage {...props} />}
-                                        />
-                                    )}
-                                    {!disabledRoutes.includes("/metadata") && (
-                                        <Route
-                                            exact
-                                            path="/metadata"
-                                            render={() => <Redirect to="/metadata/products" />}
-                                        />
-                                    )}
-                                    <ProtectedRoute
-                                        path="/metadata/product-block/:id"
-                                        render={(props) => <ProductBlock {...props} />}
-                                    />
-                                    <ProtectedRoute
-                                        path="/metadata/product/:id"
-                                        render={(props) => <ProductPage {...props} />}
-                                    />
-                                    <ProtectedRoute
-                                        path="/metadata/:type"
-                                        render={(props) => (
-                                            <MetaData selectedTab={props.match.params.type} {...props} />
-                                        )}
-                                    />
-                                    {!disabledRoutes.includes("/metadata") && (
-                                        <ProtectedRoute path="/settings" render={() => <Settings />} />
-                                    )}
-
-                                    {!isEmpty(importedModules) &&
-                                        importedModules.map(({ path, name, Component }) => (
-                                            <Route key={path} exact path={`/${name}`} component={Component} />
-                                        ))}
-
-                                    <ProtectedRoute path="/new-task" render={() => <NewTask />} />
-
-                                    <ProtectedRoute path="/tasks" render={() => <Tasks />} />
-                                    <Route path="/task/:id" render={(props) => <ProcessDetail {...props} />} />
-                                    <Route path="/not-allowed" render={() => <NotAllowed />} />
-                                    <Route path="/error" render={(props) => <ServerError {...props} />} />
-                                    <Route path="/styleguide" render={(props) => <StyleGuide {...props} />} />
-                                    <Route component={NotFound} />
-                                </Switch>
-                            </div>
-                        </RawIntlProvider>
-                    </ApplicationContext.Provider>
-                </QueryParamProvider>
-            </Router>
+                            </RawIntlProvider>
+                        </ApplicationContext.Provider>
+                    </QueryParamProvider>
+                </Router>
+            </QueryClientProvider>
         );
     }
 }

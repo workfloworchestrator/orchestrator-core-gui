@@ -30,6 +30,7 @@
         "react-network-diagrams": "^0.8.0",
         "react-numeric-input": "^2.2.3",
         "react-pretty-json": "^2.0.2",
+        "react-query": "^3.19.5",
         "react-router-dom": "^5.0.1",
         "react-scripts": "4.0.3",
         "react-scroll-up-button": "^1.6.4",
