@@ -130,14 +130,6 @@ class Header extends React.PureComponent<IProps, IState> {
                             <i className={`fa fa-circle header__status ${engineStatus.toLowerCase()}`}></i>
                         </EuiHeaderLink>
 
-                        <EuiHeaderLink
-                            iconType="popout"
-                            href="https://docs.dev.automation.surf.net/static/html/workflows.html"
-                            target="_blank"
-                        >
-                            <FormattedMessage id="header.links.help" />
-                        </EuiHeaderLink>
-
                         <EuiHeaderLink id="logout" onClick={this.logout}>
                             <FormattedMessage id="header.links.logout" />
                         </EuiHeaderLink>
