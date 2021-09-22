@@ -32,50 +32,50 @@ export function vlanData() {
 }
 
 export function loadVlanMocks() {
-    mock.onGet(/ims\/vlans\/0.*/).reply(200, vlanData());
-    mock.onGet(/ims\/vlans\/1.*/).reply(200, vlanData(), {
+    mock.onGet(/subscriptions\/vlans-by-service-port\/0.*/).reply(200, vlanData());
+    mock.onGet(/subscriptions\/vlans-by-service-port\/1.*/).reply(200, vlanData(), {
         overwriteRoutes: false,
     });
-    mock.onGet(/ims\/vlans\/2.*/).reply(200, vlanData(), {
+    mock.onGet(/subscriptions\/vlans-by-service-port\/2.*/).reply(200, vlanData(), {
         overwriteRoutes: false,
     });
-    mock.onGet(/ims\/vlans\/3.*/).reply(200, vlanData(), {
+    mock.onGet(/subscriptions\/vlans-by-service-port\/3.*/).reply(200, vlanData(), {
         overwriteRoutes: false,
     });
-    mock.onGet(/ims\/vlans\/4.*/).reply(200, vlanData(), {
+    mock.onGet(/subscriptions\/vlans-by-service-port\/4.*/).reply(200, vlanData(), {
         overwriteRoutes: false,
     });
-    mock.onGet(/ims\/vlans\/5.*/).reply(200, vlanData(), {
+    mock.onGet(/subscriptions\/vlans-by-service-port\/5.*/).reply(200, vlanData(), {
         overwriteRoutes: false,
     });
-    mock.onGet(/ims\/vlans\/6.*/).reply(200, vlanData(), {
+    mock.onGet(/subscriptions\/vlans-by-service-port\/6.*/).reply(200, vlanData(), {
         overwriteRoutes: false,
     });
-    mock.onGet(/ims\/vlans\/7.*/).reply(200, vlanData(), {
+    mock.onGet(/subscriptions\/vlans-by-service-port\/7.*/).reply(200, vlanData(), {
         overwriteRoutes: false,
     });
-    mock.onGet(/ims\/vlans\/8.*/).reply(200, vlanData(), {
+    mock.onGet(/subscriptions\/vlans-by-service-port\/8.*/).reply(200, vlanData(), {
         overwriteRoutes: false,
     });
-    mock.onGet(/ims\/vlans\/9.*/).reply(200, vlanData(), {
+    mock.onGet(/subscriptions\/vlans-by-service-port\/9.*/).reply(200, vlanData(), {
         overwriteRoutes: false,
     });
-    mock.onGet(/ims\/vlans\/a.*/).reply(200, vlanData(), {
+    mock.onGet(/subscriptions\/vlans-by-service-port\/a.*/).reply(200, vlanData(), {
         overwriteRoutes: false,
     });
-    mock.onGet(/ims\/vlans\/b.*/).reply(200, vlanData(), {
+    mock.onGet(/subscriptions\/vlans-by-service-port\/b.*/).reply(200, vlanData(), {
         overwriteRoutes: false,
     });
-    mock.onGet(/ims\/vlans\/c.*/).reply(200, vlanData(), {
+    mock.onGet(/subscriptions\/vlans-by-service-port\/c.*/).reply(200, vlanData(), {
         overwriteRoutes: false,
     });
-    mock.onGet(/ims\/vlans\/d.*/).reply(200, vlanData(), {
+    mock.onGet(/subscriptions\/vlans-by-service-port\/d.*/).reply(200, vlanData(), {
         overwriteRoutes: false,
     });
-    mock.onGet(/ims\/vlans\/e.*/).reply(200, vlanData(), {
+    mock.onGet(/subscriptions\/vlans-by-service-port\/e.*/).reply(200, vlanData(), {
         overwriteRoutes: false,
     });
-    mock.onGet(/ims\/vlans\/f.*/).reply(200, vlanData(), {
+    mock.onGet(/subscriptions\/vlans-by-service-port\/f.*/).reply(200, vlanData(), {
         overwriteRoutes: false,
     });
 }
