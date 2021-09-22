@@ -44,7 +44,7 @@ This component expects to be used in a list alongside a SubscriptionField.
                 product: { tag: "A", product_id: "P3" }
             }
         ]);
-        mock.onGet(/surf\/ims\/vlans\/.*/).reply(200, [
+        mock.onGet(/surf\/subscriptions\/vlans-by-service-port\/.*/).reply(200, [
             [1, 3],
             [5, 5]
         ]);
@@ -105,7 +105,7 @@ This component expects to be used in a list alongside a SubscriptionField.
                 product: { tag: "A", product_id: "P3" }
             }
         ]);
-        mock.onGet(/surf\/ims\/vlans\/.*/).reply(200, [
+        mock.onGet(/surf\/subscriptions\/vlans-by-service-port\/.*/).reply(200, [
             [1, 3],
             [5, 5]
         ]);

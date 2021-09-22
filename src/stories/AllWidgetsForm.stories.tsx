@@ -105,7 +105,7 @@ function prepare() {
     mock.onGet("surf/subscriptions/tag/IPBGP/").reply(200, []);
     mock.onGet("surf/products/ieee_interface_types/e89776be-16c3-4bee-af98-8e73bf6492a7").reply(200, ["1000BASE-T"]);
     mock.onGet("products/a3bf8b26-50a6-4586-8e58-ad552cb39798").reply(200, PRODUCTS[0]);
-    mock.onGet(/surf\/ims\/vlans\/.*/).reply(200, [[3, 5]]);
+    mock.onGet(/surf\/subscriptions\/vlans-by-service-port\/.*/).reply(200, [[3, 5]]);
 }
 
 export const AllWidgetsForm = () => {
