@@ -29,7 +29,6 @@ I18n.translations.en = {
     header: {
         title: "Orchestrator",
         links: {
-            help: "Help",
             logout: "Logout",
             exit: "Exit",
         },
