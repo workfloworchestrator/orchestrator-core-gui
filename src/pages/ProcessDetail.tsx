@@ -31,6 +31,7 @@ import { CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
 import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
+import { WebSocketCodes, websocketService } from "websocketService";
 
 const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 
@@ -82,42 +83,113 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         };
     }
 
-    componentDidMount = () => {
-        this.context.apiClient.process(this.props.match.params.id).then((processInstance: ProcessWithDetails) => {
-            /**
-             * Ensure correct user memberships and populate UserInput form with values
-             */
+    initialize = (processInstance: ProcessWithDetails) => {
+        /**
+         * Ensure correct user memberships and populate UserInput form with values
+         */
 
-            const { organisations, products } = this.context;
+        const { organisations, products } = this.context;
 
-            let enrichedProcess = processInstance as CustomProcessWithDetails;
-            enrichedProcess.customerName = organisationNameByUuid(enrichedProcess.customer, organisations);
-            enrichedProcess.productName = productNameById(enrichedProcess.product, products);
+        let enrichedProcess = processInstance as CustomProcessWithDetails;
+        enrichedProcess.customerName = organisationNameByUuid(enrichedProcess.customer, organisations);
+        enrichedProcess.productName = productNameById(enrichedProcess.product, products);
 
-            const stepUserInput: InputForm | undefined = enrichedProcess.form;
-            const tabs = stepUserInput ? this.state.tabs : ["process"];
-            const selectedTab = stepUserInput ? "user_input" : "process";
+        const stepUserInput: InputForm | undefined = enrichedProcess.form;
+        const tabs = stepUserInput ? this.state.tabs : ["process"];
+        const selectedTab = stepUserInput ? "user_input" : "process";
 
-            this.setState({
-                process: enrichedProcess,
-                stepUserInput: stepUserInput,
-                tabs: tabs,
-                selectedTab: selectedTab,
-                product: productById(enrichedProcess.product, products),
-            });
-            this.context.apiClient
-                .processSubscriptionsByProcessId(enrichedProcess.id)
-                .then((res) => {
-                    this.setState({ subscriptionProcesses: res, loaded: true });
-                })
-                .catch((err) => {
-                    if (err.response && err.response.status === 404) {
-                        this.setState({ notFound: true, loaded: true });
-                    } else {
-                        throw err;
-                    }
-                });
+        this.setState({
+            process: enrichedProcess,
+            stepUserInput: stepUserInput,
+            tabs: tabs,
+            selectedTab: selectedTab,
+            product: productById(enrichedProcess.product, products),
         });
+        this.context.apiClient
+            .processSubscriptionsByProcessId(enrichedProcess.id)
+            .then((res) => {
+                this.setState({ subscriptionProcesses: res, loaded: true });
+            })
+            .catch((err) => {
+                if (err.response && err.response.status === 404) {
+                    this.setState({ notFound: true, loaded: true });
+                } else {
+                    throw err;
+                }
+            });
+    };
+
+    updateProcessStep = (step: Step) => {
+        const enrichedProcess = this.state.process as CustomProcessWithDetails;
+        this.setState({
+            process: {
+                ...enrichedProcess,
+                steps: enrichedProcess.steps.map((process_step) => {
+                    if (process_step.name === step.name) {
+                        return { ...process_step, ...step };
+                    }
+                    return process_step;
+                }),
+            },
+        });
+    };
+
+    closeOnLastStep = (client: WebSocket, step: Step) => {
+        const process = this.state.process as CustomProcessWithDetails;
+        const stepIndex = process.steps.findIndex((process_step) => process_step.name === step.name);
+
+        if (process.steps.length - 1 === stepIndex) {
+            client.close();
+        }
+    };
+
+    handleWebsocketError = (error: any) => {
+        setFlash(error.detail, "error");
+    };
+
+    componentDidMount = () => {
+        // this.context.apiClient.process(this.props.match.params.id).then(this.initialize);
+
+        if (!this.props.match.params.id) {
+            return;
+        }
+        const client = websocketService.connect(`api/processes/test/${this.props.match.params.id}`);
+        client.onopen = () => {
+            console.log("WebSocket Client Connected");
+        };
+        client.onmessage = ({ data }) => {
+            if (typeof data === "string") {
+                try {
+                    const json = JSON.parse(data);
+                    const process = json.process;
+                    const step: Step = json.step;
+                    const error = json.error;
+                    if (process) {
+                        this.initialize(process);
+                    }
+                    if (step) {
+                        this.updateProcessStep(step);
+                        this.closeOnLastStep(client, step);
+                    }
+                    if (error) {
+                        this.handleWebsocketError(error);
+                    }
+                } catch (e) {
+                    console.log(data);
+                    console.log(e);
+                }
+                return;
+            }
+        };
+        client.onerror = (e) => {
+            // api call fallback if websocket error's
+            this.context.apiClient.process(this.props.match.params.id).then(this.initialize);
+        };
+        client.onclose = (e) => {
+            if (e.code !== WebSocketCodes.NORMAL_CLOSURE) {
+            }
+            console.log("echo-protocol Client Closed", e);
+        };
     };
 
     handleDeleteProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
