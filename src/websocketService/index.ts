@@ -4,7 +4,7 @@ import * as WebSocketCodes from "./codes";
 const websocketUrl = `wss${ENV.BACKEND_URL.replace(/(^\w+|^)/, "")}`;
 
 class WebsocketService {
-    token = "test-bla-bla";
+    token = "";
 
     setToken = (token: string | undefined | null) => {
         this.token = token ?? "";
