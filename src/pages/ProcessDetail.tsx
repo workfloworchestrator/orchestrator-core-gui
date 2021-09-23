@@ -31,7 +31,7 @@ import { CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
 import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
-import { WebSocketCodes, websocketService } from "websocketService";
+import { websocketService } from "websocketService";
 
 const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 
@@ -83,7 +83,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         };
     }
 
-    initialize = (processInstance: ProcessWithDetails) => {
+    initializeProcessDetails = (processInstance: ProcessWithDetails) => {
         /**
          * Ensure correct user memberships and populate UserInput form with values
          */
@@ -148,11 +148,6 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
     };
 
     componentDidMount = () => {
-        // this.context.apiClient.process(this.props.match.params.id).then(this.initialize);
-
-        if (!this.props.match.params.id) {
-            return;
-        }
         const client = websocketService.connect(`api/processes/test/${this.props.match.params.id}`);
         client.onmessage = ({ data }) => {
             if (typeof data === "string") {
@@ -162,7 +157,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                     const step: Step = json.step;
                     const error = json.error;
                     if (process) {
-                        this.initialize(process);
+                        this.initializeProcessDetails(process);
                     }
                     if (step) {
                         this.updateProcessStep(step);
@@ -180,7 +175,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         };
         client.onerror = () => {
             // api call fallback if websocket closes with an error.
-            this.context.apiClient.process(this.props.match.params.id).then(this.initialize);
+            this.context.apiClient.process(this.props.match.params.id).then(this.initializeProcessDetails);
         };
     };
 
