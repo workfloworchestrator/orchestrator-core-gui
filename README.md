@@ -62,7 +62,7 @@ Browse to the [application homepage](http://localhost:3000/).
 
 Copy `.env.local.example` to `.env.local`
 
-This overrides the `BACKEND_URL` variable. You should make local changes to `.env.local`
+This overrides the `REACT_APP_BACKEND_URL` variable. You should make local changes to `.env.local`
 
 There is also a .env file checked in that points to a backend that runs locally (https://localhost:8080).
 
@@ -101,8 +101,8 @@ Tests consist out of snapshots tests for storybook items and tests for the unifo
 WebStorm can run the tests from the IDE by default and is the easiest to start with, especially when you want to
 easily run separate tests.
 
-The uniforms component are covered by React component tests with [Enzyme](https://enzymejs.github.io/enzyme/). 
-It contains a lot of tests and additionally uses snapshots in JSON format to check on the rendering as a whole 
+The uniforms component are covered by React component tests with [Enzyme](https://enzymejs.github.io/enzyme/).
+It contains a lot of tests and additionally uses snapshots in JSON format to check on the rendering as a whole
 and to assert more specific stuff like the existence of an expected div with className="x".
 
 #### Tips
@@ -124,9 +124,9 @@ Your browser should open to http://localhost:9009/?path=/story/welcome--to-story
 
 
 ## Actions and page views depending on who you are.
-The orchestrator client can be configured to allow access to a page or to buttons in the client. The react app 
+The orchestrator client can be configured to allow access to a page or to buttons in the client. The react app
 consumes a webassembly OPA policy and evaluates if the user has the correct claims to view certain resources.
-The function that gets called is the ```allowed()``` function in `src/utils/policy.ts`. The implementation of `allowed()` 
+The function that gets called is the ```allowed()``` function in `src/utils/policy.ts`. The implementation of `allowed()`
 is done as follows:
 
 ```typescript jsx
