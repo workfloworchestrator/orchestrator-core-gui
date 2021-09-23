@@ -154,9 +154,6 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             return;
         }
         const client = websocketService.connect(`api/processes/test/${this.props.match.params.id}`);
-        client.onopen = () => {
-            console.log("WebSocket Client Connected");
-        };
         client.onmessage = ({ data }) => {
             if (typeof data === "string") {
                 try {
@@ -181,14 +178,9 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                 return;
             }
         };
-        client.onerror = (e) => {
-            // api call fallback if websocket error's
+        client.onerror = () => {
+            // api call fallback if websocket closes with an error.
             this.context.apiClient.process(this.props.match.params.id).then(this.initialize);
-        };
-        client.onclose = (e) => {
-            if (e.code !== WebSocketCodes.NORMAL_CLOSURE) {
-            }
-            console.log("echo-protocol Client Closed", e);
         };
     };
 
