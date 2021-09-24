@@ -57,6 +57,7 @@ interface IState {
     confirm: (e: React.MouseEvent<HTMLButtonElement>) => void;
     confirmationDialogQuestion: string;
     product?: Product;
+    client: WebSocket | undefined;
 }
 
 export interface CustomProcessWithDetails extends ProcessWithDetails {
@@ -80,6 +81,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => {},
             confirm: (e: React.MouseEvent<HTMLButtonElement>) => {},
             confirmationDialogQuestion: "",
+            client: undefined,
         };
     }
 
@@ -121,6 +123,10 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
     updateProcessStep = (step: Step) => {
         const enrichedProcess = this.state.process as CustomProcessWithDetails;
+        const stepUserInput: InputForm | undefined = step.form;
+        const tabs = stepUserInput ? this.state.tabs : ["process"];
+        const selectedTab = stepUserInput ? "user_input" : "process";
+
         this.setState({
             process: {
                 ...enrichedProcess,
@@ -131,16 +137,10 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                     return process_step;
                 }),
             },
+            stepUserInput: stepUserInput,
+            tabs: tabs,
+            selectedTab: selectedTab,
         });
-    };
-
-    closeOnLastStep = (client: WebSocket, step: Step) => {
-        const process = this.state.process as CustomProcessWithDetails;
-        const stepIndex = process.steps.findIndex((process_step) => process_step.name === step.name);
-
-        if (process.steps.length - 1 === stepIndex) {
-            client.close();
-        }
     };
 
     handleWebsocketError = (error: any) => {
@@ -149,6 +149,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
     componentDidMount = () => {
         const client = websocketService.connect(`api/processes/test/${this.props.match.params.id}`);
+        this.setState({ client: client });
         client.onmessage = ({ data }) => {
             if (typeof data === "string") {
                 try {
@@ -161,14 +162,12 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                     }
                     if (step) {
                         this.updateProcessStep(step);
-                        this.closeOnLastStep(client, step);
                     }
                     if (error) {
                         this.handleWebsocketError(error);
                     }
                 } catch (e) {
-                    console.log(data);
-                    console.log(e);
+                    console.error("invalid JSON");
                 }
                 return;
             }
@@ -177,6 +176,13 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             // api call fallback if websocket closes with an error.
             this.context.apiClient.process(this.props.match.params.id).then(this.initializeProcessDetails);
         };
+        client.onclose = () => {
+            this.setState({ client: undefined });
+        };
+    };
+
+    componentWillUnmount = () => {
+        this.state.client?.close();
     };
 
     handleDeleteProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -377,7 +383,15 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         }
 
         return this.context.apiClient.resumeProcess(process.id, processInput).then((e) => {
-            this.context.redirect(`/${process.is_task ? "tasks" : `processes?highlight=${process.id}`}`);
+            if (this.state.client) {
+                this.setState({
+                    confirmationDialogOpen: false,
+                    stepUserInput: undefined,
+                    tabs: ["process"],
+                });
+            } else {
+                this.context.redirect(`/${process.is_task ? "tasks" : `processes?highlight=${process.id}`}`);
+            }
             setFlash(
                 intl.formatMessage(
                     { id: `${process.is_task ? "task" : "process"}.flash.update` },

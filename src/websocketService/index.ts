@@ -1,7 +1,7 @@
 import { ENV } from "../env";
 import * as WebSocketCodes from "./codes";
 
-const websocketUrl = `wss${ENV.BACKEND_URL.replace(/(^\w+|^)/, "")}`;
+const websocketUrl = `ws${ENV.BACKEND_URL.replace(/(^\w+|^)/, "")}`;
 
 class WebsocketService {
     token = "";
