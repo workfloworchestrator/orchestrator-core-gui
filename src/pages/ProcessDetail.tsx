@@ -148,7 +148,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
     };
 
     componentDidMount = () => {
-        const client = websocketService.connect(`api/processes/test/${this.props.match.params.id}`);
+        const client = websocketService.connect(`api/processes/${this.props.match.params.id}`);
         this.setState({ client: client });
         client.onmessage = ({ data }) => {
             if (typeof data === "string") {
