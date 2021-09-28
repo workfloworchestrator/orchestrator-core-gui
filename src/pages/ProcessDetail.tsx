@@ -121,6 +121,19 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             });
     };
 
+    updateProcess = (processInstance: ProcessWithDetails) => {
+        const enrichedProcess = this.state.process as CustomProcessWithDetails;
+        this.setState({
+            process: {
+                ...enrichedProcess,
+                assignee: processInstance.assignee,
+                step: processInstance.step,
+                status: processInstance.status,
+                last_modified: processInstance.last_modified
+            },
+        });
+    }
+
     updateProcessStep = (step: Step) => {
         const enrichedProcess = this.state.process as CustomProcessWithDetails;
         const stepUserInput: InputForm | undefined = step.form;
@@ -153,12 +166,14 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         client.onmessage = ({ data }) => {
             if (typeof data === "string") {
                 try {
-                    const json = JSON.parse(data);
-                    const process = json.process;
-                    const step: Step = json.step;
-                    const error = json.error;
+                    const { process, step, error } = JSON.parse(data);
+
                     if (process) {
-                        this.initializeProcessDetails(process);
+                        if (process.steps) {
+                            this.initializeProcessDetails(process);
+                            return;
+                        }
+                        this.updateProcess(process);
                     }
                     if (step) {
                         this.updateProcessStep(step);
