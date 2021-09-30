@@ -398,15 +398,8 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         }
 
         return this.context.apiClient.resumeProcess(process.id, processInput).then((e) => {
-            if (this.state.client) {
-                this.setState({
-                    confirmationDialogOpen: false,
-                    stepUserInput: undefined,
-                    tabs: ["process"],
-                });
-            } else {
-                this.context.redirect(`/${process.is_task ? "tasks" : `processes?highlight=${process.id}`}`);
-            }
+            this.context.redirect(`/${process.is_task ? "tasks" : `processes?highlight=${process.id}`}`);
+
             setFlash(
                 intl.formatMessage(
                     { id: `${process.is_task ? "task" : "process"}.flash.update` },
