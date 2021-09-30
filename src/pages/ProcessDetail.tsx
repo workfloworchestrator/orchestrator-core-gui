@@ -31,7 +31,7 @@ import { CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
 import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
-import { websocketService } from "websocketService";
+import { WebSocketCodes, websocketReconnectTime, websocketService } from "websocketService";
 
 const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 
@@ -58,6 +58,7 @@ interface IState {
     confirmationDialogQuestion: string;
     product?: Product;
     client: WebSocket | undefined;
+    websocketReconnect: boolean;
 }
 
 export interface CustomProcessWithDetails extends ProcessWithDetails {
@@ -82,6 +83,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             confirm: (e: React.MouseEvent<HTMLButtonElement>) => {},
             confirmationDialogQuestion: "",
             client: undefined,
+            websocketReconnect: true,
         };
     }
 
@@ -129,10 +131,10 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                 assignee: processInstance.assignee,
                 step: processInstance.step,
                 status: processInstance.status,
-                last_modified: processInstance.last_modified
+                last_modified: processInstance.last_modified,
             },
         });
-    }
+    };
 
     updateProcessStep = (step: Step) => {
         const enrichedProcess = this.state.process as CustomProcessWithDetails;
@@ -191,9 +193,19 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             // api call fallback if websocket closes with an error.
             this.context.apiClient.process(this.props.match.params.id).then(this.initializeProcessDetails);
         };
-        client.onclose = () => {
+        client.onclose = (ev) => {
             this.setState({ client: undefined });
+            if (ev.code === WebSocketCodes.NORMAL_CLOSURE) {
+                this.setState({ websocketReconnect: false });
+            }
         };
+
+        setTimeout(() => {
+            if (this.state.websocketReconnect) {
+                client.close(WebSocketCodes.NORMAL_CLOSURE);
+                this.componentDidMount();
+            }
+        }, websocketReconnectTime);
     };
 
     componentWillUnmount = () => {
