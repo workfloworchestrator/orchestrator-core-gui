@@ -166,27 +166,20 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         const client = websocketService.connect(`api/processes/${this.props.match.params.id}`);
         this.setState({ client: client });
         client.onmessage = ({ data }) => {
-            if (typeof data === "string") {
-                try {
-                    const { process, step, error } = JSON.parse(data);
+            const { process, step, error } = JSON.parse(data);
 
-                    if (process) {
-                        if (process.steps) {
-                            this.initializeProcessDetails(process);
-                            return;
-                        }
-                        this.updateProcess(process);
-                    }
-                    if (step) {
-                        this.updateProcessStep(step);
-                    }
-                    if (error) {
-                        this.handleWebsocketError(error);
-                    }
-                } catch (e) {
-                    console.error("invalid JSON");
+            if (process) {
+                if (process.steps) {
+                    this.initializeProcessDetails(process);
+                    return;
                 }
-                return;
+                this.updateProcess(process);
+            }
+            if (step) {
+                this.updateProcessStep(step);
+            }
+            if (error) {
+                this.handleWebsocketError(error);
             }
         };
         client.onerror = () => {
