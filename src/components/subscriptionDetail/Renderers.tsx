@@ -73,29 +73,31 @@ export function RenderActions({
                 <thead />
                 <tbody>
                     {allowed("/orchestrator/subscriptions/terminate/" + subscription.subscription_id + "/") &&
-                        workflows.terminate.map((wf, index: number) => (
-                            <tr key={index}>
-                                <td id={`${index}-k`}>
-                                    {!wf.reason && (
-                                        <a id="terminate-link" href="/modify" key={wf.name} onClick={terminate}>
-                                            <FormattedMessage id="subscription.terminate" />
-                                        </a>
-                                    )}
-                                    {wf.reason && (
-                                        <span>
-                                            <FormattedMessage id="subscription.terminate" />
-                                        </span>
-                                    )}
-                                </td>
-                                <td id={`${index}-v`}>
-                                    {wf.reason && (
-                                        <em className="error">
-                                            <FormattedMessage id={wf.reason} values={wf as any} />
-                                        </em>
-                                    )}
-                                </td>
-                            </tr>
-                        ))}
+                        workflows.terminate
+                            .sort((a, b) => a.name.localeCompare(b.name))
+                            .map((wf, index: number) => (
+                                <tr key={index}>
+                                    <td id={`${index}-k`}>
+                                        {!wf.reason && (
+                                            <a id="terminate-link" href="/modify" key={wf.name} onClick={terminate}>
+                                                <FormattedMessage id="subscription.terminate" />
+                                            </a>
+                                        )}
+                                        {wf.reason && (
+                                            <span>
+                                                <FormattedMessage id="subscription.terminate" />
+                                            </span>
+                                        )}
+                                    </td>
+                                    <td id={`${index}-v`}>
+                                        {wf.reason && (
+                                            <em className="error">
+                                                <FormattedMessage id={wf.reason} values={wf as any} />
+                                            </em>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
                     {isEmpty(workflows.terminate) && (
                         <tr>
                             <td>
@@ -106,34 +108,36 @@ export function RenderActions({
                         </tr>
                     )}
                     {allowed("/orchestrator/subscriptions/modify/" + subscription.subscription_id + "/") &&
-                        workflows.modify.map((wf, index: number) => (
-                            <tr key={index}>
-                                <td>
-                                    {!wf.reason && (
-                                        <a
-                                            id={`modify-link-${wf.name.replace(/_/g, "-")}`}
-                                            href="/modify"
-                                            key={wf.name}
-                                            onClick={modify(wf.name)}
-                                        >
-                                            <FormattedMessage id={`workflow.${wf.name}`} />
-                                        </a>
-                                    )}
-                                    {wf.reason && (
-                                        <span>
-                                            <FormattedMessage id={`workflow.${wf.name}`} />
-                                        </span>
-                                    )}
-                                </td>
-                                <td>
-                                    {wf.reason && (
-                                        <em className="error">
-                                            <FormattedMessage id={wf.reason} values={wf as any} />
-                                        </em>
-                                    )}
-                                </td>
-                            </tr>
-                        ))}
+                        workflows.modify
+                            .sort((a, b) => a.name.localeCompare(b.name))
+                            .map((wf, index: number) => (
+                                <tr key={index}>
+                                    <td>
+                                        {!wf.reason && (
+                                            <a
+                                                id={`modify-link-${wf.name.replace(/_/g, "-")}`}
+                                                href="/modify"
+                                                key={wf.name}
+                                                onClick={modify(wf.name)}
+                                            >
+                                                <FormattedMessage id={`workflow.${wf.name}`} />
+                                            </a>
+                                        )}
+                                        {wf.reason && (
+                                            <span>
+                                                <FormattedMessage id={`workflow.${wf.name}`} />
+                                            </span>
+                                        )}
+                                    </td>
+                                    <td>
+                                        {wf.reason && (
+                                            <em className="error">
+                                                <FormattedMessage id={wf.reason} values={wf as any} />
+                                            </em>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
                     {isEmpty(workflows.modify) && (
                         <tr>
                             <td>
@@ -144,34 +148,36 @@ export function RenderActions({
                         </tr>
                     )}
                     {allowed("/orchestrator/subscriptions/validate/" + subscription.subscription_id + "/") &&
-                        workflows.system.map((wf, index: number) => (
-                            <tr key={index}>
-                                <td>
-                                    {!wf.reason && (
-                                        <a
-                                            id={`validate-link-${wf.name.replace(/_/g, "-")}`}
-                                            href="/modify"
-                                            key={wf.name}
-                                            onClick={modify(wf.name)}
-                                        >
-                                            <FormattedMessage id={`workflow.${wf.name}`} />
-                                        </a>
-                                    )}
-                                    {wf.reason && (
-                                        <span>
-                                            <FormattedMessage id={`workflow.${wf.name}`} />
-                                        </span>
-                                    )}
-                                </td>
-                                <td>
-                                    {wf.reason && (
-                                        <em className="error">
-                                            <FormattedMessage id={wf.reason} values={wf as any} />
-                                        </em>
-                                    )}
-                                </td>
-                            </tr>
-                        ))}
+                        workflows.system.
+                            .sort((a, b) => a.name.localeCompare(b.name))
+                            .map((wf, index: number) => (
+                                <tr key={index}>
+                                    <td>
+                                        {!wf.reason && (
+                                            <a
+                                                id={`validate-link-${wf.name.replace(/_/g, "-")}`}
+                                                href="/modify"
+                                                key={wf.name}
+                                                onClick={modify(wf.name)}
+                                            >
+                                                <FormattedMessage id={`workflow.${wf.name}`} />
+                                            </a>
+                                        )}
+                                        {wf.reason && (
+                                            <span>
+                                                <FormattedMessage id={`workflow.${wf.name}`} />
+                                            </span>
+                                        )}
+                                    </td>
+                                    <td>
+                                        {wf.reason && (
+                                            <em className="error">
+                                                <FormattedMessage id={wf.reason} values={wf as any} />
+                                            </em>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
                     {isEmpty(workflows.system) && (
                         <tr>
                             <td>
