@@ -16,6 +16,10 @@
 @use "../../../stylesheets/vars.scss";
 
 .bool-field {
+    .euiCheckbox .euiCheckbox__input ~ .euiCheckbox__label {
+        z-index: unset;
+    }
+
     input[type="checkbox"] {
         display: none;
     }
