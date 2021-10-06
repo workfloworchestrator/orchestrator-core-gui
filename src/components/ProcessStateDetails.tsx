@@ -102,12 +102,13 @@ function StateChanges({ steps, index, collapsed = false }: { steps: Step[]; inde
     };
 
     const stateDelta = (prev: State, curr: State) => {
-        const prevKeys = Object.keys(prev);
+        const prevOrEmpty = prev ?? {};
+        const prevKeys = Object.keys(prevOrEmpty);
         const currKeys = Object.keys(curr);
-        const newKeys = currKeys.filter((key) => prevKeys.indexOf(key) === -1 || !isEqual(prev[key], curr[key]));
+        const newKeys = currKeys.filter((key) => prevKeys.indexOf(key) === -1 || !isEqual(prevOrEmpty[key], curr[key]));
         const newState = newKeys.sort().reduce((acc: State, key) => {
-            if (curr[key] === Object(curr[key]) && !Array.isArray(curr[key]) && prev[key]) {
-                acc[key] = stateDelta(prev[key], curr[key]);
+            if (curr[key] === Object(curr[key]) && !Array.isArray(curr[key]) && prevOrEmpty[key]) {
+                acc[key] = stateDelta(prevOrEmpty[key], curr[key]);
             } else {
                 acc[key] = curr[key];
             }

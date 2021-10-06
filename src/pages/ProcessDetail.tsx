@@ -31,6 +31,7 @@ import { CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
 import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
+import { WebSocketCodes, websocketReconnectTime, websocketService } from "websocketService";
 
 const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 
@@ -56,6 +57,8 @@ interface IState {
     confirm: (e: React.MouseEvent<HTMLButtonElement>) => void;
     confirmationDialogQuestion: string;
     product?: Product;
+    client: WebSocket | undefined;
+    websocketReconnect: boolean;
 }
 
 export interface CustomProcessWithDetails extends ProcessWithDetails {
@@ -79,45 +82,127 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => {},
             confirm: (e: React.MouseEvent<HTMLButtonElement>) => {},
             confirmationDialogQuestion: "",
+            client: undefined,
+            websocketReconnect: true,
         };
     }
 
-    componentDidMount = () => {
-        this.context.apiClient.process(this.props.match.params.id).then((processInstance: ProcessWithDetails) => {
-            /**
-             * Ensure correct user memberships and populate UserInput form with values
-             */
+    initializeProcessDetails = (processInstance: ProcessWithDetails) => {
+        /**
+         * Ensure correct user memberships and populate UserInput form with values
+         */
 
-            const { organisations, products } = this.context;
+        const { organisations, products } = this.context;
 
-            let enrichedProcess = processInstance as CustomProcessWithDetails;
-            enrichedProcess.customerName = organisationNameByUuid(enrichedProcess.customer, organisations);
-            enrichedProcess.productName = productNameById(enrichedProcess.product, products);
+        let enrichedProcess = processInstance as CustomProcessWithDetails;
+        enrichedProcess.customerName = organisationNameByUuid(enrichedProcess.customer, organisations);
+        enrichedProcess.productName = productNameById(enrichedProcess.product, products);
 
-            const stepUserInput: InputForm | undefined = enrichedProcess.form;
-            const tabs = stepUserInput ? this.state.tabs : ["process"];
-            const selectedTab = stepUserInput ? "user_input" : "process";
+        const stepUserInput: InputForm | undefined = enrichedProcess.form;
+        const tabs = stepUserInput ? this.state.tabs : ["process"];
+        const selectedTab = stepUserInput ? "user_input" : "process";
 
-            this.setState({
-                process: enrichedProcess,
-                stepUserInput: stepUserInput,
-                tabs: tabs,
-                selectedTab: selectedTab,
-                product: productById(enrichedProcess.product, products),
-            });
-            this.context.apiClient
-                .processSubscriptionsByProcessId(enrichedProcess.id)
-                .then((res) => {
-                    this.setState({ subscriptionProcesses: res, loaded: true });
-                })
-                .catch((err) => {
-                    if (err.response && err.response.status === 404) {
-                        this.setState({ notFound: true, loaded: true });
-                    } else {
-                        throw err;
-                    }
-                });
+        this.setState({
+            process: enrichedProcess,
+            stepUserInput: stepUserInput,
+            tabs: tabs,
+            selectedTab: selectedTab,
+            product: productById(enrichedProcess.product, products),
         });
+        this.context.apiClient
+            .processSubscriptionsByProcessId(enrichedProcess.id)
+            .then((res) => {
+                this.setState({ subscriptionProcesses: res, loaded: true });
+            })
+            .catch((err) => {
+                if (err.response && err.response.status === 404) {
+                    this.setState({ notFound: true, loaded: true });
+                } else {
+                    throw err;
+                }
+            });
+    };
+
+    updateProcess = (processInstance: ProcessWithDetails) => {
+        const enrichedProcess = this.state.process as CustomProcessWithDetails;
+        this.setState({
+            process: {
+                ...enrichedProcess,
+                assignee: processInstance.assignee,
+                step: processInstance.step,
+                status: processInstance.status,
+                last_modified: processInstance.last_modified,
+            },
+        });
+    };
+
+    updateProcessStep = (step: Step) => {
+        const enrichedProcess = this.state.process as CustomProcessWithDetails;
+        const stepUserInput: InputForm | undefined = step.form;
+        const tabs = stepUserInput ? this.state.tabs : ["process"];
+        const selectedTab = stepUserInput ? "user_input" : "process";
+
+        this.setState({
+            process: {
+                ...enrichedProcess,
+                steps: enrichedProcess.steps.map((process_step) => {
+                    if (process_step.name === step.name) {
+                        return { ...process_step, ...step };
+                    }
+                    return process_step;
+                }),
+            },
+            stepUserInput: stepUserInput,
+            tabs: tabs,
+            selectedTab: selectedTab,
+        });
+    };
+
+    handleWebsocketError = (error: any) => {
+        setFlash(error.detail, "error");
+    };
+
+    componentDidMount = () => {
+        const client = websocketService.connect(`api/processes/${this.props.match.params.id}`);
+        this.setState({ client: client });
+        client.onmessage = ({ data }) => {
+            const { process, step, error } = JSON.parse(data);
+
+            if (process) {
+                if (process.steps) {
+                    this.initializeProcessDetails(process);
+                    return;
+                }
+                this.updateProcess(process);
+            }
+            if (step) {
+                this.updateProcessStep(step);
+            }
+            if (error) {
+                this.handleWebsocketError(error);
+            }
+        };
+        client.onerror = () => {
+            // api call fallback if websocket closes with an error.
+            this.context.apiClient.process(this.props.match.params.id).then(this.initializeProcessDetails);
+        };
+        client.onclose = (ev) => {
+            this.setState({ client: undefined });
+            if (ev.code === WebSocketCodes.NORMAL_CLOSURE) {
+                this.setState({ websocketReconnect: false });
+            }
+        };
+
+        setTimeout(() => {
+            if (this.state.websocketReconnect) {
+                client.close(WebSocketCodes.NORMAL_CLOSURE);
+                this.componentDidMount();
+            }
+        }, websocketReconnectTime);
+    };
+
+    componentWillUnmount = () => {
+        this.state.client?.close();
     };
 
     handleDeleteProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -319,6 +404,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
         return this.context.apiClient.resumeProcess(process.id, processInput).then((e) => {
             this.context.redirect(`/${process.is_task ? "tasks" : `processes?highlight=${process.id}`}`);
+
             setFlash(
                 intl.formatMessage(
                     { id: `${process.is_task ? "task" : "process"}.flash.update` },
