@@ -38,6 +38,10 @@ Mac OS:
 
 `yarn install --python /usr/bin/python2.7`
 
+If you need more flexibility, like having the ability to test with multiple Node JS versions, we strongly recommend 
+to use NVM. More info [here](https://github.com/nvm-sh/nvm#installing-and-updating). You would then install yarn also 
+from within your Node env.
+
 #### Linux
 
 This project currently only works with Node.js 14 (if you also want to be able to run the tests).
