@@ -32,7 +32,6 @@
     .form-input {
         margin: 20px 0;
 
-        border-bottom: 1px solid vars.$light-grey;
         padding-bottom: 20px;
 
         em {
@@ -83,6 +82,12 @@
 .euiFormRow {
     margin-bottom: 25px; // For service ports this add margin to the label??
 }
+
 .euiFormRow__labelWrapper {
     flex-direction: column;
+}
+
+.euiFormRow__label__large {
+    font-size: +1.1em;
+    margin-bottom: 0;
 }
