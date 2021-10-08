@@ -1,3 +1,4 @@
+import { EuiHorizontalRule } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 /*
  * Copyright 2019-2020 SURF.
@@ -19,7 +20,7 @@ import { connectField } from "uniforms";
 export type LabelFieldProps = FieldProps<null, {}, null, HTMLDivElement>;
 
 function Divider({ id }: LabelFieldProps) {
-    return <hr id={id}></hr>;
+    return <EuiHorizontalRule />;
 }
 
 export default connectField(Divider, { kind: "leaf" });
