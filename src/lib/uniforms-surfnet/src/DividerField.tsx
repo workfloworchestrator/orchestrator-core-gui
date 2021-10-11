@@ -1,3 +1,4 @@
+import { EuiHorizontalRule } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 /*
  * Copyright 2019-2020 SURF.
@@ -14,19 +15,12 @@ import { FieldProps } from "lib/uniforms-surfnet/src/types";
  *
  */
 import React from "react";
-import { connectField, filterDOMProps } from "uniforms";
+import { connectField } from "uniforms";
 
 export type LabelFieldProps = FieldProps<null, {}, null, HTMLDivElement>;
 
-// onChange not used on purpose
-function Label({ id, name, value, label, onChange, ...props }: LabelFieldProps) {
-    return (
-        <section {...filterDOMProps(props)}>
-            <label id={id} className={`euiFormLabel euiFormRow__label${value ? "__large" : ""}`}>
-                {value ? value : label}
-            </label>
-        </section>
-    );
+function Divider({ id }: LabelFieldProps) {
+    return <EuiHorizontalRule />;
 }
 
-export default connectField(Label, { kind: "leaf" });
+export default connectField(Divider, { kind: "leaf" });

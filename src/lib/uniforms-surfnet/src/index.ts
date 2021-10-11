@@ -33,6 +33,7 @@ export { default as TextField } from "lib/uniforms-surfnet/src/TextField";
 
 export { default as AcceptField } from "lib/uniforms-surfnet/src/AcceptField";
 export { default as LabelField } from "lib/uniforms-surfnet/src/LabelField";
+export { default as DividerField } from "lib/uniforms-surfnet/src/DividerField";
 export { default as OptGroupField } from "lib/uniforms-surfnet/src/OptGroupField";
 export { default as SubscriptionField } from "lib/uniforms-surfnet/src/SubscriptionField";
 export { default as SubscriptionSummaryField } from "lib/uniforms-surfnet/src/SubscriptionSummaryField";
