@@ -58,7 +58,7 @@ interface IState {
     confirmationDialogQuestion: string;
     product?: Product;
     client: WebSocket | undefined;
-    websocketReconnect: boolean;
+    wsTimeout: NodeJS.Timeout | undefined;
 }
 
 export interface CustomProcessWithDetails extends ProcessWithDetails {
@@ -83,7 +83,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             confirm: (e: React.MouseEvent<HTMLButtonElement>) => {},
             confirmationDialogQuestion: "",
             client: undefined,
-            websocketReconnect: true,
+            wsTimeout: undefined,
         };
     }
 
@@ -186,22 +186,26 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             // api call fallback if websocket closes with an error.
             this.context.apiClient.process(this.props.match.params.id).then(this.initializeProcessDetails);
         };
+
         client.onclose = (ev) => {
             this.setState({ client: undefined });
-            if (ev.code === WebSocketCodes.NORMAL_CLOSURE) {
-                this.setState({ websocketReconnect: false });
+            if (this.state?.process?.status === 'completed' && this.state.wsTimeout) {
+                clearTimeout(this.state.wsTimeout);
             }
         };
 
-        setTimeout(() => {
-            if (this.state.websocketReconnect) {
-                client.close(WebSocketCodes.NORMAL_CLOSURE);
-                this.componentDidMount();
-            }
+        const timeout = setTimeout(() => {
+            client.close(WebSocketCodes.NORMAL_CLOSURE);
+            this.componentDidMount();
         }, websocketReconnectTime);
+
+        this.setState({ wsTimeout: timeout });
     };
 
     componentWillUnmount = () => {
+        if (this.state.wsTimeout) {
+            clearTimeout(this.state.wsTimeout);
+        }
         this.state.client?.close();
     };
 
