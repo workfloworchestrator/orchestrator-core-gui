@@ -33,6 +33,7 @@ import { organisationNameByUuid } from "utils/Lookups";
 import { ProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
+import { WebSocketCodes, websocketService, websocketReconnectTime } from "websocketService";
 
 interface IProps extends WrappedComponentProps {}
 
@@ -42,6 +43,9 @@ interface IState {
     confirm: () => void;
     confirmationDialogQuestion: string;
     showExplanation: boolean;
+    client: WebSocket | undefined;
+    wsTimeout: NodeJS.Timeout | undefined;
+    showTables: boolean;
 }
 
 class Processes extends React.PureComponent<IProps, IState> {
@@ -54,8 +58,42 @@ class Processes extends React.PureComponent<IProps, IState> {
             confirm: () => this,
             confirmationDialogQuestion: "",
             showExplanation: false,
+            client: undefined,
+            wsTimeout: undefined,
+            showTables: true,
         };
     }
+
+    componentDidMount = () => {
+        const client = websocketService.connect('api/processes/all/');
+        this.setState({ client: client });
+
+        client.onmessage = ({ data }) => {
+            const json = JSON.parse(data);
+            if (json.process) {
+                this.setState({ showTables: false });
+                this.setState({ showTables: true });
+            }
+        };
+
+        client.onclose = () => {
+            this.setState({ client: undefined });
+        };
+
+        const timeout = setTimeout(() => {
+            client.close(WebSocketCodes.NORMAL_CLOSURE);
+            this.componentDidMount();
+        }, websocketReconnectTime);
+
+        this.setState({ wsTimeout: timeout });
+    };
+
+    componentWillUnmount = () => {
+        if (this.state.wsTimeout) {
+            clearTimeout(this.state.wsTimeout);
+        }
+        this.state.client?.close();
+    };
 
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
 
@@ -126,13 +164,13 @@ class Processes extends React.PureComponent<IProps, IState> {
             "table.processes.active",
             initialProcessesFilterAndSort(false, ["running", "suspended", "failed", "created", "waiting"]),
             ["pid", "step", "tag", "creator", "customer", "product"],
-            { showSettings: false, refresh: true, pageSize: 10 }
+            { showSettings: false, pageSize: 10, refresh: false }
         );
         const completedSettings = initialProcessTableSettings(
             "table.processes.completed",
             initialProcessesFilterAndSort(false, ["completed"]),
             ["pid", "step", "status", "assignee", "creator", "started", "abbrev"],
-            { showSettings: false, pageSize: 5, refresh: true }
+            { showSettings: false, pageSize: 5, refresh: false }
         );
 
         return (
@@ -162,18 +200,22 @@ class Processes extends React.PureComponent<IProps, IState> {
                         question={this.state.confirmationDialogQuestion}
                     />
                     <div className="actions">{this.renderExplain()}</div>
-                    <ProcessesTable
-                        key={"active"}
-                        initialTableSettings={activeSettings}
-                        renderActions={this.renderActions}
-                        isProcess={true}
-                    />
-                    <ProcessesTable
-                        key={"completed"}
-                        initialTableSettings={completedSettings}
-                        renderActions={this.renderActions}
-                        isProcess={true}
-                    />
+                    { this.state.showTables &&
+                        <>
+                            <ProcessesTable
+                                key={"active"}
+                                initialTableSettings={activeSettings}
+                                renderActions={this.renderActions}
+                                isProcess={true}
+                            />
+                            <ProcessesTable
+                                key={"completed"}
+                                initialTableSettings={completedSettings}
+                                renderActions={this.renderActions}
+                                isProcess={true}
+                            />
+                        </>
+                    }
                     <ScrollUpButton />
                 </EuiPageBody>
             </EuiPage>

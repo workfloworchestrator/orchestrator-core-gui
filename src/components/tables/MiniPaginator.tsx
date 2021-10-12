@@ -49,6 +49,7 @@ function MiniPaginator({
                     color="primary"
                     disabled={!canPreviousPage}
                     iconType="sortLeft"
+                    aria-label="sort left"
                 />
             </EuiFlexItem>
             <EuiFlexItem>
@@ -57,6 +58,7 @@ function MiniPaginator({
                     color="primary"
                     disabled={!canPreviousPage}
                     iconType="arrowLeft"
+                    aria-label="arrow left"
                 />
             </EuiFlexItem>
             <EuiFlexItem>
@@ -65,6 +67,7 @@ function MiniPaginator({
                     color="primary"
                     disabled={!canNextPage}
                     iconType="arrowRight"
+                    aria-label="arrow right"
                 />
             </EuiFlexItem>
             <EuiFlexItem>
@@ -73,6 +76,7 @@ function MiniPaginator({
                     color="primary"
                     disabled={!canNextPage}
                     iconType="sortRight"
+                    aria-label="sort right"
                 />
             </EuiFlexItem>
         </EuiFlexGroup>
