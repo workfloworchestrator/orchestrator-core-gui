@@ -148,7 +148,7 @@ export function RenderActions({
                         </tr>
                     )}
                     {allowed("/orchestrator/subscriptions/validate/" + subscription.subscription_id + "/") &&
-                        workflows.system.
+                        workflows.system
                             .sort((a, b) => a.name.localeCompare(b.name))
                             .map((wf, index: number) => (
                                 <tr key={index}>
