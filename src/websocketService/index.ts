@@ -1,9 +1,9 @@
 import { ENV } from "../env";
 import * as WebSocketCodes from "./codes";
 
-const secure = !!ENV.BACKEND_URL.includes('https');
+const secure = !!ENV.BACKEND_URL.includes("https");
 
-const wsProtocol = secure ? 'wss' : 'ws';
+const wsProtocol = secure ? "wss" : "ws";
 const websocketUrl = `${wsProtocol}${ENV.BACKEND_URL.replace(/(^\w+|^)/, "")}`;
 
 class WebsocketService {

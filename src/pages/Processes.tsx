@@ -33,7 +33,7 @@ import { organisationNameByUuid } from "utils/Lookups";
 import { ProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
-import { WebSocketCodes, websocketService, websocketReconnectTime } from "websocketService";
+import { WebSocketCodes, websocketReconnectTime, websocketService } from "websocketService";
 
 interface IProps extends WrappedComponentProps {}
 
@@ -65,7 +65,7 @@ class Processes extends React.PureComponent<IProps, IState> {
     }
 
     componentDidMount = () => {
-        const client = websocketService.connect('api/processes/all/');
+        const client = websocketService.connect("api/processes/all/");
         this.setState({ client: client });
 
         client.onmessage = ({ data }) => {
@@ -200,7 +200,7 @@ class Processes extends React.PureComponent<IProps, IState> {
                         question={this.state.confirmationDialogQuestion}
                     />
                     <div className="actions">{this.renderExplain()}</div>
-                    { this.state.showTables &&
+                    {this.state.showTables && (
                         <>
                             <ProcessesTable
                                 key={"active"}
@@ -215,7 +215,7 @@ class Processes extends React.PureComponent<IProps, IState> {
                                 isProcess={true}
                             />
                         </>
-                    }
+                    )}
                     <ScrollUpButton />
                 </EuiPageBody>
             </EuiPage>

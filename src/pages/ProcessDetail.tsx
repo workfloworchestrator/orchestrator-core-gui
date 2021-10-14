@@ -189,7 +189,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
         client.onclose = (ev) => {
             this.setState({ client: undefined });
-            if (this.state?.process?.status === 'completed' && this.state.wsTimeout) {
+            if (this.state?.process?.status === "completed" && this.state.wsTimeout) {
                 clearTimeout(this.state.wsTimeout);
             }
         };
