@@ -16,54 +16,38 @@
 import "./FailedTaskBanner.scss";
 
 import { EuiText, EuiToolTip } from "@elastic/eui";
-import useInterval from "components/tables/useInterval";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Process, ProcessStatus } from "utils/types";
+import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
 
-import useFailedTaskFetcher from "./useFailedTaskFetcher";
-
-enum TasksStatus {
+enum CheckboxStatus {
     "OK" = "ok",
     "FAILED" = "failed",
 }
-
-interface Item {
-    last_status: string;
+export interface ProcessData extends Process {
+    id: string;
+    status: ProcessStatus;
 }
 
-export default function FailedTaskBanner() {
-    const [data, pageCount, fetchData] = useFailedTaskFetcher<Item>("processes/");
-    const [failedTasks, setFailedTasks] = useState({
-        all: 0,
-        failed: 0,
-        inconsistentData: 0,
-        apiUnavailable: 0,
-    });
+const countFailedProcesses = (processes: ProcessData[]) => {
+    const failed = processes.filter((p) => p.last_status === ProcessStatus.FAILED).length;
+    const inconsistentData = processes.filter((p) => p.last_status === ProcessStatus.INCONSISTENT_DATA).length;
+    const apiUnavailable = processes.filter((p) => p.last_status === ProcessStatus.API_UNAVAILABLE).length;
+    return {
+        failed,
+        inconsistentData,
+        apiUnavailable,
+        all: failed + inconsistentData + apiUnavailable,
+    };
+};
 
-    const filterBy = [
-        { id: "isTask", values: ["true"] },
-        { id: "status", values: ["failed", "api_unavailable", "inconsistent_data"] },
-    ];
+export default function FailedTaskBanner() {
+    const { runningProcesses } = useContext(RunningProcessesContext);
+    const [failedTasks, setFailedTasks] = useState(countFailedProcesses(runningProcesses));
 
     useEffect(() => {
-        const list = {
-            all: data.length,
-            failed: data.filter((item) => item.last_status === "failed").length,
-            inconsistentData: data.filter((item) => item.last_status === "inconsistent_data").length,
-            apiUnavailable: data.filter((item) => item.last_status === "api_unavailable").length,
-        };
-        setFailedTasks(list);
-    }, [data]);
-
-    fetchData(0, 10, [], filterBy);
-
-    /*
-     * poll for updates at an interval. because this is a hook the interval will be
-     * removed when the table is unmounted
-     */
-    const autoRefreshDelay = 3000;
-    useInterval(() => {
-        fetchData(0, 10, [], filterBy);
-    }, autoRefreshDelay);
+        setFailedTasks(countFailedProcesses(runningProcesses));
+    }, [runningProcesses]);
 
     const renderTooltipContent = () => (
         <>
@@ -73,7 +57,7 @@ export default function FailedTaskBanner() {
         </>
     );
 
-    const showTasksStatus = () => (failedTasks.all ? TasksStatus.FAILED : TasksStatus.OK);
+    const showTasksStatus = () => (failedTasks.all ? CheckboxStatus.FAILED : CheckboxStatus.OK);
 
     return (
         <EuiToolTip position="bottom" content={renderTooltipContent()}>

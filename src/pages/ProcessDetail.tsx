@@ -184,6 +184,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         };
         client.onerror = () => {
             // api call fallback if websocket closes with an error.
+            console.error("unable to connect to websocket, using fallback to http request");
             this.context.apiClient.process(this.props.match.params.id).then(this.initializeProcessDetails);
         };
 
