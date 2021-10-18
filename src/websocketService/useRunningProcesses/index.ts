@@ -47,14 +47,15 @@ const useRunningProcesses = (): RunningProcesses => {
             return;
         }
 
-        if (process.status === ProcessStatus.COMPLETED) {
-            setRunningProcesses(runningProcesses.filter((p) => p.id !== process.id));
+        if (process.status === ProcessStatus.COMPLETED ||  process.status === ProcessStatus.ABORTED) {
+            setRunningProcesses(runningProcesses.filter((p) => p.pid !== process.id));
         } else {
             setRunningProcesses([
-                ...runningProcesses,
+                ...runningProcesses.filter((p) => p.pid !== process.id),
                 {
                     ...process,
                     pid: process.id,
+                    last_status: process.status,
                 },
             ]);
         }
