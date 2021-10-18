@@ -61,7 +61,6 @@ class Processes extends React.PureComponent<IProps, IState> {
     }
 
     updateRunningProcesses = (runningProcesses: ProcessV2[]) => {
-        console.log("UPDATE");
         this.setState({ showTables: false });
         this.setState({ showTables: true });
         return <></>;
