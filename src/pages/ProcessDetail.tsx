@@ -194,6 +194,13 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             }
         };
 
+        // wait max 3 seconds on timeout: so non working websocket will take 3 seconds to load old process page
+        setTimeout(() => {
+            if (client.readyState === 0) {
+                client.close();
+            }
+        }, 3000);
+
         const timeout = setTimeout(() => {
             client.close(WebSocketCodes.NORMAL_CLOSURE);
             this.componentDidMount();
