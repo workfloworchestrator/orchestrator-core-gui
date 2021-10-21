@@ -20,6 +20,7 @@ it("exports everything", () => {
         AutoFields: expect.any(Function),
         BoolField: expect.any(Function),
         DateField: expect.any(Function),
+        DividerField: expect.any(Function),
         ErrorField: expect.any(Function),
         ErrorsField: expect.any(Function),
         HiddenField: expect.any(Function),
