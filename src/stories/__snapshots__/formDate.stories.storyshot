@@ -97,7 +97,7 @@ exports[`Storyshots DatePicker Date Picker 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="euiIcon euiIcon--medium euiFormControlLayoutClearButton__icon"
+                      className="euiIcon euiIcon--medium euiIcon-isLoaded euiFormControlLayoutClearButton__icon"
                       focusable="false"
                       height={16}
                       role="img"
