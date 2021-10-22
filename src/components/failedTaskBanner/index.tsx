@@ -31,7 +31,7 @@ interface Item {
 }
 
 export default function FailedTaskBanner() {
-    const [data, pageCount, fetchData] = useFailedTaskFetcher<Item>("processes/");
+    const [data, , fetchData] = useFailedTaskFetcher<Item>("processes/");
     const [failedTasks, setFailedTasks] = useState({
         all: 0,
         failed: 0,
