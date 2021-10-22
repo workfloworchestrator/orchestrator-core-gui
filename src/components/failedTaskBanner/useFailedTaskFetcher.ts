@@ -18,11 +18,11 @@ import { useCallback, useRef, useState } from "react";
 import { SortingRule } from "react-table";
 import { FilterArgument } from "utils/types";
 
-interface IFetchData<T extends object> {
+interface IFetchData {
     (pageIndex: number, pageSize: number, sortBy: SortingRule<string>[], filterBy: FilterArgument[]): void;
 }
 
-function useFailedTaskFetcher<T extends object>(endpoint: string): [T[], number, IFetchData<T>] {
+function useFailedTaskFetcher<T extends object>(endpoint: string): [T[], number, IFetchData] {
     const [pageCount, setPageCount] = useState(0);
     const [data, setData] = useState<T[]>([]);
     /*
