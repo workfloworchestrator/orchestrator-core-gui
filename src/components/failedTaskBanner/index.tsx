@@ -16,6 +16,7 @@
 import "./FailedTaskBanner.scss";
 
 import { EuiText, EuiToolTip } from "@elastic/eui";
+import { groupBy } from "lodash";
 import { useContext, useEffect, useState } from "react";
 import { Process, ProcessStatus } from "utils/types";
 import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
@@ -41,9 +42,10 @@ const filterFailedTasks = [
 ];
 
 const countFailedProcesses = (processes: ProcessWithStatus[]) => {
-    const failed = processes.filter((p) => p.last_status === ProcessStatus.FAILED).length;
-    const inconsistentData = processes.filter((p) => p.last_status === ProcessStatus.INCONSISTENT_DATA).length;
-    const apiUnavailable = processes.filter((p) => p.last_status === ProcessStatus.API_UNAVAILABLE).length;
+    const groupStatuses = groupBy(processes, (p) => p.last_status);
+    const failed = groupStatuses[ProcessStatus.FAILED]?.length || 0;
+    const inconsistentData = groupStatuses[ProcessStatus.INCONSISTENT_DATA]?.length || 0;
+    const apiUnavailable = groupStatuses[ProcessStatus.API_UNAVAILABLE]?.length || 0;
     return {
         failed,
         inconsistentData,
