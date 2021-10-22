@@ -16,6 +16,7 @@
 import "components/Header.scss";
 
 import { EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderSectionItem, EuiText } from "@elastic/eui";
+import FailedTaskBanner from "components/failedTaskBanner";
 import UserProfile from "components/UserProfile";
 import { ENV } from "env";
 import logo from "images/network-automation.png";
@@ -129,6 +130,8 @@ class Header extends React.PureComponent<IProps, IState> {
                             <FormattedMessage id={`settings.status.engine.${engineStatus.toLowerCase()}`} />
                             <i className={`fa fa-circle header__status ${engineStatus.toLowerCase()}`}></i>
                         </EuiHeaderLink>
+
+                        <FailedTaskBanner />
 
                         <EuiHeaderLink id="logout" onClick={this.logout}>
                             <FormattedMessage id="header.links.logout" />
