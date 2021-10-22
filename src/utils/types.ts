@@ -15,6 +15,18 @@
 
 import { JSONSchema6 } from "json-schema";
 
+export enum ProcessStatus {
+    "CREATED" = "created",
+    "RUNNING" = "running",
+    "SUSPENDED" = "suspended",
+    "WAITING" = "waiting",
+    "ABORTED" = "aborted",
+    "FAILED" = "failed",
+    "API_UNAVAILABLE" = "api_unavailable",
+    "INCONSISTENT_DATA" = "inconsistent_data",
+    "COMPLETED" = "completed",
+}
+
 export interface FilterArgument {
     id: string;
     values: string[];

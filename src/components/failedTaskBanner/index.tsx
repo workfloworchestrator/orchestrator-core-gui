@@ -17,7 +17,9 @@ import "./FailedTaskBanner.scss";
 
 import { EuiText, EuiToolTip } from "@elastic/eui";
 import useInterval from "components/tables/useInterval";
+import { groupBy } from "lodash";
 import { useEffect, useState } from "react";
+import { ProcessStatus } from "utils/types";
 
 import useFailedTaskFetcher from "./useFailedTaskFetcher";
 
@@ -26,12 +28,25 @@ enum TasksStatus {
     "FAILED" = "failed",
 }
 
-interface Item {
+interface ProcessWithStatus {
     last_status: string;
 }
 
+const countFailedProcesses = (processes: ProcessWithStatus[]) => {
+    const groupStatuses = groupBy(processes, (p) => p.last_status);
+    const failed = groupStatuses[ProcessStatus.FAILED]?.length || 0;
+    const inconsistentData = groupStatuses[ProcessStatus.INCONSISTENT_DATA]?.length || 0;
+    const apiUnavailable = groupStatuses[ProcessStatus.API_UNAVAILABLE]?.length || 0;
+    return {
+        failed,
+        inconsistentData,
+        apiUnavailable,
+        all: failed + inconsistentData + apiUnavailable,
+    };
+};
+
 export default function FailedTaskBanner() {
-    const [data, , fetchData] = useFailedTaskFetcher<Item>("processes/");
+    const [data, , fetchData] = useFailedTaskFetcher<ProcessWithStatus>("processes/");
     const [failedTasks, setFailedTasks] = useState({
         all: 0,
         failed: 0,
@@ -45,13 +60,7 @@ export default function FailedTaskBanner() {
     ];
 
     useEffect(() => {
-        const list = {
-            all: data.length,
-            failed: data.filter((item) => item.last_status === "failed").length,
-            inconsistentData: data.filter((item) => item.last_status === "inconsistent_data").length,
-            apiUnavailable: data.filter((item) => item.last_status === "api_unavailable").length,
-        };
-        setFailedTasks(list);
+        setFailedTasks(countFailedProcesses(data));
     }, [data]);
 
     fetchData(0, 10, [], filterBy);
