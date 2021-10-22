@@ -36,10 +36,11 @@ export interface WebSocketMessageData {
 
 export interface RunningProcesses {
     runningProcesses: RunningProcess[];
+    useFallback: boolean;
 }
 
 const useRunningProcesses = (): RunningProcesses => {
-    const [data] = useWebsocket<WebSocketMessageData>("api/processes/all/");
+    const { message, useFallback } = useWebsocket<WebSocketMessageData>("api/processes/alll/");
     const [runningProcesses, setRunningProcesses] = useState<RunningProcess[]>([]);
 
     const handleProcessUpdate = ({ process }: WebSocketMessageData) => {
@@ -47,7 +48,7 @@ const useRunningProcesses = (): RunningProcesses => {
             return;
         }
 
-        if (process.status === ProcessStatus.COMPLETED ||  process.status === ProcessStatus.ABORTED) {
+        if (process.status === ProcessStatus.COMPLETED || process.status === ProcessStatus.ABORTED) {
             setRunningProcesses(runningProcesses.filter((p) => p.pid !== process.id));
         } else {
             setRunningProcesses([
@@ -62,14 +63,14 @@ const useRunningProcesses = (): RunningProcesses => {
     };
 
     useEffect(() => {
-        if (data.failedProcesses) {
-            setRunningProcesses(data.failedProcesses as RunningProcess[]);
+        if (message.failedProcesses) {
+            setRunningProcesses(message.failedProcesses as RunningProcess[]);
         }
 
-        handleProcessUpdate(data);
-    }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
+        handleProcessUpdate(message);
+    }, [message]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    return { runningProcesses };
+    return { runningProcesses, useFallback };
 };
 
 export default useRunningProcesses;

@@ -16,10 +16,17 @@
 import { useEffect, useRef, useState } from "react";
 import { WebSocketCodes, websocketReconnectTime, websocketService } from "websocketService";
 
-const useWebsocket = <T extends object>(endpoint: string): [T, () => WebSocket | undefined] => {
+const useWebsocket = <T extends object>(
+    endpoint: string
+): {
+    message: T;
+    useFallback: boolean;
+    getWebsocket: () => WebSocket | undefined;
+} => {
     const client = useRef<WebSocket | undefined>(undefined);
     const timeout = useRef<NodeJS.Timeout | undefined>(undefined);
     const [message, setMessage] = useState<T>({} as T);
+    const [useFallback, setUsefallback] = useState<boolean>(false);
 
     const connectWebsocket = () => {
         disconnectWebsocket();
@@ -29,9 +36,20 @@ const useWebsocket = <T extends object>(endpoint: string): [T, () => WebSocket |
             newClient.onmessage = ({ data }) => {
                 setMessage(JSON.parse(data));
             };
+            newClient.onerror = () => {
+                setUsefallback(true);
+            };
             client.current = newClient;
         }
 
+        // wait max 3 seconds on timeout: so non working websocket will take 3 seconds to load old process page
+        setTimeout(() => {
+            if (client.current?.readyState !== 1) {
+                disconnectWebsocket();
+            }
+        }, 3000);
+
+        // timeout to reconnect to enforce re-auth.
         timeout.current = setTimeout(() => {
             connectWebsocket();
         }, websocketReconnectTime);
@@ -53,17 +71,10 @@ const useWebsocket = <T extends object>(endpoint: string): [T, () => WebSocket |
 
     useEffect(() => {
         connectWebsocket();
-
-        setTimeout(() => {
-            connectWebsocket();
-        }, websocketReconnectTime);
-
-        return () => {
-            disconnectWebsocket();
-        };
+        return () => disconnectWebsocket();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    return [message, getWebsocket];
+    return { message, useFallback, getWebsocket };
 };
 
 export default useWebsocket;

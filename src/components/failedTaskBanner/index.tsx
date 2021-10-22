@@ -20,6 +20,8 @@ import { useContext, useEffect, useState } from "react";
 import { Process, ProcessStatus } from "utils/types";
 import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
 
+import useFailedTaskFetcher from "./useFailedTaskFetcher";
+
 enum CheckboxStatus {
     "OK" = "ok",
     "FAILED" = "failed",
@@ -29,7 +31,16 @@ export interface ProcessData extends Process {
     status: ProcessStatus;
 }
 
-const countFailedProcesses = (processes: ProcessData[]) => {
+interface ProcessWithStatus {
+    last_status: string;
+}
+
+const filterFailedTasks = [
+    { id: "isTask", values: ["true"] },
+    { id: "status", values: ["failed", "api_unavailable", "inconsistent_data"] },
+];
+
+const countFailedProcesses = (processes: ProcessWithStatus[]) => {
     const failed = processes.filter((p) => p.last_status === ProcessStatus.FAILED).length;
     const inconsistentData = processes.filter((p) => p.last_status === ProcessStatus.INCONSISTENT_DATA).length;
     const apiUnavailable = processes.filter((p) => p.last_status === ProcessStatus.API_UNAVAILABLE).length;
@@ -42,12 +53,38 @@ const countFailedProcesses = (processes: ProcessData[]) => {
 };
 
 export default function FailedTaskBanner() {
-    const { runningProcesses } = useContext(RunningProcessesContext);
+    const { runningProcesses, useFallback } = useContext(RunningProcessesContext);
     const [failedTasks, setFailedTasks] = useState(countFailedProcesses(runningProcesses));
+    const [data, , fetchData] = useFailedTaskFetcher<ProcessWithStatus>("processes/");
+    const [httpInterval, setHttpInterval] = useState<NodeJS.Timeout | undefined>();
+
+    const httpFailedProcessesFallback = () => {
+        fetchData(0, 10, [], filterFailedTasks);
+
+        setHttpInterval(
+            setInterval(() => {
+                fetchData(0, 10, [], filterFailedTasks);
+            }, 3000)
+        );
+    };
 
     useEffect(() => {
         setFailedTasks(countFailedProcesses(runningProcesses));
     }, [runningProcesses]);
+
+    useEffect(() => {
+        setFailedTasks(countFailedProcesses(data));
+    }, [data]);
+
+    useEffect(() => {
+        if (useFallback) {
+            httpFailedProcessesFallback();
+        }
+    }, [useFallback]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        return () => httpInterval && clearInterval(httpInterval);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const renderTooltipContent = () => (
         <>
