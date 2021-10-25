@@ -16,21 +16,30 @@
 import "./FailedTaskBanner.scss";
 
 import { EuiText, EuiToolTip } from "@elastic/eui";
-import useInterval from "components/tables/useInterval";
 import { groupBy } from "lodash";
-import { useEffect, useState } from "react";
-import { ProcessStatus } from "utils/types";
+import { useContext, useEffect, useState } from "react";
+import { Process, ProcessStatus } from "utils/types";
+import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
 
 import useFailedTaskFetcher from "./useFailedTaskFetcher";
 
-enum TasksStatus {
+enum CheckboxStatus {
     "OK" = "ok",
     "FAILED" = "failed",
+}
+export interface ProcessData extends Process {
+    id: string;
+    status: ProcessStatus;
 }
 
 interface ProcessWithStatus {
     last_status: string;
 }
+
+const filterFailedTasks = [
+    { id: "isTask", values: ["true"] },
+    { id: "status", values: ["failed", "api_unavailable", "inconsistent_data"] },
+];
 
 const countFailedProcesses = (processes: ProcessWithStatus[]) => {
     const groupStatuses = groupBy(processes, (p) => p.last_status);
@@ -46,33 +55,38 @@ const countFailedProcesses = (processes: ProcessWithStatus[]) => {
 };
 
 export default function FailedTaskBanner() {
+    const { runningProcesses, useFallback } = useContext(RunningProcessesContext);
+    const [failedTasks, setFailedTasks] = useState(countFailedProcesses(runningProcesses));
     const [data, , fetchData] = useFailedTaskFetcher<ProcessWithStatus>("processes/");
-    const [failedTasks, setFailedTasks] = useState({
-        all: 0,
-        failed: 0,
-        inconsistentData: 0,
-        apiUnavailable: 0,
-    });
+    const [httpInterval, setHttpInterval] = useState<NodeJS.Timeout | undefined>();
 
-    const filterBy = [
-        { id: "isTask", values: ["true"] },
-        { id: "status", values: ["failed", "api_unavailable", "inconsistent_data"] },
-    ];
+    const httpFailedProcessesFallback = () => {
+        fetchData(0, 10, [], filterFailedTasks);
+
+        setHttpInterval(
+            setInterval(() => {
+                fetchData(0, 10, [], filterFailedTasks);
+            }, 3000)
+        );
+    };
+
+    useEffect(() => {
+        setFailedTasks(countFailedProcesses(runningProcesses));
+    }, [runningProcesses]);
 
     useEffect(() => {
         setFailedTasks(countFailedProcesses(data));
     }, [data]);
 
-    fetchData(0, 10, [], filterBy);
+    useEffect(() => {
+        if (useFallback) {
+            httpFailedProcessesFallback();
+        }
+    }, [useFallback]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    /*
-     * poll for updates at an interval. because this is a hook the interval will be
-     * removed when the table is unmounted
-     */
-    const autoRefreshDelay = 3000;
-    useInterval(() => {
-        fetchData(0, 10, [], filterBy);
-    }, autoRefreshDelay);
+    useEffect(() => {
+        return () => httpInterval && clearInterval(httpInterval);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const renderTooltipContent = () => (
         <>
@@ -82,7 +96,7 @@ export default function FailedTaskBanner() {
         </>
     );
 
-    const showTasksStatus = () => (failedTasks.all ? TasksStatus.FAILED : TasksStatus.OK);
+    const showTasksStatus = () => (failedTasks.all ? CheckboxStatus.FAILED : CheckboxStatus.OK);
 
     return (
         <EuiToolTip position="bottom" content={renderTooltipContent()}>

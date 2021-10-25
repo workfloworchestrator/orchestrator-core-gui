@@ -30,10 +30,10 @@ import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { organisationNameByUuid } from "utils/Lookups";
-import { ProcessV2 } from "utils/types";
+import { ProcessStatus, ProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
-import { WebSocketCodes, websocketReconnectTime, websocketService } from "websocketService";
+import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
 
 interface IProps extends WrappedComponentProps {}
 
@@ -43,8 +43,6 @@ interface IState {
     confirm: () => void;
     confirmationDialogQuestion: string;
     showExplanation: boolean;
-    client: WebSocket | undefined;
-    wsTimeout: NodeJS.Timeout | undefined;
     showTables: boolean;
 }
 
@@ -58,41 +56,14 @@ class Processes extends React.PureComponent<IProps, IState> {
             confirm: () => this,
             confirmationDialogQuestion: "",
             showExplanation: false,
-            client: undefined,
-            wsTimeout: undefined,
             showTables: true,
         };
     }
 
-    componentDidMount = () => {
-        const client = websocketService.connect("api/processes/all/");
-        this.setState({ client: client });
-
-        client.onmessage = ({ data }) => {
-            const json = JSON.parse(data);
-            if (json.process) {
-                this.setState({ showTables: false });
-                this.setState({ showTables: true });
-            }
-        };
-
-        client.onclose = () => {
-            this.setState({ client: undefined });
-        };
-
-        const timeout = setTimeout(() => {
-            client.close(WebSocketCodes.NORMAL_CLOSURE);
-            this.componentDidMount();
-        }, websocketReconnectTime);
-
-        this.setState({ wsTimeout: timeout });
-    };
-
-    componentWillUnmount = () => {
-        if (this.state.wsTimeout) {
-            clearTimeout(this.state.wsTimeout);
-        }
-        this.state.client?.close();
+    updateRunningProcesses = (runningProcesses: ProcessV2[]) => {
+        this.setState({ showTables: false });
+        this.setState({ showTables: true });
+        return <></>;
     };
 
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
@@ -162,19 +133,28 @@ class Processes extends React.PureComponent<IProps, IState> {
     render() {
         const activeSettings = initialProcessTableSettings(
             "table.processes.active",
-            initialProcessesFilterAndSort(false, ["running", "suspended", "failed", "created", "waiting"]),
+            initialProcessesFilterAndSort(false, [
+                ProcessStatus.RUNNING,
+                ProcessStatus.SUSPENDED,
+                ProcessStatus.FAILED,
+                ProcessStatus.CREATED,
+                ProcessStatus.WAITING,
+            ]),
             ["pid", "step", "tag", "creator", "customer", "product"],
             { showSettings: false, pageSize: 10, refresh: false }
         );
         const completedSettings = initialProcessTableSettings(
             "table.processes.completed",
-            initialProcessesFilterAndSort(false, ["completed"]),
+            initialProcessesFilterAndSort(false, [ProcessStatus.COMPLETED]),
             ["pid", "step", "status", "assignee", "creator", "started", "abbrev"],
             { showSettings: false, pageSize: 5, refresh: false }
         );
 
         return (
             <EuiPage>
+                <RunningProcessesContext.Consumer>
+                    {(rpc: any) => this.updateRunningProcesses(rpc.runningProcesses)}
+                </RunningProcessesContext.Consumer>
                 <EuiPageBody component="div" className="process-container">
                     <Explain
                         close={() => this.setState({ showExplanation: false })}
