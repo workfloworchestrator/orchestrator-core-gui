@@ -40,7 +40,7 @@ export interface RunningProcesses {
 }
 
 const useRunningProcesses = (): RunningProcesses => {
-    const { message, useFallback } = useWebsocket<WebSocketMessageData>("api/processes/alll/");
+    const { message, useFallback } = useWebsocket<WebSocketMessageData>("api/processes/all/");
     const [runningProcesses, setRunningProcesses] = useState<RunningProcess[]>([]);
 
     const handleProcessUpdate = ({ process }: WebSocketMessageData) => {
