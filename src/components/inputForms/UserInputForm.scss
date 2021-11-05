@@ -21,6 +21,7 @@
         padding: 20px 0;
 
         font-size: larger;
+        font-weight: bold;
         margin-bottom: 15px;
         color: vars.$dark-grey;
     }
@@ -83,16 +84,18 @@
     margin-bottom: 20px; // For service ports this add margin to the label??
 }
 
-.euiFormRow__labelWrapper {
+.form.euiFormRow__labelWrapper {
     flex-direction: column;
     margin-top: -10px;
 }
 
-.euiFormRow__label__large {
+.form.euiFormRow__label__large {
     font-size: +1.1em;
     margin-bottom: 0;
 }
 .euiHorizontalRule {
-    border-top: 2px solid vars.$lighter-primary;
-    margin-top: -36px;
+    border-top: 2px solid vars.$light-primary;
 }
+.form.euiHorizontalRule {
+     margin-top: -36px;
+ }
