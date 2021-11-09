@@ -20,7 +20,7 @@ import { connectField } from "uniforms";
 export type LabelFieldProps = FieldProps<null, {}, null, HTMLDivElement>;
 
 function Divider({ id }: LabelFieldProps) {
-    return <EuiHorizontalRule />;
+    return <EuiHorizontalRule style={{ marginTop: "-30px" }} />;
 }
 
 export default connectField(Divider, { kind: "leaf" });
