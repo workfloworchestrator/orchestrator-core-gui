@@ -44,6 +44,8 @@ interface IState {
     confirmationDialogQuestion: string;
     showExplanation: boolean;
     showTables: boolean;
+    rpLength: number;
+    runningProcesses: any;
 }
 
 class Processes extends React.PureComponent<IProps, IState> {
@@ -57,12 +59,18 @@ class Processes extends React.PureComponent<IProps, IState> {
             confirmationDialogQuestion: "",
             showExplanation: false,
             showTables: true,
+            rpLength: 0,
+            runningProcesses: []
         };
     }
 
     updateRunningProcesses = (runningProcesses: ProcessV2[]) => {
-        this.setState({ showTables: false });
-        this.setState({ showTables: true });
+        if (runningProcesses !== this.state.runningProcesses) {
+            this.setState({ showTables: false, runningProcesses });
+            setTimeout(() => {
+                this.setState({ showTables: true });
+            }, 1);
+        }
         return <></>;
     };
 
@@ -173,6 +181,7 @@ class Processes extends React.PureComponent<IProps, IState> {
                             on the reset button.
                         </p>
                     </Explain>
+                    {this.state.showTables}
                     <ConfirmationDialog
                         isOpen={this.state.confirmationDialogOpen}
                         cancel={this.cancelConfirmation}
