@@ -65,6 +65,7 @@ class Processes extends React.PureComponent<IProps, IState> {
     updateRunningProcesses = (runningProcesses: ProcessV2[]) => {
         if (runningProcesses !== this.state.runningProcesses) {
             this.setState({ showTables: false, runningProcesses });
+            // using setTimeout to force rerender.
             setTimeout(() => {
                 this.setState({ showTables: true });
             }, 1);
