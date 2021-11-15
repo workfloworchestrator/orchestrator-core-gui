@@ -58,7 +58,7 @@ class Processes extends React.PureComponent<IProps, IState> {
             confirmationDialogQuestion: "",
             showExplanation: false,
             showTables: true,
-            runningProcesses: []
+            runningProcesses: [],
         };
     }
 
