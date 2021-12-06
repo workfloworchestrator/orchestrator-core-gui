@@ -90,9 +90,17 @@ export function RenderActions({
                                         )}
                                     </td>
                                     <td id={`${index}-v`}>
-                                        {wf.reason && (
+                                        {wf.reason && wf.reason === "subscription.no_modify_parent_subscription" && (
                                             <em className="error">
-                                                <FormattedMessage id={wf.reason} values={wf as any} />
+                                                    <FormattedMessage
+                                                        id={wf.reason}
+                                                        values={{unterminated_parents: wf.unterminated_parents.join(", ")}}
+                                                        />
+                                            </em>
+                                        )}
+                                        {wf.reason && wf.reason !== "subscription.no_modify_parent_subscription" && (
+                                            <em className="error">
+                                                <FormattedMessage id={wf.reason} values={wf as any}></FormattedMessage>
                                             </em>
                                         )}
                                     </td>
@@ -130,7 +138,15 @@ export function RenderActions({
                                         )}
                                     </td>
                                     <td>
-                                        {wf.reason && (
+                                        {wf.reason && wf.reason === "subscription.no_modify_parent_subscription" && (
+                                            <em className="error">
+                                                <FormattedMessage
+                                                    id={wf.reason}
+                                                    values={{unterminated_parents: wf.unterminated_parents.join(", ")}}
+                                                />
+                                            </em>
+                                        )}
+                                        {wf.reason && wf.reason !== "subscription.no_modify_parent_subscription" && (
                                             <em className="error">
                                                 <FormattedMessage id={wf.reason} values={wf as any} />
                                             </em>
