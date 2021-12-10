@@ -148,7 +148,7 @@ export function RenderActions({
                                             <em className="error">
                                                 <FormattedMessage
                                                     id={wf.reason}
-                                                    values={create_readable_description(wf) as any}
+                                                    values={{unterminated_parents: wf.unterminated_parents.join(", ")}}
                                                 />
                                             </em>
                                         )}
