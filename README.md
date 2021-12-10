@@ -40,7 +40,7 @@ yarn install
 
 #### Linux
 
-This project currently only works with Node.js 14 (if you also want to be able to run the tests).
+This project currently only works with Node.js 14 (if you also want to be able to run the tests in a deterministic way).
 
 ```sh
 npm install yarn -g
@@ -88,7 +88,7 @@ We are using Prettier as a code formatter. You can run prettier like this:
     yarn prettier-fix
 ```
 
-Similarly you can run other scripts that can be found in the package.json
+Similarly, you can run other yarn (sub)commands that can be found in the `package.json`
 
 ### Running the tests
 
@@ -138,7 +138,7 @@ is done as follows:
 )}
 ```
 
-Basically if allowed returns true the component will be shown.
+Basically it boils down to: when a call to `allowed` returns true the component will be shown.
 
 **When no policy is found, the orchestrator-client will allow access to the resource.
 Any real access must be enforced by the API. The client only disables features with the `allowed` function**
