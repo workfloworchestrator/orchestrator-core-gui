@@ -15,6 +15,12 @@ import { applyIdNamingConvention, isEmpty, stop } from "utils/Utils";
 
 import CheckBox from "../CheckBox";
 
+let create_readable_description = function(wf: any): object {
+    if ("unterminated_parents" in wf)
+        return {unterminated_parents: wf.unterminated_parents.join(", ")};
+    return wf as any
+};
+
 export function RenderActions({
     subscription,
     workflows,
@@ -94,7 +100,7 @@ export function RenderActions({
                                             <em className="error">
                                                     <FormattedMessage
                                                         id={wf.reason}
-                                                        values={{unterminated_parents: wf.unterminated_parents.join(", ")}}
+                                                        values={create_readable_description(wf) as any}
                                                         />
                                             </em>
                                         )}
@@ -142,7 +148,7 @@ export function RenderActions({
                                             <em className="error">
                                                 <FormattedMessage
                                                     id={wf.reason}
-                                                    values={{unterminated_parents: wf.unterminated_parents.join(", ")}}
+                                                    values={create_readable_description(wf) as any}
                                                 />
                                             </em>
                                         )}
