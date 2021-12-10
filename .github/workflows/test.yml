@@ -9,7 +9,8 @@ jobs:
   build:
     name: try to make a clean build without lint, yarn, test and compile errors
     runs-on: ubuntu-latest
-
+    env:
+      TZ: Europe/Amsterdam
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
