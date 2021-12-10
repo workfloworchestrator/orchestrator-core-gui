@@ -8,9 +8,15 @@ The client is a ReactJS user interface. This project was bootstrapped with
 [Create React App](https://github.com/facebookincubator/create-react-app).
 
 When you need to work on the theming it's good to know that the theme is split into a separate
-package: located in `lib/themes/surfnet_light`. It has its own README.
+package: located in `lib/themes`. It has its own README.
 
 ### Installing
+
+Depending on the OS there are ways to install yarn with a package manager.
+
+Note: If you need more flexibility, like having the ability to test with multiple Node JS versions, we strongly recommend
+to use NVM. More info [here](https://github.com/nvm-sh/nvm#installing-and-updating). You would then install yarn also
+from within your Node env.
 
 #### Mac
 
@@ -32,16 +38,6 @@ and then:
 yarn install
 ```
 
-Note: when you use python3 as a default python on mac you will receive an error when yarn tries to install gyp:
-stating that it needs python >2.5 < 3.0: you can then still install stuff by pointing yarn to the default python2.7 on
-Mac OS:
-
-`yarn install --python /usr/bin/python2.7`
-
-If you need more flexibility, like having the ability to test with multiple Node JS versions, we strongly recommend 
-to use NVM. More info [here](https://github.com/nvm-sh/nvm#installing-and-updating). You would then install yarn also 
-from within your Node env.
-
 #### Linux
 
 This project currently only works with Node.js 14 (if you also want to be able to run the tests).
@@ -57,6 +53,7 @@ npm install npm-run-all --save-dev -g
 To run locally:
 
 ```sh
+./bootstrap.sh # only needed the first time if you don't use plugins
 yarn start
 ```
 
