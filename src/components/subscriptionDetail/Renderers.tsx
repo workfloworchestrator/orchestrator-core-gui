@@ -15,10 +15,9 @@ import { applyIdNamingConvention, isEmpty, stop } from "utils/Utils";
 
 import CheckBox from "../CheckBox";
 
-let create_readable_description = function(wf: any): object {
-    if ("unterminated_parents" in wf)
-        return {unterminated_parents: wf.unterminated_parents.join(", ")};
-    return wf as any
+let create_readable_description = function (wf: any): object {
+    if ("unterminated_parents" in wf) return { unterminated_parents: wf.unterminated_parents.join(", ") };
+    return wf as any;
 };
 
 export function RenderActions({
@@ -98,10 +97,10 @@ export function RenderActions({
                                     <td id={`${index}-v`}>
                                         {wf.reason && wf.reason === "subscription.no_modify_parent_subscription" && (
                                             <em className="error">
-                                                    <FormattedMessage
-                                                        id={wf.reason}
-                                                        values={create_readable_description(wf) as any}
-                                                        />
+                                                <FormattedMessage
+                                                    id={wf.reason}
+                                                    values={create_readable_description(wf) as any}
+                                                />
                                             </em>
                                         )}
                                         {wf.reason && wf.reason !== "subscription.no_modify_parent_subscription" && (
