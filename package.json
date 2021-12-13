@@ -4,11 +4,28 @@
     "version": "1.0.0",
     "private": false,
     "license": "Apache-2.0",
+    "scripts": {
+        "analyze": "source-map-explorer build/static/js/main.*",
+        "start-old": "react-scripts start",
+        "start": "craco start",
+        "build": "set \"INLINE_RUNTIME_CHUNK=false\" && react-scripts build",
+        "test-old": "react-scripts test",
+        "test": "react-scripts test -- --config=jest.config.js",
+        "eject": "react-scripts eject",
+        "storybook": "start-storybook -p 9009 -s ./public",
+        "storybook-build": "build-storybook -s ./public",
+        "storybook-deploy": "gh-pages -d storybook-static",
+        "prettier": "prettier -c \"{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}\"",
+        "prettier-fix": "prettier --write \"{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}\"",
+        "extract": "formatjs extract",
+        "compile": "formatjs compile"
+    },
     "dependencies": {
         "@craco/craco": "^6.1.2",
         "@elastic/datemath": "^5.0.3",
         "@elastic/eui": "^30.5.1",
         "@fortawesome/fontawesome-free": "^5.15.2",
+        "@jest/types": "^27.4.2",
         "@open-policy-agent/opa-wasm": "^1.2.0",
         "@sentry/react": "^6.0.1",
         "@sentry/tracing": "^6.0.1",
@@ -126,21 +143,6 @@
         "@types/react": "EUI requires this version",
         "@types/react-dom": "EUI requires this version",
         "query-string": "needed for use-query-params to actually work"
-    },
-    "scripts": {
-        "analyze": "source-map-explorer build/static/js/main.*",
-        "start-old": "react-scripts start",
-        "start": "craco start",
-        "build": "set \"INLINE_RUNTIME_CHUNK=false\" && react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject",
-        "storybook": "start-storybook -p 9009 -s ./public",
-        "storybook-build": "build-storybook -s ./public",
-        "storybook-deploy": "gh-pages -d storybook-static",
-        "prettier": "prettier -c \"{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}\"",
-        "prettier-fix": "prettier --write \"{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}\"",
-        "extract": "formatjs extract",
-        "compile": "formatjs compile"
     },
     "importSort": {
         ".js, .jsx, .ts, .tsx": {

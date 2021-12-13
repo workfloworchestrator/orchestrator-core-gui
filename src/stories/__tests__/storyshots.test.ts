@@ -25,7 +25,7 @@ function AsyncSnapshot({
     story,
     context,
     renderTree,
-    done, // --> callback passed to test method when asyncJest option is true
+    done // --> callback passed to test method when asyncJest option is true
 }: {
     story: any;
     context: any;
