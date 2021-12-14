@@ -330,7 +330,7 @@ I18n.translations.en = {
         end_date: "End date",
         start_date_epoch: "Start date",
         end_date_epoch: "End date",
-        name: "Name",
+        name: "Product name",
         no_found: "No subscriptions",
         searchPlaceHolder: "Search for subscriptions...",
         advancedSearchPlaceHolder: "Search on resource types",
