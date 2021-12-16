@@ -219,7 +219,6 @@ class Tasks extends React.PureComponent<IProps, IState> {
                     <ProcessesTable
                         initialTableSettings={tasksSettings}
                         renderActions={this.renderActions}
-                        isProcess={false}
                     />
                     <ScrollUpButton />
                 </EuiPageBody>

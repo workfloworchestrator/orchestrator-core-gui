@@ -17,9 +17,8 @@ import "components/tables/Preferences.scss";
 
 import { EuiButton, EuiCheckbox, EuiFlexGroup, EuiFlexItem, EuiText } from "@elastic/eui";
 import { ActionType, TableSettingsAction } from "components/tables/NwaTable";
-import React, { Dispatch } from "react";
+import { Dispatch } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
-import NumericInput from "react-numeric-input";
 import { ColumnInstance, TableSettings, TableState } from "react-table";
 
 interface IProps<T extends object> {
@@ -46,26 +45,6 @@ function Preferences<T extends object>({
                 <span className="table-name">
                     <FormattedMessage id={name} />
                     {minimized && <FormattedMessage id="table.is_minimized" />}
-                </span>
-                {"   "}
-                <span
-                    title={
-                        refresh
-                            ? intl.formatMessage({ id: "table.preferences.refresh" }, { delay: delay })
-                            : intl.formatMessage({ id: "table.preferences.norefresh" })
-                    }
-                    onClick={() => dispatch({ type: ActionType.REFRESH_TOGGLE })}
-                    className={refresh ? (loading ? "pulse" : "rest") : "dead"}
-                >
-                    {refresh ? (
-                        loading ? (
-                            <i className={"fa fa-bullseye"} />
-                        ) : (
-                            <i className={"fa fa-circle"} />
-                        )
-                    ) : (
-                        <i className={"far fa-circle"} />
-                    )}
                 </span>
                 {"   "}
                 <span
@@ -119,21 +98,6 @@ function Preferences<T extends object>({
                             </EuiButton>
                         </EuiFlexItem>
                     </EuiFlexGroup>
-                    <EuiText size="s">
-                        <h4>
-                            <FormattedMessage id="table.preferences.autorefresh" />
-                        </h4>
-                    </EuiText>
-                    <NumericInput
-                        onChange={(valueAsNumber) => {
-                            valueAsNumber && dispatch({ type: ActionType.REFRESH_DELAY, delay: valueAsNumber });
-                        }}
-                        min={500}
-                        max={10000}
-                        step={500}
-                        value={state.delay}
-                        strict={true}
-                    />
                     <EuiText size="s">
                         <h4>
                             <FormattedMessage id="table.preferences.hidden_columns" />

@@ -22,9 +22,8 @@ import Paginator from "components/tables/Paginator";
 import Preferences from "components/tables/Preferences";
 import { TableRenderer } from "components/tables/TableRenderer";
 import useFilterableDataFetcher from "components/tables/useFilterableDataFetcher";
-import useInterval from "components/tables/useInterval";
 import { produce } from "immer";
-import React, { useEffect } from "react";
+import { useEffect, useContext, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import {
     Column,
@@ -43,6 +42,7 @@ import {
 } from "react-table";
 
 import MiniPaginator from "./MiniPaginator";
+import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
 
 /*
  * Reusable NWA table implementation using react-table 7.
@@ -100,7 +100,7 @@ export function tableSettingsReducer<T extends object>(
     prevState: TableState<T>
 ) {
     // Uncomment to see all the actions in the console.
-    // console.log(action);
+    console.log(action);
     const changedState = produce(newState, (draft) => {
         switch (action.type) {
             case ActionType.OVERRIDE:
@@ -157,9 +157,6 @@ export function tableSettingsReducer<T extends object>(
             case ActionType.REFRESH_ENABLE:
                 draft.refresh = true;
                 break;
-            case ActionType.REFRESH_DELAY:
-                draft.delay = action.delay;
-                break;
             case ActionType.SHOW_SETTINGS_TOGGLE:
                 draft.showSettings = !draft.showSettings;
                 break;
@@ -214,6 +211,7 @@ export function NwaTable<T extends object>({
     excludeInFilter,
     advancedSearch,
 }: INwaTableProps<T>) {
+    const { runningProcesses, useFallback } = useContext(RunningProcessesContext)
     const [data, pageCount, fetchData] = useFilterableDataFetcher<T>(endpoint);
     const {
         getTableProps,
@@ -235,7 +233,7 @@ export function NwaTable<T extends object>({
     } = useTable<T>(
         {
             columns,
-            data,
+            data: data,
             pageCount,
             manualFilters: true,
             manualPagination: true,
@@ -303,6 +301,17 @@ export function NwaTable<T extends object>({
         setPageSize,
     };
 
+    const [httpInterval, setHttpInterval] = useState<NodeJS.Timeout | undefined>();
+    const httpFallback = () => {
+        fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
+
+        setHttpInterval(
+            setInterval(() => {
+                fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
+            }, 3000)
+        );
+    };
+
     // Update localStorage
     useEffect(() => {
         persistSettings({ showSettings, showPaginator, hiddenColumns, delay, filterBy, sortBy });
@@ -318,14 +327,23 @@ export function NwaTable<T extends object>({
         fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
     }, [fetchData, dispatch, pageIndex, pageSize, sortBy, filterBy]);
 
-    /*
-     * poll for updates at an interval. because this is a hook the interval will be
-     * removed when the table is unmounted
-     */
-    const autoRefreshDelay = refresh ? delay : -1;
-    useInterval(() => {
+    useEffect(() => {
         fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
-    }, autoRefreshDelay);
+    }, [runningProcesses])
+
+    useEffect(() => {
+        if (useFallback) {
+            httpFallback();
+        }
+        if (!useFallback && httpInterval) {
+            clearInterval(httpInterval);
+            return;
+        }
+    }, [useFallback])
+    
+    useEffect(() => {
+        return () => httpInterval && clearInterval(httpInterval);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div id={name}>
