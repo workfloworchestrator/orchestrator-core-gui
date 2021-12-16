@@ -4,13 +4,21 @@
     "version": "1.0.0",
     "private": false,
     "license": "Apache-2.0",
+    "jest": {
+        "moduleNameMapper": {
+            "@elastic/eui": "<rootDir>/node_modules/@elastic/eui",
+            "react$": "<rootDir>/node_modules/react",
+            "scroll-into-view$": "<rootDir>/node_modules/scroll-into-view",
+            "jsx-dev-runtime$": "<rootDir>/node_modules/react/jsx-dev-runtime"
+        }
+    },
     "scripts": {
         "analyze": "source-map-explorer build/static/js/main.*",
         "start-old": "react-scripts start",
         "start": "craco start",
         "build": "set \"INLINE_RUNTIME_CHUNK=false\" && react-scripts build",
-        "test-old": "react-scripts test",
-        "test": "react-scripts test -- --config=jest.config.js",
+        "test": "react-scripts test",
+        "test-try": "react-scripts test -- --config=jest.config.js",
         "eject": "react-scripts eject",
         "storybook": "start-storybook -p 9009 -s ./public",
         "storybook-build": "build-storybook -s ./public",
@@ -21,6 +29,7 @@
         "compile": "formatjs compile"
     },
     "dependencies": {
+        "@babel/runtime": "^7.16.5",
         "@craco/craco": "^6.1.2",
         "@elastic/datemath": "^5.0.3",
         "@elastic/eui": "^30.5.1",

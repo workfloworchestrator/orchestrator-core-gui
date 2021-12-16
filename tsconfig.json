@@ -25,7 +25,8 @@
     "sourceMap": true,
     "inlineSources": true,
     "sourceRoot": "/",
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "rootDirs": ["src", "../src"]
   },
   "include": [
     "src",
