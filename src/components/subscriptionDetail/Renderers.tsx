@@ -257,7 +257,7 @@ export function RenderProduct({ product }: { product?: Product }) {
                             <FormattedMessage id="subscription.product.name" />
                         </td>
                         <td id="sub-prod-name-v">
-                            <a target="_blank" rel="noopener noreferrer" href={`/product/${product.product_id}`}>
+                            <a target="_blank" rel="noopener noreferrer" href={`/metadata/product/${product.product_id}`}>
                                 {product.name || ""}
                             </a>
                         </td>
