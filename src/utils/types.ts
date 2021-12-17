@@ -458,3 +458,10 @@ export interface Dienstafname {
     code: string;
     status: string;
 }
+
+export interface ISubscriptionInstance {
+    subscription_instance_id: string;
+    name: string;
+    label?: string;
+    [index: string]: any;
+}

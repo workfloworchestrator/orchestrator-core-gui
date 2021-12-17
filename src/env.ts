@@ -43,7 +43,9 @@ export const ENV: Env = window.__env__ || {
     CHECK_STATUS_INTERVAL: parseInt(process.env.REACT_APP_CHECK_STATUS_INTERVAL ?? "0"),
     NETWORKDASHBOARD_URL: process.env.REACT_APP_NETWORKDASHBOARD_URL,
     SENTRY_DSN: process.env.REACT_APP_SENTRY_DSN,
-    TRACING_ENABLED: process.env.REACT_APP_TRACING_ENABLED,
+    TRACING_ENABLED: ["true", "1", "yes", "on"].includes(
+        (process.env.REACT_APP_TRACING_ENABLED || "true").toLocaleLowerCase()
+    ),
     TRACE_SAMPLE_RATE: process.env.REACT_APP_TRACE_SAMPLE_RATE,
     RELEASE: process.env.REACT_APP_RELEASE,
     ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,

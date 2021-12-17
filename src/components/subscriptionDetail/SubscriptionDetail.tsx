@@ -15,6 +15,7 @@
 
 import "./SubscriptionDetail.scss";
 
+import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiTitle } from "@elastic/eui";
 import {
     RenderActions,
     RenderFixedInputs,
@@ -30,6 +31,7 @@ import { isArray } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useQuery } from "react-query";
+import { useStorageState } from "react-storage-hooks";
 import ApplicationContext from "utils/ApplicationContext";
 import { enrichSubscription } from "utils/Lookups";
 import {
@@ -41,6 +43,10 @@ import {
     WorkflowReasons,
 } from "utils/types";
 import { importPlugin } from "utils/Utils";
+
+import { TabbedSection } from "./TabbedSection";
+import { SUBSCRIPTION_VIEWTYPE_SELECTOR, StoredViewPreferences, TabView } from "./TabView";
+import { RenderServiceConfiguration } from "./templates/ServiceConfiguration";
 
 interface IProps {
     subscriptionId: string;
@@ -59,6 +65,16 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     const [notFound, setNotFound] = useState(false);
     const [workflows, setWorkflows] = useState<WorkflowReasons>();
     const [enrichedParentSubscriptions, setEnrichedParentSubscriptions] = useState<SubscriptionWithDetails[]>();
+    const [viewTypes, setViewTypes] = useStorageState<StoredViewPreferences[]>(
+        localStorage,
+        SUBSCRIPTION_VIEWTYPE_SELECTOR,
+        []
+    );
+
+    const tabViewSettingsForId = (id: string) => {
+        const defaultViewSetting = { tabViewId: id, viewType: "tabs" } as StoredViewPreferences;
+        return viewTypes.find((s) => s.tabViewId === id) || defaultViewSetting;
+    };
 
     useQuery<SubscriptionModel, Error>(
         ["subscription", { id: subscriptionId }],
@@ -103,7 +119,12 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                     // @ts-ignore
                     const componentPromises = plugins["subscriptionDetailPlugins"].map(async (plugin) => {
                         const View = await importPlugin(plugin);
-                        return <View subscription={subscription} />;
+                        return (
+                            <View
+                                key={`subscription-detail-plugin-${plugin.toLowerCase()}`}
+                                subscription={subscription}
+                            />
+                        );
                     });
                     // @ts-ignore
                     Promise.all(componentPromises).then(setLoadedPlugins);
@@ -123,6 +144,56 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
         return null;
     }
 
+    const subscriptionDetailHeader = (id: string, title?: string) => (
+        <EuiFlexGroup>
+            <EuiFlexItem grow={true}>
+                <EuiTitle size="m">
+                    <h1>{title ? title : subscription.product?.name}</h1>
+                </EuiTitle>
+            </EuiFlexItem>
+            <EuiFlexItem grow={false}>
+                <EuiButton
+                    id="subscription-detail-viewtype-tree"
+                    iconType="list"
+                    size="s"
+                    isDisabled={tabViewSettingsForId(id).viewType === "tree"}
+                    onClick={() => {
+                        const existing = viewTypes.find((s) => s.tabViewId === id);
+                        let newViewTypes = viewTypes;
+                        if (existing) {
+                            newViewTypes = viewTypes.map((s) => (s.tabViewId === id ? { ...s, viewType: "tree" } : s));
+                        } else {
+                            newViewTypes = [...viewTypes, { tabViewId: id, viewType: "tree" }];
+                        }
+                        setViewTypes(newViewTypes);
+                    }}
+                >
+                    tree
+                </EuiButton>
+            </EuiFlexItem>
+            <EuiFlexItem grow={false}>
+                <EuiButton
+                    id="subscription-detail-viewtype-tree"
+                    iconType="tableDensityNormal"
+                    size="s"
+                    isDisabled={tabViewSettingsForId(id).viewType === "tabs"}
+                    onClick={() => {
+                        const existing = viewTypes.find((s) => s.tabViewId === id);
+                        let newViewTypes = viewTypes;
+                        if (existing) {
+                            newViewTypes = viewTypes.map((s) => (s.tabViewId === id ? { ...s, viewType: "tabs" } : s));
+                        } else {
+                            newViewTypes = [...viewTypes, { tabViewId: id, viewType: "tabs" }];
+                        }
+                        setViewTypes(newViewTypes);
+                    }}
+                >
+                    tabs
+                </EuiButton>
+            </EuiFlexItem>
+        </EuiFlexGroup>
+    );
+
     const subscription_instances = Object.entries(subscription)
         .filter(
             (entry) =>
@@ -132,43 +203,143 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
         )
         .flatMap((entry) => (isArray(entry[1]) ? entry[1].map((value: any) => [entry[0], value]) : [entry]));
 
-    return (
+    const renderedSubscriptionDetails = (
         <div className="mod-subscription-detail">
-            <SubscriptionDetailSection
-                name={<FormattedMessage id="subscription.subscription_title" />}
-                className="subscription-details"
-            >
+            <div className="subscription-details">
                 <SubscriptionDetails
                     subscription={subscription}
                     subscriptionProcesses={subscriptionProcesses}
                 ></SubscriptionDetails>
-            </SubscriptionDetailSection>
-            {plugins.hasOwnProperty("subscriptionDetailPlugins") && (
-                <React.Suspense fallback="Loading plugins...">{loadedPlugins}</React.Suspense>
-            )}
-
-            <RenderFixedInputs product={product} />
-
-            {subscription_instances && (
-                <SubscriptionDetailSection
-                    name={<FormattedMessage id="subscriptions.productBlocks" />}
-                    className="subscription-product-blocks"
-                >
-                    {subscription_instances.map((entry, index) => (
-                        <SubscriptionInstance
-                            //@ts-ignore
-                            key={index}
-                            subscription_instance={entry[1]}
-                            field_name={entry[0]}
-                        />
-                    ))}
-                </SubscriptionDetailSection>
-            )}
-
+                {plugins.hasOwnProperty("subscriptionDetailPlugins") && (
+                    <React.Suspense fallback="Loading plugins...">{loadedPlugins}</React.Suspense>
+                )}
+            </div>
+        </div>
+    );
+    const renderedActions = (
+        <div className="mod-subscription-detail">
             <RenderActions subscription={subscription} workflows={workflows} confirmation={confirmation} />
+        </div>
+    );
+
+    const renderedDienstAfname = (
+        <div className="mod-subscription-detail">
+            <p>?</p>
+        </div>
+    );
+
+    const renderedProductDetails = (
+        <div className="mod-subscription-detail">
             <RenderProduct product={product} />
+        </div>
+    );
+
+    const renderedProcesses = (
+        <div className="mod-subscription-detail">
             <RenderProcesses subscriptionProcesses={subscriptionProcesses} />
+        </div>
+    );
+
+    const renderedSubscriptionChildren = (
+        <div className="mod-subscription-detail">
             <RenderSubscriptions parentSubscriptions={enrichedParentSubscriptions} />
+        </div>
+    );
+
+    const subscriptionTabs: TabView[] = [
+        {
+            id: "subscription-detail",
+            name: "Subscription",
+            disabled: false,
+            content: (
+                <>
+                    {renderedSubscriptionDetails}
+                    <RenderFixedInputs product={product} />
+                </>
+            ),
+        },
+        {
+            id: "subscription-actions",
+            name: "Actions",
+            disabled: false,
+            content: renderedActions,
+        },
+        {
+            id: "subscription-dienstafname",
+            name: "Dienstafname",
+            disabled: false,
+            content: renderedDienstAfname,
+        },
+        {
+            id: "subscription-product",
+            name: "Product",
+            disabled: false,
+            content: renderedProductDetails,
+        },
+        {
+            id: "subscription-processes",
+            name: "Processes",
+            disabled: false,
+            content: renderedProcesses,
+        },
+        {
+            id: "subscription-children",
+            name: "Child subscriptions",
+            disabled: false,
+            content: renderedSubscriptionChildren,
+        },
+    ];
+
+    return (
+        <div className="mod-subscription-detail">
+            {subscriptionDetailHeader("subscription-details")}
+            {tabViewSettingsForId("subscription-details").viewType === "tree" && (
+                <>
+                    {renderedSubscriptionDetails}
+                    <RenderFixedInputs product={product} />
+                </>
+            )}
+            {tabViewSettingsForId("subscription-details").viewType === "tabs" && (
+                <TabbedSection
+                    id="subscription-detail-tabs"
+                    tabs={subscriptionTabs}
+                    className="tabbed-details-parent"
+                    name={<FormattedMessage id="subscription.subscription_title" />}
+                ></TabbedSection>
+            )}
+
+            {subscriptionDetailHeader("subscription-product-blocks", "Service configuration details")}
+            {tabViewSettingsForId("subscription-product-blocks").viewType === "tree" && (
+                <>
+                    {subscription_instances && (
+                        <SubscriptionDetailSection
+                            name={<FormattedMessage id="subscriptions.productBlocks" />}
+                            className="subscription-product-blocks"
+                        >
+                            {subscription_instances.map((entry, index) => (
+                                <SubscriptionInstance
+                                    //@ts-ignore
+                                    key={index}
+                                    subscription_instance={entry[1]}
+                                    field_name={entry[0]}
+                                />
+                            ))}
+                        </SubscriptionDetailSection>
+                    )}
+                </>
+            )}
+            {tabViewSettingsForId("subscription-product-blocks").viewType === "tabs" && (
+                <RenderServiceConfiguration subscriptionInstances={subscription_instances} />
+            )}
+
+            {tabViewSettingsForId("subscription-details").viewType === "tree" && (
+                <>
+                    {renderedActions}
+                    {renderedProductDetails}
+                    {renderedProcesses}
+                    {renderedSubscriptionChildren}
+                </>
+            )}
         </div>
     );
 }
