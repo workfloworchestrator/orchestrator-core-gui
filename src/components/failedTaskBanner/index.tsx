@@ -37,7 +37,6 @@ interface ProcessWithStatus {
 }
 
 const filterFailedTasks = [
-    { id: "isTask", values: ["true"] },
     { id: "status", values: ["failed", "api_unavailable", "inconsistent_data"] },
 ];
 
@@ -82,9 +81,13 @@ export default function FailedTaskBanner() {
         if (useFallback) {
             httpFailedProcessesFallback();
         }
+        if (!useFallback && httpInterval) {
+            clearInterval(httpInterval);
+        }
     }, [useFallback]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
+        fetchData(0, 10, [], filterFailedTasks);
         return () => httpInterval && clearInterval(httpInterval);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

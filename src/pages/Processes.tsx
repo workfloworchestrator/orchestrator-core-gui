@@ -33,7 +33,6 @@ import { organisationNameByUuid } from "utils/Lookups";
 import { ProcessStatus, ProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
-import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
 
 interface IProps extends WrappedComponentProps {}
 

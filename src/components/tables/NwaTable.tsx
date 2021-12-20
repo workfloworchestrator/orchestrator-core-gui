@@ -100,7 +100,7 @@ export function tableSettingsReducer<T extends object>(
     prevState: TableState<T>
 ) {
     // Uncomment to see all the actions in the console.
-    console.log(action);
+    // console.log(action);
     const changedState = produce(newState, (draft) => {
         switch (action.type) {
             case ActionType.OVERRIDE:
@@ -300,7 +300,6 @@ export function NwaTable<T extends object>({
         previousPage,
         setPageSize,
     };
-
     const [httpInterval, setHttpInterval] = useState<NodeJS.Timeout | undefined>();
     const httpFallback = () => {
         fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
@@ -329,7 +328,7 @@ export function NwaTable<T extends object>({
 
     useEffect(() => {
         fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
-    }, [runningProcesses])
+    }, [runningProcesses]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         if (useFallback) {
@@ -339,7 +338,7 @@ export function NwaTable<T extends object>({
             clearInterval(httpInterval);
             return;
         }
-    }, [useFallback])
+    }, [useFallback]) // eslint-disable-line react-hooks/exhaustive-deps
     
     useEffect(() => {
         return () => httpInterval && clearInterval(httpInterval);

@@ -36,7 +36,7 @@ function Preferences<T extends object>({
     initialTableSettings,
     excludeInFilter,
 }: IProps<T>) {
-    const { name, minimized, refresh, delay, loading, showSettings, showPaginator } = state;
+    const { name, minimized, showSettings, showPaginator } = state;
     const intl = useIntl();
 
     return (
