@@ -233,7 +233,7 @@ export function NwaTable<T extends object>({
     } = useTable<T>(
         {
             columns,
-            data: data,
+            data,
             pageCount,
             manualFilters: true,
             manualPagination: true,
