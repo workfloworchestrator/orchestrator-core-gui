@@ -216,10 +216,7 @@ class Tasks extends React.PureComponent<IProps, IState> {
                         )}
                         <EuiFlexItem className="explain">{this.renderExplain()}</EuiFlexItem>
                     </EuiFlexGroup>
-                    <ProcessesTable
-                        initialTableSettings={tasksSettings}
-                        renderActions={this.renderActions}
-                    />
+                    <ProcessesTable initialTableSettings={tasksSettings} renderActions={this.renderActions} />
                     <ScrollUpButton />
                 </EuiPageBody>
             </EuiPage>

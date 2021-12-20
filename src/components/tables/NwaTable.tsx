@@ -23,7 +23,7 @@ import Preferences from "components/tables/Preferences";
 import { TableRenderer } from "components/tables/TableRenderer";
 import useFilterableDataFetcher from "components/tables/useFilterableDataFetcher";
 import { produce } from "immer";
-import { useEffect, useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import {
     Column,
@@ -40,9 +40,9 @@ import {
     useSortBy,
     useTable,
 } from "react-table";
+import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
 
 import MiniPaginator from "./MiniPaginator";
-import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
 
 /*
  * Reusable NWA table implementation using react-table 7.
@@ -211,7 +211,7 @@ export function NwaTable<T extends object>({
     excludeInFilter,
     advancedSearch,
 }: INwaTableProps<T>) {
-    const { runningProcesses, useFallback } = useContext(RunningProcessesContext)
+    const { runningProcesses, useFallback } = useContext(RunningProcessesContext);
     const [data, pageCount, fetchData] = useFilterableDataFetcher<T>(endpoint);
     const {
         getTableProps,
@@ -328,7 +328,7 @@ export function NwaTable<T extends object>({
 
     useEffect(() => {
         fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
-    }, [runningProcesses]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [runningProcesses]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         if (useFallback) {
@@ -338,8 +338,8 @@ export function NwaTable<T extends object>({
             clearInterval(httpInterval);
             return;
         }
-    }, [useFallback]) // eslint-disable-line react-hooks/exhaustive-deps
-    
+    }, [useFallback]); // eslint-disable-line react-hooks/exhaustive-deps
+
     useEffect(() => {
         return () => httpInterval && clearInterval(httpInterval);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps

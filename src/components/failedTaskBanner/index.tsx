@@ -36,9 +36,7 @@ interface ProcessWithStatus {
     last_status: string;
 }
 
-const filterFailedTasks = [
-    { id: "status", values: ["failed", "api_unavailable", "inconsistent_data"] },
-];
+const filterFailedTasks = [{ id: "status", values: ["failed", "api_unavailable", "inconsistent_data"] }];
 
 const countFailedProcesses = (processes: ProcessWithStatus[]) => {
     const groupStatuses = groupBy(processes, (p) => p.last_status);
