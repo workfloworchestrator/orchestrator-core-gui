@@ -26,6 +26,8 @@ import {
 import SubscriptionDetails from "components/subscriptionDetail/SubscriptionDetails";
 import { SubscriptionDetailSection } from "components/subscriptionDetail/SubscriptionDetailSection";
 import SubscriptionInstance from "components/subscriptionDetail/SubscriptionInstance";
+import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
+import { RenderServiceConfiguration } from "components/subscriptionDetail/templates/ServiceConfiguration";
 import { plugins } from "custom/manifest.json";
 import { isArray } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
@@ -36,17 +38,16 @@ import ApplicationContext from "utils/ApplicationContext";
 import { enrichSubscription } from "utils/Lookups";
 import {
     Product,
+    SUBSCRIPTION_VIEWTYPE_SELECTOR,
+    StoredViewPreferences,
     Subscription,
     SubscriptionModel,
     SubscriptionProcesses,
     SubscriptionWithDetails,
+    TabView,
     WorkflowReasons,
 } from "utils/types";
 import { importPlugin } from "utils/Utils";
-
-import { TabbedSection } from "./TabbedSection";
-import { SUBSCRIPTION_VIEWTYPE_SELECTOR, StoredViewPreferences, TabView } from "./TabView";
-import { RenderServiceConfiguration } from "./templates/ServiceConfiguration";
 
 interface IProps {
     subscriptionId: string;

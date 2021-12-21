@@ -1,7 +1,6 @@
 import { EuiTab, EuiTabs } from "@elastic/eui";
 import React, { useMemo, useState } from "react";
-
-import { TabView } from "./TabView";
+import { TabView } from "utils/types";
 
 interface IProps {
     name: React.ReactNode;

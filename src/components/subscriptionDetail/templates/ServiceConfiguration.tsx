@@ -1,9 +1,7 @@
+import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
 import SubscriptionInstanceValue from "custom/components/subscriptionDetail/SubscriptionInstanceValue";
 import { isArray, partition } from "lodash";
-
-import { ISubscriptionInstance } from "../../../utils/types";
-import { TabbedSection } from "../TabbedSection";
-import { TabView } from "../TabView";
+import { ISubscriptionInstance, TabView } from "utils/types";
 
 interface IProps {
     subscriptionInstances: any[][];

@@ -15,10 +15,8 @@
 
 import SubscriptionInstanceValue from "custom/components/subscriptionDetail/SubscriptionInstanceValue";
 import { isArray, partition } from "lodash";
-import React from "react";
 import { FormattedMessage } from "react-intl";
-
-import { ISubscriptionInstance } from "../../utils/types";
+import { ISubscriptionInstance } from "utils/types";
 
 interface IProps {
     subscription_instance: ISubscriptionInstance;
