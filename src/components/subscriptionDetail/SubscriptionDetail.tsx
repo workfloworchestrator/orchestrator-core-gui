@@ -222,12 +222,6 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
         </div>
     );
 
-    const renderedDienstAfname = (
-        <div className="mod-subscription-detail">
-            <p>?</p>
-        </div>
-    );
-
     const renderedProductDetails = (
         <div className="mod-subscription-detail">
             <RenderProduct product={product} />
@@ -263,12 +257,6 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
             name: "Actions",
             disabled: false,
             content: renderedActions,
-        },
-        {
-            id: "subscription-dienstafname",
-            name: "Dienstafname",
-            disabled: false,
-            content: renderedDienstAfname,
         },
         {
             id: "subscription-product",
