@@ -67,10 +67,7 @@ export default function FailedTaskBanner() {
     const [failedProcesses, setFailedProcesses] = useState<FailedProcess[]>([]);
     const [failedTasks, setFailedTasks] = useState(countFailedProcesses([]));
 
-    useHttpIntervalFallback(
-        RunningProcessesContext,
-        () => fetchData(0, 10, [], filterFailedTasks)
-    );
+    useHttpIntervalFallback(RunningProcessesContext, () => fetchData(0, 10, [], filterFailedTasks));
 
     useEffect(() => {
         const newList = [...data, ...runningProcesses.filter((p) => failedProcessStatuses.includes(p.last_status))];
