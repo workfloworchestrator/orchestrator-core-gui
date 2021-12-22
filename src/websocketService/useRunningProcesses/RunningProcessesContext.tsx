@@ -1,25 +1,21 @@
 import React from "react";
 
-import useRunningProcesses, { RunningProcess } from ".";
+import useRunningProcesses, { RunningProcesses } from ".";
 
-interface RunningProcessesContextState {
-    runningProcesses: RunningProcess[];
-    useFallback: boolean;
-}
-
-const RunningProcessesContext = React.createContext<RunningProcessesContextState>({
+const RunningProcessesContext = React.createContext<RunningProcesses>({
     runningProcesses: [],
+    completedProcessIds: [],
     useFallback: false,
 });
 export const RunningProcessesProvider = RunningProcessesContext.Provider;
 export default RunningProcessesContext;
 
 export function RunningProcessesContextWrapper({ children }: any) {
-    const { runningProcesses, useFallback } = useRunningProcesses();
+    const data = useRunningProcesses();
 
     return (
         <div>
-            <RunningProcessesProvider value={{ runningProcesses, useFallback }}>{children}</RunningProcessesProvider>
+            <RunningProcessesProvider value={data}>{children}</RunningProcessesProvider>
         </div>
     );
 }

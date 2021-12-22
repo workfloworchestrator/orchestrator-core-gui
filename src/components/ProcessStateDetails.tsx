@@ -19,7 +19,6 @@ import { EuiButton, EuiCheckbox, EuiCopy, EuiIcon, EuiText } from "@elastic/eui"
 import HighlightCode from "components/HighlightCode";
 import StepDetails from "components/Step";
 import isEqual from "lodash/isEqual";
-import { CustomProcessWithDetails } from "pages/ProcessDetail";
 import { useContext, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
@@ -241,14 +240,24 @@ function ProcessOverview({
 }
 
 interface IProps {
-    process: CustomProcessWithDetails;
+    process: ProcessWithDetails;
+    productName: string;
+    customerName: string;
     subscriptionProcesses: ProcessSubscription[];
     collapsed?: number[];
     onChangeCollapsed: (index: number) => void; // when provided it will toggle the collapse functionality
     isProcess: boolean;
 }
 
-function ProcessStateDetails({ process, subscriptionProcesses, isProcess, onChangeCollapsed, collapsed = [] }: IProps) {
+function ProcessStateDetails({
+    process,
+    productName,
+    customerName,
+    subscriptionProcesses,
+    isProcess,
+    onChangeCollapsed,
+    collapsed = [],
+}: IProps) {
     const [raw, setRaw] = useState(false);
     const [details, setDetails] = useState(true);
     const [stateChanges, setStateChanges] = useState(true);
@@ -264,7 +273,7 @@ function ProcessStateDetails({ process, subscriptionProcesses, isProcess, onChan
     const renderSummaryValue = (value: string | number | any) =>
         typeof value === "string" ? capitalize(value) : typeof value === "number" ? renderDateTime(value) : value;
 
-    const renderRaw = (process: CustomProcessWithDetails) => {
+    const renderRaw = (process: ProcessWithDetails) => {
         const json = JSON.stringify(process, null, 4);
         return (
             <section>
@@ -282,7 +291,7 @@ function ProcessStateDetails({ process, subscriptionProcesses, isProcess, onChan
         );
     };
 
-    const renderProcessHeaderInformation = (process: CustomProcessWithDetails) => {
+    const renderProcessHeaderInformation = (process: ProcessWithDetails) => {
         return (
             <section className="header-information">
                 <ul>
@@ -293,8 +302,8 @@ function ProcessStateDetails({ process, subscriptionProcesses, isProcess, onChan
                                     <FormattedMessage
                                         id="process_state.wording_process"
                                         values={{
-                                            product: process.productName,
-                                            customer: process.customerName,
+                                            product: productName,
+                                            customer: customerName,
                                             workflow: process.workflow_name,
                                         }}
                                     />

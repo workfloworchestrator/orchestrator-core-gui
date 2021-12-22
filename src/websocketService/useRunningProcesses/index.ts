@@ -14,14 +14,9 @@
  */
 
 import { useEffect, useState } from "react";
-import { Process, ProcessStatus, Step } from "utils/types";
+import { ProcessStatus, Step, WsProcessV2 } from "utils/types";
 
 import useWebsocket from "../useWebsocket";
-
-export interface RunningProcess extends Process {
-    id: string;
-    status: ProcessStatus;
-}
 
 export interface FailedProcess {
     pid: string;
@@ -30,47 +25,39 @@ export interface FailedProcess {
 
 export interface WebSocketMessageData {
     failedProcesses?: FailedProcess[];
-    process?: RunningProcess;
+    process?: WsProcessV2;
     step?: Step;
 }
 
 export interface RunningProcesses {
-    runningProcesses: RunningProcess[];
+    runningProcesses: WsProcessV2[];
+    completedProcessIds: string[];
     useFallback: boolean;
 }
 
 const useRunningProcesses = (): RunningProcesses => {
     const { message, useFallback } = useWebsocket<WebSocketMessageData>("api/processes/all/");
-    const [runningProcesses, setRunningProcesses] = useState<RunningProcess[]>([]);
+    const [runningProcesses, setRunningProcesses] = useState<WsProcessV2[]>([]);
+    const [completedProcessIds, setCompletedProcessIds] = useState<string[]>([]);
 
     const handleProcessUpdate = ({ process }: WebSocketMessageData) => {
         if (!process) {
             return;
         }
 
+        setRunningProcesses([...runningProcesses.filter((p) => p.pid !== process.id), process]);
+
         if (process.status === ProcessStatus.COMPLETED || process.status === ProcessStatus.ABORTED) {
-            setRunningProcesses(runningProcesses.filter((p) => p.pid !== process.id));
-        } else {
-            setRunningProcesses([
-                ...runningProcesses.filter((p) => p.pid !== process.id),
-                {
-                    ...process,
-                    pid: process.id,
-                    last_status: process.status,
-                },
-            ]);
+            setTimeout(() => setRunningProcesses(runningProcesses.filter((p) => p.pid !== process.id)), 100);
+            setCompletedProcessIds([...completedProcessIds, process.id]);
         }
     };
 
     useEffect(() => {
-        if (message.failedProcesses) {
-            setRunningProcesses(message.failedProcesses as RunningProcess[]);
-        }
-
         handleProcessUpdate(message);
     }, [message]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    return { runningProcesses, useFallback };
+    return { runningProcesses, completedProcessIds, useFallback };
 };
 
 export default useRunningProcesses;

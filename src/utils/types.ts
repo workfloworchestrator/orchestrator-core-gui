@@ -203,10 +203,12 @@ export interface FormNotCompleteResponse {
     hasNext?: boolean;
 }
 
+export type Assignee = "NOC" | "CHANGES" | "SYSTEM" | "KLANT_SUPPORT";
+
 export interface Process {
     pid: string;
     workflow: string;
-    assignee: "NOC" | "CHANGES" | "SYSTEM" | "KLANT_SUPPORT";
+    assignee: Assignee;
     last_status: string;
     failed_reason: string;
     traceback: string;
@@ -222,7 +224,7 @@ export interface ProcessWithDetails {
     workflow_name: string;
     product: string;
     customer: string;
-    assignee: "NOC" | "CHANGES" | "SYSTEM" | "KLANT_SUPPORT";
+    assignee: Assignee;
     status: string;
     failed_reason: string;
     traceback: string;
@@ -245,11 +247,11 @@ export interface ProcessSubscription {
 }
 
 export interface ProcessV2 {
-    assignee: string;
+    pid: string;
+    assignee: Assignee;
     created_by: string;
     failed_reason: string;
     last_modified_at: string;
-    pid: string;
     started_at: string;
     last_status: string;
     last_step: string;
@@ -257,6 +259,15 @@ export interface ProcessV2 {
     workflow: string;
     workflow_target: string;
     is_task: boolean;
+}
+
+export interface WsProcessV2 extends ProcessV2 {
+    id: string;
+    status: ProcessStatus;
+    form: InputForm;
+    steps: Step[];
+    traceback: string;
+    step: string;
 }
 
 export interface Step {
