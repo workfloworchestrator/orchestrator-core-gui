@@ -20,6 +20,7 @@ import { groupBy } from "lodash";
 import { useContext, useEffect, useState } from "react";
 import { Process, ProcessStatus } from "utils/types";
 import useHttpIntervalFallback from "utils/useHttpIntervalFallback";
+import { FailedProcess } from "websocketService/useRunningProcesses";
 import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
 
 import useFailedTaskFetcher from "./useFailedTaskFetcher";
@@ -37,9 +38,17 @@ interface ProcessWithStatus {
     last_status: string;
 }
 
-const filterFailedTasks = [{ id: "status", values: ["failed", "api_unavailable", "inconsistent_data"] }];
+interface CountFailedProcesses {
+    failed: number;
+    inconsistentData: number;
+    apiUnavailable: number;
+    all: number;
+}
 
-const countFailedProcesses = (processes: ProcessWithStatus[]) => {
+const failedProcessStatuses = ["failed", "api_unavailable", "inconsistent_data"];
+const filterFailedTasks = [{ id: "status", values: failedProcessStatuses }];
+
+const countFailedProcesses = (processes: ProcessWithStatus[]): CountFailedProcesses => {
     const groupStatuses = groupBy(processes, (p) => p.last_status);
     const failed = groupStatuses[ProcessStatus.FAILED]?.length || 0;
     const inconsistentData = groupStatuses[ProcessStatus.INCONSISTENT_DATA]?.length || 0;
@@ -53,19 +62,21 @@ const countFailedProcesses = (processes: ProcessWithStatus[]) => {
 };
 
 export default function FailedTaskBanner() {
-    const { runningProcesses } = useContext(RunningProcessesContext);
-    const [failedTasks, setFailedTasks] = useState(countFailedProcesses(runningProcesses));
-    const [data, , fetchData] = useFailedTaskFetcher<ProcessWithStatus>("processes/");
+    const { runningProcesses, completedProcessIds, useFallback } = useContext(RunningProcessesContext);
+    const [data, , fetchData] = useFailedTaskFetcher<FailedProcess>("processes/");
+    const [failedProcesses, setFailedProcesses] = useState<FailedProcess[]>([]);
+    const [failedTasks, setFailedTasks] = useState(countFailedProcesses([]));
 
-    useHttpIntervalFallback(RunningProcessesContext, () => fetchData(0, 10, [], filterFailedTasks));
-
-    useEffect(() => {
-        setFailedTasks(countFailedProcesses(runningProcesses));
-    }, [runningProcesses]);
+    useHttpIntervalFallback(useFallback, () => fetchData(0, 10, [], filterFailedTasks));
 
     useEffect(() => {
-        setFailedTasks(countFailedProcesses(data));
-    }, [data]);
+        const newList = [...data, ...runningProcesses.filter((p) => failedProcessStatuses.includes(p.last_status))];
+        setFailedProcesses(newList.filter((p) => !completedProcessIds.includes(p.pid)));
+    }, [data, runningProcesses, completedProcessIds]);
+
+    useEffect(() => {
+        setFailedTasks(countFailedProcesses(failedProcesses));
+    }, [failedProcesses]);
 
     useEffect(() => {
         fetchData(0, 10, [], filterFailedTasks);

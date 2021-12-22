@@ -42,6 +42,9 @@ const useWebsocket = <T extends object>(
             newClient.onerror = () => {
                 setUsefallback(true);
             };
+            newClient.close = () => {
+                setUsefallback(true);
+            };
             client.current = newClient;
         }
 

@@ -28,10 +28,10 @@ import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { organisationNameByUuid, productById, productNameById } from "utils/Lookups";
 import { CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
-import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step } from "utils/types";
+import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step, WsProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
-import { WebSocketCodes, websocketReconnectTime, websocketService } from "websocketService";
+import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
 
 const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 
@@ -45,7 +45,7 @@ interface IProps extends RouteComponentProps<MatchParams>, WrappedComponentProps
 }
 
 interface IState {
-    process?: CustomProcessWithDetails;
+    process?: ProcessWithDetails;
     notFound: boolean;
     tabs: string[];
     selectedTab: string;
@@ -56,12 +56,8 @@ interface IState {
     confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => void;
     confirmationDialogQuestion: string;
     product?: Product;
-    client: WebSocket | undefined;
-    wsTimeout: NodeJS.Timeout | undefined;
     httpIntervalFallback: NodeJS.Timeout | undefined;
-}
-
-export interface CustomProcessWithDetails extends ProcessWithDetails {
+    wsProcess?: WsProcessV2;
     productName: string;
     customerName: string;
 }
@@ -81,9 +77,10 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             confirmationDialogOpen: false,
             confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => {},
             confirmationDialogQuestion: "",
-            client: undefined,
-            wsTimeout: undefined,
             httpIntervalFallback: undefined,
+            wsProcess: undefined,
+            productName: "",
+            customerName: "",
         };
     }
 
@@ -94,15 +91,15 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
         const { organisations, products } = this.context;
 
-        let enrichedProcess = processInstance as CustomProcessWithDetails;
-        enrichedProcess.customerName = organisationNameByUuid(enrichedProcess.customer, organisations);
-        enrichedProcess.productName = productNameById(enrichedProcess.product, products);
+        let enrichedProcess = processInstance as ProcessWithDetails;
 
         const stepUserInput: InputForm | undefined = enrichedProcess.form;
         const tabs = stepUserInput ? this.state.tabs : ["process"];
         const selectedTab = stepUserInput ? "user_input" : "process";
 
         this.setState({
+            productName: productNameById(enrichedProcess.product, products),
+            customerName: organisationNameByUuid(enrichedProcess.customer, organisations),
             process: enrichedProcess,
             stepUserInput: stepUserInput,
             tabs: tabs,
@@ -124,7 +121,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
     };
 
     updateProcessHttp = (processInstance: ProcessWithDetails) => {
-        let enrichedProcess = processInstance as CustomProcessWithDetails;
+        let enrichedProcess = processInstance as ProcessWithDetails;
 
         const stepUserInput: InputForm | undefined = enrichedProcess.form;
         const tabs = stepUserInput ? this.state.tabs : ["process"];
@@ -142,41 +139,6 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         }
     };
 
-    updateProcess = (processInstance: ProcessWithDetails) => {
-        const enrichedProcess = this.state.process as CustomProcessWithDetails;
-        this.setState({
-            process: {
-                ...enrichedProcess,
-                assignee: processInstance.assignee,
-                step: processInstance.step,
-                status: processInstance.status,
-                last_modified: processInstance.last_modified,
-            },
-        });
-    };
-
-    updateProcessStep = (step: Step) => {
-        const enrichedProcess = this.state.process as CustomProcessWithDetails;
-        const stepUserInput: InputForm | undefined = step.form;
-        const tabs = stepUserInput ? this.state.tabs : ["process"];
-        const selectedTab = stepUserInput ? "user_input" : "process";
-
-        this.setState({
-            process: {
-                ...enrichedProcess,
-                steps: enrichedProcess.steps.map((process_step) => {
-                    if (process_step.name === step.name) {
-                        return { ...process_step, ...step };
-                    }
-                    return process_step;
-                }),
-            },
-            stepUserInput: stepUserInput,
-            tabs: tabs,
-            selectedTab: selectedTab,
-        });
-    };
-
     handleWebsocketError = (error: any) => {
         setFlash(error.detail, "error");
     };
@@ -192,64 +154,29 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
     componentDidMount = () => {
         this.context.apiClient.process(this.props.match.params.id).then(this.initializeProcessDetails);
-
-        const client = websocketService.connect(`api/processes/${this.props.match.params.id}`);
-        this.setState({ client: client });
-        client.onmessage = ({ data }) => {
-            const { process, step, error } = JSON.parse(data);
-
-            if (process) {
-                if (process.steps) {
-                    this.initializeProcessDetails(process);
-                    return;
-                }
-                this.updateProcess(process);
-            }
-            if (step) {
-                this.updateProcessStep(step);
-            }
-            if (error) {
-                this.handleWebsocketError(error);
-            }
-        };
-        client.onerror = () => {
-            // api call fallback if websocket closes with an error.
-            console.error("unable to connect to websocket, using fallback to http request");
-            this.httpfallback();
-        };
-
-        client.onclose = (ev) => {
-            this.setState({ client: undefined });
-            if (this.state?.process?.status === "completed" && this.state.wsTimeout) {
-                clearTimeout(this.state.wsTimeout);
-                return;
-            }
-            this.httpfallback();
-        };
-
-        // wait max 3 seconds on timeout: so non working websocket will take 3 seconds to load old process page
-        setTimeout(() => {
-            if (client.readyState === 0) {
-                client.close();
-            }
-        }, 3000);
-
-        const timeout = setTimeout(() => {
-            client.close(WebSocketCodes.NORMAL_CLOSURE);
-            this.componentDidMount();
-        }, websocketReconnectTime);
-
-        this.setState({ wsTimeout: timeout });
     };
 
-    componentWillUnmount = () => {
-        if (this.state.wsTimeout) {
-            clearTimeout(this.state.wsTimeout);
+    handleUpdateProcess = (runningProcesses: WsProcessV2[]) => {
+        const process = runningProcesses.find((p) => p.pid === this.props.match.params.id);
+        if (this.state.wsProcess === process || !process) {
+            return <></>;
         }
-        this.state.client?.close();
+
+        const enrichedProcess = { ...(this.state.process as ProcessWithDetails), ...process };
+        const stepUserInput: InputForm | undefined = process.form;
+        const tabs = stepUserInput ? this.state.tabs : ["process"];
+        const selectedTab = stepUserInput ? "user_input" : "process";
+        this.setState({
+            wsProcess: process,
+            process: enrichedProcess,
+            stepUserInput: stepUserInput,
+            tabs: tabs,
+            selectedTab: selectedTab,
+        });
+        return <></>;
     };
 
-    handleDeleteProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleDeleteProcess = (process: ProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
         const { intl } = this.props;
 
@@ -257,7 +184,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         if (!process.is_task) {
             message = intl.formatMessage(
                 { id: "processes.deleteConfirmation" },
-                { name: process.productName, customer: process.customerName }
+                { name: this.state.productName, customer: this.state.customerName }
             );
         } else {
             message = intl.formatMessage({ id: "tasks.deleteConfirmation" }, { name: process.workflow_name });
@@ -269,14 +196,14 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                 setFlash(
                     intl.formatMessage(
                         { id: `${process.is_task ? "tasks" : "processes"}.flash.delete` },
-                        { name: process.productName }
+                        { name: this.state.productName }
                     )
                 );
             })
         );
     };
 
-    handleAbortProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleAbortProcess = (process: ProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
         const { intl } = this.props;
 
@@ -284,7 +211,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         if (!process.is_task) {
             message = intl.formatMessage(
                 { id: "processes.abortConfirmation" },
-                { name: process.productName, customer: process.customerName }
+                { name: this.state.productName, customer: this.state.customerName }
             );
         } else {
             message = intl.formatMessage({ id: "tasks.abortConfirmation" }, { name: process.workflow_name });
@@ -296,14 +223,14 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                 setFlash(
                     intl.formatMessage(
                         { id: `${process.is_task ? "tasks" : "processes"}.flash.abort` },
-                        { name: process.productName }
+                        { name: this.state.productName }
                     )
                 );
             })
         );
     };
 
-    handleRetryProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleRetryProcess = (process: ProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
         const { intl } = this.props;
 
@@ -311,7 +238,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         if (!process.is_task) {
             message = intl.formatMessage(
                 { id: "processes.retryConfirmation" },
-                { name: process.productName, customer: process.customerName }
+                { name: this.state.productName, customer: this.state.customerName }
             );
         } else {
             message = intl.formatMessage({ id: "tasks.retryConfirmation" }, { name: process.workflow_name });
@@ -323,7 +250,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                 setFlash(
                     intl.formatMessage(
                         { id: `${process.is_task ? "tasks" : "processes"}.flash.retry` },
-                        { name: process.productName }
+                        { name: this.state.productName }
                     )
                 );
             })
@@ -379,7 +306,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             },
         });
 
-    renderActions = (process: CustomProcessWithDetails) => {
+    renderActions = (process: ProcessWithDetails) => {
         const { intl } = this.props;
         const { allowed } = this.context;
 
@@ -465,14 +392,12 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
     renderTabContent = (
         selectedTab: string,
-        process: CustomProcessWithDetails,
+        process: ProcessWithDetails,
         step: Step | undefined,
         stepUserInput: InputForm | undefined,
         subscriptionProcesses: ProcessSubscription[]
     ) => {
-        const { products } = this.context;
-        const product: Product | undefined = products.find((prod: Product) => prod.product_id === process.product);
-        const productName = product && product.name;
+        const { productName, customerName } = this.state;
         if (!step || !stepUserInput || selectedTab === "process") {
             return (
                 <section>
@@ -480,6 +405,8 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                         {this.renderActions(process)}
                         <ProcessStateDetails
                             process={process}
+                            productName={productName}
+                            customerName={customerName}
                             subscriptionProcesses={subscriptionProcesses}
                             collapsed={this.props.query.collapsed}
                             onChangeCollapsed={this.handleCollapse}
@@ -502,7 +429,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                                     <br />
                                     <FormattedMessage
                                         id={`${process.is_task ? "task" : "process"}.userInput`}
-                                        values={{ name: step.name, product: productName || "" }}
+                                        values={{ name: step.name, product: this.state.productName || "" }}
                                     />
                                 </h3>
                             </EuiText>
@@ -547,6 +474,9 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         const renderContent = loaded && !notFound;
         return (
             <EuiPage>
+                <RunningProcessesContext.Consumer>
+                    {(rpc: any) => this.handleUpdateProcess(rpc.runningProcesses)}
+                </RunningProcessesContext.Consumer>
                 <EuiPageBody component="div" className="mod-process-detail">
                     <ConfirmationDialog
                         isOpen={confirmationDialogOpen}
