@@ -22,9 +22,8 @@ import Paginator from "components/tables/Paginator";
 import Preferences from "components/tables/Preferences";
 import { TableRenderer } from "components/tables/TableRenderer";
 import useFilterableDataFetcher from "components/tables/useFilterableDataFetcher";
-import useInterval from "components/tables/useInterval";
 import { produce } from "immer";
-import React, { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { FormattedMessage } from "react-intl";
 import {
     Column,
@@ -41,6 +40,8 @@ import {
     useSortBy,
     useTable,
 } from "react-table";
+import useHttpIntervalFallback from "utils/useHttpIntervalFallback";
+import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
 
 import MiniPaginator from "./MiniPaginator";
 
@@ -157,9 +158,6 @@ export function tableSettingsReducer<T extends object>(
             case ActionType.REFRESH_ENABLE:
                 draft.refresh = true;
                 break;
-            case ActionType.REFRESH_DELAY:
-                draft.delay = action.delay;
-                break;
             case ActionType.SHOW_SETTINGS_TOGGLE:
                 draft.showSettings = !draft.showSettings;
                 break;
@@ -214,6 +212,7 @@ export function NwaTable<T extends object>({
     excludeInFilter,
     advancedSearch,
 }: INwaTableProps<T>) {
+    const { runningProcesses } = useContext(RunningProcessesContext);
     const [data, pageCount, fetchData] = useFilterableDataFetcher<T>(endpoint);
     const {
         getTableProps,
@@ -302,6 +301,7 @@ export function NwaTable<T extends object>({
         previousPage,
         setPageSize,
     };
+    useHttpIntervalFallback(RunningProcessesContext, () => fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy));
 
     // Update localStorage
     useEffect(() => {
@@ -318,14 +318,9 @@ export function NwaTable<T extends object>({
         fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
     }, [fetchData, dispatch, pageIndex, pageSize, sortBy, filterBy]);
 
-    /*
-     * poll for updates at an interval. because this is a hook the interval will be
-     * removed when the table is unmounted
-     */
-    const autoRefreshDelay = refresh ? delay : -1;
-    useInterval(() => {
+    useEffect(() => {
         fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
-    }, autoRefreshDelay);
+    }, [runningProcesses]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div id={name}>

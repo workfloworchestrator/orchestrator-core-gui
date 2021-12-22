@@ -84,14 +84,13 @@ export function initialProcessTableSettings(
 interface ProcessesTableProps {
     initialTableSettings: TableSettings<ProcessV2>;
     renderActions: (process: ProcessV2) => JSX.Element;
-    isProcess: boolean;
 }
 
 interface FilterParams {
     toggleAllRowsExpanded: () => void;
 }
 
-export function ProcessesTable({ initialTableSettings, renderActions, isProcess }: ProcessesTableProps) {
+export function ProcessesTable({ initialTableSettings, renderActions }: ProcessesTableProps) {
     const intl = useIntl();
     const { name } = initialTableSettings;
     const queryNameSpace = last(name.split("."));

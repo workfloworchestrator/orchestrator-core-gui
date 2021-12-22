@@ -33,7 +33,6 @@ import { organisationNameByUuid } from "utils/Lookups";
 import { ProcessStatus, ProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
-import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
 
 interface IProps extends WrappedComponentProps {}
 
@@ -43,8 +42,6 @@ interface IState {
     confirm: () => void;
     confirmationDialogQuestion: string;
     showExplanation: boolean;
-    showTables: boolean;
-    runningProcesses: any;
 }
 
 class Processes extends React.PureComponent<IProps, IState> {
@@ -57,21 +54,8 @@ class Processes extends React.PureComponent<IProps, IState> {
             confirm: () => this,
             confirmationDialogQuestion: "",
             showExplanation: false,
-            showTables: true,
-            runningProcesses: [],
         };
     }
-
-    updateRunningProcesses = (runningProcesses: ProcessV2[]) => {
-        if (runningProcesses !== this.state.runningProcesses) {
-            this.setState({ showTables: false, runningProcesses });
-            // using setTimeout to force rerender.
-            setTimeout(() => {
-                this.setState({ showTables: true });
-            }, 1);
-        }
-        return <></>;
-    };
 
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
 
@@ -159,9 +143,6 @@ class Processes extends React.PureComponent<IProps, IState> {
 
         return (
             <EuiPage>
-                <RunningProcessesContext.Consumer>
-                    {(rpc: any) => this.updateRunningProcesses(rpc.runningProcesses)}
-                </RunningProcessesContext.Consumer>
                 <EuiPageBody component="div" className="process-container">
                     <Explain
                         close={() => this.setState({ showExplanation: false })}
@@ -187,22 +168,16 @@ class Processes extends React.PureComponent<IProps, IState> {
                         question={this.state.confirmationDialogQuestion}
                     />
                     <div className="actions">{this.renderExplain()}</div>
-                    {this.state.showTables && (
-                        <>
-                            <ProcessesTable
-                                key={"active"}
-                                initialTableSettings={activeSettings}
-                                renderActions={this.renderActions}
-                                isProcess={true}
-                            />
-                            <ProcessesTable
-                                key={"completed"}
-                                initialTableSettings={completedSettings}
-                                renderActions={this.renderActions}
-                                isProcess={true}
-                            />
-                        </>
-                    )}
+                    <ProcessesTable
+                        key={"active"}
+                        initialTableSettings={activeSettings}
+                        renderActions={this.renderActions}
+                    />
+                    <ProcessesTable
+                        key={"completed"}
+                        initialTableSettings={completedSettings}
+                        renderActions={this.renderActions}
+                    />
                     <ScrollUpButton />
                 </EuiPageBody>
             </EuiPage>

@@ -33,6 +33,9 @@ const useWebsocket = <T extends object>(
 
         if (!client.current) {
             const newClient = websocketService.connect(endpoint);
+            newClient.onopen = () => {
+                setUsefallback(false);
+            };
             newClient.onmessage = ({ data }) => {
                 setMessage(JSON.parse(data));
             };
@@ -46,6 +49,7 @@ const useWebsocket = <T extends object>(
         setTimeout(() => {
             if (client.current?.readyState !== 1) {
                 disconnectWebsocket();
+                setUsefallback(true);
             }
         }, 3000);
 

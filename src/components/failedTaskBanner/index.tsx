@@ -19,6 +19,7 @@ import { EuiText, EuiToolTip } from "@elastic/eui";
 import { groupBy } from "lodash";
 import { useContext, useEffect, useState } from "react";
 import { Process, ProcessStatus } from "utils/types";
+import useHttpIntervalFallback from "utils/useHttpIntervalFallback";
 import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
 
 import useFailedTaskFetcher from "./useFailedTaskFetcher";
@@ -36,10 +37,7 @@ interface ProcessWithStatus {
     last_status: string;
 }
 
-const filterFailedTasks = [
-    { id: "isTask", values: ["true"] },
-    { id: "status", values: ["failed", "api_unavailable", "inconsistent_data"] },
-];
+const filterFailedTasks = [{ id: "status", values: ["failed", "api_unavailable", "inconsistent_data"] }];
 
 const countFailedProcesses = (processes: ProcessWithStatus[]) => {
     const groupStatuses = groupBy(processes, (p) => p.last_status);
@@ -55,20 +53,11 @@ const countFailedProcesses = (processes: ProcessWithStatus[]) => {
 };
 
 export default function FailedTaskBanner() {
-    const { runningProcesses, useFallback } = useContext(RunningProcessesContext);
+    const { runningProcesses } = useContext(RunningProcessesContext);
     const [failedTasks, setFailedTasks] = useState(countFailedProcesses(runningProcesses));
     const [data, , fetchData] = useFailedTaskFetcher<ProcessWithStatus>("processes/");
-    const [httpInterval, setHttpInterval] = useState<NodeJS.Timeout | undefined>();
 
-    const httpFailedProcessesFallback = () => {
-        fetchData(0, 10, [], filterFailedTasks);
-
-        setHttpInterval(
-            setInterval(() => {
-                fetchData(0, 10, [], filterFailedTasks);
-            }, 3000)
-        );
-    };
+    useHttpIntervalFallback(RunningProcessesContext, () => fetchData(0, 10, [], filterFailedTasks));
 
     useEffect(() => {
         setFailedTasks(countFailedProcesses(runningProcesses));
@@ -79,13 +68,7 @@ export default function FailedTaskBanner() {
     }, [data]);
 
     useEffect(() => {
-        if (useFallback) {
-            httpFailedProcessesFallback();
-        }
-    }, [useFallback]); // eslint-disable-line react-hooks/exhaustive-deps
-
-    useEffect(() => {
-        return () => httpInterval && clearInterval(httpInterval);
+        fetchData(0, 10, [], filterFailedTasks);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const renderTooltipContent = () => (

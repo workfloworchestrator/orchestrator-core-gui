@@ -54,11 +54,11 @@ interface IState {
     stepUserInput?: InputForm;
     confirmationDialogOpen: boolean;
     confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => void;
-    confirm: (e: React.MouseEvent<HTMLButtonElement>) => void;
     confirmationDialogQuestion: string;
     product?: Product;
     client: WebSocket | undefined;
     wsTimeout: NodeJS.Timeout | undefined;
+    httpIntervalFallback: NodeJS.Timeout | undefined;
 }
 
 export interface CustomProcessWithDetails extends ProcessWithDetails {
@@ -80,10 +80,10 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             loaded: false,
             confirmationDialogOpen: false,
             confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => {},
-            confirm: (e: React.MouseEvent<HTMLButtonElement>) => {},
             confirmationDialogQuestion: "",
             client: undefined,
             wsTimeout: undefined,
+            httpIntervalFallback: undefined,
         };
     }
 
@@ -121,6 +121,25 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                     throw err;
                 }
             });
+    };
+
+    updateProcessHttp = (processInstance: ProcessWithDetails) => {
+        let enrichedProcess = processInstance as CustomProcessWithDetails;
+
+        const stepUserInput: InputForm | undefined = enrichedProcess.form;
+        const tabs = stepUserInput ? this.state.tabs : ["process"];
+        const selectedTab = stepUserInput ? "user_input" : "process";
+
+        this.setState({
+            process: { ...this.state.process, ...enrichedProcess },
+            stepUserInput: stepUserInput,
+            tabs: tabs,
+            selectedTab: selectedTab,
+        });
+
+        if (enrichedProcess.status === "completed" && this.state.httpIntervalFallback) {
+            clearInterval(this.state.httpIntervalFallback);
+        }
     };
 
     updateProcess = (processInstance: ProcessWithDetails) => {
@@ -162,7 +181,18 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         setFlash(error.detail, "error");
     };
 
+    httpfallback = () => {
+        if (this.state?.process?.status !== "completed" && !this.state.httpIntervalFallback) {
+            const httpIntervalFallback = setInterval(() => {
+                this.context.apiClient.process(this.props.match.params.id).then(this.updateProcessHttp);
+            }, 3000);
+            this.setState({ httpIntervalFallback });
+        }
+    };
+
     componentDidMount = () => {
+        this.context.apiClient.process(this.props.match.params.id).then(this.initializeProcessDetails);
+
         const client = websocketService.connect(`api/processes/${this.props.match.params.id}`);
         this.setState({ client: client });
         client.onmessage = ({ data }) => {
@@ -185,14 +215,16 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         client.onerror = () => {
             // api call fallback if websocket closes with an error.
             console.error("unable to connect to websocket, using fallback to http request");
-            this.context.apiClient.process(this.props.match.params.id).then(this.initializeProcessDetails);
+            this.httpfallback();
         };
 
         client.onclose = (ev) => {
             this.setState({ client: undefined });
             if (this.state?.process?.status === "completed" && this.state.wsTimeout) {
                 clearTimeout(this.state.wsTimeout);
+                return;
             }
+            this.httpfallback();
         };
 
         // wait max 3 seconds on timeout: so non working websocket will take 3 seconds to load old process page
