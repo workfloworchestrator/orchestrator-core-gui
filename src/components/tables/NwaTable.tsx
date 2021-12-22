@@ -212,7 +212,7 @@ export function NwaTable<T extends object>({
     excludeInFilter,
     advancedSearch,
 }: INwaTableProps<T>) {
-    const { runningProcesses } = useContext(RunningProcessesContext);
+    const { runningProcesses, useFallback } = useContext(RunningProcessesContext);
     const [data, pageCount, fetchData] = useFilterableDataFetcher<T>(endpoint);
     const {
         getTableProps,
@@ -301,7 +301,7 @@ export function NwaTable<T extends object>({
         previousPage,
         setPageSize,
     };
-    useHttpIntervalFallback(RunningProcessesContext, () => fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy));
+    useHttpIntervalFallback(useFallback, () => fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy));
 
     // Update localStorage
     useEffect(() => {

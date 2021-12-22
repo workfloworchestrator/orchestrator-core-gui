@@ -13,11 +13,9 @@
  *
  */
 
-import { Context, useContext, useEffect, useState } from "react";
-import { RunningProcesses } from "websocketService/useRunningProcesses";
+import { useEffect, useState } from "react";
 
-const useHttpIntervalFallback = (context: Context<RunningProcesses>, fn: () => void) => {
-    const { useFallback } = useContext(context);
+const useHttpIntervalFallback = (useFallback: boolean, fn: () => void) => {
     const [httpInterval, setHttpInterval] = useState<NodeJS.Timeout | undefined>();
 
     useEffect(() => {
