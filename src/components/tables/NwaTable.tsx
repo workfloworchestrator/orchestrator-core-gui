@@ -23,7 +23,7 @@ import Preferences from "components/tables/Preferences";
 import { TableRenderer } from "components/tables/TableRenderer";
 import useFilterableDataFetcher from "components/tables/useFilterableDataFetcher";
 import { produce } from "immer";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { FormattedMessage } from "react-intl";
 import {
     Column,
@@ -40,6 +40,7 @@ import {
     useSortBy,
     useTable,
 } from "react-table";
+import useHttpIntervalFallback from "utils/useHttpIntervalFallback";
 import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
 
 import MiniPaginator from "./MiniPaginator";
@@ -211,7 +212,7 @@ export function NwaTable<T extends object>({
     excludeInFilter,
     advancedSearch,
 }: INwaTableProps<T>) {
-    const { runningProcesses, useFallback } = useContext(RunningProcessesContext);
+    const { runningProcesses } = useContext(RunningProcessesContext);
     const [data, pageCount, fetchData] = useFilterableDataFetcher<T>(endpoint);
     const {
         getTableProps,
@@ -300,16 +301,7 @@ export function NwaTable<T extends object>({
         previousPage,
         setPageSize,
     };
-    const [httpInterval, setHttpInterval] = useState<NodeJS.Timeout | undefined>();
-    const httpFallback = () => {
-        fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
-
-        setHttpInterval(
-            setInterval(() => {
-                fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
-            }, 3000)
-        );
-    };
+    useHttpIntervalFallback(RunningProcessesContext, () => fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy));
 
     // Update localStorage
     useEffect(() => {
@@ -329,20 +321,6 @@ export function NwaTable<T extends object>({
     useEffect(() => {
         fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
     }, [runningProcesses]); // eslint-disable-line react-hooks/exhaustive-deps
-
-    useEffect(() => {
-        if (useFallback) {
-            httpFallback();
-        }
-        if (!useFallback && httpInterval) {
-            clearInterval(httpInterval);
-            return;
-        }
-    }, [useFallback]); // eslint-disable-line react-hooks/exhaustive-deps
-
-    useEffect(() => {
-        return () => httpInterval && clearInterval(httpInterval);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div id={name}>
