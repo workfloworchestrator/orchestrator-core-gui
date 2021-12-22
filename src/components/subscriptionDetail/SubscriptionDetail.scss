@@ -30,7 +30,7 @@
     h3 {
         font-size: 16px;
         margin: 10px 0 0 0;
-        padding: 10px 0 0 25px;
+        padding: 10px 0 0 0;
         color: vars.$primary;
     }
     em {
@@ -321,7 +321,43 @@
     }
     p.label {
         color: vars.$primary;
-        margin-left: 25px;
+        margin-left: 0px;
         padding-top: 5px;
+    }
+}
+
+section.tabbed-details > div.mod-subscription-detail > section.details {
+    & > div {
+        padding-left: 0px;
+    }
+    & > h2 {
+        display: none;
+    }
+}
+
+div.indented {
+    padding-left: 25px;
+}
+
+section.tabbed-details {
+    margin-top: 12px;
+
+    &-parent {
+        min-height: 600px;
+        margin-bottom: 2rem;
+
+        & .scrollable-tab-content {
+            max-height: 552px;
+            overflow-y: scroll;
+        }
+    }
+}
+
+.euiTab {
+    border-left: 1px solid vars.$light-grey;
+    border-top: 1px solid vars.$light-grey;
+
+    &:last-of-type {
+        border-right: 1px solid vars.$light-grey;
     }
 }
