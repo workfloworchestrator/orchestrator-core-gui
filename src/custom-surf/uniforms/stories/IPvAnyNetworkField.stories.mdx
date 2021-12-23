@@ -1,0 +1,74 @@
+import { Meta, Preview, Story } from "@storybook/addon-docs/blocks";
+import mock from "axios-mock";
+
+import IP_BLOCKS_V6 from "../../../stories/data/ip_blocks_v6.json";
+import IP_BLOCKS from "../../../stories/data/ip_blocks.json";
+import UserInputContainer from "../../../stories/UserInputContainer";
+import { createForm } from "../../../stories/utils";
+import IPvAnyNetworkField from "../../../custom/uniforms/IPvAnyNetworkField";
+
+<Meta title="Uniforms/IPvAnyNetworkField" component={IPvAnyNetworkField} />
+
+## IPvAnyNetworkField
+
+<Story name="IPvAnyNetworkField">
+    {() => {
+        mock.reset();
+        mock.onGet("surf/ipam/prefix_filters").reply(200, [
+            { id: 1, prefix: "10.0.0.0/16", version: 4 },
+            { id: 2, prefix: "2010::/32", version: 6 }
+        ]);
+        mock.onGet("surf/ipam/ip_blocks/1").reply(200, IP_BLOCKS);
+        mock.onGet("surf/ipam/ip_blocks/2").reply(200, IP_BLOCKS_V6);
+        mock.onGet(/surf\/ipam\/free_subnets\/.*?\/.*?\/.*/).reply((config) => {
+            const m = config.url.substring(18, config.url.length - 6) + config.url.substring(config.url.length - 3);
+            return [200, [m]];
+        });
+        return <UserInputContainer stepUserInput={createForm({ name: { type: "string", format: "ipvanynetwork" } })} />;
+    }}
+</Story>
+
+### JSON Schema form json
+
+```json
+{
+    "name": {
+        "type": "string",
+        "format": "ipvanynetwork"
+    }
+}
+```
+
+## IPvAnyNetworkFieldPreselected
+
+<Story name="IPvAnyNetworkFieldPreselected">
+    {() => {
+        mock.reset();
+        mock.onGet("surf/ipam/prefix_filters").reply(200, []);
+        mock.onGet("surf/ipam/ip_blocks/1").reply(200, []);
+        mock.onGet(/surf\/ipam\/free_subnets\/.*?\/.*?\/.*/).reply((config) => {
+            const m = config.url.substring(18, config.url.length - 6) + config.url.substring(config.url.length - 3);
+            return [200, [m]];
+        });
+        return (
+            <UserInputContainer
+                stepUserInput={createForm({
+                    name: { type: "string", format: "ipvanynetwork", prefixMin: 23, value: "10.0.0.0/16" }
+                })}
+            />
+        );
+    }}
+</Story>
+
+### JSON Schema form json
+
+```json
+{
+    "name": {
+        "type": "string",
+        "format": "ipvanynetwork",
+        "prefixMin": 23,
+        "value": "10.0.0.0/16"
+    }
+}
+```
