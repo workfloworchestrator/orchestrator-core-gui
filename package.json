@@ -1,5 +1,4 @@
 {
-    "homepage": "https://workfloworchestrator.github.io/orchestrator-core-gui",
     "name": "workflow-client",
     "version": "1.0.0",
     "private": false,
