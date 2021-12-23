@@ -43,7 +43,6 @@ export default {
     },
 };
 export const Contactpersons = () => {
-
     mock.onGet("surf/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive").reply(200, []);
     mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(200, []);
     mock.onGet("subscriptions/all").reply(200, []);

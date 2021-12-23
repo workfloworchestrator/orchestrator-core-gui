@@ -1,0 +1,2757 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ContactPersonNameField> - selects item with keystrokes 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "required": "",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "class": "euiFormRow euiFormRow--fullWidth",
+          "id": "uniforms-0000-000y-row",
+        },
+        "children": Array [
+          Node {
+            "attribs": Object {
+              "class": "euiFormRow__labelWrapper",
+            },
+            "children": Array [
+              Node {
+                "attribs": Object {
+                  "class": "euiFormLabel euiFormRow__label",
+                  "for": "uniforms-0000-000y",
+                },
+                "children": Array [],
+                "name": "label",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": Node {
+                  "data": " ",
+                  "next": Node {
+                    "attribs": Object {
+                      "class": "euiText euiText--medium",
+                    },
+                    "children": Array [],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": [Circular],
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                  "parent": [Circular],
+                  "prev": [Circular],
+                  "type": "text",
+                },
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                  "for": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                  "for": undefined,
+                },
+              },
+              Node {
+                "data": " ",
+                "next": Node {
+                  "attribs": Object {
+                    "class": "euiText euiText--medium",
+                  },
+                  "children": Array [],
+                  "name": "div",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": [Circular],
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+                "parent": [Circular],
+                "prev": Node {
+                  "attribs": Object {
+                    "class": "euiFormLabel euiFormRow__label",
+                    "for": "uniforms-0000-000y",
+                  },
+                  "children": Array [],
+                  "name": "label",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": [Circular],
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                    "for": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                    "for": undefined,
+                  },
+                },
+                "type": "text",
+              },
+              Node {
+                "attribs": Object {
+                  "class": "euiText euiText--medium",
+                },
+                "children": Array [],
+                "name": "div",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": Node {
+                  "data": " ",
+                  "next": [Circular],
+                  "parent": [Circular],
+                  "prev": Node {
+                    "attribs": Object {
+                      "class": "euiFormLabel euiFormRow__label",
+                      "for": "uniforms-0000-000y",
+                    },
+                    "children": Array [],
+                    "name": "label",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": [Circular],
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                  },
+                  "type": "text",
+                },
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+            ],
+            "name": "div",
+            "namespace": "http://www.w3.org/1999/xhtml",
+            "next": Node {
+              "attribs": Object {
+                "class": "euiFormRow__fieldWrapper",
+              },
+              "children": Array [
+                Node {
+                  "attribs": Object {
+                    "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
+                  },
+                  "children": Array [
+                    Node {
+                      "attribs": Object {
+                        "class": "euiFormControlLayout__childrenWrapper",
+                      },
+                      "children": Array [
+                        Node {
+                          "attribs": Object {
+                            "autocomplete": "off",
+                            "class": "euiFieldText euiFieldText--fullWidth",
+                            "id": "uniforms-0000-000y",
+                            "name": "x",
+                            "placeholder": "Search and add contact persons...",
+                            "type": "text",
+                            "value": "n",
+                          },
+                          "children": Array [],
+                          "name": "input",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "autocomplete": undefined,
+                            "class": undefined,
+                            "id": undefined,
+                            "name": undefined,
+                            "placeholder": undefined,
+                            "type": undefined,
+                            "value": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "autocomplete": undefined,
+                            "class": undefined,
+                            "id": undefined,
+                            "name": undefined,
+                            "placeholder": undefined,
+                            "type": undefined,
+                            "value": undefined,
+                          },
+                        },
+                      ],
+                      "name": "div",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                  ],
+                  "name": "div",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+              ],
+              "name": "div",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": null,
+              "parent": [Circular],
+              "prev": [Circular],
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+            "parent": [Circular],
+            "prev": null,
+            "type": "tag",
+            "x-attribsNamespace": Object {
+              "class": undefined,
+            },
+            "x-attribsPrefix": Object {
+              "class": undefined,
+            },
+          },
+          Node {
+            "attribs": Object {
+              "class": "euiFormRow__fieldWrapper",
+            },
+            "children": Array [
+              Node {
+                "attribs": Object {
+                  "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
+                },
+                "children": Array [
+                  Node {
+                    "attribs": Object {
+                      "class": "euiFormControlLayout__childrenWrapper",
+                    },
+                    "children": Array [
+                      Node {
+                        "attribs": Object {
+                          "autocomplete": "off",
+                          "class": "euiFieldText euiFieldText--fullWidth",
+                          "id": "uniforms-0000-000y",
+                          "name": "x",
+                          "placeholder": "Search and add contact persons...",
+                          "type": "text",
+                          "value": "n",
+                        },
+                        "children": Array [],
+                        "name": "input",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "autocomplete": undefined,
+                          "class": undefined,
+                          "id": undefined,
+                          "name": undefined,
+                          "placeholder": undefined,
+                          "type": undefined,
+                          "value": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "autocomplete": undefined,
+                          "class": undefined,
+                          "id": undefined,
+                          "name": undefined,
+                          "placeholder": undefined,
+                          "type": undefined,
+                          "value": undefined,
+                        },
+                      },
+                    ],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                ],
+                "name": "div",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+            ],
+            "name": "div",
+            "namespace": "http://www.w3.org/1999/xhtml",
+            "next": null,
+            "parent": [Circular],
+            "prev": Node {
+              "attribs": Object {
+                "class": "euiFormRow__labelWrapper",
+              },
+              "children": Array [
+                Node {
+                  "attribs": Object {
+                    "class": "euiFormLabel euiFormRow__label",
+                    "for": "uniforms-0000-000y",
+                  },
+                  "children": Array [],
+                  "name": "label",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": Node {
+                    "data": " ",
+                    "next": Node {
+                      "attribs": Object {
+                        "class": "euiText euiText--medium",
+                      },
+                      "children": Array [],
+                      "name": "div",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": [Circular],
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    "parent": [Circular],
+                    "prev": [Circular],
+                    "type": "text",
+                  },
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                    "for": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                    "for": undefined,
+                  },
+                },
+                Node {
+                  "data": " ",
+                  "next": Node {
+                    "attribs": Object {
+                      "class": "euiText euiText--medium",
+                    },
+                    "children": Array [],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": [Circular],
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                  "parent": [Circular],
+                  "prev": Node {
+                    "attribs": Object {
+                      "class": "euiFormLabel euiFormRow__label",
+                      "for": "uniforms-0000-000y",
+                    },
+                    "children": Array [],
+                    "name": "label",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": [Circular],
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                  },
+                  "type": "text",
+                },
+                Node {
+                  "attribs": Object {
+                    "class": "euiText euiText--medium",
+                  },
+                  "children": Array [],
+                  "name": "div",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": Node {
+                    "data": " ",
+                    "next": [Circular],
+                    "parent": [Circular],
+                    "prev": Node {
+                      "attribs": Object {
+                        "class": "euiFormLabel euiFormRow__label",
+                        "for": "uniforms-0000-000y",
+                      },
+                      "children": Array [],
+                      "name": "label",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": [Circular],
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                        "for": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                        "for": undefined,
+                      },
+                    },
+                    "type": "text",
+                  },
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+              ],
+              "name": "div",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": [Circular],
+              "parent": [Circular],
+              "prev": null,
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+            "type": "tag",
+            "x-attribsNamespace": Object {
+              "class": undefined,
+            },
+            "x-attribsPrefix": Object {
+              "class": undefined,
+            },
+          },
+        ],
+        "name": "div",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": Node {
+          "attribs": Object {
+            "class": "autocomplete-container",
+          },
+          "children": Array [
+            Node {
+              "attribs": Object {
+                "class": "autocomplete ",
+              },
+              "children": Array [
+                Node {
+                  "attribs": Object {
+                    "class": "result",
+                  },
+                  "children": Array [
+                    Node {
+                      "attribs": Object {},
+                      "children": Array [
+                        Node {
+                          "attribs": Object {
+                            "class": "",
+                          },
+                          "children": Array [
+                            Node {
+                              "attribs": Object {},
+                              "children": Array [
+                                Node {
+                                  "attribs": Object {},
+                                  "children": Array [
+                                    Node {
+                                      "attribs": Object {
+                                        "class": "matched",
+                                      },
+                                      "children": Array [
+                                        Node {
+                                          "data": "n",
+                                          "next": null,
+                                          "parent": [Circular],
+                                          "prev": null,
+                                          "type": "text",
+                                        },
+                                      ],
+                                      "name": "span",
+                                      "namespace": "http://www.w3.org/1999/xhtml",
+                                      "next": Node {
+                                        "data": "ame",
+                                        "next": null,
+                                        "parent": [Circular],
+                                        "prev": [Circular],
+                                        "type": "text",
+                                      },
+                                      "parent": [Circular],
+                                      "prev": null,
+                                      "type": "tag",
+                                      "x-attribsNamespace": Object {
+                                        "class": undefined,
+                                      },
+                                      "x-attribsPrefix": Object {
+                                        "class": undefined,
+                                      },
+                                    },
+                                    Node {
+                                      "data": "ame",
+                                      "next": null,
+                                      "parent": [Circular],
+                                      "prev": Node {
+                                        "attribs": Object {
+                                          "class": "matched",
+                                        },
+                                        "children": Array [
+                                          Node {
+                                            "data": "n",
+                                            "next": null,
+                                            "parent": [Circular],
+                                            "prev": null,
+                                            "type": "text",
+                                          },
+                                        ],
+                                        "name": "span",
+                                        "namespace": "http://www.w3.org/1999/xhtml",
+                                        "next": [Circular],
+                                        "parent": [Circular],
+                                        "prev": null,
+                                        "type": "tag",
+                                        "x-attribsNamespace": Object {
+                                          "class": undefined,
+                                        },
+                                        "x-attribsPrefix": Object {
+                                          "class": undefined,
+                                        },
+                                      },
+                                      "type": "text",
+                                    },
+                                  ],
+                                  "name": "span",
+                                  "namespace": "http://www.w3.org/1999/xhtml",
+                                  "next": null,
+                                  "parent": [Circular],
+                                  "prev": null,
+                                  "type": "tag",
+                                  "x-attribsNamespace": Object {},
+                                  "x-attribsPrefix": Object {},
+                                },
+                              ],
+                              "name": "td",
+                              "namespace": "http://www.w3.org/1999/xhtml",
+                              "next": Node {
+                                "attribs": Object {},
+                                "children": Array [
+                                  Node {
+                                    "data": "a@b.nl",
+                                    "next": null,
+                                    "parent": [Circular],
+                                    "prev": null,
+                                    "type": "text",
+                                  },
+                                ],
+                                "name": "td",
+                                "namespace": "http://www.w3.org/1999/xhtml",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": [Circular],
+                                "type": "tag",
+                                "x-attribsNamespace": Object {},
+                                "x-attribsPrefix": Object {},
+                              },
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "tag",
+                              "x-attribsNamespace": Object {},
+                              "x-attribsPrefix": Object {},
+                            },
+                            Node {
+                              "attribs": Object {},
+                              "children": Array [
+                                Node {
+                                  "data": "a@b.nl",
+                                  "next": null,
+                                  "parent": [Circular],
+                                  "prev": null,
+                                  "type": "text",
+                                },
+                              ],
+                              "name": "td",
+                              "namespace": "http://www.w3.org/1999/xhtml",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": Node {
+                                "attribs": Object {},
+                                "children": Array [
+                                  Node {
+                                    "attribs": Object {},
+                                    "children": Array [
+                                      Node {
+                                        "attribs": Object {
+                                          "class": "matched",
+                                        },
+                                        "children": Array [
+                                          Node {
+                                            "data": "n",
+                                            "next": null,
+                                            "parent": [Circular],
+                                            "prev": null,
+                                            "type": "text",
+                                          },
+                                        ],
+                                        "name": "span",
+                                        "namespace": "http://www.w3.org/1999/xhtml",
+                                        "next": Node {
+                                          "data": "ame",
+                                          "next": null,
+                                          "parent": [Circular],
+                                          "prev": [Circular],
+                                          "type": "text",
+                                        },
+                                        "parent": [Circular],
+                                        "prev": null,
+                                        "type": "tag",
+                                        "x-attribsNamespace": Object {
+                                          "class": undefined,
+                                        },
+                                        "x-attribsPrefix": Object {
+                                          "class": undefined,
+                                        },
+                                      },
+                                      Node {
+                                        "data": "ame",
+                                        "next": null,
+                                        "parent": [Circular],
+                                        "prev": Node {
+                                          "attribs": Object {
+                                            "class": "matched",
+                                          },
+                                          "children": Array [
+                                            Node {
+                                              "data": "n",
+                                              "next": null,
+                                              "parent": [Circular],
+                                              "prev": null,
+                                              "type": "text",
+                                            },
+                                          ],
+                                          "name": "span",
+                                          "namespace": "http://www.w3.org/1999/xhtml",
+                                          "next": [Circular],
+                                          "parent": [Circular],
+                                          "prev": null,
+                                          "type": "tag",
+                                          "x-attribsNamespace": Object {
+                                            "class": undefined,
+                                          },
+                                          "x-attribsPrefix": Object {
+                                            "class": undefined,
+                                          },
+                                        },
+                                        "type": "text",
+                                      },
+                                    ],
+                                    "name": "span",
+                                    "namespace": "http://www.w3.org/1999/xhtml",
+                                    "next": null,
+                                    "parent": [Circular],
+                                    "prev": null,
+                                    "type": "tag",
+                                    "x-attribsNamespace": Object {},
+                                    "x-attribsPrefix": Object {},
+                                  },
+                                ],
+                                "name": "td",
+                                "namespace": "http://www.w3.org/1999/xhtml",
+                                "next": [Circular],
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "tag",
+                                "x-attribsNamespace": Object {},
+                                "x-attribsPrefix": Object {},
+                              },
+                              "type": "tag",
+                              "x-attribsNamespace": Object {},
+                              "x-attribsPrefix": Object {},
+                            },
+                          ],
+                          "name": "tr",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "class": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "class": undefined,
+                          },
+                        },
+                      ],
+                      "name": "tbody",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {},
+                      "x-attribsPrefix": Object {},
+                    },
+                  ],
+                  "name": "table",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+              ],
+              "name": "section",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": null,
+              "parent": [Circular],
+              "prev": null,
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+          ],
+          "name": "div",
+          "namespace": "http://www.w3.org/1999/xhtml",
+          "next": null,
+          "parent": [Circular],
+          "prev": [Circular],
+          "type": "tag",
+          "x-attribsNamespace": Object {
+            "class": undefined,
+          },
+          "x-attribsPrefix": Object {
+            "class": undefined,
+          },
+        },
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "class": undefined,
+          "id": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "class": undefined,
+          "id": undefined,
+        },
+      },
+      Node {
+        "attribs": Object {
+          "class": "autocomplete-container",
+        },
+        "children": Array [
+          Node {
+            "attribs": Object {
+              "class": "autocomplete ",
+            },
+            "children": Array [
+              Node {
+                "attribs": Object {
+                  "class": "result",
+                },
+                "children": Array [
+                  Node {
+                    "attribs": Object {},
+                    "children": Array [
+                      Node {
+                        "attribs": Object {
+                          "class": "",
+                        },
+                        "children": Array [
+                          Node {
+                            "attribs": Object {},
+                            "children": Array [
+                              Node {
+                                "attribs": Object {},
+                                "children": Array [
+                                  Node {
+                                    "attribs": Object {
+                                      "class": "matched",
+                                    },
+                                    "children": Array [
+                                      Node {
+                                        "data": "n",
+                                        "next": null,
+                                        "parent": [Circular],
+                                        "prev": null,
+                                        "type": "text",
+                                      },
+                                    ],
+                                    "name": "span",
+                                    "namespace": "http://www.w3.org/1999/xhtml",
+                                    "next": Node {
+                                      "data": "ame",
+                                      "next": null,
+                                      "parent": [Circular],
+                                      "prev": [Circular],
+                                      "type": "text",
+                                    },
+                                    "parent": [Circular],
+                                    "prev": null,
+                                    "type": "tag",
+                                    "x-attribsNamespace": Object {
+                                      "class": undefined,
+                                    },
+                                    "x-attribsPrefix": Object {
+                                      "class": undefined,
+                                    },
+                                  },
+                                  Node {
+                                    "data": "ame",
+                                    "next": null,
+                                    "parent": [Circular],
+                                    "prev": Node {
+                                      "attribs": Object {
+                                        "class": "matched",
+                                      },
+                                      "children": Array [
+                                        Node {
+                                          "data": "n",
+                                          "next": null,
+                                          "parent": [Circular],
+                                          "prev": null,
+                                          "type": "text",
+                                        },
+                                      ],
+                                      "name": "span",
+                                      "namespace": "http://www.w3.org/1999/xhtml",
+                                      "next": [Circular],
+                                      "parent": [Circular],
+                                      "prev": null,
+                                      "type": "tag",
+                                      "x-attribsNamespace": Object {
+                                        "class": undefined,
+                                      },
+                                      "x-attribsPrefix": Object {
+                                        "class": undefined,
+                                      },
+                                    },
+                                    "type": "text",
+                                  },
+                                ],
+                                "name": "span",
+                                "namespace": "http://www.w3.org/1999/xhtml",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "tag",
+                                "x-attribsNamespace": Object {},
+                                "x-attribsPrefix": Object {},
+                              },
+                            ],
+                            "name": "td",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": Node {
+                              "attribs": Object {},
+                              "children": Array [
+                                Node {
+                                  "data": "a@b.nl",
+                                  "next": null,
+                                  "parent": [Circular],
+                                  "prev": null,
+                                  "type": "text",
+                                },
+                              ],
+                              "name": "td",
+                              "namespace": "http://www.w3.org/1999/xhtml",
+                              "next": null,
+                              "parent": [Circular],
+                              "prev": [Circular],
+                              "type": "tag",
+                              "x-attribsNamespace": Object {},
+                              "x-attribsPrefix": Object {},
+                            },
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {},
+                            "x-attribsPrefix": Object {},
+                          },
+                          Node {
+                            "attribs": Object {},
+                            "children": Array [
+                              Node {
+                                "data": "a@b.nl",
+                                "next": null,
+                                "parent": [Circular],
+                                "prev": null,
+                                "type": "text",
+                              },
+                            ],
+                            "name": "td",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": Node {
+                              "attribs": Object {},
+                              "children": Array [
+                                Node {
+                                  "attribs": Object {},
+                                  "children": Array [
+                                    Node {
+                                      "attribs": Object {
+                                        "class": "matched",
+                                      },
+                                      "children": Array [
+                                        Node {
+                                          "data": "n",
+                                          "next": null,
+                                          "parent": [Circular],
+                                          "prev": null,
+                                          "type": "text",
+                                        },
+                                      ],
+                                      "name": "span",
+                                      "namespace": "http://www.w3.org/1999/xhtml",
+                                      "next": Node {
+                                        "data": "ame",
+                                        "next": null,
+                                        "parent": [Circular],
+                                        "prev": [Circular],
+                                        "type": "text",
+                                      },
+                                      "parent": [Circular],
+                                      "prev": null,
+                                      "type": "tag",
+                                      "x-attribsNamespace": Object {
+                                        "class": undefined,
+                                      },
+                                      "x-attribsPrefix": Object {
+                                        "class": undefined,
+                                      },
+                                    },
+                                    Node {
+                                      "data": "ame",
+                                      "next": null,
+                                      "parent": [Circular],
+                                      "prev": Node {
+                                        "attribs": Object {
+                                          "class": "matched",
+                                        },
+                                        "children": Array [
+                                          Node {
+                                            "data": "n",
+                                            "next": null,
+                                            "parent": [Circular],
+                                            "prev": null,
+                                            "type": "text",
+                                          },
+                                        ],
+                                        "name": "span",
+                                        "namespace": "http://www.w3.org/1999/xhtml",
+                                        "next": [Circular],
+                                        "parent": [Circular],
+                                        "prev": null,
+                                        "type": "tag",
+                                        "x-attribsNamespace": Object {
+                                          "class": undefined,
+                                        },
+                                        "x-attribsPrefix": Object {
+                                          "class": undefined,
+                                        },
+                                      },
+                                      "type": "text",
+                                    },
+                                  ],
+                                  "name": "span",
+                                  "namespace": "http://www.w3.org/1999/xhtml",
+                                  "next": null,
+                                  "parent": [Circular],
+                                  "prev": null,
+                                  "type": "tag",
+                                  "x-attribsNamespace": Object {},
+                                  "x-attribsPrefix": Object {},
+                                },
+                              ],
+                              "name": "td",
+                              "namespace": "http://www.w3.org/1999/xhtml",
+                              "next": [Circular],
+                              "parent": [Circular],
+                              "prev": null,
+                              "type": "tag",
+                              "x-attribsNamespace": Object {},
+                              "x-attribsPrefix": Object {},
+                            },
+                            "type": "tag",
+                            "x-attribsNamespace": Object {},
+                            "x-attribsPrefix": Object {},
+                          },
+                        ],
+                        "name": "tr",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                    ],
+                    "name": "tbody",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {},
+                    "x-attribsPrefix": Object {},
+                  },
+                ],
+                "name": "table",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+            ],
+            "name": "section",
+            "namespace": "http://www.w3.org/1999/xhtml",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "tag",
+            "x-attribsNamespace": Object {
+              "class": undefined,
+            },
+            "x-attribsPrefix": Object {
+              "class": undefined,
+            },
+          },
+        ],
+        "name": "div",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": Node {
+          "attribs": Object {
+            "class": "euiFormRow euiFormRow--fullWidth",
+            "id": "uniforms-0000-000y-row",
+          },
+          "children": Array [
+            Node {
+              "attribs": Object {
+                "class": "euiFormRow__labelWrapper",
+              },
+              "children": Array [
+                Node {
+                  "attribs": Object {
+                    "class": "euiFormLabel euiFormRow__label",
+                    "for": "uniforms-0000-000y",
+                  },
+                  "children": Array [],
+                  "name": "label",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": Node {
+                    "data": " ",
+                    "next": Node {
+                      "attribs": Object {
+                        "class": "euiText euiText--medium",
+                      },
+                      "children": Array [],
+                      "name": "div",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": [Circular],
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    "parent": [Circular],
+                    "prev": [Circular],
+                    "type": "text",
+                  },
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                    "for": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                    "for": undefined,
+                  },
+                },
+                Node {
+                  "data": " ",
+                  "next": Node {
+                    "attribs": Object {
+                      "class": "euiText euiText--medium",
+                    },
+                    "children": Array [],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": [Circular],
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                  "parent": [Circular],
+                  "prev": Node {
+                    "attribs": Object {
+                      "class": "euiFormLabel euiFormRow__label",
+                      "for": "uniforms-0000-000y",
+                    },
+                    "children": Array [],
+                    "name": "label",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": [Circular],
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                  },
+                  "type": "text",
+                },
+                Node {
+                  "attribs": Object {
+                    "class": "euiText euiText--medium",
+                  },
+                  "children": Array [],
+                  "name": "div",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": Node {
+                    "data": " ",
+                    "next": [Circular],
+                    "parent": [Circular],
+                    "prev": Node {
+                      "attribs": Object {
+                        "class": "euiFormLabel euiFormRow__label",
+                        "for": "uniforms-0000-000y",
+                      },
+                      "children": Array [],
+                      "name": "label",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": [Circular],
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                        "for": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                        "for": undefined,
+                      },
+                    },
+                    "type": "text",
+                  },
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+              ],
+              "name": "div",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": Node {
+                "attribs": Object {
+                  "class": "euiFormRow__fieldWrapper",
+                },
+                "children": Array [
+                  Node {
+                    "attribs": Object {
+                      "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
+                    },
+                    "children": Array [
+                      Node {
+                        "attribs": Object {
+                          "class": "euiFormControlLayout__childrenWrapper",
+                        },
+                        "children": Array [
+                          Node {
+                            "attribs": Object {
+                              "autocomplete": "off",
+                              "class": "euiFieldText euiFieldText--fullWidth",
+                              "id": "uniforms-0000-000y",
+                              "name": "x",
+                              "placeholder": "Search and add contact persons...",
+                              "type": "text",
+                              "value": "n",
+                            },
+                            "children": Array [],
+                            "name": "input",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "autocomplete": undefined,
+                              "class": undefined,
+                              "id": undefined,
+                              "name": undefined,
+                              "placeholder": undefined,
+                              "type": undefined,
+                              "value": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "autocomplete": undefined,
+                              "class": undefined,
+                              "id": undefined,
+                              "name": undefined,
+                              "placeholder": undefined,
+                              "type": undefined,
+                              "value": undefined,
+                            },
+                          },
+                        ],
+                        "name": "div",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                    ],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                ],
+                "name": "div",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": [Circular],
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+              "parent": [Circular],
+              "prev": null,
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+            Node {
+              "attribs": Object {
+                "class": "euiFormRow__fieldWrapper",
+              },
+              "children": Array [
+                Node {
+                  "attribs": Object {
+                    "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
+                  },
+                  "children": Array [
+                    Node {
+                      "attribs": Object {
+                        "class": "euiFormControlLayout__childrenWrapper",
+                      },
+                      "children": Array [
+                        Node {
+                          "attribs": Object {
+                            "autocomplete": "off",
+                            "class": "euiFieldText euiFieldText--fullWidth",
+                            "id": "uniforms-0000-000y",
+                            "name": "x",
+                            "placeholder": "Search and add contact persons...",
+                            "type": "text",
+                            "value": "n",
+                          },
+                          "children": Array [],
+                          "name": "input",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "autocomplete": undefined,
+                            "class": undefined,
+                            "id": undefined,
+                            "name": undefined,
+                            "placeholder": undefined,
+                            "type": undefined,
+                            "value": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "autocomplete": undefined,
+                            "class": undefined,
+                            "id": undefined,
+                            "name": undefined,
+                            "placeholder": undefined,
+                            "type": undefined,
+                            "value": undefined,
+                          },
+                        },
+                      ],
+                      "name": "div",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                  ],
+                  "name": "div",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+              ],
+              "name": "div",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": null,
+              "parent": [Circular],
+              "prev": Node {
+                "attribs": Object {
+                  "class": "euiFormRow__labelWrapper",
+                },
+                "children": Array [
+                  Node {
+                    "attribs": Object {
+                      "class": "euiFormLabel euiFormRow__label",
+                      "for": "uniforms-0000-000y",
+                    },
+                    "children": Array [],
+                    "name": "label",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": Node {
+                      "data": " ",
+                      "next": Node {
+                        "attribs": Object {
+                          "class": "euiText euiText--medium",
+                        },
+                        "children": Array [],
+                        "name": "div",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": [Circular],
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                      "parent": [Circular],
+                      "prev": [Circular],
+                      "type": "text",
+                    },
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                  },
+                  Node {
+                    "data": " ",
+                    "next": Node {
+                      "attribs": Object {
+                        "class": "euiText euiText--medium",
+                      },
+                      "children": Array [],
+                      "name": "div",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": [Circular],
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    "parent": [Circular],
+                    "prev": Node {
+                      "attribs": Object {
+                        "class": "euiFormLabel euiFormRow__label",
+                        "for": "uniforms-0000-000y",
+                      },
+                      "children": Array [],
+                      "name": "label",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": [Circular],
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                        "for": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                        "for": undefined,
+                      },
+                    },
+                    "type": "text",
+                  },
+                  Node {
+                    "attribs": Object {
+                      "class": "euiText euiText--medium",
+                    },
+                    "children": Array [],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": Node {
+                      "data": " ",
+                      "next": [Circular],
+                      "parent": [Circular],
+                      "prev": Node {
+                        "attribs": Object {
+                          "class": "euiFormLabel euiFormRow__label",
+                          "for": "uniforms-0000-000y",
+                        },
+                        "children": Array [],
+                        "name": "label",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": [Circular],
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                          "for": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                          "for": undefined,
+                        },
+                      },
+                      "type": "text",
+                    },
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                ],
+                "name": "div",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": [Circular],
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+          ],
+          "name": "div",
+          "namespace": "http://www.w3.org/1999/xhtml",
+          "next": [Circular],
+          "parent": [Circular],
+          "prev": null,
+          "type": "tag",
+          "x-attribsNamespace": Object {
+            "class": undefined,
+            "id": undefined,
+          },
+          "x-attribsPrefix": Object {
+            "class": undefined,
+            "id": undefined,
+          },
+        },
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "class": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "class": undefined,
+        },
+      },
+    ],
+    "name": "section",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "required": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "required": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;
+
+exports[`<ContactPersonNameField> - selects item with keystrokes 2`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "required": "",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "class": "euiFormRow euiFormRow--fullWidth",
+          "id": "uniforms-0000-000y-row",
+        },
+        "children": Array [
+          Node {
+            "attribs": Object {
+              "class": "euiFormRow__labelWrapper",
+            },
+            "children": Array [
+              Node {
+                "attribs": Object {
+                  "class": "euiFormLabel euiFormRow__label",
+                  "for": "uniforms-0000-000y",
+                },
+                "children": Array [],
+                "name": "label",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": Node {
+                  "data": " ",
+                  "next": Node {
+                    "attribs": Object {
+                      "class": "euiText euiText--medium",
+                    },
+                    "children": Array [],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": [Circular],
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                  "parent": [Circular],
+                  "prev": [Circular],
+                  "type": "text",
+                },
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                  "for": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                  "for": undefined,
+                },
+              },
+              Node {
+                "data": " ",
+                "next": Node {
+                  "attribs": Object {
+                    "class": "euiText euiText--medium",
+                  },
+                  "children": Array [],
+                  "name": "div",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": [Circular],
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+                "parent": [Circular],
+                "prev": Node {
+                  "attribs": Object {
+                    "class": "euiFormLabel euiFormRow__label",
+                    "for": "uniforms-0000-000y",
+                  },
+                  "children": Array [],
+                  "name": "label",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": [Circular],
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                    "for": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                    "for": undefined,
+                  },
+                },
+                "type": "text",
+              },
+              Node {
+                "attribs": Object {
+                  "class": "euiText euiText--medium",
+                },
+                "children": Array [],
+                "name": "div",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": Node {
+                  "data": " ",
+                  "next": [Circular],
+                  "parent": [Circular],
+                  "prev": Node {
+                    "attribs": Object {
+                      "class": "euiFormLabel euiFormRow__label",
+                      "for": "uniforms-0000-000y",
+                    },
+                    "children": Array [],
+                    "name": "label",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": [Circular],
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                  },
+                  "type": "text",
+                },
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+            ],
+            "name": "div",
+            "namespace": "http://www.w3.org/1999/xhtml",
+            "next": Node {
+              "attribs": Object {
+                "class": "euiFormRow__fieldWrapper",
+              },
+              "children": Array [
+                Node {
+                  "attribs": Object {
+                    "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
+                  },
+                  "children": Array [
+                    Node {
+                      "attribs": Object {
+                        "class": "euiFormControlLayout__childrenWrapper",
+                      },
+                      "children": Array [
+                        Node {
+                          "attribs": Object {
+                            "autocomplete": "off",
+                            "class": "euiFieldText euiFieldText--fullWidth",
+                            "id": "uniforms-0000-000y",
+                            "name": "x",
+                            "placeholder": "Search and add contact persons...",
+                            "type": "text",
+                            "value": "n",
+                          },
+                          "children": Array [],
+                          "name": "input",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "autocomplete": undefined,
+                            "class": undefined,
+                            "id": undefined,
+                            "name": undefined,
+                            "placeholder": undefined,
+                            "type": undefined,
+                            "value": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "autocomplete": undefined,
+                            "class": undefined,
+                            "id": undefined,
+                            "name": undefined,
+                            "placeholder": undefined,
+                            "type": undefined,
+                            "value": undefined,
+                          },
+                        },
+                      ],
+                      "name": "div",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                  ],
+                  "name": "div",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+              ],
+              "name": "div",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": null,
+              "parent": [Circular],
+              "prev": [Circular],
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+            "parent": [Circular],
+            "prev": null,
+            "type": "tag",
+            "x-attribsNamespace": Object {
+              "class": undefined,
+            },
+            "x-attribsPrefix": Object {
+              "class": undefined,
+            },
+          },
+          Node {
+            "attribs": Object {
+              "class": "euiFormRow__fieldWrapper",
+            },
+            "children": Array [
+              Node {
+                "attribs": Object {
+                  "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
+                },
+                "children": Array [
+                  Node {
+                    "attribs": Object {
+                      "class": "euiFormControlLayout__childrenWrapper",
+                    },
+                    "children": Array [
+                      Node {
+                        "attribs": Object {
+                          "autocomplete": "off",
+                          "class": "euiFieldText euiFieldText--fullWidth",
+                          "id": "uniforms-0000-000y",
+                          "name": "x",
+                          "placeholder": "Search and add contact persons...",
+                          "type": "text",
+                          "value": "n",
+                        },
+                        "children": Array [],
+                        "name": "input",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "autocomplete": undefined,
+                          "class": undefined,
+                          "id": undefined,
+                          "name": undefined,
+                          "placeholder": undefined,
+                          "type": undefined,
+                          "value": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "autocomplete": undefined,
+                          "class": undefined,
+                          "id": undefined,
+                          "name": undefined,
+                          "placeholder": undefined,
+                          "type": undefined,
+                          "value": undefined,
+                        },
+                      },
+                    ],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                ],
+                "name": "div",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+            ],
+            "name": "div",
+            "namespace": "http://www.w3.org/1999/xhtml",
+            "next": null,
+            "parent": [Circular],
+            "prev": Node {
+              "attribs": Object {
+                "class": "euiFormRow__labelWrapper",
+              },
+              "children": Array [
+                Node {
+                  "attribs": Object {
+                    "class": "euiFormLabel euiFormRow__label",
+                    "for": "uniforms-0000-000y",
+                  },
+                  "children": Array [],
+                  "name": "label",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": Node {
+                    "data": " ",
+                    "next": Node {
+                      "attribs": Object {
+                        "class": "euiText euiText--medium",
+                      },
+                      "children": Array [],
+                      "name": "div",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": [Circular],
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    "parent": [Circular],
+                    "prev": [Circular],
+                    "type": "text",
+                  },
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                    "for": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                    "for": undefined,
+                  },
+                },
+                Node {
+                  "data": " ",
+                  "next": Node {
+                    "attribs": Object {
+                      "class": "euiText euiText--medium",
+                    },
+                    "children": Array [],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": [Circular],
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                  "parent": [Circular],
+                  "prev": Node {
+                    "attribs": Object {
+                      "class": "euiFormLabel euiFormRow__label",
+                      "for": "uniforms-0000-000y",
+                    },
+                    "children": Array [],
+                    "name": "label",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": [Circular],
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                  },
+                  "type": "text",
+                },
+                Node {
+                  "attribs": Object {
+                    "class": "euiText euiText--medium",
+                  },
+                  "children": Array [],
+                  "name": "div",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": Node {
+                    "data": " ",
+                    "next": [Circular],
+                    "parent": [Circular],
+                    "prev": Node {
+                      "attribs": Object {
+                        "class": "euiFormLabel euiFormRow__label",
+                        "for": "uniforms-0000-000y",
+                      },
+                      "children": Array [],
+                      "name": "label",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": [Circular],
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                        "for": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                        "for": undefined,
+                      },
+                    },
+                    "type": "text",
+                  },
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+              ],
+              "name": "div",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": [Circular],
+              "parent": [Circular],
+              "prev": null,
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+            "type": "tag",
+            "x-attribsNamespace": Object {
+              "class": undefined,
+            },
+            "x-attribsPrefix": Object {
+              "class": undefined,
+            },
+          },
+        ],
+        "name": "div",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": Node {
+          "attribs": Object {
+            "class": "autocomplete-container",
+          },
+          "children": Array [],
+          "name": "div",
+          "namespace": "http://www.w3.org/1999/xhtml",
+          "next": null,
+          "parent": [Circular],
+          "prev": [Circular],
+          "type": "tag",
+          "x-attribsNamespace": Object {
+            "class": undefined,
+          },
+          "x-attribsPrefix": Object {
+            "class": undefined,
+          },
+        },
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "class": undefined,
+          "id": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "class": undefined,
+          "id": undefined,
+        },
+      },
+      Node {
+        "attribs": Object {
+          "class": "autocomplete-container",
+        },
+        "children": Array [],
+        "name": "div",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": Node {
+          "attribs": Object {
+            "class": "euiFormRow euiFormRow--fullWidth",
+            "id": "uniforms-0000-000y-row",
+          },
+          "children": Array [
+            Node {
+              "attribs": Object {
+                "class": "euiFormRow__labelWrapper",
+              },
+              "children": Array [
+                Node {
+                  "attribs": Object {
+                    "class": "euiFormLabel euiFormRow__label",
+                    "for": "uniforms-0000-000y",
+                  },
+                  "children": Array [],
+                  "name": "label",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": Node {
+                    "data": " ",
+                    "next": Node {
+                      "attribs": Object {
+                        "class": "euiText euiText--medium",
+                      },
+                      "children": Array [],
+                      "name": "div",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": [Circular],
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    "parent": [Circular],
+                    "prev": [Circular],
+                    "type": "text",
+                  },
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                    "for": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                    "for": undefined,
+                  },
+                },
+                Node {
+                  "data": " ",
+                  "next": Node {
+                    "attribs": Object {
+                      "class": "euiText euiText--medium",
+                    },
+                    "children": Array [],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": [Circular],
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                  "parent": [Circular],
+                  "prev": Node {
+                    "attribs": Object {
+                      "class": "euiFormLabel euiFormRow__label",
+                      "for": "uniforms-0000-000y",
+                    },
+                    "children": Array [],
+                    "name": "label",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": [Circular],
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                  },
+                  "type": "text",
+                },
+                Node {
+                  "attribs": Object {
+                    "class": "euiText euiText--medium",
+                  },
+                  "children": Array [],
+                  "name": "div",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": Node {
+                    "data": " ",
+                    "next": [Circular],
+                    "parent": [Circular],
+                    "prev": Node {
+                      "attribs": Object {
+                        "class": "euiFormLabel euiFormRow__label",
+                        "for": "uniforms-0000-000y",
+                      },
+                      "children": Array [],
+                      "name": "label",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": [Circular],
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                        "for": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                        "for": undefined,
+                      },
+                    },
+                    "type": "text",
+                  },
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+              ],
+              "name": "div",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": Node {
+                "attribs": Object {
+                  "class": "euiFormRow__fieldWrapper",
+                },
+                "children": Array [
+                  Node {
+                    "attribs": Object {
+                      "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
+                    },
+                    "children": Array [
+                      Node {
+                        "attribs": Object {
+                          "class": "euiFormControlLayout__childrenWrapper",
+                        },
+                        "children": Array [
+                          Node {
+                            "attribs": Object {
+                              "autocomplete": "off",
+                              "class": "euiFieldText euiFieldText--fullWidth",
+                              "id": "uniforms-0000-000y",
+                              "name": "x",
+                              "placeholder": "Search and add contact persons...",
+                              "type": "text",
+                              "value": "n",
+                            },
+                            "children": Array [],
+                            "name": "input",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "autocomplete": undefined,
+                              "class": undefined,
+                              "id": undefined,
+                              "name": undefined,
+                              "placeholder": undefined,
+                              "type": undefined,
+                              "value": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "autocomplete": undefined,
+                              "class": undefined,
+                              "id": undefined,
+                              "name": undefined,
+                              "placeholder": undefined,
+                              "type": undefined,
+                              "value": undefined,
+                            },
+                          },
+                        ],
+                        "name": "div",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                    ],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                ],
+                "name": "div",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": [Circular],
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+              "parent": [Circular],
+              "prev": null,
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+            Node {
+              "attribs": Object {
+                "class": "euiFormRow__fieldWrapper",
+              },
+              "children": Array [
+                Node {
+                  "attribs": Object {
+                    "class": "euiFormControlLayout euiFormControlLayout--fullWidth",
+                  },
+                  "children": Array [
+                    Node {
+                      "attribs": Object {
+                        "class": "euiFormControlLayout__childrenWrapper",
+                      },
+                      "children": Array [
+                        Node {
+                          "attribs": Object {
+                            "autocomplete": "off",
+                            "class": "euiFieldText euiFieldText--fullWidth",
+                            "id": "uniforms-0000-000y",
+                            "name": "x",
+                            "placeholder": "Search and add contact persons...",
+                            "type": "text",
+                            "value": "n",
+                          },
+                          "children": Array [],
+                          "name": "input",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "autocomplete": undefined,
+                            "class": undefined,
+                            "id": undefined,
+                            "name": undefined,
+                            "placeholder": undefined,
+                            "type": undefined,
+                            "value": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "autocomplete": undefined,
+                            "class": undefined,
+                            "id": undefined,
+                            "name": undefined,
+                            "placeholder": undefined,
+                            "type": undefined,
+                            "value": undefined,
+                          },
+                        },
+                      ],
+                      "name": "div",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                  ],
+                  "name": "div",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+              ],
+              "name": "div",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": null,
+              "parent": [Circular],
+              "prev": Node {
+                "attribs": Object {
+                  "class": "euiFormRow__labelWrapper",
+                },
+                "children": Array [
+                  Node {
+                    "attribs": Object {
+                      "class": "euiFormLabel euiFormRow__label",
+                      "for": "uniforms-0000-000y",
+                    },
+                    "children": Array [],
+                    "name": "label",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": Node {
+                      "data": " ",
+                      "next": Node {
+                        "attribs": Object {
+                          "class": "euiText euiText--medium",
+                        },
+                        "children": Array [],
+                        "name": "div",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": [Circular],
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                      "parent": [Circular],
+                      "prev": [Circular],
+                      "type": "text",
+                    },
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                      "for": undefined,
+                    },
+                  },
+                  Node {
+                    "data": " ",
+                    "next": Node {
+                      "attribs": Object {
+                        "class": "euiText euiText--medium",
+                      },
+                      "children": Array [],
+                      "name": "div",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": [Circular],
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    "parent": [Circular],
+                    "prev": Node {
+                      "attribs": Object {
+                        "class": "euiFormLabel euiFormRow__label",
+                        "for": "uniforms-0000-000y",
+                      },
+                      "children": Array [],
+                      "name": "label",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": [Circular],
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                        "for": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                        "for": undefined,
+                      },
+                    },
+                    "type": "text",
+                  },
+                  Node {
+                    "attribs": Object {
+                      "class": "euiText euiText--medium",
+                    },
+                    "children": Array [],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": Node {
+                      "data": " ",
+                      "next": [Circular],
+                      "parent": [Circular],
+                      "prev": Node {
+                        "attribs": Object {
+                          "class": "euiFormLabel euiFormRow__label",
+                          "for": "uniforms-0000-000y",
+                        },
+                        "children": Array [],
+                        "name": "label",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": [Circular],
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                          "for": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                          "for": undefined,
+                        },
+                      },
+                      "type": "text",
+                    },
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                ],
+                "name": "div",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": [Circular],
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+          ],
+          "name": "div",
+          "namespace": "http://www.w3.org/1999/xhtml",
+          "next": [Circular],
+          "parent": [Circular],
+          "prev": null,
+          "type": "tag",
+          "x-attribsNamespace": Object {
+            "class": undefined,
+            "id": undefined,
+          },
+          "x-attribsPrefix": Object {
+            "class": undefined,
+            "id": undefined,
+          },
+        },
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "class": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "class": undefined,
+        },
+      },
+    ],
+    "name": "section",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "required": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "required": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;
