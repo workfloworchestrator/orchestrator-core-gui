@@ -41,9 +41,9 @@ import {
     useTable,
 } from "react-table";
 import useHttpIntervalFallback from "utils/useHttpIntervalFallback";
-import RunningProcessesContext from "websocketService/useRunningProcesses/RunningProcessesContext";
 
 import MiniPaginator from "./MiniPaginator";
+import RunningProcessesContext from "contextProviders/runningProcessesProvider";
 
 /*
  * Reusable NWA table implementation using react-table 7.
