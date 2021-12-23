@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
+exports[`Storyshots NewProcess Default 1`] = `
 <section
   className="storybook-container"
 >
@@ -4745,7 +4745,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -5005,7 +5005,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -5311,7 +5311,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -5571,7 +5571,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -6154,7 +6154,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -6470,7 +6470,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -6832,7 +6832,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -7692,7 +7692,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -7952,7 +7952,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -8212,7 +8212,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -8472,7 +8472,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -9332,7 +9332,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -9356,7 +9356,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -9663,7 +9663,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -9687,7 +9687,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -9994,7 +9994,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -10018,7 +10018,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -10325,7 +10325,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -10349,7 +10349,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -10933,7 +10933,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -10957,7 +10957,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   >
                                     <svg
                                       aria-hidden={true}
-                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                       focusable="false"
                                       height={16}
                                       role="img"
@@ -11734,7 +11734,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         >
                           <svg
                             aria-hidden={true}
-                            className="euiIcon euiIcon--large euiButtonIcon__icon"
+                            className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                             focusable="false"
                             height={16}
                             role="img"
@@ -11909,7 +11909,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         >
                           <svg
                             aria-hidden={true}
-                            className="euiIcon euiIcon--large euiButtonIcon__icon"
+                            className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                             focusable="false"
                             height={16}
                             role="img"
@@ -12114,7 +12114,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               >
                                 <svg
                                   aria-hidden={true}
-                                  className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                  className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                   focusable="false"
                                   height={16}
                                   role="img"
@@ -12302,7 +12302,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               >
                                 <svg
                                   aria-hidden={true}
-                                  className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                  className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                   focusable="false"
                                   height={16}
                                   role="img"
@@ -12536,7 +12536,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               >
                                 <svg
                                   aria-hidden={true}
-                                  className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                  className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                   focusable="false"
                                   height={16}
                                   role="img"
@@ -12724,7 +12724,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                               >
                                 <svg
                                   aria-hidden={true}
-                                  className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                  className="euiIcon euiIcon--large euiIcon-isLoaded euiButtonIcon__icon"
                                   focusable="false"
                                   height={16}
                                   role="img"
