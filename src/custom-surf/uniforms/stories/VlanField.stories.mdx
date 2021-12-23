@@ -1,0 +1,156 @@
+import { Meta, Preview, Story } from "@storybook/addon-docs/blocks";
+import mock from "axios-mock";
+
+import UserInputContainer from "../../../stories/UserInputContainer";
+import { createForm } from "../../../stories/utils";
+import VlanField from "../../../custom/uniforms/VlanField";
+
+<Meta title="Uniforms/VlanField" component={VlanField} />
+
+This component expects to be used in a list alongside a SubscriptionField.
+
+## VlanField Standalone
+
+<Story name="VlanField">
+    <UserInputContainer stepUserInput={createForm({ name: { type: "string", format: "vlan" } })} />
+</Story>
+
+### JSON Schema form json
+
+```json
+{
+    "vlan": { "type": "string", "format": "vlan" }
+}
+```
+
+## VlanField Typical usage
+
+<Story name="VlanField Typical usage">
+    {() => {
+        mock.reset();
+        mock.onGet("subscriptions/?filter=statuses%2Cactive").reply(200, [
+            {
+                subscription_id: "a",
+                customer_id: "c1",
+                description: "Untagged port subscription",
+                port_mode: "untagged",
+                product: { tag: "A", product_id: "P2" }
+            },
+            {
+                subscription_id: "b",
+                customer_id: "c2",
+                description: "Tagged port subscription",
+                port_mode: "tagged",
+                product: { tag: "A", product_id: "P3" }
+            }
+        ]);
+        mock.onGet(/surf\/subscriptions\/vlans-by-service-port\/.*/).reply(200, [
+            [1, 3],
+            [5, 5]
+        ]);
+        return (
+            <UserInputContainer
+                stepUserInput={createForm({
+                    subscriptions: {
+                        type: "array",
+                        items: {
+                            type: "object",
+                            properties: {
+                                subscription_id: { type: "string", format: "subscriptionId" },
+                                vlan: { type: "string", format: "vlan" }
+                            }
+                        }
+                    }
+                })}
+            />
+        );
+    }}
+</Story>
+
+### JSON Schema form json
+
+```json
+{
+    "subscriptions": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "subscription_id": { "type": "string", "format": "subscriptionId" },
+                "vlan": { "type": "string", "format": "vlan" }
+            }
+        }
+    }
+}
+```
+
+## VlanField ESI usage
+
+<Story name="VlanField ESI usage">
+    {() => {
+        mock.reset();
+        mock.onGet("subscriptions/?filter=statuses%2Cactive").reply(200, [
+            {
+                subscription_id: "a",
+                customer_id: "c1",
+                description: "Untagged port subscription",
+                port_mode: "untagged",
+                product: { tag: "A", product_id: "P2" }
+            },
+            {
+                subscription_id: "b",
+                customer_id: "c2",
+                description: "Tagged port subscription",
+                port_mode: "tagged",
+                product: { tag: "A", product_id: "P3" }
+            }
+        ]);
+        mock.onGet(/surf\/subscriptions\/vlans-by-service-port\/.*/).reply(200, [
+            [1, 3],
+            [5, 5]
+        ]);
+        return (
+            <UserInputContainer
+                stepUserInput={createForm({
+                    esis: {
+                        type: "array",
+                        items: {
+                            type: "array",
+                            items: {
+                                type: "object",
+                                properties: {
+                                    subscription_id: {
+                                        type: "string",
+                                        format: "subscriptionId",
+                                        uniforms: { tags: ["SP"] }
+                                    },
+                                    vlan: { type: "string", format: "vlan" }
+                                }
+                            }
+                        }
+                    }
+                })}
+            />
+        );
+    }}
+</Story>
+
+### JSON Schema form json
+
+```json
+{
+    "esis": {
+        "type": "array",
+        "items": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "subscription_id": { "type": "string", "format": "subscriptionId", "uniforms": { "tags": ["SP"] } },
+                    "vlan": { "type": "string", "format": "vlan" }
+                }
+            }
+        }
+    }
+}
+```

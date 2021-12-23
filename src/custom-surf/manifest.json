@@ -1,0 +1,16 @@
+{
+    "name": "SURF",
+    "customPages": [
+        {
+            "name": "prefixes",
+            "path": "pages",
+            "file": "Prefixes",
+            "component": "Prefixes"
+        }
+    ],
+    "disabledRoutes": ["/YOUR_DISABLED_ROUTE_HERE"],
+    "disabledMenuItems": [],
+    "plugins": {
+        "subscriptionDetailPlugins": ["RenderDiagram", "RenderExternalLinks", "RenderDienstafname"]
+    }
+}
