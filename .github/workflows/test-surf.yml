@@ -2,6 +2,8 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 #
 # It will test the SURF specific setup of the orchestrator-core-gui
+#
+# Note: Linting is done via the `test-standalone.yml` workflow
 
 name: Lint and test the SURF version
 
@@ -9,7 +11,7 @@ on: push
 
 jobs:
   build:
-    name: try to make a clean build without lint, yarn, test and compile errors
+    name: try to make a clean build without yarn, test and compile errors
     runs-on: ubuntu-latest
     env:
       TZ: Europe/Amsterdam
@@ -19,7 +21,6 @@ jobs:
         with:
           node-version: '14.x'
       - run: yarn install --frozen-lockfile
-      - run: yarn prettier
       - run: ./bootstrap.sh surf
       - run: yarn test
       - run: yarn build
