@@ -22,6 +22,7 @@ import Paginator from "components/tables/Paginator";
 import Preferences from "components/tables/Preferences";
 import { TableRenderer } from "components/tables/TableRenderer";
 import useFilterableDataFetcher from "components/tables/useFilterableDataFetcher";
+import RunningProcessesContext from "contextProviders/runningProcessesProvider";
 import { produce } from "immer";
 import { useContext, useEffect } from "react";
 import { FormattedMessage } from "react-intl";
@@ -43,7 +44,6 @@ import {
 import useHttpIntervalFallback from "utils/useHttpIntervalFallback";
 
 import MiniPaginator from "./MiniPaginator";
-import RunningProcessesContext from "contextProviders/runningProcessesProvider";
 
 /*
  * Reusable NWA table implementation using react-table 7.

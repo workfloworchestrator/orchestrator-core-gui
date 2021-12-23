@@ -19,6 +19,7 @@ import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody, EuiPanel, E
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import ProcessStateDetails from "components/ProcessStateDetails";
+import RunningProcessesContext from "contextProviders/runningProcessesProvider";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { RouteComponentProps } from "react-router-dom";
@@ -31,7 +32,6 @@ import { CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
 import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step, WsProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
-import RunningProcessesContext from "contextProviders/runningProcessesProvider";
 
 const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 

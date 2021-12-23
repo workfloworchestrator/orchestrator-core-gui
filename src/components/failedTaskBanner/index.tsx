@@ -16,12 +16,12 @@
 import "./FailedTaskBanner.scss";
 
 import { EuiText, EuiToolTip } from "@elastic/eui";
+import RunningProcessesContext from "contextProviders/runningProcessesProvider";
 import { groupBy } from "lodash";
 import { useContext, useEffect, useState } from "react";
 import { Process, ProcessStatus } from "utils/types";
 import useHttpIntervalFallback from "utils/useHttpIntervalFallback";
 import { FailedProcess } from "websocketService/useRunningProcesses";
-import RunningProcessesContext from "contextProviders/runningProcessesProvider";
 
 import useFailedTaskFetcher from "./useFailedTaskFetcher";
 
