@@ -14,6 +14,7 @@ import { SubscriptionSummaryField } from "../src";
 <Story name="SubscriptionSummaryField">
     {() => {
         mock.reset();
+        mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
         mock.onGet(/subscriptions\/.*/).reply(200, SUBSCRIPTION_JSON);
         mock.onGet("products/a3bf8b26-50a6-4586-8e58-ad552cb39798").reply(200, PRODUCTS[22]);
         return (
