@@ -13,7 +13,7 @@
  *
  */
 
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { User } from "oidc-client";
 
 import { ENV } from "../env";
@@ -23,43 +23,52 @@ import { setFlash } from "../utils/Flash";
 let calls = 0;
 const apiPath = ENV.BACKEND_URL + "/api/";
 
+function decrementCalls() {
+    calls--;
+    console.log(`calls: ${calls}`);
+    if (calls <= 0) {
+        mySpinner.stop();
+    }
+}
+
 // basic configuration for axios.
 // the 'Authorization' header is set in
 // index.ts:setUser
-const axiosConfig = {
+const axiosConfig: AxiosRequestConfig = {
     baseURL: apiPath,
     headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        post: {
-            "Content-Type": "application/json",
-        },
-        put: {
-            "Content-Type": "application/json",
-        },
+        // post: {
+        //     "Content-Type": "application/json",
+        // },
+        // put: {
+        //     "Content-Type": "application/json",
+        // },
     },
 };
-
 const axiosInstance = axios.create(axiosConfig);
-axiosInstance.interceptors.request.use((config) => {
-    calls++;
-    mySpinner.start();
-    return config;
-});
+axiosInstance.interceptors.request.use(
+    (config) => {
+        calls++;
+        mySpinner.start();
+        console.log(`calls: ${calls} -> new call to ${config.url}`);
+        return config;
+    },
+    (error) => {
+        decrementCalls();
+        return Promise.reject(error);
+    }
+);
 
 axiosInstance.interceptors.response.use(
     (response) => {
-        calls--;
-        if (calls <= 0) {
-            mySpinner.stop();
-        }
+        decrementCalls();
         return response;
     },
     (error) => {
-        calls--;
-        if (calls <= 0) {
-            mySpinner.stop();
-        }
+        decrementCalls();
+
         if (error.response) {
             if (error.response.status >= 500 && error.response.data?.body) {
                 setFlash(error.response.data.body, "error");
@@ -68,8 +77,10 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
 export default axiosInstance;
 
 export function setUser(_user: User | null) {
-    axiosInstance.defaults.headers["Authorization"] = `${_user?.token_type} ${_user?.access_token}`;
+    // @ts-ignore
+    axiosInstance.defaults.headers.common["Authorization"] = `${_user?.token_type} ${_user?.access_token}`;
 }
