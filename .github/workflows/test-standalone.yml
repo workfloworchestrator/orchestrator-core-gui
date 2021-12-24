@@ -21,5 +21,5 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn prettier
       - run: ./bootstrap.sh
-      - run: yarn test
+      - run: react-scripts test --testPathIgnorePatterns=src/custom-surf
       - run: yarn build
