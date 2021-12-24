@@ -11,7 +11,7 @@ on: push
 
 jobs:
   build:
-    name: try to make a clean build without yarn, test and compile errors
+    name: Check yarn, test and compile errors
     runs-on: ubuntu-latest
     env:
       TZ: Europe/Amsterdam
@@ -21,6 +21,6 @@ jobs:
         with:
           node-version: '14.x'
       - run: yarn install --frozen-lockfile
-      - run: ./bootstrap.sh surf
+      - run: mv src/custom-surf src/custom
       - run: yarn test
       - run: yarn build
