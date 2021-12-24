@@ -20,7 +20,6 @@ jobs:
           node-version: '14.x'
       - run: yarn install --frozen-lockfile
       - run: yarn prettier
-      - run: ./bootstrap.sh
-      - run: rm -rf src/custom-surf
+      - run: mv src/custom-example src/custom
       - run: yarn test
       - run: yarn build
