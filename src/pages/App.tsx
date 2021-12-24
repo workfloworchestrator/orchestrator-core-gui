@@ -182,7 +182,6 @@ class App extends React.PureComponent<IProps, IState> {
             language,
             allowed,
         ] = await Promise.all([
-            // Todo GPL: move to dynamic loading part
             this.state.applicationContext.customApiClient.organisations(),
             this.state.applicationContext.customApiClient.locationCodes(),
             this.state.applicationContext.apiClient.products(),
