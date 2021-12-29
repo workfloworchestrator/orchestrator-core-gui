@@ -24,9 +24,8 @@ import axiosInstance from "./axios";
 
 export const cancel = axios.CancelToken.source();
 
-function getHeaders(eTag?: string | null) {
-    const ifNoneMatchHeader = eTag ? { "If-None-Match": eTag } : {};
-    return { ...ifNoneMatchHeader };
+function getHeaders(eTag?: string | null): Record<string, string> {
+    return eTag ? { "If-None-Match": eTag } : {};
 }
 
 interface Params {
@@ -59,6 +58,7 @@ export function filterableEndpoint<T>(
         ) as string;
     }
     const extractResponseHeaders = (headers: any) => {
+        const result: [number, string | null] = [99, null];
         let etag: string | undefined = headers["etag"];
 
         if (etag?.startsWith('W/"')) {
@@ -67,7 +67,9 @@ export function filterableEndpoint<T>(
 
         const contentRange: string | undefined = headers["content-range"];
         const total = contentRange ? parseInt(contentRange.split("/")[1], 10) : 99;
-        return [total, etag];
+        result[0] = total;
+        result[1] = etag || null;
+        return result;
     };
     return axiosInstance
         .get(path, {

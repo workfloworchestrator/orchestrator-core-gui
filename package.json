@@ -11,7 +11,7 @@
         "@open-policy-agent/opa-wasm": "^1.2.0",
         "@sentry/react": "^6.0.1",
         "@sentry/tracing": "^6.0.1",
-        "axios": "^0.22.0",
+        "axios": "^0.24.0",
         "babel-polyfill": "^6.26.0",
         "date-fns": "^2.16.1",
         "events": "^3.2.0",

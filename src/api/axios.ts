@@ -25,7 +25,6 @@ const apiPath = ENV.BACKEND_URL + "/api/";
 
 function decrementCalls() {
     calls--;
-    console.log(`calls: ${calls}`);
     if (calls <= 0) {
         mySpinner.stop();
     }
@@ -39,12 +38,6 @@ const axiosConfig: AxiosRequestConfig = {
     headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        // post: {
-        //     "Content-Type": "application/json",
-        // },
-        // put: {
-        //     "Content-Type": "application/json",
-        // },
     },
 };
 const axiosInstance = axios.create(axiosConfig);
@@ -52,7 +45,6 @@ axiosInstance.interceptors.request.use(
     (config) => {
         calls++;
         mySpinner.start();
-        console.log(`calls: ${calls} -> new call to ${config.url}`);
         return config;
     },
     (error) => {
