@@ -15,20 +15,18 @@
 
 import "./EngineStatusBanner.scss";
 
-import { EuiHeaderLink } from "@elastic/eui";
 import EngineSettingsContext from "contextProviders/engineSettingsProvider";
 import { useContext } from "react";
 import { FormattedMessage } from "react-intl";
 
 export default function EngineStatusBanner() {
     const { engineStatus } = useContext(EngineSettingsContext);
+    const globalStatus = engineStatus.global_status.toLocaleLowerCase();
 
     return (
-        <EuiHeaderLink href="#">
-            <FormattedMessage id={`settings.status.engine.${engineStatus.global_status.toLocaleLowerCase()}`} />
-            <i
-                className={`fa fa-circle engine-status-banner__status ${engineStatus.global_status.toLocaleLowerCase()}`}
-            ></i>
-        </EuiHeaderLink>
+        <div className="engine-status-banner">
+            <FormattedMessage id={`settings.status.engine.${globalStatus}`} />
+            <i className={`fa fa-circle engine-status-banner__status ${globalStatus}`}></i>
+        </div>
     );
 }
