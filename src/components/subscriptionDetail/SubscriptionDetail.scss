@@ -326,14 +326,25 @@
     }
 }
 
-section.tabbed-details > div.mod-subscription-detail > section.details {
-    & > div {
-        padding-left: 0px;
-    }
-    & > h2 {
-        display: none;
+div.scrollable-tab-content {
+
+    & > div.mod-subscription-detail {
+        & > section.details {
+            & > div {
+                padding-left: 25px;
+            }
+            
+            & > h2 {
+                display: none;
+            }
+        }
+
+        & > div.subscription-details {
+            padding-left: 25px;
+        }
     }
 }
+
 
 div.indented {
     padding-left: 25px;

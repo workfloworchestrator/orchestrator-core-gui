@@ -46,6 +46,11 @@ export function RenderServiceConfiguration({ subscriptionInstances, viewType }: 
                             <>
                                 <table className="detail-block multiple-tbody">
                                     <thead />
+                                    <SubscriptionInstanceValue
+                                        key={`${inst.subscription_id}-instance-id`}
+                                        label={'Instance ID'}
+                                        value={inst.subscription_instance_id}
+                                    />
                                     {splitFields.value_fields
                                         .sort((entryA, entryB) => entryA[0].localeCompare(entryB[0]))
                                         .flatMap((entry) =>
@@ -86,6 +91,11 @@ export function RenderServiceConfiguration({ subscriptionInstances, viewType }: 
         <div className="mod-subscription-detail">
             <table className="detail-block multiple-tbody">
                 <thead />
+                <SubscriptionInstanceValue
+                    key={`${instance.subscription_id}-instance-id`}
+                    label={'Instance ID'}
+                    value={instance.subscription_instance_id}
+                />
                 {parentSplitFields.value_fields
                     .sort((entryA, entryB) => entryA[0].localeCompare(entryB[0]))
                     .flatMap((entry) => entry[1].map((value: any) => [entry[0], value]))
