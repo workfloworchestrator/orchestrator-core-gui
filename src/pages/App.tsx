@@ -26,6 +26,7 @@ import Navigation from "components/Navigation";
 import ProductPage from "components/Product";
 import ProductBlock from "components/ProductBlock";
 import ProtectedRoute from "components/ProtectedRoute";
+import GlobalContextProviders from "contextProviders/globalContextProviders";
 import { customPages, disabledRoutes } from "custom/manifest.json";
 import { createBrowserHistory } from "history";
 import { intl, setLocale } from "locale/i18n";
@@ -56,7 +57,6 @@ import { createPolicyCheck } from "utils/policy";
 import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
 import { isEmpty } from "utils/Utils";
-import { RunningProcessesContextWrapper } from "websocketService/useRunningProcesses/RunningProcessesContext";
 
 export const history = createBrowserHistory();
 
@@ -228,8 +228,8 @@ class App extends React.PureComponent<IProps, IState> {
                 <Router history={history}>
                     <QueryParamProvider ReactRouterRoute={Route}>
                         <ApplicationContext.Provider value={applicationContext}>
-                            <RunningProcessesContextWrapper>
-                                <RawIntlProvider value={intl}>
+                            <RawIntlProvider value={intl}>
+                                <GlobalContextProviders>
                                     {loading && (
                                         <EuiToast className="sync" color="primary">
                                             <EuiLoadingSpinner size="m" />
@@ -352,8 +352,8 @@ class App extends React.PureComponent<IProps, IState> {
                                             <Route component={NotFound} />
                                         </Switch>
                                     </div>
-                                </RawIntlProvider>
-                            </RunningProcessesContextWrapper>
+                                </GlobalContextProviders>
+                            </RawIntlProvider>
                         </ApplicationContext.Provider>
                     </QueryParamProvider>
                 </Router>
