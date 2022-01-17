@@ -5,8 +5,9 @@
 
 import "custom/pages/Prefixes.scss";
 
-import { EuiFieldSearch, EuiPage, EuiPageBody } from "@elastic/eui";
+import { EuiFieldSearch, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody, EuiSpacer } from "@elastic/eui";
 import FilterDropDown from "custom/components/FilterDropDown";
+import LabelledFilter from "custom/components/LabelledFilter";
 import constant from "lodash/constant";
 import debounce from "lodash/debounce";
 import memoize from "lodash/memoize";
@@ -218,6 +219,21 @@ class Prefixes extends React.PureComponent<IProps, IState> {
         });
     };
 
+    // setFilter, but for a list of filters.
+    setFilterList = (filterName: "state" | "rootPrefix") => (item: Filter[]) => {
+        const currentFilterAttributes = this.state.filterAttributes;
+        const incomingFilterNames = item.map((f) => f.name);
+        let modifiedAttributes: Partial<FilterAttributes> = {};
+        modifiedAttributes[filterName] = currentFilterAttributes[filterName].map((attr) => {
+            attr.selected = incomingFilterNames.includes(attr.name);
+
+            return attr;
+        });
+        this.setState({
+            filterAttributes: { ...currentFilterAttributes, ...modifiedAttributes },
+        });
+    };
+
     singleSelectFilter = (filterName: "state" | "rootPrefix") => (e: React.MouseEvent<HTMLElement>, item: Filter) => {
         stop(e);
         const currentFilterAttributes = this.state.filterAttributes;
@@ -251,12 +267,18 @@ class Prefixes extends React.PureComponent<IProps, IState> {
     };
 
     filter = (unfiltered: ExtendedIpPrefixSubscription[]) => {
-        const { state } = this.state.filterAttributes;
-        return unfiltered.filter((prefix) => {
-            const stateFilter = state.find((attr) => ipamStates.indexOf(attr.name) === prefix.state);
+        const { state, rootPrefix } = this.state.filterAttributes;
+        return unfiltered
+            .filter((prefix) => {
+                const stateFilter = state.find((attr) => ipamStates.indexOf(attr.name) === prefix.state);
 
-            return stateFilter ? stateFilter.selected : true;
-        });
+                return stateFilter ? stateFilter.selected : true;
+            })
+            .filter((prefix) => {
+                const rootFilter = rootPrefix.find((attr) => attr.name === prefix.parent);
+
+                return rootFilter ? rootFilter.selected : true;
+            });
     };
 
     sortBy = (name: Column) => (a: ExtendedIpPrefixSubscription, b: ExtendedIpPrefixSubscription) => {
@@ -372,22 +394,37 @@ class Prefixes extends React.PureComponent<IProps, IState> {
                 <EuiPageBody component="div" className="mod-prefixes">
                     <div>
                         <div className="options">
-                            <FilterDropDown
-                                items={filterAttributes.state}
-                                filterBy={this.setFilter("state")}
-                                // singleSelectFilter={this.singleSelectFilter("state")}
-                                selectAll={this.selectAll("state")}
-                                label={intl.formatMessage({ id: "prefixes.filters.state" })}
-                            />
-
-                            <EuiFieldSearch
-                                placeholder={intl.formatMessage({ id: "prefixes.searchPlaceHolder" })}
-                                value={query}
-                                onChange={this.search}
-                                isClearable={true}
-                                fullWidth
-                            />
+                            <EuiFlexGroup>
+                                <EuiFlexItem>
+                                    <LabelledFilter
+                                        items={filterAttributes.state}
+                                        filterBy={this.setFilterList("state")}
+                                        selectAll={this.selectAll("state")}
+                                        label={intl.formatMessage({ id: "prefixes.filters.state" })}
+                                    />
+                                </EuiFlexItem>
+                                <EuiFlexItem>
+                                    <LabelledFilter
+                                        items={filterAttributes.rootPrefix}
+                                        filterBy={this.setFilterList("rootPrefix")}
+                                        selectAll={this.selectAll("rootPrefix")}
+                                        label={intl.formatMessage({ id: "prefixes.filters.root_prefix" })}
+                                    />
+                                </EuiFlexItem>
+                            </EuiFlexGroup>
                         </div>
+                        <EuiFlexGroup>
+                            <EuiFlexItem>
+                                <EuiFieldSearch
+                                    placeholder={intl.formatMessage({ id: "prefixes.searchPlaceHolder" })}
+                                    value={query}
+                                    onChange={this.search}
+                                    isClearable={true}
+                                    fullWidth
+                                />
+                            </EuiFlexItem>
+                        </EuiFlexGroup>
+                        <EuiSpacer size="m" />
                     </div>
                     <table className="prefixes">
                         <thead>
