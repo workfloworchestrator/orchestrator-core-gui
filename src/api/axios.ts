@@ -40,15 +40,27 @@ const axiosConfig = {
     },
 };
 
+// Since we introduced websockets; there seem to be even more problems with the global way we track request activity
+// with some global axios vars. When a response is missed, the counter can stay positive and it reset the
+// "syncing" label in the GUI. As this also blocks some of the system tests and we probably want to refactor
+// the sync (or remove it and let the components that do data loading communicate it with spinners)
+
+// PATH workaround to not show "syncing":
+const EXCLUDED_SPINNER_PATHS = ["processes", "surf", "subscriptions"];
+
 const axiosInstance = axios.create(axiosConfig);
-axiosInstance.interceptors.request.use((config) => {
-    calls++;
-    mySpinner.start();
-    return config;
+axiosInstance.interceptors.request.use((request) => {
+    // @ts-ignore
+    if (request.url && !EXCLUDED_SPINNER_PATHS.find((i) => request.url.startsWith(i))) {
+        calls++;
+        mySpinner.start();
+    }
+    return request;
 });
 
 axiosInstance.interceptors.response.use(
     (response) => {
+        console.log(response);
         calls--;
         if (calls <= 0) {
             mySpinner.stop();
