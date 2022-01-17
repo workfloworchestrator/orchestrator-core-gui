@@ -6,7 +6,6 @@
 import "custom/pages/Prefixes.scss";
 
 import { EuiFieldSearch, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody, EuiSpacer } from "@elastic/eui";
-import FilterDropDown from "custom/components/FilterDropDown";
 import LabelledFilter from "custom/components/LabelledFilter";
 import constant from "lodash/constant";
 import debounce from "lodash/debounce";
