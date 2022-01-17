@@ -43,11 +43,7 @@ export function TabbedSection({ name, id, tabs, className = "", fixedHeight = fa
     return (
         <section className={`${className} tabbed-details`}>
             <EuiTabs>{renderTabs()}</EuiTabs>
-            <div className="scrollable-tab-content">
-                
-                    {selectedTabContent}
-                
-            </div>
+            <div className="scrollable-tab-content">{selectedTabContent}</div>
         </section>
     );
 }

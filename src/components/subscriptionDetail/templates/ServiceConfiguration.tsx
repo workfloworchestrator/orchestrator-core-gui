@@ -48,7 +48,7 @@ export function RenderServiceConfiguration({ subscriptionInstances, viewType }: 
                                     <thead />
                                     <SubscriptionInstanceValue
                                         key={`${inst.subscription_id}-instance-id`}
-                                        label={'Instance ID'}
+                                        label={"Instance ID"}
                                         value={inst.subscription_instance_id}
                                     />
                                     {splitFields.value_fields
@@ -93,7 +93,7 @@ export function RenderServiceConfiguration({ subscriptionInstances, viewType }: 
                 <thead />
                 <SubscriptionInstanceValue
                     key={`${instance.subscription_id}-instance-id`}
-                    label={'Instance ID'}
+                    label={"Instance ID"}
                     value={instance.subscription_instance_id}
                 />
                 {parentSplitFields.value_fields
