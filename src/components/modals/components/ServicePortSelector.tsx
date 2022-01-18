@@ -83,7 +83,6 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         this.context.customApiClient
             .getPortSubscriptionsForNode(selectedNode.subscription_id)
             .then((result: ServicePortFilterItem[]) => {
-                console.log(result);
                 const portOptions = result.map((port) => ({
                     value: port.subscription_id,
                     inputDisplay: port.port_name,
@@ -121,11 +120,10 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         }
     };
 
-    // Todo: find out why type EventTarget doesn't work: fall back to type ANY for now =>
-    onNodeInputChange = (e: any) => {
+    onNodeInputChange = (e: EventTarget) => {
         const { nodes } = this.state;
-        let nodeQuery = e.value;
-        console.log(`Current nodeQuery: ${nodeQuery}`);
+        const target = e as HTMLInputElement;
+        let nodeQuery = target.value;
 
         // update Suggestions
         const nodeSuggestions = nodes
@@ -277,7 +275,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                     >
                         <EuiSuggest
                             status={nodesLoading ? "loading" : "unchanged"}
-                            onInputChange={(e) => this.onNodeInputChange(e)}
+                            onInputChange={this.onNodeInputChange}
                             onItemClick={this.onNodeClick}
                             suggestions={nodeSuggestions}
                         />

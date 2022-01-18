@@ -97,8 +97,6 @@ export function formDate(
     value: Date | null,
     openToDate = new Date()
 ) {
-    console.log(value);
-
     const date = value ? moment(value) : null;
 
     const handleChange = (date: Moment) => {

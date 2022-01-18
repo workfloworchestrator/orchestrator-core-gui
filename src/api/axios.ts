@@ -60,7 +60,6 @@ axiosInstance.interceptors.request.use((request) => {
 
 axiosInstance.interceptors.response.use(
     (response) => {
-        console.log(response);
         calls--;
         if (calls <= 0) {
             mySpinner.stop();
