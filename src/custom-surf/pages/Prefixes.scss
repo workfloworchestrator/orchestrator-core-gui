@@ -30,7 +30,6 @@ table.prefixes {
     }
 
     tr.Allocated {
-        cursor: pointer;
         background-color: vars.$light-primary;
 
         &:hover {
@@ -44,7 +43,6 @@ table.prefixes {
     }
 
     tr.Free {
-        cursor: pointer;
         background-color: vars.$light-success;
 
         &:hover {
@@ -62,7 +60,6 @@ table.prefixes {
     }
 
     th {
-        cursor: pointer;
         padding: 5px 5px 10px 5px;
     }
 
@@ -119,7 +116,6 @@ table.prefixes {
 
     tbody {
         tr {
-            cursor: pointer;
 
             &:hover {
                 background-color: vars.$hover;
