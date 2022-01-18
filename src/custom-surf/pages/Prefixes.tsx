@@ -79,7 +79,7 @@ class Prefixes extends React.PureComponent<IProps, IState> {
         this.context.customApiClient.prefix_filters().then((result) => {
             const prefixFilters = result.map((p, idx) => ({
                 name: p.prefix,
-                selected: idx === 0,
+                selected: true,
                 count: 0,
             }));
             const currentFilterAttributes = this.state.filterAttributes;
