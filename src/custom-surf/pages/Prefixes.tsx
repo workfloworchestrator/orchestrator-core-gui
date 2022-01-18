@@ -347,7 +347,6 @@ class Prefixes extends React.PureComponent<IProps, IState> {
         return <i />;
     };
 
-
     render() {
         const { intl } = this.props;
         const columns: Column[] = [
@@ -490,7 +489,6 @@ function getLink(prefix_of_row: ExtendedIpPrefixSubscription, productId: string)
     }
     return link;
 }
-
 
 Prefixes.contextType = ApplicationContext;
 
