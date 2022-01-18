@@ -11,6 +11,7 @@ function getGrafanaLink(subscription: SubscriptionModel) {
             subscription.product.product_type === "LightPath" ||
             subscription.product.product_type === "IP" ||
             subscription.product.product_type === "L2VPN" ||
+            subscription.product.product_type === "L3VPN" ||
             subscription.product.product_type === "Firewall" ||
             subscription.product.product_type === "Node") &&
         subscription.product.tag !== "MSC"
@@ -30,6 +31,7 @@ function getNetworkDashboardLink(subscription: SubscriptionModel) {
         subscription.product.product_type === "LightPath" ||
         subscription.product.product_type === "IP" ||
         subscription.product.product_type === "L2VPN" ||
+        subscription.product.product_type === "L3VPN" ||
         subscription.product.product_type === "Firewall"
     ) {
         return `${ENV.NETWORKDASHBOARD_URL}/subscription/${subscription.subscription_id}`;
