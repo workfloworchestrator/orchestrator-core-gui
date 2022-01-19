@@ -1,4 +1,4 @@
-import { EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPanel } from "@elastic/eui";
+import { EuiCard, EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPanel } from "@elastic/eui";
 import React from "react";
 import { TrafficMap } from "react-network-diagrams";
 import ApplicationContext from "utils/ApplicationContext";
@@ -583,7 +583,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                     )}
                 </EuiFlexItem>
                 <EuiFlexItem grow={3} style={{ minWidth: 300 }}>
-                    <EuiPanel betaBadgeLabel={"Details"}>{this.state.panelText}</EuiPanel>
+                    <EuiCard title={"Details"}>{this.state.panelText}</EuiCard>
                 </EuiFlexItem>
                 <EuiFlexItem grow={2} style={{ minWidth: 100 }}></EuiFlexItem>
             </EuiFlexGroup>

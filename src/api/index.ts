@@ -119,6 +119,7 @@ abstract class ApiClientInterface extends BaseApiClient {
     abstract allWorkflowsWithProductTags: () => Promise<WorkflowWithProductTags[]>;
     abstract workflowsByTarget: (target: string) => Promise<Workflow[]>;
     abstract deleteSubscription: (subscriptionId: string) => Promise<null>;
+    abstract setInSyncSubscription: (subscriptionId: string) => Promise<any>;
     abstract deleteProcess: (processId: string) => Promise<null>;
     abstract abortProcess: (processId: string) => Promise<any>;
     abstract process: (processId: string) => Promise<ProcessWithDetails>;
@@ -272,6 +273,10 @@ export class ApiClient extends ApiClientInterface {
     // @ts-ignore
     deleteSubscription = (subscriptionId: string) => {
         return this.fetchJson(`subscriptions/${subscriptionId}`, { method: "DELETE" }, {}, true, false);
+    };
+
+    setInSyncSubscription = (subscriptionId: string) => {
+        return this.postPutJson(`subscriptions/${subscriptionId}/set_in_sync`, {}, "put", false, true);
     };
 
     // @ts-ignore

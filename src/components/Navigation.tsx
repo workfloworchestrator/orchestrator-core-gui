@@ -121,7 +121,7 @@ const Navigation = ({ extraPages = [] }: { extraPages: string[] }) => {
                             id="main-navigation-new-process-tab-button"
                             iconType="plusInCircle"
                             size="s"
-                            color="secondary"
+                            color="accent"
                             fill
                         >
                             <FormattedMessage id="navigation.new_process" />

@@ -333,7 +333,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                             <EuiButton
                                 id={option.label}
                                 fill
-                                color={option.danger ? "danger" : "secondary"}
+                                color={option.danger ? "danger" : "accent"}
                                 iconType={option.danger ? "cross" : "refresh"}
                                 iconSide="right"
                                 onClick={option.action}

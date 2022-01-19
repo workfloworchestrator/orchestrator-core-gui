@@ -1,5 +1,17 @@
 # SURFnet EUI theme light
 
+NOTE: in version 42.0.0 EUI switches to @emotion and this also has an effect on the sass vars.
+
+Excerpt from the EUI changelog:
+
+**Breaking changes**
+
+-   Added @emotion/react to peerDependencies
+-   Amsterdam is now the default theme, deprecated and renamed old theme as "legacy"
+-   Re-organized Sass files including where the globals are imported from
+
+So for now the EUI version is stuck on 41.2.3
+
 ## USE
 
 1. `yarn`

@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiButton, EuiCopy, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
+import { EuiButton, EuiCopy, EuiFlexGroup, EuiFlexItem, EuiIcon } from "@elastic/eui";
 import CheckBox from "components/CheckBox";
 import { FAVORITE_STORAGE_KEY } from "components/modals/components/FavoritePortSelector";
 import React, { useContext } from "react";
@@ -155,8 +155,31 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                         <FormattedMessage id="subscriptions.insync" />
                     </td>
                     <td id="subscriptions-insync-v">
-                        <CheckBox value={subscription.insync || false} readOnly={true} name="isync" />
-                        {!subscription.insync && renderFailedTask(subscriptionProcesses)}
+                        <EuiFlexGroup>
+                            <EuiFlexItem grow={false}>
+                                {subscription.insync ? (
+                                    <EuiIcon type={"check"} size={"l"} />
+                                ) : (
+                                    <EuiIcon type={"alert"} size={"l"} color={"danger"} />
+                                )}
+                            </EuiFlexItem>
+                            {!subscription.insync && (
+                                <EuiFlexItem grow={false}>{renderFailedTask(subscriptionProcesses)}</EuiFlexItem>
+                            )}
+                            <EuiFlexItem grow={false}>
+                                {!subscription.insync && (
+                                    <EuiButton
+                                        id="subscriptions-insync-button"
+                                        iconType="refresh"
+                                        size="s"
+                                        color={"danger"}
+                                        onClick={() => alert()}
+                                    >
+                                        Set in sync
+                                    </EuiButton>
+                                )}
+                            </EuiFlexItem>
+                        </EuiFlexGroup>
                     </td>
                 </tr>
                 {customer_name && customer_name !== subscription.customer_id && (
