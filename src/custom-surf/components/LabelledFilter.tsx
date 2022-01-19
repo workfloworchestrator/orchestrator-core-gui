@@ -41,7 +41,6 @@ export default function LabelledFilter({ items, filterBy, selectAll, label, noTr
     const onChange = (selectedOptions: any[]) => {
         setSelected(selectedOptions);
         filterBy(selectedOptions);
-        console.log(selectedOptions);
     };
 
     return (
