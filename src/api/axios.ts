@@ -41,6 +41,9 @@ const axiosConfig: AxiosRequestConfig = {
     },
 };
 
+// PATH workaround to not show "syncing":
+const EXCLUDED_SPINNER_PATHS = ["processes", "surf", "subscriptions"];
+
 const axiosInstance = axios.create(axiosConfig);
 axiosInstance.interceptors.request.use(
     (request) => {
