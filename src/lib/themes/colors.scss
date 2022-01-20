@@ -17,7 +17,7 @@
 @import "~@elastic/eui/src/global_styling/variables/colors";
 
 $euiColorPrimary: vars.$primary;
-$euiColorSecondary: vars.$secondary;
+$euiColorSecondary: vars.$accent; // secondary seems to be removed
 $euiColorAccent: vars.$accent;
 $euiColorSuccess: vars.$success;
 $euiColorDanger: vars.$danger;

@@ -19,7 +19,7 @@ import { FAVORITE_STORAGE_KEY } from "components/modals/components/FavoritePortS
 import React, { useContext } from "react";
 import { FormattedMessage } from "react-intl";
 import { useStorageState } from "react-storage-hooks";
-import ApplicationContext from "utils/ApplicationContext";
+import ApplicationContext, { apiClient } from "utils/ApplicationContext";
 import { organisationNameByUuid, renderDate } from "utils/Lookups";
 import { FavoriteSubscriptionStorage, SubscriptionModel, SubscriptionProcesses } from "utils/types";
 
@@ -173,7 +173,7 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                                         iconType="refresh"
                                         size="s"
                                         color={"danger"}
-                                        onClick={() => alert()}
+                                        onClick={() => apiClient.setInSyncSubscription(subscription.subscription_id)}
                                     >
                                         Set in sync
                                     </EuiButton>
