@@ -13,7 +13,7 @@
  *
  */
 
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { User } from "oidc-client";
 
 import { ENV } from "../env";
@@ -23,54 +23,51 @@ import { setFlash } from "../utils/Flash";
 let calls = 0;
 const apiPath = ENV.BACKEND_URL + "/api/";
 
+function decrementCalls() {
+    calls--;
+    if (calls <= 0) {
+        mySpinner.stop();
+    }
+}
+
 // basic configuration for axios.
 // the 'Authorization' header is set in
 // index.ts:setUser
-const axiosConfig = {
+const axiosConfig: AxiosRequestConfig = {
     baseURL: apiPath,
     headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        post: {
-            "Content-Type": "application/json",
-        },
-        put: {
-            "Content-Type": "application/json",
-        },
     },
 };
-
-// Since we introduced websockets; there seem to be even more problems with the global way we track request activity
-// with some global axios vars. When a response is missed, the counter can stay positive and it reset the
-// "syncing" label in the GUI. As this also blocks some of the system tests and we probably want to refactor
-// the sync (or remove it and let the components that do data loading communicate it with spinners)
 
 // PATH workaround to not show "syncing":
 const EXCLUDED_SPINNER_PATHS = ["processes", "surf", "subscriptions"];
 
 const axiosInstance = axios.create(axiosConfig);
-axiosInstance.interceptors.request.use((request) => {
-    // @ts-ignore
-    if (request.url && !EXCLUDED_SPINNER_PATHS.find((i) => request.url.startsWith(i))) {
-        calls++;
-        mySpinner.start();
+axiosInstance.interceptors.request.use(
+    (request) => {
+        // @ts-ignore
+        if (request.url && !EXCLUDED_SPINNER_PATHS.find((i) => request.url.startsWith(i))) {
+            calls++;
+            mySpinner.start();
+        }
+        return request;
+    },
+    (error) => {
+        decrementCalls();
+        return Promise.reject(error);
     }
-    return request;
-});
+);
 
 axiosInstance.interceptors.response.use(
     (response) => {
-        calls--;
-        if (calls <= 0) {
-            mySpinner.stop();
-        }
+        decrementCalls();
         return response;
     },
     (error) => {
-        calls--;
-        if (calls <= 0) {
-            mySpinner.stop();
-        }
+        decrementCalls();
+
         if (error.response) {
             if (error.response.status >= 500 && error.response.data?.body) {
                 setFlash(error.response.data.body, "error");
@@ -79,8 +76,10 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
 export default axiosInstance;
 
 export function setUser(_user: User | null) {
-    axiosInstance.defaults.headers["Authorization"] = `${_user?.token_type} ${_user?.access_token}`;
+    // @ts-ignore
+    axiosInstance.defaults.headers.common["Authorization"] = `${_user?.token_type} ${_user?.access_token}`;
 }
