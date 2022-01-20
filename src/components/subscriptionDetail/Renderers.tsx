@@ -16,7 +16,8 @@ import { applyIdNamingConvention, isEmpty, stop } from "utils/Utils";
 import CheckBox from "../CheckBox";
 
 let create_readable_description = function (wf: any): object {
-    if ("unterminated_parents" in wf) return { unterminated_parents: wf.unterminated_parents.join(", ") };
+    if ("unterminated_parents" in wf)
+        return { action: wf.action, unterminated_parents: wf.unterminated_parents.join(", ") };
     return wf as any;
 };
 

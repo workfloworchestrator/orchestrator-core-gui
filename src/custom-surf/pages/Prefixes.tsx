@@ -5,11 +5,9 @@
 
 import "custom/pages/Prefixes.scss";
 
-import { EuiFieldSearch, EuiPage, EuiPageBody } from "@elastic/eui";
-import FilterDropDown from "custom/components/FilterDropDown";
-import constant from "lodash/constant";
+import { EuiFieldSearch, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody, EuiSpacer } from "@elastic/eui";
+import LabelledFilter from "custom/components/LabelledFilter";
 import debounce from "lodash/debounce";
-import memoize from "lodash/memoize";
 import pMap from "p-map";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
@@ -50,6 +48,7 @@ interface IState {
     filterAttributes: FilterAttributes;
     rootPrefixes: IpPrefix[];
     availablePrefixId: number;
+    ipPrefixProductId: string;
 }
 
 class Prefixes extends React.PureComponent<IProps, IState> {
@@ -71,6 +70,7 @@ class Prefixes extends React.PureComponent<IProps, IState> {
         },
         rootPrefixes: [],
         availablePrefixId: 10000,
+        ipPrefixProductId: "",
     };
 
     componentDidMount() {
@@ -79,7 +79,7 @@ class Prefixes extends React.PureComponent<IProps, IState> {
         this.context.customApiClient.prefix_filters().then((result) => {
             const prefixFilters = result.map((p, idx) => ({
                 name: p.prefix,
-                selected: idx === 0,
+                selected: true,
                 count: 0,
             }));
             const currentFilterAttributes = this.state.filterAttributes;
@@ -87,6 +87,11 @@ class Prefixes extends React.PureComponent<IProps, IState> {
             this.setState({
                 rootPrefixes: result,
                 filterAttributes: { ...currentFilterAttributes, ...modifiedAttributes },
+                ipPrefixProductId:
+                    this.context.products
+                        .filter((p) => p.tag === "IP_PREFIX")
+                        .map((p) => p.product_id)
+                        .pop() || "",
             });
             this.getFreePrefixes(result);
             this.getPrefixSubscriptions(result);
@@ -147,7 +152,7 @@ class Prefixes extends React.PureComponent<IProps, IState> {
                     return {
                         id: availablePrefixId + idx,
                         customer: "N/A",
-                        subscription_id: "N/A",
+                        subscription_id: "Create",
                         start_date: now,
                         start_date_as_str: nowString,
                         description: "Vrije ruimte - gegenereerd",
@@ -218,6 +223,21 @@ class Prefixes extends React.PureComponent<IProps, IState> {
         });
     };
 
+    // setFilter, but for a list of filters.
+    setFilterList = (filterName: "state" | "rootPrefix") => (item: Filter[]) => {
+        const currentFilterAttributes = this.state.filterAttributes;
+        const incomingFilterNames = item.map((f) => f.name);
+        let modifiedAttributes: Partial<FilterAttributes> = {};
+        modifiedAttributes[filterName] = currentFilterAttributes[filterName].map((attr) => {
+            attr.selected = incomingFilterNames.includes(attr.name);
+
+            return attr;
+        });
+        this.setState({
+            filterAttributes: { ...currentFilterAttributes, ...modifiedAttributes },
+        });
+    };
+
     singleSelectFilter = (filterName: "state" | "rootPrefix") => (e: React.MouseEvent<HTMLElement>, item: Filter) => {
         stop(e);
         const currentFilterAttributes = this.state.filterAttributes;
@@ -251,12 +271,18 @@ class Prefixes extends React.PureComponent<IProps, IState> {
     };
 
     filter = (unfiltered: ExtendedIpPrefixSubscription[]) => {
-        const { state } = this.state.filterAttributes;
-        return unfiltered.filter((prefix) => {
-            const stateFilter = state.find((attr) => ipamStates.indexOf(attr.name) === prefix.state);
+        const { state, rootPrefix } = this.state.filterAttributes;
+        return unfiltered
+            .filter((prefix) => {
+                const stateFilter = state.find((attr) => ipamStates.indexOf(attr.name) === prefix.state);
 
-            return stateFilter ? stateFilter.selected : true;
-        });
+                return stateFilter ? stateFilter.selected : true;
+            })
+            .filter((prefix) => {
+                const rootFilter = rootPrefix.find((attr) => attr.name === prefix.parent);
+
+                return rootFilter ? rootFilter.selected : true;
+            });
     };
 
     sortBy = (name: Column) => (a: ExtendedIpPrefixSubscription, b: ExtendedIpPrefixSubscription) => {
@@ -305,6 +331,7 @@ class Prefixes extends React.PureComponent<IProps, IState> {
                 prefix.customer.toLowerCase().includes(queryToLower) ||
                 (prefix.description !== null && prefix.description.toLowerCase().includes(queryToLower)) ||
                 ipamStates[prefix.state]?.toLowerCase().includes(queryToLower) ||
+                ipamStates[prefix.state]?.toLowerCase().includes("free") ||
                 queryToLower === familyFullName[prefix.family].toLowerCase() ||
                 prefix.start_date_as_str.includes(query)
             );
@@ -318,26 +345,6 @@ class Prefixes extends React.PureComponent<IProps, IState> {
             return <i className={sorted.descending ? "fas fa-sort-down" : "fas fa-sort-up"} />;
         }
         return <i />;
-    };
-
-    subscriptionLink = (selection: ExtendedIpPrefixSubscription) => (event: React.MouseEvent<HTMLTableRowElement>) => {
-        const { subscription_id, prefix, prefixlen } = selection;
-        const product_id = memoize(
-            constant(
-                this.context.products
-                    .filter((p) => p.tag === "IP_PREFIX")
-                    .map((p) => p.product_id)
-                    .pop()
-            )
-        )();
-        if (isValidUUIDv4(subscription_id)) {
-            this.context.redirect("/subscriptions/" + subscription_id);
-        } else if (subscription_id === "N/A") {
-            let network = prefix.split("/")[0];
-            this.context.redirect(
-                `new-process/?product=${product_id}&prefix=${network}&prefixlen=${prefixlen}&prefix_min=${prefixlen}`
-            );
-        }
     };
 
     render() {
@@ -372,22 +379,37 @@ class Prefixes extends React.PureComponent<IProps, IState> {
                 <EuiPageBody component="div" className="mod-prefixes">
                     <div>
                         <div className="options">
-                            <FilterDropDown
-                                items={filterAttributes.state}
-                                filterBy={this.setFilter("state")}
-                                // singleSelectFilter={this.singleSelectFilter("state")}
-                                selectAll={this.selectAll("state")}
-                                label={intl.formatMessage({ id: "prefixes.filters.state" })}
-                            />
-
-                            <EuiFieldSearch
-                                placeholder={intl.formatMessage({ id: "prefixes.searchPlaceHolder" })}
-                                value={query}
-                                onChange={this.search}
-                                isClearable={true}
-                                fullWidth
-                            />
+                            <EuiFlexGroup>
+                                <EuiFlexItem>
+                                    <LabelledFilter
+                                        items={filterAttributes.state}
+                                        filterBy={this.setFilterList("state")}
+                                        selectAll={this.selectAll("state")}
+                                        label={intl.formatMessage({ id: "prefixes.filters.state" })}
+                                    />
+                                </EuiFlexItem>
+                                <EuiFlexItem>
+                                    <LabelledFilter
+                                        items={filterAttributes.rootPrefix}
+                                        filterBy={this.setFilterList("rootPrefix")}
+                                        selectAll={this.selectAll("rootPrefix")}
+                                        label={intl.formatMessage({ id: "prefixes.filters.root_prefix" })}
+                                    />
+                                </EuiFlexItem>
+                            </EuiFlexGroup>
                         </div>
+                        <EuiFlexGroup>
+                            <EuiFlexItem>
+                                <EuiFieldSearch
+                                    placeholder={intl.formatMessage({ id: "prefixes.searchPlaceHolder" })}
+                                    value={query}
+                                    onChange={this.search}
+                                    isClearable={true}
+                                    fullWidth
+                                />
+                            </EuiFlexItem>
+                        </EuiFlexGroup>
+                        <EuiSpacer size="m" />
                     </div>
                     <table className="prefixes">
                         <thead>
@@ -395,11 +417,7 @@ class Prefixes extends React.PureComponent<IProps, IState> {
                         </thead>
                         <tbody>
                             {sortedPrefixes.map((prefix) => (
-                                <tr
-                                    key={prefix.id}
-                                    onClick={this.subscriptionLink(prefix)}
-                                    className={ipamStates[prefix.state] ?? ""}
-                                >
+                                <tr key={prefix.id} className={ipamStates[prefix.state] ?? ""}>
                                     <td
                                         data-label={intl.formatMessage({ id: "prefixes.customer" })}
                                         className="customer"
@@ -410,7 +428,13 @@ class Prefixes extends React.PureComponent<IProps, IState> {
                                         data-label={intl.formatMessage({ id: "prefixes.subscription_id" })}
                                         className="subscription"
                                     >
-                                        {prefix.subscription_id.substring(0, 8)}
+                                        <a
+                                            href={`${getLink(prefix, this.state.ipPrefixProductId)}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            {prefix.subscription_id.substring(0, 8)}
+                                        </a>
                                     </td>
                                     <td
                                         data-label={intl.formatMessage({ id: "prefixes.description" })}
@@ -451,6 +475,19 @@ class Prefixes extends React.PureComponent<IProps, IState> {
             </EuiPage>
         );
     }
+}
+
+function getLink(prefix_of_row: ExtendedIpPrefixSubscription, productId: string) {
+    const { subscription_id, prefix, prefixlen } = prefix_of_row;
+
+    let network = prefix.split("/")[0];
+    let link = "/new-process";
+    if (isValidUUIDv4(subscription_id)) {
+        link = `/subscriptions/${subscription_id}`;
+    } else if (subscription_id === "Create") {
+        link = `new-process/?product=${productId}&prefix=${network}&prefixlen=${prefixlen}&prefix_min=${prefixlen}`;
+    }
+    return link;
 }
 
 Prefixes.contextType = ApplicationContext;

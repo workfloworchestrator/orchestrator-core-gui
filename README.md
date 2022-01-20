@@ -65,8 +65,6 @@ Copy `.env.local.example` to `.env.local`
 
 This overrides the `REACT_APP_BACKEND_URL` variable. You should make local changes to `.env.local`
 
-There is also a .env file checked in that points to a backend that runs locally (https://localhost:8080).
-
 ### Add new dependencies
 
 ```sh

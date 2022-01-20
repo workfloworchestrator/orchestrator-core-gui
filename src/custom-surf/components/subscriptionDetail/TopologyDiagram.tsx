@@ -266,7 +266,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
             this.setState({ imsEndpoints: imsEndpoints });
             // forceUpdate is a bit rough, but this.setState() does not
             // trigger a re-render, so we have to.
-            console.log(`all done.`);
+            // console.log(`all done.`);
             // this.forceUpdate();
         });
     };

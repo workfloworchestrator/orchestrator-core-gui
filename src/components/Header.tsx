@@ -16,9 +16,9 @@
 import "components/Header.scss";
 
 import { EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderSectionItem, EuiText } from "@elastic/eui";
+import EngineStatusBanner from "components/engineStatusBanner";
 import FailedTaskBanner from "components/failedTaskBanner";
 import UserProfile from "components/UserProfile";
-import { ENV } from "env";
 import logo from "images/network-automation.png";
 import { Profile } from "oidc-client";
 import { AuthContextProps, withAuth } from "oidc-react";
@@ -26,14 +26,10 @@ import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { Link } from "react-router-dom";
 import ApplicationContext from "utils/ApplicationContext";
-import { setFlash } from "utils/Flash";
-import { EngineStatus, GlobalStatus } from "utils/types";
 
 interface IState {
     dropDownActive: boolean;
     environment: string;
-    globalLock: boolean;
-    engineStatus: GlobalStatus;
 }
 
 interface IProps extends WrappedComponentProps, AuthContextProps {}
@@ -52,8 +48,6 @@ class Header extends React.PureComponent<IProps, IState> {
                     : hostname.indexOf("dev") > -1
                     ? "development"
                     : "production",
-            globalLock: false,
-            engineStatus: "RUNNING",
         };
     }
 
@@ -86,27 +80,9 @@ class Header extends React.PureComponent<IProps, IState> {
         return this.state.dropDownActive ? <UserProfile /> : null;
     }
 
-    refeshStatus = () => {
-        this.context.apiClient.getGlobalStatus().then((globalStatus: EngineStatus) => {
-            const { globalLock } = this.state;
-            const { intl } = this.props;
-            if (!globalStatus.global_lock && globalLock) {
-                this.setState({ globalLock: globalStatus.global_lock });
-                setFlash(intl.formatMessage({ id: "settings.status.engine.restarted" }));
-            }
-            this.setState({ globalLock: globalStatus.global_lock, engineStatus: globalStatus.global_status });
-        });
-    };
-
-    componentDidMount() {
-        if (ENV.CHECK_STATUS_INTERVAL > 0) {
-            window.setInterval(this.refeshStatus, ENV.CHECK_STATUS_INTERVAL * 1000);
-        }
-    }
-
     render() {
         const currentUser = this.props.userData?.profile;
-        const { environment, engineStatus } = this.state;
+        const { environment } = this.state;
 
         return (
             <EuiHeader>
@@ -126,11 +102,7 @@ class Header extends React.PureComponent<IProps, IState> {
 
                 <EuiHeaderSectionItem>
                     <EuiHeaderLinks aria-label="App navigation links extra">
-                        <EuiHeaderLink href="#">
-                            <FormattedMessage id={`settings.status.engine.${engineStatus.toLowerCase()}`} />
-                            <i className={`fa fa-circle header__status ${engineStatus.toLowerCase()}`}></i>
-                        </EuiHeaderLink>
-
+                        <EngineStatusBanner />
                         <FailedTaskBanner />
 
                         <EuiHeaderLink id="logout" onClick={this.logout}>

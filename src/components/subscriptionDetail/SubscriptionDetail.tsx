@@ -116,7 +116,6 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
         if (loadedSubscriptionModel && subscription) {
             async function loadViews() {
                 if (plugins.hasOwnProperty("subscriptionDetailPlugins")) {
-                    console.log("Fetch of subscription model complete: loading plugins");
                     // @ts-ignore
                     const componentPromises = plugins["subscriptionDetailPlugins"].map(async (plugin) => {
                         const View = await importPlugin(plugin);

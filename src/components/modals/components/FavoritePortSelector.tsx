@@ -108,7 +108,6 @@ class FavoritePortSelector extends React.PureComponent<IProps, IState> {
         const portIndex = oldPorts.findIndex((port) => port.subscription_id === selectedSubscription);
 
         oldPorts[portIndex].customName = editName;
-        console.log(oldPorts);
         localStorage.setItem(FAVORITE_STORAGE_KEY, JSON.stringify(oldPorts));
         this.setState({ selectedSubscription: undefined, editName: "", editMode: false });
         this.loadData();

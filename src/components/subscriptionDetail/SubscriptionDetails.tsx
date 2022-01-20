@@ -159,7 +159,7 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                         {!subscription.insync && renderFailedTask(subscriptionProcesses)}
                     </td>
                 </tr>
-                {customer_name && (
+                {customer_name && customer_name !== subscription.customer_id && (
                     <tr>
                         <td id="subscriptions-customer-name-k">
                             <FormattedMessage id="subscriptions.customer_name" />

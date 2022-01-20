@@ -40,12 +40,16 @@ const axiosConfig: AxiosRequestConfig = {
         "Content-Type": "application/json",
     },
 };
+
 const axiosInstance = axios.create(axiosConfig);
 axiosInstance.interceptors.request.use(
-    (config) => {
-        calls++;
-        mySpinner.start();
-        return config;
+    (request) => {
+        // @ts-ignore
+        if (request.url && !EXCLUDED_SPINNER_PATHS.find((i) => request.url.startsWith(i))) {
+            calls++;
+            mySpinner.start();
+        }
+        return request;
     },
     (error) => {
         decrementCalls();
