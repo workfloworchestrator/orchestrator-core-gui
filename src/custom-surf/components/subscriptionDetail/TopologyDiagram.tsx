@@ -1,4 +1,4 @@
-import { EuiCard, EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPanel } from "@elastic/eui";
+import { EuiCard, EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink } from "@elastic/eui";
 import React from "react";
 import { TrafficMap } from "react-network-diagrams";
 import ApplicationContext from "utils/ApplicationContext";

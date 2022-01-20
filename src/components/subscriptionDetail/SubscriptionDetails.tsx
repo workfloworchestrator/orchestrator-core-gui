@@ -14,7 +14,6 @@
  */
 
 import { EuiButton, EuiCopy, EuiFlexGroup, EuiFlexItem, EuiIcon } from "@elastic/eui";
-import CheckBox from "components/CheckBox";
 import { FAVORITE_STORAGE_KEY } from "components/modals/components/FavoritePortSelector";
 import React, { useContext } from "react";
 import { FormattedMessage } from "react-intl";
