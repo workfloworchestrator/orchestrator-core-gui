@@ -295,6 +295,10 @@ export class ApiClient extends ApiClientInterface {
         return this.postPutJson(`processes/${processId}/resume`, userInput, "put", false, false);
     };
 
+    resumeAllProcesses = (): Promise<{ count: number }> => {
+        return this.postPutJson(`processes/resume-all`, {}, "put");
+    };
+
     retryProcess = (processId: string) => {
         return this.postPutJson(`processes/${processId}/resume`, {}, "put", true, false);
     };
