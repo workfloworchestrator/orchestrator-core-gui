@@ -78,6 +78,7 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                                 <EuiCopy textToCopy={subscription.subscription_id}>
                                     {(copy) => (
                                         <EuiButton
+                                            fill
                                             id="subscriptions-copy-button"
                                             iconType="copyClipboard"
                                             size="s"
@@ -90,6 +91,7 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                             </EuiFlexItem>
                             <EuiFlexItem grow={false}>
                                 <EuiButton
+                                    fill
                                     id="subscriptions-favorite-toggle"
                                     iconType="filter"
                                     size="s"
@@ -168,6 +170,7 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                             <EuiFlexItem grow={false}>
                                 {!subscription.insync && (
                                     <EuiButton
+                                        fill
                                         id="subscriptions-insync-button"
                                         iconType="refresh"
                                         size="s"
