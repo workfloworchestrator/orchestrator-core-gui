@@ -80,7 +80,7 @@ export default function SubscriptionDetails({ subscription, className = "", subs
         closeInsyncModal();
         apiClient
             .setInSyncSubscription(subscription.subscription_id)
-            .then((result) => {
+            .then(() => {
                 closeInsyncModal();
                 window.location.reload();
             })
