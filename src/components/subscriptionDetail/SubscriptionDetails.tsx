@@ -56,9 +56,11 @@ export default function SubscriptionDetails({ subscription, className = "", subs
     const { organisations } = useContext(ApplicationContext);
     // handle global errors
     const [errorMessage, setErrorMessage] = useState("");
-    const closeErrorModal = () => setIsErrorModalVisible(false);
+    const closeErrorModal = () => {
+        setIsErrorModalVisible(false);
+        setErrorMessage("");
+    };
     const showErrorModal = () => setIsErrorModalVisible(true);
-
     // handle insync errors
     const [isInsyncModalVisible, setIsInsyncModalVisible] = useState(false);
     const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
@@ -85,8 +87,12 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                 window.location.reload();
             })
             .catch((error) => {
-                if (error.response.status == 422) {
+                if (error.response.status === 422) {
+                    debugger;
                     setErrorMessage(error.response.data.detail);
+                    showErrorModal();
+                } else {
+                    setErrorMessage(`Unhandled error occured, with HTTP error code: ${error.response.status}`);
                     showErrorModal();
                 }
             });
