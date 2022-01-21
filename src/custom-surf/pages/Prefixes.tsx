@@ -388,7 +388,7 @@ class Prefixes extends React.PureComponent<IProps, IState> {
                                         label={intl.formatMessage({ id: "prefixes.filters.state" })}
                                     />
                                 </EuiFlexItem>
-                                <EuiFlexItem>
+                                <EuiFlexItem grow={true}>
                                     <LabelledFilter
                                         items={filterAttributes.rootPrefix}
                                         filterBy={this.setFilterList("rootPrefix")}
