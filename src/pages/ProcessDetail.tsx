@@ -333,7 +333,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                             <EuiButton
                                 id={option.label}
                                 fill
-                                color={option.danger ? "danger" : "secondary"}
+                                color={option.danger ? "danger" : "accent"}
                                 iconType={option.danger ? "cross" : "refresh"}
                                 iconSide="right"
                                 onClick={option.action}
@@ -343,17 +343,18 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                         </EuiFlexItem>
                     ))}
                     <EuiFlexItem grow={true}>
-                        <EuiButton iconType="minimize" iconSide="right" onClick={this.handleCollapseAll}>
+                        <EuiButton fill iconType="minimize" iconSide="right" onClick={this.handleCollapseAll}>
                             COLLAPSE
                         </EuiButton>
                     </EuiFlexItem>
                     <EuiFlexItem grow={true}>
-                        <EuiButton iconType="expand" iconSide="right" onClick={this.handleExpandAll}>
+                        <EuiButton fill iconType="expand" iconSide="right" onClick={this.handleExpandAll}>
                             EXPAND
                         </EuiButton>
                     </EuiFlexItem>
                     <EuiFlexItem grow={true}>
                         <EuiButton
+                            fill
                             iconType="sortDown"
                             iconSide="right"
                             onClick={() => this.handleScrollTo(lastStepIndex)}

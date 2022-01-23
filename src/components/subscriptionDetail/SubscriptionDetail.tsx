@@ -154,9 +154,10 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
             <EuiFlexItem grow={false}>
                 <EuiButton
                     id="subscription-detail-viewtype-tree"
+                    fill={tabViewSettingsForId(id).viewType === "tree"}
                     iconType="list"
                     size="s"
-                    isDisabled={tabViewSettingsForId(id).viewType === "tree"}
+                    isSelected={tabViewSettingsForId(id).viewType === "tree"}
                     onClick={() => {
                         const existing = viewTypes.find((s) => s.tabViewId === id);
                         let newViewTypes = viewTypes;
@@ -174,9 +175,10 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
             <EuiFlexItem grow={false}>
                 <EuiButton
                     id="subscription-detail-viewtype-tree"
+                    fill={tabViewSettingsForId(id).viewType === "tabs"}
                     iconType="tableDensityNormal"
                     size="s"
-                    isDisabled={tabViewSettingsForId(id).viewType === "tabs"}
+                    isSelected={tabViewSettingsForId(id).viewType === "tabs"}
                     onClick={() => {
                         const existing = viewTypes.find((s) => s.tabViewId === id);
                         let newViewTypes = viewTypes;

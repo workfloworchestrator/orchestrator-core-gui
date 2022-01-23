@@ -1,4 +1,4 @@
-import { EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPanel } from "@elastic/eui";
+import { EuiCard, EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink } from "@elastic/eui";
 import React from "react";
 import { ConcatenatedCircuit } from "react-network-diagrams";
 import { Link } from "react-router-dom";
@@ -400,7 +400,7 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
                 </EuiFlexItem>
                 <EuiFlexItem grow={3}>
                     {this.state.isTableOn && (
-                        <EuiPanel betaBadgeLabel={"Details"}>{this.state._selectedCircuit.explanation}</EuiPanel>
+                        <EuiCard title={"Details"}>{this.state._selectedCircuit.explanation}</EuiCard>
                     )}
                 </EuiFlexItem>
             </EuiFlexGroup>

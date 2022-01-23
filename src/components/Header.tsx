@@ -86,11 +86,11 @@ class Header extends React.PureComponent<IProps, IState> {
 
         return (
             <EuiHeader>
-                <EuiHeaderSectionItem border="right">
+                <EuiHeaderSectionItem border="none">
                     <Link to="/" className="header__logo">
                         <img className="header__logo-img" src={logo} alt="logo" />
                     </Link>
-                    <EuiHeaderSectionItem border="right">
+                    <EuiHeaderSectionItem border="none">
                         <EuiText grow={false}>
                             <h1 className={`header__app-title ${environment}`}>
                                 <FormattedMessage id="header.title" />
@@ -100,7 +100,7 @@ class Header extends React.PureComponent<IProps, IState> {
                     </EuiHeaderSectionItem>
                 </EuiHeaderSectionItem>
 
-                <EuiHeaderSectionItem>
+                <EuiHeaderSectionItem border="none">
                     <EuiHeaderLinks aria-label="App navigation links extra">
                         <EngineStatusBanner />
                         <FailedTaskBanner />

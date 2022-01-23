@@ -52,6 +52,7 @@ export default function LabelledFilter({ items, filterBy, selectAll, label, noTr
                     </EuiText>
                     <EuiSpacer size="s" />
                     <EuiComboBox
+                        fullWidth={true}
                         aria-label="Filter by prefix"
                         placeholder="Select prefixes"
                         options={optionsStatic}

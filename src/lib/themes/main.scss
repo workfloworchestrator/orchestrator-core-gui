@@ -26,10 +26,3 @@
 
 // Components
 @import "~@elastic/eui/src/components/index";
-
-// Packages
-@import "~@elastic/eui/packages/index";
-
-// Component overrides
-// Comes after the component import and overrides via cascade
-@import "~@elastic/eui/src/themes/eui-amsterdam/overrides/index";

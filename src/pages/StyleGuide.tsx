@@ -207,25 +207,25 @@ export default class StyleGuide extends React.PureComponent<IProps, IState> {
 
                 <EuiFlexGroup gutterSize="s" alignItems="center">
                     <EuiFlexItem grow={false}>
-                        <EuiButton color="secondary" onClick={() => window.alert("Button clicked")}>
+                        <EuiButton color="accent" onClick={() => window.alert("Button clicked")}>
                             Secondary
                         </EuiButton>
                     </EuiFlexItem>
 
                     <EuiFlexItem grow={false}>
-                        <EuiButton color="secondary" fill onClick={() => window.alert("Button clicked")}>
+                        <EuiButton color="accent" fill onClick={() => window.alert("Button clicked")}>
                             Filled
                         </EuiButton>
                     </EuiFlexItem>
 
                     <EuiFlexItem grow={false}>
-                        <EuiButton color="secondary" size="s" onClick={() => window.alert("Button clicked")}>
+                        <EuiButton color="accent" size="s" onClick={() => window.alert("Button clicked")}>
                             Small
                         </EuiButton>
                     </EuiFlexItem>
 
                     <EuiFlexItem grow={false}>
-                        <EuiButton color="secondary" size="s" fill onClick={() => window.alert("Button clicked")}>
+                        <EuiButton color="accent" size="s" fill onClick={() => window.alert("Button clicked")}>
                             Small and filled
                         </EuiButton>
                     </EuiFlexItem>

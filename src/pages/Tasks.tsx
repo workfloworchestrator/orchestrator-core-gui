@@ -209,7 +209,7 @@ class Tasks extends React.PureComponent<IProps, IState> {
                         )}
                         {allowed("/orchestrator/processes/create/task") && (
                             <EuiFlexItem>
-                                <EuiButton onClick={this.newTask} fill color="secondary" iconType="plusInCircle">
+                                <EuiButton onClick={this.newTask} fill color="accent" iconType="plusInCircle">
                                     <FormattedMessage id="tasks.new" />
                                 </EuiButton>
                             </EuiFlexItem>
