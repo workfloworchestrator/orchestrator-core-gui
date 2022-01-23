@@ -109,7 +109,7 @@
         "husky": "^6.0.0",
         "import-sort-style-module": "^6.0.0",
         "license-check-and-add": "^4.0.2",
-        "node-fetch": "^2.6.1",
+        "node-fetch": "^2.6.7",
         "prettier": "2.2.1",
         "prettier-plugin-import-sort": "^0.0.6",
         "react-router": "^5.1.2",
