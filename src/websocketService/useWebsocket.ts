@@ -31,9 +31,9 @@ const useWebsocket = <T extends object>(
 
     const ping = () => {
         if (!client.current) return;
-        client.current.send('__ping__');
+        client.current.send("__ping__");
         pingTimeout.current = setTimeout(disconnectWebsocket, 5000);
-    }
+    };
 
     function pong() {
         pingTimeout.current && clearTimeout(pingTimeout.current);
@@ -51,7 +51,7 @@ const useWebsocket = <T extends object>(
                 ping();
             };
             newClient.onmessage = ({ data }) => {
-                if (data === '__pong__') {
+                if (data === "__pong__") {
                     return pong();
                 }
                 setMessage(JSON.parse(data));
