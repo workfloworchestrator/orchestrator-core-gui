@@ -53,7 +53,7 @@ interface IProps {
 }
 
 export default function SubscriptionDetails({ subscription, className = "", subscriptionProcesses = [] }: IProps) {
-    const { organisations } = useContext(ApplicationContext);
+    const { organisations, allowed } = useContext(ApplicationContext);
     // handle global errors
     const [errorMessage, setErrorMessage] = useState("");
     const closeErrorModal = () => {
@@ -248,20 +248,22 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                                 {!subscription.insync && (
                                     <EuiFlexItem grow={false}>{renderFailedTask(subscriptionProcesses)}</EuiFlexItem>
                                 )}
-                                <EuiFlexItem grow={false}>
-                                    {!subscription.insync && (
-                                        <EuiButton
-                                            fill
-                                            id="subscriptions-insync-button"
-                                            iconType="refresh"
-                                            size="s"
-                                            color={"danger"}
-                                            onClick={showInsyncModal}
-                                        >
-                                            Set in sync
-                                        </EuiButton>
-                                    )}
-                                </EuiFlexItem>
+                                {allowed("/orchestrator/subscriptions/set-in-sync") && (
+                                    <EuiFlexItem grow={false}>
+                                        {!subscription.insync && (
+                                            <EuiButton
+                                                fill
+                                                id="subscriptions-insync-button"
+                                                iconType="refresh"
+                                                size="s"
+                                                color={"danger"}
+                                                onClick={showInsyncModal}
+                                            >
+                                                Set in sync
+                                            </EuiButton>
+                                        )}
+                                    </EuiFlexItem>
+                                )}
                             </EuiFlexGroup>
                         </td>
                     </tr>
