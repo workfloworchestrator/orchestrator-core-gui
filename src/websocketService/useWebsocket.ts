@@ -25,8 +25,21 @@ const useWebsocket = <T extends object>(
 } => {
     const client = useRef<WebSocket | undefined>(undefined);
     const timeout = useRef<NodeJS.Timeout | undefined>(undefined);
+    const pingTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
     const [message, setMessage] = useState<T>({} as T);
     const [useFallback, setUsefallback] = useState<boolean>(false);
+
+    const ping = () => {
+        if (!client.current) return;
+        client.current.send('__ping__');
+        pingTimeout.current = setTimeout(disconnectWebsocket, 5000);
+    }
+
+    function pong() {
+        pingTimeout.current && clearTimeout(pingTimeout.current);
+        pingTimeout.current = undefined;
+        setTimeout(() => ping, 30000);
+    }
 
     const connectWebsocket = () => {
         disconnectWebsocket();
@@ -35,8 +48,12 @@ const useWebsocket = <T extends object>(
             const newClient = websocketService.connect(endpoint);
             newClient.onopen = () => {
                 setUsefallback(false);
+                ping();
             };
             newClient.onmessage = ({ data }) => {
+                if (data === '__pong__') {
+                    return pong();
+                }
                 setMessage(JSON.parse(data));
             };
             newClient.onerror = () => {
@@ -47,14 +64,6 @@ const useWebsocket = <T extends object>(
             };
             client.current = newClient;
         }
-
-        // wait max 3 seconds on timeout: so non working websocket will take 3 seconds to load old process page
-        setTimeout(() => {
-            if (client.current?.readyState !== 1) {
-                disconnectWebsocket();
-                setUsefallback(true);
-            }
-        }, 3000);
 
         // timeout to reconnect to enforce re-auth.
         timeout.current = setTimeout(() => {
@@ -67,7 +76,7 @@ const useWebsocket = <T extends object>(
             client.current.close(WebSocketCodes.NORMAL_CLOSURE);
         }
         if (timeout.current) {
-            clearInterval(timeout.current);
+            clearTimeout(timeout.current);
             timeout.current = undefined;
         }
     };
