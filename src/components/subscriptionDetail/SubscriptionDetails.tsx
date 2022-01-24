@@ -248,7 +248,7 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                                 {!subscription.insync && (
                                     <EuiFlexItem grow={false}>{renderFailedTask(subscriptionProcesses)}</EuiFlexItem>
                                 )}
-                                {!allowed("/orchestrator/subscriptions/set-in-sync") && (
+                                {allowed("/orchestrator/subscriptions/set-in-sync") && (
                                     <EuiFlexItem grow={false}>
                                         {!subscription.insync && (
                                             <EuiButton
