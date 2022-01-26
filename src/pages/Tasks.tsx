@@ -64,14 +64,19 @@ class Tasks extends React.PureComponent<IProps, IState> {
     runAllTasks = () => {
         const { intl } = this.props;
         this.confirmation(intl.formatMessage({ id: "tasks.runallConfirmation" }), () => {
-            this.context.apiClient.resumeAllProcesses().then(
-                (res: { count: number }) => {
+            this.context.apiClient
+                .resumeAllProcesses()
+                .then((res: { count: number }) => {
                     setFlash(intl.formatMessage({ id: "tasks.flash.runallbulk" }, { count: res.count }));
-                },
-                () => {
-                    setFlash(intl.formatMessage({ id: "tasks.flash.runallfailed" }), "error");
-                }
-            );
+                })
+                .catch((err: any) => {
+                    if (err.response && err.response.status === 409) {
+                        setFlash(intl.formatMessage({ id: "tasks.flash.runallinprogress" }), "warning");
+                    } else {
+                        setFlash(intl.formatMessage({ id: "tasks.flash.runallfailed" }), "error");
+                        throw err;
+                    }
+                });
         });
     };
 

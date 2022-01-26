@@ -632,6 +632,7 @@ I18n.translations.en = {
             retry: "Task {{name}} has been retried",
             runall: "All failed tasks retried",
             runallbulk: "Retried {{count}} failed task(s)",
+            runallinprogress: "Already retrying failed tasks",
             runallfailed: "Not all failed tasks could be retried",
         },
         runall: "Rerun all",

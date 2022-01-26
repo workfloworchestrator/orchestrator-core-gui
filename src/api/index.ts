@@ -296,7 +296,7 @@ export class ApiClient extends ApiClientInterface {
     };
 
     resumeAllProcesses = (): Promise<{ count: number }> => {
-        return this.postPutJson(`processes/resume-all`, {}, "put");
+        return this.postPutJson(`processes/resume-all`, {}, "put", false);
     };
 
     retryProcess = (processId: string) => {
