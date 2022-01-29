@@ -174,18 +174,20 @@ function StateChanges({ steps, index, collapsed = false }: { steps: Step[]; inde
             <section className={collapsed ? "state-delta collapsed" : "state-delta"}>
                 <table>
                     <tbody>
-                        {Object.keys(json).map((key) => (
-                            <tr key={key}>
-                                <td id={`${index}-${applyIdNamingConvention(key)}-k`} className="key">
-                                    {key}
-                                </td>
-                                <td id={`${index}-${applyIdNamingConvention(key)}-v`} className="value">
-                                    {key === "confirmation_mail"
-                                        ? displayMailConfirmation(json[key])
-                                        : displayStateValue(json[key])}
-                                </td>
-                            </tr>
-                        ))}
+                        {Object.keys(json)
+                            .filter((key) => !key.startsWith("label_") && !key.startsWith("divider_"))
+                            .map((key) => (
+                                <tr key={key}>
+                                    <td id={`${index}-${applyIdNamingConvention(key)}-k`} className="key">
+                                        {key}
+                                    </td>
+                                    <td id={`${index}-${applyIdNamingConvention(key)}-v`} className="value">
+                                        {key === "confirmation_mail"
+                                            ? displayMailConfirmation(json[key])
+                                            : displayStateValue(json[key])}
+                                    </td>
+                                </tr>
+                            ))}
                     </tbody>
                 </table>
             </section>
