@@ -26,6 +26,8 @@ import { capitalize, renderDateTime } from "utils/Lookups";
 import { ProcessSubscription, ProcessWithDetails, State, Step, prop } from "utils/types";
 import { applyIdNamingConvention, isEmpty } from "utils/Utils";
 
+const HIDDEN_KEYS = ["label_", "divider_", "__"];
+
 function ProcessSubscriptionLink({
     subscriptionProcesses,
     isProcess,

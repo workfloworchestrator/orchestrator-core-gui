@@ -15,7 +15,22 @@
 
 import "pages/ProcessDetail.scss";
 
-import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody, EuiPanel, EuiText } from "@elastic/eui";
+import {
+    EuiButton,
+    EuiCard,
+    EuiFlexGroup,
+    EuiFlexItem,
+    EuiFlyout,
+    EuiFlyoutBody,
+    EuiFlyoutFooter,
+    EuiFlyoutHeader,
+    EuiPage,
+    EuiPageBody,
+    EuiPanel,
+    EuiResizableContainer,
+    EuiText,
+    EuiTitle,
+} from "@elastic/eui";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import ProcessStateDetails from "components/ProcessStateDetails";
@@ -60,6 +75,8 @@ interface IState {
     wsProcess?: WsProcessV2;
     productName: string;
     customerName: string;
+    subscriptionDeltaModalOpen: boolean;
+    subscriptionDeltaSubscriptionId: string;
 }
 
 class ProcessDetail extends React.PureComponent<IProps, IState> {
@@ -81,6 +98,8 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             wsProcess: undefined,
             productName: "",
             customerName: "",
+            subscriptionDeltaModalOpen: true,
+            subscriptionDeltaSubscriptionId: "",
         };
     }
 
@@ -295,6 +314,8 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
     };
 
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
+    closeSubscriptionDeltaModal = () =>
+        this.setState({ subscriptionDeltaModalOpen: false, subscriptionDeltaSubscriptionId: "" });
 
     confirmation = (question: string, action: (e: React.MouseEvent<HTMLButtonElement>) => void) =>
         this.setState({
@@ -465,6 +486,8 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             confirmationDialogOpen,
             confirmationDialogAction,
             confirmationDialogQuestion,
+            subscriptionDeltaModalOpen,
+            subscriptionDeltaSubscriptionId,
         } = this.state;
         if (!process) {
             return null;
@@ -485,6 +508,42 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                         confirm={confirmationDialogAction}
                         question={confirmationDialogQuestion}
                     />
+
+                    {subscriptionDeltaModalOpen && (
+                        <EuiFlyout onClose={this.closeSubscriptionDeltaModal}>
+                            <EuiFlyoutHeader hasBorder aria-labelledby="subscription-delta-modal">
+                                <EuiTitle>
+                                    <h2 id="subscription-delta-modal-header">Inspect subscription changes</h2>
+                                </EuiTitle>
+                            </EuiFlyoutHeader>
+                            <EuiFlyoutBody>
+                                <EuiResizableContainer style={{ height: "200px" }}>
+                                    {(EuiResizablePanel, EuiResizableButton) => (
+                                        <>
+                                            <EuiResizablePanel initialSize={50} minSize="30%">
+                                                <EuiText>
+                                                    <div>Left one</div>
+                                                    <a href="">Hello world</a>
+                                                </EuiText>
+                                            </EuiResizablePanel>
+
+                                            <EuiResizableButton />
+
+                                            <EuiResizablePanel initialSize={50} minSize="200px">
+                                                <EuiText>Right one</EuiText>
+                                            </EuiResizablePanel>
+                                        </>
+                                    )}
+                                </EuiResizableContainer>
+                            </EuiFlyoutBody>
+                            <EuiFlyoutFooter>
+                                <EuiFlexGroup justifyContent="spaceBetween">
+                                    <EuiFlexItem grow={false}>One</EuiFlexItem>
+                                    <EuiFlexItem grow={false}>Two</EuiFlexItem>
+                                </EuiFlexGroup>
+                            </EuiFlyoutFooter>
+                        </EuiFlyout>
+                    )}
                     <section className="tabs">{tabs.map((tab) => this.renderTab(tab, selectedTab))}</section>
                     {renderContent &&
                         this.renderTabContent(selectedTab, process, step, stepUserInput, subscriptionProcesses)}
