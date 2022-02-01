@@ -57,7 +57,7 @@ if (ENV.OAUTH2_ENABLED) {
         response_type: "code",
         scope: ENV.OAUTH2_SCOPE || "openid",
         loadUserInfo: true,
-        userStore: new WebStorageStateStore({ store: sessionStorage }),
+        userStore: new WebStorageStateStore({ store: localStorage }),
     };
 
     const userManager = new UserManager(oidcConfig);
