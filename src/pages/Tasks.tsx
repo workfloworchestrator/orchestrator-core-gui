@@ -16,7 +16,6 @@
 import "pages/Tasks.scss";
 
 import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody } from "@elastic/eui";
-import { filterableEndpoint } from "api/filterable";
 import DropDownActions from "components/DropDownActions";
 import Explain from "components/Explain";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
@@ -65,28 +64,19 @@ class Tasks extends React.PureComponent<IProps, IState> {
     runAllTasks = () => {
         const { intl } = this.props;
         this.confirmation(intl.formatMessage({ id: "tasks.runallConfirmation" }), () => {
-            filterableEndpoint<ProcessV2>(
-                "processes/",
-                null,
-                null,
-                null,
-                [
-                    { id: "isTask", values: ["true"] },
-                    { id: "status", values: ["running", "failed", "waiting", "api_unavailable", "inconsistent_data"] },
-                ],
-                null
-            )
-                .then(([tasks]) => {
-                    if (tasks && tasks.length > 0) {
-                        return Promise.all(tasks.map((task) => this.context.apiClient.retryProcess(task.pid)));
-                    } else {
-                        return Promise.reject();
-                    }
+            this.context.apiClient
+                .resumeAllProcesses()
+                .then((res: { count: number }) => {
+                    setFlash(intl.formatMessage({ id: "tasks.flash.runallbulk" }, { count: res.count }));
                 })
-                .then(
-                    () => setFlash(intl.formatMessage({ id: "tasks.flash.runall" })),
-                    () => setFlash(intl.formatMessage({ id: "tasks.flash.runallfailed" }))
-                );
+                .catch((err: any) => {
+                    if (err.response && err.response.status === 409) {
+                        setFlash(intl.formatMessage({ id: "tasks.flash.runallinprogress" }), "warning");
+                    } else {
+                        setFlash(intl.formatMessage({ id: "tasks.flash.runallfailed" }), "error");
+                        throw err;
+                    }
+                });
         });
     };
 
