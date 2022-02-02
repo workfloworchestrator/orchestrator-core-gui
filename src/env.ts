@@ -58,5 +58,5 @@ export const ENV: Env = window.__env__ || {
     CI_PROJECT_ID: process.env.CI_PROJECT_ID,
     CI_MERGE_REQUEST_IID: process.env.CI_MERGE_REQUEST_IID,
     GITLAB_URL: process.env.GITLAB_URL,
-    CI_PROJECT_PATH: process.env.CI_PROJECT_PATH
+    CI_PROJECT_PATH: process.env.CI_PROJECT_PATH,
 };
