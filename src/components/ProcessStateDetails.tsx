@@ -26,7 +26,7 @@ import { capitalize, renderDateTime } from "utils/Lookups";
 import { ProcessSubscription, ProcessWithDetails, State, Step, prop } from "utils/types";
 import { applyIdNamingConvention, isEmpty } from "utils/Utils";
 
-const HIDDEN_KEYS = ["label_", "divider_", "__"];
+import { HIDDEN_KEYS } from "../pages/ProcessDetail";
 
 function ProcessSubscriptionLink({
     subscriptionProcesses,
@@ -64,7 +64,17 @@ function ProcessSubscriptionLink({
     );
 }
 
-function StateChanges({ steps, index, collapsed = false }: { steps: Step[]; index: number; collapsed?: boolean }) {
+function StateChanges({
+    steps,
+    index,
+    collapsed = false,
+    showHiddenKeys,
+}: {
+    steps: Step[];
+    index: number;
+    collapsed?: boolean;
+    showHiddenKeys: boolean;
+}) {
     const displayStateValue = (value: any) => {
         if (isEmpty(value)) {
             return "";
@@ -166,6 +176,10 @@ function StateChanges({ steps, index, collapsed = false }: { steps: Step[]; inde
         return null;
     }
     const iconName = index === 0 || steps[index - 1].status === "suspend" ? "user" : "pipelineApp";
+    let data = Object.keys(json);
+    if (!showHiddenKeys) {
+        data = data.filter((key) => !HIDDEN_KEYS.some((word) => key.startsWith(word)));
+    }
 
     return (
         <section className="state-changes">
@@ -176,20 +190,18 @@ function StateChanges({ steps, index, collapsed = false }: { steps: Step[]; inde
             <section className={collapsed ? "state-delta collapsed" : "state-delta"}>
                 <table>
                     <tbody>
-                        {Object.keys(json)
-                            .filter((key) => !key.startsWith("label_") && !key.startsWith("divider_"))
-                            .map((key) => (
-                                <tr key={key}>
-                                    <td id={`${index}-${applyIdNamingConvention(key)}-k`} className="key">
-                                        {key}
-                                    </td>
-                                    <td id={`${index}-${applyIdNamingConvention(key)}-v`} className="value">
-                                        {key === "confirmation_mail"
-                                            ? displayMailConfirmation(json[key])
-                                            : displayStateValue(json[key])}
-                                    </td>
-                                </tr>
-                            ))}
+                        {data.map((key) => (
+                            <tr key={key}>
+                                <td id={`${index}-${applyIdNamingConvention(key)}-k`} className="key">
+                                    {key}
+                                </td>
+                                <td id={`${index}-${applyIdNamingConvention(key)}-v`} className="value">
+                                    {key === "confirmation_mail"
+                                        ? displayMailConfirmation(json[key])
+                                        : displayStateValue(json[key])}
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </section>
@@ -202,11 +214,13 @@ function ProcessOverview({
     stateChanges,
     onChangeCollapsed,
     collapsed,
+    showHiddenKeys,
 }: {
     steps: Step[];
     stateChanges: boolean;
     onChangeCollapsed?: (index: number) => void;
     collapsed?: number[];
+    showHiddenKeys: boolean;
 }) {
     const last = (i: number) => i === steps.length - 1;
 
@@ -233,6 +247,7 @@ function ProcessOverview({
                                     key={index}
                                     index={index}
                                     collapsed={collapsed && collapsed.includes(index)}
+                                    showHiddenKeys={showHiddenKeys}
                                 />
                             )}
                         </div>
@@ -266,6 +281,7 @@ function ProcessStateDetails({
     const [details, setDetails] = useState(true);
     const [stateChanges, setStateChanges] = useState(true);
     const [traceback, setTraceback] = useState(false);
+    const [showHiddenKeys, setShowHiddenKeys] = useState(false);
 
     const summaryKeys: (keyof ProcessWithDetails)[] = [
         "status",
@@ -357,6 +373,16 @@ function ProcessStateDetails({
                             onChange={() => setRaw(!raw)}
                         />
                     </li>
+                    <li>
+                        <EuiCheckbox
+                            id="toggle-hidden-keys"
+                            aria-label="toggle-hidden-keys"
+                            name="toggle-hidden-keys"
+                            checked={showHiddenKeys}
+                            label={<FormattedMessage id="process_state.show_hidden_keys" />}
+                            onChange={() => setShowHiddenKeys(!showHiddenKeys)}
+                        />
+                    </li>
                     {process.traceback && (
                         <li>
                             <EuiCheckbox
@@ -408,6 +434,7 @@ function ProcessStateDetails({
                         stateChanges={stateChanges}
                         onChangeCollapsed={onChangeCollapsed}
                         collapsed={collapsed}
+                        showHiddenKeys={showHiddenKeys}
                     />
                 </>
             )}

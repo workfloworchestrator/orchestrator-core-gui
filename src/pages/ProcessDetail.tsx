@@ -39,7 +39,14 @@ import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { RouteComponentProps } from "react-router-dom";
 import ScrollUpButton from "react-scroll-up-button";
-import { DecodedValueMap, NumberParam, QueryParamConfigMap, SetQuery, withQueryParams } from "use-query-params";
+import {
+    BooleanParam,
+    DecodedValueMap,
+    NumberParam,
+    QueryParamConfigMap,
+    SetQuery,
+    withQueryParams,
+} from "use-query-params";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { organisationNameByUuid, productById, productNameById } from "utils/Lookups";
@@ -47,6 +54,10 @@ import { CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
 import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step, WsProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
+
+import HighlightCode from "../components/HighlightCode";
+
+export const HIDDEN_KEYS = ["label_", "divider_", "__"];
 
 const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 
@@ -98,7 +109,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             wsProcess: undefined,
             productName: "",
             customerName: "",
-            subscriptionDeltaModalOpen: true,
+            subscriptionDeltaModalOpen: false,
             subscriptionDeltaSubscriptionId: "",
         };
     }
@@ -317,6 +328,8 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
     closeSubscriptionDeltaModal = () =>
         this.setState({ subscriptionDeltaModalOpen: false, subscriptionDeltaSubscriptionId: "" });
 
+    openSubscriptionDeltaModal = (subscriptionId: string) =>
+        this.setState({ subscriptionDeltaModalOpen: true, subscriptionDeltaSubscriptionId: subscriptionId });
     confirmation = (question: string, action: (e: React.MouseEvent<HTMLButtonElement>) => void) =>
         this.setState({
             confirmationDialogOpen: true,
@@ -363,6 +376,16 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                             </EuiButton>
                         </EuiFlexItem>
                     ))}
+                    <EuiFlexItem grow={true}>
+                        <EuiButton
+                            fill
+                            iconType="minimize"
+                            iconSide="right"
+                            onClick={() => this.openSubscriptionDeltaModal("1234")}
+                        >
+                            SHOW BACKUP
+                        </EuiButton>
+                    </EuiFlexItem>
                     <EuiFlexItem grow={true}>
                         <EuiButton fill iconType="minimize" iconSide="right" onClick={this.handleCollapseAll}>
                             COLLAPSE
@@ -510,27 +533,40 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                     />
 
                     {subscriptionDeltaModalOpen && (
-                        <EuiFlyout onClose={this.closeSubscriptionDeltaModal}>
+                        <EuiFlyout size={window.window.innerWidth} onClose={this.closeSubscriptionDeltaModal}>
                             <EuiFlyoutHeader hasBorder aria-labelledby="subscription-delta-modal">
                                 <EuiTitle>
                                     <h2 id="subscription-delta-modal-header">Inspect subscription changes</h2>
                                 </EuiTitle>
                             </EuiFlyoutHeader>
                             <EuiFlyoutBody>
-                                <EuiResizableContainer style={{ height: "200px" }}>
+                                <EuiResizableContainer style={{ height: "100%" }}>
                                     {(EuiResizablePanel, EuiResizableButton) => (
                                         <>
-                                            <EuiResizablePanel initialSize={50} minSize="30%">
+                                            <EuiResizablePanel initialSize={window.window.innerWidth / 2}>
                                                 <EuiText>
-                                                    <div>Left one</div>
-                                                    <a href="">Hello world</a>
+                                                    <div>Before</div>
                                                 </EuiText>
+                                                <HighlightCode
+                                                    data={JSON.stringify(
+                                                        process?.current_state?.["__old_subscription__"],
+                                                        null,
+                                                        2
+                                                    )}
+                                                />
                                             </EuiResizablePanel>
 
                                             <EuiResizableButton />
 
-                                            <EuiResizablePanel initialSize={50} minSize="200px">
-                                                <EuiText>Right one</EuiText>
+                                            <EuiResizablePanel initialSize={window.window.innerWidth / 2}>
+                                                <EuiText>Now</EuiText>
+                                                <HighlightCode
+                                                    data={JSON.stringify(
+                                                        process?.current_state?.["subscription"],
+                                                        null,
+                                                        2
+                                                    )}
+                                                />
                                             </EuiResizablePanel>
                                         </>
                                     )}
