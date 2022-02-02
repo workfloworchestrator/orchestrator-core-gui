@@ -55,8 +55,8 @@ export const ENV: Env = window.__env__ || {
     ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
     TRACING_ORIGINS: process.env.REACT_APP_TRACING_ORIGINS,
     IMS_URL: process.env.REACT_APP_IMS_URL,
-    CI_PROJECT_ID: process.env.CI_PROJECT_ID,
-    CI_MERGE_REQUEST_IID: process.env.CI_MERGE_REQUEST_IID,
-    GITLAB_URL: process.env.GITLAB_URL,
-    CI_PROJECT_PATH: process.env.CI_PROJECT_PATH,
+    CI_PROJECT_ID: process.env.REACT_APP_CI_PROJECT_ID,
+    CI_MERGE_REQUEST_IID: process.env.REACT_APP_CI_MERGE_REQUEST_IID,
+    GITLAB_URL: process.env.REACT_APP_GITLAB_URL,
+    CI_PROJECT_PATH: process.env.REACT_APP_CI_PROJECT_PATH,
 };
