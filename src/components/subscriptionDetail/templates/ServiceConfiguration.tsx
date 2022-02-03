@@ -58,7 +58,7 @@ export function RenderServiceConfiguration({ subscriptionInstances, viewType }: 
                                         )
                                         .map((entry, i) => (
                                             <SubscriptionInstanceValue
-                                                key={i}
+                                                key={`${field}.${inst.subscription_instance_id}.${i}`}
                                                 label={entry[0]}
                                                 value={entry[1] !== null ? entry[1] : "null"}
                                             />
