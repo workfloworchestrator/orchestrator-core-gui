@@ -172,11 +172,11 @@ I18n.translations.en = {
         workflow: "Process instance of workflow {{name}}",
     },
     process_state: {
-        raw: "Show raw JSON",
-        details: "Show details",
-        show_hidden_keys: "Show hidden keys",
-        stateChanges: "Show state input",
-        traceback: "Show traceback",
+        raw: "raw JSON",
+        details: "Summary",
+        show_hidden_keys: "Hidden keys",
+        stateChanges: "State",
+        traceback: "Traceback",
         wording_process: "Process {{product}} of workflow {{workflow}} for {{customer}}",
         wording_task: "Task of workflow {{workflow}}",
         summary: {

@@ -1,10 +1,8 @@
-import { EuiButtonGroup, EuiButtonIcon, EuiFlexGroup, EuiFlexItem, EuiSplitPanel, EuiText } from "@elastic/eui";
+import { EuiButton, EuiButtonIcon, EuiFlexGroup, EuiFlexItem, EuiSplitPanel, EuiText } from "@elastic/eui";
 import { useContext, useState } from "react";
-
-import ApplicationContext from "../utils/ApplicationContext";
-import { ProcessSubscription } from "../utils/types";
-import { isEmpty } from "../utils/Utils";
-import Navigation from "./Navigation";
+import ApplicationContext from "utils/ApplicationContext";
+import { ProcessSubscription } from "utils/types";
+import { isEmpty } from "utils/Utils";
 
 function ProcessSubscriptionLink({
     subscriptionProcesses,
@@ -15,48 +13,61 @@ function ProcessSubscriptionLink({
     subscriptionProcesses: ProcessSubscription[];
     isProcess: boolean;
     currentState: any;
-    handleDeltaClick: (subscriptionId: string, subscription: any | undefined) => void;
+    handleDeltaClick: (subscriptionId: string, before: any | undefined, now: any | undefined) => void;
 }) {
     const { allowed } = useContext(ApplicationContext);
     const [collapsedPanel, setCollapsedPanel] = useState(false);
-    const [toggleIdToSelectedMap, setToggleIdToSelectedMap] = useState({
-        ["multiSelectButtonGroup__1"]: true,
-        ["multiSelectButtonGroup__2"]: true,
-    });
+
+    console.log("Current state:");
+    console.log(currentState);
+
     if (isEmpty(subscriptionProcesses)) {
         return null;
     }
 
-    const buttons = [
-        {
-            id: 'multiSelectButtonGroup__1',
-            label: "Show Subscription",
-            iconType: "link",
-        },
-        {
-            id: 'multiSelectButtonGroup__2',
-            label: "Show Delta",
-            iconType: "indexMapping",
-        },
-    ];
-
-    const onChange = (optionId: string, subscriptionId:string) => {
-        console.log("Button clicked", optionId);
-        if(optionId=="multiSelectButtonGroup__2") {
-            handleDeltaClick(subscriptionId, {})
-        }
+    const onDeltaClicked = (subscriptionId: string, before: any, now: any) => {
+        console.log("Delegating showDelta for subscriptionId:", subscriptionId);
+        handleDeltaClick(subscriptionId, before, now);
     };
 
     const renderButtons = subscriptionProcesses.map((ps, index: number) => (
         <EuiSplitPanel.Inner>
-            <EuiButtonGroup
-                color={"accent"}
-                legend="Subscription button group"
-                options={buttons}
-                type={"multi"}
-                idToSelectedMap={toggleIdToSelectedMap}
-                onChange={(id: string) => onChange(id, ps.subscription_id)}
-            />
+            <EuiFlexGroup gutterSize="s" alignItems="center">
+                <EuiFlexItem grow={false}>
+                    <EuiText>Subscription: {ps.subscription_id.slice(0, 8)}</EuiText>
+                </EuiFlexItem>
+                <EuiFlexItem grow={false}>
+                    <EuiButton
+                        id="to-subscription"
+                        href={`/subscriptions/${ps.subscription_id}`}
+                        iconType="link"
+                        size="s"
+                        fill
+                    >
+                        Show Details
+                    </EuiButton>
+                </EuiFlexItem>
+                {currentState.hasOwnProperty("subscription") &&
+                    currentState.hasOwnProperty("__old_subscription__") &&
+                    currentState.__old_subscription__.hasOwnProperty(ps.subscription_id) && (
+                        <EuiFlexItem grow={false}>
+                            <EuiButton
+                                iconType="indexMapping"
+                                size="s"
+                                fill
+                                onClick={() =>
+                                    onDeltaClicked(
+                                        ps.subscription_id,
+                                        currentState.__old_subscription__[ps.subscription_id],
+                                        currentState.subscription
+                                    )
+                                }
+                            >
+                                Show Delta
+                            </EuiButton>
+                        </EuiFlexItem>
+                    )}
+            </EuiFlexGroup>
         </EuiSplitPanel.Inner>
     ));
 

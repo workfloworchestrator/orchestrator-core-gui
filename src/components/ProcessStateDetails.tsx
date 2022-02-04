@@ -16,19 +16,18 @@
 import "components/ProcessStateDetails.scss";
 
 import {
-    EuiAccordion,
-    EuiButton,
-    EuiButtonEmpty,
-    EuiButtonGroup,
-    EuiButtonIcon,
     EuiCheckbox,
     EuiCopy,
     EuiFlexGroup,
-    EuiFlexItem, EuiFlyout, EuiFlyoutBody, EuiFlyoutFooter, EuiFlyoutHeader,
+    EuiFlexItem,
+    EuiFlyout,
+    EuiFlyoutBody,
+    EuiFlyoutFooter,
+    EuiFlyoutHeader,
     EuiIcon,
-    EuiPanel, EuiResizableContainer,
+    EuiLoadingChart,
+    EuiResizableContainer,
     EuiSpacer,
-    EuiSplitPanel,
     EuiText,
     EuiTitle,
 } from "@elastic/eui";
@@ -37,9 +36,8 @@ import ProcessSubscriptionLink from "components/ProcessSubscriptionLink";
 import StepDetails from "components/Step";
 import isEqual from "lodash/isEqual";
 import { HIDDEN_KEYS } from "pages/ProcessDetail";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
-import ApplicationContext from "utils/ApplicationContext";
 import { capitalize, renderDateTime } from "utils/Lookups";
 import { ProcessSubscription, ProcessWithDetails, State, Step, prop } from "utils/types";
 import { applyIdNamingConvention, isEmpty } from "utils/Utils";
@@ -249,10 +247,10 @@ interface IProps {
 }
 
 interface ISubscriptionDelta {
-    modalOpen: boolean
-    subscriptionId: string
-    before: any
-    now: any
+    modalOpen: boolean;
+    subscriptionId: string;
+    before: any;
+    now: any;
 }
 
 function ProcessStateDetails({
@@ -269,15 +267,23 @@ function ProcessStateDetails({
     const [stateChanges, setStateChanges] = useState(true);
     const [traceback, setTraceback] = useState(false);
     const [showHiddenKeys, setShowHiddenKeys] = useState(false);
-    const [subscriptionDelta, setSubscriptionDelta] = useState<ISubscriptionDelta>({modalOpen: false, subscriptionId: "", before: {}, now: {}});
+    const [loading, setLoading] = useState(false);
+    const [subscriptionDelta, setSubscriptionDelta] = useState<ISubscriptionDelta>({
+        modalOpen: false,
+        subscriptionId: "",
+        before: {},
+        now: {},
+    });
 
     const closeSubscriptionDeltaModal = () => {
-        setSubscriptionDelta({modalOpen: false, subscriptionId: "", before: {}, now: {}})
-    }
+        setSubscriptionDelta({ modalOpen: false, subscriptionId: "", before: {}, now: {} });
+        setLoading(false);
+    };
 
     const openSubscriptionDeltaModal = (subscriptionId: string, before: any, now: any) => {
-        setSubscriptionDelta({modalOpen: true, subscriptionId: subscriptionId, before: before, now: now})
-    }
+        setLoading(true);
+        setSubscriptionDelta({ modalOpen: true, subscriptionId: subscriptionId, before: before, now: now });
+    };
 
     const summaryKeys: (keyof ProcessWithDetails)[] = [
         "status",
@@ -306,11 +312,9 @@ function ProcessStateDetails({
             </section>
         );
     };
-    const handleDeltaClick = (subscriptionId: string, subscription: any | undefined) => {
-        console.log(subscriptionId)
-        console.log(subscriptionId)
-        openSubscriptionDeltaModal(subscriptionId, {}, {})
-    }
+    const handleDeltaClick = (subscriptionId: string, before: any, now: any) => {
+        openSubscriptionDeltaModal(subscriptionId, before, now);
+    };
 
     const renderProcessHeaderInformation = (process: ProcessWithDetails) => {
         return (
@@ -403,7 +407,6 @@ function ProcessStateDetails({
 
     return (
         <section className="process-state-detail">
-
             {subscriptionDelta.modalOpen && (
                 <EuiFlyout size={window.window.innerWidth} onClose={closeSubscriptionDeltaModal}>
                     <EuiFlyoutHeader hasBorder aria-labelledby="subscription-delta-modal">
@@ -423,9 +426,7 @@ function ProcessStateDetails({
                                         </EuiText>
                                         <HighlightCode
                                             data={JSON.stringify(
-                                                process?.current_state?.__old_subscription__?.[
-                                                    subscriptionDelta.subscriptionId
-                                                    ],
+                                                subscriptionDelta.before,
                                                 // process?.current_state?.__old_subscription__,
                                                 null,
                                                 2
@@ -436,14 +437,10 @@ function ProcessStateDetails({
                                     <EuiResizableButton />
 
                                     <EuiResizablePanel initialSize={window.window.innerWidth / 2}>
-                                        <h3>Now</h3>
-                                        <HighlightCode
-                                            data={JSON.stringify(
-                                                process?.current_state?.["subscription"],
-                                                null,
-                                                2
-                                            )}
-                                        />
+                                        <EuiText>
+                                            <h3>Now</h3>
+                                        </EuiText>
+                                        <HighlightCode data={JSON.stringify(subscriptionDelta.now, null, 2)} />
                                     </EuiResizablePanel>
                                 </>
                             )}
@@ -457,10 +454,6 @@ function ProcessStateDetails({
                     </EuiFlyoutFooter>
                 </EuiFlyout>
             )}
-
-
-
-
 
             {renderProcessHeaderInformation(process)}
             {traceback && (
@@ -488,12 +481,15 @@ function ProcessStateDetails({
                             </table>
                         </section>
                     )}
-                    <ProcessSubscriptionLink
-                        subscriptionProcesses={subscriptionProcesses}
-                        isProcess={isProcess}
-                        currentState={process.current_state}
-                        handleDeltaClick={handleDeltaClick}
-                    />
+                    {loading && <EuiLoadingChart size="xl" mono />}
+                    {!loading && (
+                        <ProcessSubscriptionLink
+                            subscriptionProcesses={subscriptionProcesses}
+                            isProcess={isProcess}
+                            currentState={process.current_state}
+                            handleDeltaClick={handleDeltaClick}
+                        />
+                    )}
                     <EuiSpacer />
                     <ProcessOverview
                         steps={process.steps}

@@ -15,23 +15,7 @@
 
 import "pages/ProcessDetail.scss";
 
-import {
-    EuiAccordion,
-    EuiButton,
-    EuiCard,
-    EuiFlexGroup,
-    EuiFlexItem,
-    EuiFlyout,
-    EuiFlyoutBody,
-    EuiFlyoutFooter,
-    EuiFlyoutHeader,
-    EuiPage,
-    EuiPageBody,
-    EuiPanel,
-    EuiResizableContainer,
-    EuiText,
-    EuiTitle,
-} from "@elastic/eui";
+import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody, EuiPanel, EuiText } from "@elastic/eui";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import ProcessStateDetails from "components/ProcessStateDetails";
@@ -48,8 +32,6 @@ import { CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
 import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step, WsProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
-
-import HighlightCode from "../components/HighlightCode";
 
 export const HIDDEN_KEYS = ["label_", "divider_", "__"];
 
@@ -80,8 +62,6 @@ interface IState {
     wsProcess?: WsProcessV2;
     productName: string;
     customerName: string;
-    subscriptionDeltaModalOpen: boolean;
-    subscriptionDeltaSubscriptionId: string;
 }
 
 class ProcessDetail extends React.PureComponent<IProps, IState> {
@@ -103,8 +83,6 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             wsProcess: undefined,
             productName: "",
             customerName: "",
-            subscriptionDeltaModalOpen: false,
-            subscriptionDeltaSubscriptionId: "",
         };
     }
 
@@ -319,11 +297,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
     };
 
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
-    closeSubscriptionDeltaModal = () =>
-        this.setState({ subscriptionDeltaModalOpen: false, subscriptionDeltaSubscriptionId: "" });
 
-    openSubscriptionDeltaModal = (subscriptionId: string) =>
-        this.setState({ subscriptionDeltaModalOpen: true, subscriptionDeltaSubscriptionId: subscriptionId });
     confirmation = (question: string, action: (e: React.MouseEvent<HTMLButtonElement>) => void) =>
         this.setState({
             confirmationDialogOpen: true,
@@ -370,16 +344,6 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                             </EuiButton>
                         </EuiFlexItem>
                     ))}
-                    <EuiFlexItem grow={true}>
-                        <EuiButton
-                            fill
-                            iconType="minimize"
-                            iconSide="right"
-                            onClick={() => this.openSubscriptionDeltaModal(process.current_state.subscription_id)}
-                        >
-                            SHOW BACKUP
-                        </EuiButton>
-                    </EuiFlexItem>
                     <EuiFlexItem grow={true}>
                         <EuiButton fill iconType="minimize" iconSide="right" onClick={this.handleCollapseAll}>
                             COLLAPSE
@@ -503,8 +467,6 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             confirmationDialogOpen,
             confirmationDialogAction,
             confirmationDialogQuestion,
-            // subscriptionDeltaModalOpen,
-            // subscriptionDeltaSubscriptionId,
         } = this.state;
         if (!process) {
             return null;
@@ -525,7 +487,6 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                         confirm={confirmationDialogAction}
                         question={confirmationDialogQuestion}
                     />
-
 
                     <section className="tabs">{tabs.map((tab) => this.renderTab(tab, selectedTab))}</section>
                     {renderContent &&
