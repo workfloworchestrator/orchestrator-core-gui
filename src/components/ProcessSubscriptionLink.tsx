@@ -18,9 +18,6 @@ function ProcessSubscriptionLink({
     const { allowed } = useContext(ApplicationContext);
     const [collapsedPanel, setCollapsedPanel] = useState(false);
 
-    console.log("Current state:");
-    console.log(currentState);
-
     if (isEmpty(subscriptionProcesses)) {
         return null;
     }
@@ -31,10 +28,12 @@ function ProcessSubscriptionLink({
     };
 
     const renderButtons = subscriptionProcesses.map((ps, index: number) => (
-        <EuiSplitPanel.Inner>
+        <EuiSplitPanel.Inner paddingSize="s">
             <EuiFlexGroup gutterSize="s" alignItems="center">
                 <EuiFlexItem grow={false}>
-                    <EuiText>Subscription: {ps.subscription_id.slice(0, 8)}</EuiText>
+                    <EuiText>
+                        {ps.workflow_target === "CREATE" ? "created" : "modified"}: {ps.subscription_id.slice(0, 8)}
+                    </EuiText>
                 </EuiFlexItem>
                 <EuiFlexItem grow={false}>
                     <EuiButton

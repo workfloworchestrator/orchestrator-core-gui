@@ -172,7 +172,7 @@ I18n.translations.en = {
         workflow: "Process instance of workflow {{name}}",
     },
     process_state: {
-        raw: "raw JSON",
+        raw: "Raw JSON",
         details: "Summary",
         show_hidden_keys: "Hidden keys",
         stateChanges: "State",

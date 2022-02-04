@@ -16,16 +16,17 @@
 import "components/ProcessStateDetails.scss";
 
 import {
+    EuiButtonIcon,
     EuiCheckbox,
     EuiCopy,
     EuiFlexGroup,
     EuiFlexItem,
     EuiFlyout,
     EuiFlyoutBody,
-    EuiFlyoutFooter,
     EuiFlyoutHeader,
     EuiIcon,
     EuiLoadingChart,
+    EuiPanel,
     EuiResizableContainer,
     EuiSpacer,
     EuiText,
@@ -34,13 +35,12 @@ import {
 import HighlightCode from "components/HighlightCode";
 import ProcessSubscriptionLink from "components/ProcessSubscriptionLink";
 import StepDetails from "components/Step";
-import isEqual from "lodash/isEqual";
 import { HIDDEN_KEYS } from "pages/ProcessDetail";
 import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { capitalize, renderDateTime } from "utils/Lookups";
-import { ProcessSubscription, ProcessWithDetails, State, Step, prop } from "utils/types";
-import { applyIdNamingConvention, isEmpty } from "utils/Utils";
+import { ProcessSubscription, ProcessWithDetails, Step, prop } from "utils/types";
+import { applyIdNamingConvention, isEmpty, stateDelta } from "utils/Utils";
 
 function StateChanges({
     steps,
@@ -88,22 +88,6 @@ function StateChanges({
                 <div dangerouslySetInnerHTML={{ __html: value.message }}></div>
             </EuiText>
         );
-    };
-
-    const stateDelta = (prev: State, curr: State) => {
-        const prevOrEmpty = prev ?? {};
-        const prevKeys = Object.keys(prevOrEmpty);
-        const currKeys = Object.keys(curr);
-        const newKeys = currKeys.filter((key) => prevKeys.indexOf(key) === -1 || !isEqual(prevOrEmpty[key], curr[key]));
-        const newState = newKeys.sort().reduce((acc: State, key) => {
-            if (curr[key] === Object(curr[key]) && !Array.isArray(curr[key]) && prevOrEmpty[key]) {
-                acc[key] = stateDelta(prevOrEmpty[key], curr[key]);
-            } else {
-                acc[key] = curr[key];
-            }
-            return acc;
-        }, {});
-        return newState;
     };
 
     const step = steps[index];
@@ -268,6 +252,7 @@ function ProcessStateDetails({
     const [traceback, setTraceback] = useState(false);
     const [showHiddenKeys, setShowHiddenKeys] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [collapsedDeltaPanel, setCollapsedDeltaPanel] = useState(false);
     const [subscriptionDelta, setSubscriptionDelta] = useState<ISubscriptionDelta>({
         modalOpen: false,
         subscriptionId: "",
@@ -411,47 +396,66 @@ function ProcessStateDetails({
                 <EuiFlyout size={window.window.innerWidth} onClose={closeSubscriptionDeltaModal}>
                     <EuiFlyoutHeader hasBorder aria-labelledby="subscription-delta-modal">
                         <EuiTitle>
-                            <h2 id="subscription-delta-modal-header">
+                            <h3 id="subscription-delta-modal-header">
                                 Inspect subscription changes for {subscriptionDelta.subscriptionId}
-                            </h2>
+                            </h3>
                         </EuiTitle>
                     </EuiFlyoutHeader>
                     <EuiFlyoutBody>
-                        <EuiResizableContainer style={{ height: "100%" }}>
-                            {(EuiResizablePanel, EuiResizableButton) => (
-                                <>
-                                    <EuiResizablePanel initialSize={window.window.innerWidth / 2}>
-                                        <EuiText>
-                                            <h3>Before</h3>
-                                        </EuiText>
-                                        <HighlightCode
-                                            data={JSON.stringify(
-                                                subscriptionDelta.before,
-                                                // process?.current_state?.__old_subscription__,
-                                                null,
-                                                2
-                                            )}
-                                        />
-                                    </EuiResizablePanel>
-
-                                    <EuiResizableButton />
-
-                                    <EuiResizablePanel initialSize={window.window.innerWidth / 2}>
-                                        <EuiText>
-                                            <h3>Now</h3>
-                                        </EuiText>
-                                        <HighlightCode data={JSON.stringify(subscriptionDelta.now, null, 2)} />
-                                    </EuiResizablePanel>
-                                </>
+                        <>
+                            <EuiFlexGroup gutterSize="s">
+                                <EuiFlexItem grow={false}>
+                                    <EuiText>
+                                        <h4>Delta</h4>
+                                    </EuiText>
+                                </EuiFlexItem>
+                                <EuiFlexItem grow={false}>
+                                    <EuiButtonIcon
+                                        iconType={collapsedDeltaPanel ? "arrowRight" : "arrowDown"}
+                                        aria-label="Toggle related subscriptions"
+                                        onClick={() => setCollapsedDeltaPanel(!collapsedDeltaPanel)}
+                                    />
+                                </EuiFlexItem>
+                                <EuiFlexItem></EuiFlexItem>
+                            </EuiFlexGroup>
+                            {!collapsedDeltaPanel && (
+                                <EuiPanel color="transparent" hasBorder={true}>
+                                    <HighlightCode
+                                        data={JSON.stringify(
+                                            stateDelta(subscriptionDelta.before, subscriptionDelta.now),
+                                            null,
+                                            2
+                                        )}
+                                    />
+                                </EuiPanel>
                             )}
-                        </EuiResizableContainer>
+
+                            <EuiResizableContainer style={{ height: "100%" }}>
+                                {(EuiResizablePanel, EuiResizableButton) => (
+                                    <>
+                                        <EuiResizablePanel
+                                            initialSize={window.window.innerWidth / 2}
+                                            style={{ marginLeft: "-15px" }}
+                                        >
+                                            <EuiText>
+                                                <h4>Before</h4>
+                                            </EuiText>
+                                            <HighlightCode data={JSON.stringify(subscriptionDelta.before, null, 2)} />
+                                        </EuiResizablePanel>
+
+                                        <EuiResizableButton />
+
+                                        <EuiResizablePanel initialSize={window.window.innerWidth / 2}>
+                                            <EuiText>
+                                                <h4>Now</h4>
+                                            </EuiText>
+                                            <HighlightCode data={JSON.stringify(subscriptionDelta.now, null, 2)} />
+                                        </EuiResizablePanel>
+                                    </>
+                                )}
+                            </EuiResizableContainer>
+                        </>
                     </EuiFlyoutBody>
-                    <EuiFlyoutFooter>
-                        <EuiFlexGroup justifyContent="spaceBetween">
-                            <EuiFlexItem grow={false}>One</EuiFlexItem>
-                            <EuiFlexItem grow={false}>Two</EuiFlexItem>
-                        </EuiFlexGroup>
-                    </EuiFlyoutFooter>
                 </EuiFlyout>
             )}
 
