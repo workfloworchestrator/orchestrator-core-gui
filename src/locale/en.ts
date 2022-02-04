@@ -174,6 +174,7 @@ I18n.translations.en = {
     process_state: {
         raw: "Show raw JSON",
         details: "Show details",
+        show_hidden_keys: "Show hidden keys",
         stateChanges: "Show state input",
         traceback: "Show traceback",
         wording_process: "Process {{product}} of workflow {{workflow}} for {{customer}}",

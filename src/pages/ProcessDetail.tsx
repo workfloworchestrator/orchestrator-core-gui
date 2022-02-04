@@ -16,6 +16,7 @@
 import "pages/ProcessDetail.scss";
 
 import {
+    EuiAccordion,
     EuiButton,
     EuiCard,
     EuiFlexGroup,
@@ -39,14 +40,7 @@ import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { RouteComponentProps } from "react-router-dom";
 import ScrollUpButton from "react-scroll-up-button";
-import {
-    BooleanParam,
-    DecodedValueMap,
-    NumberParam,
-    QueryParamConfigMap,
-    SetQuery,
-    withQueryParams,
-} from "use-query-params";
+import { DecodedValueMap, NumberParam, QueryParamConfigMap, SetQuery, withQueryParams } from "use-query-params";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { organisationNameByUuid, productById, productNameById } from "utils/Lookups";
@@ -381,7 +375,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                             fill
                             iconType="minimize"
                             iconSide="right"
-                            onClick={() => this.openSubscriptionDeltaModal("1234")}
+                            onClick={() => this.openSubscriptionDeltaModal(process.current_state.subscription_id)}
                         >
                             SHOW BACKUP
                         </EuiButton>
@@ -509,8 +503,8 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             confirmationDialogOpen,
             confirmationDialogAction,
             confirmationDialogQuestion,
-            subscriptionDeltaModalOpen,
-            subscriptionDeltaSubscriptionId,
+            // subscriptionDeltaModalOpen,
+            // subscriptionDeltaSubscriptionId,
         } = this.state;
         if (!process) {
             return null;
@@ -532,54 +526,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                         question={confirmationDialogQuestion}
                     />
 
-                    {subscriptionDeltaModalOpen && (
-                        <EuiFlyout size={window.window.innerWidth} onClose={this.closeSubscriptionDeltaModal}>
-                            <EuiFlyoutHeader hasBorder aria-labelledby="subscription-delta-modal">
-                                <EuiTitle>
-                                    <h2 id="subscription-delta-modal-header">Inspect subscription changes</h2>
-                                </EuiTitle>
-                            </EuiFlyoutHeader>
-                            <EuiFlyoutBody>
-                                <EuiResizableContainer style={{ height: "100%" }}>
-                                    {(EuiResizablePanel, EuiResizableButton) => (
-                                        <>
-                                            <EuiResizablePanel initialSize={window.window.innerWidth / 2}>
-                                                <EuiText>
-                                                    <div>Before</div>
-                                                </EuiText>
-                                                <HighlightCode
-                                                    data={JSON.stringify(
-                                                        process?.current_state?.["__old_subscription__"],
-                                                        null,
-                                                        2
-                                                    )}
-                                                />
-                                            </EuiResizablePanel>
 
-                                            <EuiResizableButton />
-
-                                            <EuiResizablePanel initialSize={window.window.innerWidth / 2}>
-                                                <EuiText>Now</EuiText>
-                                                <HighlightCode
-                                                    data={JSON.stringify(
-                                                        process?.current_state?.["subscription"],
-                                                        null,
-                                                        2
-                                                    )}
-                                                />
-                                            </EuiResizablePanel>
-                                        </>
-                                    )}
-                                </EuiResizableContainer>
-                            </EuiFlyoutBody>
-                            <EuiFlyoutFooter>
-                                <EuiFlexGroup justifyContent="spaceBetween">
-                                    <EuiFlexItem grow={false}>One</EuiFlexItem>
-                                    <EuiFlexItem grow={false}>Two</EuiFlexItem>
-                                </EuiFlexGroup>
-                            </EuiFlyoutFooter>
-                        </EuiFlyout>
-                    )}
                     <section className="tabs">{tabs.map((tab) => this.renderTab(tab, selectedTab))}</section>
                     {renderContent &&
                         this.renderTabContent(selectedTab, process, step, stepUserInput, subscriptionProcesses)}

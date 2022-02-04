@@ -15,54 +15,34 @@
 
 import "components/ProcessStateDetails.scss";
 
-import { EuiButton, EuiCheckbox, EuiCopy, EuiIcon, EuiText } from "@elastic/eui";
+import {
+    EuiAccordion,
+    EuiButton,
+    EuiButtonEmpty,
+    EuiButtonGroup,
+    EuiButtonIcon,
+    EuiCheckbox,
+    EuiCopy,
+    EuiFlexGroup,
+    EuiFlexItem, EuiFlyout, EuiFlyoutBody, EuiFlyoutFooter, EuiFlyoutHeader,
+    EuiIcon,
+    EuiPanel, EuiResizableContainer,
+    EuiSpacer,
+    EuiSplitPanel,
+    EuiText,
+    EuiTitle,
+} from "@elastic/eui";
 import HighlightCode from "components/HighlightCode";
+import ProcessSubscriptionLink from "components/ProcessSubscriptionLink";
 import StepDetails from "components/Step";
 import isEqual from "lodash/isEqual";
-import { useContext, useState } from "react";
+import { HIDDEN_KEYS } from "pages/ProcessDetail";
+import React, { useContext, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { capitalize, renderDateTime } from "utils/Lookups";
 import { ProcessSubscription, ProcessWithDetails, State, Step, prop } from "utils/types";
 import { applyIdNamingConvention, isEmpty } from "utils/Utils";
-
-import { HIDDEN_KEYS } from "../pages/ProcessDetail";
-
-function ProcessSubscriptionLink({
-    subscriptionProcesses,
-    isProcess,
-}: {
-    subscriptionProcesses: ProcessSubscription[];
-    isProcess: boolean;
-}) {
-    const { allowed } = useContext(ApplicationContext);
-
-    if (isEmpty(subscriptionProcesses)) {
-        return null;
-    }
-
-    return (
-        <section className="subscription-link">
-            {allowed("/orchestrator/subscriptions/view/from-process") &&
-                subscriptionProcesses.map((ps, index: number) => (
-                    <div key={index}>
-                        <EuiButton
-                            id="to-subscription"
-                            href={`/subscriptions/${ps.subscription_id}`}
-                            fill
-                            // color="secondary"
-                            iconType="link"
-                        >
-                            <FormattedMessage
-                                id={`${isProcess ? "process" : "task"}.subscription_link_txt`}
-                                values={{ target: ps.workflow_target }}
-                            />
-                        </EuiButton>
-                    </div>
-                ))}
-        </section>
-    );
-}
 
 function StateChanges({
     steps,
@@ -268,6 +248,13 @@ interface IProps {
     isProcess: boolean;
 }
 
+interface ISubscriptionDelta {
+    modalOpen: false
+    subscriptionId: string
+    before: any
+    now: any
+}
+
 function ProcessStateDetails({
     process,
     productName,
@@ -282,6 +269,16 @@ function ProcessStateDetails({
     const [stateChanges, setStateChanges] = useState(true);
     const [traceback, setTraceback] = useState(false);
     const [showHiddenKeys, setShowHiddenKeys] = useState(false);
+    const [subscriptionDelta, setSubscriptionDelta] = useState<ISubscriptionDelta>({modalOpen: false, subscriptionId: "", before: {}, now: {}});
+
+    const closeSubscriptionDeltaModal = () => {
+        setSubscriptionDelta({modalOpen: false, subscriptionId: "", before: {}, now: {}})
+    }
+
+    const openSubscriptionDeltaModal = (subscriptionId: string, old: any, current: any) => {
+        setSubscriptionDelta({modalOpen: false, subscriptionId: "", before: {}, now: {}})
+
+    }
 
     const summaryKeys: (keyof ProcessWithDetails)[] = [
         "status",
@@ -310,6 +307,11 @@ function ProcessStateDetails({
             </section>
         );
     };
+    const handleDeltaClick = (subscriptionId: string, subscription: any | undefined) => {
+        console.log(subscriptionId)
+        console.log(subscriptionId)
+        openSubscriptionDeltaModal(subscriptionId, {}, {})
+    }
 
     const renderProcessHeaderInformation = (process: ProcessWithDetails) => {
         return (
@@ -402,8 +404,66 @@ function ProcessStateDetails({
 
     return (
         <section className="process-state-detail">
+
+            {subscriptionDeltaModalOpen && (
+                <EuiFlyout size={window.window.innerWidth} onClose={closeSubscriptionDeltaModal}>
+                    <EuiFlyoutHeader hasBorder aria-labelledby="subscription-delta-modal">
+                        <EuiTitle>
+                            <h2 id="subscription-delta-modal-header">
+                                Inspect subscription changes for {subscriptionDeltaSubscriptionId}
+                            </h2>
+                        </EuiTitle>
+                    </EuiFlyoutHeader>
+                    <EuiFlyoutBody>
+                        <EuiResizableContainer style={{ height: "100%" }}>
+                            {(EuiResizablePanel, EuiResizableButton) => (
+                                <>
+                                    <EuiResizablePanel initialSize={window.window.innerWidth / 2}>
+                                        <EuiText>
+                                            <h3>Before</h3>
+                                        </EuiText>
+                                        <HighlightCode
+                                            data={JSON.stringify(
+                                                process?.current_state?.__old_subscription__?.[
+                                                    subscriptionDeltaSubscriptionId
+                                                    ],
+                                                // process?.current_state?.__old_subscription__,
+                                                null,
+                                                2
+                                            )}
+                                        />
+                                    </EuiResizablePanel>
+
+                                    <EuiResizableButton />
+
+                                    <EuiResizablePanel initialSize={window.window.innerWidth / 2}>
+                                        <h3>Now</h3>
+                                        <HighlightCode
+                                            data={JSON.stringify(
+                                                process?.current_state?.["subscription"],
+                                                null,
+                                                2
+                                            )}
+                                        />
+                                    </EuiResizablePanel>
+                                </>
+                            )}
+                        </EuiResizableContainer>
+                    </EuiFlyoutBody>
+                    <EuiFlyoutFooter>
+                        <EuiFlexGroup justifyContent="spaceBetween">
+                            <EuiFlexItem grow={false}>One</EuiFlexItem>
+                            <EuiFlexItem grow={false}>Two</EuiFlexItem>
+                        </EuiFlexGroup>
+                    </EuiFlyoutFooter>
+                </EuiFlyout>
+            )}
+
+
+
+
+
             {renderProcessHeaderInformation(process)}
-            <ProcessSubscriptionLink subscriptionProcesses={subscriptionProcesses} isProcess={isProcess} />
             {traceback && (
                 <section className="traceback-container">
                     <pre>{process.traceback}</pre>
@@ -429,6 +489,13 @@ function ProcessStateDetails({
                             </table>
                         </section>
                     )}
+                    <ProcessSubscriptionLink
+                        subscriptionProcesses={subscriptionProcesses}
+                        isProcess={isProcess}
+                        currentState={process.current_state}
+                        handleDeltaClick={handleDeltaClick}
+                    />
+                    <EuiSpacer />
                     <ProcessOverview
                         steps={process.steps}
                         stateChanges={stateChanges}
