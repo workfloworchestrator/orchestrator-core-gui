@@ -249,7 +249,7 @@ interface IProps {
 }
 
 interface ISubscriptionDelta {
-    modalOpen: false
+    modalOpen: boolean
     subscriptionId: string
     before: any
     now: any
@@ -275,9 +275,8 @@ function ProcessStateDetails({
         setSubscriptionDelta({modalOpen: false, subscriptionId: "", before: {}, now: {}})
     }
 
-    const openSubscriptionDeltaModal = (subscriptionId: string, old: any, current: any) => {
-        setSubscriptionDelta({modalOpen: false, subscriptionId: "", before: {}, now: {}})
-
+    const openSubscriptionDeltaModal = (subscriptionId: string, before: any, now: any) => {
+        setSubscriptionDelta({modalOpen: true, subscriptionId: subscriptionId, before: before, now: now})
     }
 
     const summaryKeys: (keyof ProcessWithDetails)[] = [
@@ -405,12 +404,12 @@ function ProcessStateDetails({
     return (
         <section className="process-state-detail">
 
-            {subscriptionDeltaModalOpen && (
+            {subscriptionDelta.modalOpen && (
                 <EuiFlyout size={window.window.innerWidth} onClose={closeSubscriptionDeltaModal}>
                     <EuiFlyoutHeader hasBorder aria-labelledby="subscription-delta-modal">
                         <EuiTitle>
                             <h2 id="subscription-delta-modal-header">
-                                Inspect subscription changes for {subscriptionDeltaSubscriptionId}
+                                Inspect subscription changes for {subscriptionDelta.subscriptionId}
                             </h2>
                         </EuiTitle>
                     </EuiFlyoutHeader>
@@ -425,7 +424,7 @@ function ProcessStateDetails({
                                         <HighlightCode
                                             data={JSON.stringify(
                                                 process?.current_state?.__old_subscription__?.[
-                                                    subscriptionDeltaSubscriptionId
+                                                    subscriptionDelta.subscriptionId
                                                     ],
                                                 // process?.current_state?.__old_subscription__,
                                                 null,
