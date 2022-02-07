@@ -46,16 +46,13 @@ section.process-state-detail {
             list-style: none;
             h3 {
                 font-size: larger;
-                padding: 5px 15px 0;
+                padding: 0px 15px 0 3px;
                 color: vars.$dark-grey;
             }
             li {
                 display: inline-block;
-                &.toggle-details,
-                &.toggle-state-changes {
-                    margin-right: 50px;
-                    margin-bottom: 20px;
-                }
+                margin-right: 20px;
+                margin-bottom: 10px;
             }
             &:last-child {
                 margin-left: auto;
@@ -69,10 +66,8 @@ section.process-state-detail {
     }
 
     section.process-summary {
-        margin: 0 0 20px 0;
-        padding: 25px 0;
-        border-top: 1px solid vars.$light-grey;
-        border-bottom: 1px solid vars.$light-grey;
+        margin: 0 0 0 0;
+        padding: 20px 0 15px 0;
         table {
             td {
                 font-size: larger;

@@ -33,6 +33,8 @@ import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step, WsPr
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
 
+export const HIDDEN_KEYS = ["label_", "divider_", "__"];
+
 const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 
 interface MatchParams {
@@ -485,6 +487,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                         confirm={confirmationDialogAction}
                         question={confirmationDialogQuestion}
                     />
+
                     <section className="tabs">{tabs.map((tab) => this.renderTab(tab, selectedTab))}</section>
                     {renderContent &&
                         this.renderTabContent(selectedTab, process, step, stepUserInput, subscriptionProcesses)}

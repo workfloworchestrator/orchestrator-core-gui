@@ -14,7 +14,10 @@
  */
 
 import { isDate } from "date-fns";
+import isEqual from "lodash/isEqual";
 import { lazy } from "react";
+
+import { State } from "./types";
 
 export function stop(e: React.SyntheticEvent) {
     if (e !== undefined && e !== null) {
@@ -80,3 +83,19 @@ export function capitalizeFirstLetter(word: string): string {
 
 export const importPlugin = (plugin: string) =>
     lazy(() => import(`custom/plugins/${plugin}`).catch(() => import(`components/RenderNull`)));
+
+export const stateDelta = (prev: State, curr: State) => {
+    const prevOrEmpty = prev ?? {};
+    const prevKeys = Object.keys(prevOrEmpty);
+    const currKeys = Object.keys(curr);
+    const newKeys = currKeys.filter((key) => prevKeys.indexOf(key) === -1 || !isEqual(prevOrEmpty[key], curr[key]));
+    const newState = newKeys.sort().reduce((acc: State, key) => {
+        if (curr[key] === Object(curr[key]) && !Array.isArray(curr[key]) && prevOrEmpty[key]) {
+            acc[key] = stateDelta(prevOrEmpty[key], curr[key]);
+        } else {
+            acc[key] = curr[key];
+        }
+        return acc;
+    }, {});
+    return newState;
+};

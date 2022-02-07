@@ -15,54 +15,44 @@
 
 import "components/ProcessStateDetails.scss";
 
-import { EuiButton, EuiCheckbox, EuiCopy, EuiIcon, EuiText } from "@elastic/eui";
+import {
+    EuiButtonIcon,
+    EuiCheckbox,
+    EuiCopy,
+    EuiFlexGroup,
+    EuiFlexItem,
+    EuiFlyout,
+    EuiFlyoutBody,
+    EuiFlyoutHeader,
+    EuiIcon,
+    EuiLoadingChart,
+    EuiPanel,
+    EuiResizableContainer,
+    EuiSpacer,
+    EuiText,
+    EuiTitle,
+} from "@elastic/eui";
 import HighlightCode from "components/HighlightCode";
+import ProcessSubscriptionLink from "components/ProcessSubscriptionLink";
 import StepDetails from "components/Step";
-import isEqual from "lodash/isEqual";
-import { useContext, useState } from "react";
+import { HIDDEN_KEYS } from "pages/ProcessDetail";
+import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
-import ApplicationContext from "utils/ApplicationContext";
 import { capitalize, renderDateTime } from "utils/Lookups";
-import { ProcessSubscription, ProcessWithDetails, State, Step, prop } from "utils/types";
-import { applyIdNamingConvention, isEmpty } from "utils/Utils";
+import { ProcessSubscription, ProcessWithDetails, Step, prop } from "utils/types";
+import { applyIdNamingConvention, isEmpty, stateDelta } from "utils/Utils";
 
-function ProcessSubscriptionLink({
-    subscriptionProcesses,
-    isProcess,
+function StateChanges({
+    steps,
+    index,
+    collapsed = false,
+    showHiddenKeys,
 }: {
-    subscriptionProcesses: ProcessSubscription[];
-    isProcess: boolean;
+    steps: Step[];
+    index: number;
+    collapsed?: boolean;
+    showHiddenKeys: boolean;
 }) {
-    const { allowed } = useContext(ApplicationContext);
-
-    if (isEmpty(subscriptionProcesses)) {
-        return null;
-    }
-
-    return (
-        <section className="subscription-link">
-            {allowed("/orchestrator/subscriptions/view/from-process") &&
-                subscriptionProcesses.map((ps, index: number) => (
-                    <div key={index}>
-                        <EuiButton
-                            id="to-subscription"
-                            href={`/subscriptions/${ps.subscription_id}`}
-                            fill
-                            // color="secondary"
-                            iconType="link"
-                        >
-                            <FormattedMessage
-                                id={`${isProcess ? "process" : "task"}.subscription_link_txt`}
-                                values={{ target: ps.workflow_target }}
-                            />
-                        </EuiButton>
-                    </div>
-                ))}
-        </section>
-    );
-}
-
-function StateChanges({ steps, index, collapsed = false }: { steps: Step[]; index: number; collapsed?: boolean }) {
     const displayStateValue = (value: any) => {
         if (isEmpty(value)) {
             return "";
@@ -98,22 +88,6 @@ function StateChanges({ steps, index, collapsed = false }: { steps: Step[]; inde
                 <div dangerouslySetInnerHTML={{ __html: value.message }}></div>
             </EuiText>
         );
-    };
-
-    const stateDelta = (prev: State, curr: State) => {
-        const prevOrEmpty = prev ?? {};
-        const prevKeys = Object.keys(prevOrEmpty);
-        const currKeys = Object.keys(curr);
-        const newKeys = currKeys.filter((key) => prevKeys.indexOf(key) === -1 || !isEqual(prevOrEmpty[key], curr[key]));
-        const newState = newKeys.sort().reduce((acc: State, key) => {
-            if (curr[key] === Object(curr[key]) && !Array.isArray(curr[key]) && prevOrEmpty[key]) {
-                acc[key] = stateDelta(prevOrEmpty[key], curr[key]);
-            } else {
-                acc[key] = curr[key];
-            }
-            return acc;
-        }, {});
-        return newState;
     };
 
     const step = steps[index];
@@ -164,6 +138,10 @@ function StateChanges({ steps, index, collapsed = false }: { steps: Step[]; inde
         return null;
     }
     const iconName = index === 0 || steps[index - 1].status === "suspend" ? "user" : "pipelineApp";
+    let data = Object.keys(json);
+    if (!showHiddenKeys) {
+        data = data.filter((key) => !HIDDEN_KEYS.some((word) => key.startsWith(word)));
+    }
 
     return (
         <section className="state-changes">
@@ -174,7 +152,7 @@ function StateChanges({ steps, index, collapsed = false }: { steps: Step[]; inde
             <section className={collapsed ? "state-delta collapsed" : "state-delta"}>
                 <table>
                     <tbody>
-                        {Object.keys(json).map((key) => (
+                        {data.map((key) => (
                             <tr key={key}>
                                 <td id={`${index}-${applyIdNamingConvention(key)}-k`} className="key">
                                     {key}
@@ -198,11 +176,13 @@ function ProcessOverview({
     stateChanges,
     onChangeCollapsed,
     collapsed,
+    showHiddenKeys,
 }: {
     steps: Step[];
     stateChanges: boolean;
     onChangeCollapsed?: (index: number) => void;
     collapsed?: number[];
+    showHiddenKeys: boolean;
 }) {
     const last = (i: number) => i === steps.length - 1;
 
@@ -229,6 +209,7 @@ function ProcessOverview({
                                     key={index}
                                     index={index}
                                     collapsed={collapsed && collapsed.includes(index)}
+                                    showHiddenKeys={showHiddenKeys}
                                 />
                             )}
                         </div>
@@ -249,6 +230,13 @@ interface IProps {
     isProcess: boolean;
 }
 
+interface ISubscriptionDelta {
+    modalOpen: boolean;
+    subscriptionId: string;
+    before: any;
+    now: any;
+}
+
 function ProcessStateDetails({
     process,
     productName,
@@ -262,6 +250,25 @@ function ProcessStateDetails({
     const [details, setDetails] = useState(true);
     const [stateChanges, setStateChanges] = useState(true);
     const [traceback, setTraceback] = useState(false);
+    const [showHiddenKeys, setShowHiddenKeys] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [collapsedDeltaPanel, setCollapsedDeltaPanel] = useState(false);
+    const [subscriptionDelta, setSubscriptionDelta] = useState<ISubscriptionDelta>({
+        modalOpen: false,
+        subscriptionId: "",
+        before: {},
+        now: {},
+    });
+
+    const closeSubscriptionDeltaModal = () => {
+        setSubscriptionDelta({ modalOpen: false, subscriptionId: "", before: {}, now: {} });
+        setLoading(false);
+    };
+
+    const openSubscriptionDeltaModal = (subscriptionId: string, before: any, now: any) => {
+        setLoading(true);
+        setSubscriptionDelta({ modalOpen: true, subscriptionId: subscriptionId, before: before, now: now });
+    };
 
     const summaryKeys: (keyof ProcessWithDetails)[] = [
         "status",
@@ -289,6 +296,9 @@ function ProcessStateDetails({
                 <HighlightCode data={JSON.stringify(process, null, 2)} />
             </section>
         );
+    };
+    const handleDeltaClick = (subscriptionId: string, before: any, now: any) => {
+        openSubscriptionDeltaModal(subscriptionId, before, now);
     };
 
     const renderProcessHeaderInformation = (process: ProcessWithDetails) => {
@@ -353,6 +363,16 @@ function ProcessStateDetails({
                             onChange={() => setRaw(!raw)}
                         />
                     </li>
+                    <li>
+                        <EuiCheckbox
+                            id="toggle-hidden-keys"
+                            aria-label="toggle-hidden-keys"
+                            name="toggle-hidden-keys"
+                            checked={showHiddenKeys}
+                            label={<FormattedMessage id="process_state.show_hidden_keys" />}
+                            onChange={() => setShowHiddenKeys(!showHiddenKeys)}
+                        />
+                    </li>
                     {process.traceback && (
                         <li>
                             <EuiCheckbox
@@ -372,8 +392,74 @@ function ProcessStateDetails({
 
     return (
         <section className="process-state-detail">
+            {subscriptionDelta.modalOpen && (
+                <EuiFlyout size={window.window.innerWidth} onClose={closeSubscriptionDeltaModal}>
+                    <EuiFlyoutHeader hasBorder aria-labelledby="subscription-delta-modal">
+                        <EuiTitle>
+                            <h3 id="subscription-delta-modal-header">
+                                Inspect subscription changes for {subscriptionDelta.subscriptionId}
+                            </h3>
+                        </EuiTitle>
+                    </EuiFlyoutHeader>
+                    <EuiFlyoutBody>
+                        <>
+                            <EuiFlexGroup gutterSize="s">
+                                <EuiFlexItem grow={false}>
+                                    <EuiText>
+                                        <h4>Delta</h4>
+                                    </EuiText>
+                                </EuiFlexItem>
+                                <EuiFlexItem grow={false}>
+                                    <EuiButtonIcon
+                                        iconType={collapsedDeltaPanel ? "arrowRight" : "arrowDown"}
+                                        aria-label="Toggle related subscriptions"
+                                        onClick={() => setCollapsedDeltaPanel(!collapsedDeltaPanel)}
+                                    />
+                                </EuiFlexItem>
+                                <EuiFlexItem></EuiFlexItem>
+                            </EuiFlexGroup>
+                            {!collapsedDeltaPanel && (
+                                <EuiPanel color="transparent" hasBorder={true}>
+                                    <HighlightCode
+                                        data={JSON.stringify(
+                                            stateDelta(subscriptionDelta.before, subscriptionDelta.now),
+                                            null,
+                                            2
+                                        )}
+                                    />
+                                </EuiPanel>
+                            )}
+
+                            <EuiResizableContainer style={{ height: "100%" }}>
+                                {(EuiResizablePanel, EuiResizableButton) => (
+                                    <>
+                                        <EuiResizablePanel
+                                            initialSize={window.window.innerWidth / 2}
+                                            style={{ marginLeft: "-15px" }}
+                                        >
+                                            <EuiText>
+                                                <h4>Before</h4>
+                                            </EuiText>
+                                            <HighlightCode data={JSON.stringify(subscriptionDelta.before, null, 2)} />
+                                        </EuiResizablePanel>
+
+                                        <EuiResizableButton />
+
+                                        <EuiResizablePanel initialSize={window.window.innerWidth / 2}>
+                                            <EuiText>
+                                                <h4>Now</h4>
+                                            </EuiText>
+                                            <HighlightCode data={JSON.stringify(subscriptionDelta.now, null, 2)} />
+                                        </EuiResizablePanel>
+                                    </>
+                                )}
+                            </EuiResizableContainer>
+                        </>
+                    </EuiFlyoutBody>
+                </EuiFlyout>
+            )}
+
             {renderProcessHeaderInformation(process)}
-            <ProcessSubscriptionLink subscriptionProcesses={subscriptionProcesses} isProcess={isProcess} />
             {traceback && (
                 <section className="traceback-container">
                     <pre>{process.traceback}</pre>
@@ -399,11 +485,22 @@ function ProcessStateDetails({
                             </table>
                         </section>
                     )}
+                    {loading && <EuiLoadingChart size="xl" mono />}
+                    {!loading && (
+                        <ProcessSubscriptionLink
+                            subscriptionProcesses={subscriptionProcesses}
+                            isProcess={isProcess}
+                            currentState={process.current_state}
+                            handleDeltaClick={handleDeltaClick}
+                        />
+                    )}
+                    <EuiSpacer />
                     <ProcessOverview
                         steps={process.steps}
                         stateChanges={stateChanges}
                         onChangeCollapsed={onChangeCollapsed}
                         collapsed={collapsed}
+                        showHiddenKeys={showHiddenKeys}
                     />
                 </>
             )}

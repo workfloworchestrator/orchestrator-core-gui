@@ -233,7 +233,7 @@ export interface ProcessWithDetails {
     started: number;
     last_modified: number;
     is_task: boolean;
-    current_state: {};
+    current_state: any;
     steps: Step[];
     form?: InputForm;
 }
