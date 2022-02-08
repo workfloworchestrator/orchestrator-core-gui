@@ -32,7 +32,7 @@ function ProcessSubscriptionLink({
             <EuiFlexGroup gutterSize="s" alignItems="center">
                 <EuiFlexItem grow={false}>
                     <EuiText>
-                        {ps.workflow_target === "CREATE" ? "created" : "modified"}: {ps.subscription_id.slice(0, 8)}
+                        {ps.workflow_target.toLowerCase()}: {ps.subscription_id.slice(0, 8)}
                     </EuiText>
                 </EuiFlexItem>
                 <EuiFlexItem grow={false}>
@@ -47,8 +47,8 @@ function ProcessSubscriptionLink({
                     </EuiButton>
                 </EuiFlexItem>
                 {currentState.hasOwnProperty("subscription") &&
-                    currentState.hasOwnProperty("__old_subscription__") &&
-                    currentState.__old_subscription__.hasOwnProperty(ps.subscription_id) && (
+                    currentState.hasOwnProperty("__old_subscriptions__") &&
+                    currentState.__old_subscriptions__.hasOwnProperty(ps.subscription_id) && (
                         <EuiFlexItem grow={false}>
                             <EuiButton
                                 iconType="indexMapping"
@@ -57,8 +57,34 @@ function ProcessSubscriptionLink({
                                 onClick={() =>
                                     onDeltaClicked(
                                         ps.subscription_id,
-                                        currentState.__old_subscription__[ps.subscription_id],
+                                        currentState.__old_subscriptions__[ps.subscription_id],
                                         currentState.subscription
+                                    )
+                                }
+                            >
+                                Show Delta
+                            </EuiButton>
+                        </EuiFlexItem>
+                    )}
+                {currentState.hasOwnProperty("__old_subscriptions__") &&
+                    currentState.__old_subscriptions__.hasOwnProperty(ps.subscription_id) &&
+                    currentState.__old_subscriptions__[ps.subscription_id].hasOwnProperty("subscription_id") &&
+                    currentState.__old_subscriptions__[ps.subscription_id]["subscription_id"] !==
+                        currentState.subscription_id && (
+                        <EuiFlexItem grow={false}>
+                            <EuiButton
+                                iconType="indexMapping"
+                                size="s"
+                                fill
+                                onClick={() =>
+                                    onDeltaClicked(
+                                        ps.subscription_id,
+                                        currentState.__old_subscriptions__[ps.subscription_id],
+                                        currentState.find(
+                                            (sub: any) =>
+                                                sub.hasOwnProperty("subscription_id") &&
+                                                sub.subscription_id === ps.subscription_id
+                                        )
                                     )
                                 }
                             >
