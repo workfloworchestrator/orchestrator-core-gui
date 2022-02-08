@@ -92,6 +92,7 @@ function ProcessSubscriptionLink({
                             </EuiButton>
                         </EuiFlexItem>
                     )}
+
             </EuiFlexGroup>
         </EuiSplitPanel.Inner>
     ));
