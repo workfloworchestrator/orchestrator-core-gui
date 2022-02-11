@@ -29,7 +29,7 @@ jobs:
     needs: [run_gpl]
 
   slack:
-      needs: [check_week, run_tests]
+      needs: [check_week, run_surf]
       runs-on: ubuntu-latest
       if: ${{ needs.check_week.outputs.should_cancel != '1' }}
       steps:
