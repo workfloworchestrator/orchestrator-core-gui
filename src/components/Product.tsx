@@ -16,7 +16,9 @@
 import "components/Product.scss";
 
 import "./Product.scss";
-
+// remove css , use EUI instead
+// show product and product blocks by clicking on it
+// show product blocks and resource types inside Product
 import { EuiButton } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { isDate } from "date-fns";
@@ -102,7 +104,7 @@ class Product extends React.Component<IProps, IState> {
             this.context.apiClient.productTags(),
             this.context.apiClient.productTypes(),
             this.context.apiClient.productStatuses(),
-            this.context.apiClient.fixedInputConfiguration(),
+            // this.context.apiClient.fixedInputConfiguration(),
         ]).then((res) => {
             const product = res[2].find((value: iProduct) => value.product_id === product_id);
 
@@ -114,25 +116,25 @@ class Product extends React.Component<IProps, IState> {
                 tags: res[3],
                 types: res[4],
                 statuses: res[5],
-                fixedInputConf: res[6],
-                allowedFixedInputs: this.determineAllowedFixedInputs(res[6], product?.tag),
+                // fixedInputConf: res[6],
+                // allowedFixedInputs: this.determineAllowedFixedInputs(res[6], product?.tag),
             });
         });
 
-    determineAllowedFixedInputs = (fixedInputConf: FixedInputConfiguration, productTag?: string) => {
-        const ourTag = Object.keys(fixedInputConf.by_tag).find((tag) => tag === productTag);
-        if (!ourTag) {
-            return this.state.allowedFixedInputs;
-        }
-        const inputs = fixedInputConf.by_tag[ourTag].map((fi) => {
-            const name = Object.keys(fi)[0];
-            const required = fi[name];
-            const cfi: FixedInputConf = fixedInputConf.fixed_inputs.find((f) => f.name === name)!;
-            cfi.required = required;
-            return cfi;
-        });
-        return inputs;
-    };
+    // determineAllowedFixedInputs = (fixedInputConf: FixedInputConfiguration, productTag?: string) => {
+    //     const ourTag = Object.keys(fixedInputConf.by_tag).find((tag) => tag === productTag);
+    //     if (!ourTag) {
+    //         return this.state.allowedFixedInputs;
+    //     }
+    //     const inputs = fixedInputConf.by_tag[ourTag].map((fi) => {
+    //         const name = Object.keys(fi)[0];
+    //         const required = fi[name];
+    //         const cfi: FixedInputConf = fixedInputConf.fixed_inputs.find((f) => f.name === name)!;
+    //         cfi.required = required;
+    //         return cfi;
+    //     });
+    //     return inputs;
+    // };
 
     cancel = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
@@ -207,6 +209,7 @@ class Product extends React.Component<IProps, IState> {
         const invalid = !initial && (this.isInvalid() || this.state.processing);
         return (
             <section className="buttons">
+                {/* <EuiFlex> , EuiFlexItem*/}
                 <EuiButton className="button" onClick={this.cancel}>
                     <FormattedMessage id="metadata.products.back" />
                 </EuiButton>
@@ -275,9 +278,9 @@ class Product extends React.Component<IProps, IState> {
         // @ts-ignore
         product![name] = value;
         this.setState({ product: product });
-        if (name === "tag") {
-            this.determineAllowedFixedInputs(fixedInputConf!, value);
-        }
+        // if (name === "tag") {
+        //     this.determineAllowedFixedInputs(fixedInputConf!, value);
+        // }
     };
 
     render() {
