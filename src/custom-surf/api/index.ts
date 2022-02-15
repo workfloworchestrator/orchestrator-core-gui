@@ -126,6 +126,10 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.fetchJson<IMSService>(`surf/ims/service_by_ims_service_id/${serviceId}`);
     };
 
+    nodeByImsNodeId = (nodeId: number): Promise<IMSNode> => {
+        return this.fetchJson<IMSNode>(`surf/ims/node_by_id/${nodeId}`);
+    };
+
     locationCodes = (): Promise<string[] | undefined> => {
         // @ts-ignore
         return this.fetchJson("surf/crm/location_codes", {}, {}, false).catch(() => {
