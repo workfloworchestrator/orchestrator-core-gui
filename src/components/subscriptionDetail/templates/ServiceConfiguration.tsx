@@ -6,24 +6,26 @@ import { ISubscriptionInstance, TabView } from "utils/types";
 interface IProps {
     subscriptionInstances: any[][];
     viewType?: string;
+    subscription_id: string;
 }
 
-export function RenderServiceConfiguration({ subscriptionInstances, viewType }: IProps) {
+export function RenderServiceConfiguration({ subscriptionInstances, viewType, subscription_id }: IProps) {
     const tabOrder = ["ip_gw_endpoint", "l3_endpoints", "l2_endpoints"];
 
     const splitValueAndInstanceFields = (instance: ISubscriptionInstance) => {
         if (instance === null) debugger;
 
         const fields = Object.entries(instance)
-            .filter((entry) => !["label", "subscription_instance_id", "name"].includes(entry[0]))
-            .map<[string, any]>((entry) => {
-                return isArray(entry[1]) ? entry : [entry[0], [entry[1]]];
+            .filter(([key]) => !["label", "subscription_instance_id", "name"].includes(key))
+            .filter(([key, value]) => (key === "owner_subscription_id" ? value !== subscription_id : true))
+            .map<[string, any]>(([key, value]) => {
+                return isArray(value) ? [key, value] : [key, [value]];
             });
         const [value_fields, instance_fields] = partition(
             fields,
-            (entry) => entry[1][0] === null || typeof entry[1][0] !== "object"
+            ([_, value]) => value[0] === null || typeof value[0] !== "object"
         );
-        const tabName = Object.entries(instance).filter((entry) => entry[0] === "name");
+        const tabName = Object.entries(instance).filter(([key]) => key === "name");
         return { value_fields, instance_fields, tabName: tabName.length > 0 ? tabName[0][1] : "-" };
     };
 
