@@ -23,7 +23,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { useQuery } from "react-query";
 import ApplicationContext from "utils/ApplicationContext";
 import { enrichSubscription, ipamStates, organisationNameByUuid } from "utils/Lookups";
-import {IMSEndpoint, IMSService, SubscriptionModel, prop, IMSNode} from "utils/types";
+import { IMSEndpoint, IMSNode, IMSService, SubscriptionModel, prop } from "utils/types";
 import { applyIdNamingConvention } from "utils/Utils";
 
 interface IPAMAddress {
@@ -284,12 +284,12 @@ function ImsServiceDetail({ service, recursive = false }: { service: IMSService;
     );
 }
 
-function ImsNodeDetail({ims_node}: {ims_node: IMSNode}) {
+function ImsNodeDetail({ ims_node }: { ims_node: IMSNode }) {
     return (
         <DataTable>
-            <DataRow type="ims_node" label="id" value={ims_node.id}/>
-            <DataRow type="ims_node" label="name" value={ims_node.name}/>
-            <DataRow type="ims_node" label="status" value={ims_node.status}/>
+            <DataRow type="ims_node" label="id" value={ims_node.id} />
+            <DataRow type="ims_node" label="name" value={ims_node.name} />
+            <DataRow type="ims_node" label="status" value={ims_node.status} />
         </DataTable>
     );
 }
