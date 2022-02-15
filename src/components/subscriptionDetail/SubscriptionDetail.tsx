@@ -319,7 +319,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                 </>
             )}
             {tabViewSettingsForId("subscription-product-blocks").viewType === "tabs" && (
-                <RenderServiceConfiguration subscriptionInstances={subscription_instances} />
+                <RenderServiceConfiguration subscriptionInstances={subscription_instances} subscription_id={subscription.subscription_id} />
             )}
 
             {tabViewSettingsForId("subscription-details").viewType === "tree" && (
