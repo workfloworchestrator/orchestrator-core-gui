@@ -1,7 +1,7 @@
 import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
 import SubscriptionInstanceValue from "custom/components/subscriptionDetail/SubscriptionInstanceValue";
-import { filter, isArray, partition } from "lodash";
-import { ISubscriptionInstance, SubscriptionModel, TabView } from "utils/types";
+import { isArray, partition } from "lodash";
+import { ISubscriptionInstance, TabView } from "utils/types";
 
 interface IProps {
     subscriptionInstances: any[][];
@@ -17,7 +17,7 @@ export function RenderServiceConfiguration({ subscriptionInstances, viewType, su
 
         const fields = Object.entries(instance)
             .filter(([key]) => !["label", "subscription_instance_id", "name"].includes(key))
-            .filter(([key, value]) => key === "owner_subscription_id" ? value !== subscription_id : true)
+            .filter(([key, value]) => (key === "owner_subscription_id" ? value !== subscription_id : true))
             .map<[string, any]>(([key, value]) => {
                 return isArray(value) ? [key, value] : [key, [value]];
             });
