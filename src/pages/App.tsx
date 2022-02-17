@@ -323,7 +323,7 @@ class App extends React.PureComponent<IProps, IState> {
                                                 render={(props) => <ProductBlock {...props} />}
                                             />
                                             <ProtectedRoute
-                                                path="/metadata/product/:id"
+                                                path="/metadata/product/:action/:id"
                                                 render={(props) => <ProductPage {...props} />}
                                             />
                                             <ProtectedRoute

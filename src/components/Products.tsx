@@ -218,15 +218,29 @@ class Products extends React.Component<WrappedComponentProps, IState> {
                 name: "",
                 width: "2.5%",
                 render: (product_id: string) => {
+                    const View =
+                        this.context.allowed("/orchestrator/metadata/product/view/" + product_id) + "/" ? (
+                            <EuiButtonIcon
+                                href={`/metadata/product/view/${product_id}`}
+                                iconType="eye"
+                                aria-label="View" />
+                        ) : null;
+
+                    return <div>{View}</div>;
+                },
+            },
+            {
+                field: "product_id",
+                name: "",
+                width: "2.5%",
+                render: (product_id: string) => {
                     const Edit =
                         this.context.allowed("/orchestrator/metadata/product/edit/" + product_id) + "/" ? (
                             <EuiButtonIcon
-                                href={`/metadata/product/${product_id}`}
+                                href={`/metadata/product/edit/${product_id}`}
                                 iconType="pencil"
                                 aria-label="Edit"
                             />
-                        ) : this.context.allowed("/orchestrator/metadata/product/view/" + product_id) + "/" ? (
-                            <EuiButtonIcon href={`/metadata/product/${product_id}`} iconType="eye" aria-label="View" />
                         ) : null;
                     return <div>{Edit}</div>;
                 },

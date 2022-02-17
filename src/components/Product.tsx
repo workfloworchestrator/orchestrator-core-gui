@@ -16,9 +16,9 @@
 import "components/Product.scss";
 
 import "./Product.scss";
-// remove css , use EUI instead
-// show product and product blocks by clicking on it
-// show product blocks and resource types inside Product
+//TODO: remove css , use EUI instead
+//TODO: show product and product blocks by clicking on it
+//TODO: show product blocks and resource types inside Product
 import { EuiButton } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { isDate } from "date-fns";
@@ -29,23 +29,15 @@ import { RouteComponentProps } from "react-router";
 import { ValueType } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
-import { FixedInputConfiguration, Option, ProductBlock, Workflow, Product as iProduct } from "utils/types";
+import { Option, ProductBlock, Workflow, Product as iProduct } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
 interface MatchParams {
     id: string;
+    action: string;
 }
 
-interface IProps extends Partial<RouteComponentProps<MatchParams>>, WrappedComponentProps {
-    subscriptionId?: string;
-}
-
-interface FixedInputConf {
-    name: string;
-    description: string;
-    values: string[];
-    required?: boolean;
-}
+interface IProps extends Partial<RouteComponentProps<MatchParams>>, WrappedComponentProps {}
 
 interface IState {
     confirmationDialogOpen: boolean;
@@ -66,8 +58,6 @@ interface IState {
     types: string[];
     statuses: string[];
     duplicateName: boolean;
-    allowedFixedInputs: FixedInputConf[];
-    fixedInputConf?: FixedInputConfiguration;
 }
 
 class Product extends React.Component<IProps, IState> {
@@ -88,8 +78,7 @@ class Product extends React.Component<IProps, IState> {
         tags: [],
         types: [],
         statuses: [],
-        duplicateName: false,
-        allowedFixedInputs: [],
+        duplicateName: false
     };
 
     componentDidMount() {
@@ -98,43 +87,12 @@ class Product extends React.Component<IProps, IState> {
 
     fetchAllConstants = (product_id?: string) =>
         Promise.all([
-            this.context.apiClient.productBlocks(),
-            this.context.apiClient.allWorkflows(),
-            this.context.apiClient.products(),
-            this.context.apiClient.productTags(),
-            this.context.apiClient.productTypes(),
-            this.context.apiClient.productStatuses(),
-            // this.context.apiClient.fixedInputConfiguration(),
+            this.context.apiClient.productById(product_id),
         ]).then((res) => {
-            const product = res[2].find((value: iProduct) => value.product_id === product_id);
-
             this.setState({
-                productBlocks: res[0],
-                workflows: res[1],
-                products: res[2],
-                product: product,
-                tags: res[3],
-                types: res[4],
-                statuses: res[5],
-                // fixedInputConf: res[6],
-                // allowedFixedInputs: this.determineAllowedFixedInputs(res[6], product?.tag),
+                product: res[0],
             });
         });
-
-    // determineAllowedFixedInputs = (fixedInputConf: FixedInputConfiguration, productTag?: string) => {
-    //     const ourTag = Object.keys(fixedInputConf.by_tag).find((tag) => tag === productTag);
-    //     if (!ourTag) {
-    //         return this.state.allowedFixedInputs;
-    //     }
-    //     const inputs = fixedInputConf.by_tag[ourTag].map((fi) => {
-    //         const name = Object.keys(fi)[0];
-    //         const required = fi[name];
-    //         const cfi: FixedInputConf = fixedInputConf.fixed_inputs.find((f) => f.name === name)!;
-    //         cfi.required = required;
-    //         return cfi;
-    //     });
-    //     return inputs;
-    // };
 
     cancel = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
@@ -207,27 +165,32 @@ class Product extends React.Component<IProps, IState> {
 
     renderButtons = (initial: boolean, product: iProduct) => {
         const invalid = !initial && (this.isInvalid() || this.state.processing);
+        const actionType = this.props.match?.params.action
+
         return (
             <section className="buttons">
-                {/* <EuiFlex> , EuiFlexItem*/}
                 <EuiButton className="button" onClick={this.cancel}>
                     <FormattedMessage id="metadata.products.back" />
                 </EuiButton>
-                {this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id) && (
-                    <EuiButton
-                        tabIndex={0}
-                        className={`button ${invalid ? "grey disabled" : "blue"}`}
-                        onClick={this.submit}
-                    >
-                        <FormattedMessage id="metadata.products.submit" />
-                    </EuiButton>
+                {actionType === "edit" && (
+                    <div className="edit-delete-buttons">
+                        {this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id) && (
+                            <EuiButton
+                                tabIndex={0}
+                                className={`button ${invalid ? "grey disabled" : "blue"}`}
+                                onClick={this.submit}
+                            >
+                                <FormattedMessage id="metadata.products.submit" />
+                            </EuiButton>
+                        )}
+                        {this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id) &&
+                        product.product_id && (
+                            <EuiButton className="button red" onClick={this.handleDeleteProduct}>
+                                <FormattedMessage id="metadata.products.delete" />
+                            </EuiButton>
+                        )}
+                    </div>
                 )}
-                {this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id) &&
-                    product.product_id && (
-                        <EuiButton className="button red" onClick={this.handleDeleteProduct}>
-                            <FormattedMessage id="metadata.products.delete" />
-                        </EuiButton>
-                    )}
             </section>
         );
     };
@@ -267,7 +230,7 @@ class Product extends React.Component<IProps, IState> {
             | React.ChangeEvent<HTMLInputElement>
             | ValueType<Option, false>
     ) => {
-        const { product, fixedInputConf } = this.state;
+        const { product } = this.state;
         let value: any;
         if (isEmpty(e) || isDate(e)) {
             value = e;
@@ -278,9 +241,6 @@ class Product extends React.Component<IProps, IState> {
         // @ts-ignore
         product![name] = value;
         this.setState({ product: product });
-        // if (name === "tag") {
-        //     this.determineAllowedFixedInputs(fixedInputConf!, value);
-        // }
     };
 
     render() {
