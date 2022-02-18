@@ -19,7 +19,7 @@ import { EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderSectionItem, EuiText
 import EngineStatusBanner from "components/engineStatusBanner";
 import FailedTaskBanner from "components/failedTaskBanner";
 import UserProfile from "components/UserProfile";
-import logo from "images/network-automation.png";
+import logo from "images/orchestrator-logo.png";
 import { Profile } from "oidc-client";
 import { AuthContextProps, withAuth } from "oidc-react";
 import React from "react";
