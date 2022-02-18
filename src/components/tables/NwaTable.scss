@@ -23,7 +23,7 @@
     margin: 0 0 5px 0;
     font-size: larger;
     &.minimized {
-        background-color: white;
+        //background-color: white;
     }
     .icon-right {
         float: right;
@@ -92,18 +92,18 @@ table.nwa-table {
     }
     tr {
         border-bottom: 1px solid vars.$light-grey;
-        background-color: white;
+        //background-color: white;
         &.suspended {
-            background-color: vars.$lightest-gold;
+            //background-color: vars.$lightest-gold;
         }
         &.running {
-            background-color: vars.$lightest-success;
+            //background-color: vars.$lightest-success;
         }
         &.api_unavailable {
-            background-color: vars.$lightest-primary;
+            //background-color: vars.$lightest-primary;
         }
         &.inconsistent_data {
-            background-color: vars.$lightest-danger;
+            //background-color: vars.$lightest-danger;
         }
         &.highlighted {
             border: 2px solid vars.$primary;
@@ -114,20 +114,20 @@ table.nwa-table {
             th {
                 padding: 5px 5px 10px 5px;
                 background-color: vars.$primary;
-                color: white;
+                //color: white;
             }
         }
         span {
             font-weight: bold;
             font-size: larger;
-            color: vars.$medium-grey;
+            //color: vars.$medium-grey;
             padding: 7px 2px 7px 0;
         }
         input {
             font-size: 14px;
         }
         tr.filters {
-            background-color: white;
+            //background-color: white;
             th {
                 border-right: none;
                 border-left: none;
@@ -146,7 +146,7 @@ table.nwa-table {
 
                     i.fa {
                         margin-top: 6px;
-                        color: vars.$primary;
+                        //color: vars.$primary;
                         float: left;
                         font-size: 18px;
                         &.active {
@@ -160,21 +160,21 @@ table.nwa-table {
     tbody {
         tr {
             &:hover {
-                background-color: vars.$hover;
+                //background-color: vars.$hover;
                 &.suspended {
-                    background-color: color.adjust(vars.$lightest-gold, $lightness: -3%);
+                    //background-color: color.adjust(vars.$lightest-gold, $lightness: -3%);
                 }
                 &.running {
-                    background-color: color.adjust(vars.$lightest-success, $lightness: -3%);
+                    //background-color: color.adjust(vars.$lightest-success, $lightness: -3%);
                 }
                 &.api_unavailable {
-                    background-color: color.adjust(vars.$lightest-primary, $lightness: -3%);
+                    //background-color: color.adjust(vars.$lightest-primary, $lightness: -3%);
                 }
                 &.inconsistent_data {
-                    background-color: color.adjust(vars.$lightest-danger, $lightness: -3%);
+                    //background-color: color.adjust(vars.$lightest-danger, $lightness: -3%);
                 }
                 td.actions i.fa-ellipsis-h {
-                    color: vars.$primary;
+                    //color: vars.$primary;
                 }
             }
         }
