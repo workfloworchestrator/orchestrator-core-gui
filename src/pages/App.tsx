@@ -16,8 +16,9 @@
 import "locale/en";
 import "locale/nl";
 import "pages/App.scss";
+import "@elastic/eui/dist/eui_theme_dark.css";
 
-import { EuiLoadingSpinner, EuiToast } from "@elastic/eui";
+import { EuiLoadingSpinner, EuiProvider, EuiToast } from "@elastic/eui";
 import * as Sentry from "@sentry/react";
 import EditProduct from "components/EditProduct";
 import Flash from "components/Flash";
@@ -239,58 +240,59 @@ class App extends React.PureComponent<IProps, IState> {
 
         return (
             <QueryClientProvider client={queryClient}>
-                <Router history={history}>
-                    <QueryParamProvider ReactRouterRoute={Route}>
-                        <ApplicationContext.Provider value={applicationContext}>
-                            <RawIntlProvider value={intl}>
-                                <GlobalContextProviders>
-                                    {loading && (
-                                        <EuiToast className="sync" color="primary">
-                                            <EuiLoadingSpinner size="m" />
-                                            <h6 className="sync__label">Syncing</h6>
-                                        </EuiToast>
-                                    )}
-                                    <div>
-                                        <ReactQueryDevtools initialIsOpen={false} position={"bottom-right"} />
+                <EuiProvider colorMode="dark">
+                    <Router history={history}>
+                        <QueryParamProvider ReactRouterRoute={Route}>
+                            <ApplicationContext.Provider value={applicationContext}>
+                                <RawIntlProvider value={intl}>
+                                    <GlobalContextProviders>
+                                        {loading && (
+                                            <EuiToast className="sync" color="primary">
+                                                <EuiLoadingSpinner size="m" />
+                                                <h6 className="sync__label">Syncing</h6>
+                                            </EuiToast>
+                                        )}
                                         <div>
-                                            <Flash />
-                                            <Header />
-                                            <Navigation extraPages={importedModules.map((i) => i.name)} />
-                                            <ErrorDialog isOpen={errorDialogOpen} close={errorDialogAction} />
-                                        </div>
-                                        <Switch>
-                                            <Route exact path="/authorize" render={() => <Redirect to="/" />} />
-                                            <Route exact path="/" render={() => <Redirect to="/processes" />} />
-                                            <ProtectedRoute
-                                                path="/new-process"
-                                                render={(props) => (
-                                                    <NewProcess
-                                                        preselectedInput={getQueryParameters(props.location.search)}
-                                                    />
-                                                )}
-                                            />
-                                            <ProtectedRoute
-                                                path="/modify-subscription"
-                                                render={(props) => (
-                                                    <ModifySubscription
-                                                        workflowName={getParameterByName(
-                                                            "workflow",
-                                                            props.location.search
-                                                        )}
-                                                        subscriptionId={getParameterByName(
-                                                            "subscription",
+                                            <ReactQueryDevtools initialIsOpen={false} position={"bottom-right"} />
+                                            <div>
+                                                <Flash />
+                                                <Header />
+                                                <Navigation extraPages={importedModules.map((i) => i.name)} />
+                                                <ErrorDialog isOpen={errorDialogOpen} close={errorDialogAction} />
+                                            </div>
+                                            <Switch>
+                                                <Route exact path="/authorize" render={() => <Redirect to="/" />} />
+                                                <Route exact path="/" render={() => <Redirect to="/processes" />} />
+                                                <ProtectedRoute
+                                                    path="/new-process"
+                                                    render={(props) => (
+                                                        <NewProcess
+                                                            preselectedInput={getQueryParameters(props.location.search)}
+                                                        />
+                                                    )}
+                                                />
+                                                <ProtectedRoute
+                                                    path="/modify-subscription"
+                                                    render={(props) => (
+                                                        <ModifySubscription
+                                                            workflowName={getParameterByName(
+                                                                "workflow",
+                                                                props.location.search
+                                                            )}
+                                                            subscriptionId={getParameterByName(
+                                                                "subscription",
 
-                                                            props.location.search
-                                                        )}
-                                                    />
-                                                )}
-                                            />
-                                            <ProtectedRoute
-                                                path="/terminate-subscription"
-                                                render={(props) => (
-                                                    <TerminateSubscription
-                                                        subscriptionId={getParameterByName(
-                                                            "subscription",
+                                                                props.location.search
+                                                            )}
+                                                        />
+                                                    )}
+                                                />
+                                                <ProtectedRoute
+                                                    path="/terminate-subscription"
+                                                    render={(props) => (
+                                                        <TerminateSubscription
+                                                            subscriptionId={getParameterByName(
+                                                                "subscription",
 
                                                             props.location.search
                                                         )}
@@ -355,26 +357,38 @@ class App extends React.PureComponent<IProps, IState> {
                                                 <ProtectedRoute path="/settings" render={() => <Settings />} />
                                             )}
 
-                                            {!isEmpty(importedModules) &&
-                                                importedModules.map(({ path, name, Component }) => (
-                                                    <Route key={path} exact path={`/${name}`} component={Component} />
-                                                ))}
+                                                {!isEmpty(importedModules) &&
+                                                    importedModules.map(({ path, name, Component }) => (
+                                                        <Route
+                                                            key={path}
+                                                            exact
+                                                            path={`/${name}`}
+                                                            component={Component}
+                                                        />
+                                                    ))}
 
-                                            <ProtectedRoute path="/new-task" render={() => <NewTask />} />
+                                                <ProtectedRoute path="/new-task" render={() => <NewTask />} />
 
-                                            <ProtectedRoute path="/tasks" render={() => <Tasks />} />
-                                            <Route path="/task/:id" render={(props) => <ProcessDetail {...props} />} />
-                                            <Route path="/not-allowed" render={() => <NotAllowed />} />
-                                            <Route path="/error" render={(props) => <ServerError {...props} />} />
-                                            <Route path="/styleguide" render={(props) => <StyleGuide {...props} />} />
-                                            <Route component={NotFound} />
-                                        </Switch>
-                                    </div>
-                                </GlobalContextProviders>
-                            </RawIntlProvider>
-                        </ApplicationContext.Provider>
-                    </QueryParamProvider>
-                </Router>
+                                                <ProtectedRoute path="/tasks" render={() => <Tasks />} />
+                                                <Route
+                                                    path="/task/:id"
+                                                    render={(props) => <ProcessDetail {...props} />}
+                                                />
+                                                <Route path="/not-allowed" render={() => <NotAllowed />} />
+                                                <Route path="/error" render={(props) => <ServerError {...props} />} />
+                                                <Route
+                                                    path="/styleguide"
+                                                    render={(props) => <StyleGuide {...props} />}
+                                                />
+                                                <Route component={NotFound} />
+                                            </Switch>
+                                        </div>
+                                    </GlobalContextProviders>
+                                </RawIntlProvider>
+                            </ApplicationContext.Provider>
+                        </QueryParamProvider>
+                    </Router>
+                </EuiProvider>
             </QueryClientProvider>
         );
     }

@@ -21,7 +21,7 @@
     "dependencies": {
         "@craco/craco": "^6.1.2",
         "@elastic/datemath": "^5.0.3",
-        "@elastic/eui": "^41.2.3",
+        "@elastic/eui": "^48.1.0",
         "@fortawesome/fontawesome-free": "^5.15.2",
         "@open-policy-agent/opa-wasm": "^1.2.0",
         "@sentry/react": "^6.0.1",
