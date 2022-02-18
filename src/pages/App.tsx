@@ -23,7 +23,7 @@ import Flash from "components/Flash";
 import Header from "components/Header";
 import ErrorDialog from "components/modals/ErrorDialog";
 import Navigation from "components/Navigation";
-import ProductPage from "components/Product";
+import ProductPage from "components/EditProduct";
 import ProductBlock from "components/ProductBlock";
 import ProtectedRoute from "components/ProtectedRoute";
 import GlobalContextProviders from "contextProviders/globalContextProviders";

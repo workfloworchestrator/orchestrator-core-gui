@@ -19,7 +19,7 @@ import "./Product.scss";
 
 //TODO: remove css , use EUI instead
 //TODO: show product and product blocks by clicking on it
-//TODO: show product blocks and resource types inside Product
+//TODO: show product blocks and resource types inside EditProduct
 import { EuiButton } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { isDate } from "date-fns";
@@ -30,7 +30,7 @@ import { RouteComponentProps } from "react-router";
 import { ValueType } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
-import { Option, ProductBlock, Workflow, Product as iProduct } from "utils/types";
+import { Option, ProductBlock, Workflow, Product as ProductData } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
 interface MatchParams {
@@ -46,14 +46,14 @@ interface IState {
     cancelDialogAction: () => void;
     confirmationDialogQuestion: string;
     leavePage: boolean;
-    errors: Partial<Record<keyof iProduct, boolean>>;
-    required: (keyof iProduct)[];
+    errors: Partial<Record<keyof ProductData, boolean>>;
+    required: (keyof ProductData)[];
     initial: boolean;
     readOnly: boolean;
-    product?: iProduct;
+    product?: ProductData;
     processing: boolean;
     productBlocks: ProductBlock[];
-    products: iProduct[];
+    products: ProductData[];
     workflows: Workflow[];
     tags: string[];
     types: string[];
@@ -61,7 +61,7 @@ interface IState {
     duplicateName: boolean;
 }
 
-class Product extends React.Component<IProps, IState> {
+class EditProduct extends React.Component<IProps, IState> {
     state: IState = {
         confirmationDialogOpen: false,
         confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
@@ -87,9 +87,9 @@ class Product extends React.Component<IProps, IState> {
     }
 
     fetchAllConstants = (product_id?: string) =>
-        Promise.all([this.context.apiClient.productById(product_id)]).then((res) => {
+        this.context.apiClient.productById(product_id).then((res: ProductData) => {
             this.setState({
-                product: res[0],
+                product: res,
             });
         });
 
@@ -162,7 +162,7 @@ class Product extends React.Component<IProps, IState> {
         }
     };
 
-    renderButtons = (initial: boolean, product: iProduct) => {
+    renderButtons = (initial: boolean, product: ProductData) => {
         const invalid = !initial && (this.isInvalid() || this.state.processing);
         const actionType = this.props.match?.params.action;
 
@@ -196,7 +196,7 @@ class Product extends React.Component<IProps, IState> {
 
     isInvalid = (markErrors: boolean = false) => {
         const { errors, required, product, duplicateName } = this.state;
-        const hasErrors = (Object.keys(errors) as (keyof iProduct)[]).some((key) => errors[key]);
+        const hasErrors = (Object.keys(errors) as (keyof ProductData)[]).some((key) => errors[key]);
         const requiredInputMissing = required.some((attr) => isEmpty(product![attr]));
         if (markErrors) {
             const missing = required.filter((attr) => isEmpty(product![attr]));
@@ -207,7 +207,7 @@ class Product extends React.Component<IProps, IState> {
         return hasErrors || requiredInputMissing || duplicateName;
     };
 
-    validateProperty = (name: keyof iProduct) => (e: React.FocusEvent<HTMLInputElement>) => {
+    validateProperty = (name: keyof ProductData) => (e: React.FocusEvent<HTMLInputElement>) => {
         const value = e.target.value;
         const errors = { ...this.state.errors };
         const { product } = this.state;
@@ -221,7 +221,7 @@ class Product extends React.Component<IProps, IState> {
         this.setState({ errors: errors });
     };
 
-    changeProperty = (name: keyof iProduct) => (
+    changeProperty = (name: keyof ProductData) => (
         e:
             | Date
             | React.MouseEvent<HTMLSpanElement | HTMLButtonElement>
@@ -318,6 +318,6 @@ class Product extends React.Component<IProps, IState> {
     }
 }
 
-Product.contextType = ApplicationContext;
+EditProduct.contextType = ApplicationContext;
 
-export default injectIntl(Product);
+export default injectIntl(EditProduct);
