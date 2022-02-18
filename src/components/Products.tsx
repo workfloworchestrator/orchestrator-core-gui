@@ -223,7 +223,8 @@ class Products extends React.Component<WrappedComponentProps, IState> {
                             <EuiButtonIcon
                                 href={`/metadata/product/view/${product_id}`}
                                 iconType="eye"
-                                aria-label="View" />
+                                aria-label="View"
+                            />
                         ) : null;
 
                     return <div>{View}</div>;

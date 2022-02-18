@@ -16,6 +16,7 @@
 import "components/Product.scss";
 
 import "./Product.scss";
+
 //TODO: remove css , use EUI instead
 //TODO: show product and product blocks by clicking on it
 //TODO: show product blocks and resource types inside Product
@@ -78,7 +79,7 @@ class Product extends React.Component<IProps, IState> {
         tags: [],
         types: [],
         statuses: [],
-        duplicateName: false
+        duplicateName: false,
     };
 
     componentDidMount() {
@@ -86,9 +87,7 @@ class Product extends React.Component<IProps, IState> {
     }
 
     fetchAllConstants = (product_id?: string) =>
-        Promise.all([
-            this.context.apiClient.productById(product_id),
-        ]).then((res) => {
+        Promise.all([this.context.apiClient.productById(product_id)]).then((res) => {
             this.setState({
                 product: res[0],
             });
@@ -165,7 +164,7 @@ class Product extends React.Component<IProps, IState> {
 
     renderButtons = (initial: boolean, product: iProduct) => {
         const invalid = !initial && (this.isInvalid() || this.state.processing);
-        const actionType = this.props.match?.params.action
+        const actionType = this.props.match?.params.action;
 
         return (
             <section className="buttons">
@@ -184,11 +183,11 @@ class Product extends React.Component<IProps, IState> {
                             </EuiButton>
                         )}
                         {this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id) &&
-                        product.product_id && (
-                            <EuiButton className="button red" onClick={this.handleDeleteProduct}>
-                                <FormattedMessage id="metadata.products.delete" />
-                            </EuiButton>
-                        )}
+                            product.product_id && (
+                                <EuiButton className="button red" onClick={this.handleDeleteProduct}>
+                                    <FormattedMessage id="metadata.products.delete" />
+                                </EuiButton>
+                            )}
                     </div>
                 )}
             </section>
