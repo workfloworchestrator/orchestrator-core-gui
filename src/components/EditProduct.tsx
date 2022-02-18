@@ -30,7 +30,7 @@ import { RouteComponentProps } from "react-router";
 import { ValueType } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
-import { Option, ProductBlock, Workflow, Product as ProductData } from "utils/types";
+import { Option, ProductBlock, Product as ProductData, Workflow } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
 interface MatchParams {
