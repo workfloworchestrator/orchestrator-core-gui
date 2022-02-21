@@ -17,9 +17,8 @@ import "components/Product.scss";
 
 import "./Product.scss";
 
+//TODO: func based comp
 //TODO: remove css , use EUI instead
-//TODO: show product and product blocks by clicking on it
-//TODO: show product blocks and resource types inside EditProduct
 import { EuiButton } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { isDate } from "date-fns";
@@ -164,32 +163,27 @@ class EditProduct extends React.Component<IProps, IState> {
 
     renderButtons = (initial: boolean, product: ProductData) => {
         const invalid = !initial && (this.isInvalid() || this.state.processing);
-        const actionType = this.props.match?.params.action;
 
         return (
             <section className="buttons">
                 <EuiButton className="button" onClick={this.cancel}>
                     <FormattedMessage id="metadata.products.back" />
                 </EuiButton>
-                {actionType === "edit" && (
-                    <div className="edit-delete-buttons">
-                        {this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id) && (
-                            <EuiButton
-                                tabIndex={0}
-                                className={`button ${invalid ? "grey disabled" : "blue"}`}
-                                onClick={this.submit}
-                            >
-                                <FormattedMessage id="metadata.products.submit" />
+                    {this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id) && (
+                        <EuiButton
+                            tabIndex={0}
+                            className={`button ${invalid ? "grey disabled" : "blue"}`}
+                            onClick={this.submit}
+                        >
+                            <FormattedMessage id="metadata.products.submit" />
+                        </EuiButton>
+                    )}
+                    {this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id) &&
+                        product.product_id && (
+                            <EuiButton className="button red" onClick={this.handleDeleteProduct}>
+                                <FormattedMessage id="metadata.products.delete" />
                             </EuiButton>
                         )}
-                        {this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id) &&
-                            product.product_id && (
-                                <EuiButton className="button red" onClick={this.handleDeleteProduct}>
-                                    <FormattedMessage id="metadata.products.delete" />
-                                </EuiButton>
-                            )}
-                    </div>
-                )}
             </section>
         );
     };

@@ -19,7 +19,8 @@ import "pages/App.scss";
 
 import { EuiLoadingSpinner, EuiToast } from "@elastic/eui";
 import * as Sentry from "@sentry/react";
-import ProductPage from "components/EditProduct";
+import EditProduct from "components/EditProduct";
+import ViewProduct from "components/ViewProduct";
 import Flash from "components/Flash";
 import Header from "components/Header";
 import ErrorDialog from "components/modals/ErrorDialog";
@@ -323,8 +324,12 @@ class App extends React.PureComponent<IProps, IState> {
                                                 render={(props) => <ProductBlock {...props} />}
                                             />
                                             <ProtectedRoute
-                                                path="/metadata/product/:action/:id"
-                                                render={(props) => <ProductPage {...props} />}
+                                                path="/metadata/product/edit/:id"
+                                                render={(props) => <EditProduct {...props} />}
+                                            />
+                                            <ProtectedRoute
+                                                path="/metadata/product/view/:id"
+                                                render={(props) => <ViewProduct {...props} />}
                                             />
                                             <ProtectedRoute
                                                 path="/metadata/:type"
