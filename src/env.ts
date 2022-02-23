@@ -27,6 +27,7 @@ interface Env {
     ENVIRONMENT: string;
     TRACING_ORIGINS: string;
     IMS_URL: string;
+    REVIEW_APP: boolean;
     CI_PROJECT_ID: string;
     CI_MERGE_REQUEST_IID: string;
     GITLAB_URL: string;
@@ -55,6 +56,7 @@ export const ENV: Env = window.__env__ || {
     ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
     TRACING_ORIGINS: process.env.REACT_APP_TRACING_ORIGINS,
     IMS_URL: process.env.REACT_APP_IMS_URL,
+    REVIEW_APP: ["true", "1", "yes", "on"].includes((process.env.REACT_APP_REVIEW_APP || "true").toLocaleLowerCase()),
     CI_PROJECT_ID: process.env.REACT_APP_CI_PROJECT_ID,
     CI_MERGE_REQUEST_IID: process.env.REACT_APP_CI_MERGE_REQUEST_IID,
     GITLAB_URL: process.env.REACT_APP_GITLAB_URL,
