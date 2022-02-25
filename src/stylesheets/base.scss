@@ -15,15 +15,15 @@
 
 @use "../stylesheets/vars.scss";
 
-body {
-    font-family: "Roboto", Sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    color: vars.$dark-grey;
-    -webkit-font-smoothing: antialiased;
-    background-color: vars.$background;
-}
+//body {
+//    font-family: "Roboto", Sans-serif;
+//    font-weight: 400;
+//    font-size: 14px;
+//    line-height: 20px;
+//    //color: vars.$dark-grey;
+//    -webkit-font-smoothing: antialiased;
+//    //background-color: vars.$background;
+//}
 
 a {
     cursor: pointer;

@@ -18,14 +18,15 @@
 @use "../stylesheets/vars";
 
 .euiHeader {
-    height: 92px;
+    min-height: 80px;
 }
+
 .header {
     &__app-title {
         margin: 0;
         font-size: 1.3rem !important;
         font-weight: normal !important;
-        border-left: 1px solid vars.$primary;
+        border-left: 2px solid vars.$primary;
         padding-left: 0.5rem;
         &.staging,
         &.local,
@@ -33,15 +34,12 @@
             color: vars.$danger;
         }
     }
-    &__container {
-    }
-    &__logo {
-    }
     &__logo-img {
         padding-left: 0.2rem;
         padding-right: 0.5rem;
         margin-top: 1rem;
         width: 6rem;
+        height: 60px;
     }
 }
 

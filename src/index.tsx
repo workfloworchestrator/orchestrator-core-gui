@@ -114,5 +114,20 @@ if (ENV.OAUTH2_ENABLED) {
         appElement
     );
 } else {
-    ReactDOM.render(<App />, appElement);
+    ReactDOM.render(
+        <>
+            <link
+                rel="stylesheet"
+                type="text/css"
+                href={localStorage.getItem("darkMode") || false ? "/eui_theme_dark.css" : "/eui_theme_light.css"}
+            />
+            <link
+                rel="stylesheet"
+                type="text/css"
+                href={localStorage.getItem("darkMode") || false ? "/dark.css" : "/light.css"}
+            />
+            <App />
+        </>,
+        appElement
+    );
 }
