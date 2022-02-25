@@ -85,7 +85,7 @@ class Header extends React.PureComponent<IProps, IState> {
         const { environment } = this.state;
 
         return (
-            <EuiHeader>
+            <EuiHeader className="header">
                 <EuiHeaderSectionItem border="none">
                     <Link to="/" className="header__logo">
                         <img className="header__logo-img" src={logo} alt="logo" />

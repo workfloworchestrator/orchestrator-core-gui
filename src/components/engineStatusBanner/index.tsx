@@ -15,6 +15,7 @@
 
 import "./EngineStatusBanner.scss";
 
+import { EuiText } from "@elastic/eui";
 import EngineSettingsContext from "contextProviders/engineSettingsProvider";
 import { useContext } from "react";
 import { FormattedMessage } from "react-intl";
@@ -24,9 +25,9 @@ export default function EngineStatusBanner() {
     const globalStatus = engineStatus.global_status.toLocaleLowerCase();
 
     return (
-        <div className="engine-status-banner">
+        <EuiText>
             <FormattedMessage id={`settings.status.engine.${globalStatus}`} />
             <i className={`fa fa-circle engine-status-banner__status ${globalStatus}`}></i>
-        </div>
+        </EuiText>
     );
 }

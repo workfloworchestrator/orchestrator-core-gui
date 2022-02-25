@@ -18,7 +18,7 @@
 @use "vars.scss";
 
 @mixin card {
-    background-color: white;
+    //background-color: white;
     border-bottom-left-radius: vars.$br;
     border-bottom-right-radius: vars.$br;
     padding: 0 15px;
@@ -32,7 +32,7 @@
     font-size: 14px !important;
     pointer-events: auto !important;
     color: vars.$dark-grey !important;
-    background-color: white !important;
+    //background-color: white !important;
     &.show {
         opacity: 1 !important;
     }
@@ -56,7 +56,7 @@
 
     div.Select-control {
         border-radius: vars.$br;
-        border: 1px solid vars.$lighter-grey;
+        //border: 1px solid vars.$lighter-grey;
         margin-top: 5px;
         display: table;
         border-spacing: 0;
@@ -68,7 +68,7 @@
 
     span.Select-arrow-zone {
         padding: 0 12px;
-        background-color: vars.$light-grey;
+        //background-color: vars.$light-grey;
     }
 
     span.select-option {

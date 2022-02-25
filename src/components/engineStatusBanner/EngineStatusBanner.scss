@@ -24,17 +24,17 @@
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
-    &__status {
-        font-size: 115%;
-        margin-left: 5px;
-        &.paused {
-            color: vars.$danger;
-        }
-        &.pausing {
-            color: vars.$warning;
-        }
-        &.running {
-            color: vars.$success;
-        }
-    }
+    //&__status {
+    //    font-size: 115%;
+    //    margin-left: 5px;
+    //    &.paused {
+    //        color: vars.$danger;
+    //    }
+    //    &.pausing {
+    //        color: vars.$warning;
+    //    }
+    //    &.running {
+    //        color: vars.$success;
+    //    }
+    //}
 }

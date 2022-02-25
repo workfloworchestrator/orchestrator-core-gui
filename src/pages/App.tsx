@@ -16,9 +16,8 @@
 import "locale/en";
 import "locale/nl";
 import "pages/App.scss";
-import "@elastic/eui/dist/eui_theme_dark.css";
 
-import { EuiLoadingSpinner, EuiProvider, EuiToast } from "@elastic/eui";
+import { EuiButton, EuiLoadingSpinner, EuiProvider, EuiToast } from "@elastic/eui";
 import * as Sentry from "@sentry/react";
 import Flash from "components/Flash";
 import Header from "components/Header";
@@ -58,6 +57,8 @@ import { createPolicyCheck } from "utils/policy";
 import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
 import { isEmpty } from "utils/Utils";
+// import "@elastic/eui/dist/eui_theme_dark.css";
+// import "@elastic/eui/dist/eui_theme_light.css";
 
 export const history = createBrowserHistory();
 
@@ -67,6 +68,7 @@ interface IProps {
 interface IState {
     loading: boolean;
     loaded: boolean;
+    darkMode: boolean;
     importedModules: any[];
     importedPlugins: any[];
     applicationContext: ApplicationContextInterface;
@@ -83,6 +85,7 @@ class App extends React.PureComponent<IProps, IState> {
         this.state = {
             loading: true,
             loaded: false,
+            darkMode: false,
             importedModules: [],
             importedPlugins: [],
             applicationContext: {
@@ -197,6 +200,7 @@ class App extends React.PureComponent<IProps, IState> {
         this.setState({
             loading: false,
             loaded: true,
+            darkMode: false,
             intl: language,
             applicationContext: {
                 organisations: allOrganisations || [],
@@ -225,7 +229,7 @@ class App extends React.PureComponent<IProps, IState> {
 
         return (
             <QueryClientProvider client={queryClient}>
-                <EuiProvider colorMode="dark">
+                <EuiProvider colorMode={this.state.darkMode ? "dark" : "light"}>
                     <Router history={history}>
                         <QueryParamProvider ReactRouterRoute={Route}>
                             <ApplicationContext.Provider value={applicationContext}>
@@ -238,6 +242,8 @@ class App extends React.PureComponent<IProps, IState> {
                                             </EuiToast>
                                         )}
                                         <div>
+                                            {/*<link rel="stylesheet" type="text/css" href={this.state.darkMode ? "@elastic/eui/dist/eui_theme_dark.css" : "@elastic/eui/dist/eui_theme_light.css"} />*/}
+                                            {/*<EuiButton name="switch" onClick={()=>this.setState({darkMode:false})}></EuiButton>*/}
                                             <ReactQueryDevtools initialIsOpen={false} position={"bottom-right"} />
                                             <div>
                                                 <Flash />
