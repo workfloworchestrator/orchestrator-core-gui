@@ -1,0 +1,8 @@
+body {
+    font-family: "Roboto", Sans-serif;
+    font-size: 15px;
+    line-height: 18px;
+    -webkit-font-smoothing: antialiased;
+    color: #dddddd;
+    background-color: #1D1E24;
+}
