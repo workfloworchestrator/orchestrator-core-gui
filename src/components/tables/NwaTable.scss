@@ -82,6 +82,7 @@ table.nwa-table {
     th {
         text-align: left;
         vertical-align: middle;
+        color: white;
     }
     th:first-child {
         border-radius: 10px 0 0 0;
@@ -91,7 +92,7 @@ table.nwa-table {
         border-right: none;
     }
     tr {
-        border-bottom: 1px solid vars.$light-grey;
+        border-bottom: 1px solid #cccccc;
         //background-color: white;
         &.suspended {
             //background-color: vars.$lightest-gold;
