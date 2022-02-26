@@ -77,7 +77,6 @@ function Preferences<T extends object>({
                         <EuiFlexItem>
                             <EuiButton
                                 onClick={() => dispatch({ type: ActionType.OVERRIDE, settings: initialTableSettings })}
-                                color="warning"
                                 iconType="refresh"
                             >
                                 <FormattedMessage id="table.preferences.reset" />

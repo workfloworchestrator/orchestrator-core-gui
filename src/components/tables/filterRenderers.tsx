@@ -13,6 +13,7 @@
  *
  */
 
+import { EuiFieldText } from "@elastic/eui";
 import DropDownContainer from "components/tables/DropDownContainer";
 import { ActionType, TableSettingsAction } from "components/tables/NwaTable";
 import { intl } from "locale/i18n";
@@ -251,7 +252,8 @@ export function renderILikeFilter({
         dispatch({ type: ActionType.FILTER_CLEAR, id: column.id });
     }
     return (
-        <input
+        <EuiFieldText
+            compressed={true}
             id={`input-filter-${state.name}.${column.id}`}
             value={column.filterValue}
             onChange={(e) => {

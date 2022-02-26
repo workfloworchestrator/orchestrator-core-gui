@@ -57,6 +57,9 @@ import { createPolicyCheck } from "utils/policy";
 import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
 import { isEmpty } from "utils/Utils";
+
+import { FAVORITE_STORAGE_KEY } from "../components/modals/components/FavoritePortSelector";
+
 // import "@elastic/eui/dist/eui_theme_dark.css";
 // import "@elastic/eui/dist/eui_theme_light.css";
 
@@ -243,7 +246,6 @@ class App extends React.PureComponent<IProps, IState> {
                                         )}
                                         <div>
                                             {/*<link rel="stylesheet" type="text/css" href={this.state.darkMode ? "@elastic/eui/dist/eui_theme_dark.css" : "@elastic/eui/dist/eui_theme_light.css"} />*/}
-                                            {/*<EuiButton name="switch" onClick={()=>this.setState({darkMode:false})}></EuiButton>*/}
                                             <ReactQueryDevtools initialIsOpen={false} position={"bottom-right"} />
                                             <div>
                                                 <Flash />

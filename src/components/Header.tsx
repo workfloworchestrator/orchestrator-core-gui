@@ -15,11 +15,11 @@
 
 import "components/Header.scss";
 
-import { EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderSectionItem, EuiText } from "@elastic/eui";
+import { EuiButtonIcon, EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderSectionItem, EuiText } from "@elastic/eui";
 import EngineStatusBanner from "components/engineStatusBanner";
 import FailedTaskBanner from "components/failedTaskBanner";
 import UserProfile from "components/UserProfile";
-import logo from "images/orchestrator-logo.png";
+import logo from "images/logo.svg";
 import { Profile } from "oidc-client";
 import { AuthContextProps, withAuth } from "oidc-react";
 import React from "react";
@@ -29,6 +29,7 @@ import ApplicationContext from "utils/ApplicationContext";
 
 interface IState {
     dropDownActive: boolean;
+    darkMode: boolean | string;
     environment: string;
 }
 
@@ -40,6 +41,7 @@ class Header extends React.PureComponent<IProps, IState> {
         const hostname = window.location.hostname;
         this.state = {
             dropDownActive: false,
+            darkMode: localStorage.getItem("darkMode") || false,
             environment:
                 hostname.indexOf("staging") > -1
                     ? "staging"
@@ -72,6 +74,16 @@ class Header extends React.PureComponent<IProps, IState> {
         );
     }
 
+    switchTheme = () => {
+        if (this.state.darkMode) {
+            localStorage.removeItem("darkMode");
+            window.location.reload();
+        } else {
+            localStorage.setItem("darkMode", "yes");
+            window.location.reload();
+        }
+    };
+
     renderDropDownIndicator() {
         return this.state.dropDownActive ? <i className="fa fa-caret-up" /> : <i className="fa fa-caret-down" />;
     }
@@ -92,8 +104,12 @@ class Header extends React.PureComponent<IProps, IState> {
                     </Link>
                     <EuiHeaderSectionItem border="none">
                         <EuiText grow={false}>
-                            <h1 className={`header__app-title ${environment}`}>
+                            <h1 className={`header__app-title`}>
                                 <FormattedMessage id="header.title" />
+                            </h1>
+                        </EuiText>
+                        <EuiText grow={false}>
+                            <h1 className={`header__app-title ${environment}`}>
                                 {environment !== "production" && ` ${environment}`}
                             </h1>
                         </EuiText>
@@ -104,9 +120,11 @@ class Header extends React.PureComponent<IProps, IState> {
                     <EuiHeaderLinks aria-label="App navigation links extra">
                         <EngineStatusBanner />
                         <FailedTaskBanner />
-
+                        <EuiHeaderLink id="switchTheme" onClick={this.switchTheme}>
+                            <EuiButtonIcon iconType={this.state.darkMode ? "sun" : "moon"}></EuiButtonIcon>
+                        </EuiHeaderLink>
                         <EuiHeaderLink id="logout" onClick={this.logout}>
-                            <FormattedMessage id="header.links.logout" />
+                            <EuiButtonIcon iconType="exit"></EuiButtonIcon>
                         </EuiHeaderLink>
 
                         {currentUser && (

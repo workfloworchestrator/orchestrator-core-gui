@@ -6,3 +6,9 @@ body {
     color: #dddddd;
     background-color: #1D1E24;
 }
+
+a {
+    cursor: pointer;
+    color: #33abff;
+    font-weight: bold;
+}
