@@ -21,25 +21,25 @@ import "./Product.scss";
 //TODO: show product blocks and resource types inside EditProduct
 import {
     EuiButton,
-    EuiFlexGroup,
-    EuiFlexItem,
+    EuiDescriptionList,
     EuiDescriptionListDescription,
     EuiDescriptionListTitle,
-    EuiDescriptionList,
-    EuiTitle, EuiSpacer, EuiPageContent, EuiPage, EuiPageBody
+    EuiFlexGroup,
+    EuiFlexItem, EuiHorizontalRule,
+    EuiPage,
+    EuiPageContent,
+    EuiSpacer,
+    EuiTitle,
+    EuiPanel, EuiText
 } from "@elastic/eui";
-import ConfirmationDialog from "components/modals/ConfirmationDialog";
-import {isDate} from "date-fns";
-import {formDate, formInput, formSelect} from "forms/Builder";
-import React, {useContext, useEffect, useRef, useState} from "react";
-// import {useLocation} from "react-router";
-import {FormattedMessage, WrappedComponentProps, injectIntl} from "react-intl";
+import React, {useContext, useEffect, useState} from "react";
+import {FormattedMessage, injectIntl, WrappedComponentProps} from "react-intl";
 import {RouteComponentProps} from "react-router";
-import {ValueType} from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
-import {setFlash} from "utils/Flash";
-import {Option, ProductBlock, Product as ProductData, Workflow} from "utils/types";
-import {isEmpty, stop} from "utils/Utils";
+import {Product as ProductData} from "utils/types";
+import {intl} from "../locale/i18n";
+
+const I18N_KEY_PREFIX = "metadata.products."
 
 interface MatchParams {
     id: string;
@@ -60,12 +60,6 @@ interface IState {
 
 function ViewProduct<IState>({match}: IProps) {
     const {allowed, apiClient, redirect} = useContext(ApplicationContext);
-    const [errors, setErrors] = useState({});
-    const [required, setRequired] = useState(["name", "description", "status", "product_type", "tag"]);
-    const [initial, setInitial] = useState(true);
-    const [readOnly, setReadOnly] = useState(false);
-    const [processing, setProcessing] = useState(false);
-    const [duplicateName, setDuplicateName] = useState(false);
     const [product, setProduct] = useState<ProductData>({
         create_subscription_workflow_key: "",
         created_at: 0,
@@ -92,9 +86,10 @@ function ViewProduct<IState>({match}: IProps) {
         }
     }, [])
 
-    const renderButtons = (initial: boolean, product: ProductData) => {
+    const renderButtons = () => {
         return (
             <section className="buttons">
+                <EuiSpacer/>
                 <EuiButton className="button" onClick={() => redirect("/metadata/products")}>
                     <FormattedMessage id="metadata.products.back"/>
                 </EuiButton>
@@ -106,51 +101,54 @@ function ViewProduct<IState>({match}: IProps) {
         return null;
     }
 
-    const endDate = !product.end_date
-        ? null
-        : isDate(product.end_date)
-            ? ((product.end_date as unknown) as Date)
-            : new Date(product.end_date * 1000);
-
-
-    const renderProductDetail = (product: ProductData) => {
+    const renderProductDetail = (i18nKey: string, value: any) => {
         return (
-            <div>
-                <EuiFlexGroup>
-                    <EuiFlexItem>
-                        <EuiDescriptionList>
-                            <EuiTitle size="xs">
-                                <h1>
-                                    Name
-                                </h1>
-                            </EuiTitle>
-                            <EuiDescriptionListDescription>
-                                testdescription
-                            </EuiDescriptionListDescription>
-                            <EuiSpacer size="s"/>
-                            <EuiDescriptionListTitle>{product.name}</EuiDescriptionListTitle>
-                        </EuiDescriptionList>
-                    </EuiFlexItem>
-                </EuiFlexGroup>
-                <EuiSpacer size="xl"/>
-            </div>
+                <EuiDescriptionList key={i18nKey}>
+                    <EuiPanel>
+                        <EuiFlexGroup>
+                            <EuiFlexItem style={{maxWidth: '400px'}}>
+                                <EuiDescriptionListTitle>
+                                    <h1>
+                                        {intl.formatMessage({id: i18nKey})}
+                                    </h1>
+                                </EuiDescriptionListTitle>
+                                <EuiDescriptionListDescription>
+                                    {intl.formatMessage({id: `${i18nKey}_info`})}
+                                </EuiDescriptionListDescription>
+                            </EuiFlexItem>
+                            <EuiFlexItem style={{marginTop: "auto", marginBottom: "auto"}}>
+                                <EuiText color="accent">{value}</EuiText>
+                            </EuiFlexItem>
+                        </EuiFlexGroup>
+                    </EuiPanel>
+                    <EuiSpacer size="xs"/>
+                </EuiDescriptionList>
         );
     };
+
+    const renderProductInfo = (i18n_key_prefix: string, product: ProductData) => {
+        let product_info_list = []
+        for (let [key, value] of Object.entries(product)) {
+            if (typeof value !== 'object' && value !== null) {
+                const i18n_key = i18n_key_prefix + key
+                if (!isNaN(new Date(value).getTime())){
+                    value = new Date(value * 1000).toString()
+                }
+                product_info_list.push(renderProductDetail(i18n_key, value))
+            } else {
+                //TODO tables
+            }
+        }
+        return product_info_list
+    }
 
     return (
         <EuiPage>
             <EuiPageContent>
-                {renderProductDetail(product)}
-                {renderProductDetail(product)}
-                {renderProductDetail(product)}
-                {renderProductDetail(product)}
-                {renderButtons(initial, product)}
+                {renderProductInfo(I18N_KEY_PREFIX, product)}
+                {renderButtons()}
             </EuiPageContent>
         </EuiPage>
     );
-    // }
 }
-
-// ViewProduct.contextType = ApplicationContext;
-
 export default injectIntl(ViewProduct);

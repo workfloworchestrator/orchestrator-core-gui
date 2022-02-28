@@ -499,6 +499,8 @@ I18n.translations.en = {
         products: {
             searchPlaceHolder: "Search for Products",
             new: "New Product",
+            product_id: "ID",
+            product_id_info: "The ID of this Product",
             name: "Name",
             name_info: "The name of this Product.",
             description: "Description",
