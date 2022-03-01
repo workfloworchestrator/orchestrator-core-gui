@@ -84,7 +84,7 @@ function prepare() {
     );
     mock.onGet(/surf\/crm\/contacts\/.*/).reply(200, contactPersons);
 
-    mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
+    mock.onGet(/subscriptions\/in_use_by\/.*/).reply(200, []);
     mock.onGet(/surf\/ims\/free_ports\/.*\/1000\/.*/).reply(200, freeCorelinkPorts);
     mock.onGet("surf/ims/nodes/MT001A/PL?unsubscribed_only=true").reply(200, imsNodes);
     mock.onGet("surf/ims/nodes/Asd001a/IS").reply(200, imsNodes);

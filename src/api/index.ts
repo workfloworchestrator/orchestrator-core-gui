@@ -234,7 +234,7 @@ export class ApiClient extends ApiClientInterface {
     };
 
     parentSubscriptions = (subscriptionId: string): Promise<Subscription[]> => {
-        return this.fetchJson(`subscriptions/parent_subscriptions/${subscriptionId}`);
+        return this.fetchJson(`subscriptions/in_use_by/${subscriptionId}`);
     };
 
     processSubscriptionsBySubscriptionId = (subscriptionId: string): Promise<SubscriptionProcesses[]> => {

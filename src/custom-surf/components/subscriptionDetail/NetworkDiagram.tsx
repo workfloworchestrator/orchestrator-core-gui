@@ -30,12 +30,6 @@ interface IState {
     isLoading: boolean;
 }
 
-export interface SubscriptionInstanceExtended extends SubscriptionInstance {
-    subscription_id: string;
-    parent_relations: SubscriptionInstanceParentRelation[];
-    children_relations: SubscriptionInstanceParentRelation[];
-}
-
 export interface IMSVlanRange {
     start: number;
     end: number;
