@@ -65,7 +65,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     const [subscriptionProcesses, setSubscriptionProcesses] = useState<SubscriptionProcesses[]>();
     const [notFound, setNotFound] = useState(false);
     const [workflows, setWorkflows] = useState<WorkflowReasons>();
-    const [enrichedParentSubscriptions, setEnrichedParentSubscriptions] = useState<SubscriptionWithDetails[]>();
+    const [enrichedInUseBySubscriptions, setEnrichedInUseBySubscriptions] = useState<SubscriptionWithDetails[]>();
     const [viewTypes, setViewTypes] = useStorageState<StoredViewPreferences[]>(
         localStorage,
         SUBSCRIPTION_VIEWTYPE_SELECTOR,
@@ -94,10 +94,10 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
             apiClient.subscriptionWorkflows(subscriptionId).then(setWorkflows),
             apiClient.parentSubscriptions(subscriptionId).then((parentSubscriptions) => {
                 // Enrich parent subscriptions
-                const enrichedParentSubscriptions = parentSubscriptions.map((sub: Subscription) =>
+                const enrichedInUseBySubscriptions = parentSubscriptions.map((sub: Subscription) =>
                     enrichSubscription(sub, organisations, products)
                 );
-                setEnrichedParentSubscriptions(enrichedParentSubscriptions);
+                setEnrichedInUseBySubscriptions(enrichedInUseBySubscriptions);
             }),
         ];
 
@@ -140,7 +140,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                 <FormattedMessage id="subscription.notFound" />
             </h2>
         );
-    } else if (!subscription || !workflows || !subscriptionProcesses || !enrichedParentSubscriptions) {
+    } else if (!subscription || !workflows || !subscriptionProcesses || !enrichedInUseBySubscriptions) {
         return null;
     }
 
@@ -236,12 +236,13 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
         </div>
     );
 
-    const renderedSubscriptionChildren = (
+    const renderedInUseBySubscriptions = (
         <div className="mod-subscription-detail">
-            <RenderSubscriptions parentSubscriptions={enrichedParentSubscriptions} />
+            <RenderSubscriptions parentSubscriptions={enrichedInUseBySubscriptions} />
         </div>
     );
 
+    // TODO: change to use formatted message
     const subscriptionTabs: TabView[] = [
         {
             id: "subscription-detail",
@@ -276,7 +277,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
             id: "subscription-children",
             name: "Child subscriptions",
             disabled: false,
-            content: renderedSubscriptionChildren,
+            content: renderedInUseBySubscriptions,
         },
     ];
 
@@ -330,7 +331,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                     {renderedActions}
                     {renderedProductDetails}
                     {renderedProcesses}
-                    {renderedSubscriptionChildren}
+                    {renderedInUseBySubscriptions}
                 </>
             )}
         </div>
