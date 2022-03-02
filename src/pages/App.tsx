@@ -17,7 +17,7 @@ import "locale/en";
 import "locale/nl";
 import "pages/App.scss";
 
-import { EuiButton, EuiLoadingSpinner, EuiProvider, EuiToast } from "@elastic/eui";
+import { EuiLoadingSpinner, EuiProvider, EuiToast } from "@elastic/eui";
 import * as Sentry from "@sentry/react";
 import EditProduct from "components/EditProduct";
 import Flash from "components/Flash";
@@ -59,11 +59,6 @@ import { createPolicyCheck } from "utils/policy";
 import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
 import { isEmpty } from "utils/Utils";
-
-import { FAVORITE_STORAGE_KEY } from "../components/modals/components/FavoritePortSelector";
-
-// import "@elastic/eui/dist/eui_theme_dark.css";
-// import "@elastic/eui/dist/eui_theme_light.css";
 
 export const history = createBrowserHistory();
 
@@ -260,7 +255,6 @@ class App extends React.PureComponent<IProps, IState> {
                                             </EuiToast>
                                         )}
                                         <div>
-                                            {/*<link rel="stylesheet" type="text/css" href={this.state.darkMode ? "@elastic/eui/dist/eui_theme_dark.css" : "@elastic/eui/dist/eui_theme_light.css"} />*/}
                                             <ReactQueryDevtools initialIsOpen={false} position={"bottom-right"} />
                                             <div>
                                                 <Flash />
