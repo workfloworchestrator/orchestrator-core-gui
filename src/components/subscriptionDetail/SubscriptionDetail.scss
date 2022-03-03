@@ -25,7 +25,7 @@
     h2 {
         font-size: 20px;
         padding: 15px 0 0 15px;
-        color: vars.$dark-grey;
+        //color: vars.$dark-grey;
     }
     h3 {
         font-size: 16px;
@@ -67,7 +67,7 @@
             min-width: 320px;
             i {
                 margin-right: 30px;
-                color: white;
+                //color: white;
             }
         }
         p.no-termination-reason,
@@ -129,10 +129,10 @@
                 border-left: 1px solid vars.$primary;
 
                 &:nth-child(even) {
-                    background: white;
+                    //background: white;
                 }
                 &:nth-child(odd) {
-                    background: vars.$table-odd-even;
+                    //background-blend-mode: darken;
                 }
             }
             td {
@@ -177,12 +177,12 @@
             tbody {
                 &:nth-child(even) {
                     tr {
-                        background: vars.$table-odd-even;
+                        //background: vars.$table-odd-even;
                     }
                 }
                 &:nth-child(odd) {
                     tr {
-                        background: white;
+                        //background: white;
                     }
                 }
                 tr.related-subscription {
@@ -190,11 +190,11 @@
                     border-left: none;
                     td {
                         &.whitespace {
-                            background-color: white;
+                            //background-color: white;
                             border-left: none;
                         }
                         &.related-subscription-values {
-                            background-color: vars.$light-grey;
+                            //background-color: vars.$light-grey;
                             border-bottom: 1px solid vars.$light-grey;
                             border-left: 5px solid vars.$primary;
                             margin: 0;
@@ -210,10 +210,10 @@
             border-bottom: 1px solid vars.$light-grey;
             border-left: 1px solid vars.$primary;
             &:nth-child(even) {
-                background: white;
+                //background: white;
             }
             &:nth-child(odd) {
-                background: vars.$table-odd-even;
+                //background: vars.$table-odd-even;
             }
         }
         th,
@@ -268,10 +268,10 @@
             border-bottom: 1px solid vars.$light-grey;
             border-left: 1px solid vars.$primary;
             &:nth-child(even) {
-                background: white;
+                //background: white;
             }
             &:nth-child(odd) {
-                background: vars.$table-odd-even;
+                //background: vars.$table-odd-even;
             }
         }
         th,
@@ -303,7 +303,7 @@
             text-transform: uppercase;
             font-weight: bold;
             font-size: larger;
-            color: vars.$medium-grey;
+            //color: vars.$medium-grey;
             padding: 7px 2px 7px 0;
         }
         tbody {
@@ -363,10 +363,10 @@ section.tabbed-details {
 }
 
 .euiTab {
-    border-left: 1px solid vars.$light-grey;
-    border-top: 1px solid vars.$light-grey;
+    //border-left: 1px solid vars.$light-grey;
+    //border-top: 1px solid vars.$light-grey;
 
     &:last-of-type {
-        border-right: 1px solid vars.$light-grey;
+        //border-right: 1px solid vars.$light-grey;
     }
 }

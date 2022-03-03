@@ -21,12 +21,12 @@
 
 section.autocomplete {
     position: absolute;
-    z-index: 3;
+    z-index: 2000;
     top: 100%;
     width: 100%;
     border-radius: vars.$br;
-    background-color: white;
-    box-shadow: 1px 4px 12px 1px vars.$medium-grey;
+    background-color: #787878;
+    //box-shadow: 1px 4px 12px 1px vars.$medium-grey;
     margin-bottom: 25px;
 
     div.no-results {
@@ -37,14 +37,15 @@ section.autocomplete {
     table.result {
         width: 100%;
         word-break: break-all;
+        z-index: 2000;
 
         tbody tr {
-            border-top: 1px solid vars.$light-grey;
+            //border-top: 1px solid vars.$light-grey;
             cursor: pointer;
 
             &.active,
             &:hover {
-                background-color: vars.$light-grey;
+                //background-color: inherit;
             }
             td {
                 padding: 10px;

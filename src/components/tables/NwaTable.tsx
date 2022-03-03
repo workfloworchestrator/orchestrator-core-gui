@@ -16,7 +16,7 @@
 import "stylesheets/buttons.scss";
 import "components/tables/NwaTable.scss";
 
-import { EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
+import { EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
 import AdvancedSearch from "components/tables/AdvancedSearch";
 import Paginator from "components/tables/Paginator";
 import Preferences from "components/tables/Preferences";
@@ -323,7 +323,7 @@ export function NwaTable<T extends object>({
     }, [runningProcesses]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <div id={name}>
+        <EuiPanel id={name} style={{ marginBottom: "20px" }}>
             <EuiFlexGroup>
                 <EuiFlexItem grow={false} component="span">
                     <Preferences<T> {...preferencesProps} />
@@ -342,6 +342,6 @@ export function NwaTable<T extends object>({
                 </div>
             )}
             {!minimized && showPaginator && <Paginator {...paginatorProps} />}
-        </div>
+        </EuiPanel>
     );
 }
