@@ -83,7 +83,7 @@ class App extends React.PureComponent<IProps, IState> {
         this.state = {
             loading: true,
             loaded: false,
-            darkMode: false,
+            darkMode: !!localStorage.getItem("darkMode"),
             importedModules: [],
             importedPlugins: [],
             applicationContext: {
@@ -198,7 +198,6 @@ class App extends React.PureComponent<IProps, IState> {
         this.setState({
             loading: false,
             loaded: true,
-            darkMode: false,
             intl: language,
             applicationContext: {
                 organisations: allOrganisations || [],
