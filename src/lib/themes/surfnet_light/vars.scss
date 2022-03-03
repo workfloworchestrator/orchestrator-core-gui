@@ -76,11 +76,25 @@ $z-index: (
     color: #fff !important;
 }
 
+.euiButton--danger.euiButton--fill {
+    color: #fff !important;
+}
+.euiButton--secondary.euiButton--fill {
+    color: #fff !important;
+}
+
+.euiButton--accent.euiButton {
+    background-color: #e39846 !important;
+}
+.euiButton--accent.euiButton--fill {
+    color: #fff !important;
+}
+
 .euiButton--warning.euiButton {
-    background-color: #faf0e8 !important;
+    background-color: #e39846 !important;
 }
 .euiButton--warning.euiButton--fill {
-    background-color: #e39846 !important;
+    color: #fff !important;
 }
 
 .euiTitle {
