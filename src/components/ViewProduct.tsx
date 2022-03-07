@@ -13,54 +13,52 @@
  *
  */
 
-import "components/Product.scss";
-
-import "./Product.scss";
-
-//TODO: show product and product blocks by clicking on it
-//TODO: show product blocks and resource types inside EditProduct
 import {
+    EuiBadge,
     EuiButton,
     EuiDescriptionList,
     EuiDescriptionListDescription,
     EuiDescriptionListTitle,
     EuiFlexGroup,
-    EuiFlexItem, EuiHorizontalRule,
+    EuiFlexItem,
+    EuiInMemoryTable,
     EuiPage,
     EuiPageContent,
+    EuiPanel,
     EuiSpacer,
-    EuiTitle,
-    EuiPanel, EuiText
+    EuiText,
 } from "@elastic/eui";
-import React, {useContext, useEffect, useState} from "react";
-import {FormattedMessage, injectIntl, WrappedComponentProps} from "react-intl";
-import {RouteComponentProps} from "react-router";
+import React, { useContext, useEffect, useState } from "react";
+import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
+import { RouteComponentProps } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
-import {Product as ProductData} from "utils/types";
-import {intl} from "../locale/i18n";
+import { FixedInput, Product, ProductBlock, ResourceType, Workflow } from "utils/types";
 
-const I18N_KEY_PREFIX = "metadata.products."
+import { intl } from "../locale/i18n";
+import { renderDateTime } from "../utils/Lookups";
+
+const I18N_KEY_PREFIX = "metadata.products.";
 
 interface MatchParams {
     id: string;
 }
 
-interface IProps extends Partial<RouteComponentProps<MatchParams>>, WrappedComponentProps {
+interface ProductFields<T> {
+    [Key: string]: T;
 }
 
-interface IState {
-    errors: Partial<Record<keyof ProductData, boolean>>;
-    required: (keyof ProductData)[];
-    initial: boolean;
-    readOnly: boolean;
-    product?: ProductData;
-    processing: boolean;
-    duplicateName: boolean;
+interface ObjectFields {
+    fixed_inputs?: FixedInput[];
+    product_blocks?: ProductBlock[];
+    workflows?: Workflow[];
 }
 
-function ViewProduct<IState>({match}: IProps) {
-    const {allowed, apiClient, redirect} = useContext(ApplicationContext);
-    const [product, setProduct] = useState<ProductData>({
+interface IProps extends Partial<RouteComponentProps<MatchParams>>, WrappedComponentProps {}
+
+function ViewProduct({ match }: IProps) {
+    const { apiClient, redirect } = useContext(ApplicationContext);
+    const [productLoaded, setProductLoaded] = useState(false);
+    const [product, setProduct] = useState<Product>({
         create_subscription_workflow_key: "",
         created_at: 0,
         description: "",
@@ -74,24 +72,25 @@ function ViewProduct<IState>({match}: IProps) {
         status: "",
         tag: "",
         terminate_subscription_workflow_key: "",
-        workflows: []
-    })
+        workflows: [],
+    });
 
     useEffect(() => {
-        const product_id = match?.params.id
+        const product_id = match?.params.id;
         if (product_id) {
-            apiClient.productById(product_id).then((res: ProductData) => {
-                setProduct(res)
-            })
+            apiClient.productById(product_id).then((res: Product) => {
+                setProduct(res);
+                setProductLoaded(true);
+            });
         }
-    }, [])
+    }, [apiClient, match?.params.id]);
 
     const renderButtons = () => {
         return (
             <section className="buttons">
-                <EuiSpacer/>
+                <EuiSpacer />
                 <EuiButton className="button" onClick={() => redirect("/metadata/products")}>
-                    <FormattedMessage id="metadata.products.back"/>
+                    <FormattedMessage id="metadata.products.back" />
                 </EuiButton>
             </section>
         );
@@ -101,54 +100,137 @@ function ViewProduct<IState>({match}: IProps) {
         return null;
     }
 
-    const renderProductDetail = (i18nKey: string, value: any) => {
-        return (
-                <EuiDescriptionList key={i18nKey}>
-                    <EuiPanel>
+    const renderProductTables = (i18n_key_prefix: string, object_fields: ProductFields<ObjectFields>) => {
+        let tables = [];
+        for (let [table_name, table_data] of Object.entries(object_fields)) {
+            let columns = [];
+            let table_row = Object.values(table_data)[0];
+            for (let [column_name, value] of Object.entries(table_row)) {
+                let column = {
+                    field: column_name,
+                    name: column_name,
+                    sortable: true,
+                    truncateText: false,
+                };
+                if (column_name === "created_at") {
+                    Object.assign(column, {
+                        render: () => {
+                            return <div>{renderDateTime(value as number)}</div>;
+                        },
+                        width: "15%",
+                    });
+                } else if (column_name === "end_date") {
+                    Object.assign(column, {
+                        render: () => {
+                            return <div>{renderDateTime(value as number)}</div>;
+                        },
+                        width: "15%",
+                    });
+                } else if (column_name === "resource_types") {
+                    Object.assign(column, {
+                        render: () => {
+                            return (
+                                <div>
+                                    {(value as ResourceType[]).map((item) => (
+                                        <EuiBadge color="primary" isDisabled={false}>
+                                            {item.resource_type}
+                                        </EuiBadge>
+                                    ))}
+                                </div>
+                            );
+                        },
+                    });
+                } else if (column_name === "tag") {
+                    Object.assign(column, { width: "5%" });
+                } else if (column_name === "status") {
+                    Object.assign(column, { width: "5%" });
+                }
+
+                columns.push(column);
+            }
+            tables.push(
+                <EuiDescriptionList key={table_name}>
+                    <EuiSpacer size="s" />
+                    <EuiPanel paddingSize="s" style={{ paddingLeft: "15px" }}>
+                        <EuiDescriptionListTitle>
+                            <h1>{intl.formatMessage({ id: i18n_key_prefix + table_name })}</h1>
+                        </EuiDescriptionListTitle>
+                        <EuiDescriptionListDescription>
+                            {intl.formatMessage({ id: `${i18n_key_prefix + table_name}_info` })}
+                        </EuiDescriptionListDescription>
+                        <EuiSpacer size="s" />
+                        <EuiInMemoryTable
+                            items={table_data as ProductFields<ObjectFields>[]}
+                            columns={columns}
+                            sorting={true}
+                        />
+                    </EuiPanel>
+                    <EuiSpacer size="s" />
+                </EuiDescriptionList>
+            );
+        }
+        return tables;
+    };
+
+    const renderProductDetails = (i18n_key_prefix: string, non_object_fields: ProductFields<string>) => {
+        let product_details = [];
+        for (let [key, value] of Object.entries(non_object_fields)) {
+            product_details.push(
+                <EuiDescriptionList key={key}>
+                    <EuiPanel paddingSize="s" style={{ paddingLeft: "15px" }}>
                         <EuiFlexGroup>
-                            <EuiFlexItem style={{maxWidth: '400px'}}>
+                            <EuiFlexItem style={{ maxWidth: "400px" }}>
                                 <EuiDescriptionListTitle>
-                                    <h1>
-                                        {intl.formatMessage({id: i18nKey})}
-                                    </h1>
+                                    <h1>{intl.formatMessage({ id: i18n_key_prefix + key })}</h1>
                                 </EuiDescriptionListTitle>
                                 <EuiDescriptionListDescription>
-                                    {intl.formatMessage({id: `${i18nKey}_info`})}
+                                    {intl.formatMessage({ id: `${i18n_key_prefix + key}_info` })}
                                 </EuiDescriptionListDescription>
                             </EuiFlexItem>
-                            <EuiFlexItem style={{marginTop: "auto", marginBottom: "auto"}}>
+                            <EuiFlexItem style={{ marginTop: "auto", marginBottom: "auto" }}>
                                 <EuiText color="accent">{value}</EuiText>
                             </EuiFlexItem>
                         </EuiFlexGroup>
                     </EuiPanel>
-                    <EuiSpacer size="xs"/>
+                    <EuiSpacer size="xs" />
                 </EuiDescriptionList>
-        );
+            );
+        }
+        return product_details;
     };
 
-    const renderProductInfo = (i18n_key_prefix: string, product: ProductData) => {
-        let product_info_list = []
+    function getNonObjectFields(product: Product): ProductFields<string> {
+        let non_object_fields = {};
         for (let [key, value] of Object.entries(product)) {
-            if (typeof value !== 'object' && value !== null) {
-                const i18n_key = i18n_key_prefix + key
-                if (!isNaN(new Date(value).getTime())){
-                    value = new Date(value * 1000).toString()
+            if (typeof value !== "object" && value !== null) {
+                if (!isNaN(new Date(value).getTime())) {
+                    value = new Date(value * 1000);
                 }
-                product_info_list.push(renderProductDetail(i18n_key, value))
-            } else {
-                //TODO tables
+                Object.assign(non_object_fields, { [key]: value.toString() });
             }
         }
-        return product_info_list
+        return non_object_fields;
+    }
+
+    function getObjectFields(product: Product): ProductFields<ObjectFields> {
+        let object_fields: ProductFields<ObjectFields> = {};
+        for (let [key, value] of Object.entries(product)) {
+            if (typeof value === "object" && value !== null && value.length > 0) {
+                Object.assign(object_fields, { [key]: value });
+            }
+        }
+        return object_fields;
     }
 
     return (
         <EuiPage>
             <EuiPageContent>
-                {renderProductInfo(I18N_KEY_PREFIX, product)}
+                {productLoaded && renderProductDetails(I18N_KEY_PREFIX, getNonObjectFields(product))}
+                {productLoaded && renderProductTables(I18N_KEY_PREFIX, getObjectFields(product))}
                 {renderButtons()}
             </EuiPageContent>
         </EuiPage>
     );
 }
+
 export default injectIntl(ViewProduct);
