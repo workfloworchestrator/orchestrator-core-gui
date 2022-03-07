@@ -94,6 +94,7 @@ export interface ProductBlock {
     created_at: number;
     end_date: number;
     resource_types: ResourceType[];
+    parent_ids: string[];
 }
 
 export interface Subscription {
