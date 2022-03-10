@@ -14,14 +14,16 @@
  */
 
 import { EuiFormRow, EuiText } from "@elastic/eui";
-import { ListField, ListItemField, SelectField } from "lib/uniforms-surfnet/src";
-import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
+import ListField, { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
+import ListItemField from "lib/uniforms-surfnet/src/ListItemField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { get } from "lodash";
 import React from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import ReactSelect from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
+// Todo: Not sure about this temp fix for circular import
+import { SelectField } from "uniforms-unstyled";
 import { Option } from "utils/types";
 
 export type SelectFieldProps = FieldProps<

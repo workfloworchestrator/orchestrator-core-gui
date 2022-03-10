@@ -28,7 +28,7 @@ import { SubscriptionDetailSection } from "components/subscriptionDetail/Subscri
 import SubscriptionInstance from "components/subscriptionDetail/SubscriptionInstance";
 import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
 import { RenderServiceConfiguration } from "components/subscriptionDetail/templates/ServiceConfiguration";
-import { plugins } from "custom/manifest.json";
+import manifest from "custom/manifest.json";
 import { isArray } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
@@ -115,9 +115,9 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     useEffect(() => {
         if (loadedSubscriptionModel && subscription) {
             async function loadViews() {
-                if (plugins.hasOwnProperty("subscriptionDetailPlugins")) {
+                if (manifest.plugins.hasOwnProperty("subscriptionDetailPlugins")) {
                     // @ts-ignore
-                    const componentPromises = plugins["subscriptionDetailPlugins"].map(async (plugin) => {
+                    const componentPromises = manifest.plugins["subscriptionDetailPlugins"].map(async (plugin) => {
                         const View = await importPlugin(plugin);
                         return (
                             <View
@@ -212,7 +212,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                     subscription={subscription}
                     subscriptionProcesses={subscriptionProcesses}
                 ></SubscriptionDetails>
-                {plugins.hasOwnProperty("subscriptionDetailPlugins") && (
+                {manifest.plugins.hasOwnProperty("subscriptionDetailPlugins") && (
                     <React.Suspense fallback="Loading plugins...">{loadedPlugins}</React.Suspense>
                 )}
             </div>

@@ -27,10 +27,6 @@ import { websocketService } from "websocketService";
 
 const appElement = document.getElementById("app");
 
-if (module.hot) {
-    module.hot.accept();
-}
-
 if (ENV.TRACING_ENABLED) {
     console.log("Initialized Sentry");
     Sentry.init({

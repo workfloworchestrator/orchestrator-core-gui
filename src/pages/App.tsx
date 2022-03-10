@@ -28,7 +28,7 @@ import ProductBlock from "components/ProductBlock";
 import ProtectedRoute from "components/ProtectedRoute";
 import ViewProduct from "components/ViewProduct";
 import GlobalContextProviders from "contextProviders/globalContextProviders";
-import { customPages, disabledRoutes } from "custom/manifest.json";
+import manifest from "custom/manifest.json";
 import { ENV } from "env";
 import { createBrowserHistory } from "history";
 import { intl, setLocale } from "locale/i18n";
@@ -139,10 +139,10 @@ class App extends React.PureComponent<IProps, IState> {
     }
 
     importCustomPages = () => {
-        if (customPages) {
+        if (manifest.customPages) {
             try {
                 const importedModules: any[] = [];
-                const importPromises = customPages.map((page) =>
+                const importPromises = manifest.customPages.map((page) =>
                     // @ts-ignore
                     import(`../custom/${page.path}/${page.file}`).then((module) => {
                         // @ts-ignore
@@ -317,19 +317,19 @@ class App extends React.PureComponent<IProps, IState> {
                                                     <Redirect to={`/subscriptions/${props.match.params.id}`} />
                                                 )}
                                             />
-                                            {!disabledRoutes.includes("/subscriptions/:id") && (
+                                            {!manifest.disabledRoutes.includes("/subscriptions/:id") && (
                                                 <Route
                                                     path="/subscriptions/:id"
                                                     render={(props) => <SubscriptionDetailPage {...props} />}
                                                 />
                                             )}
-                                            {!disabledRoutes.includes("/subscriptions") && (
+                                            {!manifest.disabledRoutes.includes("/subscriptions") && (
                                                 <Route
                                                     path="/subscriptions"
                                                     render={(props) => <SubscriptionsPage {...props} />}
                                                 />
                                             )}
-                                            {!disabledRoutes.includes("/metadata") && (
+                                            {!manifest.disabledRoutes.includes("/metadata") && (
                                                 <Route
                                                     exact
                                                     path="/metadata"
@@ -354,7 +354,7 @@ class App extends React.PureComponent<IProps, IState> {
                                                     <MetaData selectedTab={props.match.params.type} {...props} />
                                                 )}
                                             />
-                                            {!disabledRoutes.includes("/metadata") && (
+                                            {!manifest.disabledRoutes.includes("/metadata") && (
                                                 <ProtectedRoute path="/settings" render={() => <Settings />} />
                                             )}
 
