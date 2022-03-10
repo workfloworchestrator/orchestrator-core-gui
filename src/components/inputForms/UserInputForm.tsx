@@ -414,6 +414,8 @@ class UserInputForm extends React.Component<IProps, IState> {
                 <section className="form-fieldset">
                     {stepUserInput.title && stepUserInput.title !== "unknown" && <h3>{stepUserInput.title}</h3>}
                     <SubscriptionsContextProvider>
+                        {/*
+                        // @ts-ignore */}
                         <AutoFieldProvider value={autoFieldFunction}>
                             <AutoForm
                                 schema={bridge}

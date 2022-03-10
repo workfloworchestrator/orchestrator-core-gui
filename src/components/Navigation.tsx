@@ -27,7 +27,7 @@ import {
     EuiToast,
 } from "@elastic/eui";
 import { Control } from "@elastic/eui/src/components/control_bar/control_bar";
-import { disabledMenuItems } from "custom/manifest.json";
+import manifest from "custom/manifest.json";
 import mySpinner from "lib/Spin";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { FormattedMessage } from "react-intl";
@@ -47,7 +47,7 @@ const Navigation = ({ extraPages = [] }: { extraPages: string[] }) => {
     const navItems = ["processes", "subscriptions", "metadata", "tasks", "settings"]
         .filter(
             // @ts-ignore
-            (i) => !disabledMenuItems.includes(i)
+            (i) => !manifest.disabledMenuItems.includes(i)
         )
         .concat(extraPages);
     const [isModalVisible, setIsModalVisible] = useState(false);

@@ -14,7 +14,7 @@
  */
 
 import { ApiClient } from "api";
-import { CustomApiClient } from "custom/api";
+import { CustomApiClient } from "custom/api/index";
 import React from "react";
 import { Organization, Product } from "utils/types";
 

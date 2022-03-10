@@ -38,7 +38,7 @@ export { default as OptGroupField } from "lib/uniforms-surfnet/src/OptGroupField
 export { default as SubscriptionField } from "lib/uniforms-surfnet/src/SubscriptionField";
 export { default as SubscriptionSummaryField } from "lib/uniforms-surfnet/src/SubscriptionSummaryField";
 export { default as SummaryField } from "lib/uniforms-surfnet/src/SummaryField";
-// ???
+
 export { default as LocationCodeField } from "lib/uniforms-surfnet/src/logic/LocationCodeField";
 export { default as OrganisationField } from "lib/uniforms-surfnet/src/logic/OrganisationField";
 export { default as ProductField } from "lib/uniforms-surfnet/src/logic/ProductField";

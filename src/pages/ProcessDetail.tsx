@@ -33,8 +33,6 @@ import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step, WsPr
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
 
-export const HIDDEN_KEYS = ["label_", "divider_", "__"];
-
 const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 
 interface MatchParams {
