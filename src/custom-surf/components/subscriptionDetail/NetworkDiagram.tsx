@@ -3,15 +3,7 @@ import React from "react";
 import { ConcatenatedCircuit } from "react-network-diagrams";
 import { Link } from "react-router-dom";
 import ApplicationContext from "utils/ApplicationContext";
-import {
-    IMSEndpoint,
-    IMSPort,
-    IMSService,
-    SubscriptionInstance,
-    SubscriptionInstanceParentRelation,
-    SubscriptionModel,
-    SubscriptionWithDetails,
-} from "utils/types";
+import { IMSEndpoint, IMSPort, IMSService, SubscriptionModel } from "utils/types";
 import { isEmpty } from "utils/Utils";
 
 import { lineShapeMap, stylesMap } from "./DiagramStyles";

@@ -67,7 +67,7 @@ export interface SubscriptionProcesses {
 export interface SubscriptionInstance {
     subscription_id: string;
     in_use_by_relations: SubscriptionInstanceParentRelation[];
-    dependent_on_relations: SubscriptionInstanceParentRelation[];
+    depends_relations: SubscriptionInstanceParentRelation[];
     subscription_instance_id: string;
     product_block: ProductBlock;
     label: string;
