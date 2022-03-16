@@ -19,7 +19,6 @@ import { lineShapeMap, stylesMap } from "./DiagramStyles";
 interface IProps {
     type: "patchpanel" | "combined";
     subscription: SubscriptionModel;
-    childSubscriptions?: SubscriptionWithDetails[];
 }
 
 interface IState {
