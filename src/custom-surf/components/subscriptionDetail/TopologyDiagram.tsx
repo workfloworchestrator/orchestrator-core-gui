@@ -474,9 +474,9 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         if (vc) {
             // get ESI's
             const esiList = vc.esis;
-            // for each ESI's children: draw.
+            // for each ESI's depends on block: draw.
             esiList.forEach((esi: any, esiIndex: number) => {
-                const childCount = esi.saps.length;
+                const dependsOnCount = esi.saps.length;
                 esi.saps.forEach((sap: any, index: number) => {
                     // find instance in instances
                     const portSubscriptionId = sap.port_subscription_id;
@@ -498,7 +498,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                     }
                     const label = `${nodeName}__${portName}`;
                     const point = this._calculatePositionFor(radius, esiIndex, esiList.length);
-                    if (childCount > 1) {
+                    if (dependsOnCount > 1) {
                         // space nodes with 10px;
                         point.y = point.y - 10 * index;
                         pathColorMap[`${label}__WOLK`] = "cyan";

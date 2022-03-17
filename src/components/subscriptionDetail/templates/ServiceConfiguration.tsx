@@ -85,9 +85,9 @@ export function RenderServiceConfiguration({ subscriptionInstances, viewType, su
 
     // initiate first run to map all product blocks into a tab list.
     const instance = subscriptionInstances[0][1] as ISubscriptionInstance;
-    const parentSplitFields = splitValueAndInstanceFields(instance);
+    const inUseByInstanceSplitFields = splitValueAndInstanceFields(instance);
 
-    const tabs: TabView[] = parseToTabs(parentSplitFields.instance_fields);
+    const tabs: TabView[] = parseToTabs(inUseByInstanceSplitFields.instance_fields);
 
     return (
         <div className="mod-subscription-detail">
@@ -98,7 +98,7 @@ export function RenderServiceConfiguration({ subscriptionInstances, viewType, su
                     label={"Instance ID"}
                     value={instance.subscription_instance_id}
                 />
-                {parentSplitFields.value_fields
+                {inUseByInstanceSplitFields.value_fields
                     .sort((entryA, entryB) => entryA[0].localeCompare(entryB[0]))
                     .flatMap((entry) => entry[1].map((value: any) => [entry[0], value]))
                     .map((entry, i) => (

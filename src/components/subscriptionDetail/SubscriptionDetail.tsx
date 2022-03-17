@@ -92,9 +92,9 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
         const promises = [
             apiClient.processSubscriptionsBySubscriptionId(subscriptionId).then(setSubscriptionProcesses),
             apiClient.subscriptionWorkflows(subscriptionId).then(setWorkflows),
-            apiClient.parentSubscriptions(subscriptionId).then((parentSubscriptions) => {
-                // Enrich parent subscriptions
-                const enrichedInUseBySubscriptions = parentSubscriptions.map((sub: Subscription) =>
+            apiClient.inUseBySubscriptions(subscriptionId).then((inUseBySubscriptions) => {
+                // Enrich in use by subscriptions
+                const enrichedInUseBySubscriptions = inUseBySubscriptions.map((sub: Subscription) =>
                     enrichSubscription(sub, organisations, products)
                 );
                 setEnrichedInUseBySubscriptions(enrichedInUseBySubscriptions);
@@ -238,7 +238,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
 
     const renderedInUseBySubscriptions = (
         <div className="mod-subscription-detail">
-            <RenderSubscriptions parentSubscriptions={enrichedInUseBySubscriptions} />
+            <RenderSubscriptions inUseBySubscriptions={enrichedInUseBySubscriptions} />
         </div>
     );
 
@@ -274,8 +274,8 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
             content: renderedProcesses,
         },
         {
-            id: "subscription-children",
-            name: "Child subscriptions",
+            id: "subscription-related",
+            name: "Related subscriptions",
             disabled: false,
             content: renderedInUseBySubscriptions,
         },

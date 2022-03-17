@@ -120,7 +120,7 @@ I18n.translations.en = {
                 name: "Name",
                 status: "Status",
                 description: "Description",
-                subscriptionChildren: "Child subscriptions - ports used in {{product}}",
+                subscriptionInUseBy: "Related subscriptions - ports used in {{product}}",
                 subscription: "Subscription",
                 resourceTypes: "Subscription Instance Values",
                 resourceTypesInfo: "The resource types of the associated product block(s) of this subscription",
@@ -364,7 +364,7 @@ I18n.translations.en = {
         notFound: "No Subscription found (e.g. 404)",
         subscription_title: "Subscription",
         in_use_by_subscriptions: "Related Subscriptions",
-        toggle_hide_depends_on_subscriptions: "Hide terminated child subscriptions",
+        toggle_hide_depends_on_subscriptions: "Hide terminated related subscriptions",
         resource_types: "Subscription Instance Values",
         resource_types_info: "The resource types of the associated product block(s) of this subscription",
         product_title: "Product",
@@ -444,8 +444,8 @@ I18n.translations.en = {
         fetchingImsData: "Please wait until we have loaded all IMS information...",
         terminate: "Terminate Subscription",
         terminateConfirmation: "Are you sure you want to terminate {{name}} subscription for {{customer}}?",
-        no_modify_parent_subscription:
-            "This subscription can not be {{action}} as it is used in other subscriptions: {{unterminated_parents}}",
+        no_modify_in_use_by_subscription:
+            "This subscription can not be {{action}} as it is used in other subscriptions: {{unterminated_in_use_by_subscriptions}}",
         no_termination_workflow: "This subscription can not be terminated as the product has no termination workflows.",
         modifyConfirmation:
             "Are you sure you want to {{change}} of {{name}} subscription for {{customer}}? This will start a new modify process immediately!",
@@ -467,7 +467,7 @@ I18n.translations.en = {
     terminate_subscription: {
         cancel: "Cancel",
         submit: "Terminate",
-        subscription_childs: "Child subscriptions - ports used in {{product}}",
+        subscription_depends_on: "Depends on subscriptions - ports used in {{product}}",
     },
     clipboard: {
         copied: "Copied!",
