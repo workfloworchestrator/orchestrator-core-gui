@@ -364,7 +364,7 @@ I18n.translations.en = {
         notFound: "No Subscription found (e.g. 404)",
         subscription_title: "Subscription",
         in_use_by_subscriptions: "Related Subscriptions",
-        toggle_hide_dependent_subscriptions: "Hide terminated child subscriptions",
+        toggle_hide_depends_on_subscriptions: "Hide terminated child subscriptions",
         resource_types: "Subscription Instance Values",
         resource_types_info: "The resource types of the associated product block(s) of this subscription",
         product_title: "Product",

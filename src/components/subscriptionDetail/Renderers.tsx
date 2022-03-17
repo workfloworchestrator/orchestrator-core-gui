@@ -405,7 +405,7 @@ export function RenderSubscriptions({ parentSubscriptions }: { parentSubscriptio
                     </EuiFlexItem>
                     <EuiFlexItem>
                         <EuiSwitch
-                            label={<FormattedMessage id="subscription.toggle_hide_dependent_subscriptions" />}
+                            label={<FormattedMessage id="subscription.toggle_hide_depends_on_subscriptions" />}
                             checked={filterTerminated}
                             onChange={(e) => {
                                 setFilterTerminated(e.target.checked);
