@@ -102,5 +102,6 @@ export function autoFieldFunction(props: GuaranteedProps<unknown> & Record<strin
         }
     }
 
+    // @ts-ignore
     return AutoField.defaultComponentDetector(props, uniforms);
 }
