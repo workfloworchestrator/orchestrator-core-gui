@@ -22,11 +22,9 @@ import {
     EuiFlexGroup,
     EuiFlexItem,
     EuiInMemoryTable,
-    EuiPage,
     EuiPageContent,
     EuiPanel,
     EuiSpacer,
-    EuiText,
 } from "@elastic/eui";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
@@ -96,10 +94,6 @@ function ViewProduct({ match }: IProps) {
         );
     };
 
-    if (!product) {
-        return null;
-    }
-
     const renderProductTables = (i18n_key_prefix: string, object_fields: ProductFields<ObjectFields>) => {
         let tables = [];
         for (let [table_name, table_data] of Object.entries(object_fields)) {
@@ -115,14 +109,14 @@ function ViewProduct({ match }: IProps) {
                 if (column_name === "created_at") {
                     Object.assign(column, {
                         render: () => {
-                            return <div>{renderDateTime(value as number)}</div>;
+                            return renderDateTime(value as number);
                         },
                         width: "15%",
                     });
                 } else if (column_name === "end_date") {
                     Object.assign(column, {
                         render: () => {
-                            return <div>{renderDateTime(value as number)}</div>;
+                            return renderDateTime(value as number);
                         },
                         width: "15%",
                     });
@@ -151,7 +145,7 @@ function ViewProduct({ match }: IProps) {
             tables.push(
                 <EuiDescriptionList key={table_name}>
                     <EuiSpacer size="s" />
-                    <EuiPanel paddingSize="s" style={{ paddingLeft: "15px" }}>
+                    <EuiPanel>
                         <EuiDescriptionListTitle>
                             <h1>{intl.formatMessage({ id: i18n_key_prefix + table_name })}</h1>
                         </EuiDescriptionListTitle>
@@ -176,27 +170,21 @@ function ViewProduct({ match }: IProps) {
         let product_details = [];
         for (let [key, value] of Object.entries(non_object_fields)) {
             product_details.push(
-                <EuiDescriptionList key={key}>
-                    <EuiPanel paddingSize="s" style={{ paddingLeft: "15px" }}>
-                        <EuiFlexGroup>
-                            <EuiFlexItem style={{ maxWidth: "400px" }}>
-                                <EuiDescriptionListTitle>
-                                    <h1>{intl.formatMessage({ id: i18n_key_prefix + key })}</h1>
-                                </EuiDescriptionListTitle>
-                                <EuiDescriptionListDescription>
-                                    {intl.formatMessage({ id: `${i18n_key_prefix + key}_info` })}
-                                </EuiDescriptionListDescription>
-                            </EuiFlexItem>
-                            <EuiFlexItem style={{ marginTop: "auto", marginBottom: "auto" }}>
-                                <EuiText color="accent">{value}</EuiText>
-                            </EuiFlexItem>
-                        </EuiFlexGroup>
-                    </EuiPanel>
-                    <EuiSpacer size="xs" />
-                </EuiDescriptionList>
+                <EuiFlexItem style={{ minWidth: "400px" }}>
+                    <EuiDescriptionList>
+                        <EuiDescriptionListTitle>
+                            {intl.formatMessage({ id: i18n_key_prefix + key })}
+                        </EuiDescriptionListTitle>
+                        <EuiDescriptionListDescription>{value}</EuiDescriptionListDescription>
+                    </EuiDescriptionList>
+                </EuiFlexItem>
             );
         }
-        return product_details;
+        return (
+            <EuiPanel>
+                <EuiFlexGroup wrap>{product_details}</EuiFlexGroup>
+            </EuiPanel>
+        );
     };
 
     function getNonObjectFields(product: Product): ProductFields<string> {
@@ -204,7 +192,7 @@ function ViewProduct({ match }: IProps) {
         for (let [key, value] of Object.entries(product)) {
             if (typeof value !== "object" && value !== null) {
                 if (!isNaN(new Date(value).getTime())) {
-                    value = new Date(value * 1000);
+                    value = renderDateTime(value);
                 }
                 Object.assign(non_object_fields, { [key]: value.toString() });
             }
@@ -223,13 +211,11 @@ function ViewProduct({ match }: IProps) {
     }
 
     return (
-        <EuiPage>
-            <EuiPageContent>
-                {productLoaded && renderProductDetails(I18N_KEY_PREFIX, getNonObjectFields(product))}
-                {productLoaded && renderProductTables(I18N_KEY_PREFIX, getObjectFields(product))}
-                {renderButtons()}
-            </EuiPageContent>
-        </EuiPage>
+        <EuiPageContent>
+            {productLoaded && renderProductDetails(I18N_KEY_PREFIX, getNonObjectFields(product))}
+            {productLoaded && renderProductTables(I18N_KEY_PREFIX, getObjectFields(product))}
+            {renderButtons()}
+        </EuiPageContent>
     );
 }
 
