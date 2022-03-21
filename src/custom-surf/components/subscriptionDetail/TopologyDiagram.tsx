@@ -338,11 +338,11 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
     };
 
     _makePrefixExplanation = (endpoint: IMSEndpoint, sub: SubscriptionModel, sap: any): JSX.Element => {
-        if (isEmpty(sap.ip_prefix_subscription_id)) {
+        if (isEmpty(sap.prefixes)) {
             return <EuiCodeBlock />;
         }
         const { prefix } = this.state;
-        const subscriptionId = sap.ip_prefix_subscription_id[0];
+        const subscriptionId = sap.prefixes[0]["owner_subscription_id"];
         const prefixInstance = prefix[subscriptionId];
 
         if (!prefixInstance) {
@@ -374,11 +374,11 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
     }
 
     _updatePrefixInformation(sap: any) {
-        if (isEmpty(sap.ip_prefix_subscription_id) || this.prefixesLoaded.includes(sap.ip_prefix_subscription_id[0])) {
+        if (isEmpty(sap.prefixes) || this.prefixesLoaded.includes(sap.prefixes[0])) {
             return;
         }
 
-        const prefixSubscriptionId = sap.ip_prefix_subscription_id[0];
+        const prefixSubscriptionId = sap.prefixes[0]["owner_subscription_id"];
 
         this.prefixesLoaded.push(prefixSubscriptionId);
         this.context.apiClient.subscriptionsDetailWithModel(prefixSubscriptionId).then((result: SubscriptionModel) => {

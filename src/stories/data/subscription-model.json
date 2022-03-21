@@ -34,8 +34,30 @@
                 "subscription_instance_id": "4b6d3259-f97b-42ca-8465-c97a9f7cf448",
                 "label": null,
                 "ip_prefix_subscription_id": [
-                    "2d58c52e-db35-4bd9-882d-5b4deb7a697b",
-                    "6fd8aae2-37f6-481e-81cd-0e17a15f5494"
+                    {
+                        "name": "IP_PREFIX",
+                        "subscription_instance_id": "98037925-9c3c-4d22-b684-8541cc9afaf8",
+                        "customer_aggregate": false,
+                        "extra_information": "",
+                        "ipam_prefix_id": 91178,
+                        "label": null,
+                        "owner_subscription_id": "3b6c821b-926b-4f77-8655-504dffb2db7b",
+                        "parent_prefix": null,
+                        "planned": false,
+                        "to_internet": false
+                    },
+                    {
+                        "name": "IP_PREFIX",
+                        "subscription_instance_id": "98337925-9c3c-4d22-b684-8541cc9afaf8",
+                        "customer_aggregate": false,
+                        "extra_information": "",
+                        "ipam_prefix_id": 91178,
+                        "label": null,
+                        "owner_subscription_id": "336c821b-926b-4f77-8655-504dffb2db7b",
+                        "parent_prefix": null,
+                        "planned": false,
+                        "to_internet": false
+                    }
                 ],
                 "port_subscription_id": "07cf8b2a-7602-4ca8-b3c9-9ff6ec0aee5d",
                 "vlanrange": "0",
@@ -55,8 +77,30 @@
                 "subscription_instance_id": "2cf6cf3d-6aa6-4b8d-9f05-b676fdf40c59",
                 "label": null,
                 "ip_prefix_subscription_id": [
-                    "2d58c52e-db35-4bd9-882d-5b4deb7a697b",
-                    "6fd8aae2-37f6-481e-81cd-0e17a15f5494"
+                    {
+                        "name": "IP_PREFIX",
+                        "subscription_instance_id": "98037925-9c3c-4d22-b684-8541cc9afaf8",
+                        "customer_aggregate": false,
+                        "extra_information": "",
+                        "ipam_prefix_id": 91178,
+                        "label": null,
+                        "owner_subscription_id": "3b6c821b-926b-4f77-8655-504dffb2db7b",
+                        "parent_prefix": null,
+                        "planned": false,
+                        "to_internet": false
+                    },
+                    {
+                        "name": "IP_PREFIX",
+                        "subscription_instance_id": "98337925-9c3c-4d22-b684-8541cc9afaf8",
+                        "customer_aggregate": false,
+                        "extra_information": "",
+                        "ipam_prefix_id": 91178,
+                        "label": null,
+                        "owner_subscription_id": "336c821b-926b-4f77-8655-504dffb2db7b",
+                        "parent_prefix": null,
+                        "planned": false,
+                        "to_internet": false
+                    }
                 ],
                 "port_subscription_id": "2b0d8128-4dce-42da-a3a3-b97deddf9ae2",
                 "vlanrange": "0",

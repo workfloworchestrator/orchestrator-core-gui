@@ -364,7 +364,6 @@ export function getExternalTypeData(
         case "node_subscription_id":
         case "port_subscription_id":
         case "peer_group_subscription_id":
-        case "ip_prefix_subscription_id":
         case "internetpinnen_prefix_subscription_id":
         case "parent_ip_prefix_subscription_id":
             return {
