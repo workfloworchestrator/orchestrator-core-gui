@@ -498,6 +498,8 @@ I18n.translations.en = {
         products: {
             searchPlaceHolder: "Search for Products",
             new: "New Product",
+            product_id: "ID",
+            product_id_info: "The ID of this Product",
             name: "Name",
             name_info: "The name of this Product.",
             description: "Description",
@@ -524,6 +526,8 @@ I18n.translations.en = {
             product_blocks: "Product Blocks",
             product_blocks_string: "Product Blocks",
             workflows_string: "Workflows",
+            workflows: "Workflows",
+            workflows_info: "Workflows related to this Product",
             product_blocks_info:
                 "They define which values are stored on the subscriptions of the Products linked to the Product Block(s)",
             fixed_inputs: "Fixed Inputs",

@@ -12,7 +12,6 @@
  * limitations under the License.
  *
  */
-
 import "components/Product.scss";
 
 import "./Product.scss";
@@ -27,23 +26,15 @@ import { RouteComponentProps } from "react-router";
 import { ValueType } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
-import { FixedInputConfiguration, Option, ProductBlock, Workflow, Product as iProduct } from "utils/types";
+import { Option, ProductBlock, Product as ProductData, Workflow } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
 interface MatchParams {
     id: string;
+    action: string;
 }
 
-interface IProps extends Partial<RouteComponentProps<MatchParams>>, WrappedComponentProps {
-    subscriptionId?: string;
-}
-
-interface FixedInputConf {
-    name: string;
-    description: string;
-    values: string[];
-    required?: boolean;
-}
+interface IProps extends Partial<RouteComponentProps<MatchParams>>, WrappedComponentProps {}
 
 interface IState {
     confirmationDialogOpen: boolean;
@@ -51,24 +42,22 @@ interface IState {
     cancelDialogAction: () => void;
     confirmationDialogQuestion: string;
     leavePage: boolean;
-    errors: Partial<Record<keyof iProduct, boolean>>;
-    required: (keyof iProduct)[];
+    errors: Partial<Record<keyof ProductData, boolean>>;
+    required: (keyof ProductData)[];
     initial: boolean;
     readOnly: boolean;
-    product?: iProduct;
+    product?: ProductData;
     processing: boolean;
     productBlocks: ProductBlock[];
-    products: iProduct[];
+    products: ProductData[];
     workflows: Workflow[];
     tags: string[];
     types: string[];
     statuses: string[];
     duplicateName: boolean;
-    allowedFixedInputs: FixedInputConf[];
-    fixedInputConf?: FixedInputConfiguration;
 }
 
-class Product extends React.Component<IProps, IState> {
+class EditProduct extends React.Component<IProps, IState> {
     state: IState = {
         confirmationDialogOpen: false,
         confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
@@ -87,52 +76,20 @@ class Product extends React.Component<IProps, IState> {
         types: [],
         statuses: [],
         duplicateName: false,
-        allowedFixedInputs: [],
     };
 
     componentDidMount() {
-        this.fetchAllConstants(this.props.match?.params.id);
+        this.fetchProducts(this.props.match?.params.id);
     }
 
-    fetchAllConstants = (product_id?: string) =>
-        Promise.all([
-            this.context.apiClient.productBlocks(),
-            this.context.apiClient.allWorkflows(),
-            this.context.apiClient.products(),
-            this.context.apiClient.productTags(),
-            this.context.apiClient.productTypes(),
-            this.context.apiClient.productStatuses(),
-            this.context.apiClient.fixedInputConfiguration(),
-        ]).then((res) => {
-            const product = res[2].find((value: iProduct) => value.product_id === product_id);
-
+    fetchProducts = (product_id?: string) =>
+        this.context.apiClient.products().then((res: ProductData[]) => {
+            const product = res.find((value: ProductData) => value.product_id === product_id);
             this.setState({
-                productBlocks: res[0],
-                workflows: res[1],
-                products: res[2],
+                products: res,
                 product: product,
-                tags: res[3],
-                types: res[4],
-                statuses: res[5],
-                fixedInputConf: res[6],
-                allowedFixedInputs: this.determineAllowedFixedInputs(res[6], product?.tag),
             });
         });
-
-    determineAllowedFixedInputs = (fixedInputConf: FixedInputConfiguration, productTag?: string) => {
-        const ourTag = Object.keys(fixedInputConf.by_tag).find((tag) => tag === productTag);
-        if (!ourTag) {
-            return this.state.allowedFixedInputs;
-        }
-        const inputs = fixedInputConf.by_tag[ourTag].map((fi) => {
-            const name = Object.keys(fi)[0];
-            const required = fi[name];
-            const cfi: FixedInputConf = fixedInputConf.fixed_inputs.find((f) => f.name === name)!;
-            cfi.required = required;
-            return cfi;
-        });
-        return inputs;
-    };
 
     cancel = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
@@ -143,12 +100,10 @@ class Product extends React.Component<IProps, IState> {
             cancelDialogAction: () => this.context.redirect("/metadata/products"),
         });
     };
-
     handleDeleteProduct = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
         const { product } = this.state;
         const { intl } = this.props;
-
         const question = intl.formatMessage(
             { id: "metadata.deleteConfirmation" },
             { type: "Product", name: product!.name }
@@ -180,12 +135,10 @@ class Product extends React.Component<IProps, IState> {
             cancelDialogAction: () => this.setState({ confirmationDialogOpen: false }),
         });
     };
-
     submit = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
         const { product, processing } = this.state;
         const { intl } = this.props;
-
         const invalid = this.isInvalid(true) || processing;
         if (!invalid) {
             this.setState({ processing: true });
@@ -202,8 +155,7 @@ class Product extends React.Component<IProps, IState> {
             this.setState({ initial: false });
         }
     };
-
-    renderButtons = (initial: boolean, product: iProduct) => {
+    renderButtons = (initial: boolean, product: ProductData) => {
         const invalid = !initial && (this.isInvalid() || this.state.processing);
         return (
             <section className="buttons">
@@ -228,10 +180,9 @@ class Product extends React.Component<IProps, IState> {
             </section>
         );
     };
-
     isInvalid = (markErrors: boolean = false) => {
         const { errors, required, product, duplicateName } = this.state;
-        const hasErrors = (Object.keys(errors) as (keyof iProduct)[]).some((key) => errors[key]);
+        const hasErrors = (Object.keys(errors) as (keyof ProductData)[]).some((key) => errors[key]);
         const requiredInputMissing = required.some((attr) => isEmpty(product![attr]));
         if (markErrors) {
             const missing = required.filter((attr) => isEmpty(product![attr]));
@@ -241,8 +192,7 @@ class Product extends React.Component<IProps, IState> {
         }
         return hasErrors || requiredInputMissing || duplicateName;
     };
-
-    validateProperty = (name: keyof iProduct) => (e: React.FocusEvent<HTMLInputElement>) => {
+    validateProperty = (name: keyof ProductData) => (e: React.FocusEvent<HTMLInputElement>) => {
         const value = e.target.value;
         const errors = { ...this.state.errors };
         const { product } = this.state;
@@ -255,8 +205,7 @@ class Product extends React.Component<IProps, IState> {
         errors[name] = isEmpty(value);
         this.setState({ errors: errors });
     };
-
-    changeProperty = (name: keyof iProduct) => (
+    changeProperty = (name: keyof ProductData) => (
         e:
             | Date
             | React.MouseEvent<HTMLSpanElement | HTMLButtonElement>
@@ -264,7 +213,7 @@ class Product extends React.Component<IProps, IState> {
             | React.ChangeEvent<HTMLInputElement>
             | ValueType<Option, false>
     ) => {
-        const { product, fixedInputConf } = this.state;
+        const { product } = this.state;
         let value: any;
         if (isEmpty(e) || isDate(e)) {
             value = e;
@@ -275,9 +224,6 @@ class Product extends React.Component<IProps, IState> {
         // @ts-ignore
         product![name] = value;
         this.setState({ product: product });
-        if (name === "tag") {
-            this.determineAllowedFixedInputs(fixedInputConf!, value);
-        }
     };
 
     render() {
@@ -293,19 +239,15 @@ class Product extends React.Component<IProps, IState> {
             statuses,
         } = this.state;
         const { intl } = this.props;
-
         if (!product) {
             return null;
         }
-
         const readOnly = !this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id + "/");
-
         const endDate = !product.end_date
             ? null
             : isDate(product.end_date)
             ? ((product.end_date as unknown) as Date)
             : new Date(product.end_date * 1000);
-
         return (
             <div className="mod-product">
                 <ConfirmationDialog
@@ -356,6 +298,5 @@ class Product extends React.Component<IProps, IState> {
     }
 }
 
-Product.contextType = ApplicationContext;
-
-export default injectIntl(Product);
+EditProduct.contextType = ApplicationContext;
+export default injectIntl(EditProduct);

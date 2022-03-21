@@ -218,17 +218,23 @@ class Products extends React.Component<WrappedComponentProps, IState> {
                 name: "",
                 width: "2.5%",
                 render: (product_id: string) => {
-                    const Edit =
-                        this.context.allowed("/orchestrator/metadata/product/edit/" + product_id) + "/" ? (
-                            <EuiButtonIcon
-                                href={`/metadata/product/${product_id}`}
-                                iconType="pencil"
-                                aria-label="Edit"
-                            />
-                        ) : this.context.allowed("/orchestrator/metadata/product/view/" + product_id) + "/" ? (
-                            <EuiButtonIcon href={`/metadata/product/${product_id}`} iconType="eye" aria-label="View" />
-                        ) : null;
-                    return <div>{Edit}</div>;
+                    return this.context.allowed("/orchestrator/metadata/product/view/" + product_id) + "/" ? (
+                        <EuiButtonIcon href={`/metadata/product/view/${product_id}`} iconType="eye" aria-label="View" />
+                    ) : null;
+                },
+            },
+            {
+                field: "product_id",
+                name: "",
+                width: "2.5%",
+                render: (product_id: string) => {
+                    return this.context.allowed("/orchestrator/metadata/product/edit/" + product_id) + "/" ? (
+                        <EuiButtonIcon
+                            href={`/metadata/product/edit/${product_id}`}
+                            iconType="pencil"
+                            aria-label="Edit"
+                        />
+                    ) : null;
                 },
             },
             {
@@ -236,15 +242,13 @@ class Products extends React.Component<WrappedComponentProps, IState> {
                 name: "",
                 width: "2%",
                 render: (product_id: string, record: Product) => {
-                    const Delete =
-                        this.context.allowed("/orchestrator/metadata/product/delete/" + product_id) + "/" ? (
-                            <EuiButtonIcon
-                                onClick={this.handleDeleteProduct(record)}
-                                iconType="trash"
-                                aria-label="Delete"
-                            />
-                        ) : null;
-                    return <div>{Delete}</div>;
+                    return this.context.allowed("/orchestrator/metadata/product/delete/" + product_id) + "/" ? (
+                        <EuiButtonIcon
+                            onClick={this.handleDeleteProduct(record)}
+                            iconType="trash"
+                            aria-label="Delete"
+                        />
+                    ) : null;
                 },
             },
         ];

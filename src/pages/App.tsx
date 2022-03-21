@@ -19,13 +19,14 @@ import "pages/App.scss";
 
 import { EuiLoadingSpinner, EuiToast } from "@elastic/eui";
 import * as Sentry from "@sentry/react";
+import EditProduct from "components/EditProduct";
 import Flash from "components/Flash";
 import Header from "components/Header";
 import ErrorDialog from "components/modals/ErrorDialog";
 import Navigation from "components/Navigation";
-import ProductPage from "components/Product";
 import ProductBlock from "components/ProductBlock";
 import ProtectedRoute from "components/ProtectedRoute";
+import ViewProduct from "components/ViewProduct";
 import GlobalContextProviders from "contextProviders/globalContextProviders";
 import { customPages, disabledRoutes } from "custom/manifest.json";
 import { ENV } from "env";
@@ -337,8 +338,12 @@ class App extends React.PureComponent<IProps, IState> {
                                                 render={(props) => <ProductBlock {...props} />}
                                             />
                                             <ProtectedRoute
-                                                path="/metadata/product/:id"
-                                                render={(props) => <ProductPage {...props} />}
+                                                path="/metadata/product/edit/:id"
+                                                render={(props) => <EditProduct {...props} />}
+                                            />
+                                            <ProtectedRoute
+                                                path="/metadata/product/view/:id"
+                                                render={(props) => <ViewProduct {...props} />}
                                             />
                                             <ProtectedRoute
                                                 path="/metadata/:type"
