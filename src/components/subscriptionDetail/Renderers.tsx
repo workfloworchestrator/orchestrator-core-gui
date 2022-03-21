@@ -16,8 +16,11 @@ import { applyIdNamingConvention, isEmpty, stop } from "utils/Utils";
 import CheckBox from "../CheckBox";
 
 let create_readable_description = function (wf: any): object {
-    if ("unterminated_parents" in wf)
-        return { action: wf.action, unterminated_parents: wf.unterminated_parents.join(", ") };
+    if ("unterminated_in_use_by_subscriptions" in wf)
+        return {
+            action: wf.action,
+            unterminated_in_use_by_subscriptions: wf.unterminated_in_use_by_subscriptions.join(", "),
+        };
     return wf as any;
 };
 
@@ -96,7 +99,7 @@ export function RenderActions({
                                         )}
                                     </td>
                                     <td id={`${index}-v`}>
-                                        {wf.reason && wf.reason === "subscription.no_modify_parent_subscription" && (
+                                        {wf.reason && wf.reason === "subscription.no_modify_depends_on_subscription" && (
                                             <em className="error">
                                                 <FormattedMessage
                                                     id={wf.reason}
@@ -104,7 +107,7 @@ export function RenderActions({
                                                 />
                                             </em>
                                         )}
-                                        {wf.reason && wf.reason !== "subscription.no_modify_parent_subscription" && (
+                                        {wf.reason && wf.reason !== "subscription.no_modify_depends_on_subscription" && (
                                             <em className="error">
                                                 <FormattedMessage id={wf.reason} values={wf as any}></FormattedMessage>
                                             </em>
@@ -144,7 +147,7 @@ export function RenderActions({
                                         )}
                                     </td>
                                     <td>
-                                        {wf.reason && wf.reason === "subscription.no_modify_parent_subscription" && (
+                                        {wf.reason && wf.reason === "subscription.no_modify_depends_on_subscription" && (
                                             <em className="error">
                                                 <FormattedMessage
                                                     id={wf.reason}
@@ -152,7 +155,7 @@ export function RenderActions({
                                                 />
                                             </em>
                                         )}
-                                        {wf.reason && wf.reason !== "subscription.no_modify_parent_subscription" && (
+                                        {wf.reason && wf.reason !== "subscription.no_modify_depends_on_subscription" && (
                                             <em className="error">
                                                 <FormattedMessage id={wf.reason} values={wf as any} />
                                             </em>
@@ -364,17 +367,17 @@ export function RenderProcesses({ subscriptionProcesses }: { subscriptionProcess
     );
 }
 
-export function RenderSubscriptions({ parentSubscriptions }: { parentSubscriptions?: SubscriptionWithDetails[] }) {
+export function RenderSubscriptions({ inUseBySubscriptions }: { inUseBySubscriptions?: SubscriptionWithDetails[] }) {
     const intl = useIntl();
     const [filterTerminated, setFilterTerminated] = useState(true);
 
-    if (!parentSubscriptions || parentSubscriptions.length === 0) {
+    if (!inUseBySubscriptions || inUseBySubscriptions.length === 0) {
         return null;
     }
 
     const filteredSubscriptions = filterTerminated
-        ? parentSubscriptions?.filter((subscription) => subscription.status !== "terminated")
-        : parentSubscriptions;
+        ? inUseBySubscriptions?.filter((subscription) => subscription.status !== "terminated")
+        : inUseBySubscriptions;
 
     const columns = [
         "customer_name",
@@ -401,11 +404,11 @@ export function RenderSubscriptions({ parentSubscriptions }: { parentSubscriptio
             name={
                 <EuiFlexGroup justifyContent="spaceBetween">
                     <EuiFlexItem grow={false}>
-                        <FormattedMessage id="subscription.parent_subscriptions" />
+                        <FormattedMessage id="subscription.in_use_by_subscriptions" />
                     </EuiFlexItem>
                     <EuiFlexItem>
                         <EuiSwitch
-                            label={<FormattedMessage id="subscription.toggle_hide_child_subscriptions" />}
+                            label={<FormattedMessage id="subscription.toggle_hide_depends_on_subscriptions" />}
                             checked={filterTerminated}
                             onChange={(e) => {
                                 setFilterTerminated(e.target.checked);
@@ -414,7 +417,7 @@ export function RenderSubscriptions({ parentSubscriptions }: { parentSubscriptio
                     </EuiFlexItem>
                 </EuiFlexGroup>
             }
-            className="subscription-parent-subscriptions"
+            className="subscription-in_use_by-subscriptions"
         >
             <table className="subscriptions">
                 <thead>

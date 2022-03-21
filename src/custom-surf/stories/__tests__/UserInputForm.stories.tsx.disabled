@@ -108,7 +108,7 @@ export const Sn8PortselectAllOrganisations = () => {
         SN8PortSubscriptions.filter((p) => p.status === "active")
     );
     mock.onGet("subscriptions/all").reply(200, []);
-    mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
+    mock.onGet(/subscriptions\/in_use_by\/.*/).reply(200, []);
     loadVlanMocks();
 
     const form = createForm({
@@ -134,7 +134,7 @@ export const Sn8PortselectTagged = () => {
             .filter((p) => p.port_mode === "tagged")
     );
     mock.onGet("subscriptions/all").reply(200, []);
-    mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
+    mock.onGet(/subscriptions\/in_use_by\/.*/).reply(200, []);
     loadVlanMocks();
 
     const form = createForm({
@@ -156,7 +156,7 @@ export const Sn8PortselectUntagged = () => {
             .filter((p) => p.port_mode === "untagged")
     );
     mock.onGet("/api/subscriptions/all").reply(200, []);
-    mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
+    mock.onGet(/subscriptions\/in_use_by\/.*/).reply(200, []);
     loadVlanMocks();
 
     const form = createForm({
@@ -176,7 +176,7 @@ export const Sn8PortselectSelectedOrganisation = () => {
         SN8PortSubscriptions.filter((p) => p.status === "active")
     );
     mock.onGet("subscriptions/all").reply(200, []);
-    mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
+    mock.onGet(/subscriptions\/in_use_by\/.*/).reply(200, []);
     loadVlanMocks();
 
     const form = createForm({

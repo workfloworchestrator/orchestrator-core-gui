@@ -73,7 +73,7 @@ export const Subscription = () => {
         system: [{description: "Validate SN8 IP BGP", name: "validate_sn8_ip_bgp"}],
     });
 
-    mock.onGet("subscriptions/parent_subscriptions/pid").reply(200, []);
+    mock.onGet("subscriptions/in_use_by/pid").reply(200, []);
     mock.onGet("surf/ims/service_by_ims_service_id/36261").reply(200, {
         aliases: ["SUBSCRIPTION_ID=9C8C13D5-6954-461A-A931-32894C193AA0"],
         customer_id: "5203E539-0A11-E511-80D0-005056956C1A",

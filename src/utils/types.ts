@@ -66,8 +66,10 @@ export interface SubscriptionProcesses {
 
 export interface SubscriptionInstance {
     subscription_id: string;
-    parent_relations: SubscriptionInstanceParentRelation[];
-    children_relations: SubscriptionInstanceParentRelation[];
+    in_use_by_block_relations: SubscriptionInstanceParentRelation[];
+    depends_on_block_relations: SubscriptionInstanceParentRelation[];
+    in_use_by: SubscriptionInstance[];
+    depends_on: SubscriptionInstance[];
     subscription_instance_id: string;
     product_block: ProductBlock;
     label: string;
@@ -126,10 +128,10 @@ export interface FavoriteSubscriptionStorage {
 }
 
 export interface SubscriptionInstanceParentRelation {
-    child_id: string;
+    depends_on_id: string;
     domain_model_attr: string;
     order_id: number;
-    parent_id: string;
+    in_use_by_id: string;
 }
 
 export interface SubscriptionWithDetails extends Subscription {
