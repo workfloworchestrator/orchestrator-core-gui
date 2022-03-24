@@ -12,3 +12,7 @@ else
   rm -rf custom
   ln -s custom-example custom
 fi
+
+echo "Clearing WEBPACK Cache, be patient..."
+rm -rf ../node_modules/.cache
+echo "All done!"
