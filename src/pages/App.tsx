@@ -295,68 +295,68 @@ class App extends React.PureComponent<IProps, IState> {
                                                             subscriptionId={getParameterByName(
                                                                 "subscription",
 
-                                                            props.location.search
-                                                        )}
+                                                                props.location.search
+                                                            )}
+                                                        />
+                                                    )}
+                                                />
+                                                <Route
+                                                    path="/process/:id"
+                                                    render={(props) => (
+                                                        <Redirect to={`/processes/${props.match.params.id}`} />
+                                                    )}
+                                                />
+                                                <Route
+                                                    path="/processes/:id"
+                                                    render={(props) => <ProcessDetail {...props} />}
+                                                />
+                                                <ProtectedRoute path="/processes" render={(props) => <Processes />} />
+                                                <Route
+                                                    path="/subscription/:id"
+                                                    render={(props) => (
+                                                        <Redirect to={`/subscriptions/${props.match.params.id}`} />
+                                                    )}
+                                                />
+                                                {!manifest.disabledRoutes.includes("/subscriptions/:id") && (
+                                                    <Route
+                                                        path="/subscriptions/:id"
+                                                        render={(props) => <SubscriptionDetailPage {...props} />}
                                                     />
                                                 )}
-                                            />
-                                            <Route
-                                                path="/process/:id"
-                                                render={(props) => (
-                                                    <Redirect to={`/processes/${props.match.params.id}`} />
+                                                {!manifest.disabledRoutes.includes("/subscriptions") && (
+                                                    <Route
+                                                        path="/subscriptions"
+                                                        render={(props) => <SubscriptionsPage {...props} />}
+                                                    />
                                                 )}
-                                            />
-                                            <Route
-                                                path="/processes/:id"
-                                                render={(props) => <ProcessDetail {...props} />}
-                                            />
-                                            <ProtectedRoute path="/processes" render={(props) => <Processes />} />
-                                            <Route
-                                                path="/subscription/:id"
-                                                render={(props) => (
-                                                    <Redirect to={`/subscriptions/${props.match.params.id}`} />
+                                                {!manifest.disabledRoutes.includes("/metadata") && (
+                                                    <Route
+                                                        exact
+                                                        path="/metadata"
+                                                        render={() => <Redirect to="/metadata/products" />}
+                                                    />
                                                 )}
-                                            />
-                                            {!manifest.disabledRoutes.includes("/subscriptions/:id") && (
-                                                <Route
-                                                    path="/subscriptions/:id"
-                                                    render={(props) => <SubscriptionDetailPage {...props} />}
+                                                <ProtectedRoute
+                                                    path="/metadata/product-block/:id"
+                                                    render={(props) => <ProductBlock {...props} />}
                                                 />
-                                            )}
-                                            {!manifest.disabledRoutes.includes("/subscriptions") && (
-                                                <Route
-                                                    path="/subscriptions"
-                                                    render={(props) => <SubscriptionsPage {...props} />}
+                                                <ProtectedRoute
+                                                    path="/metadata/product/edit/:id"
+                                                    render={(props) => <EditProduct {...props} />}
                                                 />
-                                            )}
-                                            {!manifest.disabledRoutes.includes("/metadata") && (
-                                                <Route
-                                                    exact
-                                                    path="/metadata"
-                                                    render={() => <Redirect to="/metadata/products" />}
+                                                <ProtectedRoute
+                                                    path="/metadata/product/view/:id"
+                                                    render={(props) => <ViewProduct {...props} />}
                                                 />
-                                            )}
-                                            <ProtectedRoute
-                                                path="/metadata/product-block/:id"
-                                                render={(props) => <ProductBlock {...props} />}
-                                            />
-                                            <ProtectedRoute
-                                                path="/metadata/product/edit/:id"
-                                                render={(props) => <EditProduct {...props} />}
-                                            />
-                                            <ProtectedRoute
-                                                path="/metadata/product/view/:id"
-                                                render={(props) => <ViewProduct {...props} />}
-                                            />
-                                            <ProtectedRoute
-                                                path="/metadata/:type"
-                                                render={(props) => (
-                                                    <MetaData selectedTab={props.match.params.type} {...props} />
+                                                <ProtectedRoute
+                                                    path="/metadata/:type"
+                                                    render={(props) => (
+                                                        <MetaData selectedTab={props.match.params.type} {...props} />
+                                                    )}
+                                                />
+                                                {!manifest.disabledRoutes.includes("/metadata") && (
+                                                    <ProtectedRoute path="/settings" render={() => <Settings />} />
                                                 )}
-                                            />
-                                            {!manifest.disabledRoutes.includes("/metadata") && (
-                                                <ProtectedRoute path="/settings" render={() => <Settings />} />
-                                            )}
 
                                                 {!isEmpty(importedModules) &&
                                                     importedModules.map(({ path, name, Component }) => (
