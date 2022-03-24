@@ -68,7 +68,6 @@ interface IProps {
 interface IState {
     loading: boolean;
     loaded: boolean;
-    darkMode: boolean;
     importedModules: any[];
     importedPlugins: any[];
     applicationContext: ApplicationContextInterface;
@@ -85,10 +84,10 @@ class App extends React.PureComponent<IProps, IState> {
         this.state = {
             loading: true,
             loaded: false,
-            darkMode: !!localStorage.getItem("darkMode"),
             importedModules: [],
             importedPlugins: [],
             applicationContext: {
+                theme: context.theme,
                 organisations: [],
                 locationCodes: [],
                 assignees: [],
@@ -215,6 +214,7 @@ class App extends React.PureComponent<IProps, IState> {
             loaded: true,
             intl: language,
             applicationContext: {
+                theme: this.state.applicationContext.theme,
                 organisations: allOrganisations || [],
                 locationCodes: allLocationCodes || [],
                 assignees: allAssignees || [],
@@ -241,7 +241,7 @@ class App extends React.PureComponent<IProps, IState> {
 
         return (
             <QueryClientProvider client={queryClient}>
-                <EuiProvider colorMode={this.state.darkMode ? "dark" : "light"}>
+                <EuiProvider colorMode={applicationContext.theme}>
                     <Router history={history}>
                         <QueryParamProvider ReactRouterRoute={Route}>
                             <ApplicationContext.Provider value={applicationContext}>

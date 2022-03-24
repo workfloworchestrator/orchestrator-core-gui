@@ -15,6 +15,8 @@
 
 import { JSONSchema6 } from "json-schema";
 
+export type Theme = "light" | "dark";
+
 export enum ProcessStatus {
     "CREATED" = "created",
     "RUNNING" = "running",
