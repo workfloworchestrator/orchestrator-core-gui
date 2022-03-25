@@ -125,14 +125,23 @@
         }
         tbody {
             tr {
-                border-bottom: 1px solid vars.$light-grey;
-                border-left: 1px solid vars.$primary;
-
-                &:nth-child(even) {
-                    //background: white;
+                &.light {
+                    border-bottom: 1px solid vars.$light-grey;
+                    border-left: 1px solid vars.$primary;
+                    &:nth-child(even) {
+                    }
+                    &:nth-child(odd) {
+                        background: #f6f6f6;
+                    }
                 }
-                &:nth-child(odd) {
-                    //background-blend-mode: darken;
+                &.dark {
+                    border-bottom: 1px solid #141519;
+                    border-left: 1px solid vars.$primary;
+                    &:nth-child(even) {
+                    }
+                    &:nth-child(odd) {
+                        background: #141519;
+                    }
                 }
             }
             td {
@@ -175,14 +184,22 @@
         }
         &.multiple-tbody {
             tbody {
-                &:nth-child(even) {
-                    tr {
-                        //background: vars.$table-odd-even;
+                &.light {
+                    border-bottom: 1px solid vars.$light-grey;
+                    border-left: 1px solid vars.$primary;
+                    &:nth-child(even) {
+                    }
+                    &:nth-child(odd) {
+                        background: #f6f6f6;
                     }
                 }
-                &:nth-child(odd) {
-                    tr {
-                        //background: white;
+                &.dark {
+                    border-bottom: 1px solid #141519;
+                    border-left: 1px solid vars.$primary;
+                    &:nth-child(even) {
+                    }
+                    &:nth-child(odd) {
+                        background: #141519;
                     }
                 }
                 tr.related-subscription {
@@ -207,13 +224,23 @@
     }
     table.subscriptions {
         tr {
-            border-bottom: 1px solid vars.$light-grey;
-            border-left: 1px solid vars.$primary;
-            &:nth-child(even) {
-                //background: white;
+            &.light {
+                border-bottom: 1px solid vars.$light-grey;
+                border-left: 1px solid vars.$primary;
+                &:nth-child(even) {
+                }
+                &:nth-child(odd) {
+                    background: #f6f6f6;
+                }
             }
-            &:nth-child(odd) {
-                //background: vars.$table-odd-even;
+            &.dark {
+                border-bottom: 1px solid #141519;
+                border-left: 1px solid vars.$primary;
+                &:nth-child(even) {
+                }
+                &:nth-child(odd) {
+                    background: #141519;
+                }
             }
         }
         th,
@@ -265,13 +292,23 @@
     }
     table.processes {
         tr {
-            border-bottom: 1px solid vars.$light-grey;
-            border-left: 1px solid vars.$primary;
-            &:nth-child(even) {
-                //background: white;
+            &.light {
+                border-bottom: 1px solid vars.$light-grey;
+                border-left: 1px solid vars.$primary;
+                &:nth-child(even) {
+                }
+                &:nth-child(odd) {
+                    background: #f6f6f6;
+                }
             }
-            &:nth-child(odd) {
-                //background: vars.$table-odd-even;
+            &.dark {
+                border-bottom: 1px solid #141519;
+                border-left: 1px solid vars.$primary;
+                &:nth-child(even) {
+                }
+                &:nth-child(odd) {
+                    background: #141519;
+                }
             }
         }
         th,

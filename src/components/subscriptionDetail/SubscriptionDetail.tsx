@@ -208,10 +208,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     const renderedSubscriptionDetails = (
         <div className="mod-subscription-detail">
             <div className="subscription-details">
-                <SubscriptionDetails
-                    subscription={subscription}
-                    subscriptionProcesses={subscriptionProcesses}
-                ></SubscriptionDetails>
+                <SubscriptionDetails subscription={subscription} subscriptionProcesses={subscriptionProcesses} />
                 {manifest.plugins.hasOwnProperty("subscriptionDetailPlugins") && (
                     <React.Suspense fallback="Loading plugins...">{loadedPlugins}</React.Suspense>
                 )}

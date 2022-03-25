@@ -13,8 +13,9 @@
  *
  */
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FormattedMessage } from "react-intl";
+import ApplicationContext from "utils/ApplicationContext";
 
 function SubscriptionInstanceValueRow({
     label,
@@ -35,9 +36,10 @@ function SubscriptionInstanceValueRow({
     type: string;
 }>) {
     const icon = children ? "minus" : "plus";
+    const { theme } = useContext(ApplicationContext);
 
     return (
-        <tbody>
+        <tbody className={theme}>
             <tr>
                 <td>{label.toUpperCase()}</td>
                 <td colSpan={isDeleted ? 1 : 2}>

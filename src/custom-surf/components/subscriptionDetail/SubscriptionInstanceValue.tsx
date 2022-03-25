@@ -93,7 +93,7 @@ function SubscriptionInstanceValueRow({
     type: string;
 }>) {
     const icon = children ? "minus" : "plus";
-    const { apiClient } = useContext(ApplicationContext);
+    const { apiClient, theme } = useContext(ApplicationContext);
 
     var imsLink = "";
     if (isExternalLinkValue) {
@@ -117,7 +117,7 @@ function SubscriptionInstanceValueRow({
             : value;
 
     return (
-        <tbody>
+        <tbody className={theme}>
             <tr>
                 <td>{label.toUpperCase()}</td>
                 <td colSpan={isDeleted ? 1 : 2}>

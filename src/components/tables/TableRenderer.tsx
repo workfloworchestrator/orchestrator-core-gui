@@ -17,8 +17,8 @@ import "stylesheets/buttons.scss";
 
 import React, { useContext } from "react";
 import { ColumnInstance, HeaderGroup, Row, TableBodyProps, TableProps } from "react-table";
-
-import ApplicationContext from "../../utils/ApplicationContext";
+import ApplicationContext from "utils/ApplicationContext";
+import { DARK_ROW_BORDER_COLOR, LIGHT_ROW_BORDER_COLOR } from "utils/Constants";
 
 interface ITableRendererProps<T extends object> {
     renderSubComponent: ({ row }: { row: Row<T> }) => JSX.Element;
@@ -55,7 +55,7 @@ export function TableRenderer<T extends object>({
             return <i className="fa fa-sort" />;
         }
     };
-    const rowBorderColor = theme === "light" ? "#cccccc" : "#555555";
+    const rowBorderColor = theme === "light" ? LIGHT_ROW_BORDER_COLOR : DARK_ROW_BORDER_COLOR;
 
     return (
         <table className="nwa-table" {...getTableProps()}>
@@ -69,7 +69,7 @@ export function TableRenderer<T extends object>({
                                 </th>
                             ))}
                         </tr>
-                        <tr className={"filters"}>
+                        <tr className={"filters"} style={{ borderBottom: `1px solid ${rowBorderColor}` }}>
                             {headerGroup.headers.map((column) => (
                                 <th id={`filter_headers_${column.id}`} key={column.id}>
                                     {column.canFilter && column.render("Filter")}

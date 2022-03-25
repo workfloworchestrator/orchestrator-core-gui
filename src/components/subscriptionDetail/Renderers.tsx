@@ -34,7 +34,7 @@ export function RenderActions({
     confirmation?: (message: string, callback: () => void) => void;
 }) {
     const intl = useIntl();
-    const { organisations, redirect, allowed } = useContext(ApplicationContext);
+    const { allowed, organisations, redirect, theme } = useContext(ApplicationContext);
 
     if (!confirmation) {
         return null;
@@ -85,7 +85,7 @@ export function RenderActions({
                         workflows.terminate
                             .sort((a, b) => a.name.localeCompare(b.name))
                             .map((wf, index: number) => (
-                                <tr key={index}>
+                                <tr key={index} className={theme}>
                                     <td id={`${index}-k`}>
                                         {!wf.reason && (
                                             <a id="terminate-link" href="/modify" key={wf.name} onClick={terminate}>
@@ -116,7 +116,7 @@ export function RenderActions({
                                 </tr>
                             ))}
                     {isEmpty(workflows.terminate) && (
-                        <tr>
+                        <tr className={theme}>
                             <td>
                                 <em className="error">
                                     <FormattedMessage id="subscription.no_termination_workflow" />
@@ -128,7 +128,7 @@ export function RenderActions({
                         workflows.modify
                             .sort((a, b) => a.name.localeCompare(b.name))
                             .map((wf, index: number) => (
-                                <tr key={index}>
+                                <tr key={index} className={theme}>
                                     <td>
                                         {!wf.reason && (
                                             <a
@@ -164,7 +164,7 @@ export function RenderActions({
                                 </tr>
                             ))}
                     {isEmpty(workflows.modify) && (
-                        <tr>
+                        <tr className={theme}>
                             <td>
                                 <em className="error">
                                     <FormattedMessage id="subscription.no_modify_workflow" />
@@ -176,7 +176,7 @@ export function RenderActions({
                         workflows.system
                             .sort((a, b) => a.name.localeCompare(b.name))
                             .map((wf, index: number) => (
-                                <tr key={index}>
+                                <tr key={index} className={theme}>
                                     <td>
                                         {!wf.reason && (
                                             <a
@@ -204,7 +204,7 @@ export function RenderActions({
                                 </tr>
                             ))}
                     {isEmpty(workflows.system) && (
-                        <tr>
+                        <tr className={theme}>
                             <td>
                                 <em className="error">
                                     <FormattedMessage id="subscription.no_validate_workflow" />
@@ -219,9 +219,11 @@ export function RenderActions({
 }
 
 export function RenderFixedInputs({ product }: { product?: Product }) {
+    const { theme } = useContext(ApplicationContext);
     if (!product || !product.fixed_inputs.length) {
         return null;
     }
+
     return (
         <SubscriptionDetailSection
             name={<FormattedMessage id="subscriptions.fixedInputs" />}
@@ -233,7 +235,7 @@ export function RenderFixedInputs({ product }: { product?: Product }) {
                     {product.fixed_inputs
                         .sort((a, b) => a.name.localeCompare(b.name))
                         .map((fi, index) => (
-                            <tr key={index}>
+                            <tr key={index} className={theme}>
                                 <td id={`${applyIdNamingConvention(fi.name)}-k`}>{fi.name}</td>
                                 <td id={`${applyIdNamingConvention(fi.name)}-v`}>{fi.value}</td>
                             </tr>
@@ -245,9 +247,11 @@ export function RenderFixedInputs({ product }: { product?: Product }) {
 }
 
 export function RenderProduct({ product }: { product?: Product }) {
+    const { theme } = useContext(ApplicationContext);
     if (!product) {
         return null;
     }
+
     return (
         <SubscriptionDetailSection
             name={<FormattedMessage id="subscription.product_title" />}
@@ -256,7 +260,7 @@ export function RenderProduct({ product }: { product?: Product }) {
             <table className="detail-block">
                 <thead />
                 <tbody>
-                    <tr>
+                    <tr className={theme}>
                         <td id="sub-prod-name-k">
                             <FormattedMessage id="subscription.product.name" />
                         </td>
@@ -270,37 +274,37 @@ export function RenderProduct({ product }: { product?: Product }) {
                             </a>
                         </td>
                     </tr>
-                    <tr>
+                    <tr className={theme}>
                         <td id="description-k">
                             <FormattedMessage id="subscription.product.description" />
                         </td>
                         <td id="description-v">{product.description}</td>
                     </tr>
-                    <tr>
+                    <tr className={theme}>
                         <td id="product-type-k">
                             <FormattedMessage id="subscription.product.product_type" />
                         </td>
                         <td id="product-type-v">{product.product_type}</td>
                     </tr>
-                    <tr>
+                    <tr className={theme}>
                         <td id="tag-k">
                             <FormattedMessage id="subscription.product.tag" />
                         </td>
                         <td id="tag-v">{product.tag || ""}</td>
                     </tr>
-                    <tr>
+                    <tr className={theme}>
                         <td id="status-k">
                             <FormattedMessage id="subscription.product.status" />
                         </td>
                         <td id="status-v">{product.status || ""}</td>
                     </tr>
-                    <tr>
+                    <tr className={theme}>
                         <td id="created-k">
                             <FormattedMessage id="subscription.product.created" />
                         </td>
                         <td id="created-v">{renderDateTime(product.created_at)}</td>
                     </tr>
-                    <tr>
+                    <tr className={theme}>
                         <td id="end-date-k">
                             <FormattedMessage id="subscription.product.end_date" />
                         </td>
@@ -313,6 +317,7 @@ export function RenderProduct({ product }: { product?: Product }) {
 }
 
 export function RenderProcesses({ subscriptionProcesses }: { subscriptionProcesses: SubscriptionProcesses[] }) {
+    const { theme } = useContext(ApplicationContext);
     const columns = ["target", "name", "id", "status", "started_at", "modified_at"];
 
     const th = (index: number) => {
@@ -339,7 +344,7 @@ export function RenderProcesses({ subscriptionProcesses }: { subscriptionProcess
                 </thead>
                 <tbody>
                     {subscriptionProcesses.map((ps, index) => (
-                        <tr key={index}>
+                        <tr key={index} className={theme}>
                             <td>{ps.workflow_target}</td>
                             <td>{ps.process.workflow}</td>
                             <td>
@@ -353,7 +358,7 @@ export function RenderProcesses({ subscriptionProcesses }: { subscriptionProcess
                         </tr>
                     ))}
                     {isEmpty(subscriptionProcesses) && (
-                        <tr>
+                        <tr className={theme}>
                             <td colSpan={3}>
                                 <span className="no_process_link">
                                     <FormattedMessage id="subscription.no_process_link_text" />
@@ -368,6 +373,7 @@ export function RenderProcesses({ subscriptionProcesses }: { subscriptionProcess
 }
 
 export function RenderSubscriptions({ inUseBySubscriptions }: { inUseBySubscriptions?: SubscriptionWithDetails[] }) {
+    const { theme } = useContext(ApplicationContext);
     const intl = useIntl();
     const [filterTerminated, setFilterTerminated] = useState(true);
 
@@ -425,7 +431,7 @@ export function RenderSubscriptions({ inUseBySubscriptions }: { inUseBySubscript
                 </thead>
                 <tbody>
                     {filteredSubscriptions.map((subscription: SubscriptionWithDetails, index: number) => (
-                        <tr key={index}>
+                        <tr key={index} className={theme}>
                             <td
                                 data-label={intl.formatMessage({ id: "subscriptions.customer_name" })}
                                 className="customer_name"

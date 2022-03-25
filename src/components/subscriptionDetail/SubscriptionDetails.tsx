@@ -53,7 +53,7 @@ interface IProps {
 }
 
 export default function SubscriptionDetails({ subscription, className = "", subscriptionProcesses = [] }: IProps) {
-    const { organisations, allowed } = useContext(ApplicationContext);
+    const { allowed, organisations, theme } = useContext(ApplicationContext);
     // handle global errors
     const [errorMessage, setErrorMessage] = useState("");
     const closeErrorModal = () => {
@@ -140,7 +140,7 @@ export default function SubscriptionDetails({ subscription, className = "", subs
             <table className={`detail-block ${className}`}>
                 <thead />
                 <tbody>
-                    <tr>
+                    <tr className={theme}>
                         <td id="subscriptions-id-k">
                             <FormattedMessage id="subscriptions.id" />
                         </td>
@@ -202,37 +202,37 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                             </EuiFlexGroup>
                         </td>
                     </tr>
-                    <tr>
+                    <tr className={theme}>
                         <td id="subscriptions-name-k">
                             <FormattedMessage id="subscriptions.name" />
                         </td>
                         <td id="subscriptions-name-v">{subscription.product?.name}</td>
                     </tr>
-                    <tr>
+                    <tr className={theme}>
                         <td id="subscriptions-description-k">
                             <FormattedMessage id="subscriptions.description" />
                         </td>
                         <td id="subscriptions-description-v">{subscription.description}</td>
                     </tr>
-                    <tr>
+                    <tr className={theme}>
                         <td id="subscriptions-startdate-k">
                             <FormattedMessage id="subscriptions.start_date_epoch" />
                         </td>
                         <td id="subscriptions-startdate-v">{renderDate(subscription.start_date)}</td>
                     </tr>
-                    <tr>
+                    <tr className={theme}>
                         <td id="subscriptions-enddate-k">
                             <FormattedMessage id="subscriptions.end_date_epoch" />
                         </td>
                         <td id="subscriptions-enddate-v">{renderDate(subscription.end_date)}</td>
                     </tr>
-                    <tr>
+                    <tr className={theme}>
                         <td id="subscriptions-status-k">
                             <FormattedMessage id="subscriptions.status" />
                         </td>
                         <td id="subscriptions-status-v">{subscription.status}</td>
                     </tr>
-                    <tr>
+                    <tr className={theme}>
                         <td id="subscriptions-insync-k">
                             <FormattedMessage id="subscriptions.insync" />
                         </td>
@@ -268,21 +268,21 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                         </td>
                     </tr>
                     {customer_name && customer_name !== subscription.customer_id && (
-                        <tr>
+                        <tr className={theme}>
                             <td id="subscriptions-customer-name-k">
                                 <FormattedMessage id="subscriptions.customer_name" />
                             </td>
                             <td id="subscriptions-customer-name-v">{customer_name}</td>
                         </tr>
                     )}
-                    <tr>
+                    <tr className={theme}>
                         <td id="subscriptions-customer-id-k">
                             <FormattedMessage id="subscriptions.customer_id" />
                         </td>
                         <td id="subscriptions-customer-id-v">{subscription.customer_id}</td>
                     </tr>
                     {subscription.customer_descriptions && (
-                        <tr>
+                        <tr className={theme}>
                             <td id="subscriptions-customer-descriptions-k">
                                 <FormattedMessage id="subscriptions.customer_descriptions" />
                             </td>
@@ -298,7 +298,7 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                             </td>
                         </tr>
                     )}
-                    <tr>
+                    <tr className={theme}>
                         <td id="subscriptions-note-k">
                             <FormattedMessage id="subscriptions.note" />
                         </td>
