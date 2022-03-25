@@ -87,7 +87,7 @@ class App extends React.PureComponent<IProps, IState> {
             importedModules: [],
             importedPlugins: [],
             applicationContext: {
-                theme: context.theme,
+                theme: localStorage.getItem("darkMode") || false ? "dark" : "light",
                 organisations: [],
                 locationCodes: [],
                 assignees: [],
@@ -209,6 +209,8 @@ class App extends React.PureComponent<IProps, IState> {
 
         const filteredProducts = (allProducts || []).sort((a, b) => a.name.localeCompare(b.name));
 
+        console.log("Theme before load: ", this.state.applicationContext.theme);
+
         this.setState({
             loading: false,
             loaded: true,
@@ -238,7 +240,7 @@ class App extends React.PureComponent<IProps, IState> {
         if (loading || !intl) {
             return null; // render null when app is not ready yet for static mySpinner
         }
-
+        console.log(applicationContext.theme);
         return (
             <QueryClientProvider client={queryClient}>
                 <EuiProvider colorMode={applicationContext.theme}>

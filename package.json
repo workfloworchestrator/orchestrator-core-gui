@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "private": false,
     "license": "Apache-2.0",
+    "proxy": "http://localhost:8080",
     "scripts": {
         "analyze": "source-map-explorer build/static/js/main.*",
         "clear-cache": "rm -rf node_modules/.cache",
@@ -108,7 +109,6 @@
         "enzyme-adapter-react-16": "^1.15.5",
         "eslint-plugin-formatjs": "^2.12.7",
         "git-format-staged": "^2.1.1",
-        "http-proxy-middleware": "^1.0.6",
         "husky": "^6.0.0",
         "import-sort-style-module": "^6.0.0",
         "license-check-and-add": "^4.0.2",

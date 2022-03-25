@@ -37,7 +37,7 @@ export const customApiClient: CustomApiClient = new CustomApiClient();
 
 // Don't just add stuff here. This is reserved for things that don't change during the lifetime of the application
 let ApplicationContext = React.createContext<ApplicationContextInterface>({
-    theme: localStorage.getItem("darkMode") || false ? "dark" : "light",
+    theme: "light",
     organisations: [],
     locationCodes: [],
     products: [],

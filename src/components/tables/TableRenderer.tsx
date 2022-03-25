@@ -15,8 +15,10 @@
 
 import "stylesheets/buttons.scss";
 
-import React from "react";
+import React, { useContext } from "react";
 import { ColumnInstance, HeaderGroup, Row, TableBodyProps, TableProps } from "react-table";
+
+import ApplicationContext from "../../utils/ApplicationContext";
 
 interface ITableRendererProps<T extends object> {
     renderSubComponent: ({ row }: { row: Row<T> }) => JSX.Element;
@@ -37,6 +39,8 @@ export function TableRenderer<T extends object>({
     page,
     visibleColumns,
 }: ITableRendererProps<T>) {
+    const { theme } = useContext(ApplicationContext);
+
     const sortIcon = (col: ColumnInstance<T>) => {
         if (!col.canSort) {
             return "";
@@ -51,6 +55,7 @@ export function TableRenderer<T extends object>({
             return <i className="fa fa-sort" />;
         }
     };
+    const rowBorderColor = theme === "light" ? "#cccccc" : "#555555";
 
     return (
         <table className="nwa-table" {...getTableProps()}>
@@ -79,7 +84,7 @@ export function TableRenderer<T extends object>({
                     prepareRow(row);
                     return (
                         <React.Fragment key={`row_fragment_${row.id}`}>
-                            <tr {...row.getRowProps()}>
+                            <tr {...row.getRowProps()} style={{ borderBottom: `1px solid ${rowBorderColor}` }}>
                                 {row.cells.map((cell) => {
                                     return (
                                         <td {...cell.getCellProps([{ className: cell.column.id }])}>
