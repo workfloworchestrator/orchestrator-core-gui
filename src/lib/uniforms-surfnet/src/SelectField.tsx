@@ -116,6 +116,10 @@ function Select({
 
             return { ...provided, opacity, transition, color: fontColor };
         },
+        menu: (provided: any) => ({
+            ...provided,
+            backgroundColor: backgroundColor,
+        }),
     };
 
     if (fieldType === Array) {
