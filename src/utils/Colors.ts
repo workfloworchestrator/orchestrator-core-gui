@@ -2,7 +2,7 @@ import { Theme } from "utils/types";
 
 export const DARK_ROW_BORDER_COLOR = "#555555";
 export const LIGHT_ROW_BORDER_COLOR = "#cccccc";
-export const DARK_BACKGROUND_COLOR = "#202128";
+export const DARK_BACKGROUND_COLOR = "#1D1E24";
 export const LIGHT_BACKGROUND_COLOR = "#f6f6f6";
 export const DARK_FONT_COLOR = "#ffffff";
 export const LIGHT_FONT_COLOR = "#111111";
@@ -16,11 +16,12 @@ export function getReactSelectTheme(theme: Theme) {
     const selectedFontColor = theme === "light" ? LIGHT_SELECTED_FONT_COLOR : DARK_SELECTED_FONT_COLOR;
 
     const customStyles = {
-        option: (provided: any, state: { isSelected: any }) => ({
+        option: (provided: any, state: { isSelected: boolean; isDisabled: boolean }) => ({
             ...provided,
             borderBottom: `1px solid ${seperatorColor}`,
             backgroundColor: backgroundColor,
             color: state.isSelected ? selectedFontColor : fontColor,
+            // cursor: state.isDisabled ? 'not-allowed' : 'default',
         }),
         control: (provided: any) => ({
             ...provided,
