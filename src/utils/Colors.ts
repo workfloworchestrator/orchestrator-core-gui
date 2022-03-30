@@ -21,16 +21,21 @@ export function getReactSelectTheme(theme: Theme) {
             borderBottom: `1px solid ${seperatorColor}`,
             backgroundColor: backgroundColor,
             color: state.isSelected ? selectedFontColor : fontColor,
-            // cursor: state.isDisabled ? 'not-allowed' : 'default',
+            cursor: state.isDisabled ? "not-allowed" : "default",
         }),
         control: (provided: any) => ({
             ...provided,
             backgroundColor: backgroundColor,
             color: fontColor,
+            border: `1px solid ${seperatorColor}`,
+        }),
+        input: (provided: any) => ({
+            ...provided,
+            color: fontColor,
         }),
         // TODO: check if we need to style this
         singleValue: (provided: any, state: { isDisabled: any }) => {
-            const opacity = state.isDisabled ? 0.5 : 1;
+            const opacity = state.isDisabled ? 0.3 : 1;
             const transition = "opacity 300ms";
 
             return { ...provided, opacity, transition, color: fontColor };
