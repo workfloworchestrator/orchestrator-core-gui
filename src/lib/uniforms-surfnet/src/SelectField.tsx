@@ -34,7 +34,7 @@ import {
     LIGHT_FONT_COLOR,
     LIGHT_ROW_BORDER_COLOR,
     LIGHT_SELECTED_FONT_COLOR,
-} from "utils/Constants";
+} from "utils/Colors";
 import { Option } from "utils/types";
 
 export type SelectFieldProps = FieldProps<

@@ -18,7 +18,7 @@ import "stylesheets/buttons.scss";
 import React, { useContext } from "react";
 import { ColumnInstance, HeaderGroup, Row, TableBodyProps, TableProps } from "react-table";
 import ApplicationContext from "utils/ApplicationContext";
-import { DARK_ROW_BORDER_COLOR, LIGHT_ROW_BORDER_COLOR } from "utils/Constants";
+import { DARK_ROW_BORDER_COLOR, LIGHT_ROW_BORDER_COLOR } from "utils/Colors";
 
 interface ITableRendererProps<T extends object> {
     renderSubComponent: ({ row }: { row: Row<T> }) => JSX.Element;
