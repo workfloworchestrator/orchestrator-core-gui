@@ -39,6 +39,7 @@ I18n.translations.en = {
         processes: "Processes",
         validations: "Validations",
         subscriptions: "Subscriptions",
+        tickets: "Service Tickets",
         metadata: "Metadata",
         tasks: "Tasks",
         prefixes: "LIR Prefixes",
@@ -472,6 +473,9 @@ I18n.translations.en = {
     clipboard: {
         copied: "Copied!",
         copy: "Copy to clipboard",
+    },
+    tickets: {
+        new_ticket: "New Service Ticket",
     },
     metadata: {
         tabs: {

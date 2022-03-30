@@ -159,6 +159,15 @@ export interface IpPrefixSubscription extends Subscription {
     family: number;
     network_address_as_int: number;
 }
+
+export interface ServiceTicket {
+    jira_ticket: string;
+    subject: string;
+    state: number;
+    opened_by: string;
+    plandate: number;
+}
+
 export interface ServicePortSubscription extends Subscription {
     port_mode?: string;
 }

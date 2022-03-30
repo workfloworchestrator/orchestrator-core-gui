@@ -44,7 +44,8 @@ const Navigation = ({ extraPages = [] }: { extraPages: string[] }) => {
     const location = useLocation();
     const spinnerTarget = useRef();
     const spinnerElement = useRef<Spinner>();
-    const navItems = ["processes", "subscriptions", "metadata", "tasks", "settings"]
+    // using "tickets" instead. "service_tickets" doesn't display being selected in navbar
+    const navItems = ["processes", "subscriptions", "tickets", "metadata", "tasks", "settings"]
         .filter(
             // @ts-ignore
             (i) => !manifest.disabledMenuItems.includes(i)
