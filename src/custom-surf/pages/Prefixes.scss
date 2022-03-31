@@ -66,7 +66,7 @@ table.prefixes {
                 background-color: color.adjust(vars.$light-gold, $lightness: -10%);
             }
             &.dark {
-                background-color: color.adjust(vars.$gold, $lightness: -10%);
+                background-color: color.adjust(vars.$dark-gold, $lightness: -10%);
             }
         }
     }

@@ -39,6 +39,7 @@ $background: #f9f9f9;
 
 $medium-grey: #a6b6be;
 $dark-grey: #565656;
+$darkest-grey: #414141;
 $light-grey: #eff2f3;
 $lighter-grey: #d9d9d8;
 $lightest-grey: #fbfbfb;
@@ -100,9 +101,9 @@ $z-index: (
     color: #fff !important;
 }
 
-.euiTitle {
-    color: $dark-grey;
-}
+//.euiTitle {
+//    color: $dark-grey;
+//}
 
 .euiTab {
     color: red;
