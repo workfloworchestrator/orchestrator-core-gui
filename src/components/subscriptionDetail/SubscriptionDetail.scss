@@ -25,13 +25,11 @@
     h2 {
         font-size: 20px;
         padding: 15px 0 0 15px;
-        //color: vars.$dark-grey;
     }
     h3 {
         font-size: 18px;
         margin: 10px 0 0 0;
         padding: 10px 0 0 0;
-        //color: vars.$primary;
     }
     em {
         margin-left: 15px;
@@ -67,7 +65,6 @@
             min-width: 320px;
             i {
                 margin-right: 30px;
-                //color: white;
             }
         }
         p.no-termination-reason,
@@ -207,11 +204,9 @@
                     border-left: none;
                     td {
                         &.whitespace {
-                            //background-color: white;
                             border-left: none;
                         }
                         &.related-subscription-values {
-                            //background-color: vars.$light-grey;
                             border-bottom: 1px solid vars.$light-grey;
                             border-left: 5px solid vars.$primary;
                             margin: 0;
@@ -340,7 +335,6 @@
             text-transform: uppercase;
             font-weight: bold;
             font-size: larger;
-            //color: vars.$medium-grey;
             padding: 7px 2px 7px 0;
         }
         tbody {
@@ -357,7 +351,6 @@
         padding-top: 5px;
     }
     p.label {
-        //color: vars.$primary;
         font-weight: bold;
         margin-left: 0px;
         padding-top: 5px;
@@ -401,10 +394,5 @@ section.tabbed-details {
 }
 
 .euiTab {
-    //border-left: 1px solid vars.$light-grey;
-    //border-top: 1px solid vars.$light-grey;
-
-    &:last-of-type {
-        //border-right: 1px solid vars.$light-grey;
-    }
+    padding: 5px 5px 5px 5px;
 }

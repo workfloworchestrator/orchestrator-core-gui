@@ -22,9 +22,6 @@
     padding: 20px 0 5px 0;
     margin: 0 0 5px 0;
     font-size: larger;
-    &.minimized {
-        //background-color: white;
-    }
     .icon-right {
         float: right;
     }
@@ -44,7 +41,7 @@
     }
 }
 div.advanced-search-container {
-    padding: 0px 0px 10px 0px;
+    padding: 0 0 10px 0;
 }
 
 .preferences {
@@ -92,20 +89,6 @@ table.nwa-table {
         border-right: none;
     }
     tr {
-        //border-bottom: 1px solid #cccccc;
-        //background-color: white;
-        &.suspended {
-            //background-color: vars.$lightest-gold;
-        }
-        &.running {
-            //background-color: vars.$lightest-success;
-        }
-        &.api_unavailable {
-            //background-color: vars.$lightest-primary;
-        }
-        &.inconsistent_data {
-            //background-color: vars.$lightest-danger;
-        }
         &.highlighted {
             border: 2px solid vars.$primary;
         }
@@ -115,20 +98,17 @@ table.nwa-table {
             th {
                 padding: 5px 5px 10px 5px;
                 background-color: vars.$primary;
-                //color: white;
             }
         }
         span {
             font-weight: bold;
             font-size: larger;
-            //color: vars.$medium-grey;
             padding: 7px 2px 7px 0;
         }
         input {
             font-size: 14px;
         }
         tr.filters {
-            //background-color: white;
             th {
                 border-right: none;
                 border-left: none;
@@ -147,7 +127,6 @@ table.nwa-table {
 
                     i.fa {
                         margin-top: 6px;
-                        //color: vars.$primary;
                         float: left;
                         font-size: 18px;
                         &.active {
@@ -159,26 +138,6 @@ table.nwa-table {
         }
     }
     tbody {
-        tr {
-            &:hover {
-                //background-color: vars.$hover;
-                &.suspended {
-                    //background-color: color.adjust(vars.$lightest-gold, $lightness: -3%);
-                }
-                &.running {
-                    //background-color: color.adjust(vars.$lightest-success, $lightness: -3%);
-                }
-                &.api_unavailable {
-                    //background-color: color.adjust(vars.$lightest-primary, $lightness: -3%);
-                }
-                &.inconsistent_data {
-                    //background-color: color.adjust(vars.$lightest-danger, $lightness: -3%);
-                }
-                td.actions i.fa-ellipsis-h {
-                    //color: vars.$primary;
-                }
-            }
-        }
         td {
             i.fa-info-circle {
                 @include mixins.info-icon;
@@ -232,7 +191,6 @@ table.nwa-table {
             }
         }
         td.assignee {
-            //color: vars.$primary;
             font-weight: bold;
             padding-right: 15px;
         }

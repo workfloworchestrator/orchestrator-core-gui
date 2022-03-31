@@ -349,6 +349,7 @@ class Prefixes extends React.PureComponent<IProps, IState> {
 
     render() {
         const { intl } = this.props;
+        const { theme } = this.context;
         const columns: Column[] = [
             "customer",
             "subscription_id",
@@ -417,7 +418,12 @@ class Prefixes extends React.PureComponent<IProps, IState> {
                         </thead>
                         <tbody>
                             {sortedPrefixes.map((prefix) => (
-                                <tr key={prefix.id} className={ipamStates[prefix.state] ?? ""}>
+                                <tr
+                                    key={prefix.id}
+                                    className={
+                                        ipamStates[prefix.state] ? `${ipamStates[prefix.state]} ${theme}` : theme
+                                    }
+                                >
                                     <td
                                         data-label={intl.formatMessage({ id: "prefixes.customer" })}
                                         className="customer"
