@@ -19,7 +19,7 @@ import { ActionType, TableSettingsAction } from "components/tables/NwaTable";
 import { intl } from "locale/i18n";
 import debounce from "lodash/debounce";
 import React, { Dispatch, useContext } from "react";
-import Select, { ActionMeta, ValueType } from "react-select";
+import ReactSelect, { ActionMeta, ValueType } from "react-select";
 import { ColumnInstance, TableState } from "react-table";
 import ApplicationContext from "utils/ApplicationContext";
 import { Option, Organization, ProcessV2 } from "utils/types";
@@ -78,7 +78,7 @@ function CustomersFilter({
             title={column.id}
             renderButtonContent={renderFilterIcon(filtering)}
             renderContent={(disabled: boolean, reset) => (
-                <Select<Option, false>
+                <ReactSelect<Option, false>
                     ref={(ref) => ref?.focus()}
                     id={`filter-${state.name}.${column.id}`}
                     inputID={`input-filter-${state.name}.${column.id}`}
@@ -155,7 +155,7 @@ export function renderMultiSelectFilter(
             title={column.id}
             renderButtonContent={renderFilterIcon(filtering)}
             renderContent={(disabled, reset) => (
-                <Select<Option, true>
+                <ReactSelect<Option, true>
                     ref={(ref) => ref?.focus()}
                     id={`filter-${state.name}.${column.id}`}
                     inputId={`input-filter-${state.name}.${column.id}`}
@@ -213,7 +213,7 @@ export function renderSingleSelectFilter(
             title={column.id}
             renderButtonContent={renderFilterIcon(filtering)}
             renderContent={(disabled, reset) => (
-                <Select<Option, true>
+                <ReactSelect<Option, true>
                     ref={(ref) => ref?.focus()}
                     id={`filter-${state.name}.${column.id}`}
                     inputId={`input-filter-${state.name}.${column.id}`}

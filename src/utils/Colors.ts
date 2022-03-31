@@ -33,11 +33,9 @@ export function getReactSelectTheme(theme: Theme) {
             ...provided,
             color: fontColor,
         }),
-        // TODO: check if we need to style this
         singleValue: (provided: any, state: { isDisabled: any }) => {
             const opacity = state.isDisabled ? 0.3 : 1;
             const transition = "opacity 300ms";
-
             return { ...provided, opacity, transition, color: fontColor };
         },
         menu: (provided: any) => ({

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2019-2020 SURF.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 import SubscriptionDetail from "components/subscriptionDetail/SubscriptionDetail";
 import {
     renderInsyncCell,
@@ -36,20 +51,6 @@ import { useQueryParam } from "use-query-params";
 import ApplicationContext from "utils/ApplicationContext";
 import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";
 import { Subscription } from "utils/types";
-/*
- * Copyright 2019-2020 SURF.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
 
 export function initialSubscriptionsFilterAndSort(showTasks: boolean, statuses: string[]) {
     const initialFilterBy = [{ id: "status", values: statuses }];
@@ -94,7 +95,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
     const [pageQ, setPageQ] = useQueryParam(queryNameSpace + "Page", CommaSeparatedNumericArrayParam);
     const [sortQ, setSortQ] = useQueryParam(queryNameSpace + "Sort", CommaSeparatedStringArrayParam);
     const [filterQ, setFilterQ] = useQueryParam(queryNameSpace + "Filter", CommaSeparatedStringArrayParam);
-    const { organisations, products } = useContext(ApplicationContext);
+    const { organisations, products, theme } = useContext(ApplicationContext);
 
     const initialize = useMemo(
         () =>

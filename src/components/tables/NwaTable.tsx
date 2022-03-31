@@ -18,6 +18,7 @@ import "components/tables/NwaTable.scss";
 
 import { EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
 import AdvancedSearch from "components/tables/AdvancedSearch";
+import MiniPaginator from "components/tables/MiniPaginator";
 import Paginator from "components/tables/Paginator";
 import Preferences from "components/tables/Preferences";
 import { TableRenderer } from "components/tables/TableRenderer";
@@ -42,8 +43,6 @@ import {
     useTable,
 } from "react-table";
 import useHttpIntervalFallback from "utils/useHttpIntervalFallback";
-
-import MiniPaginator from "./MiniPaginator";
 
 /*
  * Reusable NWA table implementation using react-table 7.
