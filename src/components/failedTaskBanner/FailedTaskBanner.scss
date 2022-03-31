@@ -17,6 +17,9 @@
 @use "../../stylesheets/media_queries.scss";
 @use "../../stylesheets/vars";
 
+.failed-task-container {
+    cursor: pointer;
+}
 .failed-task-banner {
     display: flex;
     align-items: center;
