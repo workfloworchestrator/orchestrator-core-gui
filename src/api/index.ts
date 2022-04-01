@@ -111,6 +111,7 @@ abstract class ApiClientInterface extends BaseApiClient {
     ) => Promise<Subscription[]>;
     abstract subscriptionWorkflows: (subscription_id: string) => Promise<WorkflowReasons>;
     abstract inUseBySubscriptions: (subscriptionId: string) => Promise<Subscription[]>;
+    abstract subscriptionsByInUsedByIds: (subscriptionInstanceIds: string[]) => Promise<any>;
     abstract processSubscriptionsBySubscriptionId: (subscriptionId: string) => Promise<SubscriptionProcesses[]>;
     abstract processSubscriptionsByProcessId: (processId: string) => Promise<ProcessSubscription[]>;
     abstract assignees: () => Promise<string[]>;
@@ -235,6 +236,16 @@ export class ApiClient extends ApiClientInterface {
 
     inUseBySubscriptions = (subscriptionId: string): Promise<Subscription[]> => {
         return this.fetchJson(`subscriptions/in_use_by/${subscriptionId}`);
+    };
+
+    subscriptionsByInUsedByIds = (subscriptionInstanceIds: string[]) => {
+        return this.postPutJson(
+            "subscriptions/subscriptions_in_used_by_ids",
+            subscriptionInstanceIds,
+            "post",
+            true,
+            false
+        );
     };
 
     processSubscriptionsBySubscriptionId = (subscriptionId: string): Promise<SubscriptionProcesses[]> => {

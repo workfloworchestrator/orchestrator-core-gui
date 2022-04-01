@@ -7,9 +7,16 @@ interface IProps {
     subscriptionInstances: any[][];
     viewType?: string;
     subscription_id: string;
+    inUseBySubscriptions: {};
 }
 
-export function RenderServiceConfiguration({ subscriptionInstances, viewType, subscription_id }: IProps) {
+export function RenderServiceConfiguration({
+    subscriptionInstances,
+    viewType,
+    subscription_id,
+    inUseBySubscriptions,
+}: IProps) {
+    // Todo: remove surf specific code
     const tabOrder = ["ip_gw_endpoint", "l3_endpoints", "l2_endpoints"];
 
     const splitValueAndInstanceFields = (instance: ISubscriptionInstance) => {
@@ -58,13 +65,30 @@ export function RenderServiceConfiguration({ subscriptionInstances, viewType, su
                                         .flatMap((entry) =>
                                             entry[1].map((value: any) => [entry[0], value !== null ? value : "NULL"])
                                         )
-                                        .map((entry, i) => (
-                                            <SubscriptionInstanceValue
-                                                key={`${inst.subscription_instance_id}.${i}`}
-                                                label={entry[0]}
-                                                value={entry[1] !== null ? entry[1] : "null"}
-                                            />
-                                        ))}
+                                        .map((entry, i) => {
+                                            if (entry[0] === "in_use_by_ids") {
+                                                // @ts-ignore
+                                                const value = inUseBySubscriptions.hasOwnProperty(entry[1])
+                                                    ? // @ts-ignore
+                                                      inUseBySubscriptions[entry[1]].description
+                                                    : entry[1];
+                                                console.log(value);
+                                                return (
+                                                    <SubscriptionInstanceValue
+                                                        key={`${inst.subscription_instance_id}.${i}`}
+                                                        label="in_use_by_subscription_id"
+                                                        value={value}
+                                                    />
+                                                );
+                                            }
+                                            return (
+                                                <SubscriptionInstanceValue
+                                                    key={`${inst.subscription_instance_id}.${i}`}
+                                                    label={entry[0]}
+                                                    value={entry[1] !== null ? entry[1] : "null"}
+                                                />
+                                            );
+                                        })}
                                 </table>
                                 {subTabs.length > 0 && (
                                     <div className="indented">

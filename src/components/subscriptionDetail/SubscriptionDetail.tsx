@@ -47,7 +47,7 @@ import {
     TabView,
     WorkflowReasons,
 } from "utils/types";
-import { importPlugin } from "utils/Utils";
+import { findObjects, importPlugin } from "utils/Utils";
 
 interface IProps {
     subscriptionId: string;
@@ -65,6 +65,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     const [subscriptionProcesses, setSubscriptionProcesses] = useState<SubscriptionProcesses[]>();
     const [notFound, setNotFound] = useState(false);
     const [workflows, setWorkflows] = useState<WorkflowReasons>();
+    const [inUseBySubscriptions, setInUseBySubscriptions] = useState({});
     const [enrichedInUseBySubscriptions, setEnrichedInUseBySubscriptions] = useState<SubscriptionWithDetails[]>();
     const [viewTypes, setViewTypes] = useStorageState<StoredViewPreferences[]>(
         localStorage,
@@ -131,6 +132,14 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                 }
             }
             loadViews().then();
+        }
+    }, [loadedSubscriptionModel, subscription]);
+
+    useEffect(() => {
+        if (loadedSubscriptionModel && subscription) {
+            const subscriptionInstanceIds = subscription;
+            const inUseByIds = findObjects(subscription, "in_use_by_ids");
+            apiClient.subscriptionsByInUsedByIds(inUseByIds).then((i) => setInUseBySubscriptions(i));
         }
     }, [loadedSubscriptionModel, subscription]);
 
@@ -320,6 +329,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                 <RenderServiceConfiguration
                     subscriptionInstances={subscription_instances}
                     subscription_id={subscription.subscription_id}
+                    inUseBySubscriptions={inUseBySubscriptions}
                 />
             )}
 

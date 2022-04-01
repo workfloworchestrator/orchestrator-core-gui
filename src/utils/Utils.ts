@@ -99,3 +99,25 @@ export const stateDelta = (prev: State, curr: State) => {
     }, {});
     return newState;
 };
+
+export function findObjects(obj: Object, targetProp: string) {
+    let finalResult: any[] = [];
+    function getObject(theObject: any) {
+        for (let prop in theObject) {
+            if (theObject.hasOwnProperty(prop)) {
+                if (prop === targetProp) {
+                    finalResult.push(theObject[prop]);
+                }
+                if (theObject[prop] instanceof Object || theObject[prop] instanceof Array) {
+                    getObject(theObject[prop]);
+                }
+            }
+        }
+    }
+
+    getObject(obj);
+    if (finalResult.length) {
+        return finalResult[0];
+    }
+    return [];
+}
