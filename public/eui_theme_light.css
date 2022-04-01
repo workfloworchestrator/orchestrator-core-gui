@@ -1,5 +1,51 @@
 @charset "UTF-8";
 /**
+The MIT License (MIT)
+
+Copyright (c) 2015 strarsis https://github.com/strarsis/sass-math-pow
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ */
+/**
+The MIT License (MIT)
+
+Copyright (c) 2015 strarsis https://github.com/strarsis/sass-math-pow
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ */
+/**
  * 1. Focus rings shouldn't be visible on scrollable regions, but a11y requires them to be focusable.
  *    Browser's supporting `:focus-visible` will still show outline on keyboard focus only.
  *    Others like Safari, won't show anything at all.
@@ -6012,6 +6058,8 @@
       max-width: -moz-max-content;
       max-width: max-content; } }
   .euiEmptyPrompt .euiEmptyPrompt__icon > * {
+    -webkit-flex-shrink: 1;
+            flex-shrink: 1;
     max-width: 25.71429rem; }
   .euiEmptyPrompt.euiPanel--transparent .euiEmptyPrompt__footer {
     background-color: #fafbfd; }
@@ -6092,27 +6140,23 @@
           align-items: center;
   -webkit-justify-content: center;
           justify-content: center; }
+  @media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .euiEmptyPrompt--horizontal .euiEmptyPrompt__icon {
+      min-width: 40%;
+      max-width: 50%; } }
+  @media only screen and (min-width: 1200px) {
+    .euiEmptyPrompt--horizontal .euiEmptyPrompt__icon {
+      min-width: 40%;
+      max-width: 50%; } }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .euiEmptyPrompt--horizontal .euiEmptyPrompt__content {
-    padding: 24px 0; } }
-
-@media only screen and (min-width: 1200px) {
-  .euiEmptyPrompt--horizontal .euiEmptyPrompt__content {
-    padding: 24px 0; } }
-
-.euiEmptyPrompt--horizontal .euiEmptyPrompt__contentInner {
+.euiEmptyPrompt--horizontal .euiEmptyPrompt__content {
   max-width: 36em; }
-
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .euiEmptyPrompt--horizontal .euiEmptyPrompt__icon,
-  .euiEmptyPrompt--horizontal .euiEmptyPrompt__content {
-    width: 50%; } }
-
-@media only screen and (min-width: 1200px) {
-  .euiEmptyPrompt--horizontal .euiEmptyPrompt__icon,
-  .euiEmptyPrompt--horizontal .euiEmptyPrompt__content {
-    width: 50%; } }
+  @media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .euiEmptyPrompt--horizontal .euiEmptyPrompt__content {
+      padding: 24px 0; } }
+  @media only screen and (min-width: 1200px) {
+    .euiEmptyPrompt--horizontal .euiEmptyPrompt__content {
+      padding: 24px 0; } }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .euiEmptyPrompt--horizontal .euiEmptyPrompt__actions {
@@ -6128,13 +6172,22 @@
 .euiEmptyPrompt--paddingSmall .euiEmptyPrompt__footer {
   padding: 8px; }
 
+.euiEmptyPrompt--paddingSmall.euiEmptyPrompt--horizontal .euiEmptyPrompt__main {
+  gap: 8px; }
+
 .euiEmptyPrompt--paddingMedium .euiEmptyPrompt__main,
 .euiEmptyPrompt--paddingMedium .euiEmptyPrompt__footer {
   padding: 16px; }
 
+.euiEmptyPrompt--paddingMedium.euiEmptyPrompt--horizontal .euiEmptyPrompt__main {
+  gap: 16px; }
+
 .euiEmptyPrompt--paddingLarge .euiEmptyPrompt__main,
 .euiEmptyPrompt--paddingLarge .euiEmptyPrompt__footer {
   padding: 24px; }
+
+.euiEmptyPrompt--paddingLarge.euiEmptyPrompt--horizontal .euiEmptyPrompt__main {
+  gap: 24px; }
 
 .euiErrorBoundary {
   background: repeating-linear-gradient(45deg, rgba(189, 39, 30, 0.25), rgba(189, 39, 30, 0.25) 1px, rgba(189, 39, 30, 0.05) 1px, rgba(189, 39, 30, 0.05) 20px);
@@ -10404,7 +10457,8 @@
   -webkit-flex-shrink: 0;
           flex-shrink: 0; }
   .euiImage .euiImage__img {
-    margin-bottom: 0; }
+    margin-bottom: 0;
+    max-width: 100%; }
   .euiImage.euiImage--hasShadow .euiImage__img {
     box-shadow: 0 0.9px 4px -1px rgba(0, 0, 0, 0.08), 0 2.6px 8px -1px rgba(0, 0, 0, 0.06), 0 5.7px 12px -1px rgba(0, 0, 0, 0.05), 0 15px 15px -1px rgba(0, 0, 0, 0.04); }
   .euiImage .euiImage__button {
@@ -11369,13 +11423,11 @@ button.euiLink {
 
 .euiLoadingSpinner--small {
   width: 12px;
-  height: 12px;
-  border-width: 1px; }
+  height: 12px; }
 
 .euiLoadingSpinner--medium {
   width: 16px;
-  height: 16px;
-  border-width: 1px; }
+  height: 16px; }
 
 .euiLoadingSpinner--large {
   width: 24px;
@@ -11384,6 +11436,14 @@ button.euiLink {
 .euiLoadingSpinner--xLarge {
   width: 32px;
   height: 32px; }
+
+.euiLoadingSpinner--xxLarge {
+  width: 40px;
+  height: 40px; }
+
+.euiLoadingSpinner--small,
+.euiLoadingSpinner--medium {
+  border-width: 1px; }
 
 @-webkit-keyframes euiLoadingSpinner {
   from {
@@ -11710,6 +11770,12 @@ button.euiLink {
   .euiMarkdownEditorPreview::-webkit-scrollbar-corner, .euiMarkdownEditorPreview::-webkit-scrollbar-track {
     background-color: transparent; }
 
+.euiMarkdownEditorPreview-isReadOnly .euiCheckbox__input ~ .euiCheckbox__label {
+  cursor: default; }
+
+.euiMarkdownEditorPreview-isReadOnly .euiCheckbox__input:focus:not(:checked) + .euiCheckbox__square {
+  border-color: #c9cbcd; }
+
 .euiMarkdownEditorTextArea {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-weight: 400;
@@ -11763,6 +11829,13 @@ button.euiLink {
     background-image: linear-gradient(to top, #07C, #07C 2px, transparent 2px, transparent 100%);
     background-size: 100% 100%; }
 
+.euiMarkdownEditorTextArea-isReadOnly {
+  background: #FFF;
+  cursor: unset; }
+  .euiMarkdownEditorTextArea-isReadOnly:focus,
+  .euiMarkdownEditor:focus-within .euiMarkdownEditorTextArea-isReadOnly {
+    background: none; }
+
 .euiMarkdownEditorToolbar {
   display: -webkit-flex;
   display: flex;
@@ -11795,11 +11868,6 @@ button.euiLink {
 .euiMarkdownTooltip__icon {
   -webkit-transform: translateY(-1px);
           transform: translateY(-1px); }
-
-.euiMark {
-  background-color: transparent;
-  font-weight: 700;
-  color: #343741; }
 
 /**
  * 1. Fix IE overflow issue (min-height) by adding a separate wrapper for the
@@ -14048,13 +14116,14 @@ button.euiLink {
           flex-shrink: 0; }
 
 .euiSelectableListItem__text {
-  max-width: 100%;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-  word-wrap: normal !important;
   -webkit-flex-grow: 1;
           flex-grow: 1; }
+  .euiSelectableListItem__text--truncate {
+    max-width: 100%;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    word-wrap: normal !important; }
 
 /**
   * 1. Prevent really long input from overflowing the container.
@@ -14082,18 +14151,18 @@ button.euiLink {
   .euiHeader--dark .euiSelectableTemplateSitewide .euiFormControlLayout input {
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3); }
   .euiHeader--dark .euiSelectableTemplateSitewide .euiFormControlLayout:not(:focus-within) {
-    color: rgba(255, 255, 255, 0.7); }
+    color: #FFF; }
     .euiHeader--dark .euiSelectableTemplateSitewide .euiFormControlLayout:not(:focus-within) input {
       color: inherit;
       background-color: transparent; }
       .euiHeader--dark .euiSelectableTemplateSitewide .euiFormControlLayout:not(:focus-within) input::-webkit-input-placeholder {
-        color: rgba(255, 255, 255, 0.4);
+        color: #bdc0c6;
         opacity: 1; }
       .euiHeader--dark .euiSelectableTemplateSitewide .euiFormControlLayout:not(:focus-within) input::-moz-placeholder {
-        color: rgba(255, 255, 255, 0.4);
+        color: #bdc0c6;
         opacity: 1; }
       .euiHeader--dark .euiSelectableTemplateSitewide .euiFormControlLayout:not(:focus-within) input::placeholder {
-        color: rgba(255, 255, 255, 0.4);
+        color: #bdc0c6;
         opacity: 1; }
     .euiHeader--dark .euiSelectableTemplateSitewide .euiFormControlLayout:not(:focus-within) .euiFormControlLayout__append {
       background-color: transparent;
@@ -17233,6 +17302,11 @@ button.euiSuggestItem {
   background-color: #fbfcfd;
   box-shadow: inset 0 0 0 1px rgba(17, 43, 134, 0.1); }
 
+.euiFilterGroup--compressed {
+  border-radius: 4px; }
+  .euiFilterGroup--compressed .euiFilterButton {
+    height: 32px; }
+
 .euiFilterButton {
   border-radius: 0;
   border: none;
@@ -17514,9 +17588,6 @@ button.euiSuggestItem {
 
 .euiKeyPadMenuItem__label {
   font-weight: 600; }
-
-.euiMark {
-  background: rgba(0, 119, 204, 0.1); }
 
 .euiMarkdownEditorToolbar {
   border-radius: 6px 6px 0 0; }

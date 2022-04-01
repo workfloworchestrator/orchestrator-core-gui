@@ -95,7 +95,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
     const [pageQ, setPageQ] = useQueryParam(queryNameSpace + "Page", CommaSeparatedNumericArrayParam);
     const [sortQ, setSortQ] = useQueryParam(queryNameSpace + "Sort", CommaSeparatedStringArrayParam);
     const [filterQ, setFilterQ] = useQueryParam(queryNameSpace + "Filter", CommaSeparatedStringArrayParam);
-    const { organisations, products, theme } = useContext(ApplicationContext);
+    const { organisations, products } = useContext(ApplicationContext);
 
     const initialize = useMemo(
         () =>

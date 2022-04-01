@@ -3,6 +3,8 @@ import SubscriptionInstanceValue from "custom/components/subscriptionDetail/Subs
 import { isArray, partition } from "lodash";
 import { ISubscriptionInstance, TabView } from "utils/types";
 
+import SubscriptionInfo from "../SubscriptionInfo";
+
 interface IProps {
     subscriptionInstances: any[][];
     viewType?: string;
@@ -20,8 +22,6 @@ export function RenderServiceConfiguration({
     const tabOrder = ["ip_gw_endpoint", "l3_endpoints", "l2_endpoints"];
 
     const splitValueAndInstanceFields = (instance: ISubscriptionInstance) => {
-        if (instance === null) debugger;
-
         const fields = Object.entries(instance)
             .filter(([key]) => !["label", "subscription_instance_id", "name"].includes(key))
             .filter(([key, value]) => (key === "owner_subscription_id" ? value !== subscription_id : true))
@@ -70,13 +70,12 @@ export function RenderServiceConfiguration({
                                                 // @ts-ignore
                                                 const value = inUseBySubscriptions.hasOwnProperty(entry[1])
                                                     ? // @ts-ignore
-                                                      inUseBySubscriptions[entry[1]].description
+                                                      inUseBySubscriptions[entry[1]]
                                                     : entry[1];
-                                                console.log(value);
                                                 return (
-                                                    <SubscriptionInstanceValue
+                                                    <SubscriptionInfo
                                                         key={`${inst.subscription_instance_id}.${i}`}
-                                                        label="in_use_by_subscription_id"
+                                                        label="used_by_subscription"
                                                         value={value}
                                                     />
                                                 );

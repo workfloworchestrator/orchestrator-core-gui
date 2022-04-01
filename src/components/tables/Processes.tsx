@@ -98,7 +98,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
     const [pageQ, setPageQ] = useQueryParam(queryNameSpace + "Page", CommaSeparatedNumericArrayParam);
     const [sortQ, setSortQ] = useQueryParam(queryNameSpace + "Sort", CommaSeparatedStringArrayParam);
     const [filterQ, setFilterQ] = useQueryParam(queryNameSpace + "Filter", CommaSeparatedStringArrayParam);
-    const { organisations, products, assignees, processStatuses, theme } = useContext(ApplicationContext);
+    const { organisations, products, assignees, processStatuses } = useContext(ApplicationContext);
 
     const initialize = useMemo(
         () =>

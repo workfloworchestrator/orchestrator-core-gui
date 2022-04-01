@@ -137,11 +137,10 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
 
     useEffect(() => {
         if (loadedSubscriptionModel && subscription) {
-            const subscriptionInstanceIds = subscription;
             const inUseByIds = findObjects(subscription, "in_use_by_ids");
             apiClient.subscriptionsByInUsedByIds(inUseByIds).then((i) => setInUseBySubscriptions(i));
         }
-    }, [loadedSubscriptionModel, subscription]);
+    }, [loadedSubscriptionModel, subscription, apiClient]);
 
     if (notFound) {
         return (
@@ -319,6 +318,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                                     key={index}
                                     subscription_instance={entry[1]}
                                     field_name={entry[0]}
+                                    inUseBySubscriptions={inUseBySubscriptions}
                                 />
                             ))}
                         </SubscriptionDetailSection>

@@ -21,6 +21,12 @@
     @include mixins.card;
 }
 
+.euiDescriptionList {
+    a {
+        margin-top: 15px;
+    }
+}
+
 .mod-subscription-detail {
     h2 {
         font-size: 20px;
@@ -45,6 +51,7 @@
         margin-left: auto;
         width: 66%;
     }
+
     section.product-block {
         section.product-block {
             padding-left: 20px;

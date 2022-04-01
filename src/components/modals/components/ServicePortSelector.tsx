@@ -276,7 +276,8 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                         <EuiSuggest
                             aria-labelledby="Search and select a node"
                             status={nodesLoading ? "loading" : "unchanged"}
-                            onInputChange={this.onNodeInputChange}
+                            // @ts-ignore
+                            onChange={this.onNodeInputChange}
                             onItemClick={this.onNodeClick}
                             suggestions={nodeSuggestions}
                         />
