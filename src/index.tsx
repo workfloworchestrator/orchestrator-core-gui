@@ -102,7 +102,25 @@ if (ENV.OAUTH2_ENABLED) {
 
                     // @ts-ignore
                     if (props.userData && !props.userData.expired) {
-                        return <App user={props?.userData.profile} />;
+                        return (
+                            <>
+                                <link
+                                    rel="stylesheet"
+                                    type="text/css"
+                                    href={
+                                        localStorage.getItem("darkMode") || false
+                                            ? "/eui_theme_dark.css"
+                                            : "/eui_theme_light.css"
+                                    }
+                                />
+                                <link
+                                    rel="stylesheet"
+                                    type="text/css"
+                                    href={localStorage.getItem("darkMode") || false ? "/dark.css" : "/light.css"}
+                                />
+                                <App user={props?.userData.profile} />
+                            </>
+                        );
                     }
                 }}
             </AuthContext.Consumer>
