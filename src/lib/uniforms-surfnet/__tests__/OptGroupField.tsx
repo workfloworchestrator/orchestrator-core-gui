@@ -2,7 +2,7 @@ import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import { OptGroupField } from "lib/uniforms-surfnet/src";
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
