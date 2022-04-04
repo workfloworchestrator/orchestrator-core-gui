@@ -23,55 +23,59 @@ import {
     EuiSpacer,
 } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { renderDateTime } from "utils/Lookups";
 import { Product, ProductBlock } from "utils/types";
+import {intl} from "../locale/i18n";
 
-interface IState {
-    products: Product[];
-    productsLoaded: boolean;
-    isLoading: boolean;
-    confirmationDialogOpen: boolean;
-    confirmationDialogAction: () => void;
-    confirm: () => void;
-    confirmationDialogQuestion: string;
-    leavePage: boolean;
-}
+// interface IState {
+//     products: Product[];
+//     productsLoaded: boolean;
+//     isLoading: boolean;
+//     confirmationDialogOpen: boolean;
+//     confirmationDialogAction: () => void;
+//     confirm: () => void;
+//     confirmationDialogQuestion: string;
+//     leavePage: boolean;
+// }
 
-class Products extends React.Component<WrappedComponentProps, IState> {
-    context!: React.ContextType<typeof ApplicationContext>;
+function Products() {
+    // context!: React.ContextType<typeof ApplicationContext>;
 
-    state: IState = {
-        products: [],
-        productsLoaded: true,
-        isLoading: false,
-        confirmationDialogOpen: false,
-        confirmationDialogAction: () => this,
-        confirm: () => this,
-        confirmationDialogQuestion: "",
-        leavePage: true,
-    };
+    const { apiClient, redirect, allowed } = useContext(ApplicationContext);
+    const [products, setProducts] = useState<Product[]>([])
+    const [productsLoaded, setProductsLoaded] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
+    const [reload, setReload] = useState(false)
+    const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false)
+    const [confirmationDialogAction, setConfirmationDialogAction] = useState<() => void>(() => () => null)
+    const [confirmationDialogQuestion, setConfirmationDialogQuestion] = useState("")
+    // const [confirm, setConfirm] = useState<() => void>(() => null)
+    // const [leavePage, setLeavePage] = useState(true)
 
-    componentDidMount() {
-        this.context.apiClient.products().then((products: Product[]) => {
-            this.setState({ products: products, productsLoaded: false });
+    useEffect(() => {
+        apiClient.products().then((products: Product[]) => {
+            setProducts(products)
+            setProductsLoaded(true)
         });
-    }
+        setReload(false)
+    }, [apiClient, reload]);
 
-    cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
+    function cancelConfirmation() {(setConfirmationDialogOpen(false))}
+    // cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
 
-    handleDeleteProduct = (product: Product) => (e: React.MouseEvent<HTMLButtonElement>) => {
-        const { intl } = this.props;
-        this.confirmation(
+    const handleDeleteProduct = (product: Product) => (e: React.MouseEvent<HTMLButtonElement>) => {
+        // const { intl } = this.props;
+        confirmation(
             intl.formatMessage({ id: "metadata.deleteConfirmation" }, { type: "Product", name: product.name }),
             () =>
-                this.context.apiClient
+                apiClient
                     .deleteProduct(product.product_id)
                     .then(() => {
-                        this.componentDidMount();
+                        setReload(true);
                         setFlash(
                             intl.formatMessage({ id: "metadata.flash.delete" }, { name: product.name, type: "Product" })
                         );
@@ -88,24 +92,33 @@ class Products extends React.Component<WrappedComponentProps, IState> {
         );
     };
 
-    confirmation = (question: string, action: () => void) =>
-        this.setState({
-            confirmationDialogOpen: true,
-            confirmationDialogQuestion: question,
-            confirmationDialogAction: () => {
-                this.cancelConfirmation();
-                action();
-            },
-        });
+    // confirmation = (question: string, action: () => void) =>
+    //     this.setState({
+    //         confirmationDialogOpen: true,
+    //         confirmationDialogQuestion: question,
+    //         confirmationDialogAction: () => {
+    //             this.cancelConfirmation();
+    //             action();
+    //         },
+    //     });
 
-    render() {
-        const {
-            products,
-            productsLoaded,
-            confirmationDialogOpen,
-            confirmationDialogAction,
-            confirmationDialogQuestion,
-        } = this.state;
+    function confirmation(question: string, action: () => void){
+        setConfirmationDialogOpen(true)
+        setConfirmationDialogQuestion(question)
+        setConfirmationDialogAction(() => {
+            cancelConfirmation();
+            action;
+        })
+    }
+
+
+        // const {
+        //     products,
+        //     productsLoaded,
+        //     confirmationDialogOpen,
+        //     confirmationDialogAction,
+        //     confirmationDialogQuestion,
+        // } = this.state;
 
         const search = {
             box: {
@@ -218,7 +231,7 @@ class Products extends React.Component<WrappedComponentProps, IState> {
                 name: "",
                 width: "2.5%",
                 render: (product_id: string) => {
-                    return this.context.allowed("/orchestrator/metadata/product/view/" + product_id) + "/" ? (
+                    return allowed("/orchestrator/metadata/product/view/" + product_id) + "/" ? (
                         <EuiButtonIcon href={`/metadata/product/view/${product_id}`} iconType="eye" aria-label="View" />
                     ) : null;
                 },
@@ -228,7 +241,7 @@ class Products extends React.Component<WrappedComponentProps, IState> {
                 name: "",
                 width: "2.5%",
                 render: (product_id: string) => {
-                    return this.context.allowed("/orchestrator/metadata/product/edit/" + product_id) + "/" ? (
+                    return allowed("/orchestrator/metadata/product/edit/" + product_id) + "/" ? (
                         <EuiButtonIcon
                             href={`/metadata/product/edit/${product_id}`}
                             iconType="pencil"
@@ -242,9 +255,9 @@ class Products extends React.Component<WrappedComponentProps, IState> {
                 name: "",
                 width: "2%",
                 render: (product_id: string, record: Product) => {
-                    return this.context.allowed("/orchestrator/metadata/product/delete/" + product_id) + "/" ? (
+                    return allowed("/orchestrator/metadata/product/delete/" + product_id) + "/" ? (
                         <EuiButtonIcon
-                            onClick={this.handleDeleteProduct(record)}
+                            onClick={handleDeleteProduct(record)}
                             iconType="trash"
                             aria-label="Delete"
                         />
@@ -258,7 +271,7 @@ class Products extends React.Component<WrappedComponentProps, IState> {
                 <EuiPageContentHeader>
                     <ConfirmationDialog
                         isOpen={confirmationDialogOpen}
-                        cancel={this.cancelConfirmation}
+                        cancel={cancelConfirmation}
                         confirm={confirmationDialogAction}
                         question={confirmationDialogQuestion}
                     />
@@ -269,14 +282,13 @@ class Products extends React.Component<WrappedComponentProps, IState> {
                         search={search}
                         pagination={true}
                         sorting={true}
-                        loading={productsLoaded}
+                        loading={!productsLoaded}
                         hasActions={true}
                     />
                 </EuiPageContentHeader>
             </EuiPageContent>
         );
-    }
 }
 
-Products.contextType = ApplicationContext;
+// Products.contextType = ApplicationContext;
 export default injectIntl(Products);
