@@ -1,4 +1,4 @@
-import { EuiButton, EuiButtonIcon } from "@elastic/eui";
+import { EuiButton } from "@elastic/eui";
 import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
 import SubscriptionInstanceValue from "custom/components/subscriptionDetail/SubscriptionInstanceValue";
 import { isArray, partition } from "lodash";
