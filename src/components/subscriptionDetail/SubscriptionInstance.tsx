@@ -13,11 +13,14 @@
  *
  */
 
+import { EuiButton } from "@elastic/eui";
 import SubscriptionInstanceValue from "custom/components/subscriptionDetail/SubscriptionInstanceValue";
 import { isArray, partition } from "lodash";
+import React, { useContext, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { ISubscriptionInstance } from "utils/types";
 
+import ApplicationContext from "../../utils/ApplicationContext";
 import SubscriptionInfo from "./SubscriptionInfo";
 
 interface IProps {
@@ -27,10 +30,14 @@ interface IProps {
 }
 
 export default function SubscriptionInstance({ subscription_instance, field_name, inUseBySubscriptions }: IProps) {
+    const { theme } = useContext(ApplicationContext);
+    const [subscriptionInfoExpanded, setSubscriptionInfoExpanded] = useState(false);
+
     if (!subscription_instance) {
         return null;
     }
-
+    let isSubscriptionInfoSection = false;
+    const subscriptionInstanceId = subscription_instance.subscription_instance_id;
     const fields = Object.entries(subscription_instance)
         .filter((entry) => !["label", "subscription_instance_id", "name"].includes(entry[0]))
         .map<[string, any]>((entry) => (isArray(entry[1]) ? entry : [entry[0], [entry[1]]]));
@@ -54,12 +61,46 @@ export default function SubscriptionInstance({ subscription_instance, field_name
                     .flatMap((entry) => entry[1].map((value: any) => [entry[0], value]))
                     .map((entry, i) => {
                         if (entry[0] === "in_use_by_ids") {
+                            let SubscriptionInfoExpandButton = <></>;
+                            if (!isSubscriptionInfoSection) {
+                                // render button once per product block
+                                SubscriptionInfoExpandButton = (
+                                    <tbody className={theme}>
+                                        <tr>
+                                            <td>USED_BY_SUBSCRIPTIONS</td>
+                                            <td>Show info about subscriptions that use this product block</td>
+                                            <td>
+                                                <EuiButton
+                                                    iconType={subscriptionInfoExpanded ? "arrowDown" : "arrowRight"}
+                                                    onClick={() =>
+                                                        setSubscriptionInfoExpanded(!subscriptionInfoExpanded)
+                                                    }
+                                                >
+                                                    {subscriptionInfoExpanded ? "collapse" : "expand"}
+                                                </EuiButton>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                );
+                                isSubscriptionInfoSection = true;
+                            }
                             // @ts-ignore
                             const value = inUseBySubscriptions.hasOwnProperty(entry[1])
                                 ? // @ts-ignore
                                   inUseBySubscriptions[entry[1]]
                                 : entry[1];
-                            return <SubscriptionInfo key={i} label="used_by_subscription" value={value} />;
+                            return (
+                                <>
+                                    {SubscriptionInfoExpandButton}
+                                    {subscriptionInfoExpanded && (
+                                        <SubscriptionInfo
+                                            key={`${subscriptionInstanceId}.${i}`}
+                                            label="used_by_subscription"
+                                            value={value}
+                                        />
+                                    )}
+                                </>
+                            );
                         }
                         return (
                             <SubscriptionInstanceValue

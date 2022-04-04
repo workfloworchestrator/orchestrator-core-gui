@@ -1,8 +1,11 @@
+import { EuiButton, EuiButtonIcon } from "@elastic/eui";
 import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
 import SubscriptionInstanceValue from "custom/components/subscriptionDetail/SubscriptionInstanceValue";
 import { isArray, partition } from "lodash";
+import React, { useContext, useState } from "react";
 import { ISubscriptionInstance, TabView } from "utils/types";
 
+import ApplicationContext from "../../../utils/ApplicationContext";
 import SubscriptionInfo from "../SubscriptionInfo";
 
 interface IProps {
@@ -20,6 +23,16 @@ export function RenderServiceConfiguration({
 }: IProps) {
     // Todo: remove surf specific code
     const tabOrder = ["ip_gw_endpoint", "l3_endpoints", "l2_endpoints"];
+    const { theme } = useContext(ApplicationContext);
+    const [subscriptionInfoExpanded, setSubscriptionInfoExpanded] = useState<string[]>([]);
+
+    const toggleExpand = (id: string) => {
+        if (subscriptionInfoExpanded.includes(id)) {
+            setSubscriptionInfoExpanded(subscriptionInfoExpanded.filter((i) => i !== id));
+        } else {
+            setSubscriptionInfoExpanded(subscriptionInfoExpanded.concat(id));
+        }
+    };
 
     const splitValueAndInstanceFields = (instance: ISubscriptionInstance) => {
         const fields = Object.entries(instance)
@@ -48,6 +61,8 @@ export function RenderServiceConfiguration({
                 instances.forEach((inst: ISubscriptionInstance) => {
                     const splitFields = splitValueAndInstanceFields(inst);
                     const subTabs: TabView[] = level < 4 ? parseToTabs(splitFields.instance_fields, level + 1) : [];
+                    let isSubscriptionInfoSection = false;
+                    const subscriptionInstanceId = inst.subscription_instance_id;
                     tabs.push({
                         id: `${field}-${inst.subscription_instance_id}`,
                         name: splitFields.tabName,
@@ -67,17 +82,54 @@ export function RenderServiceConfiguration({
                                         )
                                         .map((entry, i) => {
                                             if (entry[0] === "in_use_by_ids") {
+                                                const isExpanded = subscriptionInfoExpanded.includes(
+                                                    subscriptionInstanceId
+                                                );
+                                                let SubscriptionInfoExpandButton = <></>;
+                                                if (!isSubscriptionInfoSection) {
+                                                    // render button once per product block
+                                                    SubscriptionInfoExpandButton = (
+                                                        <tbody className={theme}>
+                                                            <tr>
+                                                                <td>USED_BY_SUBSCRIPTIONS</td>
+                                                                <td>
+                                                                    Show info about subscriptions that use this product
+                                                                    block
+                                                                </td>
+                                                                <td>
+                                                                    <EuiButton
+                                                                        iconType={
+                                                                            isExpanded ? "arrowDown" : "arrowRight"
+                                                                        }
+                                                                        onClick={() =>
+                                                                            toggleExpand(subscriptionInstanceId)
+                                                                        }
+                                                                    >
+                                                                        {isExpanded ? "collapse" : "expand"}
+                                                                    </EuiButton>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    );
+                                                    isSubscriptionInfoSection = true;
+                                                }
                                                 // @ts-ignore
                                                 const value = inUseBySubscriptions.hasOwnProperty(entry[1])
                                                     ? // @ts-ignore
                                                       inUseBySubscriptions[entry[1]]
                                                     : entry[1];
+
                                                 return (
-                                                    <SubscriptionInfo
-                                                        key={`${inst.subscription_instance_id}.${i}`}
-                                                        label="used_by_subscription"
-                                                        value={value}
-                                                    />
+                                                    <>
+                                                        {SubscriptionInfoExpandButton}
+                                                        {isExpanded && (
+                                                            <SubscriptionInfo
+                                                                key={`${inst.subscription_instance_id}.${i}`}
+                                                                label="used_by_subscription"
+                                                                value={value}
+                                                            />
+                                                        )}
+                                                    </>
                                                 );
                                             }
                                             return (

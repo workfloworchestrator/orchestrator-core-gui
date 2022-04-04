@@ -240,7 +240,7 @@ export class ApiClient extends ApiClientInterface {
 
     subscriptionsByInUsedByIds = (subscriptionInstanceIds: string[]) => {
         return this.postPutJson(
-            "subscriptions/subscriptions_in_used_by_ids",
+            "subscriptions/subscriptions_for_in_used_by_ids",
             subscriptionInstanceIds,
             "post",
             true,
