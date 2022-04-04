@@ -1,12 +1,11 @@
 import { EuiButton } from "@elastic/eui";
+import SubscriptionInfo from "components/subscriptionDetail/SubscriptionInfo";
 import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
 import SubscriptionInstanceValue from "custom/components/subscriptionDetail/SubscriptionInstanceValue";
 import { isArray, partition } from "lodash";
 import React, { useContext, useState } from "react";
+import ApplicationContext from "utils/ApplicationContext";
 import { ISubscriptionInstance, TabView } from "utils/types";
-
-import ApplicationContext from "../../../utils/ApplicationContext";
-import SubscriptionInfo from "../SubscriptionInfo";
 
 interface IProps {
     subscriptionInstances: any[][];

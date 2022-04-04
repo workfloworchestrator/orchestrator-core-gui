@@ -14,14 +14,13 @@
  */
 
 import { EuiButton } from "@elastic/eui";
+import SubscriptionInfo from "components/subscriptionDetail/SubscriptionInfo";
 import SubscriptionInstanceValue from "custom/components/subscriptionDetail/SubscriptionInstanceValue";
 import { isArray, partition } from "lodash";
 import React, { useContext, useState } from "react";
 import { FormattedMessage } from "react-intl";
+import ApplicationContext from "utils/ApplicationContext";
 import { ISubscriptionInstance } from "utils/types";
-
-import ApplicationContext from "../../utils/ApplicationContext";
-import SubscriptionInfo from "./SubscriptionInfo";
 
 interface IProps {
     subscription_instance: ISubscriptionInstance;
