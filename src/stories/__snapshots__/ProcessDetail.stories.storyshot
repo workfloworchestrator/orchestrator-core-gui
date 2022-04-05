@@ -54,7 +54,8 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="euiIcon euiIcon--medium euiIcon--inherit euiButtonContent__icon"
+                      className="euiIcon euiIcon--medium euiIcon--inherit euiIcon-isLoaded euiButtonContent__icon"
+                      data-icon-type="refresh"
                       focusable="false"
                       height={16}
                       role="img"
@@ -2820,8 +2821,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="euiIcon euiIcon--medium euiIcon--inherit euiIcon-isLoaded euiButtonContent__icon"
-                      data-icon-type="refresh"
+                      className="euiIcon euiIcon--medium euiIcon--inherit euiButtonContent__icon"
                       focusable="false"
                       height={16}
                       role="img"
@@ -2862,8 +2862,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="euiIcon euiIcon--medium euiIcon--inherit euiIcon-isLoaded euiButtonContent__icon"
-                      data-icon-type="cross"
+                      className="euiIcon euiIcon--medium euiIcon--inherit euiButtonContent__icon"
                       focusable="false"
                       height={16}
                       role="img"
@@ -2903,8 +2902,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="euiIcon euiIcon--medium euiIcon--inherit euiIcon-isLoaded euiButtonContent__icon"
-                      data-icon-type="minimize"
+                      className="euiIcon euiIcon--medium euiIcon--inherit euiButtonContent__icon"
                       focusable="false"
                       height={16}
                       role="img"
@@ -2944,8 +2942,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="euiIcon euiIcon--medium euiIcon--inherit euiIcon-isLoaded euiButtonContent__icon"
-                      data-icon-type="expand"
+                      className="euiIcon euiIcon--medium euiIcon--inherit euiButtonContent__icon"
                       focusable="false"
                       height={16}
                       role="img"
@@ -2986,8 +2983,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="euiIcon euiIcon--medium euiIcon--inherit euiIcon-isLoaded euiButtonContent__icon"
-                      data-icon-type="sortDown"
+                      className="euiIcon euiIcon--medium euiIcon--inherit euiButtonContent__icon"
                       focusable="false"
                       height={16}
                       role="img"
@@ -3281,8 +3277,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                     >
                       <svg
                         aria-hidden={true}
-                        className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon-isLoaded step-type"
-                        data-icon-type="user"
+                        className="euiIcon euiIcon--xxLarge euiIcon--primary step-type"
                         fill="dark"
                         focusable="false"
                         height={18}
@@ -3494,8 +3489,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                     >
                       <svg
                         aria-hidden={true}
-                        className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon-isLoaded step-type"
-                        data-icon-type="pipelineApp"
+                        className="euiIcon euiIcon--xxLarge euiIcon--primary step-type"
                         fill="dark"
                         focusable="false"
                         height={32}
@@ -3637,8 +3631,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                     >
                       <svg
                         aria-hidden={true}
-                        className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon-isLoaded step-type"
-                        data-icon-type="pipelineApp"
+                        className="euiIcon euiIcon--xxLarge euiIcon--primary step-type"
                         fill="dark"
                         focusable="false"
                         height={32}
@@ -3760,8 +3753,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                     >
                       <svg
                         aria-hidden={true}
-                        className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon-isLoaded step-type"
-                        data-icon-type="pipelineApp"
+                        className="euiIcon euiIcon--xxLarge euiIcon--primary step-type"
                         fill="dark"
                         focusable="false"
                         height={32}
@@ -4099,8 +4091,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                     >
                       <svg
                         aria-hidden={true}
-                        className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon-isLoaded step-type"
-                        data-icon-type="user"
+                        className="euiIcon euiIcon--xxLarge euiIcon--primary step-type"
                         fill="dark"
                         focusable="false"
                         height={18}
@@ -4225,8 +4216,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                     >
                       <svg
                         aria-hidden={true}
-                        className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon-isLoaded step-type"
-                        data-icon-type="pipelineApp"
+                        className="euiIcon euiIcon--xxLarge euiIcon--primary step-type"
                         fill="dark"
                         focusable="false"
                         height={32}
@@ -4325,8 +4315,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                     >
                       <svg
                         aria-hidden={true}
-                        className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon-isLoaded step-type"
-                        data-icon-type="pipelineApp"
+                        className="euiIcon euiIcon--xxLarge euiIcon--primary step-type"
                         fill="dark"
                         focusable="false"
                         height={32}
@@ -4412,8 +4401,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                     >
                       <svg
                         aria-hidden={true}
-                        className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon-isLoaded step-type"
-                        data-icon-type="pipelineApp"
+                        className="euiIcon euiIcon--xxLarge euiIcon--primary step-type"
                         fill="dark"
                         focusable="false"
                         height={32}
@@ -4518,8 +4506,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                     >
                       <svg
                         aria-hidden={true}
-                        className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon-isLoaded step-type"
-                        data-icon-type="pipelineApp"
+                        className="euiIcon euiIcon--xxLarge euiIcon--primary step-type"
                         fill="dark"
                         focusable="false"
                         height={32}
@@ -4781,8 +4768,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                     >
                       <svg
                         aria-hidden={true}
-                        className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon-isLoaded step-type"
-                        data-icon-type="pipelineApp"
+                        className="euiIcon euiIcon--xxLarge euiIcon--primary step-type"
                         fill="dark"
                         focusable="false"
                         height={32}
@@ -4868,8 +4854,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                     >
                       <svg
                         aria-hidden={true}
-                        className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon-isLoaded step-type"
-                        data-icon-type="pipelineApp"
+                        className="euiIcon euiIcon--xxLarge euiIcon--primary step-type"
                         fill="dark"
                         focusable="false"
                         height={32}
