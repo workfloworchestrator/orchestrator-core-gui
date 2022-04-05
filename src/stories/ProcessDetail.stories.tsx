@@ -13,10 +13,11 @@
  *
  */
 
-import { Meta } from "@storybook/react";
-import mock from "axios-mock";
-import ProcessDetail from "pages/ProcessDetail";
 import React from "react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import ProcessDetail from "pages/ProcessDetail";
+
+import mock from "axios-mock";
 import FAILED_PROCESS_JSON from "stories/data/process-failed.json";
 import SUSPENDED_PROCESS_JSON from "stories/data/process-suspended.json";
 import StoryRouter from "storybook-react-router";
@@ -24,6 +25,7 @@ import { QueryParamProvider } from "use-query-params";
 
 export default {
     title: "ProcessDetail",
+    component: ProcessDetail,
     decorators: [
         StoryRouter(),
         (Story) => (
@@ -36,9 +38,9 @@ export default {
     parameters: {
         fileName: __filename,
     },
-} as Meta;
+} as ComponentMeta<typeof ProcessDetail>;
 
-export const Process = () => {
+export const Process: ComponentStory<typeof ProcessDetail> = () => {
     mock.reset();
     mock.onGet("processes/pid").reply(200, FAILED_PROCESS_JSON);
     mock.onGet("processes/process-subscriptions-by-pid/1a5686d9-eaa2-4d0b-96eb-1ec081c62a08").reply(200, []);
@@ -47,7 +49,7 @@ export const Process = () => {
     return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={true} />;
 };
 
-export const Task = () => {
+export const Task: ComponentStory<typeof ProcessDetail>  = () => {
     mock.reset();
     mock.onGet("processes/pid").reply(200, FAILED_PROCESS_JSON);
     mock.onGet("processes/process-subscriptions-by-pid/1a5686d9-eaa2-4d0b-96eb-1ec081c62a08").reply(200, []);
@@ -56,7 +58,7 @@ export const Task = () => {
     return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={false} />;
 };
 
-export const SuspendedProcess = () => {
+export const SuspendedProcess: ComponentStory<typeof ProcessDetail>  = () => {
     mock.reset();
     mock.onGet("processes/pid").reply(200, SUSPENDED_PROCESS_JSON);
     mock.onGet("processes/process-subscriptions-by-pid/cdae2399-dd25-440b-81db-b8846c5fa3ce").reply(200, []);
@@ -65,7 +67,7 @@ export const SuspendedProcess = () => {
     return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={true} />;
 };
 
-export const SuspendedTask = () => {
+export const SuspendedTask: ComponentStory<typeof ProcessDetail>  = () => {
     mock.reset();
     mock.onGet("processes/pid").reply(200, SUSPENDED_PROCESS_JSON);
     mock.onGet("processes/process-subscriptions-by-pid/cdae2399-dd25-440b-81db-b8846c5fa3ce").reply(200, []);

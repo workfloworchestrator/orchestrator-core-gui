@@ -5,10 +5,10 @@ exports[`Storyshots NewProcess Default 1`] = `
   className="storybook-container"
 >
   <div
-    className="euiPage"
+    className="euiPage euiPage--paddingMedium euiPage--grow"
   >
     <div
-      className="euiPageBody mod-new-process"
+      className="euiPageBody euiPageBody--borderRadiusNone mod-new-process"
     >
       <section
         className="card"
@@ -47,6 +47,7 @@ exports[`Storyshots NewProcess Default 1`] = `
                         aria-invalid={null}
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-product"
+                        id="input-product-label"
                       >
                         forms.fields.product
                       </label>
@@ -72,7 +73,7 @@ exports[`Storyshots NewProcess Default 1`] = `
                           className="css-1f43avz-a11yText-A11yText"
                         />
                         <div
-                          className=" css-yk16xz-control"
+                          className=" css-16v2aco-control"
                           onMouseDown={[Function]}
                           onTouchEnd={[Function]}
                         >
@@ -85,7 +86,7 @@ exports[`Storyshots NewProcess Default 1`] = `
                               Search and select a product...
                             </div>
                             <div
-                              className="css-b8ldur-Input"
+                              className="css-1424cry-Input"
                             >
                               <div
                                 className=""
@@ -253,10 +254,10 @@ exports[`Storyshots NewProcess Preselected 1`] = `
   className="storybook-container"
 >
   <div
-    className="euiPage"
+    className="euiPage euiPage--paddingMedium euiPage--grow"
   >
     <div
-      className="euiPageBody mod-new-process"
+      className="euiPageBody euiPageBody--borderRadiusNone mod-new-process"
     >
       <section
         className="card"
@@ -295,6 +296,7 @@ exports[`Storyshots NewProcess Preselected 1`] = `
                         aria-invalid={null}
                         className="euiFormLabel euiFormRow__label"
                         htmlFor="input-organisation"
+                        id="input-organisation-label"
                       >
                         forms.fields.organisation *
                       </label>
@@ -320,7 +322,7 @@ exports[`Storyshots NewProcess Preselected 1`] = `
                           className="css-1f43avz-a11yText-A11yText"
                         />
                         <div
-                          className=" css-yk16xz-control"
+                          className=" css-16v2aco-control"
                           onMouseDown={[Function]}
                           onTouchEnd={[Function]}
                         >
@@ -333,7 +335,7 @@ exports[`Storyshots NewProcess Preselected 1`] = `
                               Search and select a customer...
                             </div>
                             <div
-                              className="css-b8ldur-Input"
+                              className="css-1424cry-Input"
                             >
                               <div
                                 className=""

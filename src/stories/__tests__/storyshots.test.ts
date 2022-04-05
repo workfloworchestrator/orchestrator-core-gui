@@ -14,7 +14,7 @@
  */
 
 import initStoryshots, { Stories2SnapsConverter } from "@storybook/addon-storyshots";
-import { RenderTree } from "@storybook/addon-storyshots/dist/frameworks/Loader";
+import { RenderTree } from "@storybook/addon-storyshots/dist/ts3.9/frameworks/Loader";
 import { act } from "react-test-renderer";
 
 const converter = new Stories2SnapsConverter();
