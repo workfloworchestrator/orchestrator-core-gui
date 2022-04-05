@@ -28,10 +28,6 @@ export default {
     title: "SubscriptionDetailPage",
     component: SubscriptionDetailPage,
     decorators: [StoryRouter()],
-    // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
-    parameters: {
-        fileName: __filename,
-    },
 } as ComponentMeta<typeof SubscriptionDetailPage>;
 
 export const Subscription: ComponentStory<typeof SubscriptionDetailPage> = () => {

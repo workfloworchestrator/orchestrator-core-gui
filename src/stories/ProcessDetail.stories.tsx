@@ -34,10 +34,6 @@ export default {
             </QueryParamProvider>
         ),
     ],
-    // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
-    parameters: {
-        fileName: __filename,
-    },
 } as ComponentMeta<typeof ProcessDetail>;
 
 export const Process: ComponentStory<typeof ProcessDetail> = () => {

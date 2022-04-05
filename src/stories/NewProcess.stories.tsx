@@ -25,10 +25,6 @@ export default {
     title: "NewProcess",
     component: NewProcess,
     decorators: [StoryRouter()],
-    // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
-    parameters: {
-        fileName: __filename,
-    },
 } as ComponentMeta<typeof NewProcess>;
 
 export const Default: ComponentStory<typeof NewProcess> = () => {
