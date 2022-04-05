@@ -9,7 +9,7 @@ import {
     EuiFormRow,
     EuiSpacer,
     EuiSuggest,
-    EuiSuggestItemProps,
+    EuiSuggestionProps,
     EuiSuperSelect,
     EuiSwitch,
     EuiText,
@@ -32,7 +32,7 @@ interface IState {
     // nodes
     nodesLoading: boolean;
     nodes: Subscription[];
-    nodeSuggestions: EuiSuggestItemProps[];
+    nodeSuggestions: EuiSuggestionProps[];
     nodeQuery: string;
     selectedNode?: Subscription;
     //ports
@@ -111,7 +111,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
             });
     };
 
-    onNodeClick = (item: EuiSuggestItemProps) => {
+    onNodeClick = (item: EuiSuggestionProps) => {
         const { nodes } = this.state;
         const selectedNode = nodes.find((node) => node.description.replace("Node Planned", "") === item.label);
         this.setState({ selectedNode: selectedNode });
@@ -274,8 +274,10 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                         fullWidth
                     >
                         <EuiSuggest
+                            aria-labelledby="Search and select a node"
                             status={nodesLoading ? "loading" : "unchanged"}
-                            onInputChange={this.onNodeInputChange}
+                            // @ts-ignore
+                            onChange={this.onNodeInputChange}
                             onItemClick={this.onNodeClick}
                             suggestions={nodeSuggestions}
                         />

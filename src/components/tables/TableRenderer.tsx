@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,8 +15,10 @@
 
 import "stylesheets/buttons.scss";
 
-import React from "react";
+import React, { useContext } from "react";
 import { ColumnInstance, HeaderGroup, Row, TableBodyProps, TableProps } from "react-table";
+import ApplicationContext from "utils/ApplicationContext";
+import { DARK_ROW_BORDER_COLOR, LIGHT_ROW_BORDER_COLOR } from "utils/Colors";
 
 interface ITableRendererProps<T extends object> {
     renderSubComponent: ({ row }: { row: Row<T> }) => JSX.Element;
@@ -37,6 +39,8 @@ export function TableRenderer<T extends object>({
     page,
     visibleColumns,
 }: ITableRendererProps<T>) {
+    const { theme } = useContext(ApplicationContext);
+
     const sortIcon = (col: ColumnInstance<T>) => {
         if (!col.canSort) {
             return "";
@@ -51,6 +55,7 @@ export function TableRenderer<T extends object>({
             return <i className="fa fa-sort" />;
         }
     };
+    const rowBorderColor = theme === "light" ? LIGHT_ROW_BORDER_COLOR : DARK_ROW_BORDER_COLOR;
 
     return (
         <table className="nwa-table" {...getTableProps()}>
@@ -64,7 +69,7 @@ export function TableRenderer<T extends object>({
                                 </th>
                             ))}
                         </tr>
-                        <tr className={"filters"}>
+                        <tr className={"filters"} style={{ borderBottom: `1px solid ${rowBorderColor}` }}>
                             {headerGroup.headers.map((column) => (
                                 <th id={`filter_headers_${column.id}`} key={column.id}>
                                     {column.canFilter && column.render("Filter")}
@@ -79,7 +84,7 @@ export function TableRenderer<T extends object>({
                     prepareRow(row);
                     return (
                         <React.Fragment key={`row_fragment_${row.id}`}>
-                            <tr {...row.getRowProps()}>
+                            <tr {...row.getRowProps()} style={{ borderBottom: `1px solid ${rowBorderColor}` }}>
                                 {row.cells.map((cell) => {
                                     return (
                                         <td {...cell.getCellProps([{ className: cell.column.id }])}>

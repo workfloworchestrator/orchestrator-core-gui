@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,11 +14,12 @@
  */
 
 import { ApiClient } from "api";
-import { CustomApiClient } from "custom/api";
+import { CustomApiClient } from "custom/api/index";
 import React from "react";
-import { Organization, Product } from "utils/types";
+import { Organization, Product, Theme } from "utils/types";
 
 export interface ApplicationContextInterface {
+    theme: Theme;
     organisations?: Organization[];
     locationCodes?: string[];
     products: Product[];
@@ -36,6 +37,7 @@ export const customApiClient: CustomApiClient = new CustomApiClient();
 
 // Don't just add stuff here. This is reserved for things that don't change during the lifetime of the application
 let ApplicationContext = React.createContext<ApplicationContextInterface>({
+    theme: "light",
     organisations: [],
     locationCodes: [],
     products: [],

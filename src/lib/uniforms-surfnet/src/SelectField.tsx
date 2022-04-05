@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,14 +14,17 @@
  */
 
 import { EuiFormRow, EuiText } from "@elastic/eui";
-import { ListField, ListItemField, SelectField } from "lib/uniforms-surfnet/src";
-import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
+import ListField, { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
+import ListItemField from "lib/uniforms-surfnet/src/ListItemField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { get } from "lodash";
-import React from "react";
+import React, { useContext } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import ReactSelect from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
+import { SelectField } from "uniforms-unstyled";
+import ApplicationContext from "utils/ApplicationContext";
+import { getReactSelectTheme } from "utils/Colors";
 import { Option } from "utils/types";
 
 export type SelectFieldProps = FieldProps<
@@ -50,6 +53,8 @@ function Select({
     intl,
     ...props
 }: SelectFieldProps) {
+    const { theme } = useContext(ApplicationContext);
+
     const nameArray = joinName(null, name);
     let parentName = joinName(nameArray.slice(0, -1));
 
@@ -76,6 +81,8 @@ function Select({
     }));
 
     const selectedValue = options.find((option: Option) => option.value === value);
+
+    const customStyles = getReactSelectTheme(theme);
 
     if (fieldType === Array) {
         return (
@@ -105,6 +112,7 @@ function Select({
                                 onChange(option?.value);
                             }
                         }}
+                        styles={customStyles}
                         options={options}
                         value={selectedValue}
                         isSearchable={true}

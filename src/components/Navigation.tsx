@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,7 +27,7 @@ import {
     EuiToast,
 } from "@elastic/eui";
 import { Control } from "@elastic/eui/src/components/control_bar/control_bar";
-import { disabledMenuItems } from "custom/manifest.json";
+import manifest from "custom/manifest.json";
 import mySpinner from "lib/Spin";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { FormattedMessage } from "react-intl";
@@ -47,7 +47,7 @@ const Navigation = ({ extraPages = [] }: { extraPages: string[] }) => {
     const navItems = ["processes", "subscriptions", "metadata", "tasks", "settings"]
         .filter(
             // @ts-ignore
-            (i) => !disabledMenuItems.includes(i)
+            (i) => !manifest.disabledMenuItems.includes(i)
         )
         .concat(extraPages);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -121,7 +121,7 @@ const Navigation = ({ extraPages = [] }: { extraPages: string[] }) => {
                             id="main-navigation-new-process-tab-button"
                             iconType="plusInCircle"
                             size="s"
-                            color="accent"
+                            color="text"
                             fill
                         >
                             <FormattedMessage id="navigation.new_process" />

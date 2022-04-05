@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,8 +16,9 @@
 import "stylesheets/buttons.scss";
 import "components/tables/NwaTable.scss";
 
-import { EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
+import { EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
 import AdvancedSearch from "components/tables/AdvancedSearch";
+import MiniPaginator from "components/tables/MiniPaginator";
 import Paginator from "components/tables/Paginator";
 import Preferences from "components/tables/Preferences";
 import { TableRenderer } from "components/tables/TableRenderer";
@@ -42,8 +43,6 @@ import {
     useTable,
 } from "react-table";
 import useHttpIntervalFallback from "utils/useHttpIntervalFallback";
-
-import MiniPaginator from "./MiniPaginator";
 
 /*
  * Reusable NWA table implementation using react-table 7.
@@ -323,7 +322,7 @@ export function NwaTable<T extends object>({
     }, [runningProcesses]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <div id={name}>
+        <EuiPanel id={name} style={{ marginBottom: "20px" }}>
             <EuiFlexGroup>
                 <EuiFlexItem grow={false} component="span">
                     <Preferences<T> {...preferencesProps} />
@@ -342,6 +341,6 @@ export function NwaTable<T extends object>({
                 </div>
             )}
             {!minimized && showPaginator && <Paginator {...paginatorProps} />}
-        </div>
+        </EuiPanel>
     );
 }

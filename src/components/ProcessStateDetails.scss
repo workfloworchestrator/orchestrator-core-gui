@@ -1,5 +1,5 @@
 /*!
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -47,7 +47,7 @@ section.process-state-detail {
             h3 {
                 font-size: larger;
                 padding: 0px 15px 0 3px;
-                color: vars.$dark-grey;
+                //color: vars.$dark-grey;
             }
             li {
                 display: inline-block;
@@ -62,7 +62,7 @@ section.process-state-detail {
 
     section.traceback-container {
         padding: 5px;
-        background-color: vars.$light-grey;
+        //background-color: vars.$light-grey;
     }
 
     section.process-summary {
@@ -75,7 +75,7 @@ section.process-state-detail {
                     padding: 3px 40px 3px 15px;
                     text-transform: uppercase;
                     font-weight: bold;
-                    color: vars.$medium-grey;
+                    //color: vars.$medium-grey;
                 }
             }
         }
@@ -116,7 +116,7 @@ section.process-state-detail {
             section.state-delta {
                 // @include mixins.card;
                 box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
-                background-color: vars.$lightest-grey;
+                //background-color: #444444;
                 margin-bottom: 25px;
                 table {
                     td {

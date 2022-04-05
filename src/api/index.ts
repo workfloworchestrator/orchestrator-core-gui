@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -111,6 +111,7 @@ abstract class ApiClientInterface extends BaseApiClient {
     ) => Promise<Subscription[]>;
     abstract subscriptionWorkflows: (subscription_id: string) => Promise<WorkflowReasons>;
     abstract inUseBySubscriptions: (subscriptionId: string) => Promise<Subscription[]>;
+    abstract subscriptionsByInUsedByIds: (subscriptionInstanceIds: string[]) => Promise<any>;
     abstract processSubscriptionsBySubscriptionId: (subscriptionId: string) => Promise<SubscriptionProcesses[]>;
     abstract processSubscriptionsByProcessId: (processId: string) => Promise<ProcessSubscription[]>;
     abstract assignees: () => Promise<string[]>;
@@ -235,6 +236,16 @@ export class ApiClient extends ApiClientInterface {
 
     inUseBySubscriptions = (subscriptionId: string): Promise<Subscription[]> => {
         return this.fetchJson(`subscriptions/in_use_by/${subscriptionId}`);
+    };
+
+    subscriptionsByInUsedByIds = (subscriptionInstanceIds: string[]) => {
+        return this.postPutJson(
+            "subscriptions/subscriptions_for_in_used_by_ids",
+            subscriptionInstanceIds,
+            "post",
+            true,
+            false
+        );
     };
 
     processSubscriptionsBySubscriptionId = (subscriptionId: string): Promise<SubscriptionProcesses[]> => {

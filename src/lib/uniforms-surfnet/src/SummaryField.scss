@@ -1,5 +1,5 @@
 /*!
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,15 +24,31 @@ section.table-summary {
     }
 
     td:not(:first-child):not(:last-child) {
-        border-right: solid 2px vars.$light-grey;
+        &.light {
+            border-right: 1px solid vars.$light-grey;
+        }
+        &.dark {
+            border-right: 1px solid vars.$dark-grey;
+        }
     }
 
     .label {
         font-weight: bold;
-        background-color: vars.$light-primary;
-        border-right: solid 2px vars.$primary;
+        &.light {
+            background-color: vars.$light-primary;
+            border-right: solid 2px vars.$primary;
+        }
+        &.dark {
+            background-color: vars.$darkest-primary;
+            border-right: solid 2px vars.$light-primary;
+        }
     }
     .value {
-        background-color: vars.$lightest-grey;
+        &.light {
+            background-color: vars.$light-grey;
+        }
+        &.dark {
+            background-color: vars.$darkest-grey;
+        }
     }
 }

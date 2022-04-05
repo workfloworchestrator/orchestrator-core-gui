@@ -1,5 +1,5 @@
 /*!
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,17 +21,21 @@
     @include mixins.card;
 }
 
+.euiDescriptionList {
+    a {
+        margin-top: 15px;
+    }
+}
+
 .mod-subscription-detail {
     h2 {
         font-size: 20px;
         padding: 15px 0 0 15px;
-        color: vars.$dark-grey;
     }
     h3 {
-        font-size: 16px;
+        font-size: 18px;
         margin: 10px 0 0 0;
         padding: 10px 0 0 0;
-        color: vars.$primary;
     }
     em {
         margin-left: 15px;
@@ -47,6 +51,7 @@
         margin-left: auto;
         width: 66%;
     }
+
     section.product-block {
         section.product-block {
             padding-left: 20px;
@@ -67,7 +72,6 @@
             min-width: 320px;
             i {
                 margin-right: 30px;
-                color: white;
             }
         }
         p.no-termination-reason,
@@ -125,14 +129,23 @@
         }
         tbody {
             tr {
-                border-bottom: 1px solid vars.$light-grey;
-                border-left: 1px solid vars.$primary;
-
-                &:nth-child(even) {
-                    background: white;
+                &.light {
+                    border-bottom: 1px solid vars.$light-grey;
+                    border-left: 1px solid vars.$primary;
+                    &:nth-child(even) {
+                    }
+                    &:nth-child(odd) {
+                        background: #f6f6f6;
+                    }
                 }
-                &:nth-child(odd) {
-                    background: vars.$table-odd-even;
+                &.dark {
+                    border-bottom: 1px solid #141519;
+                    border-left: 1px solid vars.$primary;
+                    &:nth-child(even) {
+                    }
+                    &:nth-child(odd) {
+                        background: #141519;
+                    }
                 }
             }
             td {
@@ -175,14 +188,22 @@
         }
         &.multiple-tbody {
             tbody {
-                &:nth-child(even) {
-                    tr {
-                        background: vars.$table-odd-even;
+                &.light {
+                    border-bottom: 1px solid vars.$light-grey;
+                    border-left: 1px solid vars.$primary;
+                    &:nth-child(even) {
+                    }
+                    &:nth-child(odd) {
+                        background: #f6f6f6;
                     }
                 }
-                &:nth-child(odd) {
-                    tr {
-                        background: white;
+                &.dark {
+                    border-bottom: 1px solid #141519;
+                    border-left: 1px solid vars.$primary;
+                    &:nth-child(even) {
+                    }
+                    &:nth-child(odd) {
+                        background: #141519;
                     }
                 }
                 tr.related-subscription {
@@ -190,11 +211,9 @@
                     border-left: none;
                     td {
                         &.whitespace {
-                            background-color: white;
                             border-left: none;
                         }
                         &.related-subscription-values {
-                            background-color: vars.$light-grey;
                             border-bottom: 1px solid vars.$light-grey;
                             border-left: 5px solid vars.$primary;
                             margin: 0;
@@ -207,13 +226,23 @@
     }
     table.subscriptions {
         tr {
-            border-bottom: 1px solid vars.$light-grey;
-            border-left: 1px solid vars.$primary;
-            &:nth-child(even) {
-                background: white;
+            &.light {
+                border-bottom: 1px solid vars.$light-grey;
+                border-left: 1px solid vars.$primary;
+                &:nth-child(even) {
+                }
+                &:nth-child(odd) {
+                    background: #f6f6f6;
+                }
             }
-            &:nth-child(odd) {
-                background: vars.$table-odd-even;
+            &.dark {
+                border-bottom: 1px solid #141519;
+                border-left: 1px solid vars.$primary;
+                &:nth-child(even) {
+                }
+                &:nth-child(odd) {
+                    background: #141519;
+                }
             }
         }
         th,
@@ -265,13 +294,23 @@
     }
     table.processes {
         tr {
-            border-bottom: 1px solid vars.$light-grey;
-            border-left: 1px solid vars.$primary;
-            &:nth-child(even) {
-                background: white;
+            &.light {
+                border-bottom: 1px solid vars.$light-grey;
+                border-left: 1px solid vars.$primary;
+                &:nth-child(even) {
+                }
+                &:nth-child(odd) {
+                    background: #f6f6f6;
+                }
             }
-            &:nth-child(odd) {
-                background: vars.$table-odd-even;
+            &.dark {
+                border-bottom: 1px solid #141519;
+                border-left: 1px solid vars.$primary;
+                &:nth-child(even) {
+                }
+                &:nth-child(odd) {
+                    background: #141519;
+                }
             }
         }
         th,
@@ -303,7 +342,6 @@
             text-transform: uppercase;
             font-weight: bold;
             font-size: larger;
-            color: vars.$medium-grey;
             padding: 7px 2px 7px 0;
         }
         tbody {
@@ -320,7 +358,7 @@
         padding-top: 5px;
     }
     p.label {
-        color: vars.$primary;
+        font-weight: bold;
         margin-left: 0px;
         padding-top: 5px;
     }
@@ -363,10 +401,5 @@ section.tabbed-details {
 }
 
 .euiTab {
-    border-left: 1px solid vars.$light-grey;
-    border-top: 1px solid vars.$light-grey;
-
-    &:last-of-type {
-        border-right: 1px solid vars.$light-grey;
-    }
+    padding: 5px 5px 5px 5px;
 }

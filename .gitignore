@@ -28,6 +28,10 @@ yarn-error.log*
 # we use sass
 *.css
 *.css.map
+!public/dark.css
+!public/light.css
+!public/eui_theme_dark.css
+!public/eui_theme_light.css
 
 .idea/
 delme-validations.json

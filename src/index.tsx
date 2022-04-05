@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -26,10 +26,6 @@ import { apiClient } from "utils/ApplicationContext";
 import { websocketService } from "websocketService";
 
 const appElement = document.getElementById("app");
-
-if (module.hot) {
-    module.hot.accept();
-}
 
 if (ENV.TRACING_ENABLED) {
     console.log("Initialized Sentry");
@@ -106,7 +102,25 @@ if (ENV.OAUTH2_ENABLED) {
 
                     // @ts-ignore
                     if (props.userData && !props.userData.expired) {
-                        return <App user={props?.userData.profile} />;
+                        return (
+                            <>
+                                <link
+                                    rel="stylesheet"
+                                    type="text/css"
+                                    href={
+                                        localStorage.getItem("darkMode") || false
+                                            ? "/eui_theme_dark.css"
+                                            : "/eui_theme_light.css"
+                                    }
+                                />
+                                <link
+                                    rel="stylesheet"
+                                    type="text/css"
+                                    href={localStorage.getItem("darkMode") || false ? "/dark.css" : "/light.css"}
+                                />
+                                <App user={props?.userData.profile} />
+                            </>
+                        );
                     }
                 }}
             </AuthContext.Consumer>
@@ -114,5 +128,21 @@ if (ENV.OAUTH2_ENABLED) {
         appElement
     );
 } else {
-    ReactDOM.render(<App />, appElement);
+    // Todo: also implement it in the if
+    ReactDOM.render(
+        <>
+            <link
+                rel="stylesheet"
+                type="text/css"
+                href={localStorage.getItem("darkMode") || false ? "/eui_theme_dark.css" : "/eui_theme_light.css"}
+            />
+            <link
+                rel="stylesheet"
+                type="text/css"
+                href={localStorage.getItem("darkMode") || false ? "/dark.css" : "/light.css"}
+            />
+            <App />
+        </>,
+        appElement
+    );
 }

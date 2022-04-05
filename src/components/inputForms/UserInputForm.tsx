@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -414,6 +414,8 @@ class UserInputForm extends React.Component<IProps, IState> {
                 <section className="form-fieldset">
                     {stepUserInput.title && stepUserInput.title !== "unknown" && <h3>{stepUserInput.title}</h3>}
                     <SubscriptionsContextProvider>
+                        {/*
+                        // @ts-ignore */}
                         <AutoFieldProvider value={autoFieldFunction}>
                             <AutoForm
                                 schema={bridge}

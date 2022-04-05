@@ -1,5 +1,5 @@
 /*!
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,31 +18,38 @@
 @use "../stylesheets/vars";
 
 .euiHeader {
-    height: 92px;
+    min-height: 80px;
 }
+
 .header {
     &__app-title {
         margin: 0;
-        font-size: 1.3rem !important;
+        font-size: 1.4rem !important;
         font-weight: normal !important;
-        border-left: 1px solid vars.$primary;
+        //border-left: 2px solid vars.$primary;
         padding-left: 0.5rem;
         &.staging,
         &.local,
         &.development {
             color: vars.$danger;
+            margin-top: 0.26rem !important;
+            //font-style: italic;
+            padding-left: 0.65rem;
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 1.1rem !important;
         }
     }
-    &__container {
-    }
-    &__logo {
-    }
     &__logo-img {
-        padding-left: 0.5rem;
+        padding-left: 0.2rem;
         padding-right: 0.5rem;
-        margin-top: 1.5rem;
-        width: 16rem;
+        margin-top: 1rem;
+        width: 6rem;
+        height: 60px;
     }
+}
+#switchTheme {
+    margin-right: -20px;
 }
 
 .flash.hide + div.header-container {

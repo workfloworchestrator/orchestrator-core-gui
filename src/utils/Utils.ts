@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -99,3 +99,25 @@ export const stateDelta = (prev: State, curr: State) => {
     }, {});
     return newState;
 };
+
+export function findObjects(obj: Object, targetProp: string) {
+    let finalResult: any[] = [];
+    function getObject(theObject: any) {
+        for (let prop in theObject) {
+            if (theObject.hasOwnProperty(prop)) {
+                if (prop === targetProp) {
+                    finalResult.push(theObject[prop]);
+                }
+                if (theObject[prop] instanceof Object || theObject[prop] instanceof Array) {
+                    getObject(theObject[prop]);
+                }
+            }
+        }
+    }
+
+    getObject(obj);
+    if (finalResult.length) {
+        return finalResult[0];
+    }
+    return [];
+}

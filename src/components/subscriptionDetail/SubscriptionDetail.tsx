@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,7 +28,7 @@ import { SubscriptionDetailSection } from "components/subscriptionDetail/Subscri
 import SubscriptionInstance from "components/subscriptionDetail/SubscriptionInstance";
 import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
 import { RenderServiceConfiguration } from "components/subscriptionDetail/templates/ServiceConfiguration";
-import { plugins } from "custom/manifest.json";
+import manifest from "custom/manifest.json";
 import { isArray } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
@@ -47,7 +47,7 @@ import {
     TabView,
     WorkflowReasons,
 } from "utils/types";
-import { importPlugin } from "utils/Utils";
+import { findObjects, importPlugin } from "utils/Utils";
 
 interface IProps {
     subscriptionId: string;
@@ -65,6 +65,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     const [subscriptionProcesses, setSubscriptionProcesses] = useState<SubscriptionProcesses[]>();
     const [notFound, setNotFound] = useState(false);
     const [workflows, setWorkflows] = useState<WorkflowReasons>();
+    const [inUseBySubscriptions, setInUseBySubscriptions] = useState({});
     const [enrichedInUseBySubscriptions, setEnrichedInUseBySubscriptions] = useState<SubscriptionWithDetails[]>();
     const [viewTypes, setViewTypes] = useStorageState<StoredViewPreferences[]>(
         localStorage,
@@ -115,9 +116,9 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     useEffect(() => {
         if (loadedSubscriptionModel && subscription) {
             async function loadViews() {
-                if (plugins.hasOwnProperty("subscriptionDetailPlugins")) {
+                if (manifest.plugins.hasOwnProperty("subscriptionDetailPlugins")) {
                     // @ts-ignore
-                    const componentPromises = plugins["subscriptionDetailPlugins"].map(async (plugin) => {
+                    const componentPromises = manifest.plugins["subscriptionDetailPlugins"].map(async (plugin) => {
                         const View = await importPlugin(plugin);
                         return (
                             <View
@@ -133,6 +134,13 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
             loadViews().then();
         }
     }, [loadedSubscriptionModel, subscription]);
+
+    useEffect(() => {
+        if (loadedSubscriptionModel && subscription) {
+            const inUseByIds = findObjects(subscription, "in_use_by_ids");
+            apiClient.subscriptionsByInUsedByIds(inUseByIds).then((i) => setInUseBySubscriptions(i));
+        }
+    }, [loadedSubscriptionModel, subscription, apiClient]);
 
     if (notFound) {
         return (
@@ -208,11 +216,8 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     const renderedSubscriptionDetails = (
         <div className="mod-subscription-detail">
             <div className="subscription-details">
-                <SubscriptionDetails
-                    subscription={subscription}
-                    subscriptionProcesses={subscriptionProcesses}
-                ></SubscriptionDetails>
-                {plugins.hasOwnProperty("subscriptionDetailPlugins") && (
+                <SubscriptionDetails subscription={subscription} subscriptionProcesses={subscriptionProcesses} />
+                {manifest.plugins.hasOwnProperty("subscriptionDetailPlugins") && (
                     <React.Suspense fallback="Loading plugins...">{loadedPlugins}</React.Suspense>
                 )}
             </div>
@@ -313,6 +318,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                                     key={index}
                                     subscription_instance={entry[1]}
                                     field_name={entry[0]}
+                                    inUseBySubscriptions={inUseBySubscriptions}
                                 />
                             ))}
                         </SubscriptionDetailSection>
@@ -323,6 +329,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
                 <RenderServiceConfiguration
                     subscriptionInstances={subscription_instances}
                     subscription_id={subscription.subscription_id}
+                    inUseBySubscriptions={inUseBySubscriptions}
                 />
             )}
 

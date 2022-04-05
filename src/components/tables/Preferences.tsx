@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -77,7 +77,6 @@ function Preferences<T extends object>({
                         <EuiFlexItem>
                             <EuiButton
                                 onClick={() => dispatch({ type: ActionType.OVERRIDE, settings: initialTableSettings })}
-                                color="warning"
                                 iconType="refresh"
                             >
                                 <FormattedMessage id="table.preferences.reset" />

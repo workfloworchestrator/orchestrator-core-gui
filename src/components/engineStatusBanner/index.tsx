@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,6 +15,7 @@
 
 import "./EngineStatusBanner.scss";
 
+import { EuiText } from "@elastic/eui";
 import EngineSettingsContext from "contextProviders/engineSettingsProvider";
 import { useContext } from "react";
 import { FormattedMessage } from "react-intl";
@@ -24,9 +25,9 @@ export default function EngineStatusBanner() {
     const globalStatus = engineStatus.global_status.toLocaleLowerCase();
 
     return (
-        <div className="engine-status-banner">
+        <EuiText>
             <FormattedMessage id={`settings.status.engine.${globalStatus}`} />
             <i className={`fa fa-circle engine-status-banner__status ${globalStatus}`}></i>
-        </div>
+        </EuiText>
     );
 }

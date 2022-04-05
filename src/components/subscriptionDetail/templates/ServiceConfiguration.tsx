@@ -1,20 +1,39 @@
+import { EuiButton } from "@elastic/eui";
+import SubscriptionInfo from "components/subscriptionDetail/SubscriptionInfo";
 import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
 import SubscriptionInstanceValue from "custom/components/subscriptionDetail/SubscriptionInstanceValue";
 import { isArray, partition } from "lodash";
+import React, { useContext, useState } from "react";
+import ApplicationContext from "utils/ApplicationContext";
 import { ISubscriptionInstance, TabView } from "utils/types";
 
 interface IProps {
     subscriptionInstances: any[][];
     viewType?: string;
     subscription_id: string;
+    inUseBySubscriptions: {};
 }
 
-export function RenderServiceConfiguration({ subscriptionInstances, viewType, subscription_id }: IProps) {
+export function RenderServiceConfiguration({
+    subscriptionInstances,
+    viewType,
+    subscription_id,
+    inUseBySubscriptions,
+}: IProps) {
+    // Todo: remove surf specific code
     const tabOrder = ["ip_gw_endpoint", "l3_endpoints", "l2_endpoints"];
+    const { theme } = useContext(ApplicationContext);
+    const [subscriptionInfoExpanded, setSubscriptionInfoExpanded] = useState<string[]>([]);
+
+    const toggleExpand = (id: string) => {
+        if (subscriptionInfoExpanded.includes(id)) {
+            setSubscriptionInfoExpanded(subscriptionInfoExpanded.filter((i) => i !== id));
+        } else {
+            setSubscriptionInfoExpanded(subscriptionInfoExpanded.concat(id));
+        }
+    };
 
     const splitValueAndInstanceFields = (instance: ISubscriptionInstance) => {
-        if (instance === null) debugger;
-
         const fields = Object.entries(instance)
             .filter(([key]) => !["label", "subscription_instance_id", "name"].includes(key))
             .filter(([key, value]) => (key === "owner_subscription_id" ? value !== subscription_id : true))
@@ -41,6 +60,8 @@ export function RenderServiceConfiguration({ subscriptionInstances, viewType, su
                 instances.forEach((inst: ISubscriptionInstance) => {
                     const splitFields = splitValueAndInstanceFields(inst);
                     const subTabs: TabView[] = level < 4 ? parseToTabs(splitFields.instance_fields, level + 1) : [];
+                    let isSubscriptionInfoSection = false;
+                    const subscriptionInstanceId = inst.subscription_instance_id;
                     tabs.push({
                         id: `${field}-${inst.subscription_instance_id}`,
                         name: splitFields.tabName,
@@ -58,13 +79,66 @@ export function RenderServiceConfiguration({ subscriptionInstances, viewType, su
                                         .flatMap((entry) =>
                                             entry[1].map((value: any) => [entry[0], value !== null ? value : "NULL"])
                                         )
-                                        .map((entry, i) => (
-                                            <SubscriptionInstanceValue
-                                                key={`${inst.subscription_instance_id}.${i}`}
-                                                label={entry[0]}
-                                                value={entry[1] !== null ? entry[1] : "null"}
-                                            />
-                                        ))}
+                                        .map((entry, i) => {
+                                            if (entry[0] === "in_use_by_ids") {
+                                                const isExpanded = subscriptionInfoExpanded.includes(
+                                                    subscriptionInstanceId
+                                                );
+                                                let SubscriptionInfoExpandButton = <></>;
+                                                if (!isSubscriptionInfoSection) {
+                                                    // render button once per product block
+                                                    SubscriptionInfoExpandButton = (
+                                                        <tbody className={theme}>
+                                                            <tr>
+                                                                <td>USED_BY_SUBSCRIPTIONS</td>
+                                                                <td>
+                                                                    Show info about subscriptions that use this product
+                                                                    block
+                                                                </td>
+                                                                <td>
+                                                                    <EuiButton
+                                                                        iconType={
+                                                                            isExpanded ? "arrowDown" : "arrowRight"
+                                                                        }
+                                                                        onClick={() =>
+                                                                            toggleExpand(subscriptionInstanceId)
+                                                                        }
+                                                                    >
+                                                                        {isExpanded ? "collapse" : "expand"}
+                                                                    </EuiButton>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    );
+                                                    isSubscriptionInfoSection = true;
+                                                }
+                                                // @ts-ignore
+                                                const value = inUseBySubscriptions.hasOwnProperty(entry[1])
+                                                    ? // @ts-ignore
+                                                      inUseBySubscriptions[entry[1]]
+                                                    : entry[1];
+
+                                                return (
+                                                    <>
+                                                        {SubscriptionInfoExpandButton}
+                                                        {isExpanded && (
+                                                            <SubscriptionInfo
+                                                                key={`${inst.subscription_instance_id}.${i}`}
+                                                                label="used_by_subscription"
+                                                                value={value}
+                                                            />
+                                                        )}
+                                                    </>
+                                                );
+                                            }
+                                            return (
+                                                <SubscriptionInstanceValue
+                                                    key={`${inst.subscription_instance_id}.${i}`}
+                                                    label={entry[0]}
+                                                    value={entry[1] !== null ? entry[1] : "null"}
+                                                />
+                                            );
+                                        })}
                                 </table>
                                 {subTabs.length > 0 && (
                                     <div className="indented">

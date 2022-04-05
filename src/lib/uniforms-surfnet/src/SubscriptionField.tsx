@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -30,6 +30,8 @@ import ApplicationContext from "utils/ApplicationContext";
 import { productById } from "utils/Lookups";
 import { Option, Organization, Product, ServicePortSubscription, Subscription as iSubscription } from "utils/types";
 import { filterProductsByBandwidth } from "validations/Products";
+
+import { getReactSelectTheme } from "../../../utils/Colors";
 
 export function makeLabel(subscription: iSubscription, products: Product[], organisations?: Organization[]) {
     const organisation = organisations && organisations.find((org) => org.uuid === subscription.customer_id);
@@ -126,6 +128,8 @@ function Subscription({
     intl,
     ...props
 }: SubscriptionFieldProps) {
+    const { theme } = useContext(ApplicationContext);
+
     const nameArray = joinName(null, name);
     let parentName = joinName(nameArray.slice(0, -1));
     // We cant call useField conditionally so we call it for ourselfs if there is no parent
@@ -227,6 +231,7 @@ function Subscription({
         onChange(s);
         closeModal();
     };
+    const customStyles = getReactSelectTheme(theme);
 
     return (
         <section {...filterDOMProps(props)} className={`${className} subscription-field${disabled ? "-disabled" : ""}`}>
@@ -296,6 +301,7 @@ function Subscription({
                         isDisabled={disabled || readOnly}
                         required={required}
                         inputRef={inputRef}
+                        styles={customStyles}
                         className="subscription-field-select"
                     />
                 </div>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -35,12 +35,13 @@ import {
 import HighlightCode from "components/HighlightCode";
 import ProcessSubscriptionLink from "components/ProcessSubscriptionLink";
 import StepDetails from "components/Step";
-import { HIDDEN_KEYS } from "pages/ProcessDetail";
 import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { capitalize, renderDateTime } from "utils/Lookups";
 import { ProcessSubscription, ProcessWithDetails, Step, prop } from "utils/types";
 import { applyIdNamingConvention, isEmpty, stateDelta } from "utils/Utils";
+
+const HIDDEN_KEYS = ["label_", "divider_", "__"];
 
 function StateChanges({
     steps,

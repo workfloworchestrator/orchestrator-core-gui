@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -199,7 +199,7 @@ class Tasks extends React.PureComponent<IProps, IState> {
                         )}
                         {allowed("/orchestrator/processes/create/task") && (
                             <EuiFlexItem>
-                                <EuiButton onClick={this.newTask} fill color="accent" iconType="plusInCircle">
+                                <EuiButton onClick={this.newTask} fill color="text" iconType="plusInCircle">
                                     <FormattedMessage id="tasks.new" />
                                 </EuiButton>
                             </EuiFlexItem>

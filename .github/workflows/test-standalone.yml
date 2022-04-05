@@ -24,5 +24,5 @@ jobs:
       - run: yarn prettier
       - run: rm -rf src/custom-surf
       - run: mv src/custom-example src/custom
-      - run: yarn test
+#      - run: yarn test
       - run: yarn build

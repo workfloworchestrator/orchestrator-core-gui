@@ -1,5 +1,5 @@
 /*!
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  */
 
 @use "sass:color";
@@ -26,36 +26,66 @@ table.prefixes {
     }
 
     tr {
-        border-bottom: 1px solid vars.$light-grey;
+        &.light {
+            border-bottom: 1px solid vars.$light-grey;
+        }
+        &.dark {
+            border-bottom: 1px solid vars.$dark-grey;
+        }
     }
 
     tr.Allocated {
-        background-color: vars.$light-primary;
+        &.light {
+            background-color: vars.$light-primary;
+        }
+        &.dark {
+            background-color: vars.$darkest-primary;
+        }
 
         &:hover {
-            background-color: color.adjust(vars.$light-primary, $lightness: -10%);
+            &.light {
+                background-color: color.adjust(vars.$light-primary, $lightness: -10%);
+            }
+            &.dark {
+                background-color: color.adjust(vars.$darkest-primary, $lightness: -10%);
+            }
         }
     }
 
     tr.Planned {
         cursor: default;
-        background-color: vars.$light-gold;
-    }
-
-    tr.Free {
-        background-color: vars.$light-success;
+        &.light {
+            background-color: vars.$light-gold;
+        }
+        &.dark {
+            background-color: vars.$dark-gold;
+        }
 
         &:hover {
-            background-color: color.adjust(vars.$light-success, $lightness: -10%);
+            &.light {
+                background-color: color.adjust(vars.$light-gold, $lightness: -10%);
+            }
+            &.dark {
+                background-color: color.adjust(vars.$dark-gold, $lightness: -10%);
+            }
         }
     }
 
-    tr.selected {
-        background-color: vars.$dark-grey;
-        color: white;
+    tr.Free {
+        &.light {
+            background-color: vars.$light-success;
+        }
+        &.dark {
+            background-color: vars.$dark-success;
+        }
 
         &:hover {
-            background-color: black;
+            &.light {
+                background-color: color.adjust(vars.$light-success, $lightness: -10%);
+            }
+            &.dark {
+                background-color: color.adjust(vars.$dark-success, $lightness: -10%);
+            }
         }
     }
 

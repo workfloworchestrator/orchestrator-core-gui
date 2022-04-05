@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,9 +16,11 @@ import "lib/uniforms-surfnet/src/SummaryField.scss";
 
 import { EuiFormRow, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
-import React from "react";
+import React, { useContext } from "react";
 import { connectField, filterDOMProps } from "uniforms";
 import { isEmpty } from "utils/Utils";
+
+import ApplicationContext from "../../../utils/ApplicationContext";
 
 export type SummaryFieldProps = FieldProps<
     null,
@@ -27,6 +29,7 @@ export type SummaryFieldProps = FieldProps<
 
 // onChange not used on purpose
 function Summary({ id, name, label, description, onChange, data, ...props }: SummaryFieldProps) {
+    const { theme } = useContext(ApplicationContext);
     if (!data) {
         return null;
     }
@@ -37,11 +40,11 @@ function Summary({ id, name, label, description, onChange, data, ...props }: Sum
 
     const rows = columns[0].map((row, index) => (
         <tr key={index}>
-            {labels && <td className="label">{labels[index]}</td>}
-            <td className="value">{row}</td>
+            {labels && <td className={`label ${theme}`}>{labels[index]}</td>}
+            <td className={`value ${theme}`}>{row}</td>
             {extra_columns_data &&
                 extra_columns_data.map((cell, idx) => (
-                    <td className="value" key={idx}>
+                    <td className={`value ${theme}`} key={idx}>
                         {extra_columns_data[idx][index]}
                     </td>
                 ))}

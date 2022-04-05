@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,7 +18,8 @@ import "./FailedTaskBanner.scss";
 import { EuiText, EuiToolTip } from "@elastic/eui";
 import RunningProcessesContext from "contextProviders/runningProcessesProvider";
 import { groupBy } from "lodash";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { Process, ProcessStatus } from "utils/types";
 import useHttpIntervalFallback from "utils/useHttpIntervalFallback";
 import { FailedProcess } from "websocketService/useRunningProcesses";
@@ -66,6 +67,8 @@ export default function FailedTaskBanner() {
     const [data, , fetchData] = useFailedTaskFetcher<FailedProcess>("processes/");
     const [failedProcesses, setFailedProcesses] = useState<FailedProcess[]>([]);
     const [failedTasks, setFailedTasks] = useState(countFailedProcesses([]));
+    const history = useHistory();
+    const handleOnClick = useCallback(() => history.push("/tasks"), [history]);
 
     useHttpIntervalFallback(useFallback, () => fetchData(0, 10, [], filterFailedTasks));
 
@@ -93,13 +96,15 @@ export default function FailedTaskBanner() {
     const showTasksStatus = () => (failedTasks.all ? CheckboxStatus.FAILED : CheckboxStatus.OK);
 
     return (
-        <EuiToolTip position="bottom" content={renderTooltipContent()}>
-            <div className="failed-task-banner">
-                <i className={`fa fa-check-square failed-task-banner__icon ${showTasksStatus()}`} />
-                <EuiText grow={false} className="failed-task-banner__counter">
-                    {failedTasks.all}
-                </EuiText>
-            </div>
-        </EuiToolTip>
+        <div onClick={handleOnClick} className="failed-task-container">
+            <EuiToolTip position="bottom" content={renderTooltipContent()}>
+                <div className="failed-task-banner">
+                    <i className={`fa fa-check-square failed-task-banner__icon ${showTasksStatus()}`} />
+                    <EuiText grow={false} className="failed-task-banner__counter">
+                        {failedTasks.all}
+                    </EuiText>
+                </div>
+            </EuiToolTip>
+        </div>
     );
 }

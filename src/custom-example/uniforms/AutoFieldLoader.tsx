@@ -82,5 +82,7 @@ export function autoFieldFunction(props: GuaranteedProps<unknown> & Record<strin
         }
     }
 
+    // Todo React upgrade: fix uniform types
+    // @ts-ignore
     return AutoField.defaultComponentDetector(props, uniforms);
 }

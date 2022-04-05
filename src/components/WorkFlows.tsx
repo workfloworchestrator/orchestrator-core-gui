@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiBadge, EuiInMemoryTable, EuiPageContent, EuiPageContentHeader, EuiSpacer } from "@elastic/eui";
+import { EuiBadge, EuiIcon, EuiInMemoryTable, EuiPageContent, EuiPageContentHeader, EuiSpacer } from "@elastic/eui";
 import React from "react";
 import ApplicationContext from "utils/ApplicationContext";
 import { renderDateTime } from "utils/Lookups";
@@ -52,6 +52,21 @@ export default class WorkFlows extends React.Component {
         const columns = [
             {
                 field: "name",
+                name: "DOCS",
+                sortable: false,
+                truncateText: false,
+                render: (name: any) => {
+                    // Todo: make configurable
+                    return (
+                        <a href={`https://docs.automation.surf.net/workflows/${name}/`}>
+                            <EuiIcon type={"eye"} />
+                        </a>
+                    );
+                },
+                width: "5%",
+            },
+            {
+                field: "name",
                 name: "UNIQUE KEY",
                 sortable: true,
                 truncateText: false,
@@ -61,8 +76,9 @@ export default class WorkFlows extends React.Component {
                 name: "DESCRIPTION",
                 sortable: true,
                 truncateText: false,
-                width: "30%",
+                width: "25%",
             },
+
             {
                 field: "target",
                 name: "TARGET",

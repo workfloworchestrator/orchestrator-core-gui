@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -38,7 +38,7 @@ export { default as OptGroupField } from "lib/uniforms-surfnet/src/OptGroupField
 export { default as SubscriptionField } from "lib/uniforms-surfnet/src/SubscriptionField";
 export { default as SubscriptionSummaryField } from "lib/uniforms-surfnet/src/SubscriptionSummaryField";
 export { default as SummaryField } from "lib/uniforms-surfnet/src/SummaryField";
-// ???
+
 export { default as LocationCodeField } from "lib/uniforms-surfnet/src/logic/LocationCodeField";
 export { default as OrganisationField } from "lib/uniforms-surfnet/src/logic/OrganisationField";
 export { default as ProductField } from "lib/uniforms-surfnet/src/logic/ProductField";

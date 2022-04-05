@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 SURF.
+ * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,12 +14,13 @@
  */
 
 import { EuiDescribedFormGroup, EuiFlexItem, EuiFormRow } from "@elastic/eui";
-import { BoolField } from "lib/uniforms-surfnet/src";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import { useIntl } from "react-intl";
 import { connectField, filterDOMProps, useField } from "uniforms";
 import { AutoField } from "uniforms-unstyled";
+
+import BoolField from "./BoolField";
 
 export type OptGroupFieldProps = FieldProps<null, { fields?: any[]; itemProps?: object }>;
 
