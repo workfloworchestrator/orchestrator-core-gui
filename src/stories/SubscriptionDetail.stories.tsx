@@ -13,9 +13,11 @@
  *
  */
 
-import mock from "axios-mock";
-import SubscriptionDetailPage from "pages/SubscriptionDetailPage";
 import React from "react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import SubscriptionDetailPage from "pages/SubscriptionDetailPage";
+
+import mock from "axios-mock";
 import PRODUCTS from "stories/data/products.json";
 import SUBSCRIPTION_MODEL_JSON from "stories/data/subscription-model.json";
 import SN8PortSubscriptions from "stories/data/subscriptions-sn8-ports.json";
@@ -24,14 +26,15 @@ import StoryRouter from "storybook-react-router";
 
 export default {
     title: "SubscriptionDetailPage",
+    component: SubscriptionDetailPage,
     decorators: [StoryRouter()],
     // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
     parameters: {
         fileName: __filename,
     },
-};
+} as ComponentMeta<typeof SubscriptionDetailPage>;
 
-export const Subscription = () => {
+export const Subscription: ComponentStory<typeof SubscriptionDetailPage> = () => {
     mock.reset();
     mock.onGet("subscriptions/domain-model/pid").reply(200, SUBSCRIPTION_MODEL_JSON);
     mock.onGet("processes/process-subscriptions-by-subscription-id/pid").reply(200, [
