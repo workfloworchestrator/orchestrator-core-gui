@@ -1,0 +1,37 @@
+{
+    "aliases": [],
+    "customer_id": "C9B5E717-0B11-E511-80D0-005056956C1A",
+    "domain": null,
+    "endpoints": [
+        {
+            "id": 31421,
+            "type": "service",
+            "vlanranges": [
+                {
+                    "end": 0,
+                    "start": 0,
+                    "sub_circuit_id": null
+                }
+            ]
+        },
+        {
+            "id": 31424,
+            "type": "service",
+            "vlanranges": [
+                {
+                    "end": 0,
+                    "start": 0,
+                    "sub_circuit_id": null
+                }
+            ]
+        }
+    ],
+    "extra_info": null,
+    "id": 31420,
+    "location": null,
+    "name": "SURFINTERNETWOLK",
+    "order_id": "XX",
+    "product": "SURFMULTIPOINT",
+    "speed": "INTERNETWOLK",
+    "status": "IS"
+}

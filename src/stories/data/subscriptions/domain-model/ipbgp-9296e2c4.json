@@ -1,0 +1,124 @@
+{
+    "customer_descriptions": [],
+    "customer_id": "c37bbc49-d7e2-e611-80e3-005056956c1a",
+    "description": "KLM IP HB001A 203 Mbit/s",
+    "domain": "SURFNET8",
+    "end_date": null,
+    "insync": true,
+    "ip_routing_type": "BGP",
+    "name": null,
+    "note": null,
+    "product": {
+        "created_at": null,
+        "description": "SN8 SURFinternet connection using BGP",
+        "end_date": null,
+        "name": "SN8 SURFinternet BGP",
+        "product_id": "7a980481-8d2e-4779-9f51-3a29e8c88ad5",
+        "product_type": "IP",
+        "status": "active",
+        "tag": "IPBGP"
+    },
+    "product_id": null,
+    "start_date": 1648024380.008172,
+    "status": "active",
+    "subscription_id": "9296e2c4-1899-4a0e-be94-934bd859d7dc",
+    "tag": null,
+    "vc": {
+        "ims_circuit_id": 81150,
+        "label": null,
+        "name": "Virtual Circuit",
+        "nso_service_id": "95eb4f6d-b6eb-46de-9a6e-37f75452bfe6",
+        "owner_subscription_id": "9296e2c4-1899-4a0e-be94-934bd859d7dc",
+        "saps": [
+            {
+                "bfd": false,
+                "bfd_minimum_interval": null,
+                "bfd_multiplier": null,
+                "bgp_export_policy": "default",
+                "bgp_hash_algorithm": "no",
+                "bgp_password": null,
+                "bgp_session_priority": "primary",
+                "customer_ipv4_mtu": 1500,
+                "customer_ipv6_mtu": 1500,
+                "enable_routing": true,
+                "label": null,
+                "name": "Service Attach Point",
+                "owner_subscription_id": "9296e2c4-1899-4a0e-be94-934bd859d7dc",
+                "prefixes": [
+                    {
+                        "customer_aggregate": false,
+                        "extra_information": "test100-subprefix",
+                        "ipam_prefix_id": 91076,
+                        "label": null,
+                        "name": "IP_PREFIX",
+                        "owner_subscription_id": "1e7b202f-dbe2-47fd-b07b-aa4c98c3d578",
+                        "parent_prefix": {
+                            "customer_aggregate": false,
+                            "extra_information": "test100",
+                            "ipam_prefix_id": 91075,
+                            "label": null,
+                            "name": "IP_PREFIX",
+                            "owner_subscription_id": "1fb1781f-bddf-4071-853d-a263f49e3c33",
+                            "parent_prefix": null,
+                            "planned": false,
+                            "subscription_instance_id": "7e9d50ac-59d6-4b50-bf81-c40fd52b3033",
+                            "to_internet": false
+                        },
+                        "planned": false,
+                        "subscription_instance_id": "65d78c07-dd18-46a5-8ffb-519dab998562",
+                        "to_internet": false
+                    }
+                ],
+                "ptp_ipv4_ipam_id": 92415,
+                "ptp_ipv6_ipam_id": 92416,
+                "sap": {
+                    "label": null,
+                    "name": "SN8 Service Attach Point",
+                    "owner_subscription_id": "9296e2c4-1899-4a0e-be94-934bd859d7dc",
+                    "port_subscription_id": "d2de0900-116d-4a9d-85e6-a37c012e2970",
+                    "subscription_instance_id": "e0fd8144-bb5b-4f9b-bed0-5c6b0b661f49",
+                    "vlanrange": "12"
+                },
+                "subscription_instance_id": "b721bd53-f442-4722-9fd7-d8ad5527d2ab"
+            }
+        ],
+        "service_speed": 203,
+        "settings": {
+            "asn": 203,
+            "in_use_by_ids": ["d4328643-a1e6-4e47-8c93-c8e55dbb67e8"],
+            "label": null,
+            "multicast": true,
+            "name": "IP Service Settings",
+            "owner_subscription_id": "9296e2c4-1899-4a0e-be94-934bd859d7dc",
+            "pin_prefix": [
+                {
+                    "customer_aggregate": false,
+                    "extra_information": "test100-subprefix",
+                    "ipam_prefix_id": 91076,
+                    "label": null,
+                    "name": "IP_PREFIX",
+                    "owner_subscription_id": "1e7b202f-dbe2-47fd-b07b-aa4c98c3d578",
+                    "parent_prefix": {
+                        "customer_aggregate": false,
+                        "extra_information": "test100",
+                        "ipam_prefix_id": 91075,
+                        "label": null,
+                        "name": "IP_PREFIX",
+                        "owner_subscription_id": "1fb1781f-bddf-4071-853d-a263f49e3c33",
+                        "parent_prefix": null,
+                        "planned": false,
+                        "subscription_instance_id": "7e9d50ac-59d6-4b50-bf81-c40fd52b3033",
+                        "to_internet": false
+                    },
+                    "planned": false,
+                    "subscription_instance_id": "65d78c07-dd18-46a5-8ffb-519dab998562",
+                    "to_internet": false
+                }
+            ],
+            "subscription_instance_id": "962c44c1-f84f-41c6-bbcc-acd59f479a8f",
+            "surfcert_filter": "default",
+            "surfcert_filter_enabled": true
+        },
+        "subscription_instance_id": "d4328643-a1e6-4e47-8c93-c8e55dbb67e8"
+    }
+}

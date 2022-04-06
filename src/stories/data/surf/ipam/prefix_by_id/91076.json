@@ -1,0 +1,17 @@
+{
+    "addresses": [],
+    "afi": "4",
+    "asn": 1,
+    "asn__label": "AS0 (Default)",
+    "description": "KLM (test100-subprefix)",
+    "id": 91076,
+    "parent": 91075,
+    "parent__label": "LIR(4): 145.17.0.0/16",
+    "prefix": "145.17.0.0/28",
+    "state": 1,
+    "state__label": "Default Resource: Ready",
+    "sub_prefixes": [],
+    "tags": ["orchestrator", "ip_prefix"],
+    "vrf": 2,
+    "vrf__label": "LIR"
+}

@@ -1,0 +1,2167 @@
+[
+    {
+        "abbr": "2AT",
+        "name": "2AT B.V.",
+        "uuid": "92e56b42-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "AARNETNOC",
+        "name": "AARNET NOC",
+        "uuid": "8ce289b3-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ACE",
+        "name": "ACE",
+        "uuid": "06098696-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "AMOLF",
+        "name": "AMOLF .",
+        "uuid": "baba7775-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "AMPATH",
+        "name": "AMPATH",
+        "uuid": "025a376f-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ASTRON",
+        "name": "ASTRON",
+        "uuid": "7c41e5e3-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ASGC",
+        "name": "Academia Sinica Grid Computing",
+        "uuid": "82af25a6-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ACAR",
+        "name": "Academie Artemis",
+        "uuid": "3bd5f900-130b-ec11-9110-0050569571ea"
+    },
+    {
+        "abbr": "AMC",
+        "name": "Academisch Medisch Centrum",
+        "uuid": "a6e56b42-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "AZM",
+        "name": "Academisch Ziekenhuis Maastricht",
+        "uuid": "bae56b42-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KLM",
+        "name": "Air France - KLM",
+        "uuid": "c37bbc49-d7e2-e611-80e3-005056956c1a"
+    },
+    {
+        "abbr": "ALBEDA",
+        "name": "Albeda College",
+        "uuid": "c7a3d065-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ALFA",
+        "name": "Alfa-college",
+        "uuid": "dd605bb2-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "AOB",
+        "name": "Algemene Onderwijsbond",
+        "uuid": "307ad7b9-d76e-e811-80f7-005056956c1a"
+    },
+    {
+        "abbr": "AMPHIA",
+        "name": "Amphia Ziekenhuis",
+        "uuid": "841cadc4-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "AIGHD",
+        "name": "Amsterdam Institute for Global Health and Development (AIGHD)",
+        "uuid": "a8ef0d8c-4b58-e811-80f2-005056956c1a"
+    },
+    {
+        "abbr": "AUMC",
+        "name": "Amsterdam UMC",
+        "uuid": "409542a0-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "AHK",
+        "name": "Amsterdamse Hogeschool voor de Kunsten",
+        "uuid": "ecf7e733-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ANIXTER",
+        "name": "Anixter",
+        "uuid": "1a220ec7-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ARCUS",
+        "name": "Arcus College",
+        "uuid": "281a4f7e-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ARTEZ",
+        "name": "ArtEZ Hogeschool voor de Kunsten",
+        "uuid": "367a7248-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ATOSNL",
+        "name": "Atos Nederland",
+        "uuid": "c4294844-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "AVANS",
+        "name": "Avans Hogeschool",
+        "uuid": "3f4fc287-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TELEPLAZA",
+        "name": "BM Networks b.v. Teleplaza",
+        "uuid": "e29d6d75-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "BT",
+        "name": "BT Nederland N.V.",
+        "uuid": "24c16a4e-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "BNIX",
+        "name": "Belgian National Internet Exchange - BNIX",
+        "uuid": "2773b4a6-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "BELNET",
+        "name": "Belnet",
+        "uuid": "7f2e37ff-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "BNGRON",
+        "name": "Biblionet Groningen",
+        "uuid": "a67a7248-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "BUA",
+        "name": "Boom uitgevers Amsterdam",
+        "uuid": "d3d452ed-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NHTV",
+        "name": "Breda University of Applied Sciences",
+        "uuid": "13168ebf-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "BREEDBAND BREDA",
+        "name": "Breedband Breda",
+        "uuid": "3bf4e471-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "BREEDBAND DELFT",
+        "name": "Breedband Delft",
+        "uuid": "45f4e471-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "BRE",
+        "name": "Breedband Eindhoven",
+        "uuid": "d7b486a8-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "BREEDBAND TILBURG",
+        "name": "Breedband Tilburg",
+        "uuid": "8fe78e84-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "BRILL",
+        "name": "Brill",
+        "uuid": "e5765cb6-026e-e711-80e8-005056956c1a"
+    },
+    {
+        "abbr": "NL-ix",
+        "name": "Broadband Hosting B.V. (NL-ix)",
+        "uuid": "0773b4a6-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "AMS-IX/BUREAU",
+        "name": "Bureau Amsterdam Internet Exchange",
+        "uuid": "2ec16a4e-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CANARIE",
+        "name": "CANARIE Inc.",
+        "uuid": "24220ec7-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CCT-LSU",
+        "name": "CCT-LSU",
+        "uuid": "1d6d4fce-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CERN",
+        "name": "CERN IT Division",
+        "uuid": "9d3a0f44-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CESNET",
+        "name": "CESNET - Czech Educational and Scientific network",
+        "uuid": "53503161-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CSTNET",
+        "name": "CSTNET",
+        "uuid": "456d4fce-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CALTECH",
+        "name": "Caltech",
+        "uuid": "8daf25a6-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CAP/ISM",
+        "name": "Cap Gemini Ernst & Young",
+        "uuid": "3f3dda54-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CBG",
+        "name": "Centraal Bureau voor Genealogie",
+        "uuid": "673dda54-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CPB",
+        "name": "Centraal Planbureau",
+        "uuid": "2447f65a-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CWI",
+        "name": "Centrum Wiskunde & Informatica .",
+        "uuid": "2f47f65a-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CHEMELOT",
+        "name": "Chemelot Campus",
+        "uuid": "2958a94a-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CHE",
+        "name": "Christelijke Hogeschool Ede",
+        "uuid": "4547f65a-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "WINDESHEIM",
+        "name": "Christelijke Hogeschool Windesheim",
+        "uuid": "5043b714-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "COG",
+        "name": "Christelijke Onderwijs Groep Vallei & Gelderland-Midden",
+        "uuid": "4573b4a6-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CIBAP",
+        "name": "Cibap vakschool voor vormgeving",
+        "uuid": "f24dd711-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CLUSIUS",
+        "name": "Clusius College",
+        "uuid": "9bd10540-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CODARTS",
+        "name": "Codarts Rotterdam",
+        "uuid": "3cf3a18d-a507-e611-80db-005056956c1a"
+    },
+    {
+        "abbr": "COMMUNITYNETWORK",
+        "name": "Community Network",
+        "uuid": "2556a156-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "COMPAREX",
+        "name": "Comparex",
+        "uuid": "2e9f85b2-c56b-e711-80e8-005056956c1a"
+    },
+    {
+        "abbr": "COMPLETEGEN",
+        "name": "Complete Genomics",
+        "uuid": "e459376f-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CONECTO",
+        "name": "Conecto Networks",
+        "uuid": "db24fee0-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CONSCIA",
+        "name": "Conscia",
+        "uuid": "aa1590df-2a87-eb11-9108-0050569571ea"
+    },
+    {
+        "abbr": "KIEN",
+        "name": "Co\u00f6peratie KIEN",
+        "uuid": "03f5316c-9b9d-e511-80d5-005056956c1a"
+    },
+    {
+        "abbr": "STBOA",
+        "name": "Co\u00f6peratieve Vereniging Breedbandnetwerk Onderwijs Amsterdam u.a.",
+        "uuid": "db43ea87-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CURIO",
+        "name": "Curio",
+        "uuid": "b92250f0-c2be-eb11-910b-0050569571ea"
+    },
+    {
+        "abbr": "DFN",
+        "name": "DFN-Verein",
+        "uuid": "93503161-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "RIJNH",
+        "name": "DIFFER .",
+        "uuid": "c5ba7775-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "DUWO",
+        "name": "DUWO",
+        "uuid": "408f6c2d-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "DAVINCI",
+        "name": "Da Vinci College",
+        "uuid": "9ec33ad9-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "DMP",
+        "name": "Data Management Professionals",
+        "uuid": "c72f215b-0c11-ea11-90f2-0050569571ea"
+    },
+    {
+        "abbr": "BIBAZ",
+        "name": "De Bibliotheek AanZet",
+        "uuid": "287bd7b9-d76e-e811-80f7-005056956c1a"
+    },
+    {
+        "abbr": "HHS",
+        "name": "De Haagse Hogeschool",
+        "uuid": "d8d7a67b-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "LEIJGRAAF",
+        "name": "De Leijgraaf",
+        "uuid": "806f75b8-2a0b-ec11-9110-0050569571ea"
+    },
+    {
+        "abbr": "ROOIPANNEN",
+        "name": "De Rooi Pannen",
+        "uuid": "dfe40c49-035c-e711-80e7-005056956c1a"
+    },
+    {
+        "abbr": "DELTARES",
+        "name": "Deltares",
+        "uuid": "5b43b714-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "DELTION",
+        "name": "Deltion College",
+        "uuid": "1cefdc0b-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "DESIGNACADEMY",
+        "name": "Design Academy Eindhoven",
+        "uuid": "88503161-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "IB-GROEP",
+        "name": "Dienst Uitvoering Onderwijs - DUO",
+        "uuid": "ff104994-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "DIMENSIONDATA",
+        "name": "Dimension Data Netherlands BV",
+        "uuid": "b9032d61-8981-e711-80e9-005056956c1a"
+    },
+    {
+        "abbr": "DRAMAONLINE",
+        "name": "DramaOnline",
+        "uuid": "f09f1814-c84a-e711-80e6-005056956c1a"
+    },
+    {
+        "abbr": "DRENTHECOLLEGE",
+        "name": "Drenthe College",
+        "uuid": "6e82fa68-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "DRIESTAR",
+        "name": "Driestar Hogeschool",
+        "uuid": "3a47f65a-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "E2ECU",
+        "name": "E2ECU",
+        "uuid": "686d4fce-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ECN",
+        "name": "ECN",
+        "uuid": "9882fa68-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "EGI",
+        "name": "EGI Foundation",
+        "uuid": "2e0156ad-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ENSTINET",
+        "name": "ENSTINET",
+        "uuid": "726d4fce-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ESNET",
+        "name": "ESnet",
+        "uuid": "9c294844-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "EDUTEL",
+        "name": "Edutel",
+        "uuid": "db42e293-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ERASMUSMC",
+        "name": "Erasmus MC",
+        "uuid": "a382fa68-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "EUR",
+        "name": "Erasmus Universiteit Rotterdam",
+        "uuid": "ae82fa68-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ESSEX",
+        "name": "Essex University",
+        "uuid": "60608b90-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "EUROFIBER-NL",
+        "name": "EuroFiber Nederland bv",
+        "uuid": "9c15206f-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "COIN",
+        "name": "European Institute of Public Administration (EIPA/COIN)",
+        "uuid": "a715206f-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ESA",
+        "name": "European Space Agency ESTEC",
+        "uuid": "c615206f-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "FEICO",
+        "name": "FEI Electron Optics B.V.",
+        "uuid": "a5ba7775-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "FZJULICH",
+        "name": "FZ-J\u00fclich",
+        "uuid": "74608b90-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "FNAL",
+        "name": "Fermi National Accelerator Laboratory",
+        "uuid": "6a608b90-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "FONTYS",
+        "name": "Fontys Hogescholen",
+        "uuid": "dbba7775-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "FORBIDDEN",
+        "name": "Forbidden Fruit",
+        "uuid": "cfb8381a-cf6a-e711-80e8-005056956c1a"
+    },
+    {
+        "abbr": "GRONINGERFORUM",
+        "name": "Forum Groningen",
+        "uuid": "6e33d7d2-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "FCROC",
+        "name": "Friesland College",
+        "uuid": "8e2c51f4-8545-e511-80d2-005056956c1a"
+    },
+    {
+        "abbr": "GLORIAD",
+        "name": "GLORIAD",
+        "uuid": "866d4fce-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "GRNET",
+        "name": "GRNET",
+        "uuid": "a2223af9-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "Hibernia",
+        "name": "GTT",
+        "uuid": "0011ebb9-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "QUADRAAM",
+        "name": "Gelderse Onderwijsgroep Quadraam",
+        "uuid": "c910ebb9-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "GELRE",
+        "name": "Gelre Ziekenhuizen",
+        "uuid": "5ec36c81-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "GBU",
+        "name": "Gemeentebibliotheek Utrecht",
+        "uuid": "3ef8e733-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "GRA",
+        "name": "Gerrit Rietveld Academie",
+        "uuid": "d1dd6ecc-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "GLASLOKAALFIBER",
+        "name": "Glaslokaal Fiberleverancier",
+        "uuid": "e524fee0-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "GBLX",
+        "name": "Global Crossing (NOC)",
+        "uuid": "42608b90-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "GLOS",
+        "name": "Global Switch",
+        "uuid": "215cd190-aebe-e511-80d7-005056956c1a"
+    },
+    {
+        "abbr": "GLOBALVOICE",
+        "name": "Global Voice",
+        "uuid": "ef24fee0-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "GRAAFSCHAP",
+        "name": "Graafschap College",
+        "uuid": "5203e539-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "GLR",
+        "name": "Grafisch Lyceum Rotterdam",
+        "uuid": "b8d7a67b-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "GLU",
+        "name": "Grafisch Lyceum Utrecht",
+        "uuid": "c3d7a67b-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "DANTE",
+        "name": "G\u00c9ANT",
+        "uuid": "68503161-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TERENA",
+        "name": "G\u00c9ANT Vereniging",
+        "uuid": "9c9c15f6-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HAS",
+        "name": "HAS Hogeschool",
+        "uuid": "23459c0b-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HPDMNET",
+        "name": "HPDMnet",
+        "uuid": "f2088696-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HZEELAND",
+        "name": "HZ University of Applied Sciences",
+        "uuid": "674fc287-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HANZE",
+        "name": "Hanzehogeschool Groningen",
+        "uuid": "cba5c781-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HMF",
+        "name": "Hartwig Medical Foundation",
+        "uuid": "5cb51c43-6416-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HLCN",
+        "name": "Helicon Opleidingen",
+        "uuid": "eaa5c781-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HPE",
+        "name": "Hewlett Packard Enterprise",
+        "uuid": "0aa9b67f-a149-e611-80df-005056956c1a"
+    },
+    {
+        "abbr": "INHOLLAND",
+        "name": "Hogeschool Inholland",
+        "uuid": "3ca6c781-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KPZ",
+        "name": "Hogeschool KPZ",
+        "uuid": "71c5939c-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HSLEIDEN",
+        "name": "Hogeschool Leiden",
+        "uuid": "2a4fc287-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HRO",
+        "name": "Hogeschool Rotterdam",
+        "uuid": "354fc287-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HSTIO",
+        "name": "Hogeschool TIO",
+        "uuid": "e86dd471-a015-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HU",
+        "name": "Hogeschool Utrecht",
+        "uuid": "ed3ac01a-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "VHL",
+        "name": "Hogeschool Van Hall Larenstein",
+        "uuid": "46aa1808-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KEMPEL",
+        "name": "Hogeschool de Kempel",
+        "uuid": "06121c27-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HKDH",
+        "name": "Hogeschool der Kunsten Den Haag",
+        "uuid": "0a7cd7b9-d76e-e811-80f7-005056956c1a"
+    },
+    {
+        "abbr": "IPABO",
+        "name": "Hogeschool iPabo",
+        "uuid": "88e92ec8-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HVA",
+        "name": "Hogeschool van Amsterdam",
+        "uuid": "534fc287-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HAN",
+        "name": "Hogeschool van Arnhem en Nijmegen",
+        "uuid": "a13ac01a-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HKU",
+        "name": "Hogeschool voor de Kunsten Utrecht",
+        "uuid": "073bc01a-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HDH",
+        "name": "Hotelschool Den Haag",
+        "uuid": "651c028e-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HMC",
+        "name": "Hout- en Meubileringscollege (HMC)",
+        "uuid": "3c16068d-c3be-eb11-910b-0050569571ea"
+    },
+    {
+        "abbr": "IBFD",
+        "name": "IBFD - International Bureau of Fiscal Documentation",
+        "uuid": "fc1923d5-275b-e711-80e7-005056956c1a"
+    },
+    {
+        "abbr": "IBM/7",
+        "name": "IBM Nederland B.V.",
+        "uuid": "ac1c028e-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ICTCENTER",
+        "name": "ICT Center Friesland",
+        "uuid": "06711f3b-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "INCM",
+        "name": "InCompanyMedia",
+        "uuid": "c6ea1c09-d0f4-e911-90f2-0050569571ea"
+    },
+    {
+        "abbr": "INDIANA",
+        "name": "Indiana University",
+        "uuid": "141a4f7e-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "OWINSP",
+        "name": "Inspectie van het Onderwijs",
+        "uuid": "1f114994-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "IDL",
+        "name": "Instituut Defensie Leergangen",
+        "uuid": "39114994-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "IKNL",
+        "name": "Integraal Kankercentrum Nederland",
+        "uuid": "45af70f9-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "INTERNLNET",
+        "name": "InterNLnet bv",
+        "uuid": "62114994-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "INTERNET2",
+        "name": "Internet2",
+        "uuid": "ae83ee2e-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "Interoute",
+        "name": "Interoute",
+        "uuid": "1d03e539-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ICIN",
+        "name": "Interuniversitair Cardiologisch Instituut Nederland",
+        "uuid": "798e999a-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ISELINGE",
+        "name": "Iselinge Hogeschool",
+        "uuid": "4ef3a18d-a507-e611-80db-005056956c1a"
+    },
+    {
+        "abbr": "ISILINX",
+        "name": "Isilinx",
+        "uuid": "11711f3b-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "JGN2",
+        "name": "JGN2",
+        "uuid": "fc088696-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "JANET",
+        "name": "JISC",
+        "uuid": "7683ee2e-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "JIVE",
+        "name": "JIVE",
+        "uuid": "2e6c6787-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "JRC",
+        "name": "Joint Research Centre",
+        "uuid": "9a83ee2e-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KENTIS",
+        "name": "KENTIS BV",
+        "uuid": "0e133f69-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KPN",
+        "name": "KPN",
+        "uuid": "6c352afc-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KPNFIB",
+        "name": "KPN Fiber contacten",
+        "uuid": "36b0f277-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "IS",
+        "name": "KPN Internedservices",
+        "uuid": "c5e289b3-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KPNW",
+        "name": "KPN werkplek",
+        "uuid": "bf53bc86-7a3e-e911-8105-005056956c1a"
+    },
+    {
+        "abbr": "KABELTEX",
+        "name": "Kabeltex bv",
+        "uuid": "d16d8ea2-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KENNISNET",
+        "name": "Kennisnet",
+        "uuid": "ba41e5e3-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KACST",
+        "name": "King AbdulAziz City for Science & Technology",
+        "uuid": "34ce53b5-8a7c-e511-80d3-005056956c1a"
+    },
+    {
+        "abbr": "KAUST",
+        "name": "King Abdullah University of Science and Technology",
+        "uuid": "1a098696-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KWIC",
+        "name": "Koning Willem 1 College",
+        "uuid": "6f3a3614-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KIT",
+        "name": "Koninklijk Instituut voor de Tropen",
+        "uuid": "ec10ebb9-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NIOZ",
+        "name": "Koninklijk Nederlands Instituut voor Zeeonderzoek - NIOZ",
+        "uuid": "3d098696-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KNMI",
+        "name": "Koninklijk Nederlands Meteorologisch Instituut",
+        "uuid": "a5d3b0a0-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KABK",
+        "name": "Koninklijke Academie van Beeldende Kunsten",
+        "uuid": "afd3b0a0-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KONBIB",
+        "name": "Koninklijke Bibliotheek",
+        "uuid": "bad3b0a0-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KNAW",
+        "name": "Koninklijke Nederlandse Akademie van Wetenschappen",
+        "uuid": "cc8e999a-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KISTI",
+        "name": "Korea Institute of Science and Technology Information",
+        "uuid": "aea3d065-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KROONCO",
+        "name": "KroonCo B.V.",
+        "uuid": "a9e76120-82b4-eb11-910b-0050569571ea"
+    },
+    {
+        "abbr": "LMC",
+        "name": "LMC voortgezet onderwijs",
+        "uuid": "169ea150-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "LOI",
+        "name": "LOI Hogeschool",
+        "uuid": "41640424-a015-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "LANDSTEDE-OSP",
+        "name": "Landstede Groep",
+        "uuid": "e51d23ec-f9d6-e511-80d8-005056956c1a"
+    },
+    {
+        "abbr": "LANDSTEDE",
+        "name": "Landstede MBO",
+        "uuid": "d146e5d1-c315-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "LEGALINTEL",
+        "name": "Legal Intelligence",
+        "uuid": "df10e611-2b92-e711-80e9-005056956c1a"
+    },
+    {
+        "abbr": "LUMC",
+        "name": "Leids Universitair Medisch Centrum",
+        "uuid": "21a1f0a6-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "LENTIZ",
+        "name": "Lentiz Onderwijsgroep",
+        "uuid": "54fe37c8-ec26-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "LIJBRANDT",
+        "name": "Lijbrandt Telecom",
+        "uuid": "3fa1f0a6-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "LSU",
+        "name": "Louisiana State University",
+        "uuid": "273c70d4-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "MAASTRO",
+        "name": "MAASTRO Clinic",
+        "uuid": "4c459c0b-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "MASS-IT",
+        "name": "MASS-IT B.V.",
+        "uuid": "fca22341-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "MBOAMERSFOORT",
+        "name": "MBO Amersfoort",
+        "uuid": "aedf8cb8-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "sambo",
+        "name": "MBO Digitaal",
+        "uuid": "c4a14802-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "MBOUTRECHT",
+        "name": "MBO Utrecht",
+        "uuid": "a22c4918-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "MSM",
+        "name": "Maastricht School of Management",
+        "uuid": "4c50f21b-a7a8-e511-80d6-005056956c1a"
+    },
+    {
+        "abbr": "UNIMAAS",
+        "name": "Maastricht University",
+        "uuid": "21011e02-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "MARIN",
+        "name": "Maritime Research Institute Netherlands (MARIN)",
+        "uuid": "68a1f0a6-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HSMARNIX",
+        "name": "Marnix Academie",
+        "uuid": "558f6c2d-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "MAHU",
+        "name": "Mauritshuis",
+        "uuid": "ca7cd7b9-d76e-e811-80f7-005056956c1a"
+    },
+    {
+        "abbr": "MPI",
+        "name": "Max Planck Instituut",
+        "uuid": "3a5b1dad-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "METEOCON",
+        "name": "MeteoGroup Nederland B.V",
+        "uuid": "5a5b1dad-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "MIN.OCW/1",
+        "name": "Ministerie van Onderwijs, Cultuur en Wetenschap",
+        "uuid": "985b1dad-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "MOSCOWLT",
+        "name": "MoscowLight",
+        "uuid": "f38f898a-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "MMC",
+        "name": "M\u00e1xima Medisch Centrum",
+        "uuid": "0f3ac854-97dc-e511-80d9-005056956c1a"
+    },
+    {
+        "abbr": "NC3A",
+        "name": "NATO NCIA AGENCY",
+        "uuid": "1f6458b3-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NBD-BIBLION",
+        "name": "NBD | Biblion",
+        "uuid": "2a6458b3-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NCOI",
+        "name": "NCOI Opleidingsgroep",
+        "uuid": "c7dd6ecc-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NEMEINDHOVEN",
+        "name": "NEM Eindhoven",
+        "uuid": "8ab41a46-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NHL",
+        "name": "NHL Hogeschool .",
+        "uuid": "ce82b820-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NHLSTENDEN",
+        "name": "NHL Stenden Hogeschool",
+        "uuid": "2b7c7468-3692-e711-80e9-005056956c1a"
+    },
+    {
+        "abbr": "NIKHEF",
+        "name": "NIKHEF",
+        "uuid": "37168ebf-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NLT1",
+        "name": "NL-T1",
+        "uuid": "47098696-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NORDU",
+        "name": "NORDUnet A/S",
+        "uuid": "52ca6330-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NTTcom",
+        "name": "NTT Communications Corporation",
+        "uuid": "16b670cf-dbfe-e811-8103-005056956c1a"
+    },
+    {
+        "abbr": "NWO",
+        "name": "NWO",
+        "uuid": "f4158ebf-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "FOM",
+        "name": "NWO-I",
+        "uuid": "d0ba7775-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ARCHIEF",
+        "name": "Nationaal Archief",
+        "uuid": "146458b3-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NMVW",
+        "name": "Nationaal Museum van Wereldculturen",
+        "uuid": "f87cd7b9-d76e-e811-80f7-005056956c1a"
+    },
+    {
+        "abbr": "SINET",
+        "name": "National Institute of Informatics (NII) / SINET",
+        "uuid": "8c3c70d4-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NKN",
+        "name": "National Knowledge Network",
+        "uuid": "64fd94a3-b5b3-e511-80d6-005056956c1a"
+    },
+    {
+        "abbr": "NLR/USA",
+        "name": "National Lambda Rail",
+        "uuid": "948987be-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KIAE",
+        "name": "National Research Centre Kurchatov Institute",
+        "uuid": "6f2e0baf-460d-e611-80db-005056956c1a"
+    },
+    {
+        "abbr": "NATURALIS",
+        "name": "Naturalis Biodiversity Center",
+        "uuid": "fd72b4a6-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NVAO",
+        "name": "Nederlands - Vlaamse Accreditatieorganisatie",
+        "uuid": "855f7417-3c2e-e611-80dd-005056956c1a"
+    },
+    {
+        "abbr": "NFI",
+        "name": "Nederlands Forensisch Instituut",
+        "uuid": "456458b3-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NHG",
+        "name": "Nederlands Historisch Genootschap",
+        "uuid": "13345ab9-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NIBG",
+        "name": "Nederlands Instituut voor Beeld en Geluid",
+        "uuid": "23345ab9-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NKI",
+        "name": "Nederlands Kanker Instituut",
+        "uuid": "66345ab9-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NNI",
+        "name": "Nederlands Normalisatie Instituut",
+        "uuid": "70345ab9-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NSCR",
+        "name": "Nederlands Studiecentrum Criminaliteit en Rechtshandhaving .",
+        "uuid": "5faa0f83-df28-e711-80e5-005056956c1a"
+    },
+    {
+        "abbr": "NDIX",
+        "name": "Nederlands-Duitse Internet Exchange (NDIX)",
+        "uuid": "85345ab9-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NDIX/FIBER",
+        "name": "Nederlands-Duitse Internet Exchange (NDIX) Fiber afdeling",
+        "uuid": "79b0f277-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NCG",
+        "name": "Nederlandse Commissie voor Geodesie",
+        "uuid": "e4158ebf-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NLDA",
+        "name": "Nederlandse Defensie Academie (NLDA)",
+        "uuid": "2225fee0-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NFU",
+        "name": "Nederlandse Federatie van Universitair Medische Centra",
+        "uuid": "dca7897b-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NETHERLIGHTADMIN",
+        "name": "NetherLight Admin",
+        "uuid": "0a11ebb9-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ESCIENCECENTER",
+        "name": "Netherlands eScience Center",
+        "uuid": "97bbc0da-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NEXT",
+        "name": "Nextpertise B.V.",
+        "uuid": "7f308cbf-c436-ea11-90f5-0050569571ea"
+    },
+    {
+        "abbr": "NIMETO",
+        "name": "Nimeto Utrecht",
+        "uuid": "557150c6-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NPC",
+        "name": "Noorderpoort",
+        "uuid": "4988dde9-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NORTHERNLIGHTRAIL",
+        "name": "Northern Lightrail",
+        "uuid": "f924fee0-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NORTHWESTERN",
+        "name": "Northwestern",
+        "uuid": "453c70d4-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NRG",
+        "name": "Nuclear Research Group",
+        "uuid": "0b1a6ee6-cd5b-e711-80e7-005056956c1a"
+    },
+    {
+        "abbr": "NUFFIC",
+        "name": "Nuffic",
+        "uuid": "debe88c5-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NYENRODE",
+        "name": "Nyenrode Business Universiteit",
+        "uuid": "e8be88c5-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "PICA",
+        "name": "OCLC B.V.",
+        "uuid": "f3be88c5-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "OMREN",
+        "name": "Oman Research and Education Network (OMREN)",
+        "uuid": "89d25453-09c9-e611-80e3-005056956c1a"
+    },
+    {
+        "abbr": "OWGNOORD",
+        "name": "Onderwijsgroep Noord",
+        "uuid": "1273b4a6-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "OWGTILBURG",
+        "name": "Onderwijsgroep Tilburg",
+        "uuid": "4b1cadc4-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "OPENLINE",
+        "name": "Open Line Managed Services B V",
+        "uuid": "ddc7cbfc-e1e6-e611-80e3-005056956c1a"
+    },
+    {
+        "abbr": "OU",
+        "name": "Open Universiteit Nederland",
+        "uuid": "08bf88c5-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "OBA",
+        "name": "Openbare Bibliotheek Amsterdam",
+        "uuid": "12bf88c5-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "OGD",
+        "name": "Operator Groep Delft BV",
+        "uuid": "6064e32f-94d4-e511-80d8-005056956c1a"
+    },
+    {
+        "abbr": "PACWAVE",
+        "name": "Pacific Wave",
+        "uuid": "c89d6d75-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "PHILIPS",
+        "name": "Philips Research",
+        "uuid": "6e65c1cb-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "PBL",
+        "name": "Planbureau voor de Leefomgeving",
+        "uuid": "407f27ac-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "PLURYN",
+        "name": "Pluryn",
+        "uuid": "48c36c81-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "LSOP",
+        "name": "Politieacademie",
+        "uuid": "9865c1cb-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "PSNC",
+        "name": "Poznan Supercomputing and Networking (PSNC)",
+        "uuid": "5fe84008-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "INTROWEB",
+        "name": "Previder",
+        "uuid": "848e999a-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "PREVIDERSPSL",
+        "name": "Previder SP Netherlight",
+        "uuid": "4b898285-3414-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "PMC",
+        "name": "Prinses M\u00e1xima Centrum voor kinderoncologie",
+        "uuid": "9c322754-7868-e711-80e8-005056956c1a"
+    },
+    {
+        "abbr": "PROLOCATION",
+        "name": "Prolocation B.V.",
+        "uuid": "c4b41a46-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "QNREN",
+        "name": "Qatar University",
+        "uuid": "a3564194-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "QConf",
+        "name": "Qconferencing",
+        "uuid": "791cadc4-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "QUAR",
+        "name": "Quarantainenet BV",
+        "uuid": "f2e222d5-11ba-e511-80d7-005056956c1a"
+    },
+    {
+        "abbr": "Qwest",
+        "name": "Qwest",
+        "uuid": "0a90898a-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "RETN",
+        "name": "RETN",
+        "uuid": "9c871ee6-1200-e811-80ef-005056956c1a"
+    },
+    {
+        "abbr": "RIPN",
+        "name": "RIPN",
+        "uuid": "4f3c70d4-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "RNP",
+        "name": "RNP",
+        "uuid": "5a3c70d4-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "AVENTUS",
+        "name": "ROC Aventus",
+        "uuid": "aeb41a46-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "FRIESEPOORT",
+        "name": "ROC Friese Poort",
+        "uuid": "6b83ee2e-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "GILDE",
+        "name": "ROC Gilde Opleidingen",
+        "uuid": "f0cc01d1-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HORIZON",
+        "name": "ROC Horizon College",
+        "uuid": "baa14802-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "IDCOLLEGE",
+        "name": "ROC ID College",
+        "uuid": "e58eeb34-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "LEEUWENBORGH",
+        "name": "ROC Leeuwenborgh",
+        "uuid": "bad10540-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ROCLEIDEN",
+        "name": "ROC Leiden",
+        "uuid": "c5e7d68d-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ROCMN",
+        "name": "ROC Midden Nederland",
+        "uuid": "e7adb9d1-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "MONDRIAAN",
+        "name": "ROC Mondriaan",
+        "uuid": "eb6358b3-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ROC-NIJMEGEN",
+        "name": "ROC Nijmegen",
+        "uuid": "fbadb9d1-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NOVA",
+        "name": "ROC Nova College",
+        "uuid": "e5fcf181-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "RIVOR",
+        "name": "ROC Rivor",
+        "uuid": "7f1a9e8c-e0df-e711-80ed-005056956c1a"
+    },
+    {
+        "abbr": "ROCTOP",
+        "name": "ROC TOP",
+        "uuid": "932c4918-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ZADKINE",
+        "name": "ROC Zadkine",
+        "uuid": "9519b9d7-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TERAA",
+        "name": "ROC ter AA",
+        "uuid": "e761b706-6bfa-e611-80e3-005056956c1a"
+    },
+    {
+        "abbr": "ROCVA",
+        "name": "ROC van Amsterdam",
+        "uuid": "7fb41a46-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ROC-ON",
+        "name": "ROC van Twente",
+        "uuid": "8019b9d7-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "RU",
+        "name": "Radboud Universiteit",
+        "uuid": "e33ac01a-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "RU/UCI",
+        "name": "Radboud Universiteit - Universitair Centrum Informatievoorziening",
+        "uuid": "f8001e02-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "UMCN",
+        "name": "Radboudumc",
+        "uuid": "66931efc-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "RECHTSORDE",
+        "name": "Rechtsorde",
+        "uuid": "a75848af-136e-e711-80e8-005056956c1a"
+    },
+    {
+        "abbr": "REDIRIS",
+        "name": "RedIRIS",
+        "uuid": "d6223af9-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "REGIOCOLLEGE",
+        "name": "Regio College voor Beroepsonderwijs en Educatie Zaanstreek-Waterland",
+        "uuid": "f526615f-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "REKAM",
+        "name": "Regionale Kabeltelevisie Midden-Holland",
+        "uuid": "cc194f7e-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "LIR",
+        "name": "Registratie prefixes LIR - geen SURFnet klant",
+        "uuid": "4f623d04-f8e7-e811-8100-005056956c1a"
+    },
+    {
+        "abbr": "RELINED",
+        "name": "Relined bv",
+        "uuid": "8d82fa68-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "RIVM",
+        "name": "Rijksinstituut voor Volksgezondheid en Milieu",
+        "uuid": "c1adb9d1-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "RIJKSMUSEUM",
+        "name": "Rijksmuseum Amsterdam",
+        "uuid": "d8fdba5c-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "RUG",
+        "name": "Rijksuniversiteit Groningen",
+        "uuid": "ccadb9d1-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "RIJC",
+        "name": "Rijn IJssel",
+        "uuid": "7519b9d7-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "RIJNSTATE",
+        "name": "Rijnstate Ziekenhuis",
+        "uuid": "4f73b4a6-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "KARGER",
+        "name": "S. Karger",
+        "uuid": "598553aa-3b71-e711-80e8-005056956c1a"
+    },
+    {
+        "abbr": "SIDN",
+        "name": "SIDN",
+        "uuid": "d7caa228-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SIVON",
+        "name": "SIVON",
+        "uuid": "693d004b-291e-e911-8104-005056956c1a"
+    },
+    {
+        "abbr": "SKIDATA",
+        "name": "SKIDATA B.V.",
+        "uuid": "df96d654-eb37-ec11-9112-0050569571ea"
+    },
+    {
+        "abbr": "SN7SN8",
+        "name": "SN7-SN8 Bridge",
+        "uuid": "81d4e8fc-513c-ea11-90f6-0050569571ea"
+    },
+    {
+        "abbr": "SRON",
+        "name": "SRON Netherlands Institute for Space Research .",
+        "uuid": "93ba6dff-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SSCCAMPUS",
+        "name": "SSC-Campus",
+        "uuid": "7669e59a-ecea-e711-80ed-005056956c1a"
+    },
+    {
+        "abbr": "SSGA",
+        "name": "SSGA",
+        "uuid": "dda22341-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SSHU",
+        "name": "SSH Utrecht",
+        "uuid": "00955536-3912-e811-80f0-005056956c1a"
+    },
+    {
+        "abbr": "STCSAFIB",
+        "name": "STC FIB",
+        "uuid": "4c608b90-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "STCMBO",
+        "name": "STC Group",
+        "uuid": "1725fee0-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "STCSANOC",
+        "name": "STC NOC",
+        "uuid": "55bbc0da-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SURF",
+        "name": "SURF BV",
+        "uuid": "5ede9c9b-3bbc-ea11-90fe-0050569571ea"
+    },
+    {
+        "abbr": "NGNlab",
+        "name": "SURF NGN Lab",
+        "uuid": "5ff5da64-933e-ea11-90f8-0050569571ea"
+    },
+    {
+        "abbr": "SURFBUREAU",
+        "name": "SURF-bureau",
+        "uuid": "5488dde9-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SARA-NL",
+        "name": "SURFSARA NetherLight",
+        "uuid": "46f2e777-329f-e611-80e2-005056956c1a"
+    },
+    {
+        "abbr": "SURFcumulus",
+        "name": "SURFcumulus",
+        "uuid": "9985a394-4245-e711-80e6-005056956c1a"
+    },
+    {
+        "abbr": "SURFDIENSTEN",
+        "name": "SURFmarket bv",
+        "uuid": "a293daef-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SURFnetNFV",
+        "name": "SURFnet NFV",
+        "uuid": "4c6cf30e-c25d-e811-80f5-005056956c1a"
+    },
+    {
+        "abbr": "SVP",
+        "name": "SURFnet Virtualisatie Platform",
+        "uuid": "b6bac06a-12ec-e811-8101-005056956c1a"
+    },
+    {
+        "abbr": "SURFNET",
+        "name": "SURFnet bv",
+        "uuid": "ad93daef-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SURFnetnetwerk",
+        "name": "SURFnet netwerk",
+        "uuid": "c9b5e717-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SURFsara-IS",
+        "name": "SURFsara Insight Services",
+        "uuid": "643c70d4-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SARA",
+        "name": "SURFsara bv",
+        "uuid": "cc5ed0dd-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SVO",
+        "name": "SVO vakopleiding food",
+        "uuid": "45dde2d3-3b5f-ec11-9114-0050569571ea"
+    },
+    {
+        "abbr": "SVOPL",
+        "name": "SVO|PL",
+        "uuid": "53c36c81-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SAXION",
+        "name": "Saxion",
+        "uuid": "9a82b820-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SCALDA",
+        "name": "Scalda",
+        "uuid": "805b2684-8c68-e711-80e8-005056956c1a"
+    },
+    {
+        "abbr": "SCHEEPVMUSEUM",
+        "name": "Scheepvaartmuseum",
+        "uuid": "ac5d33ed-9a08-e711-80e3-005056956c1a"
+    },
+    {
+        "abbr": "RIJKN",
+        "name": "Scholengroep Rijk van Nijmegen",
+        "uuid": "737150c6-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SHAREWORKS",
+        "name": "Shareworks Solutions",
+        "uuid": "a2190132-1e92-e711-80e9-005056956c1a"
+    },
+    {
+        "abbr": "SIMAC",
+        "name": "Simac IDS bv",
+        "uuid": "ec423cdd-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "STFRANCISCUS",
+        "name": "Sint Franciscus Gasthuis",
+        "uuid": "b997695d-d3e1-e511-80d9-005056956c1a"
+    },
+    {
+        "abbr": "SINTLUCAS",
+        "name": "SintLucas",
+        "uuid": "61e9e76b-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SCP",
+        "name": "Sociaal en Cultureel Planbureau",
+        "uuid": "145fd0dd-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SOFTWAREONE",
+        "name": "SoftwareONE",
+        "uuid": "62978930-2c71-e711-80e8-005056956c1a"
+    },
+    {
+        "abbr": "ANTONIUSZKH",
+        "name": "St. Antonius Ziekenhuis",
+        "uuid": "f1fdba5c-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ELISABETH",
+        "name": "St. Elisabeth TweeSteden Ziekenhuis",
+        "uuid": "93e92ec8-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "STADKAMER",
+        "name": "Stadkamer",
+        "uuid": "d193370b-d73a-e711-80e6-005056956c1a"
+    },
+    {
+        "abbr": "StarLight",
+        "name": "StarLight",
+        "uuid": "a4e78e84-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SIIT&T",
+        "name": "State Institute of Information Technologies and Telecommunications (SIIT&T \"Informika\")",
+        "uuid": "3fa1f272-5b90-e611-80e1-005056956c1a"
+    },
+    {
+        "abbr": "CHN",
+        "name": "Stenden Hogeschool .",
+        "uuid": "5047f65a-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "AERES",
+        "name": "Stichting Aeres Groep",
+        "uuid": "52df2ae7-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "CARMEL",
+        "name": "Stichting Carmelcollege",
+        "uuid": "3ef5b0c0-b466-e511-80d3-005056956c1a"
+    },
+    {
+        "abbr": "CENTERDATA",
+        "name": "Stichting CentERdata",
+        "uuid": "467ed7b9-d76e-e811-80f7-005056956c1a"
+    },
+    {
+        "abbr": "CITO",
+        "name": "Stichting Cito Instituut voor Toetsontwikkeling",
+        "uuid": "7947f65a-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "DIGITALESLEUTEL",
+        "name": "Stichting De Digitale Sleutel",
+        "uuid": "998f6c2d-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "EFX",
+        "name": "Stichting Eindhoven Fiber Exchange",
+        "uuid": "f5c143f2-619a-e511-80d5-005056956c1a"
+    },
+    {
+        "abbr": "ST.FIBEROVERAL",
+        "name": "Stichting Fiber Overal",
+        "uuid": "a8fdba5c-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "Fioretti",
+        "name": "Stichting Fioretti Teylingen",
+        "uuid": "a0caa228-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "GLASLOKAALCSP",
+        "name": "Stichting Glaslokaal (CSP)",
+        "uuid": "0f75c6b5-2514-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "GLASLOKAAL",
+        "name": "Stichting Glaslokaal (OSP)",
+        "uuid": "9a41e5e3-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "GH",
+        "name": "Stichting Hogeschool Viaa",
+        "uuid": "55b0f277-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SHN",
+        "name": "Stichting Huisartsopleiding Nederland",
+        "uuid": "627ed7b9-d76e-e811-80f7-005056956c1a"
+    },
+    {
+        "abbr": "IHE",
+        "name": "Stichting IHE Delft Institute for Water Education",
+        "uuid": "14114994-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "IMEC",
+        "name": "Stichting IMEC Nederland",
+        "uuid": "9fa2f5a7-a936-ea11-90f5-0050569571ea"
+    },
+    {
+        "abbr": "LOFAR",
+        "name": "Stichting LOFAR",
+        "uuid": "14963a1e-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SLIB",
+        "name": "Stichting Leidse Infrastructuur Bundeling",
+        "uuid": "d3a22341-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "OMROEP",
+        "name": "Stichting Nederlandse Publieke Omroep",
+        "uuid": "e2f7e733-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "NIVEL",
+        "name": "Stichting Nivel",
+        "uuid": "3e88dde9-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SOMT",
+        "name": "Stichting Opleidingen Musculoskeletale Therapie",
+        "uuid": "3baf70f9-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SPVOZN",
+        "name": "Stichting Primair en Voortgezet Onderwijs Zuid-Nederland",
+        "uuid": "c6b28aab-d52e-e611-80dd-005056956c1a"
+    },
+    {
+        "abbr": "ROC-EHV",
+        "name": "Stichting ROC Summa College",
+        "uuid": "66d10540-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "STSANS",
+        "name": "Stichting SaNS",
+        "uuid": "987ed7b9-d76e-e811-80f7-005056956c1a"
+    },
+    {
+        "abbr": "STUDIELINK",
+        "name": "Stichting Studielink",
+        "uuid": "ec9d6d75-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "SWOV",
+        "name": "Stichting Wetenschappelijk Onderzoek Verkeersveiligheid",
+        "uuid": "8a88dde9-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "BIBUTRECHT",
+        "name": "Stichting de Bibliotheek Utrecht",
+        "uuid": "2b62fe25-93f1-e811-8101-005056956c1a"
+    },
+    {
+        "abbr": "SORG",
+        "name": "Stichting voor Onderwijs op Reformatorische Grondslag",
+        "uuid": "c86d3538-65f5-e911-90f2-0050569571ea"
+    },
+    {
+        "abbr": "TSYSTEMS",
+        "name": "T-Systems International GmbH",
+        "uuid": "05c0190e-3d4f-e711-80e6-005056956c1a"
+    },
+    {
+        "abbr": "TMOBILE",
+        "name": "T-mobile Netherlands B.V.",
+        "uuid": "2824699a-598a-e811-80fc-005056956c1a"
+    },
+    {
+        "abbr": "TATANOC",
+        "name": "TATA Communications (NOC)",
+        "uuid": "56608b90-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TENET",
+        "name": "TENET",
+        "uuid": "20b53b97-bc46-e711-80e6-005056956c1a"
+    },
+    {
+        "abbr": "TNO",
+        "name": "TNO",
+        "uuid": "15931efc-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TOWN",
+        "name": "TOWN QSP",
+        "uuid": "6a88dde9-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TRENT",
+        "name": "TReNT Glasvezel",
+        "uuid": "7588dde9-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TWAREN",
+        "name": "TWAREN",
+        "uuid": "2ec5939c-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "BRAUNSCHWEIG",
+        "name": "Technische Universitaet Carolo-Wilhelmina Zu Braunschweig",
+        "uuid": "01b517f6-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TUDELFT",
+        "name": "Technische Universiteit Delft",
+        "uuid": "4f82fa68-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TUE",
+        "name": "Technische Universiteit Eindhoven",
+        "uuid": "1194daef-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TELE2",
+        "name": "Tele2",
+        "uuid": "42a8897b-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TELEMANN",
+        "name": "TeleMANN",
+        "uuid": "f93c1153-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TELECITYGROUP",
+        "name": "TelecityGroup",
+        "uuid": "0844caed-4126-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TELEFONICA",
+        "name": "Telefonica",
+        "uuid": "d657e3bf-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TESTACCOUNT",
+        "name": "Testaccount Netwerkdashboard",
+        "uuid": "3902a8cf-776f-e611-80e0-005056956c1a"
+    },
+    {
+        "abbr": "TUKAMPEN",
+        "name": "Theologische Universiteit Kampen",
+        "uuid": "b4c881ce-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "THOMAS",
+        "name": "Thomas More Hogeschool",
+        "uuid": "e7a7897b-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "UVT",
+        "name": "Tilburg University",
+        "uuid": "4f011e02-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TORUN",
+        "name": "Torun Centre for Astronomy",
+        "uuid": "1ac5939c-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TRANSLIGHT",
+        "name": "Translight",
+        "uuid": "5fbbc0da-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TRESOAR",
+        "name": "Tresoar",
+        "uuid": "940dbeb5-5c4b-e711-80e6-005056956c1a"
+    },
+    {
+        "abbr": "TRIMBOS",
+        "name": "Trimbos Instituut",
+        "uuid": "236c6787-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "TRIUMF",
+        "name": "Triumf",
+        "uuid": "24c5939c-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "UMCU",
+        "name": "UMC Utrecht",
+        "uuid": "03011e02-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "Unet",
+        "name": "UNET",
+        "uuid": "db55a156-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "UNETFIB",
+        "name": "UNET Fiberleverancier",
+        "uuid": "0d25fee0-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "USLHCNET",
+        "name": "USLHCnet",
+        "uuid": "73bbc0da-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "UDENS",
+        "name": "Udens College",
+        "uuid": "8cbbc0da-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "UNINETT",
+        "name": "Uninett",
+        "uuid": "a3786e24-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "UNU-MERIT",
+        "name": "United Nations University",
+        "uuid": "e3001e02-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "UMCG",
+        "name": "Universitair Medisch Centrum Groningen",
+        "uuid": "b0e56b42-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "LEIDENUNIV",
+        "name": "Universiteit Leiden",
+        "uuid": "09114994-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "UU",
+        "name": "Universiteit Utrecht",
+        "uuid": "90ba7775-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "UVA",
+        "name": "Universiteit van Amsterdam",
+        "uuid": "ec82b820-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "UVH",
+        "name": "Universiteit voor Humanistiek",
+        "uuid": "d6a91808-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "UNL",
+        "name": "Universiteiten van Nederland",
+        "uuid": "dc53130e-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ROOSEVELT",
+        "name": "University College Roosevelt",
+        "uuid": "a019b9d7-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "UNIVCURACAO",
+        "name": "University of Curacao",
+        "uuid": "e1b22db5-b1d1-e611-80e3-005056956c1a"
+    },
+    {
+        "abbr": "UTWENTE",
+        "name": "University of Twente",
+        "uuid": "223bc01a-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "UTELISYS",
+        "name": "Utelisys Communications B.V.",
+        "uuid": "90d10540-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "VANCIS",
+        "name": "VANCIS C&MS",
+        "uuid": "9083ee2e-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "VANCISOSP",
+        "name": "VANCIS C&MS - OSP",
+        "uuid": "d1118214-319f-e611-80e2-005056956c1a"
+    },
+    {
+        "abbr": "VANCIS-NL",
+        "name": "VANCIS C&MS NetherLight",
+        "uuid": "52adaa01-688a-e811-80fc-005056956c1a"
+    },
+    {
+        "abbr": "VISTA",
+        "name": "VISTA College",
+        "uuid": "dbfedd52-c2a3-e911-90f2-0050569571ea"
+    },
+    {
+        "abbr": "VUMC",
+        "name": "VU Medisch Centrum",
+        "uuid": "e753130e-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "VANGOGH",
+        "name": "Van Gogh Museum",
+        "uuid": "0feb43f0-7444-e811-80f2-005056956c1a"
+    },
+    {
+        "abbr": "VERENIGINGHOGESCHOLEN",
+        "name": "Vereniging Hogescholen",
+        "uuid": "e7bbf998-9088-e511-80d5-005056956c1a"
+    },
+    {
+        "abbr": "vodafone",
+        "name": "Vodafone",
+        "uuid": "b0d10540-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "VSTI",
+        "name": "Volker Wessels Telecom | Infra",
+        "uuid": "1303e539-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "VU",
+        "name": "Vrije Universiteit Amsterdam",
+        "uuid": "d253130e-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "WAAG",
+        "name": "Waag Society",
+        "uuid": "0c43b714-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "WUR",
+        "name": "Wageningen University & Research",
+        "uuid": "2143b714-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "WELLANT",
+        "name": "Wellantcollege",
+        "uuid": "1e6fef11-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "WINVISION",
+        "name": "Winvision",
+        "uuid": "da3c1153-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "WITTENBORG",
+        "name": "Wittenborg University",
+        "uuid": "9ddd6ecc-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "DEKEY",
+        "name": "Woonstichting De Key",
+        "uuid": "6643b714-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "YOUNGCAPITAL",
+        "name": "YoungCapital Flex B.V.",
+        "uuid": "972ea2d8-c3fb-e511-80da-005056956c1a"
+    },
+    {
+        "abbr": "YUVERTA",
+        "name": "Yuverta",
+        "uuid": "080e2956-ab5f-eb11-9105-0050569571ea"
+    },
+    {
+        "abbr": "ZAYO",
+        "name": "ZAYO",
+        "uuid": "7b13fad6-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ZEBI",
+        "name": "ZB Bibliotheek van Zeeland",
+        "uuid": "963ac01a-0a11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ZADARA",
+        "name": "Zadara Storage Ltd.",
+        "uuid": "c5ebc79f-018e-e511-80d5-005056956c1a"
+    },
+    {
+        "abbr": "ZIGGO",
+        "name": "Ziggo Zakelijk",
+        "uuid": "3913fad6-0b11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ZONMW",
+        "name": "ZonMw",
+        "uuid": "4a9ea150-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "AOCOOST",
+        "name": "Zone.college",
+        "uuid": "809bef79-af20-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "ZNB",
+        "name": "Zorgpartners Friesland",
+        "uuid": "455b1dad-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "HSZUYD",
+        "name": "Zuyd Hogeschool",
+        "uuid": "724fc287-0911-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "AQUESTORA",
+        "name": "aQuestora",
+        "uuid": "d3ee870a-0545-e711-80e6-005056956c1a"
+    },
+    {
+        "abbr": "ONEXS",
+        "name": "dean one",
+        "uuid": "f859376f-0d11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "I2CAT",
+        "name": "i2CAT",
+        "uuid": "38e9e76b-0c11-e511-80d0-005056956c1a"
+    },
+    {
+        "abbr": "MBORIJNLAND",
+        "name": "mboRijnland",
+        "uuid": "f3442647-50ae-e711-80eb-005056956c1a"
+    },
+    {
+        "abbr": "NETSURF",
+        "name": "netSURF",
+        "uuid": "6ce9e76b-0c11-e511-80d0-005056956c1a"
+    }
+]

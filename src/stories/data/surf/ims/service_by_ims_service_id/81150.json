@@ -1,0 +1,37 @@
+{
+    "aliases": ["SUBSCRIPTION_ID=9296E2C4-1899-4A0E-BE94-934BD859D7DC"],
+    "customer_id": "C37BBC49-D7E2-E611-80E3-005056956C1A",
+    "domain": "SURFNET8",
+    "endpoints": [
+        {
+            "id": 31420,
+            "type": "internet",
+            "vlanranges": [
+                {
+                    "end": 0,
+                    "start": 0,
+                    "sub_circuit_id": null
+                }
+            ]
+        },
+        {
+            "id": 57514,
+            "type": "service",
+            "vlanranges": [
+                {
+                    "end": 12,
+                    "start": 12,
+                    "sub_circuit_id": null
+                }
+            ]
+        }
+    ],
+    "extra_info": "203 Mbit/s SN8 SURFinternet BGP in HAMBURG van Air France - KLM",
+    "id": 81150,
+    "location": null,
+    "name": "HB001A_IP_BGP_KLM_9296E2C4",
+    "order_id": "PID: 8A26E54C-7169-4620-9E4E-ED0341031A2E",
+    "product": "IP",
+    "speed": "SERVICE",
+    "status": "IS"
+}
