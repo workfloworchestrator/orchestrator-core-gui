@@ -13,11 +13,10 @@
  *
  */
 
-import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import NewProcess from "pages/NewProcess";
-
 import mock from "axios-mock";
+import NewProcess from "pages/NewProcess";
+import React from "react";
 import { Organisation, createForm } from "stories/utils";
 import StoryRouter from "storybook-react-router";
 
