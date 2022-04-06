@@ -1,4 +1,4 @@
-import { EuiFlexGroup, EuiFlexItem, EuiSwitch } from "@elastic/eui";
+import { EuiCallOut, EuiFlexGroup, EuiFlexItem, EuiSwitch } from "@elastic/eui";
 import { SubscriptionDetailSection } from "components/subscriptionDetail/SubscriptionDetailSection";
 import React, { useContext, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -377,9 +377,9 @@ export function RenderSubscriptions({ inUseBySubscriptions }: { inUseBySubscript
     const intl = useIntl();
     const [filterTerminated, setFilterTerminated] = useState(true);
 
-    if (!inUseBySubscriptions || inUseBySubscriptions.length === 0) {
-        return null;
-    }
+    // if (!inUseBySubscriptions || inUseBySubscriptions.length === 0) {
+    //     return null;
+    // }
 
     const filteredSubscriptions = filterTerminated
         ? inUseBySubscriptions?.filter((subscription) => subscription.status !== "terminated")
@@ -425,62 +425,71 @@ export function RenderSubscriptions({ inUseBySubscriptions }: { inUseBySubscript
             }
             className="subscription-in_use_by-subscriptions"
         >
-            <table className="subscriptions">
-                <thead>
-                    <tr>{columns.map((column, index) => th(index))}</tr>
-                </thead>
-                <tbody>
-                    {filteredSubscriptions.map((subscription: SubscriptionWithDetails, index: number) => (
-                        <tr key={index} className={theme}>
-                            <td
-                                data-label={intl.formatMessage({ id: "subscriptions.customer_name" })}
-                                className="customer_name"
-                            >
-                                {subscription.customer_name}
-                            </td>
-                            <td
-                                data-label={intl.formatMessage({ id: "subscriptions.subscription_id" })}
-                                className="subscription_id"
-                            >
-                                <a
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    href={`/subscriptions/${subscription.subscription_id}`}
+            {!filteredSubscriptions ||
+                (filteredSubscriptions.length === 0 && (
+                    <EuiCallOut size="m" title="No related subscriptions found" iconType="alert" />
+                ))}
+            {filteredSubscriptions && filteredSubscriptions.length > 0 && (
+                <table className="subscriptions">
+                    <thead>
+                        <tr>{columns.map((column, index) => th(index))}</tr>
+                    </thead>
+                    <tbody>
+                        {filteredSubscriptions.map((subscription: SubscriptionWithDetails, index: number) => (
+                            <tr key={index} className={theme}>
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.customer_name" })}
+                                    className="customer_name"
                                 >
-                                    {subscription.subscription_id.substring(0, 8)}
-                                </a>
-                            </td>
-                            <td
-                                data-label={intl.formatMessage({ id: "subscriptions.description" })}
-                                className="description"
-                            >
-                                {subscription.description}
-                            </td>
-                            <td data-label={intl.formatMessage({ id: "subscriptions.insync" })} className="insync">
-                                <CheckBox value={subscription.insync} name="insync" readOnly={true} />
-                            </td>
-                            <td
-                                data-label={intl.formatMessage({ id: "subscriptions.product_name" })}
-                                className="product_name"
-                            >
-                                {subscription.product.name}
-                            </td>
-                            <td data-label={intl.formatMessage({ id: "subscriptions.status" })} className="status">
-                                {subscription.status}
-                            </td>
-                            <td data-label={intl.formatMessage({ id: "subscriptions.product_tag" })} className="tag">
-                                {subscription.product.tag}
-                            </td>
-                            <td
-                                data-label={intl.formatMessage({ id: "subscriptions.start_date_epoch" })}
-                                className="start_date_epoch"
-                            >
-                                {renderDate(subscription.start_date)}
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+                                    {subscription.customer_name}
+                                </td>
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.subscription_id" })}
+                                    className="subscription_id"
+                                >
+                                    <a
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        href={`/subscriptions/${subscription.subscription_id}`}
+                                    >
+                                        {subscription.subscription_id.substring(0, 8)}
+                                    </a>
+                                </td>
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.description" })}
+                                    className="description"
+                                >
+                                    {subscription.description}
+                                </td>
+                                <td data-label={intl.formatMessage({ id: "subscriptions.insync" })} className="insync">
+                                    <CheckBox value={subscription.insync} name="insync" readOnly={true} />
+                                </td>
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.product_name" })}
+                                    className="product_name"
+                                >
+                                    {subscription.product.name}
+                                </td>
+                                <td data-label={intl.formatMessage({ id: "subscriptions.status" })} className="status">
+                                    {subscription.status}
+                                </td>
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.product_tag" })}
+                                    className="tag"
+                                >
+                                    {subscription.product.tag}
+                                </td>
+                                <td
+                                    data-label={intl.formatMessage({ id: "subscriptions.start_date_epoch" })}
+                                    className="start_date_epoch"
+                                >
+                                    {renderDate(subscription.start_date)}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
         </SubscriptionDetailSection>
     );
 }

@@ -18,10 +18,12 @@ import { EuiFormRow, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
-import Select, { ValueType } from "react-select";
+import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { IMSNode, IMSPort, Option, Subscription } from "utils/types";
+
+import { getReactSelectTheme } from "../../utils/Colors";
 
 export type ImsPortFieldProps = FieldProps<
     number,
@@ -70,7 +72,7 @@ function ImsPortId({
     intl,
     ...props
 }: ImsPortFieldProps) {
-    const { apiClient, customApiClient } = useContext(ApplicationContext);
+    const { apiClient, customApiClient, theme } = useContext(ApplicationContext);
 
     const [nodes, setNodes] = useState<IMSNode[] | Subscription[]>([]);
     const [nodeId, setNodeId] = useState<number | string | undefined>(nodeSubscriptionId);
@@ -139,6 +141,8 @@ function ImsPortId({
         .sort((x, y) => x.label.localeCompare(y.label));
     const port_value = port_options.find((option) => option.value === value);
 
+    const customStyles = getReactSelectTheme(theme);
+
     return (
         <section {...filterDOMProps(props)}>
             <EuiFormRow
@@ -152,7 +156,7 @@ function ImsPortId({
                 <section className="node-port">
                     <div className="node-select">
                         <EuiFormRow label="Node" id={`${id}.node`} fullWidth>
-                            <Select<Option, false>
+                            <ReactSelect<Option, false>
                                 inputId={`${id}.node.search`}
                                 name={`${name}.node`}
                                 onChange={onChangeNodes}
@@ -161,12 +165,13 @@ function ImsPortId({
                                 value={node_value}
                                 isSearchable={true}
                                 isDisabled={disabled || readOnly || !!nodeSubscriptionId || nodes.length === 0}
+                                styles={customStyles}
                             />
                         </EuiFormRow>
                     </div>
                     <div className="port-select">
                         <EuiFormRow label="Port" id={id} fullWidth>
-                            <Select<Option<number>, false>
+                            <ReactSelect<Option<number>, false>
                                 inputId={`${id}.search`}
                                 name={name}
                                 onChange={(selected) => {
@@ -177,6 +182,7 @@ function ImsPortId({
                                 value={port_value}
                                 isSearchable={true}
                                 isDisabled={disabled || readOnly || ports.length === 0}
+                                styles={customStyles}
                             />
                         </EuiFormRow>
                     </div>

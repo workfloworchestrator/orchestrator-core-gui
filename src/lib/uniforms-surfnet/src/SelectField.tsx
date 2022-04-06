@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiFormRow, EuiText } from "@elastic/eui";
+import { EuiFormRow, EuiSelect, EuiText } from "@elastic/eui";
 import ListField, { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
 import ListItemField from "lib/uniforms-surfnet/src/ListItemField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
@@ -77,6 +77,7 @@ function Select({
     }
     const options = allowedValues.map((value: any) => ({
         label: transform ? transform(value) : value,
+        text: transform ? transform(value) : value,
         value: value,
     }));
 
@@ -88,7 +89,9 @@ function Select({
         return (
             <ListField name={name}>
                 <ListItemField name="$">
-                    <SelectField name="" transform={transform} allowedValues={allowedValues} />
+                    {/*<SelectField name="" transform={transform} allowedValues={allowedValues} />*/}
+                    <EuiSelect options={options}></EuiSelect>
+                    {/*<SelectField name="" transform={transform} allowedValues={allowedValues} />*/}
                 </ListItemField>
             </ListField>
         );
