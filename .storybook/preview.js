@@ -11,8 +11,8 @@ import { setIntlConfig, withIntl } from "storybook-addon-intl";
 import en from "../src/locale/en";
 import { parse_translations_dict } from "../src/locale/i18n";
 import nl from "../src/locale/nl";
-import LOCATION_CODES from "../src/stories/data/location_codes.json";
-import ORGANISATIONS from "../src/stories/data/organisations.json";
+import LOCATION_CODES from "../src/stories/data/surf/crm/location_codes.json";
+import ORGANISATIONS from "../src/stories/data/surf/crm/organisations.json";
 import PRODUCTS from "../src/stories/data/products.json";
 import ApplicationContext, { apiClient, customApiClient } from "../src/utils/ApplicationContext";
 
