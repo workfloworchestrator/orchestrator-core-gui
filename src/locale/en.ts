@@ -475,7 +475,29 @@ I18n.translations.en = {
         copy: "Copy to clipboard",
     },
     tickets: {
-        new_ticket: "New Service Ticket",
+        create: {
+            new_ticket: "New Service Ticket",
+            create: "Create new Service ticket",
+            type: "Service ticket type",
+            types: {
+                planned: "Planned work ticket",
+                incident: "Incident ticket",
+            },
+            jira_ticket: "Jira ticket",
+            ims_pw_ticket: "IMS PW ticket",
+            back: "Back",
+            cancel: "Cancel",
+            continue: "Continue",
+            submit: "Submit",
+            refresh: "Refresh",
+            start_time: "Start time",
+            end_time: "End time",
+            jira: "Jira",
+            ims: "IMS",
+        },
+        filters: {
+            state: "Select states",
+        },
         table: {
             jira_ticket: "Jira ticket",
             subject: "Subject",

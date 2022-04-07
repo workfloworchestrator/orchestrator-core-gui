@@ -17,14 +17,15 @@ import {
 } from "@elastic/eui";
 import LabelledFilter from "custom/components/LabelledFilter";
 import debounce from "lodash/debounce";
-import pMap from "p-map";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
-import { familyFullName, ipAddressToNumber, ipamStates, organisationNameByUuid, renderDate } from "utils/Lookups";
-import { Filter, IpPrefix, IpPrefixSubscription, Product, SortOption } from "utils/types";
+import { ipamStates, renderDate, ticketStates } from "utils/Lookups";
+import { Filter, IpPrefixSubscription, SortOption } from "utils/types";
 import { isEmpty, isValidUUIDv4, stop } from "utils/Utils";
+
+import { intl } from "../locale/i18n";
 
 interface ExtendedIpPrefixSubscription extends IpPrefixSubscription {
     customer: string;
@@ -34,7 +35,7 @@ interface ExtendedIpPrefixSubscription extends IpPrefixSubscription {
 interface ServiceTicket {
     jira_ticket: string;
     subject: string;
-    state: string;
+    state: number;
     opened_by: string;
     plandate: string;
 }
@@ -49,13 +50,11 @@ interface FilterAttributes {
 }
 
 interface IState {
-    // prefixes: ExtendedIpPrefixSubscription[];
     serviceTickets: ServiceTicket[];
     query: string;
     searchResults: ServiceTicket[];
     sortOrder: SortOption<Column>;
     filterAttributes: FilterAttributes;
-    // rootPrefixes: IpPrefix[];
     availablePrefixId: number;
     ipPrefixProductId: string;
 }
@@ -67,30 +66,37 @@ class ServiceTickets extends React.PureComponent<IState> {
             {
                 jira_ticket: "SNNP-65541",
                 subject: "Fiber werkzaamheden rond Amersfoort",
-                state: "Open",
+                state: 0,
                 opened_by: "Hans",
                 plandate: "29-04-2021",
             },
             {
                 jira_ticket: "SNNP-65596",
                 subject: "SW upgrade Juniper MX in Zwolle",
-                state: "Open",
+                state: 0,
                 opened_by: "Peter",
                 plandate: "15-04-2021",
             },
             {
                 jira_ticket: "SNNP-65741",
                 subject: "SW upgrade Juniper MX in Deventer",
-                state: "Closed",
+                state: 2,
                 opened_by: "Wouter",
                 plandate: "30-04-2021",
+            },
+            {
+                jira_ticket: "SNTT-33541",
+                subject: "Fiver breuk op Amsterdam - London ling",
+                state: 0,
+                opened_by: "Migiel",
+                plandate: "15-04-2021",
             },
         ],
         query: "",
         searchResults: [],
         sortOrder: { name: "jira_ticket", descending: false },
         filterAttributes: {
-            state: ipamStates
+            state: ticketStates
                 .filter((s) => s)
                 .map((state) => ({
                     name: state ?? "",
@@ -99,7 +105,6 @@ class ServiceTickets extends React.PureComponent<IState> {
                 })),
             rootPrefix: [],
         },
-        // rootPrefixes: [],
         availablePrefixId: 10000,
         ipPrefixProductId: "",
     };
@@ -181,15 +186,13 @@ class ServiceTickets extends React.PureComponent<IState> {
     sortBy = (name: Column) => (a: ServiceTicket, b: ServiceTicket) => {
         const aSafe = a[name] === undefined ? "" : a[name];
         const bSafe = b[name] === undefined ? "" : b[name];
-        // if (name === "ticket") {
-        //     return a["network_address_as_int"] - b["network_address_as_int"];
-        // } else if (name === "state") {
-        //     return (ipamStates[a[name]] ?? "").localeCompare(ipamStates[b[name]] ?? "");
-        // } else {
-        return typeof aSafe === "string" || typeof bSafe === "string"
-            ? (aSafe as string).toLowerCase().localeCompare(bSafe.toString().toLowerCase())
-            : aSafe - bSafe;
-        // }
+        if (name === "state") {
+            return (ticketStates[a[name]] ?? "").localeCompare(ticketStates[b[name]] ?? "");
+        } else {
+            return typeof aSafe === "string" || typeof bSafe === "string"
+                ? (aSafe as string).toLowerCase().localeCompare(bSafe.toString().toLowerCase())
+                : aSafe - bSafe;
+        }
     };
 
     toggleSort = (name: Column) => (e: React.MouseEvent<HTMLTableHeaderCellElement>) => {
@@ -238,8 +241,7 @@ class ServiceTickets extends React.PureComponent<IState> {
     };
 
     render() {
-        // @ts-ignore
-        const { intl } = this.props;
+        // const { intl } = this.props;
         const columns: Column[] = ["jira_ticket", "subject", "state", "opened_by", "plandate"];
         const th = (index: number) => {
             const name = columns[index];
@@ -267,7 +269,7 @@ class ServiceTickets extends React.PureComponent<IState> {
                                         items={filterAttributes.state}
                                         filterBy={this.setFilterList("state")}
                                         selectAll={this.selectAll("state")}
-                                        label={intl.formatMessage({ id: "prefixes.filters.state" })}
+                                        label={intl.formatMessage({ id: "tickets.filters.state" })}
                                     />
                                 </EuiFlexItem>
                                 <EuiFlexItem grow={false} style={{ minWidth: 200 }}>
@@ -277,9 +279,9 @@ class ServiceTickets extends React.PureComponent<IState> {
                                         isDisabled={false}
                                         size="m"
                                         fill
-                                        onClick={() => {}}
+                                        onClick={() => this.context.redirect("/tickets/create")}
                                     >
-                                        {intl.formatMessage({ id: "tickets.new_ticket" })}
+                                        {intl.formatMessage({ id: "tickets.create.new_ticket" })}
                                     </EuiButton>
                                 </EuiFlexItem>
                             </EuiFlexGroup>
@@ -311,7 +313,7 @@ class ServiceTickets extends React.PureComponent<IState> {
                                         data-label={intl.formatMessage({ id: "tickets.table.state" })}
                                         className="state"
                                     >
-                                        {ticket.state}
+                                        {ticketStates[ticket.state]}
                                     </td>
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.opened_by" })}
@@ -335,8 +337,6 @@ class ServiceTickets extends React.PureComponent<IState> {
         );
     }
 }
-
 ServiceTickets.contextType = ApplicationContext;
-
-// @ts-ignore
+//@ts-ignore
 export default injectIntl(ServiceTickets);
