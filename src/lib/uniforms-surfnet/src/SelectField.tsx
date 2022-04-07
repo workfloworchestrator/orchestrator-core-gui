@@ -16,13 +16,14 @@
 import { EuiFormRow, EuiText } from "@elastic/eui";
 import ListField, { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
 import ListItemField from "lib/uniforms-surfnet/src/ListItemField";
+// Avoid circular deps
+import { default as ListSelectField } from "lib/uniforms-surfnet/src/ListSelectField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { get } from "lodash";
 import React, { useContext } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import ReactSelect from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
-import { SelectField } from "uniforms-unstyled";
 import ApplicationContext from "utils/ApplicationContext";
 import { getReactSelectTheme } from "utils/Colors";
 import { Option } from "utils/types";
@@ -58,7 +59,7 @@ function Select({
     const nameArray = joinName(null, name);
     let parentName = joinName(nameArray.slice(0, -1));
 
-    // We cant call useField conditionally so we call it for ourselves if there is no parent
+    // We can't call useField conditionally so we call it for ourselves if there is no parent
     if (parentName === "") {
         parentName = name;
     }
@@ -77,6 +78,7 @@ function Select({
     }
     const options = allowedValues.map((value: any) => ({
         label: transform ? transform(value) : value,
+        text: transform ? transform(value) : value,
         value: value,
     }));
 
@@ -85,10 +87,11 @@ function Select({
     const customStyles = getReactSelectTheme(theme);
 
     if (fieldType === Array) {
+        // Avoid circular import with our own ListSelectField (instead of recursively trying to use SelectField)
         return (
             <ListField name={name}>
                 <ListItemField name="$">
-                    <SelectField name="" transform={transform} allowedValues={allowedValues} />
+                    <ListSelectField name="" transform={transform} allowedValues={allowedValues} />
                 </ListItemField>
             </ListField>
         );

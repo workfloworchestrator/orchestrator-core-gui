@@ -29,7 +29,6 @@ import ApplicationContext from "utils/ApplicationContext";
 
 interface IState {
     dropDownActive: boolean;
-    darkMode: boolean | string;
     environment: string;
 }
 
@@ -41,7 +40,6 @@ class Header extends React.PureComponent<IProps, IState> {
         const hostname = window.location.hostname;
         this.state = {
             dropDownActive: false,
-            darkMode: localStorage.getItem("darkMode") || false,
             environment:
                 hostname.indexOf("staging") > -1
                     ? "staging"
@@ -75,7 +73,7 @@ class Header extends React.PureComponent<IProps, IState> {
     }
 
     switchTheme = () => {
-        if (this.state.darkMode) {
+        if (this.context.theme === "dark") {
             localStorage.removeItem("darkMode");
             window.location.reload();
         } else {
@@ -100,7 +98,7 @@ class Header extends React.PureComponent<IProps, IState> {
             <EuiHeader className="header">
                 <EuiHeaderSectionItem border="none">
                     <Link to="/" className="header__logo">
-                        <img className="header__logo-img" src={logo} alt="logo" />
+                        <img className={`header__logo-img ${this.context.theme}`} src={logo} alt="logo" />
                     </Link>
                     <EuiHeaderSectionItem border="none">
                         <EuiText grow={false}>
@@ -108,11 +106,11 @@ class Header extends React.PureComponent<IProps, IState> {
                                 <FormattedMessage id="header.title" />
                             </h1>
                         </EuiText>
-                        <EuiText grow={false}>
-                            <h1 className={`header__app-title ${environment}`}>
-                                {environment !== "production" && ` ${environment}`}
-                            </h1>
-                        </EuiText>
+                        {environment !== "production" && (
+                            <EuiText grow={false}>
+                                <h1 className={`header__app-title ${environment}`}>{environment}</h1>
+                            </EuiText>
+                        )}
                     </EuiHeaderSectionItem>
                 </EuiHeaderSectionItem>
 
@@ -121,10 +119,10 @@ class Header extends React.PureComponent<IProps, IState> {
                         <EngineStatusBanner />
                         <FailedTaskBanner />
                         <EuiHeaderLink id="switchTheme" onClick={this.switchTheme}>
-                            <EuiButtonIcon iconType={this.state.darkMode ? "sun" : "moon"}></EuiButtonIcon>
+                            <EuiButtonIcon iconType={this.context.theme === "dark" ? "sun" : "moon"} />
                         </EuiHeaderLink>
                         <EuiHeaderLink id="logout" onClick={this.logout}>
-                            <EuiButtonIcon iconType="exit"></EuiButtonIcon>
+                            <EuiButtonIcon iconType="exit" />
                         </EuiHeaderLink>
 
                         {currentUser && (
