@@ -57,35 +57,32 @@ export const Subscription: ComponentStory<typeof SubscriptionDetailPage> = () =>
     mock.onGet("subscriptions/in_use_by/pid").reply(200, IN_USE_BY_JSON);
     mock.onGet("subscriptions/parent_subscriptions/pid").reply(200, IN_USE_BY_JSON); // Deprecated
 
-    mock.onPost("subscriptions/subscriptions_for_in_used_by_ids", '["cbf30313-a490-4f06-ac8a-7e07face0280"]').reply(
-        200,
-        {
-            "cbf30313-a490-4f06-ac8a-7e07face0280": {
-                subscription_id: "358d5a85-49c2-46e2-ac5c-f55601957282",
-                start_date: 1646755090.029193,
-                description: "ASTRON IP HB001A 100 Mbit/s",
-                status: "active",
+    mock.onPost("subscriptions/subscriptions_for_in_used_by_ids", ["cbf30313-a490-4f06-ac8a-7e07face0280"]).reply(200, {
+        "cbf30313-a490-4f06-ac8a-7e07face0280": {
+            subscription_id: "358d5a85-49c2-46e2-ac5c-f55601957282",
+            start_date: 1646755090.029193,
+            description: "ASTRON IP HB001A 100 Mbit/s",
+            status: "active",
+            product_id: "7a980481-8d2e-4779-9f51-3a29e8c88ad5",
+            customer_id: "7c41e5e3-0911-e511-80d0-005056956c1a",
+            insync: true,
+            note: null,
+            name: null,
+            end_date: null,
+            product: {
                 product_id: "7a980481-8d2e-4779-9f51-3a29e8c88ad5",
-                customer_id: "7c41e5e3-0911-e511-80d0-005056956c1a",
-                insync: true,
-                note: null,
-                name: null,
+                name: "SN8 SURFinternet BGP",
+                description: "SN8 SURFinternet connection using BGP",
+                product_type: "IP",
+                status: "active",
+                tag: "IPBGP",
+                created_at: 1553023488.477112,
                 end_date: null,
-                product: {
-                    product_id: "7a980481-8d2e-4779-9f51-3a29e8c88ad5",
-                    name: "SN8 SURFinternet BGP",
-                    description: "SN8 SURFinternet connection using BGP",
-                    product_type: "IP",
-                    status: "active",
-                    tag: "IPBGP",
-                    created_at: 1553023488.477112,
-                    end_date: null,
-                },
-                customer_descriptions: [],
-                tag: null,
             },
-        }
-    );
+            customer_descriptions: [],
+            tag: null,
+        },
+    });
 
     // IMS calls
     mock.onGet("surf/ims/service_by_ims_service_id/31420").reply(200, IMS_31420_JSON);
@@ -96,6 +93,9 @@ export const Subscription: ComponentStory<typeof SubscriptionDetailPage> = () =>
     // CRM calls
     mock.onGet("surf/crm/location_codes").reply(200, CRM_LOCATION_CODES_JSON);
     mock.onGet("surf/crm/organisations").reply(200, CRM_ORGANISATIONS_JSON);
+    mock.onGet("surf/crm/dienstafname/undefined").reply(422, {
+        detail: [{ loc: ["path", "subscription_id"], msg: "value is not a valid uuid", type: "type_error.uuid" }],
+    });
 
     // IPAM calls
     mock.onGet("surf/ipam/prefix_by_id/83138").reply(200, IPAM_83138_JSON);
