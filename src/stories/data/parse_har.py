@@ -9,6 +9,12 @@ DATA_ROOT = pathlib.Path(os.path.abspath(__file__)).parent
 assert DATA_ROOT.name == "data", "Please make sure this script is inside the data folder"
 
 
+TO_EXCLUDE = (
+    "api/surf/crm/organisations",
+    "api/products",
+)
+
+
 def save_orchestrator_response(url, jsonresponse, dryrun):
     """Given a URL and JSON response create/update the corresponding mockfile."""
     endpoint = url.split("/api/")[1].rstrip("/")
@@ -20,6 +26,10 @@ def save_orchestrator_response(url, jsonresponse, dryrun):
     if any(char in identifier for char in "?&="):
         # Skip urls with query parameters for now (can be normalized if it's needed)
         print(f"Unsupported URL parameters: {url}")
+        return
+
+    if any(pattern in url for pattern in TO_EXCLUDE):
+        print(f"Excluding URL {url}")
         return
 
     def get_id(string):
