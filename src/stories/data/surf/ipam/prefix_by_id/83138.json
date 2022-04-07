@@ -1,0 +1,17 @@
+{
+    "addresses": [],
+    "afi": "4",
+    "asn": 1,
+    "asn__label": "AS0 (Default)",
+    "description": "DESIGNACADEMY",
+    "id": 83138,
+    "parent": 82892,
+    "parent__label": "LIR(4): 145.0.0.0/9",
+    "prefix": "145.11.2.0/24",
+    "state": 1,
+    "state__label": "Default Resource: Ready",
+    "sub_prefixes": [],
+    "tags": ["orchestrator", "ip_prefix"],
+    "vrf": 2,
+    "vrf__label": "LIR"
+}
