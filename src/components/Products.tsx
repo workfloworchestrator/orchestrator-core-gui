@@ -23,14 +23,13 @@ import {
     EuiSpacer,
 } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
-import React, {useCallback, useContext, useEffect, useState} from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { injectIntl } from "react-intl";
+import { useHistory } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { renderDateTime } from "utils/Lookups";
 import { Product, ProductBlock } from "utils/types";
-import { useHistory } from "react-router";
-
 
 import { intl } from "../locale/i18n";
 
@@ -56,7 +55,7 @@ function Products() {
 
     const cancelConfirmation = () => {
         setConfirmationDialogOpen(false);
-    }
+    };
 
     const deleteProduct = (product: Product) => {
         apiClient
@@ -75,7 +74,7 @@ function Products() {
                 }
             });
         cancelConfirmation();
-    }
+    };
 
     const handleDeleteProduct = (product: Product) => (e: React.MouseEvent<HTMLButtonElement>) => {
         setConfirmationDialogOpen(true);
@@ -173,7 +172,10 @@ function Products() {
             render: (product_blocks: ProductBlock[]) => {
                 const renderPB = product_blocks.map((item) => (
                     <EuiBadge color="primary" isDisabled={false}>
-                        <EuiLink color="text" onClick={() => handleOnClick(`/metadata/product-block/${item.product_block_id}`)}>
+                        <EuiLink
+                            color="text"
+                            onClick={() => handleOnClick(`/metadata/product-block/${item.product_block_id}`)}
+                        >
                             {item.name}
                         </EuiLink>
                     </EuiBadge>
@@ -199,7 +201,11 @@ function Products() {
             width: "2.5%",
             render: (product_id: string) => {
                 return allowed("/orchestrator/metadata/product/view/" + product_id) + "/" ? (
-                    <EuiButtonIcon onClick={() => handleOnClick(`/metadata/product/view/${product_id}`)} iconType="eye" aria-label="View" />
+                    <EuiButtonIcon
+                        onClick={() => handleOnClick(`/metadata/product/view/${product_id}`)}
+                        iconType="eye"
+                        aria-label="View"
+                    />
                 ) : null;
             },
         },
@@ -209,7 +215,11 @@ function Products() {
             width: "2.5%",
             render: (product_id: string) => {
                 return allowed("/orchestrator/metadata/product/edit/" + product_id) + "/" ? (
-                    <EuiButtonIcon onClick={() => handleOnClick(`/metadata/product/edit/${product_id}`)} iconType="pencil" aria-label="Edit" />
+                    <EuiButtonIcon
+                        onClick={() => handleOnClick(`/metadata/product/edit/${product_id}`)}
+                        iconType="pencil"
+                        aria-label="Edit"
+                    />
                 ) : null;
             },
         },

@@ -476,6 +476,13 @@ I18n.translations.en = {
     },
     tickets: {
         new_ticket: "New Service Ticket",
+        table: {
+            jira_ticket: "Jira ticket",
+            subject: "Subject",
+            state: "State",
+            opened_by: "Opened by",
+            plandate: "Plandate",
+        },
     },
     metadata: {
         tabs: {

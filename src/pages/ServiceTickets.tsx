@@ -31,16 +31,15 @@ interface ExtendedIpPrefixSubscription extends IpPrefixSubscription {
     start_date_as_str: string;
 }
 
-type Column =
-    | "customer"
-    | "subscription_id"
-    | "description"
-    | "family"
-    | "prefixlen"
-    | "prefix"
-    | "parent"
-    | "state"
-    | "start_date";
+interface ServiceTicket {
+    jira_ticket: string;
+    subject: string;
+    state: string;
+    opened_by: string;
+    plandate: string;
+}
+
+type Column = "jira_ticket" | "subject" | "state" | "opened_by" | "plandate";
 
 interface IProps extends WrappedComponentProps {}
 
@@ -50,23 +49,46 @@ interface FilterAttributes {
 }
 
 interface IState {
-    prefixes: ExtendedIpPrefixSubscription[];
+    // prefixes: ExtendedIpPrefixSubscription[];
+    serviceTickets: ServiceTicket[];
     query: string;
-    searchResults: ExtendedIpPrefixSubscription[];
+    searchResults: ServiceTicket[];
     sortOrder: SortOption<Column>;
     filterAttributes: FilterAttributes;
-    rootPrefixes: IpPrefix[];
+    // rootPrefixes: IpPrefix[];
     availablePrefixId: number;
     ipPrefixProductId: string;
 }
 
-class ServiceTickets extends React.PureComponent<IProps, IState> {
+class ServiceTickets extends React.PureComponent<IState> {
     context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {
-        prefixes: [],
+        serviceTickets: [
+            {
+                jira_ticket: "SNNP-65541",
+                subject: "Fiber werkzaamheden rond Amersfoort",
+                state: "Open",
+                opened_by: "Hans",
+                plandate: "29-04-2021",
+            },
+            {
+                jira_ticket: "SNNP-65596",
+                subject: "SW upgrade Juniper MX in Zwolle",
+                state: "Open",
+                opened_by: "Peter",
+                plandate: "15-04-2021",
+            },
+            {
+                jira_ticket: "SNNP-65741",
+                subject: "SW upgrade Juniper MX in Deventer",
+                state: "Closed",
+                opened_by: "Wouter",
+                plandate: "30-04-2021",
+            },
+        ],
         query: "",
         searchResults: [],
-        sortOrder: { name: "prefix", descending: false },
+        sortOrder: { name: "jira_ticket", descending: false },
         filterAttributes: {
             state: ipamStates
                 .filter((s) => s)
@@ -77,146 +99,14 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                 })),
             rootPrefix: [],
         },
-        rootPrefixes: [],
+        // rootPrefixes: [],
         availablePrefixId: 10000,
         ipPrefixProductId: "",
     };
 
     componentDidMount() {
         this.setState({});
-
-        this.context.customApiClient.prefix_filters().then((result) => {
-            const prefixFilters = result.map((p, idx) => ({
-                name: p.prefix,
-                selected: true,
-                count: 0,
-            }));
-            const currentFilterAttributes = this.state.filterAttributes;
-            const modifiedAttributes = { rootPrefix: prefixFilters };
-            this.setState({
-                rootPrefixes: result,
-                filterAttributes: { ...currentFilterAttributes, ...modifiedAttributes },
-                ipPrefixProductId:
-                    this.context.products
-                        .filter((p) => p.tag === "IP_PREFIX")
-                        .map((p) => p.product_id)
-                        .pop() || "",
-            });
-            this.getFreePrefixes(result);
-            this.getPrefixSubscriptions(result);
-        });
     }
-
-    componentDidUpdate(prevProps: IProps, prevState: IState) {
-        if (this.state.prefixes !== prevState.prefixes) {
-            this.debouncedCount();
-        }
-    }
-
-    getPrefixSubscriptions = async (roots: IpPrefix[]) => {
-        const { organisations } = this.context;
-        const mapper = async (root: IpPrefix) => {
-            await this.context.customApiClient
-                .prefixSubscriptionsByRootPrefix(root.id)
-                .then((result) =>
-                    result.map((prefix) => {
-                        const { customer_id, start_date, subscription_id } = prefix;
-                        const organisation =
-                            customer_id === undefined ? "Unknown" : organisationNameByUuid(customer_id, organisations);
-                        const subscription = subscription_id === undefined ? "Unknown" : subscription_id;
-                        return {
-                            ...prefix,
-                            subscription_id: subscription,
-                            start_date_as_str: renderDate(start_date),
-                            customer: organisation,
-                        };
-                    })
-                )
-                .then((result) => {
-                    //deduping is added as a temporary fix removing the IP "root_prefix" filter
-                    //a more thorough redesign is called for in wf-client ticket #255
-                    this.setState((prevState) => {
-                        let newPrefixes = prevState.prefixes.concat(result);
-                        newPrefixes = Array.from(new Set(newPrefixes.map((p) => p.id))).map((id) => {
-                            return newPrefixes.find((s) => s.id === id)!;
-                        });
-                        return { prefixes: newPrefixes };
-                    });
-                })
-                .catch((err) => {
-                    console.log(`failed to load prefix ${root.id}`);
-                });
-        };
-        return await pMap(roots, mapper, { concurrency: 2, stopOnError: false });
-    };
-
-    getFreePrefixes = (roots: IpPrefix[]) => {
-        const now = Math.floor(Date.now() / 1000);
-        const nowString = renderDate(now);
-        return roots.map((p) =>
-            this.context.customApiClient.freeSubnets(p.prefix).then((result) => {
-                const { availablePrefixId } = this.state;
-                const free = result.map((r, idx) => {
-                    const [networkAddress, prefixlen] = r.split("/");
-                    return {
-                        id: availablePrefixId + idx,
-                        customer: "N/A",
-                        subscription_id: "Create",
-                        start_date: now,
-                        start_date_as_str: nowString,
-                        description: "Vrije ruimte - gegenereerd",
-                        family: p.version,
-                        prefix: r,
-                        network_address_as_int: ipAddressToNumber(networkAddress),
-                        prefixlen: parseInt(prefixlen, 10),
-                        parent: p.prefix,
-                        state: ipamStates.indexOf("Free"),
-                        version: 4,
-                        name: "",
-                        product: {} as Product,
-                        product_id: "",
-                        status: "",
-                        insync: false,
-                        customer_id: "",
-                        end_date: now,
-                        note: "",
-                    } as ExtendedIpPrefixSubscription;
-                });
-                this.setState((prevState) => ({
-                    prefixes: prevState.prefixes.concat(free),
-                    availablePrefixId: prevState.availablePrefixId + free.length,
-                }));
-            })
-        );
-    };
-
-    count = () => {
-        const { prefixes, filterAttributes } = this.state;
-        const { state, rootPrefix } = filterAttributes;
-        const stateCount = state.map((attr) => {
-            const newCount = prefixes.reduce((acc, p) => {
-                return ipamStates[p.state] === attr.name ? acc + 1 : acc;
-            }, 0);
-            return newCount === attr.count ? attr : { ...attr, count: newCount };
-        });
-        const rootPrefixCount = rootPrefix.map((attr) => {
-            const newCount = prefixes.reduce((acc, p) => {
-                return p.parent === attr.name ? acc + 1 : acc;
-            }, 0);
-            return newCount === attr.count ? attr : { ...attr, count: newCount };
-        });
-        this.setState({
-            filterAttributes: {
-                state: stateCount,
-                rootPrefix: rootPrefixCount,
-            },
-        });
-    };
-
-    debouncedCount = debounce(this.count, 1500, {
-        leading: true,
-        trailing: true,
-    });
 
     setFilter = (filterName: "state" | "rootPrefix") => (item: Filter) => {
         const currentFilterAttributes = this.state.filterAttributes;
@@ -279,33 +169,27 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
         });
     };
 
-    filter = (unfiltered: ExtendedIpPrefixSubscription[]) => {
+    filter = (unfiltered: ServiceTicket[]) => {
         const { state, rootPrefix } = this.state.filterAttributes;
-        return unfiltered
-            .filter((prefix) => {
-                const stateFilter = state.find((attr) => ipamStates.indexOf(attr.name) === prefix.state);
+        return unfiltered.filter((ticket) => {
+            const rootFilter = rootPrefix.find((attr) => attr.name === ticket.jira_ticket);
 
-                return stateFilter ? stateFilter.selected : true;
-            })
-            .filter((prefix) => {
-                const rootFilter = rootPrefix.find((attr) => attr.name === prefix.parent);
-
-                return rootFilter ? rootFilter.selected : true;
-            });
+            return rootFilter ? rootFilter.selected : true;
+        });
     };
 
-    sortBy = (name: Column) => (a: ExtendedIpPrefixSubscription, b: ExtendedIpPrefixSubscription) => {
+    sortBy = (name: Column) => (a: ServiceTicket, b: ServiceTicket) => {
         const aSafe = a[name] === undefined ? "" : a[name];
         const bSafe = b[name] === undefined ? "" : b[name];
-        if (name === "prefix") {
-            return a["network_address_as_int"] - b["network_address_as_int"];
-        } else if (name === "state") {
-            return (ipamStates[a[name]] ?? "").localeCompare(ipamStates[b[name]] ?? "");
-        } else {
-            return typeof aSafe === "string" || typeof bSafe === "string"
-                ? (aSafe as string).toLowerCase().localeCompare(bSafe.toString().toLowerCase())
-                : aSafe - bSafe;
-        }
+        // if (name === "ticket") {
+        //     return a["network_address_as_int"] - b["network_address_as_int"];
+        // } else if (name === "state") {
+        //     return (ipamStates[a[name]] ?? "").localeCompare(ipamStates[b[name]] ?? "");
+        // } else {
+        return typeof aSafe === "string" || typeof bSafe === "string"
+            ? (aSafe as string).toLowerCase().localeCompare(bSafe.toString().toLowerCase())
+            : aSafe - bSafe;
+        // }
     };
 
     toggleSort = (name: Column) => (e: React.MouseEvent<HTMLTableHeaderCellElement>) => {
@@ -316,7 +200,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
         this.setState({ sortOrder: sortOrder });
     };
 
-    sort = (unsorted: ExtendedIpPrefixSubscription[]) => {
+    sort = (unsorted: ServiceTicket[]) => {
         const { name, descending } = this.state.sortOrder;
         const sorted = unsorted.sort(this.sortBy(name));
         if (descending) {
@@ -332,17 +216,14 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
     };
 
     runQuery = (query: string) => {
-        const { prefixes } = this.state;
+        const { serviceTickets } = this.state;
         const queryToLower = query.toLowerCase();
-        const results = prefixes.filter((prefix) => {
+        const results = serviceTickets.filter((serviceTickets) => {
             return (
-                prefix.prefix.toLowerCase().includes(queryToLower) ||
-                prefix.customer.toLowerCase().includes(queryToLower) ||
-                (prefix.description !== null && prefix.description.toLowerCase().includes(queryToLower)) ||
-                ipamStates[prefix.state]?.toLowerCase().includes(queryToLower) ||
-                ipamStates[prefix.state]?.toLowerCase().includes("free") ||
-                queryToLower === familyFullName[prefix.family].toLowerCase() ||
-                prefix.start_date_as_str.includes(query)
+                serviceTickets.jira_ticket.toLowerCase().includes(queryToLower) ||
+                serviceTickets.opened_by.toLowerCase().includes(queryToLower) ||
+                (serviceTickets.subject !== null && serviceTickets.subject.toLowerCase().includes(queryToLower)) ||
+                serviceTickets.plandate.includes(query)
             );
         });
         this.setState({ searchResults: results });
@@ -357,18 +238,9 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
     };
 
     render() {
+        // @ts-ignore
         const { intl } = this.props;
-        const columns: Column[] = [
-            "customer",
-            "subscription_id",
-            "description",
-            "family",
-            "prefixlen",
-            "prefix",
-            "parent",
-            "state",
-            "start_date",
-        ];
+        const columns: Column[] = ["jira_ticket", "subject", "state", "opened_by", "plandate"];
         const th = (index: number) => {
             const name = columns[index];
             return (
@@ -380,8 +252,9 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                 </th>
             );
         };
-        const { prefixes, query, searchResults, filterAttributes } = this.state;
-        const filteredPrefixes = isEmpty(query) ? this.filter(prefixes) : this.filter(searchResults);
+        const { serviceTickets, query, searchResults, filterAttributes } = this.state;
+        const filteredPrefixes = isEmpty(query) ? this.filter(serviceTickets) : this.filter(searchResults);
+        // @ts-ignore
         const sortedPrefixes = this.sort(filteredPrefixes);
         return (
             <EuiPage>
@@ -418,55 +291,39 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                             <tr>{columns.map((column, index) => th(index))}</tr>
                         </thead>
                         <tbody>
-                            {sortedPrefixes.map((prefix) => (
-                                <tr key={prefix.id} className={ipamStates[prefix.state] ?? ""}>
+                            {sortedPrefixes.map((ticket) => (
+                                <tr key={ticket.jira_ticket}>
                                     <td
-                                        data-label={intl.formatMessage({ id: "prefixes.customer" })}
-                                        className="customer"
-                                    >
-                                        {prefix.customer}
-                                    </td>
-                                    <td
-                                        data-label={intl.formatMessage({ id: "prefixes.subscription_id" })}
+                                        data-label={intl.formatMessage({ id: "tickets.table.jira_ticket" })}
                                         className="subscription"
                                     >
-                                        <a
-                                            href={`${getLink(prefix, this.state.ipPrefixProductId)}`}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            {prefix.subscription_id.substring(0, 8)}
+                                        <a href={""} target="_blank" rel="noopener noreferrer">
+                                            {ticket.jira_ticket}
                                         </a>
                                     </td>
                                     <td
-                                        data-label={intl.formatMessage({ id: "prefixes.description" })}
+                                        data-label={intl.formatMessage({ id: "tickets.table.subject" })}
+                                        className="customer"
+                                    >
+                                        {ticket.subject}
+                                    </td>
+                                    <td
+                                        data-label={intl.formatMessage({ id: "tickets.table.state" })}
+                                        className="state"
+                                    >
+                                        {ticket.state}
+                                    </td>
+                                    <td
+                                        data-label={intl.formatMessage({ id: "tickets.table.opened_by" })}
                                         className="description"
                                     >
-                                        {prefix.description}
-                                    </td>
-                                    <td data-label={intl.formatMessage({ id: "prefixes.family" })} className="family">
-                                        {familyFullName[prefix.family]}
+                                        {ticket.opened_by}
                                     </td>
                                     <td
-                                        data-label={intl.formatMessage({ id: "prefixes.prefixlen" })}
-                                        className="prefixlen"
-                                    >
-                                        /{prefix.prefixlen}
-                                    </td>
-                                    <td data-label={intl.formatMessage({ id: "prefixes.prefix" })} className="prefix">
-                                        {prefix.prefix}
-                                    </td>
-                                    <td data-label={intl.formatMessage({ id: "prefixes.parent" })} className="parent">
-                                        {prefix.parent}
-                                    </td>
-                                    <td data-label={intl.formatMessage({ id: "prefixes.state" })} className="state">
-                                        {ipamStates[prefix.state]}
-                                    </td>
-                                    <td
-                                        data-label={intl.formatMessage({ id: "prefixes.start_date" })}
+                                        data-label={intl.formatMessage({ id: "tickets.table.plandate" })}
                                         className="start_date"
                                     >
-                                        {prefix.start_date_as_str}
+                                        {ticket.plandate}
                                     </td>
                                 </tr>
                             ))}
@@ -479,19 +336,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
     }
 }
 
-function getLink(prefix_of_row: ExtendedIpPrefixSubscription, productId: string) {
-    const { subscription_id, prefix, prefixlen } = prefix_of_row;
-
-    let network = prefix.split("/")[0];
-    let link = "/new-process";
-    if (isValidUUIDv4(subscription_id)) {
-        link = `/subscriptions/${subscription_id}`;
-    } else if (subscription_id === "Create") {
-        link = `new-process/?product=${productId}&prefix=${network}&prefixlen=${prefixlen}&prefix_min=${prefixlen}`;
-    }
-    return link;
-}
-
 ServiceTickets.contextType = ApplicationContext;
 
+// @ts-ignore
 export default injectIntl(ServiceTickets);
