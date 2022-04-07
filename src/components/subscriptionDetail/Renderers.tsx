@@ -427,7 +427,12 @@ export function RenderSubscriptions({ inUseBySubscriptions }: { inUseBySubscript
         >
             {!filteredSubscriptions ||
                 (filteredSubscriptions.length === 0 && (
-                    <EuiCallOut size="m" title="No related subscriptions found" iconType="alert" />
+                    <EuiCallOut
+                        style={{ marginLeft: "-25px" }}
+                        size="m"
+                        title="No related subscriptions found"
+                        iconType="alert"
+                    />
                 ))}
             {filteredSubscriptions && filteredSubscriptions.length > 0 && (
                 <table className="subscriptions">

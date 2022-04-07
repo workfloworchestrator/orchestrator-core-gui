@@ -28,6 +28,7 @@ export { default as NestField } from "lib/uniforms-surfnet/src/NestField";
 export { default as NumField } from "lib/uniforms-surfnet/src/NumField";
 export { default as RadioField } from "lib/uniforms-surfnet/src/RadioField";
 export { default as SelectField } from "lib/uniforms-surfnet/src/SelectField";
+export { default as ListSelectField } from "lib/uniforms-surfnet/src/ListSelectField";
 export { default as SubmitField } from "lib/uniforms-surfnet/src/SubmitField";
 export { default as TextField } from "lib/uniforms-surfnet/src/TextField";
 
