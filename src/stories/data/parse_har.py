@@ -77,7 +77,6 @@ def process_har_entries(har_entries, dryrun):
     valid_entries = [
         entry
         for entry in har_entries
-        if "orchestrator.dev" in entry["request"]["url"]
         if "/api/" in entry["request"]["url"]
         and entry["request"]["method"] == "GET"
         and 200 <= entry["response"]["status"] < 300
