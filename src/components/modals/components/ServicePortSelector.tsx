@@ -122,16 +122,16 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
 
     onNodeInputChange = (e: EventTarget) => {
         const { nodes } = this.state;
-        const target = e as HTMLInputElement;
-        let nodeQuery = target.value;
+        let nodeQuery = (e as unknown) as string;
+        nodeQuery = nodeQuery.toLocaleUpperCase();
 
         // update Suggestions
         const nodeSuggestions = nodes
             .filter(
                 (node) =>
-                    node.description.includes(nodeQuery) ||
-                    node.status.includes(nodeQuery) ||
-                    node.subscription_id.includes(nodeQuery)
+                    node.description.toLocaleUpperCase().includes(nodeQuery) ||
+                    node.status.toLocaleUpperCase().includes(nodeQuery) ||
+                    node.subscription_id.toLocaleUpperCase().includes(nodeQuery)
             )
             .map((node, index) => ({
                 key: index,
