@@ -170,7 +170,7 @@ function ViewProduct({ match }: IProps) {
         let product_details = [];
         for (let [key, value] of Object.entries(non_object_fields)) {
             product_details.push(
-                <EuiFlexItem style={{ minWidth: "400px" }}>
+                <EuiFlexItem grow={false} style={{ minWidth: "400px" }}>
                     <EuiDescriptionList>
                         <EuiDescriptionListTitle>
                             {intl.formatMessage({ id: i18n_key_prefix + key })}

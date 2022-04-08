@@ -59,8 +59,14 @@ yarn start
 
 Browse to the [application homepage](http://localhost:3000/).
 
-#### Running against dev backend
+NOTE: After the upgrade to React script 5.0: you get proxy errors when you're on a routable IP. Workaround:
 
+```sh
+DANGEROUSLY_DISABLE_HOST_CHECK=true yarn start
+```
+
+#### Running against dev backend
+ 
 Copy `.env.local.example` to `.env.local`
 
 This overrides the `REACT_APP_BACKEND_URL` variable. You should make local changes to `.env.local`

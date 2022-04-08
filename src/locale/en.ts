@@ -39,6 +39,7 @@ I18n.translations.en = {
         processes: "Processes",
         validations: "Validations",
         subscriptions: "Subscriptions",
+        tickets: "Service Tickets",
         metadata: "Metadata",
         tasks: "Tasks",
         prefixes: "LIR Prefixes",
@@ -472,6 +473,38 @@ I18n.translations.en = {
     clipboard: {
         copied: "Copied!",
         copy: "Copy to clipboard",
+    },
+    tickets: {
+        create: {
+            new_ticket: "New Service Ticket",
+            create: "Create new Service ticket",
+            type: "Service ticket type",
+            types: {
+                planned: "Planned work ticket",
+                incident: "Incident ticket",
+            },
+            jira_ticket: "Jira ticket",
+            ims_pw_ticket: "IMS PW ticket",
+            back: "Back",
+            cancel: "Cancel",
+            continue: "Continue",
+            submit: "Submit",
+            refresh: "Refresh",
+            start_time: "Start time",
+            end_time: "End time",
+            jira: "Jira",
+            ims: "IMS",
+        },
+        filters: {
+            state: "Select states",
+        },
+        table: {
+            jira_ticket: "Jira ticket",
+            subject: "Subject",
+            state: "State",
+            opened_by: "Opened by",
+            plandate: "Plandate",
+        },
     },
     metadata: {
         tabs: {
