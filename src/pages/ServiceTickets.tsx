@@ -15,7 +15,7 @@ import {
     EuiPanel,
     EuiSpacer,
 } from "@elastic/eui";
-import LabelledFilter from "custom/components/LabelledFilter";
+import ServiceTicketFilter from "components/ServiceTicketFilter";
 import debounce from "lodash/debounce";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
@@ -26,11 +26,6 @@ import { Filter, IpPrefixSubscription, SortOption } from "utils/types";
 import { isEmpty, isValidUUIDv4, stop } from "utils/Utils";
 
 import { intl } from "../locale/i18n";
-
-interface ExtendedIpPrefixSubscription extends IpPrefixSubscription {
-    customer: string;
-    start_date_as_str: string;
-}
 
 interface ServiceTicket {
     jira_ticket: string;
@@ -265,7 +260,7 @@ class ServiceTickets extends React.PureComponent<IState> {
                         <div className="options">
                             <EuiFlexGroup justifyContent="spaceBetween">
                                 <EuiFlexItem grow={false} style={{ minWidth: 200 }}>
-                                    <LabelledFilter
+                                    <ServiceTicketFilter
                                         items={filterAttributes.state}
                                         filterBy={this.setFilterList("state")}
                                         selectAll={this.selectAll("state")}
