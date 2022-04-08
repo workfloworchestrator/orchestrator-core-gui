@@ -3,7 +3,7 @@
  *
  */
 
-import "custom/pages/Prefixes.scss";
+import "pages/ServiceTickets.scss";
 
 import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPage, EuiPanel, EuiSpacer } from "@elastic/eui";
 import ServiceTicketFilter from "components/ServiceTicketFilter";
@@ -226,6 +226,8 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
 
     render() {
         const columns: Column[] = ["jira_ticket", "subject", "state", "opened_by", "plandate"];
+        const { theme } = this.context;
+
         const th = (index: number) => {
             const name = columns[index];
             return (
@@ -271,13 +273,13 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                         </div>
                         <EuiSpacer size="m" />
                     </div>
-                    <table className="prefixes">
+                    <table className="tickets">
                         <thead>
                             <tr>{columns.map((column, index) => th(index))}</tr>
                         </thead>
                         <tbody>
                             {sortedPrefixes.map((ticket) => (
-                                <tr key={ticket.jira_ticket}>
+                                <tr key={ticket.jira_ticket} className={theme}>
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.jira_ticket" })}
                                         className="subscription"
