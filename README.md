@@ -59,7 +59,7 @@ yarn start
 
 Browse to the [application homepage](http://localhost:3000/).
 
-NOTE: After the upgrade to React script 5.0 : you get proxy errors when you're on a routable IP. Workaround:
+NOTE: After the upgrade to React script 5.0: you get proxy errors when you're on a routable IP. Workaround:
 
 ```sh
 DANGEROUSLY_DISABLE_HOST_CHECK=true yarn start
