@@ -62,8 +62,8 @@ const radios = [
 ];
 
 function CreateServiceTicket() {
-    const { apiClient, redirect } = useContext(ApplicationContext);
-    const [jiraTickets, setJiraTickets] = useState<Ticket[]>([
+    const { redirect } = useContext(ApplicationContext);
+    const [jiraTickets] = useState<Ticket[]>([
         {
             name: "SNNP-84537 - Fiber",
             start_time: "2022-Feb-09 20:00 AMS (20 UTC)",
@@ -85,7 +85,7 @@ function CreateServiceTicket() {
             end_time: "2022-Feb-09 14:00 AMS (21 UTC)",
         },
     ]);
-    const [imsTickets, setImsTickets] = useState<Ticket[]>([
+    const [imsTickets] = useState<Ticket[]>([
         {
             name: "SNNP-84537",
             start_time: "2022-Feb-09 20:00 AMS (20 UTC)",
@@ -120,9 +120,7 @@ function CreateServiceTicket() {
     const [buttonSubmitEnabled, setButtonSubmitEnabled] = useState(false);
 
     const getLabels = (tickets: Ticket[]) => {
-        let labels: any[] = [];
-        tickets.forEach((ticket) => labels.push({ ["label"]: ticket.name }));
-        return labels;
+        return tickets.map((ticket) => ({ label: ticket.name }));
     };
 
     useEffect(() => {
@@ -130,7 +128,7 @@ function CreateServiceTicket() {
         console.log("useEffect");
         setJiraTicketsLabels(getLabels(jiraTickets));
         setImsTicketsLabels(getLabels(imsTickets));
-    }, [selectedOptionsIMS, selectedOptionsJira]);
+    }, [selectedOptionsIMS, selectedOptionsJira, imsTickets, jiraTickets]);
 
     const onChange = (optionId: string) => {
         setRadioIdSelected(optionId);
