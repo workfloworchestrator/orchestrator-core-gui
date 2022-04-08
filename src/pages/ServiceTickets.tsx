@@ -5,25 +5,16 @@
 
 import "custom/pages/Prefixes.scss";
 
-import {
-    EuiButton,
-    EuiFieldSearch,
-    EuiFlexGroup,
-    EuiFlexItem,
-    EuiPage,
-    EuiPageBody,
-    EuiPanel,
-    EuiSpacer,
-} from "@elastic/eui";
-import ServiceTicketFilter from "components/ServiceTicketFilter";
+import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPage, EuiPanel, EuiSpacer } from "@elastic/eui";
+import LabelledFilter from "custom/components/LabelledFilter";
 import debounce from "lodash/debounce";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
-import { ipamStates, renderDate, ticketStates } from "utils/Lookups";
-import { Filter, IpPrefixSubscription, SortOption } from "utils/types";
-import { isEmpty, isValidUUIDv4, stop } from "utils/Utils";
+import { ticketStates } from "utils/Lookups";
+import { Filter, SortOption } from "utils/types";
+import { isEmpty, stop } from "utils/Utils";
 
 import { intl } from "../locale/i18n";
 
@@ -54,7 +45,7 @@ interface IState {
     ipPrefixProductId: string;
 }
 
-class ServiceTickets extends React.PureComponent<IState> {
+class ServiceTickets extends React.PureComponent<IProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {
         serviceTickets: [
@@ -170,7 +161,7 @@ class ServiceTickets extends React.PureComponent<IState> {
     };
 
     filter = (unfiltered: ServiceTicket[]) => {
-        const { state, rootPrefix } = this.state.filterAttributes;
+        const { rootPrefix } = this.state.filterAttributes;
         return unfiltered.filter((ticket) => {
             const rootFilter = rootPrefix.find((attr) => attr.name === ticket.jira_ticket);
 
@@ -236,7 +227,6 @@ class ServiceTickets extends React.PureComponent<IState> {
     };
 
     render() {
-        // const { intl } = this.props;
         const columns: Column[] = ["jira_ticket", "subject", "state", "opened_by", "plandate"];
         const th = (index: number) => {
             const name = columns[index];
@@ -294,9 +284,9 @@ class ServiceTickets extends React.PureComponent<IState> {
                                         data-label={intl.formatMessage({ id: "tickets.table.jira_ticket" })}
                                         className="subscription"
                                     >
-                                        <a href={""} target="_blank" rel="noopener noreferrer">
+                                        <EuiLink href={"#"} target="_blank" rel="noopener noreferrer">
                                             {ticket.jira_ticket}
-                                        </a>
+                                        </EuiLink>
                                     </td>
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.subject" })}
@@ -333,5 +323,5 @@ class ServiceTickets extends React.PureComponent<IState> {
     }
 }
 ServiceTickets.contextType = ApplicationContext;
-//@ts-ignore
+
 export default injectIntl(ServiceTickets);
