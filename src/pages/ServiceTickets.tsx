@@ -6,7 +6,8 @@
 import "custom/pages/Prefixes.scss";
 
 import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPage, EuiPanel, EuiSpacer } from "@elastic/eui";
-import LabelledFilter from "custom/components/LabelledFilter";
+import ServiceTicketFilter from "components/ServiceTicketFilter";
+import { intl } from "locale/i18n";
 import debounce from "lodash/debounce";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
@@ -15,8 +16,6 @@ import ApplicationContext from "utils/ApplicationContext";
 import { ticketStates } from "utils/Lookups";
 import { Filter, SortOption } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
-
-import { intl } from "../locale/i18n";
 
 interface ServiceTicket {
     jira_ticket: string;
@@ -113,7 +112,6 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
         });
     };
 
-    // setFilter, but for a list of filters.
     setFilterList = (filterName: "state" | "rootPrefix") => (item: Filter[]) => {
         const currentFilterAttributes = this.state.filterAttributes;
         const incomingFilterNames = item.map((f) => f.name);
