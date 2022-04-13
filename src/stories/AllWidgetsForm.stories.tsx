@@ -27,10 +27,6 @@ import { InputForm } from "utils/types";
 
 export default {
     title: "Complete Input widgets form new",
-    // Needed to match snapshot file to story, should be done bij injectFileNames but that does not work
-    parameters: {
-        fileName: __filename,
-    },
 };
 
 function prepare() {

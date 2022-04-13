@@ -21,10 +21,6 @@ import { createForm } from "stories/utils";
 
 export default {
     title: "UserInputFormWizard",
-    // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
-    parameters: {
-        fileName: __filename,
-    },
 };
 
 export const Wizard = () => {
