@@ -1,0 +1,47 @@
+{
+    "customer_descriptions": [],
+    "customer_id": "88503161-0911-e511-80d0-005056956c1a",
+    "description": "DESIGNACADEMY prefix 145.11.2.0/24",
+    "end_date": null,
+    "insync": true,
+    "ip_prefix": {
+        "customer_aggregate": false,
+        "extra_information": "",
+        "in_use_by_ids": [
+            "a65ee338-7675-4613-9d57-8d06647314a3",
+            "8e9d0d1e-f941-4f5f-9565-d7316f14e265",
+            "63acd2e7-06fa-4034-8c82-17998a7d0078",
+            "f4ffaf18-7627-4bd2-99c9-f619259bf68f",
+            "9c59db8a-b344-483b-9d94-996813d3a8cb",
+            "6d6a0f85-6f72-4b38-81fa-87dbb2c6d4b1",
+            "0a5157ab-9844-4803-9aef-4371b5266708",
+            "86dc105d-0426-483e-9d40-549c53799f3a",
+            "1f23f327-ce00-4a1c-99ef-502288b03a00"
+        ],
+        "ipam_prefix_id": 83138,
+        "label": null,
+        "name": "IP_PREFIX",
+        "owner_subscription_id": "1254f249-a798-42e8-9a8b-58e4a784e869",
+        "parent_prefix": null,
+        "planned": false,
+        "subscription_instance_id": "52119bbd-7827-4585-94b8-84146b7e5658",
+        "to_internet": false
+    },
+    "name": null,
+    "note": null,
+    "product": {
+        "created_at": null,
+        "description": "IPv4 and IPv6 Prefix product",
+        "end_date": null,
+        "name": "IP Prefix",
+        "product_id": "55c96135-e308-4126-b53f-0a3cf23331f5",
+        "product_type": "IP_PREFIX",
+        "status": "active",
+        "tag": "IP_PREFIX"
+    },
+    "product_id": null,
+    "start_date": 1634740726.874634,
+    "status": "active",
+    "subscription_id": "1254f249-a798-42e8-9a8b-58e4a784e869",
+    "tag": null
+}

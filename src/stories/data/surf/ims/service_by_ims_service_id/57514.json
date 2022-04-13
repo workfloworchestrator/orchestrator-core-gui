@@ -1,0 +1,20 @@
+{
+    "aliases": ["SUBSCRIPTION_ID=D2DE0900-116D-4A9D-85E6-A37C012E2970"],
+    "customer_id": "C37BBC49-D7E2-E611-80E3-005056956C1A",
+    "domain": null,
+    "endpoints": [
+        {
+            "id": 701817,
+            "type": "port",
+            "vlanranges": null
+        }
+    ],
+    "extra_info": "10 Gbit/s SP te HAMBURG van Air France - KLM",
+    "id": 57514,
+    "location": "HB001A",
+    "name": "HB001A_SP_TAGGED_KLM_D2DE0900",
+    "order_id": "PID: DB599390-B822-4699-A233-38390DBDEDF0",
+    "product": "SP",
+    "speed": "10GBASE-LR",
+    "status": "IS"
+}

@@ -2020,5 +2020,121 @@
                 "workflow_id": "87d8bdd4-4556-44a6-a4a5-81bd2972fb24"
             }
         ]
+    },
+
+    {
+        "product_id": "7a980481-8d2e-4779-9f51-3a29e8c88ad5",
+        "name": "SN8 SURFinternet BGP",
+        "description": "SN8 SURFinternet connection using BGP",
+        "product_type": "IP",
+        "status": "active",
+        "tag": "IPBGP",
+        "created_at": 1553023488.477112,
+        "end_date": null,
+        "product_blocks": [
+            {
+                "product_block_id": "86238ed2-e8a1-45fa-a3c3-6b9a562103f4",
+                "name": "Virtual Circuit",
+                "description": "Virtual Circuit represents the point to point circuit between minimal two endpoints",
+                "tag": "VC",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "ims_circuit_id",
+                        "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+                        "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83"
+                    },
+                    {
+                        "resource_type": "nso_service_id",
+                        "description": "The UUID of a NSO service",
+                        "resource_type_id": "9b9babd4-da78-49cc-b893-abdfd6832c39"
+                    },
+                    {
+                        "resource_type": "ims_protection_circuit_id",
+                        "description": "The protection circuit ID for Redundant MSP and Lightpaths",
+                        "resource_type_id": "a430a2a4-22e5-40c6-ac22-82dab591da81"
+                    },
+                    {
+                        "resource_type": "service_speed",
+                        "description": "Policer speed in Mbps",
+                        "resource_type_id": "bbb5e12b-ae1b-471b-9d2f-ca188a0e633c"
+                    },
+                    {
+                        "resource_type": "nms_service_id",
+                        "description": "This is the nms service_id ",
+                        "resource_type_id": "e7c336d2-ea48-4339-bffb-a8d4c904a780"
+                    }
+                ],
+                "created_at": 1512057415.411105,
+                "end_date": null
+            }
+        ],
+        "fixed_inputs": [
+            {
+                "fixed_input_id": "18407041-f6ec-4d97-857a-03da94ad7cff",
+                "name": "domain",
+                "value": "SURFNET8",
+                "product_id": "7a980481-8d2e-4779-9f51-3a29e8c88ad5",
+                "created_at": 1553023488.477112
+            },
+            {
+                "fixed_input_id": "6a8af768-9672-4e71-94b9-07cf53aacbf9",
+                "name": "ip_routing_type",
+                "value": "BGP",
+                "product_id": "7a980481-8d2e-4779-9f51-3a29e8c88ad5",
+                "created_at": 1553023488.477112
+            }
+        ],
+        "workflows": [
+            {
+                "name": "resend_email",
+                "target": "MODIFY",
+                "description": "Resend Email",
+                "created_at": 1619011572.284956,
+                "workflow_id": "8b897c7f-cf9c-4b36-9d97-fbff58948c12"
+            },
+            {
+                "name": "create_sn8_ip_bgp",
+                "target": "CREATE",
+                "description": "Create SN8 IP BGP",
+                "created_at": 1549028456.533268,
+                "workflow_id": "4e67da32-4bf8-4625-a139-d333544730a4"
+            },
+            {
+                "name": "terminate_sn8_ip_bgp",
+                "target": "TERMINATE",
+                "description": "Terminate SN8 IP BGP",
+                "created_at": 1551387115.597611,
+                "workflow_id": "7f791732-32ae-447f-8b49-34e5eea35732"
+            },
+            {
+                "name": "modify_sn8_ip_bgp_change_port",
+                "target": "MODIFY",
+                "description": "Change a port to a different port in a SN8 IP BGP subscription",
+                "created_at": 1569308161.820424,
+                "workflow_id": "309e02ee-af67-46ca-9c11-c72ba997dbea"
+            },
+            {
+                "name": "modify_sn8_ip_bgp",
+                "target": "MODIFY",
+                "description": "Change a SN8 IP BGP subscription",
+                "created_at": 1571904695.243519,
+                "workflow_id": "ed5a0cb2-8b9c-4c35-a536-853d88206ab6"
+            },
+            {
+                "name": "modify_note",
+                "target": "MODIFY",
+                "description": "Modify Note",
+                "created_at": 1576230994.483572,
+                "workflow_id": "5fd542c8-36b6-4a29-9baf-327b4423ece9"
+            },
+            {
+                "name": "validate_sn8_ip_bgp",
+                "target": "SYSTEM",
+                "description": "Validate SN8 IP BGP",
+                "created_at": 1567673595.784087,
+                "workflow_id": "95f9bca5-5b33-4dd7-9d82-726cdfb3d2db"
+            }
+        ]
     }
 ]

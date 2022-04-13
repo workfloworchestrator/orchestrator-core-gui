@@ -1,0 +1,89 @@
+{
+    "customer_descriptions": [],
+    "customer_id": "7c41e5e3-0911-e511-80d0-005056956c1a",
+    "description": "ASTRON IP HB001A 100 Mbit/s",
+    "domain": "SURFNET8",
+    "end_date": null,
+    "insync": true,
+    "ip_routing_type": "BGP",
+    "name": null,
+    "note": null,
+    "product": {
+        "created_at": null,
+        "description": "SN8 SURFinternet connection using BGP",
+        "end_date": null,
+        "name": "SN8 SURFinternet BGP",
+        "product_id": "7a980481-8d2e-4779-9f51-3a29e8c88ad5",
+        "product_type": "IP",
+        "status": "active",
+        "tag": "IPBGP"
+    },
+    "product_id": null,
+    "start_date": 1646755090.029193,
+    "status": "active",
+    "subscription_id": "358d5a85-49c2-46e2-ac5c-f55601957282",
+    "tag": null,
+    "vc": {
+        "ims_circuit_id": 79119,
+        "label": null,
+        "name": "Virtual Circuit",
+        "nso_service_id": "0d6da2bb-041b-45b1-b789-e4a3d0e90bbf",
+        "owner_subscription_id": "358d5a85-49c2-46e2-ac5c-f55601957282",
+        "saps": [
+            {
+                "bfd": false,
+                "bfd_minimum_interval": null,
+                "bfd_multiplier": null,
+                "bgp_export_policy": "default",
+                "bgp_hash_algorithm": "no",
+                "bgp_password": null,
+                "bgp_session_priority": "primary",
+                "customer_ipv4_mtu": 1500,
+                "customer_ipv6_mtu": 1500,
+                "enable_routing": true,
+                "label": null,
+                "name": "Service Attach Point",
+                "owner_subscription_id": "358d5a85-49c2-46e2-ac5c-f55601957282",
+                "prefixes": [
+                    {
+                        "customer_aggregate": false,
+                        "extra_information": "",
+                        "ipam_prefix_id": 83138,
+                        "label": null,
+                        "name": "IP_PREFIX",
+                        "owner_subscription_id": "1254f249-a798-42e8-9a8b-58e4a784e869",
+                        "parent_prefix": null,
+                        "planned": false,
+                        "subscription_instance_id": "52119bbd-7827-4585-94b8-84146b7e5658",
+                        "to_internet": false
+                    }
+                ],
+                "ptp_ipv4_ipam_id": 91492,
+                "ptp_ipv6_ipam_id": 91493,
+                "sap": {
+                    "label": null,
+                    "name": "SN8 Service Attach Point",
+                    "owner_subscription_id": "358d5a85-49c2-46e2-ac5c-f55601957282",
+                    "port_subscription_id": "d2de0900-116d-4a9d-85e6-a37c012e2970",
+                    "subscription_instance_id": "152c93e7-98af-4f52-9152-ae46ea7447d8",
+                    "vlanrange": "13"
+                },
+                "subscription_instance_id": "a65ee338-7675-4613-9d57-8d06647314a3"
+            }
+        ],
+        "service_speed": 100,
+        "settings": {
+            "asn": 1405,
+            "in_use_by_ids": ["cbf30313-a490-4f06-ac8a-7e07face0280"],
+            "label": null,
+            "multicast": true,
+            "name": "IP Service Settings",
+            "owner_subscription_id": "358d5a85-49c2-46e2-ac5c-f55601957282",
+            "pin_prefix": [],
+            "subscription_instance_id": "7e201cea-b54f-4078-80d7-b3a9694c3c08",
+            "surfcert_filter": "default",
+            "surfcert_filter_enabled": true
+        },
+        "subscription_instance_id": "cbf30313-a490-4f06-ac8a-7e07face0280"
+    }
+}
