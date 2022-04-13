@@ -13,6 +13,7 @@
  *
  */
 
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import mock from "axios-mock";
 import NewProcess from "pages/NewProcess";
 import React from "react";
@@ -21,14 +22,11 @@ import StoryRouter from "storybook-react-router";
 
 export default {
     title: "NewProcess",
+    component: NewProcess,
     decorators: [StoryRouter()],
-    // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
-    parameters: {
-        fileName: __filename,
-    },
-};
+} as ComponentMeta<typeof NewProcess>;
 
-export const Default = () => {
+export const Default: ComponentStory<typeof NewProcess> = () => {
     mock.onGet(/products\/.*\/validate/).reply(200, [1000]);
     mock.onPost(/processes\/.*/).reply(510, {
         form: createForm({ organisation: Organisation }),
@@ -38,7 +36,7 @@ export const Default = () => {
     return <NewProcess preselectedInput={{}} />;
 };
 
-export const Preselected = () => {
+export const Preselected: ComponentStory<typeof NewProcess> = () => {
     mock.reset();
     mock.onGet(/products\/.*\/validate/).reply(200, [1000]);
     mock.onPost(/processes\/.*/).reply(510, {
