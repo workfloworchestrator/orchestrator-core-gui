@@ -108,7 +108,6 @@ test("<ListField> - renders children with correct name (value)", () => {
     expect(wrapper.render()).toMatchSnapshot();
 });
 
-// FIXME
 test("<ListField> - renders correctly when child is list", () => {
     const element = <ListField name="x" />;
     const wrapper = mount(
