@@ -22,6 +22,7 @@ test("<ListField> - works", () => {
     const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
 
     expect(wrapper.find(ListField)).toHaveLength(1);
+    expect(wrapper.render()).toMatchSnapshot();
 });
 
 test("<ListField> - renders ListAddField", () => {
@@ -82,6 +83,7 @@ test("<ListField> - renders children with correct name (children)", () => {
     expect(wrapper.find(Child).at(1).prop("name")).toBe("1");
 });
 
+// FIXME
 test("<ListField> - renders children with correct values", () => {
     const element = <ListField name="x" />;
     const wrapper = mount(
@@ -107,6 +109,7 @@ test("<ListField> - renders children with correct name (value)", () => {
     expect(wrapper.render()).toMatchSnapshot();
 });
 
+// FIXME
 test("<ListField> - renders correctly when child is list", () => {
     const element = <ListField name="x" />;
     const wrapper = mount(
