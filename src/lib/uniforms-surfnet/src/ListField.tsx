@@ -69,7 +69,7 @@ function List({
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
-                id={`formrow-${name}`}
+                id={`list-formrow-${name}`}
                 fullWidth
             >
                 <></>
