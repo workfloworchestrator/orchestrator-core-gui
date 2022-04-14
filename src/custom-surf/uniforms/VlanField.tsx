@@ -83,7 +83,7 @@ function vlanRangeFromNumbers(list: number[]) {
         .join(",");
 }
 
-export type VlanFieldProps = FieldProps<string, { subscriptionFieldName?: string }>;
+export type VlanFieldProps = FieldProps<string, { subscriptionFieldName?: string, nsiVlansOnly?: boolean }>;
 
 function Vlan({
     disabled,
@@ -99,6 +99,7 @@ function Vlan({
     showInlineError,
     errorMessage,
     subscriptionFieldName = "subscription_id",
+    nsiVlansOnly = false,
     ...props
 }: VlanFieldProps) {
     const intl = useIntl();
@@ -172,11 +173,26 @@ function Vlan({
                   { vlans: vlanRangeFromNumbers(vlansInUse) }
               )
         : undefined;
-    const message = isUntagged
-        ? intl.formatMessage({ id: "forms.widgets.vlan.taggedOnly" })
-        : !allUsedVlans.length
-        ? intl.formatMessage({ id: "forms.widgets.vlan.allPortsAvailable" })
-        : intl.formatMessage({ id: "forms.widgets.vlan.vlansInUse" }, { vlans: vlanRangeFromNumbers(allUsedVlans) });
+
+        
+    let message = intl.formatMessage({ id: "forms.widgets.vlan.taggedOnly" });
+    if (!isUntagged && nsiVlansOnly) {
+        const initialUsedVlans = schema.getInitialValue("service_ports", {}).map((sp: { vlan: string }) => sp.vlan);
+        const currentUsedVlans = initialUsedVlans.filter((vlan: any) => vlan !== value && vlan !== extraUsedVlans);
+
+        const allAvailableVlans = [
+            ...usedVlans.filter((number => !getAllNumbersForVlanRange(extraUsedVlans).includes(number))),
+            ...currentUsedVlans,
+        ].sort()
+
+        message = !allAvailableVlans.length
+            ? intl.formatMessage({ id: "forms.widgets.vlan.nsiNoPortsAvailable" })
+            : intl.formatMessage({ id: "forms.widgets.vlan.nsiVlansAvailable" }, { vlans: vlanRangeFromNumbers(allAvailableVlans) });
+    } else if (!isUntagged) {
+        message = !allUsedVlans.length
+            ? intl.formatMessage({ id: "forms.widgets.vlan.allPortsAvailable" })
+            : intl.formatMessage({ id: "forms.widgets.vlan.vlansInUse" }, { vlans: vlanRangeFromNumbers(allUsedVlans) });
+    }
 
     return (
         <section {...filterDOMProps(props)}>

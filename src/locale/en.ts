@@ -137,6 +137,8 @@ I18n.translations.en = {
                 vlansInUseError: "VLAN range {{vlans}} are already in use for the selected service port",
                 vlansInUse: "Already used VLAN ranges for this service port: {{vlans}}",
                 missingInIms: "This service port can not be found in IMS. It may be deleted or in an initial state.",
+                nsiVlansAvailable: "Available NSI VLAN ranges for this service port: {{vlans}}",
+                nsiNoPortsAvailable: "This service port has no available NSI reserved VLANs (yet).",
                 allPortsAvailable: "This service port has no VLANs in use (yet).",
                 placeholder: "Enter a valid VLAN range...",
                 placeholderNoServicePort: "First select a Service Port...",
