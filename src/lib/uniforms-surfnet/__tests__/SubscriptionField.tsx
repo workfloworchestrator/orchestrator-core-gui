@@ -75,7 +75,7 @@ describe("<SubscriptionField>", () => {
         const wrapper = mount(element, createContext({ x: { type: String } }));
         await waitForComponentToPaint(wrapper);
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(wrapper.find(ReactSelect).prop("id")).toBe("y");
+        expect(wrapper.find(ReactSelect).prop("id")).toBe("subscription-formrow-x-select");
     });
 
     test("<SubscriptionField> - renders a select with correct name", async () => {
@@ -523,7 +523,7 @@ describe("<SubscriptionField>", () => {
 
         expect(wrapper.find("label")).toHaveLength(1);
         expect(wrapper.find("label").prop("children")).toContain("y");
-        expect(wrapper.find("label").prop("htmlFor")).toBe(wrapper.find(ReactSelect).prop("id"));
+        expect(wrapper.find("label").prop("htmlFor")).toBe("subscription-formrow-x");
     });
 
     test("<SubscriptionField> - renders a sync button", async () => {
