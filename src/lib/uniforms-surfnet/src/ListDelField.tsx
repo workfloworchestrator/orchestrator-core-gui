@@ -39,9 +39,9 @@ function ListDel({ disabled, name, readOnly, id, onChange, outerList = false, ..
 
     return (
         <div
-            {...filterDOMProps(props)}
             className="del-item"
-            id={`${id}.remove`}
+            {...filterDOMProps(props)}
+            id={`listdel-div-${name}`}
             onClick={onAction}
             onKeyDown={onAction}
             role="button"

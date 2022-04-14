@@ -60,7 +60,7 @@ describe("<SelectField>", () => {
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(wrapper.find(ReactSelect).prop("id")).toBe("y");
+        expect(wrapper.find(ReactSelect).prop("id")).toBe("select-formrow-x");
     });
 
     test("<SelectField> - renders a select with correct name", () => {
@@ -77,8 +77,8 @@ describe("<SelectField>", () => {
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
-            { label: "a", value: "a" },
-            { label: "b", value: "b" },
+            { label: "a", text: "a", value: "a" },
+            { label: "b", text: "b", value: "b" },
         ]);
     });
 
@@ -88,8 +88,8 @@ describe("<SelectField>", () => {
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
-            { label: "A", value: "a" },
-            { label: "B", value: "b" },
+            { label: "A", text: "A", value: "a" },
+            { label: "B", text: "B", value: "b" },
         ]);
     });
 
@@ -104,8 +104,8 @@ describe("<SelectField>", () => {
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
-            { label: "a", value: "a" },
-            { label: "b", value: "b" },
+            { label: "a", text: "a", value: "a" },
+            { label: "b", text: "b", value: "b" },
         ]);
         expect(wrapper.find(ReactSelect).prop("placeholder")).toBe("Search and select a value...");
     });
@@ -116,8 +116,8 @@ describe("<SelectField>", () => {
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
-            { label: "a", value: "a" },
-            { label: "b", value: "b" },
+            { label: "a", text: "a", value: "a" },
+            { label: "b", text: "b", value: "b" },
         ]);
         expect(wrapper.find(ReactSelect).prop("placeholder")).toBe("y");
     });
@@ -138,7 +138,7 @@ describe("<SelectField>", () => {
         );
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(wrapper.find(ReactSelect).prop("value")).toStrictEqual({ label: "b", value: "b" });
+        expect(wrapper.find(ReactSelect).prop("value")).toStrictEqual({ label: "b", text: "b", value: "b" });
         expect(wrapper.render()).toMatchSnapshot();
     });
 
@@ -147,7 +147,7 @@ describe("<SelectField>", () => {
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
-        expect(wrapper.find(ReactSelect).prop("value")).toStrictEqual({ label: "b", value: "b" });
+        expect(wrapper.find(ReactSelect).prop("value")).toStrictEqual({ label: "b", text: "b", value: "b" });
     });
 
     test("<SelectField> - renders a select which correctly reacts on change", () => {
@@ -223,9 +223,9 @@ describe("<SelectField>", () => {
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(2);
-        expect(wrapper.find(ReactSelect).at(0).prop("value")).toStrictEqual({ label: "a", value: "a" });
+        expect(wrapper.find(ReactSelect).at(0).prop("value")).toStrictEqual({ label: "a", text: "a", value: "a" });
         expect(wrapper.find(ReactSelect).at(1).prop("value")).toStrictEqual(undefined);
-        expect(wrapper.find(ReactSelect).at(1).prop("options")).toStrictEqual([{ label: "b", value: "b" }]);
+        expect(wrapper.find(ReactSelect).at(1).prop("options")).toStrictEqual([{ label: "b", text: "b", value: "b" }]);
         expect(wrapper.render()).toMatchSnapshot();
     });
 
