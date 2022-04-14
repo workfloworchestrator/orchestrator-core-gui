@@ -66,7 +66,7 @@ DANGEROUSLY_DISABLE_HOST_CHECK=true yarn start
 ```
 
 #### Running against dev backend
- 
+
 Copy `.env.local.example` to `.env.local`
 
 This overrides the `REACT_APP_BACKEND_URL` variable. You should make local changes to `.env.local`
@@ -75,6 +75,15 @@ This overrides the `REACT_APP_BACKEND_URL` variable. You should make local chang
 
 ```sh
 yarn add 'package-name'
+```
+
+#### Check dependencies
+
+A quick way to let yarn check the dependencies:
+
+```sh
+rm node_modules/.yarn-integrity
+yarn install --check-files
 ```
 
 ### Docker
