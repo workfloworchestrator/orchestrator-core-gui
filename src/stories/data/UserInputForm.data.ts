@@ -281,7 +281,7 @@ export const allNodeSubscriptions = [
             tag: "Node",
         },
         start_date: null,
-        status: "provisioning",
+        status: "active",
         subscription_id: "5e3341c2-0017-4d32-9005-56e9b2cbf86c",
     },
     {
@@ -300,7 +300,7 @@ export const allNodeSubscriptions = [
             tag: "Node",
         },
         start_date: null,
-        status: "provisioning",
+        status: "active",
         subscription_id: "faf4766b-072c-4494-a8d7-8feaf60e2446",
     },
     {
