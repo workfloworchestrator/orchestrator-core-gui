@@ -44,13 +44,13 @@ function Bool({
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
-                id={id}
+                id={`bool-formrow-${name}`}
                 fullWidth
             >
                 <EuiCheckbox
                     checked={value || false}
                     disabled={disabled}
-                    id={id}
+                    id={`bool-checkbox-${name}`}
                     name={name}
                     label={name}
                     onChange={() => !disabled && !readOnly && onChange(!value)}
