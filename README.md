@@ -179,7 +179,7 @@ Actions are disabled in the same manner as menu items. The following actions are
 |View a process detail page| The process list page| `/orchestrator/processes/details/*`| The allows the person to visit a process detail page|
 |Retry all tasks| The tasks list page|`/orchestrator/processes/all-tasks/retry`| The Retry all tasks button|
 |Create a task| The tasks list page|`/orchestrator/processes/create/task`| Create a task|
-|Create a new subscription|The new process button|`/orhcestrator/processes/create/process/menu`||
+|Create a new subscription|The new process button|`/orchestrator/processes/create/process/menu`||
 |Render a user_input_form|Allow access to input steps| `/orchestrator/processes/user_inout/*`|Allow access to input_steps|
 |Allow deletion of product blocks| Product block detail page|`/orchestrator/metadata/product-block/delete/*`||
 |Edit a product block| "  "|`/orchestrator/metadata/product-block/edit/*`||
