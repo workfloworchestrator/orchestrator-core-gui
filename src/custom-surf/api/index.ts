@@ -106,8 +106,10 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.fetchJson(`surf/ims/free_ports/${nodeSubscriptionId}/${interfaceSpeed}/${mode}`);
     };
 
-    usedVlans = (subscriptionId: string): Promise<number[][]> => {
-        return this.fetchJsonWithCustomErrorHandling(`surf/subscriptions/vlans-by-service-port/${subscriptionId}`);
+    usedVlans = (subscriptionId: string, nsiVlansOnly: boolean = false): Promise<number[][]> => {
+        return this.fetchJsonWithCustomErrorHandling(
+            `surf/subscriptions/vlans-by-service-port/${subscriptionId}?nsi_vlans_only=${nsiVlansOnly}`
+        );
     };
 
     portByImsPortId = (portId: number) => {
