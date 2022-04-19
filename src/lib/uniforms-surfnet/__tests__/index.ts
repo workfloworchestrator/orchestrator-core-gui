@@ -29,6 +29,7 @@ it("exports everything", () => {
         ListDelField: expect.any(Function),
         ListField: expect.any(Function),
         ListItemField: expect.any(Function),
+        ListSelectField: expect.any(Function),
         LocationCodeField: expect.any(Function),
         LongTextField: expect.any(Function),
         NestField: expect.any(Function),
