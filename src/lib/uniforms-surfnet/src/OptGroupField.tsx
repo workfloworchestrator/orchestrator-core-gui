@@ -46,11 +46,7 @@ function OptGroup({
             className={`${className} optgroup-field`}
         >
             <EuiFlexItem>
-                <EuiFormRow
-                    error={false}
-                    isInvalid={false}
-                    id={`optgroup-formrow-${name}`}
-                >
+                <EuiFormRow error={false} isInvalid={false} id={`optgroup-formrow-${name}`}>
                     <BoolField name="enabled" readOnly={readOnly} />
                 </EuiFormRow>
             </EuiFlexItem>
