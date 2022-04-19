@@ -83,7 +83,7 @@ function vlanRangeFromNumbers(list: number[]) {
         .join(",");
 }
 
-export type VlanFieldProps = FieldProps<string, { subscriptionFieldName?: string, nsiVlansOnly?: boolean }>;
+export type VlanFieldProps = FieldProps<string, { subscriptionFieldName?: string; nsiVlansOnly?: boolean }>;
 
 function Vlan({
     disabled,
@@ -137,7 +137,7 @@ function Vlan({
     useEffect(() => {
         if (subscriptionId) {
             customApiClient
-                .usedVlans(subscriptionId)
+                .usedVlans(subscriptionId, nsiVlansOnly)
                 .then((result) => {
                     setUsedVlansInIms(result);
                     setMissingInIms(false);
@@ -146,7 +146,7 @@ function Vlan({
                     setMissingInIms(true);
                 });
         }
-    }, [subscriptionId, customApiClient]);
+    }, [subscriptionId, customApiClient, nsiVlansOnly]);
 
     // Filter currently used vlans because they are probably from the current subscription
     const currentVlans = getAllNumbersForVlanRange(initialValue);
@@ -174,24 +174,29 @@ function Vlan({
               )
         : undefined;
 
-        
     let message = intl.formatMessage({ id: "forms.widgets.vlan.taggedOnly" });
     if (!isUntagged && nsiVlansOnly) {
         const initialUsedVlans = schema.getInitialValue("service_ports", {}).map((sp: { vlan: string }) => sp.vlan);
         const currentUsedVlans = initialUsedVlans.filter((vlan: any) => vlan !== value && vlan !== extraUsedVlans);
 
         const allAvailableVlans = [
-            ...usedVlans.filter((number => !getAllNumbersForVlanRange(extraUsedVlans).includes(number))),
+            ...usedVlans.filter((number) => !getAllNumbersForVlanRange(extraUsedVlans).includes(number)),
             ...currentUsedVlans,
-        ].sort()
+        ].sort();
 
         message = !allAvailableVlans.length
             ? intl.formatMessage({ id: "forms.widgets.vlan.nsiNoPortsAvailable" })
-            : intl.formatMessage({ id: "forms.widgets.vlan.nsiVlansAvailable" }, { vlans: vlanRangeFromNumbers(allAvailableVlans) });
+            : intl.formatMessage(
+                  { id: "forms.widgets.vlan.nsiVlansAvailable" },
+                  { vlans: vlanRangeFromNumbers(allAvailableVlans) }
+              );
     } else if (!isUntagged) {
         message = !allUsedVlans.length
             ? intl.formatMessage({ id: "forms.widgets.vlan.allPortsAvailable" })
-            : intl.formatMessage({ id: "forms.widgets.vlan.vlansInUse" }, { vlans: vlanRangeFromNumbers(allUsedVlans) });
+            : intl.formatMessage(
+                  { id: "forms.widgets.vlan.vlansInUse" },
+                  { vlans: vlanRangeFromNumbers(allUsedVlans) }
+              );
     }
 
     return (
