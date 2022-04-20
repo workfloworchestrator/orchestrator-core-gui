@@ -50,9 +50,7 @@ function prepare() {
     );
     mock.onGet("subscriptions/?filter=tags%2CNode%2Cstatuses%2Cactive").reply(
         200,
-        allNodeSubscriptions
-            .filter((p) => p.status == "active")
-            .filter((p) => p.product.tag == "Node")
+        allNodeSubscriptions.filter((p) => p.status == "active").filter((p) => p.product.tag == "Node")
     );
     mock.onGet("subscriptions/?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(
         200,
@@ -62,11 +60,11 @@ function prepare() {
     );
     mock.onGet("subscriptions/?filter=tags%2CIPS%2Cstatuses%2Cactive-provisioning").reply(
         200,
-        SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => ["IPS"].includes(p.product.tag))
+        SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => p.product.tag == "IPS")
     );
     mock.onGet("subscriptions/?filter=tags%2CIPBGP%2Cstatuses%2Cactive-provisioning").reply(
         200,
-        SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => ["IPBGP"].includes(p.product.tag))
+        SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => p.product.tag == "IPBGP")
     );
     mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP-AGGSPNL%2Cstatuses%2Cactive").reply(
         200,
