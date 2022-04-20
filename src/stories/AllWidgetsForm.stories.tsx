@@ -51,14 +51,14 @@ function prepare() {
     mock.onGet("subscriptions/?filter=tags%2CNode%2Cstatuses%2Cactive").reply(
         200,
         allNodeSubscriptions
-            .filter((p) => ["active"].includes(p.status))
-            .filter((p) => ["Node"].includes(p.product.tag))
+            .filter((p) => p.status == "active")
+            .filter((p) => p.product.tag == "Node")
     );
     mock.onGet("subscriptions/?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(
         200,
         allNodeSubscriptions
             .filter((p) => ["active", "provisioning"].includes(p.status))
-            .filter((p) => ["Node"].includes(p.product.tag))
+            .filter((p) => p.product.tag == "Node")
     );
     mock.onGet("subscriptions/?filter=tags%2CIPS%2Cstatuses%2Cactive-provisioning").reply(
         200,
