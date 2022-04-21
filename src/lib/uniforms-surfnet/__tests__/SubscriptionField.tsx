@@ -91,13 +91,13 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select with correct options (no filter)", async () => {
-        const { element, getSubscriptions } = withSubscriptions(<SubscriptionField name="x" />);
+        const { element, getSubscriptions } = withSubscriptions(<SubscriptionField name="x" id="snapshot-test" />);
         getSubscriptions.mockReturnValue([
             { subscription_id: "a", customer_id: "c1", description: "d1", product: { tag: "" } as Product },
             { subscription_id: "b", customer_id: "c2", description: "d2", product: { tag: "" } as Product },
         ]);
 
-        const wrapper = mount(element, createContext({ x: { type: String } }));
+        const wrapper = mount(element, createContext({ x: { type: String } }, undefined, "subscriptionfield-nofilter"));
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
@@ -519,19 +519,25 @@ describe("<SubscriptionField>", () => {
         const elementWithContext = withApplicationContext(<SubscriptionField name="x" label="y" />, APP_CONTEXT);
         const { element, getSubscriptions } = withSubscriptions(elementWithContext);
         getSubscriptions.mockReturnValue([]);
-        const wrapper = mount(element, createContext({ x: { type: String } }));
+        const wrapper = mount(element, createContext({ x: { type: String } }, undefined, "subscriptionfield-label"));
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.find("label")).toHaveLength(1);
         expect(wrapper.find("label").prop("children")).toContain("y");
-        expect(wrapper.find("label").prop("htmlFor")).toBe("subscription-formrow-x");
+        expect(wrapper.find("label").prop("htmlFor")).toBe("subscriptionfield-label-0000");
     });
 
     test("<SubscriptionField> - renders a sync button", async () => {
-        const elementWithContext = withApplicationContext(<SubscriptionField name="x" />, APP_CONTEXT);
+        const elementWithContext = withApplicationContext(
+            <SubscriptionField name="x" id="snapshot-test" />,
+            APP_CONTEXT
+        );
         const { element, getSubscriptions } = withSubscriptions(elementWithContext);
         getSubscriptions.mockReturnValue([]);
-        const wrapper = mount(element, createContext({ x: { type: String } }));
+        const wrapper = mount(
+            element,
+            createContext({ x: { type: String } }, undefined, "subscriptionfield-syncbutton")
+        );
         await waitForComponentToPaint(wrapper);
 
         // EUIButtonIcon and the surrounding div will receive the class
@@ -559,7 +565,7 @@ describe("<SubscriptionField>", () => {
     test("<SubscriptionField> - renders a select with correct value (as uniqueItem list child)", async () => {
         const { element, getSubscriptions } = withSubscriptions(
             <ListField name="x">
-                <SubscriptionField name="$" />
+                <SubscriptionField name="$" id="snapshot-test" />
             </ListField>
         );
         getSubscriptions.mockReturnValue([
@@ -573,7 +579,8 @@ describe("<SubscriptionField>", () => {
                     x: { type: Array, uniforms: { uniqueItems: true } },
                     "x.$": { type: String },
                 },
-                { model: { x: ["a", undefined] } }
+                { model: { x: ["a", undefined] } },
+                "subscriptionfield-uniqueitem"
             )
         );
 

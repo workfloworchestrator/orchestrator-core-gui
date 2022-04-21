@@ -35,7 +35,7 @@ const TEST_ACCEPT_DATA = [
 describe("<AcceptField>", () => {
     test("<AcceptField> - legacy renders an input", () => {
         const element = <AcceptField name="x" />;
-        const wrapper = mount(element, createContext({ x: { type: String } }));
+        const wrapper = mount(element, createContext({ x: { type: String } }, undefined, "acceptfield-legacy"));
         expect(wrapper.find("input")).toHaveLength(1);
         expect(wrapper.render()).toMatchSnapshot();
     });
@@ -57,14 +57,18 @@ describe("<AcceptField>", () => {
         const element = <AcceptField name="x" />;
         const wrapper = mount(
             element,
-            createContext({
-                x: {
-                    type: String,
-                    uniforms: {
-                        data: TEST_ACCEPT_DATA,
+            createContext(
+                {
+                    x: {
+                        type: String,
+                        uniforms: {
+                            data: TEST_ACCEPT_DATA,
+                        },
                     },
                 },
-            })
+                undefined,
+                "acceptfield-render"
+            )
         );
         expect(wrapper.find("input")).toHaveLength(6);
         expect(wrapper.render()).toMatchSnapshot();

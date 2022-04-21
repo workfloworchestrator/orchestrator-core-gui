@@ -63,17 +63,13 @@ function List({
     const hasListAsChild = child.fieldType === Array;
 
     return (
-        <section
-            className={`list-field${hasListAsChild ? " outer-list" : ""}`}
-            {...filterDOMProps(props)}
-            id={`list-section-${name}`}
-        >
+        <section className={`list-field${hasListAsChild ? " outer-list" : ""}`} {...filterDOMProps(props)}>
             <EuiFormRow
                 label={label}
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
-                id={`list-formrow-${name}`}
+                id={`formrow-${name}`}
                 fullWidth
             >
                 <></>

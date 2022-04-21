@@ -132,10 +132,14 @@ describe("<SelectField>", () => {
     });
 
     test("<SelectField> - renders a select with correct value (model)", () => {
-        const element = <SelectField name="x" />;
+        const element = <SelectField name="x" id="snapshot-test" />;
         const wrapper = mount(
             element,
-            createContext({ x: { type: String, allowedValues: ["a", "b"] } }, { model: { x: "b" } })
+            createContext(
+                { x: { type: String, allowedValues: ["a", "b"] } },
+                { model: { x: "b" } },
+                "selectfield-model"
+            )
         );
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
@@ -209,7 +213,7 @@ describe("<SelectField>", () => {
     });
 
     test("<SelectField> - renders a select with correct value (as uniqueItem list child)", async () => {
-        const element = <ListField name="x" />;
+        const element = <ListField name="x" id="snapshot-test" />;
         const wrapper = mount(
             element,
             createContext(
@@ -217,7 +221,8 @@ describe("<SelectField>", () => {
                     x: { type: Array, uniforms: { uniqueItems: true } },
                     "x.$": { type: String, allowedValues: ["a", "b"] },
                 },
-                { model: { x: ["a", undefined] } }
+                { model: { x: ["a", undefined] } },
+                "selectfield-uniqueitem"
             )
         );
 

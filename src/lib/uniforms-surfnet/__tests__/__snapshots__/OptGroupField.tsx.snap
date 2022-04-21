@@ -5,7 +5,7 @@ initialize {
   "0": Node {
     "attribs": Object {
       "class": "euiDescribedFormGroup  optgroup-field",
-      "id": "uniforms-0000-0000",
+      "id": "snapshot-test",
       "required": "",
       "role": "group",
     },
@@ -176,7 +176,7 @@ initialize {
                     Node {
                       "attribs": Object {
                         "class": "euiFormRow",
-                        "id": "optgroup-formrow-x-row",
+                        "id": "x-row",
                       },
                       "children": Array [
                         Node {
@@ -193,7 +193,7 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormRow euiFormRow--fullWidth",
-                                    "id": "bool-formrow-x.enabled-row",
+                                    "id": "x-row",
                                   },
                                   "children": Array [
                                     Node {
@@ -204,8 +204,8 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "bool-formrow-x.enabled",
-                                            "id": "bool-formrow-x.enabled-label",
+                                            "for": "x",
+                                            "id": "x-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -272,8 +272,8 @@ initialize {
                                           "prev": Node {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
-                                              "for": "bool-formrow-x.enabled",
-                                              "id": "bool-formrow-x.enabled-label",
+                                              "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -311,8 +311,8 @@ initialize {
                                             "prev": Node {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
-                                                "for": "bool-formrow-x.enabled",
-                                                "id": "bool-formrow-x.enabled-label",
+                                                "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -358,7 +358,7 @@ initialize {
                                               Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__input",
-                                                  "id": "bool-formrow-x.enabled",
+                                                  "id": "x",
                                                   "name": "x.enabled",
                                                   "type": "checkbox",
                                                 },
@@ -375,7 +375,7 @@ initialize {
                                                   "next": Node {
                                                     "attribs": Object {
                                                       "class": "euiCheckbox__label",
-                                                      "for": "bool-formrow-x.enabled",
+                                                      "for": "x",
                                                     },
                                                     "children": Array [
                                                       Node {
@@ -437,7 +437,7 @@ initialize {
                                                 "next": Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__label",
-                                                    "for": "bool-formrow-x.enabled",
+                                                    "for": "x",
                                                   },
                                                   "children": Array [
                                                     Node {
@@ -467,7 +467,7 @@ initialize {
                                                 "prev": Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__input",
-                                                    "id": "bool-formrow-x.enabled",
+                                                    "id": "x",
                                                     "name": "x.enabled",
                                                     "type": "checkbox",
                                                   },
@@ -502,7 +502,7 @@ initialize {
                                               Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__label",
-                                                  "for": "bool-formrow-x.enabled",
+                                                  "for": "x",
                                                 },
                                                 "children": Array [
                                                   Node {
@@ -529,7 +529,7 @@ initialize {
                                                   "prev": Node {
                                                     "attribs": Object {
                                                       "class": "euiCheckbox__input",
-                                                      "id": "bool-formrow-x.enabled",
+                                                      "id": "x",
                                                       "name": "x.enabled",
                                                       "type": "checkbox",
                                                     },
@@ -622,7 +622,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiCheckbox__input",
-                                                "id": "bool-formrow-x.enabled",
+                                                "id": "x",
                                                 "name": "x.enabled",
                                                 "type": "checkbox",
                                               },
@@ -639,7 +639,7 @@ initialize {
                                                 "next": Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__label",
-                                                    "for": "bool-formrow-x.enabled",
+                                                    "for": "x",
                                                   },
                                                   "children": Array [
                                                     Node {
@@ -701,7 +701,7 @@ initialize {
                                               "next": Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__label",
-                                                  "for": "bool-formrow-x.enabled",
+                                                  "for": "x",
                                                 },
                                                 "children": Array [
                                                   Node {
@@ -731,7 +731,7 @@ initialize {
                                               "prev": Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__input",
-                                                  "id": "bool-formrow-x.enabled",
+                                                  "id": "x",
                                                   "name": "x.enabled",
                                                   "type": "checkbox",
                                                 },
@@ -766,7 +766,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiCheckbox__label",
-                                                "for": "bool-formrow-x.enabled",
+                                                "for": "x",
                                               },
                                               "children": Array [
                                                 Node {
@@ -793,7 +793,7 @@ initialize {
                                                 "prev": Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__input",
-                                                    "id": "bool-formrow-x.enabled",
+                                                    "id": "x",
                                                     "name": "x.enabled",
                                                     "type": "checkbox",
                                                   },
@@ -862,8 +862,8 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
-                                              "for": "bool-formrow-x.enabled",
-                                              "id": "bool-formrow-x.enabled-label",
+                                              "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -930,8 +930,8 @@ initialize {
                                             "prev": Node {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
-                                                "for": "bool-formrow-x.enabled",
-                                                "id": "bool-formrow-x.enabled-label",
+                                                "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -969,8 +969,8 @@ initialize {
                                               "prev": Node {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
-                                                  "for": "bool-formrow-x.enabled",
-                                                  "id": "bool-formrow-x.enabled-label",
+                                                  "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -1135,7 +1135,7 @@ initialize {
                   Node {
                     "attribs": Object {
                       "class": "euiFormRow",
-                      "id": "optgroup-formrow-x-row",
+                      "id": "x-row",
                     },
                     "children": Array [
                       Node {
@@ -1152,7 +1152,7 @@ initialize {
                               Node {
                                 "attribs": Object {
                                   "class": "euiFormRow euiFormRow--fullWidth",
-                                  "id": "bool-formrow-x.enabled-row",
+                                  "id": "x-row",
                                 },
                                 "children": Array [
                                   Node {
@@ -1163,8 +1163,8 @@ initialize {
                                       Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "bool-formrow-x.enabled",
-                                          "id": "bool-formrow-x.enabled-label",
+                                          "for": "x",
+                                          "id": "x-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -1231,8 +1231,8 @@ initialize {
                                         "prev": Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "bool-formrow-x.enabled",
-                                            "id": "bool-formrow-x.enabled-label",
+                                            "for": "x",
+                                            "id": "x-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -1270,8 +1270,8 @@ initialize {
                                           "prev": Node {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
-                                              "for": "bool-formrow-x.enabled",
-                                              "id": "bool-formrow-x.enabled-label",
+                                              "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -1317,7 +1317,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiCheckbox__input",
-                                                "id": "bool-formrow-x.enabled",
+                                                "id": "x",
                                                 "name": "x.enabled",
                                                 "type": "checkbox",
                                               },
@@ -1334,7 +1334,7 @@ initialize {
                                                 "next": Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__label",
-                                                    "for": "bool-formrow-x.enabled",
+                                                    "for": "x",
                                                   },
                                                   "children": Array [
                                                     Node {
@@ -1396,7 +1396,7 @@ initialize {
                                               "next": Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__label",
-                                                  "for": "bool-formrow-x.enabled",
+                                                  "for": "x",
                                                 },
                                                 "children": Array [
                                                   Node {
@@ -1426,7 +1426,7 @@ initialize {
                                               "prev": Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__input",
-                                                  "id": "bool-formrow-x.enabled",
+                                                  "id": "x",
                                                   "name": "x.enabled",
                                                   "type": "checkbox",
                                                 },
@@ -1461,7 +1461,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiCheckbox__label",
-                                                "for": "bool-formrow-x.enabled",
+                                                "for": "x",
                                               },
                                               "children": Array [
                                                 Node {
@@ -1488,7 +1488,7 @@ initialize {
                                                 "prev": Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__input",
-                                                    "id": "bool-formrow-x.enabled",
+                                                    "id": "x",
                                                     "name": "x.enabled",
                                                     "type": "checkbox",
                                                   },
@@ -1581,7 +1581,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiCheckbox__input",
-                                              "id": "bool-formrow-x.enabled",
+                                              "id": "x",
                                               "name": "x.enabled",
                                               "type": "checkbox",
                                             },
@@ -1598,7 +1598,7 @@ initialize {
                                               "next": Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__label",
-                                                  "for": "bool-formrow-x.enabled",
+                                                  "for": "x",
                                                 },
                                                 "children": Array [
                                                   Node {
@@ -1660,7 +1660,7 @@ initialize {
                                             "next": Node {
                                               "attribs": Object {
                                                 "class": "euiCheckbox__label",
-                                                "for": "bool-formrow-x.enabled",
+                                                "for": "x",
                                               },
                                               "children": Array [
                                                 Node {
@@ -1690,7 +1690,7 @@ initialize {
                                             "prev": Node {
                                               "attribs": Object {
                                                 "class": "euiCheckbox__input",
-                                                "id": "bool-formrow-x.enabled",
+                                                "id": "x",
                                                 "name": "x.enabled",
                                                 "type": "checkbox",
                                               },
@@ -1725,7 +1725,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiCheckbox__label",
-                                              "for": "bool-formrow-x.enabled",
+                                              "for": "x",
                                             },
                                             "children": Array [
                                               Node {
@@ -1752,7 +1752,7 @@ initialize {
                                               "prev": Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__input",
-                                                  "id": "bool-formrow-x.enabled",
+                                                  "id": "x",
                                                   "name": "x.enabled",
                                                   "type": "checkbox",
                                                 },
@@ -1821,8 +1821,8 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "bool-formrow-x.enabled",
-                                            "id": "bool-formrow-x.enabled-label",
+                                            "for": "x",
+                                            "id": "x-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -1889,8 +1889,8 @@ initialize {
                                           "prev": Node {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
-                                              "for": "bool-formrow-x.enabled",
-                                              "id": "bool-formrow-x.enabled-label",
+                                              "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -1928,8 +1928,8 @@ initialize {
                                             "prev": Node {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
-                                                "for": "bool-formrow-x.enabled",
-                                                "id": "bool-formrow-x.enabled-label",
+                                                "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -2286,7 +2286,7 @@ initialize {
   "0": Node {
     "attribs": Object {
       "class": "euiDescribedFormGroup  optgroup-field",
-      "id": "uniforms-0000-0003",
+      "id": "snapshot-test",
       "required": "",
       "role": "group",
     },
@@ -2457,7 +2457,7 @@ initialize {
                     Node {
                       "attribs": Object {
                         "class": "euiFormRow",
-                        "id": "optgroup-formrow-x-row",
+                        "id": "x-row",
                       },
                       "children": Array [
                         Node {
@@ -2474,7 +2474,7 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormRow euiFormRow--fullWidth",
-                                    "id": "bool-formrow-x.enabled-row",
+                                    "id": "x-row",
                                   },
                                   "children": Array [
                                     Node {
@@ -2485,8 +2485,8 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "bool-formrow-x.enabled",
-                                            "id": "bool-formrow-x.enabled-label",
+                                            "for": "x",
+                                            "id": "x-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -2553,8 +2553,8 @@ initialize {
                                           "prev": Node {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
-                                              "for": "bool-formrow-x.enabled",
-                                              "id": "bool-formrow-x.enabled-label",
+                                              "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -2592,8 +2592,8 @@ initialize {
                                             "prev": Node {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
-                                                "for": "bool-formrow-x.enabled",
-                                                "id": "bool-formrow-x.enabled-label",
+                                                "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -2640,7 +2640,7 @@ initialize {
                                                 "attribs": Object {
                                                   "checked": "",
                                                   "class": "euiCheckbox__input",
-                                                  "id": "bool-formrow-x.enabled",
+                                                  "id": "x",
                                                   "name": "x.enabled",
                                                   "type": "checkbox",
                                                 },
@@ -2657,7 +2657,7 @@ initialize {
                                                   "next": Node {
                                                     "attribs": Object {
                                                       "class": "euiCheckbox__label",
-                                                      "for": "bool-formrow-x.enabled",
+                                                      "for": "x",
                                                     },
                                                     "children": Array [
                                                       Node {
@@ -2721,7 +2721,7 @@ initialize {
                                                 "next": Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__label",
-                                                    "for": "bool-formrow-x.enabled",
+                                                    "for": "x",
                                                   },
                                                   "children": Array [
                                                     Node {
@@ -2752,7 +2752,7 @@ initialize {
                                                   "attribs": Object {
                                                     "checked": "",
                                                     "class": "euiCheckbox__input",
-                                                    "id": "bool-formrow-x.enabled",
+                                                    "id": "x",
                                                     "name": "x.enabled",
                                                     "type": "checkbox",
                                                   },
@@ -2789,7 +2789,7 @@ initialize {
                                               Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__label",
-                                                  "for": "bool-formrow-x.enabled",
+                                                  "for": "x",
                                                 },
                                                 "children": Array [
                                                   Node {
@@ -2817,7 +2817,7 @@ initialize {
                                                     "attribs": Object {
                                                       "checked": "",
                                                       "class": "euiCheckbox__input",
-                                                      "id": "bool-formrow-x.enabled",
+                                                      "id": "x",
                                                       "name": "x.enabled",
                                                       "type": "checkbox",
                                                     },
@@ -2913,7 +2913,7 @@ initialize {
                                               "attribs": Object {
                                                 "checked": "",
                                                 "class": "euiCheckbox__input",
-                                                "id": "bool-formrow-x.enabled",
+                                                "id": "x",
                                                 "name": "x.enabled",
                                                 "type": "checkbox",
                                               },
@@ -2930,7 +2930,7 @@ initialize {
                                                 "next": Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__label",
-                                                    "for": "bool-formrow-x.enabled",
+                                                    "for": "x",
                                                   },
                                                   "children": Array [
                                                     Node {
@@ -2994,7 +2994,7 @@ initialize {
                                               "next": Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__label",
-                                                  "for": "bool-formrow-x.enabled",
+                                                  "for": "x",
                                                 },
                                                 "children": Array [
                                                   Node {
@@ -3025,7 +3025,7 @@ initialize {
                                                 "attribs": Object {
                                                   "checked": "",
                                                   "class": "euiCheckbox__input",
-                                                  "id": "bool-formrow-x.enabled",
+                                                  "id": "x",
                                                   "name": "x.enabled",
                                                   "type": "checkbox",
                                                 },
@@ -3062,7 +3062,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiCheckbox__label",
-                                                "for": "bool-formrow-x.enabled",
+                                                "for": "x",
                                               },
                                               "children": Array [
                                                 Node {
@@ -3090,7 +3090,7 @@ initialize {
                                                   "attribs": Object {
                                                     "checked": "",
                                                     "class": "euiCheckbox__input",
-                                                    "id": "bool-formrow-x.enabled",
+                                                    "id": "x",
                                                     "name": "x.enabled",
                                                     "type": "checkbox",
                                                   },
@@ -3161,8 +3161,8 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
-                                              "for": "bool-formrow-x.enabled",
-                                              "id": "bool-formrow-x.enabled-label",
+                                              "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -3229,8 +3229,8 @@ initialize {
                                             "prev": Node {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
-                                                "for": "bool-formrow-x.enabled",
-                                                "id": "bool-formrow-x.enabled-label",
+                                                "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -3268,8 +3268,8 @@ initialize {
                                               "prev": Node {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
-                                                  "for": "bool-formrow-x.enabled",
-                                                  "id": "bool-formrow-x.enabled-label",
+                                                  "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -3399,7 +3399,7 @@ initialize {
                           Node {
                             "attribs": Object {
                               "class": "euiFormRow euiFormRow--fullWidth",
-                              "id": "optgroup-autofield-x-row",
+                              "id": "optgroupfield-enabled-0003-row",
                             },
                             "children": Array [
                               Node {
@@ -3410,8 +3410,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -3478,8 +3478,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -3517,8 +3517,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "optgroup-autofield-x",
-                                          "id": "optgroup-autofield-x-label",
+                                          "for": "optgroupfield-enabled-0003",
+                                          "id": "optgroupfield-enabled-0003-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -3569,7 +3569,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiFieldNumber",
-                                                "id": "optgroup-autofield-x",
+                                                "id": "optgroupfield-enabled-0003",
                                                 "name": "x.b",
                                                 "placeholder": "",
                                                 "step": "1",
@@ -3672,7 +3672,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "optgroup-autofield-x",
+                                              "id": "optgroupfield-enabled-0003",
                                               "name": "x.b",
                                               "placeholder": "",
                                               "step": "1",
@@ -3746,8 +3746,8 @@ initialize {
                                     Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -3814,8 +3814,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "optgroup-autofield-x",
-                                          "id": "optgroup-autofield-x-label",
+                                          "for": "optgroupfield-enabled-0003",
+                                          "id": "optgroupfield-enabled-0003-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -3853,8 +3853,8 @@ initialize {
                                         "prev": Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "optgroup-autofield-x",
-                                            "id": "optgroup-autofield-x-label",
+                                            "for": "optgroupfield-enabled-0003",
+                                            "id": "optgroupfield-enabled-0003-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -3952,7 +3952,7 @@ initialize {
                             Node {
                               "attribs": Object {
                                 "class": "euiFormRow euiFormRow--fullWidth",
-                                "id": "optgroup-autofield-x-row",
+                                "id": "optgroupfield-enabled-0004-row",
                               },
                               "children": Array [
                                 Node {
@@ -3963,8 +3963,8 @@ initialize {
                                     Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -4031,8 +4031,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "optgroup-autofield-x",
-                                          "id": "optgroup-autofield-x-label",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -4070,8 +4070,8 @@ initialize {
                                         "prev": Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "optgroup-autofield-x",
-                                            "id": "optgroup-autofield-x-label",
+                                            "for": "optgroupfield-enabled-0004",
+                                            "id": "optgroupfield-enabled-0004-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -4122,7 +4122,7 @@ initialize {
                                               Node {
                                                 "attribs": Object {
                                                   "class": "euiFieldNumber",
-                                                  "id": "optgroup-autofield-x",
+                                                  "id": "optgroupfield-enabled-0004",
                                                   "name": "x.c",
                                                   "placeholder": "",
                                                   "step": "1",
@@ -4225,7 +4225,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiFieldNumber",
-                                                "id": "optgroup-autofield-x",
+                                                "id": "optgroupfield-enabled-0004",
                                                 "name": "x.c",
                                                 "placeholder": "",
                                                 "step": "1",
@@ -4299,8 +4299,8 @@ initialize {
                                       Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "optgroup-autofield-x",
-                                          "id": "optgroup-autofield-x-label",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -4367,8 +4367,8 @@ initialize {
                                         "prev": Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "optgroup-autofield-x",
-                                            "id": "optgroup-autofield-x-label",
+                                            "for": "optgroupfield-enabled-0004",
+                                            "id": "optgroupfield-enabled-0004-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -4406,8 +4406,8 @@ initialize {
                                           "prev": Node {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
-                                              "for": "optgroup-autofield-x",
-                                              "id": "optgroup-autofield-x-label",
+                                              "for": "optgroupfield-enabled-0004",
+                                              "id": "optgroupfield-enabled-0004-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -4536,7 +4536,7 @@ initialize {
                         Node {
                           "attribs": Object {
                             "class": "euiFormRow euiFormRow--fullWidth",
-                            "id": "optgroup-autofield-x-row",
+                            "id": "optgroupfield-enabled-0003-row",
                           },
                           "children": Array [
                             Node {
@@ -4547,8 +4547,8 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "optgroup-autofield-x",
-                                    "id": "optgroup-autofield-x-label",
+                                    "for": "optgroupfield-enabled-0003",
+                                    "id": "optgroupfield-enabled-0003-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -4615,8 +4615,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -4654,8 +4654,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -4706,7 +4706,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "optgroup-autofield-x",
+                                              "id": "optgroupfield-enabled-0003",
                                               "name": "x.b",
                                               "placeholder": "",
                                               "step": "1",
@@ -4809,7 +4809,7 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFieldNumber",
-                                            "id": "optgroup-autofield-x",
+                                            "id": "optgroupfield-enabled-0003",
                                             "name": "x.b",
                                             "placeholder": "",
                                             "step": "1",
@@ -4883,8 +4883,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -4951,8 +4951,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -4990,8 +4990,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "optgroup-autofield-x",
-                                          "id": "optgroup-autofield-x-label",
+                                          "for": "optgroupfield-enabled-0003",
+                                          "id": "optgroupfield-enabled-0003-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -5089,7 +5089,7 @@ initialize {
                           Node {
                             "attribs": Object {
                               "class": "euiFormRow euiFormRow--fullWidth",
-                              "id": "optgroup-autofield-x-row",
+                              "id": "optgroupfield-enabled-0004-row",
                             },
                             "children": Array [
                               Node {
@@ -5100,8 +5100,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -5168,8 +5168,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -5207,8 +5207,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "optgroup-autofield-x",
-                                          "id": "optgroup-autofield-x-label",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -5259,7 +5259,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiFieldNumber",
-                                                "id": "optgroup-autofield-x",
+                                                "id": "optgroupfield-enabled-0004",
                                                 "name": "x.c",
                                                 "placeholder": "",
                                                 "step": "1",
@@ -5362,7 +5362,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "optgroup-autofield-x",
+                                              "id": "optgroupfield-enabled-0004",
                                               "name": "x.c",
                                               "placeholder": "",
                                               "step": "1",
@@ -5436,8 +5436,8 @@ initialize {
                                     Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -5504,8 +5504,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "optgroup-autofield-x",
-                                          "id": "optgroup-autofield-x-label",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -5543,8 +5543,8 @@ initialize {
                                         "prev": Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "optgroup-autofield-x",
-                                            "id": "optgroup-autofield-x-label",
+                                            "for": "optgroupfield-enabled-0004",
+                                            "id": "optgroupfield-enabled-0004-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -5649,7 +5649,7 @@ initialize {
                       Node {
                         "attribs": Object {
                           "class": "euiFormRow",
-                          "id": "optgroup-formrow-x-row",
+                          "id": "x-row",
                         },
                         "children": Array [
                           Node {
@@ -5666,7 +5666,7 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormRow euiFormRow--fullWidth",
-                                      "id": "bool-formrow-x.enabled-row",
+                                      "id": "x-row",
                                     },
                                     "children": Array [
                                       Node {
@@ -5677,8 +5677,8 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
-                                              "for": "bool-formrow-x.enabled",
-                                              "id": "bool-formrow-x.enabled-label",
+                                              "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -5745,8 +5745,8 @@ initialize {
                                             "prev": Node {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
-                                                "for": "bool-formrow-x.enabled",
-                                                "id": "bool-formrow-x.enabled-label",
+                                                "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -5784,8 +5784,8 @@ initialize {
                                               "prev": Node {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
-                                                  "for": "bool-formrow-x.enabled",
-                                                  "id": "bool-formrow-x.enabled-label",
+                                                  "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -5832,7 +5832,7 @@ initialize {
                                                   "attribs": Object {
                                                     "checked": "",
                                                     "class": "euiCheckbox__input",
-                                                    "id": "bool-formrow-x.enabled",
+                                                    "id": "x",
                                                     "name": "x.enabled",
                                                     "type": "checkbox",
                                                   },
@@ -5849,7 +5849,7 @@ initialize {
                                                     "next": Node {
                                                       "attribs": Object {
                                                         "class": "euiCheckbox__label",
-                                                        "for": "bool-formrow-x.enabled",
+                                                        "for": "x",
                                                       },
                                                       "children": Array [
                                                         Node {
@@ -5913,7 +5913,7 @@ initialize {
                                                   "next": Node {
                                                     "attribs": Object {
                                                       "class": "euiCheckbox__label",
-                                                      "for": "bool-formrow-x.enabled",
+                                                      "for": "x",
                                                     },
                                                     "children": Array [
                                                       Node {
@@ -5944,7 +5944,7 @@ initialize {
                                                     "attribs": Object {
                                                       "checked": "",
                                                       "class": "euiCheckbox__input",
-                                                      "id": "bool-formrow-x.enabled",
+                                                      "id": "x",
                                                       "name": "x.enabled",
                                                       "type": "checkbox",
                                                     },
@@ -5981,7 +5981,7 @@ initialize {
                                                 Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__label",
-                                                    "for": "bool-formrow-x.enabled",
+                                                    "for": "x",
                                                   },
                                                   "children": Array [
                                                     Node {
@@ -6009,7 +6009,7 @@ initialize {
                                                       "attribs": Object {
                                                         "checked": "",
                                                         "class": "euiCheckbox__input",
-                                                        "id": "bool-formrow-x.enabled",
+                                                        "id": "x",
                                                         "name": "x.enabled",
                                                         "type": "checkbox",
                                                       },
@@ -6105,7 +6105,7 @@ initialize {
                                                 "attribs": Object {
                                                   "checked": "",
                                                   "class": "euiCheckbox__input",
-                                                  "id": "bool-formrow-x.enabled",
+                                                  "id": "x",
                                                   "name": "x.enabled",
                                                   "type": "checkbox",
                                                 },
@@ -6122,7 +6122,7 @@ initialize {
                                                   "next": Node {
                                                     "attribs": Object {
                                                       "class": "euiCheckbox__label",
-                                                      "for": "bool-formrow-x.enabled",
+                                                      "for": "x",
                                                     },
                                                     "children": Array [
                                                       Node {
@@ -6186,7 +6186,7 @@ initialize {
                                                 "next": Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__label",
-                                                    "for": "bool-formrow-x.enabled",
+                                                    "for": "x",
                                                   },
                                                   "children": Array [
                                                     Node {
@@ -6217,7 +6217,7 @@ initialize {
                                                   "attribs": Object {
                                                     "checked": "",
                                                     "class": "euiCheckbox__input",
-                                                    "id": "bool-formrow-x.enabled",
+                                                    "id": "x",
                                                     "name": "x.enabled",
                                                     "type": "checkbox",
                                                   },
@@ -6254,7 +6254,7 @@ initialize {
                                               Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__label",
-                                                  "for": "bool-formrow-x.enabled",
+                                                  "for": "x",
                                                 },
                                                 "children": Array [
                                                   Node {
@@ -6282,7 +6282,7 @@ initialize {
                                                     "attribs": Object {
                                                       "checked": "",
                                                       "class": "euiCheckbox__input",
-                                                      "id": "bool-formrow-x.enabled",
+                                                      "id": "x",
                                                       "name": "x.enabled",
                                                       "type": "checkbox",
                                                     },
@@ -6353,8 +6353,8 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
-                                                "for": "bool-formrow-x.enabled",
-                                                "id": "bool-formrow-x.enabled-label",
+                                                "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -6421,8 +6421,8 @@ initialize {
                                               "prev": Node {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
-                                                  "for": "bool-formrow-x.enabled",
-                                                  "id": "bool-formrow-x.enabled-label",
+                                                  "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -6460,8 +6460,8 @@ initialize {
                                                 "prev": Node {
                                                   "attribs": Object {
                                                     "class": "euiFormLabel euiFormRow__label",
-                                                    "for": "bool-formrow-x.enabled",
-                                                    "id": "bool-formrow-x.enabled-label",
+                                                    "for": "x",
+                                                    "id": "x-label",
                                                   },
                                                   "children": Array [],
                                                   "name": "label",
@@ -6610,7 +6610,7 @@ initialize {
                         Node {
                           "attribs": Object {
                             "class": "euiFormRow euiFormRow--fullWidth",
-                            "id": "optgroup-autofield-x-row",
+                            "id": "optgroupfield-enabled-0004-row",
                           },
                           "children": Array [
                             Node {
@@ -6621,8 +6621,8 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "optgroup-autofield-x",
-                                    "id": "optgroup-autofield-x-label",
+                                    "for": "optgroupfield-enabled-0004",
+                                    "id": "optgroupfield-enabled-0004-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -6689,8 +6689,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -6728,8 +6728,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -6780,7 +6780,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "optgroup-autofield-x",
+                                              "id": "optgroupfield-enabled-0004",
                                               "name": "x.c",
                                               "placeholder": "",
                                               "step": "1",
@@ -6883,7 +6883,7 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFieldNumber",
-                                            "id": "optgroup-autofield-x",
+                                            "id": "optgroupfield-enabled-0004",
                                             "name": "x.c",
                                             "placeholder": "",
                                             "step": "1",
@@ -6957,8 +6957,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -7025,8 +7025,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -7064,8 +7064,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "optgroup-autofield-x",
-                                          "id": "optgroup-autofield-x-label",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -7165,7 +7165,7 @@ initialize {
                           Node {
                             "attribs": Object {
                               "class": "euiFormRow euiFormRow--fullWidth",
-                              "id": "optgroup-autofield-x-row",
+                              "id": "optgroupfield-enabled-0003-row",
                             },
                             "children": Array [
                               Node {
@@ -7176,8 +7176,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -7244,8 +7244,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -7283,8 +7283,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "optgroup-autofield-x",
-                                          "id": "optgroup-autofield-x-label",
+                                          "for": "optgroupfield-enabled-0003",
+                                          "id": "optgroupfield-enabled-0003-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -7335,7 +7335,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiFieldNumber",
-                                                "id": "optgroup-autofield-x",
+                                                "id": "optgroupfield-enabled-0003",
                                                 "name": "x.b",
                                                 "placeholder": "",
                                                 "step": "1",
@@ -7438,7 +7438,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "optgroup-autofield-x",
+                                              "id": "optgroupfield-enabled-0003",
                                               "name": "x.b",
                                               "placeholder": "",
                                               "step": "1",
@@ -7512,8 +7512,8 @@ initialize {
                                     Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -7580,8 +7580,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "optgroup-autofield-x",
-                                          "id": "optgroup-autofield-x-label",
+                                          "for": "optgroupfield-enabled-0003",
+                                          "id": "optgroupfield-enabled-0003-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -7619,8 +7619,8 @@ initialize {
                                         "prev": Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "optgroup-autofield-x",
-                                            "id": "optgroup-autofield-x-label",
+                                            "for": "optgroupfield-enabled-0003",
+                                            "id": "optgroupfield-enabled-0003-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -7715,7 +7715,7 @@ initialize {
                         Node {
                           "attribs": Object {
                             "class": "euiFormRow",
-                            "id": "optgroup-formrow-x-row",
+                            "id": "x-row",
                           },
                           "children": Array [
                             Node {
@@ -7732,7 +7732,7 @@ initialize {
                                     Node {
                                       "attribs": Object {
                                         "class": "euiFormRow euiFormRow--fullWidth",
-                                        "id": "bool-formrow-x.enabled-row",
+                                        "id": "x-row",
                                       },
                                       "children": Array [
                                         Node {
@@ -7743,8 +7743,8 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
-                                                "for": "bool-formrow-x.enabled",
-                                                "id": "bool-formrow-x.enabled-label",
+                                                "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -7811,8 +7811,8 @@ initialize {
                                               "prev": Node {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
-                                                  "for": "bool-formrow-x.enabled",
-                                                  "id": "bool-formrow-x.enabled-label",
+                                                  "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -7850,8 +7850,8 @@ initialize {
                                                 "prev": Node {
                                                   "attribs": Object {
                                                     "class": "euiFormLabel euiFormRow__label",
-                                                    "for": "bool-formrow-x.enabled",
-                                                    "id": "bool-formrow-x.enabled-label",
+                                                    "for": "x",
+                                                    "id": "x-label",
                                                   },
                                                   "children": Array [],
                                                   "name": "label",
@@ -7898,7 +7898,7 @@ initialize {
                                                     "attribs": Object {
                                                       "checked": "",
                                                       "class": "euiCheckbox__input",
-                                                      "id": "bool-formrow-x.enabled",
+                                                      "id": "x",
                                                       "name": "x.enabled",
                                                       "type": "checkbox",
                                                     },
@@ -7915,7 +7915,7 @@ initialize {
                                                       "next": Node {
                                                         "attribs": Object {
                                                           "class": "euiCheckbox__label",
-                                                          "for": "bool-formrow-x.enabled",
+                                                          "for": "x",
                                                         },
                                                         "children": Array [
                                                           Node {
@@ -7979,7 +7979,7 @@ initialize {
                                                     "next": Node {
                                                       "attribs": Object {
                                                         "class": "euiCheckbox__label",
-                                                        "for": "bool-formrow-x.enabled",
+                                                        "for": "x",
                                                       },
                                                       "children": Array [
                                                         Node {
@@ -8010,7 +8010,7 @@ initialize {
                                                       "attribs": Object {
                                                         "checked": "",
                                                         "class": "euiCheckbox__input",
-                                                        "id": "bool-formrow-x.enabled",
+                                                        "id": "x",
                                                         "name": "x.enabled",
                                                         "type": "checkbox",
                                                       },
@@ -8047,7 +8047,7 @@ initialize {
                                                   Node {
                                                     "attribs": Object {
                                                       "class": "euiCheckbox__label",
-                                                      "for": "bool-formrow-x.enabled",
+                                                      "for": "x",
                                                     },
                                                     "children": Array [
                                                       Node {
@@ -8075,7 +8075,7 @@ initialize {
                                                         "attribs": Object {
                                                           "checked": "",
                                                           "class": "euiCheckbox__input",
-                                                          "id": "bool-formrow-x.enabled",
+                                                          "id": "x",
                                                           "name": "x.enabled",
                                                           "type": "checkbox",
                                                         },
@@ -8171,7 +8171,7 @@ initialize {
                                                   "attribs": Object {
                                                     "checked": "",
                                                     "class": "euiCheckbox__input",
-                                                    "id": "bool-formrow-x.enabled",
+                                                    "id": "x",
                                                     "name": "x.enabled",
                                                     "type": "checkbox",
                                                   },
@@ -8188,7 +8188,7 @@ initialize {
                                                     "next": Node {
                                                       "attribs": Object {
                                                         "class": "euiCheckbox__label",
-                                                        "for": "bool-formrow-x.enabled",
+                                                        "for": "x",
                                                       },
                                                       "children": Array [
                                                         Node {
@@ -8252,7 +8252,7 @@ initialize {
                                                   "next": Node {
                                                     "attribs": Object {
                                                       "class": "euiCheckbox__label",
-                                                      "for": "bool-formrow-x.enabled",
+                                                      "for": "x",
                                                     },
                                                     "children": Array [
                                                       Node {
@@ -8283,7 +8283,7 @@ initialize {
                                                     "attribs": Object {
                                                       "checked": "",
                                                       "class": "euiCheckbox__input",
-                                                      "id": "bool-formrow-x.enabled",
+                                                      "id": "x",
                                                       "name": "x.enabled",
                                                       "type": "checkbox",
                                                     },
@@ -8320,7 +8320,7 @@ initialize {
                                                 Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__label",
-                                                    "for": "bool-formrow-x.enabled",
+                                                    "for": "x",
                                                   },
                                                   "children": Array [
                                                     Node {
@@ -8348,7 +8348,7 @@ initialize {
                                                       "attribs": Object {
                                                         "checked": "",
                                                         "class": "euiCheckbox__input",
-                                                        "id": "bool-formrow-x.enabled",
+                                                        "id": "x",
                                                         "name": "x.enabled",
                                                         "type": "checkbox",
                                                       },
@@ -8419,8 +8419,8 @@ initialize {
                                               Node {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
-                                                  "for": "bool-formrow-x.enabled",
-                                                  "id": "bool-formrow-x.enabled-label",
+                                                  "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -8487,8 +8487,8 @@ initialize {
                                                 "prev": Node {
                                                   "attribs": Object {
                                                     "class": "euiFormLabel euiFormRow__label",
-                                                    "for": "bool-formrow-x.enabled",
-                                                    "id": "bool-formrow-x.enabled-label",
+                                                    "for": "x",
+                                                    "id": "x-label",
                                                   },
                                                   "children": Array [],
                                                   "name": "label",
@@ -8526,8 +8526,8 @@ initialize {
                                                   "prev": Node {
                                                     "attribs": Object {
                                                       "class": "euiFormLabel euiFormRow__label",
-                                                      "for": "bool-formrow-x.enabled",
-                                                      "id": "bool-formrow-x.enabled-label",
+                                                      "for": "x",
+                                                      "id": "x-label",
                                                     },
                                                     "children": Array [],
                                                     "name": "label",
@@ -8708,7 +8708,7 @@ initialize {
                   Node {
                     "attribs": Object {
                       "class": "euiFormRow",
-                      "id": "optgroup-formrow-x-row",
+                      "id": "x-row",
                     },
                     "children": Array [
                       Node {
@@ -8725,7 +8725,7 @@ initialize {
                               Node {
                                 "attribs": Object {
                                   "class": "euiFormRow euiFormRow--fullWidth",
-                                  "id": "bool-formrow-x.enabled-row",
+                                  "id": "x-row",
                                 },
                                 "children": Array [
                                   Node {
@@ -8736,8 +8736,8 @@ initialize {
                                       Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "bool-formrow-x.enabled",
-                                          "id": "bool-formrow-x.enabled-label",
+                                          "for": "x",
+                                          "id": "x-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -8804,8 +8804,8 @@ initialize {
                                         "prev": Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "bool-formrow-x.enabled",
-                                            "id": "bool-formrow-x.enabled-label",
+                                            "for": "x",
+                                            "id": "x-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -8843,8 +8843,8 @@ initialize {
                                           "prev": Node {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
-                                              "for": "bool-formrow-x.enabled",
-                                              "id": "bool-formrow-x.enabled-label",
+                                              "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -8891,7 +8891,7 @@ initialize {
                                               "attribs": Object {
                                                 "checked": "",
                                                 "class": "euiCheckbox__input",
-                                                "id": "bool-formrow-x.enabled",
+                                                "id": "x",
                                                 "name": "x.enabled",
                                                 "type": "checkbox",
                                               },
@@ -8908,7 +8908,7 @@ initialize {
                                                 "next": Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__label",
-                                                    "for": "bool-formrow-x.enabled",
+                                                    "for": "x",
                                                   },
                                                   "children": Array [
                                                     Node {
@@ -8972,7 +8972,7 @@ initialize {
                                               "next": Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__label",
-                                                  "for": "bool-formrow-x.enabled",
+                                                  "for": "x",
                                                 },
                                                 "children": Array [
                                                   Node {
@@ -9003,7 +9003,7 @@ initialize {
                                                 "attribs": Object {
                                                   "checked": "",
                                                   "class": "euiCheckbox__input",
-                                                  "id": "bool-formrow-x.enabled",
+                                                  "id": "x",
                                                   "name": "x.enabled",
                                                   "type": "checkbox",
                                                 },
@@ -9040,7 +9040,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiCheckbox__label",
-                                                "for": "bool-formrow-x.enabled",
+                                                "for": "x",
                                               },
                                               "children": Array [
                                                 Node {
@@ -9068,7 +9068,7 @@ initialize {
                                                   "attribs": Object {
                                                     "checked": "",
                                                     "class": "euiCheckbox__input",
-                                                    "id": "bool-formrow-x.enabled",
+                                                    "id": "x",
                                                     "name": "x.enabled",
                                                     "type": "checkbox",
                                                   },
@@ -9164,7 +9164,7 @@ initialize {
                                             "attribs": Object {
                                               "checked": "",
                                               "class": "euiCheckbox__input",
-                                              "id": "bool-formrow-x.enabled",
+                                              "id": "x",
                                               "name": "x.enabled",
                                               "type": "checkbox",
                                             },
@@ -9181,7 +9181,7 @@ initialize {
                                               "next": Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__label",
-                                                  "for": "bool-formrow-x.enabled",
+                                                  "for": "x",
                                                 },
                                                 "children": Array [
                                                   Node {
@@ -9245,7 +9245,7 @@ initialize {
                                             "next": Node {
                                               "attribs": Object {
                                                 "class": "euiCheckbox__label",
-                                                "for": "bool-formrow-x.enabled",
+                                                "for": "x",
                                               },
                                               "children": Array [
                                                 Node {
@@ -9276,7 +9276,7 @@ initialize {
                                               "attribs": Object {
                                                 "checked": "",
                                                 "class": "euiCheckbox__input",
-                                                "id": "bool-formrow-x.enabled",
+                                                "id": "x",
                                                 "name": "x.enabled",
                                                 "type": "checkbox",
                                               },
@@ -9313,7 +9313,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiCheckbox__label",
-                                              "for": "bool-formrow-x.enabled",
+                                              "for": "x",
                                             },
                                             "children": Array [
                                               Node {
@@ -9341,7 +9341,7 @@ initialize {
                                                 "attribs": Object {
                                                   "checked": "",
                                                   "class": "euiCheckbox__input",
-                                                  "id": "bool-formrow-x.enabled",
+                                                  "id": "x",
                                                   "name": "x.enabled",
                                                   "type": "checkbox",
                                                 },
@@ -9412,8 +9412,8 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "bool-formrow-x.enabled",
-                                            "id": "bool-formrow-x.enabled-label",
+                                            "for": "x",
+                                            "id": "x-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -9480,8 +9480,8 @@ initialize {
                                           "prev": Node {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
-                                              "for": "bool-formrow-x.enabled",
-                                              "id": "bool-formrow-x.enabled-label",
+                                              "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -9519,8 +9519,8 @@ initialize {
                                             "prev": Node {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
-                                                "for": "bool-formrow-x.enabled",
-                                                "id": "bool-formrow-x.enabled-label",
+                                                "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -9650,7 +9650,7 @@ initialize {
                         Node {
                           "attribs": Object {
                             "class": "euiFormRow euiFormRow--fullWidth",
-                            "id": "optgroup-autofield-x-row",
+                            "id": "optgroupfield-enabled-0003-row",
                           },
                           "children": Array [
                             Node {
@@ -9661,8 +9661,8 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "optgroup-autofield-x",
-                                    "id": "optgroup-autofield-x-label",
+                                    "for": "optgroupfield-enabled-0003",
+                                    "id": "optgroupfield-enabled-0003-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -9729,8 +9729,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -9768,8 +9768,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -9820,7 +9820,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "optgroup-autofield-x",
+                                              "id": "optgroupfield-enabled-0003",
                                               "name": "x.b",
                                               "placeholder": "",
                                               "step": "1",
@@ -9923,7 +9923,7 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFieldNumber",
-                                            "id": "optgroup-autofield-x",
+                                            "id": "optgroupfield-enabled-0003",
                                             "name": "x.b",
                                             "placeholder": "",
                                             "step": "1",
@@ -9997,8 +9997,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -10065,8 +10065,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -10104,8 +10104,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "optgroup-autofield-x",
-                                          "id": "optgroup-autofield-x-label",
+                                          "for": "optgroupfield-enabled-0003",
+                                          "id": "optgroupfield-enabled-0003-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -10203,7 +10203,7 @@ initialize {
                           Node {
                             "attribs": Object {
                               "class": "euiFormRow euiFormRow--fullWidth",
-                              "id": "optgroup-autofield-x-row",
+                              "id": "optgroupfield-enabled-0004-row",
                             },
                             "children": Array [
                               Node {
@@ -10214,8 +10214,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -10282,8 +10282,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -10321,8 +10321,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "optgroup-autofield-x",
-                                          "id": "optgroup-autofield-x-label",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -10373,7 +10373,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiFieldNumber",
-                                                "id": "optgroup-autofield-x",
+                                                "id": "optgroupfield-enabled-0004",
                                                 "name": "x.c",
                                                 "placeholder": "",
                                                 "step": "1",
@@ -10476,7 +10476,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "optgroup-autofield-x",
+                                              "id": "optgroupfield-enabled-0004",
                                               "name": "x.c",
                                               "placeholder": "",
                                               "step": "1",
@@ -10550,8 +10550,8 @@ initialize {
                                     Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -10618,8 +10618,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "optgroup-autofield-x",
-                                          "id": "optgroup-autofield-x-label",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -10657,8 +10657,8 @@ initialize {
                                         "prev": Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "optgroup-autofield-x",
-                                            "id": "optgroup-autofield-x-label",
+                                            "for": "optgroupfield-enabled-0004",
+                                            "id": "optgroupfield-enabled-0004-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -10787,7 +10787,7 @@ initialize {
                       Node {
                         "attribs": Object {
                           "class": "euiFormRow euiFormRow--fullWidth",
-                          "id": "optgroup-autofield-x-row",
+                          "id": "optgroupfield-enabled-0003-row",
                         },
                         "children": Array [
                           Node {
@@ -10798,8 +10798,8 @@ initialize {
                               Node {
                                 "attribs": Object {
                                   "class": "euiFormLabel euiFormRow__label",
-                                  "for": "optgroup-autofield-x",
-                                  "id": "optgroup-autofield-x-label",
+                                  "for": "optgroupfield-enabled-0003",
+                                  "id": "optgroupfield-enabled-0003-label",
                                 },
                                 "children": Array [],
                                 "name": "label",
@@ -10866,8 +10866,8 @@ initialize {
                                 "prev": Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "optgroup-autofield-x",
-                                    "id": "optgroup-autofield-x-label",
+                                    "for": "optgroupfield-enabled-0003",
+                                    "id": "optgroupfield-enabled-0003-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -10905,8 +10905,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -10957,7 +10957,7 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFieldNumber",
-                                            "id": "optgroup-autofield-x",
+                                            "id": "optgroupfield-enabled-0003",
                                             "name": "x.b",
                                             "placeholder": "",
                                             "step": "1",
@@ -11060,7 +11060,7 @@ initialize {
                                       Node {
                                         "attribs": Object {
                                           "class": "euiFieldNumber",
-                                          "id": "optgroup-autofield-x",
+                                          "id": "optgroupfield-enabled-0003",
                                           "name": "x.b",
                                           "placeholder": "",
                                           "step": "1",
@@ -11134,8 +11134,8 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "optgroup-autofield-x",
-                                    "id": "optgroup-autofield-x-label",
+                                    "for": "optgroupfield-enabled-0003",
+                                    "id": "optgroupfield-enabled-0003-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -11202,8 +11202,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -11241,8 +11241,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -11340,7 +11340,7 @@ initialize {
                         Node {
                           "attribs": Object {
                             "class": "euiFormRow euiFormRow--fullWidth",
-                            "id": "optgroup-autofield-x-row",
+                            "id": "optgroupfield-enabled-0004-row",
                           },
                           "children": Array [
                             Node {
@@ -11351,8 +11351,8 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "optgroup-autofield-x",
-                                    "id": "optgroup-autofield-x-label",
+                                    "for": "optgroupfield-enabled-0004",
+                                    "id": "optgroupfield-enabled-0004-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -11419,8 +11419,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -11458,8 +11458,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -11510,7 +11510,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "optgroup-autofield-x",
+                                              "id": "optgroupfield-enabled-0004",
                                               "name": "x.c",
                                               "placeholder": "",
                                               "step": "1",
@@ -11613,7 +11613,7 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFieldNumber",
-                                            "id": "optgroup-autofield-x",
+                                            "id": "optgroupfield-enabled-0004",
                                             "name": "x.c",
                                             "placeholder": "",
                                             "step": "1",
@@ -11687,8 +11687,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -11755,8 +11755,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -11794,8 +11794,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "optgroup-autofield-x",
-                                          "id": "optgroup-autofield-x-label",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -11900,7 +11900,7 @@ initialize {
                     Node {
                       "attribs": Object {
                         "class": "euiFormRow",
-                        "id": "optgroup-formrow-x-row",
+                        "id": "x-row",
                       },
                       "children": Array [
                         Node {
@@ -11917,7 +11917,7 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormRow euiFormRow--fullWidth",
-                                    "id": "bool-formrow-x.enabled-row",
+                                    "id": "x-row",
                                   },
                                   "children": Array [
                                     Node {
@@ -11928,8 +11928,8 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "bool-formrow-x.enabled",
-                                            "id": "bool-formrow-x.enabled-label",
+                                            "for": "x",
+                                            "id": "x-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -11996,8 +11996,8 @@ initialize {
                                           "prev": Node {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
-                                              "for": "bool-formrow-x.enabled",
-                                              "id": "bool-formrow-x.enabled-label",
+                                              "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -12035,8 +12035,8 @@ initialize {
                                             "prev": Node {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
-                                                "for": "bool-formrow-x.enabled",
-                                                "id": "bool-formrow-x.enabled-label",
+                                                "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -12083,7 +12083,7 @@ initialize {
                                                 "attribs": Object {
                                                   "checked": "",
                                                   "class": "euiCheckbox__input",
-                                                  "id": "bool-formrow-x.enabled",
+                                                  "id": "x",
                                                   "name": "x.enabled",
                                                   "type": "checkbox",
                                                 },
@@ -12100,7 +12100,7 @@ initialize {
                                                   "next": Node {
                                                     "attribs": Object {
                                                       "class": "euiCheckbox__label",
-                                                      "for": "bool-formrow-x.enabled",
+                                                      "for": "x",
                                                     },
                                                     "children": Array [
                                                       Node {
@@ -12164,7 +12164,7 @@ initialize {
                                                 "next": Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__label",
-                                                    "for": "bool-formrow-x.enabled",
+                                                    "for": "x",
                                                   },
                                                   "children": Array [
                                                     Node {
@@ -12195,7 +12195,7 @@ initialize {
                                                   "attribs": Object {
                                                     "checked": "",
                                                     "class": "euiCheckbox__input",
-                                                    "id": "bool-formrow-x.enabled",
+                                                    "id": "x",
                                                     "name": "x.enabled",
                                                     "type": "checkbox",
                                                   },
@@ -12232,7 +12232,7 @@ initialize {
                                               Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__label",
-                                                  "for": "bool-formrow-x.enabled",
+                                                  "for": "x",
                                                 },
                                                 "children": Array [
                                                   Node {
@@ -12260,7 +12260,7 @@ initialize {
                                                     "attribs": Object {
                                                       "checked": "",
                                                       "class": "euiCheckbox__input",
-                                                      "id": "bool-formrow-x.enabled",
+                                                      "id": "x",
                                                       "name": "x.enabled",
                                                       "type": "checkbox",
                                                     },
@@ -12356,7 +12356,7 @@ initialize {
                                               "attribs": Object {
                                                 "checked": "",
                                                 "class": "euiCheckbox__input",
-                                                "id": "bool-formrow-x.enabled",
+                                                "id": "x",
                                                 "name": "x.enabled",
                                                 "type": "checkbox",
                                               },
@@ -12373,7 +12373,7 @@ initialize {
                                                 "next": Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__label",
-                                                    "for": "bool-formrow-x.enabled",
+                                                    "for": "x",
                                                   },
                                                   "children": Array [
                                                     Node {
@@ -12437,7 +12437,7 @@ initialize {
                                               "next": Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__label",
-                                                  "for": "bool-formrow-x.enabled",
+                                                  "for": "x",
                                                 },
                                                 "children": Array [
                                                   Node {
@@ -12468,7 +12468,7 @@ initialize {
                                                 "attribs": Object {
                                                   "checked": "",
                                                   "class": "euiCheckbox__input",
-                                                  "id": "bool-formrow-x.enabled",
+                                                  "id": "x",
                                                   "name": "x.enabled",
                                                   "type": "checkbox",
                                                 },
@@ -12505,7 +12505,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiCheckbox__label",
-                                                "for": "bool-formrow-x.enabled",
+                                                "for": "x",
                                               },
                                               "children": Array [
                                                 Node {
@@ -12533,7 +12533,7 @@ initialize {
                                                   "attribs": Object {
                                                     "checked": "",
                                                     "class": "euiCheckbox__input",
-                                                    "id": "bool-formrow-x.enabled",
+                                                    "id": "x",
                                                     "name": "x.enabled",
                                                     "type": "checkbox",
                                                   },
@@ -12604,8 +12604,8 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
-                                              "for": "bool-formrow-x.enabled",
-                                              "id": "bool-formrow-x.enabled-label",
+                                              "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -12672,8 +12672,8 @@ initialize {
                                             "prev": Node {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
-                                                "for": "bool-formrow-x.enabled",
-                                                "id": "bool-formrow-x.enabled-label",
+                                                "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -12711,8 +12711,8 @@ initialize {
                                               "prev": Node {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
-                                                  "for": "bool-formrow-x.enabled",
-                                                  "id": "bool-formrow-x.enabled-label",
+                                                  "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -12861,7 +12861,7 @@ initialize {
                       Node {
                         "attribs": Object {
                           "class": "euiFormRow euiFormRow--fullWidth",
-                          "id": "optgroup-autofield-x-row",
+                          "id": "optgroupfield-enabled-0004-row",
                         },
                         "children": Array [
                           Node {
@@ -12872,8 +12872,8 @@ initialize {
                               Node {
                                 "attribs": Object {
                                   "class": "euiFormLabel euiFormRow__label",
-                                  "for": "optgroup-autofield-x",
-                                  "id": "optgroup-autofield-x-label",
+                                  "for": "optgroupfield-enabled-0004",
+                                  "id": "optgroupfield-enabled-0004-label",
                                 },
                                 "children": Array [],
                                 "name": "label",
@@ -12940,8 +12940,8 @@ initialize {
                                 "prev": Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "optgroup-autofield-x",
-                                    "id": "optgroup-autofield-x-label",
+                                    "for": "optgroupfield-enabled-0004",
+                                    "id": "optgroupfield-enabled-0004-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -12979,8 +12979,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -13031,7 +13031,7 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFieldNumber",
-                                            "id": "optgroup-autofield-x",
+                                            "id": "optgroupfield-enabled-0004",
                                             "name": "x.c",
                                             "placeholder": "",
                                             "step": "1",
@@ -13134,7 +13134,7 @@ initialize {
                                       Node {
                                         "attribs": Object {
                                           "class": "euiFieldNumber",
-                                          "id": "optgroup-autofield-x",
+                                          "id": "optgroupfield-enabled-0004",
                                           "name": "x.c",
                                           "placeholder": "",
                                           "step": "1",
@@ -13208,8 +13208,8 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "optgroup-autofield-x",
-                                    "id": "optgroup-autofield-x-label",
+                                    "for": "optgroupfield-enabled-0004",
+                                    "id": "optgroupfield-enabled-0004-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -13276,8 +13276,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -13315,8 +13315,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -13416,7 +13416,7 @@ initialize {
                         Node {
                           "attribs": Object {
                             "class": "euiFormRow euiFormRow--fullWidth",
-                            "id": "optgroup-autofield-x-row",
+                            "id": "optgroupfield-enabled-0003-row",
                           },
                           "children": Array [
                             Node {
@@ -13427,8 +13427,8 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "optgroup-autofield-x",
-                                    "id": "optgroup-autofield-x-label",
+                                    "for": "optgroupfield-enabled-0003",
+                                    "id": "optgroupfield-enabled-0003-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -13495,8 +13495,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -13534,8 +13534,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -13586,7 +13586,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "optgroup-autofield-x",
+                                              "id": "optgroupfield-enabled-0003",
                                               "name": "x.b",
                                               "placeholder": "",
                                               "step": "1",
@@ -13689,7 +13689,7 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFieldNumber",
-                                            "id": "optgroup-autofield-x",
+                                            "id": "optgroupfield-enabled-0003",
                                             "name": "x.b",
                                             "placeholder": "",
                                             "step": "1",
@@ -13763,8 +13763,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "optgroup-autofield-x",
-                                      "id": "optgroup-autofield-x-label",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -13831,8 +13831,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "optgroup-autofield-x",
-                                        "id": "optgroup-autofield-x-label",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -13870,8 +13870,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "optgroup-autofield-x",
-                                          "id": "optgroup-autofield-x-label",
+                                          "for": "optgroupfield-enabled-0003",
+                                          "id": "optgroupfield-enabled-0003-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -13966,7 +13966,7 @@ initialize {
                       Node {
                         "attribs": Object {
                           "class": "euiFormRow",
-                          "id": "optgroup-formrow-x-row",
+                          "id": "x-row",
                         },
                         "children": Array [
                           Node {
@@ -13983,7 +13983,7 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormRow euiFormRow--fullWidth",
-                                      "id": "bool-formrow-x.enabled-row",
+                                      "id": "x-row",
                                     },
                                     "children": Array [
                                       Node {
@@ -13994,8 +13994,8 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
-                                              "for": "bool-formrow-x.enabled",
-                                              "id": "bool-formrow-x.enabled-label",
+                                              "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -14062,8 +14062,8 @@ initialize {
                                             "prev": Node {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
-                                                "for": "bool-formrow-x.enabled",
-                                                "id": "bool-formrow-x.enabled-label",
+                                                "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -14101,8 +14101,8 @@ initialize {
                                               "prev": Node {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
-                                                  "for": "bool-formrow-x.enabled",
-                                                  "id": "bool-formrow-x.enabled-label",
+                                                  "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -14149,7 +14149,7 @@ initialize {
                                                   "attribs": Object {
                                                     "checked": "",
                                                     "class": "euiCheckbox__input",
-                                                    "id": "bool-formrow-x.enabled",
+                                                    "id": "x",
                                                     "name": "x.enabled",
                                                     "type": "checkbox",
                                                   },
@@ -14166,7 +14166,7 @@ initialize {
                                                     "next": Node {
                                                       "attribs": Object {
                                                         "class": "euiCheckbox__label",
-                                                        "for": "bool-formrow-x.enabled",
+                                                        "for": "x",
                                                       },
                                                       "children": Array [
                                                         Node {
@@ -14230,7 +14230,7 @@ initialize {
                                                   "next": Node {
                                                     "attribs": Object {
                                                       "class": "euiCheckbox__label",
-                                                      "for": "bool-formrow-x.enabled",
+                                                      "for": "x",
                                                     },
                                                     "children": Array [
                                                       Node {
@@ -14261,7 +14261,7 @@ initialize {
                                                     "attribs": Object {
                                                       "checked": "",
                                                       "class": "euiCheckbox__input",
-                                                      "id": "bool-formrow-x.enabled",
+                                                      "id": "x",
                                                       "name": "x.enabled",
                                                       "type": "checkbox",
                                                     },
@@ -14298,7 +14298,7 @@ initialize {
                                                 Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__label",
-                                                    "for": "bool-formrow-x.enabled",
+                                                    "for": "x",
                                                   },
                                                   "children": Array [
                                                     Node {
@@ -14326,7 +14326,7 @@ initialize {
                                                       "attribs": Object {
                                                         "checked": "",
                                                         "class": "euiCheckbox__input",
-                                                        "id": "bool-formrow-x.enabled",
+                                                        "id": "x",
                                                         "name": "x.enabled",
                                                         "type": "checkbox",
                                                       },
@@ -14422,7 +14422,7 @@ initialize {
                                                 "attribs": Object {
                                                   "checked": "",
                                                   "class": "euiCheckbox__input",
-                                                  "id": "bool-formrow-x.enabled",
+                                                  "id": "x",
                                                   "name": "x.enabled",
                                                   "type": "checkbox",
                                                 },
@@ -14439,7 +14439,7 @@ initialize {
                                                   "next": Node {
                                                     "attribs": Object {
                                                       "class": "euiCheckbox__label",
-                                                      "for": "bool-formrow-x.enabled",
+                                                      "for": "x",
                                                     },
                                                     "children": Array [
                                                       Node {
@@ -14503,7 +14503,7 @@ initialize {
                                                 "next": Node {
                                                   "attribs": Object {
                                                     "class": "euiCheckbox__label",
-                                                    "for": "bool-formrow-x.enabled",
+                                                    "for": "x",
                                                   },
                                                   "children": Array [
                                                     Node {
@@ -14534,7 +14534,7 @@ initialize {
                                                   "attribs": Object {
                                                     "checked": "",
                                                     "class": "euiCheckbox__input",
-                                                    "id": "bool-formrow-x.enabled",
+                                                    "id": "x",
                                                     "name": "x.enabled",
                                                     "type": "checkbox",
                                                   },
@@ -14571,7 +14571,7 @@ initialize {
                                               Node {
                                                 "attribs": Object {
                                                   "class": "euiCheckbox__label",
-                                                  "for": "bool-formrow-x.enabled",
+                                                  "for": "x",
                                                 },
                                                 "children": Array [
                                                   Node {
@@ -14599,7 +14599,7 @@ initialize {
                                                     "attribs": Object {
                                                       "checked": "",
                                                       "class": "euiCheckbox__input",
-                                                      "id": "bool-formrow-x.enabled",
+                                                      "id": "x",
                                                       "name": "x.enabled",
                                                       "type": "checkbox",
                                                     },
@@ -14670,8 +14670,8 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
-                                                "for": "bool-formrow-x.enabled",
-                                                "id": "bool-formrow-x.enabled-label",
+                                                "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -14738,8 +14738,8 @@ initialize {
                                               "prev": Node {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
-                                                  "for": "bool-formrow-x.enabled",
-                                                  "id": "bool-formrow-x.enabled-label",
+                                                  "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -14777,8 +14777,8 @@ initialize {
                                                 "prev": Node {
                                                   "attribs": Object {
                                                     "class": "euiFormLabel euiFormRow__label",
-                                                    "for": "bool-formrow-x.enabled",
-                                                    "id": "bool-formrow-x.enabled-label",
+                                                    "for": "x",
+                                                    "id": "x-label",
                                                   },
                                                   "children": Array [],
                                                   "name": "label",

@@ -17,9 +17,11 @@ import { Context, randomIds } from "uniforms";
 
 test("Test suite must contain at least one test", () => {});
 
-const randomId = randomIds();
-
-export default function createContext(schema?: object, context?: Partial<Context<{}>>): { context: Context<{}> } {
+export default function createContext(
+    schema?: object,
+    context?: Partial<Context<{}>>,
+    random_id_prefix?: string // Provide a unique prefix per testcase to ensure deterministic randomIds
+): { context: Context<{}> } {
     return {
         context: {
             changed: false,
@@ -29,7 +31,7 @@ export default function createContext(schema?: object, context?: Partial<Context
             name: [],
             onChange() {},
             onSubmit() {},
-            randomId,
+            randomId: randomIds(random_id_prefix), // https://uniforms.tools/docs/api-helpers/#randomids
             submitted: false,
             submitting: false,
             validating: false,

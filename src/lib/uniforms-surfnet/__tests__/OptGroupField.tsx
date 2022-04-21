@@ -18,24 +18,7 @@ import { OptGroupField } from "lib/uniforms-surfnet/src";
 import React from "react";
 
 test("<OptGroupField> - renders an the correct fields when disabled", () => {
-    const element = <OptGroupField name="x" />;
-    const wrapper = mount(
-        element,
-        createContext({
-            x: { type: Object },
-            "x.enabled": { type: Boolean },
-            "x.b": { type: Number },
-            "x.c": { type: Number },
-        })
-    );
-
-    expect(wrapper.find("input")).toHaveLength(1);
-    expect(wrapper.find("input").at(0).prop("name")).toBe("x.enabled");
-    expect(wrapper.render()).toMatchSnapshot();
-});
-
-test("<OptGroupField> - renders an the correct fields when enabled", () => {
-    const element = <OptGroupField name="x" />;
+    const element = <OptGroupField name="x" id="snapshot-test" />;
     const wrapper = mount(
         element,
         createContext(
@@ -45,7 +28,29 @@ test("<OptGroupField> - renders an the correct fields when enabled", () => {
                 "x.b": { type: Number },
                 "x.c": { type: Number },
             },
-            { model: { x: { enabled: true } } }
+            undefined,
+            "optgroupfield-disabled"
+        )
+    );
+
+    expect(wrapper.find("input")).toHaveLength(1);
+    expect(wrapper.find("input").at(0).prop("name")).toBe("x.enabled");
+    expect(wrapper.render()).toMatchSnapshot();
+});
+
+test("<OptGroupField> - renders an the correct fields when enabled", () => {
+    const element = <OptGroupField name="x" id="snapshot-test" />;
+    const wrapper = mount(
+        element,
+        createContext(
+            {
+                x: { type: Object },
+                "x.enabled": { type: Boolean },
+                "x.b": { type: Number },
+                "x.c": { type: Number },
+            },
+            { model: { x: { enabled: true } } },
+            "optgroupfield-enabled"
         )
     );
 

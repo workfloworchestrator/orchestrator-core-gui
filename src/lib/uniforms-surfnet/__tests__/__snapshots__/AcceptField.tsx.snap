@@ -5,7 +5,7 @@ initialize {
   "0": Node {
     "attribs": Object {
       "class": " accept-field",
-      "id": "uniforms-0000-0000",
+      "id": "acceptfield-legacy-0000",
       "required": "",
     },
     "children": Array [
@@ -905,7 +905,7 @@ initialize {
   "0": Node {
     "attribs": Object {
       "class": " accept-field",
-      "id": "uniforms-0000-0002",
+      "id": "acceptfield-render-0000",
       "required": "",
     },
     "children": Array [

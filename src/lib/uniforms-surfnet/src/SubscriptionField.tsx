@@ -240,7 +240,7 @@ function Subscription({
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
-                id={`subscription-formrow-${name}`}
+                id={id}
                 fullWidth
             >
                 <div>
@@ -248,7 +248,7 @@ function Subscription({
                         <>
                             <EuiButtonIcon
                                 className="reload-subscriptions-icon-button"
-                                id={`subscription-formrow-${name}-refresh-icon`}
+                                id={`refresh-icon-${id}`}
                                 aria-label={`reload-${label}`}
                                 iconType="refresh"
                                 iconSize="l"
@@ -264,7 +264,7 @@ function Subscription({
                             {tags?.includes("SP") && (
                                 <EuiButtonIcon
                                     className="show-service-port-modal-icon-button"
-                                    id={`subscription-formrow-${name}-filter-icon`}
+                                    id={`filter-icon-${id}`}
                                     aria-label={`service-port-modal-${name}`}
                                     onClick={showModal}
                                     iconType="filter"
@@ -287,8 +287,8 @@ function Subscription({
                     )}
 
                     <ReactSelect<Option, false>
-                        id={`subscription-formrow-${name}-select`}
-                        inputId={`subscription-formrow-${name}-select-input`}
+                        id={id}
+                        inputId={`${id}.search`}
                         name={name}
                         onChange={(option) => {
                             onChange(option?.value);

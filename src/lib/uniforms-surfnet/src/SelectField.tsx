@@ -103,12 +103,12 @@ function Select({
                     labelAppend={<EuiText size="m">{description}</EuiText>}
                     error={showInlineError ? errorMessage : false}
                     isInvalid={error}
-                    id={`select-formrow-${name}`}
+                    id={id}
                     fullWidth
                 >
                     <ReactSelect<Option, false>
-                        id={`select-formrow-${name}-select`}
-                        inputId={`select-formrow-${name}-select-input`}
+                        id={id}
+                        inputId={`${id}.search`}
                         name={name}
                         onChange={(option) => {
                             if (!readOnly) {

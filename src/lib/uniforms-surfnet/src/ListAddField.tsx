@@ -45,7 +45,6 @@ function ListAdd({ disabled, initialCount, name, readOnly, value, outerList = fa
         <div
             className="add-item"
             {...filterDOMProps(props)}
-            id={`listadd-div-${name}`}
             onClick={onAction}
             onKeyDown={onAction}
             role="button"

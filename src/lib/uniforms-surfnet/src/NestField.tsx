@@ -59,12 +59,7 @@ function Nest({
                 {children ||
                     fields?.map((field) => (
                         <EuiFlexItem key={field}>
-                            <AutoField
-                                name={field}
-                                id={`nest-autofield-${name}`}
-                                {...itemProps}
-                                label={itemIndex === 0 ? undefined : false}
-                            />
+                            <AutoField name={field} {...itemProps} label={itemIndex === 0 ? undefined : false} />
                         </EuiFlexItem>
                     ))}
             </EuiFlexGroup>
@@ -82,7 +77,6 @@ function Nest({
                         <AutoField
                             key={field}
                             name={field}
-                            id={`nest-autofield-${name}`}
                             {...itemProps}
                             label={itemIndex === 0 ? undefined : false}
                         />

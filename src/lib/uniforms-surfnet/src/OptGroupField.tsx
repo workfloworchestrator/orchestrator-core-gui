@@ -46,7 +46,11 @@ function OptGroup({
             className={`${className} optgroup-field`}
         >
             <EuiFlexItem>
-                <EuiFormRow error={false} isInvalid={false} id={`optgroup-formrow-${name}`}>
+                <EuiFormRow
+                    error={false}
+                    isInvalid={false}
+                    id={name} // Not sure if this is always unique
+                >
                     <BoolField name="enabled" readOnly={readOnly} />
                 </EuiFormRow>
             </EuiFlexItem>
@@ -55,7 +59,7 @@ function OptGroup({
                     ?.filter((field) => field !== "enabled")
                     .map((field) => (
                         <EuiFlexItem key={field}>
-                            <AutoField name={field} id={`optgroup-autofield-${name}`} {...itemProps} />
+                            <AutoField name={field} {...itemProps} />
                         </EuiFlexItem>
                     ))}
         </EuiDescribedFormGroup>
