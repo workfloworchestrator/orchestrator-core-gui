@@ -49,7 +49,7 @@ function OptGroup({
                 <EuiFormRow
                     error={false}
                     isInvalid={false}
-                    id={name} // Not sure if this is always unique
+                    id={name} // Not sure if this is always unique...
                 >
                     <BoolField name="enabled" readOnly={readOnly} />
                 </EuiFormRow>

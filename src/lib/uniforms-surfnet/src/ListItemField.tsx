@@ -24,7 +24,7 @@ export type ListItemFieldProps = {
     outerList?: boolean;
 };
 
-function ListItem({ name, children = <AutoField label={null} name="" />, outerList = false }: ListItemFieldProps) {
+function ListItem({ children = <AutoField label={null} name="" />, outerList = false }: ListItemFieldProps) {
     return (
         <li>
             {children}
