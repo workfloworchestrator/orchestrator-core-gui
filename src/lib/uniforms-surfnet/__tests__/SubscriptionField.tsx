@@ -67,17 +67,16 @@ describe("<SubscriptionField>", () => {
         expect(wrapper.find(ReactSelect).prop("id")).toBeTruthy();
     });
 
-    // TODO: Is there a usecase for specifying ids on components?
-    // test("<SubscriptionField> - renders a select with correct id (specified)", async () => {
-    //     const elementWithContext = withApplicationContext(<SubscriptionField name="x" id="y" />, APP_CONTEXT);
-    //     const { element, getSubscriptions } = withSubscriptions(elementWithContext);
-    //     getSubscriptions.mockReturnValue([]);
+    test("<SubscriptionField> - renders a select with correct id (specified)", async () => {
+        const elementWithContext = withApplicationContext(<SubscriptionField name="x" id="y" />, APP_CONTEXT);
+        const { element, getSubscriptions } = withSubscriptions(elementWithContext);
+        getSubscriptions.mockReturnValue([]);
 
-    //     const wrapper = mount(element, createContext({ x: { type: String } }));
-    //     await waitForComponentToPaint(wrapper);
-    //     expect(wrapper.find(ReactSelect)).toHaveLength(1);
-    //     expect(wrapper.find(ReactSelect).prop("id")).toBe("y");
-    // });
+        const wrapper = mount(element, createContext({ x: { type: String } }));
+        await waitForComponentToPaint(wrapper);
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        expect(wrapper.find(ReactSelect).prop("id")).toBe("y");
+    });
 
     test("<SubscriptionField> - renders a select with correct name", async () => {
         const elementWithContext = withApplicationContext(<SubscriptionField name="x" />, APP_CONTEXT);

@@ -55,14 +55,13 @@ describe("<SelectField>", () => {
         expect(wrapper.find(ReactSelect).prop("id")).toBeTruthy();
     });
 
-    // TODO: Is there a usecase for specifying ids on components?
-    // test("<SelectField> - renders a select with correct id (specified)", () => {
-    //     const element = <SelectField name="x" id="y" />;
-    //     const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
+    test("<SelectField> - renders a select with correct id (specified)", () => {
+        const element = <SelectField name="x" id="y" />;
+        const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-    //     expect(wrapper.find(ReactSelect)).toHaveLength(1);
-    //     expect(wrapper.find(ReactSelect).prop("id")).toBe("y");
-    // });
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        expect(wrapper.find(ReactSelect).prop("id")).toBe("y");
+    });
 
     test("<SelectField> - renders a select with correct name", () => {
         const element = <SelectField name="x" />;
