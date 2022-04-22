@@ -15,6 +15,7 @@
 
 import {
     EuiBadge,
+    EuiButton,
     EuiButtonIcon,
     EuiInMemoryTable,
     EuiLink,
@@ -24,14 +25,13 @@ import {
 } from "@elastic/eui";
 import ConfirmationDialogContext from "contextProviders/ConfirmationDialogProvider";
 import React, { useCallback, useContext, useEffect, useState } from "react";
+import { intl } from "locale/i18n";
 import { injectIntl } from "react-intl";
 import { useHistory } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { renderDateTime } from "utils/Lookups";
 import { Product, ProductBlock } from "utils/types";
-
-import { intl } from "../locale/i18n";
 
 function Products() {
     const { apiClient, allowed } = useContext(ApplicationContext);
@@ -127,13 +127,13 @@ function Products() {
                 switch (status) {
                     case "end of life":
                         return (
-                            <EuiBadge color="#FF4136" isDisabled={false}>
+                            <EuiBadge color="error" isDisabled={false}>
                                 {status}
                             </EuiBadge>
                         );
                     case "active":
                         return (
-                            <EuiBadge color="secondary" isDisabled={false}>
+                            <EuiBadge color="success" isDisabled={false}>
                                 {status}
                             </EuiBadge>
                         );
@@ -151,7 +151,7 @@ function Products() {
                         );
                     default:
                         return (
-                            <EuiBadge color="default" isDisabled={false}>
+                            <EuiBadge color="primary" isDisabled={false}>
                                 {status}
                             </EuiBadge>
                         );
@@ -165,14 +165,19 @@ function Products() {
             truncateText: false,
             render: (product_blocks: ProductBlock[]) => {
                 const renderPB = product_blocks.map((item) => (
-                    <EuiBadge color="primary" isDisabled={false}>
+                    <EuiButton
+                        size="s"
+                        color="primary"
+                        isDisabled={false}
+                        style={{ marginRight: "5px", marginBottom: "5px" }}
+                    >
                         <EuiLink
                             color="text"
                             onClick={() => handleOnClick(`/metadata/product-block/${item.product_block_id}`)}
                         >
                             {item.name}
                         </EuiLink>
-                    </EuiBadge>
+                    </EuiButton>
                 ));
                 return <div>{renderPB}</div>;
             },
