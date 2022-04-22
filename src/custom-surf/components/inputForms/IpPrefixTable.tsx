@@ -15,6 +15,7 @@
 
 import "custom/components/inputForms/IpPrefixTable.scss";
 
+import { EuiButtonIcon, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiText } from "@elastic/eui";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import Select, { ValueType } from "react-select";
@@ -39,6 +40,7 @@ interface IState {
     filter_prefixes: IpPrefix[];
     filter: { state: number[]; prefix?: IpPrefix };
     sorted: SortOption<SortKeys>;
+    manualOverrideVisible: boolean;
 }
 
 export default class IPPrefixTable extends React.PureComponent<IProps> {
@@ -60,6 +62,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
             name: "prefix",
             descending: false,
         },
+        manualOverrideVisible: false,
     };
 
     componentDidMount() {
@@ -168,7 +171,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         let ipBlocks = this.filterAndSortBlocks();
         const columns: SortKeys[] = ["id", "prefix", "description", "state_repr"];
         const { id, name, selected_prefix_id } = this.props;
-        const { sorted, filter_prefixes } = this.state;
+        const { sorted, filter_prefixes, manualOverrideVisible } = this.state;
         const { state, prefix } = { ...this.state.filter };
         let parentPrefix = prefix?.id;
         const th = (index: number) => {
@@ -191,6 +194,27 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         return (
             <div>
                 <div>
+                    <EuiFlexGroup gutterSize="s">
+                        <EuiFlexItem grow={false}>
+                            <EuiText>
+                                <h4>Manual override?</h4>
+                            </EuiText>
+                        </EuiFlexItem>
+                        <EuiFlexItem grow={false}>
+                            <EuiButtonIcon
+                                iconType={manualOverrideVisible ? "arrowDown" : "arrowRight"}
+                                aria-label="Toggle related subscriptions"
+                                onClick={() => this.setState({ manualOverrideVisible: !manualOverrideVisible })}
+                            />
+                        </EuiFlexItem>
+                        <EuiFlexItem></EuiFlexItem>
+                    </EuiFlexGroup>
+                    {manualOverrideVisible && (
+                        <EuiFormRow label="Manually enter a prefix">
+                            <EuiFieldText name={name}></EuiFieldText>
+                        </EuiFormRow>
+                    )}
+
                     <span>State:</span>
                     <span>
                         <input
