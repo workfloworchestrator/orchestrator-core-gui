@@ -15,7 +15,18 @@
 
 import "custom/components/inputForms/IpPrefixTable.scss";
 
-import { EuiButtonIcon, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiText } from "@elastic/eui";
+import {
+    EuiButton,
+    EuiButtonIcon,
+    EuiCheckbox,
+    EuiFieldText,
+    EuiFlexGroup,
+    EuiFlexItem,
+    EuiFormRow,
+    EuiInMemoryTable,
+    EuiPanel,
+    EuiText,
+} from "@elastic/eui";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import Select, { ValueType } from "react-select";
@@ -37,7 +48,7 @@ interface IState {
     ipBlocks: IpBlock[];
     loading: boolean;
     filteredIpBlocks: IpBlock[];
-    filter_prefixes: IpPrefix[];
+    filteredPrefixes: IpPrefix[];
     filter: { state: number[]; prefix?: IpPrefix };
     sorted: SortOption<SortKeys>;
     manualOverrideVisible: boolean;
@@ -48,7 +59,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         ipBlocks: [],
         loading: true,
         filteredIpBlocks: [],
-        filter_prefixes: [],
+        filteredPrefixes: [],
         filter: {
             state: [
                 ipamStates.indexOf("Free"),
@@ -70,7 +81,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
             let { filter } = this.state;
             filter.prefix = result[0];
             this.setState({
-                filter_prefixes: result,
+                filteredPrefixes: result,
                 filter: filter,
                 filteredIpBlocks: this.filterAndSortBlocks(),
             });
@@ -129,9 +140,9 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
 
     filterParentPrefix = (e: ValueType<Option, false>) => {
         const parentPrefix = parseInt(e!.value, 10);
-        let { filter, filter_prefixes } = this.state;
+        let { filter, filteredPrefixes } = this.state;
         let the_prefix: IpPrefix | undefined = undefined;
-        filter_prefixes.forEach((prefix) => (the_prefix = prefix["id"] === parentPrefix ? prefix : the_prefix));
+        filteredPrefixes.forEach((prefix) => (the_prefix = prefix["id"] === parentPrefix ? prefix : the_prefix));
         filter.prefix = the_prefix;
         this.context.customApiClient.ip_blocks(parentPrefix).then((result: IpBlock[]) => {
             this.setState({
@@ -162,6 +173,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
     }
 
     selectPrefix = (prefix: IpBlock) => () => {
+        console.log(prefix)
         if (prefix.state === 0 || prefix.state === 1) {
             this.props.onChange(prefix);
         }
@@ -169,23 +181,54 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
 
     render() {
         let ipBlocks = this.filterAndSortBlocks();
-        const columns: SortKeys[] = ["id", "prefix", "description", "state_repr"];
+
+        const columns = [
+            {
+                field: "id",
+                name: "ID",
+                sortable: true,
+                truncateText: true,
+            },
+            {
+                field: "prefix",
+                name: "Prefix",
+                sortable: true,
+            },
+            {
+                field: "description",
+                name: "Description",
+                truncateText: true,
+                sortable: true,
+            },
+            {
+                field: "state_repr",
+                name: "Status",
+                sortable: true,
+            },
+            {
+                field: "Action",
+                name: "",
+                render: (id:string, record: IpBlock) => <EuiButton onClick={this.selectPrefix(record)}>Select</EuiButton>
+            }
+        ];
+
+        // const columns: SortKeys[] = ["id", "prefix", "description", "state_repr"];
         const { id, name, selected_prefix_id } = this.props;
-        const { sorted, filter_prefixes, manualOverrideVisible } = this.state;
+        const { sorted, filteredPrefixes, manualOverrideVisible } = this.state;
         const { state, prefix } = { ...this.state.filter };
         let parentPrefix = prefix?.id;
-        const th = (index: number) => {
-            const name = columns[index];
-            return (
-                <th key={index} className={name} onClick={this.sort(name)}>
-                    <span>
-                        <FormattedMessage id={`metadata.ipBlocks.${name}`} />
-                    </span>
-                    {this.sortColumnIcon(name, sorted)}
-                </th>
-            );
-        };
-        const options: Option[] = filter_prefixes.map((fp) => ({
+        // const th = (index: number) => {
+        //     const name = columns[index];
+        //     return (
+        //         <th key={index} className={name} onClick={this.sort(name)}>
+        //             <span>
+        //                 <FormattedMessage id={`metadata.ipBlocks.${name}`} />
+        //             </span>
+        //             {this.sortColumnIcon(name, sorted)}
+        //         </th>
+        //     );
+        // };
+        const options: Option[] = filteredPrefixes.map((fp) => ({
             value: fp.id.toString(),
             label: fp.prefix,
         }));
@@ -194,7 +237,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         return (
             <div>
                 <div>
-                    <EuiFlexGroup gutterSize="s">
+                    <EuiFlexGroup gutterSize="s" style={{marginTop:"5px", marginBottom:"10px"}}>
                         <EuiFlexItem grow={false}>
                             <EuiText>
                                 <h4>Manual override?</h4>
@@ -210,45 +253,55 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                         <EuiFlexItem></EuiFlexItem>
                     </EuiFlexGroup>
                     {manualOverrideVisible && (
-                        <EuiFormRow label="Manually enter a prefix">
-                            <EuiFieldText name={name}></EuiFieldText>
-                        </EuiFormRow>
+                        <EuiPanel style={{marginBottom: "20px"}}>
+                            <EuiFormRow
+                                style={{marginTop: "15px"}}
+                                label="Manually enter a prefix"
+                                labelAppend={
+                                    <EuiText size="m">
+                                        Generating free spaces for a big IPv6 root prefix would yield an enormous list.
+                                        If you know the address of a free subnet you can provide it here:
+                                    </EuiText>
+                                }
+                            >
+                                <EuiFieldText name={name}></EuiFieldText>
+                            </EuiFormRow>
+                            <EuiButton type="submit" name="kies">Confirm</EuiButton>
+                        </EuiPanel>
                     )}
-
-                    <span>State:</span>
-                    <span>
-                        <input
-                            id="checkbox-allocated"
-                            type="checkbox"
-                            name="state"
-                            onChange={this.filterState}
-                            value={ipamStates.indexOf("Allocated")}
-                            checked={state.includes(ipamStates.indexOf("Allocated"))}
-                        />
-                        Permanent toegewezen
-                    </span>
-                    <span>
-                        <input
-                            id="checkbox-planned"
-                            type="checkbox"
-                            name="state"
-                            onChange={this.filterState}
-                            value={ipamStates.indexOf("Planned")}
-                            checked={state.includes(ipamStates.indexOf("Planned"))}
-                        />
-                        Gereserveerd
-                    </span>
-                    <span>
-                        <input
-                            id="checkbox-free"
-                            type="checkbox"
-                            name="state"
-                            onChange={this.filterState}
-                            value={ipamStates.indexOf("Free")}
-                            checked={state.includes(ipamStates.indexOf("Free"))}
-                        />
-                        Vrij
-                    </span>
+                    <EuiFlexGroup gutterSize="s">
+                        <EuiFlexItem grow={false} style={{marginTop: "6px"}}>State:</EuiFlexItem>
+                        <EuiFlexItem grow={false}>
+                            <EuiCheckbox
+                                id="checkbox-allocated"
+                                label="Allocated"
+                                name="checkbox-allocated"
+                                onChange={this.filterState}
+                                value={ipamStates.indexOf("Allocated")}
+                                checked={state.includes(ipamStates.indexOf("Allocated"))}
+                            />
+                        </EuiFlexItem>
+                        <EuiFlexItem grow={false}>
+                            <EuiCheckbox
+                                id="checkbox-planned"
+                                label="Planned"
+                                name="checkbox-planned"
+                                onChange={this.filterState}
+                                value={ipamStates.indexOf("Planned")}
+                                checked={state.includes(ipamStates.indexOf("Planned"))}
+                            />
+                        </EuiFlexItem>
+                        <EuiFlexItem grow={false}>
+                            <EuiCheckbox
+                                id="checkbox-free"
+                                label="Free"
+                                name="checkbox-free"
+                                onChange={this.filterState}
+                                value={ipamStates.indexOf("Free")}
+                                checked={state.includes(ipamStates.indexOf("Free"))}
+                            />
+                        </EuiFlexItem>
+                    </EuiFlexGroup>
                 </div>
                 <div>
                     <span>Root filter</span>
@@ -263,35 +316,46 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                         />
                     </span>
                 </div>
-                <table className="ip-blocks">
-                    <thead>
-                        <tr>{columns.map((column, index) => th(index))}</tr>
-                    </thead>
-                    {ipBlocks.length > 0 && (
-                        <tbody>
-                            {ipBlocks.map((ipBlock, index) => {
-                                let selected = ipBlock["id"] === selected_prefix_id;
-                                return (
-                                    <tr
-                                        key={`${ipBlock["id"]}_${index}`}
-                                        onClick={this.selectPrefix(ipBlock)}
-                                        className={ipamStates[ipBlock.state] + (selected ? " selected" : "")}
-                                    >
-                                        {columns.map((column, tdIndex) => (
-                                            <td
-                                                key={`${ipBlock["id"]}_${index}_${tdIndex}`}
-                                                data-label={column}
-                                                className={column}
-                                            >
-                                                {prop(ipBlock, column)}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    )}
-                </table>
+
+                <EuiInMemoryTable
+                    tableCaption="Demo of EuiInMemoryTable with search and external state"
+                    items={ipBlocks}
+                    // @ts-ignore
+                    columns={columns}
+                    // search={search}
+                    pagination={true}
+                    sorting={true}
+                />
+
+                {/*<table className="ip-blocks">*/}
+                {/*    /!*<thead>*!/*/}
+                {/*    /!*    <tr>{columns.map((column, index) => th(index))}</tr>*!/*/}
+                {/*    /!*</thead>*!/*/}
+                {/*    {ipBlocks.length > 0 && (*/}
+                {/*        <tbody>*/}
+                {/*            {ipBlocks.map((ipBlock, index) => {*/}
+                {/*                let selected = ipBlock["id"] === selected_prefix_id;*/}
+                {/*                return (*/}
+                {/*                    <tr*/}
+                {/*                        key={`${ipBlock["id"]}_${index}`}*/}
+                {/*                        onClick={this.selectPrefix(ipBlock)}*/}
+                {/*                        className={ipamStates[ipBlock.state] + (selected ? " selected" : "")}*/}
+                {/*                    >*/}
+                {/*                        {columns.map((column, tdIndex) => (*/}
+                {/*                            <td*/}
+                {/*                                key={`${ipBlock["id"]}_${index}_${tdIndex}`}*/}
+                {/*                                data-label={column}*/}
+                {/*                                className={column}*/}
+                {/*                            >*/}
+                {/*                                {prop(ipBlock, column)}*/}
+                {/*                            </td>*/}
+                {/*                        ))}*/}
+                {/*                    </tr>*/}
+                {/*                );*/}
+                {/*            })}*/}
+                {/*        </tbody>*/}
+                {/*    )}*/}
+                {/*</table>*/}
             </div>
         );
     }

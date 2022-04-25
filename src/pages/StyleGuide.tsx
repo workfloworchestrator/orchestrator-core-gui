@@ -38,6 +38,7 @@ import {
     EuiText,
 } from "@elastic/eui";
 import Explain from "components/Explain";
+import IPPrefixTable from "custom/components/inputForms/IpPrefixTable";
 import React from "react";
 
 interface IProps {}
@@ -178,6 +179,7 @@ export default class StyleGuide extends React.PureComponent<IProps, IState> {
                 <EuiText grow={true}>
                     <h1>Styleguide</h1>
                 </EuiText>
+                <IPPrefixTable id="3" name={"hallo"} onChange={() => console.log("click")} />
                 <EuiText grow={true}>
                     <h2>Buttons</h2>
                 </EuiText>
