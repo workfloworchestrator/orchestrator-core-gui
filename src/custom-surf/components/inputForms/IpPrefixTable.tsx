@@ -173,7 +173,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
     }
 
     selectPrefix = (prefix: IpBlock) => () => {
-        console.log(prefix)
+        console.log(prefix);
         if (prefix.state === 0 || prefix.state === 1) {
             this.props.onChange(prefix);
         }
@@ -208,8 +208,10 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
             {
                 field: "Action",
                 name: "",
-                render: (id:string, record: IpBlock) => <EuiButton onClick={this.selectPrefix(record)}>Select</EuiButton>
-            }
+                render: (id: string, record: IpBlock) => (
+                    <EuiButton onClick={this.selectPrefix(record)}>Select</EuiButton>
+                ),
+            },
         ];
 
         // const columns: SortKeys[] = ["id", "prefix", "description", "state_repr"];
@@ -237,7 +239,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         return (
             <div>
                 <div>
-                    <EuiFlexGroup gutterSize="s" style={{marginTop:"5px", marginBottom:"10px"}}>
+                    <EuiFlexGroup gutterSize="s" style={{ marginTop: "5px", marginBottom: "10px" }}>
                         <EuiFlexItem grow={false}>
                             <EuiText>
                                 <h4>Manual override?</h4>
@@ -253,9 +255,9 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                         <EuiFlexItem></EuiFlexItem>
                     </EuiFlexGroup>
                     {manualOverrideVisible && (
-                        <EuiPanel style={{marginBottom: "20px"}}>
+                        <EuiPanel style={{ marginBottom: "20px" }}>
                             <EuiFormRow
-                                style={{marginTop: "15px"}}
+                                style={{ marginTop: "15px" }}
                                 label="Manually enter a prefix"
                                 labelAppend={
                                     <EuiText size="m">
@@ -266,11 +268,15 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                             >
                                 <EuiFieldText name={name}></EuiFieldText>
                             </EuiFormRow>
-                            <EuiButton type="submit" name="kies">Confirm</EuiButton>
+                            <EuiButton type="submit" name="kies">
+                                Confirm
+                            </EuiButton>
                         </EuiPanel>
                     )}
                     <EuiFlexGroup gutterSize="s">
-                        <EuiFlexItem grow={false} style={{marginTop: "6px"}}>State:</EuiFlexItem>
+                        <EuiFlexItem grow={false} style={{ marginTop: "6px" }}>
+                            State:
+                        </EuiFlexItem>
                         <EuiFlexItem grow={false}>
                             <EuiCheckbox
                                 id="checkbox-allocated"
