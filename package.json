@@ -37,7 +37,7 @@
         "immer": "^9.0.6",
         "invariant": "^2.2.4",
         "lodash": "^4.14.149",
-        "moment": "^2.29.1",
+        "moment": "^2.29.2",
         "object-hash": "^2.1.1",
         "oidc-client": "^1.11.3",
         "oidc-react": "1.1.1",
