@@ -19,10 +19,6 @@ import { useState } from "react";
 
 export default {
     title: "DatePicker",
-    // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
-    parameters: {
-        fileName: __filename,
-    },
 };
 
 export const DatePicker = () => {

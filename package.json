@@ -22,6 +22,7 @@
     "dependencies": {
         "@elastic/datemath": "^5.0.3",
         "@elastic/eui": "^53.0.1",
+        "@emotion/react": "^11",
         "@fortawesome/fontawesome-free": "^5.15.2",
         "@open-policy-agent/opa-wasm": "^1.2.0",
         "@sentry/react": "^6.0.1",
@@ -43,6 +44,8 @@
         "oidc-react": "1.1.1",
         "p-map": "^4.0.0",
         "prop-types": "^15.5.0",
+        "react": "^16.14.0",
+        "react-dom": "^16.14.0",
         "react-intl": "^5.24.7",
         "react-network-diagrams": "^0.8.0",
         "react-numeric-input": "^2.2.3",
@@ -109,6 +112,7 @@
         "git-format-staged": "^2.1.1",
         "husky": "^6.0.0",
         "import-sort-style-module": "^6.0.0",
+        "jest": "^27.5.1",
         "license-check-and-add": "^4.0.2",
         "node-fetch": "^2.6.7",
         "prettier": "2.2.1",
@@ -121,7 +125,7 @@
         "storybook-addon-intl": "^2.4.1",
         "storybook-react-router": "^1.0.8",
         "typescript": "^4.2.4",
-        "uniforms-bridge-simple-schema-2": "^3.4.0",
+        "uniforms-bridge-simple-schema-2": "^3.8.1",
         "use-trace-update": "^1.3.0"
     },
     "resolutions": {

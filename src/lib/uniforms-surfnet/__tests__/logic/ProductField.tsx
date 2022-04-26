@@ -62,6 +62,7 @@ describe("<ProductField>", () => {
                 "9a8bd1ea-6650-4900-b820-3c7f0f16ef1d",
                 "a3bf8b26-50a6-4586-8e58-ad552cb39798",
                 "182b7c39-6c98-40da-9122-d7d27f61d449",
+                "7a980481-8d2e-4779-9f51-3a29e8c88ad5",
             ],
             disabled: false,
             error: null,

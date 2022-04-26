@@ -1,0 +1,12 @@
+{
+    "connector_type": "LC/PC",
+    "fiber_type": "single-mode",
+    "id": 701817,
+    "iface_type": "10GBASE-LR",
+    "line_name": "HB001A_SP_TAGGED_KLM_D2DE0900",
+    "location": "HB001A",
+    "node": "HB001A-JNX-FDR-RG00-3A-VTB",
+    "patchposition": "DDFODF_HB001A-JNX-FDR-RG00-3A-VTB_D0CD28AA/46 ()",
+    "port": "1/0/2",
+    "status": "IS"
+}

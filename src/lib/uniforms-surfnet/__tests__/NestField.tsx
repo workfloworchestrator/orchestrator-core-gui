@@ -20,14 +20,18 @@ import React from "react";
 import { AutoField } from "uniforms-unstyled";
 
 test("<NestField> - renders an <AutoField> for each field", () => {
-    const element = <NestField name="x" />;
+    const element = <NestField name="x" id="snapshot-test" />;
     const wrapper = mount(
         element,
-        createContext({
-            x: { type: Object },
-            "x.a": { type: String },
-            "x.b": { type: Number },
-        })
+        createContext(
+            {
+                x: { type: Object },
+                "x.a": { type: String },
+                "x.b": { type: Number },
+            },
+            undefined,
+            "nestfield-autofield"
+        )
     );
 
     expect(wrapper.find(AutoField)).toHaveLength(2);
@@ -88,15 +92,19 @@ test("<NestField> - renders a wrapper with unknown props", () => {
 });
 
 test("<NestField> - renders correctly in list", () => {
-    const element = <ListField name="x" />;
+    const element = <ListField name="x" id="snapshot-test" />;
     const wrapper = mount(
         element,
-        createContext({
-            x: { type: Array },
-            "x.$": { type: Object },
-            "x.$.a": { type: String },
-            "x.$.b": { type: Number },
-        })
+        createContext(
+            {
+                x: { type: Array },
+                "x.$": { type: Object },
+                "x.$.a": { type: String },
+                "x.$.b": { type: Number },
+            },
+            undefined,
+            "nestfield-list"
+        )
     );
 
     expect(wrapper.render()).toMatchSnapshot();

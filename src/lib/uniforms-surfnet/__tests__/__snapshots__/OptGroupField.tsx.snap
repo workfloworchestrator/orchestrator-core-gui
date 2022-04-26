@@ -5,7 +5,7 @@ initialize {
   "0": Node {
     "attribs": Object {
       "class": "euiDescribedFormGroup  optgroup-field",
-      "id": "uniforms-0000-0000",
+      "id": "snapshot-test",
       "required": "",
       "role": "group",
     },
@@ -205,6 +205,7 @@ initialize {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
                                             "for": "x",
+                                            "id": "x-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -239,10 +240,12 @@ initialize {
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         Node {
@@ -270,6 +273,7 @@ initialize {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
                                               "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -281,10 +285,12 @@ initialize {
                                             "x-attribsNamespace": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                             "x-attribsPrefix": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                           },
                                           "type": "text",
@@ -306,6 +312,7 @@ initialize {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
                                                 "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -317,10 +324,12 @@ initialize {
                                               "x-attribsNamespace": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                               "x-attribsPrefix": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                             },
                                             "type": "text",
@@ -854,6 +863,7 @@ initialize {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
                                               "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -888,10 +898,12 @@ initialize {
                                             "x-attribsNamespace": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                             "x-attribsPrefix": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                           },
                                           Node {
@@ -919,6 +931,7 @@ initialize {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
                                                 "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -930,10 +943,12 @@ initialize {
                                               "x-attribsNamespace": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                               "x-attribsPrefix": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                             },
                                             "type": "text",
@@ -955,6 +970,7 @@ initialize {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
                                                   "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -966,10 +982,12 @@ initialize {
                                                 "x-attribsNamespace": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                                 "x-attribsPrefix": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                               },
                                               "type": "text",
@@ -1146,6 +1164,7 @@ initialize {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
                                           "for": "x",
+                                          "id": "x-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -1180,10 +1199,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       Node {
@@ -1211,6 +1232,7 @@ initialize {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
                                             "for": "x",
+                                            "id": "x-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -1222,10 +1244,12 @@ initialize {
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         "type": "text",
@@ -1247,6 +1271,7 @@ initialize {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
                                               "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -1258,10 +1283,12 @@ initialize {
                                             "x-attribsNamespace": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                             "x-attribsPrefix": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                           },
                                           "type": "text",
@@ -1795,6 +1822,7 @@ initialize {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
                                             "for": "x",
+                                            "id": "x-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -1829,10 +1857,12 @@ initialize {
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         Node {
@@ -1860,6 +1890,7 @@ initialize {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
                                               "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -1871,10 +1902,12 @@ initialize {
                                             "x-attribsNamespace": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                             "x-attribsPrefix": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                           },
                                           "type": "text",
@@ -1896,6 +1929,7 @@ initialize {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
                                                 "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -1907,10 +1941,12 @@ initialize {
                                               "x-attribsNamespace": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                               "x-attribsPrefix": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                             },
                                             "type": "text",
@@ -2250,7 +2286,7 @@ initialize {
   "0": Node {
     "attribs": Object {
       "class": "euiDescribedFormGroup  optgroup-field",
-      "id": "uniforms-0000-0003",
+      "id": "snapshot-test",
       "required": "",
       "role": "group",
     },
@@ -2450,6 +2486,7 @@ initialize {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
                                             "for": "x",
+                                            "id": "x-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -2484,10 +2521,12 @@ initialize {
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         Node {
@@ -2515,6 +2554,7 @@ initialize {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
                                               "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -2526,10 +2566,12 @@ initialize {
                                             "x-attribsNamespace": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                             "x-attribsPrefix": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                           },
                                           "type": "text",
@@ -2551,6 +2593,7 @@ initialize {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
                                                 "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -2562,10 +2605,12 @@ initialize {
                                               "x-attribsNamespace": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                               "x-attribsPrefix": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                             },
                                             "type": "text",
@@ -3117,6 +3162,7 @@ initialize {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
                                               "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -3151,10 +3197,12 @@ initialize {
                                             "x-attribsNamespace": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                             "x-attribsPrefix": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                           },
                                           Node {
@@ -3182,6 +3230,7 @@ initialize {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
                                                 "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -3193,10 +3242,12 @@ initialize {
                                               "x-attribsNamespace": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                               "x-attribsPrefix": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                             },
                                             "type": "text",
@@ -3218,6 +3269,7 @@ initialize {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
                                                   "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -3229,10 +3281,12 @@ initialize {
                                                 "x-attribsNamespace": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                                 "x-attribsPrefix": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                               },
                                               "type": "text",
@@ -3345,7 +3399,7 @@ initialize {
                           Node {
                             "attribs": Object {
                               "class": "euiFormRow euiFormRow--fullWidth",
-                              "id": "uniforms-0000-0006-row",
+                              "id": "optgroupfield-enabled-0003-row",
                             },
                             "children": Array [
                               Node {
@@ -3356,7 +3410,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0006",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -3391,10 +3446,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   Node {
@@ -3421,7 +3478,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0006",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -3433,10 +3491,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -3457,7 +3517,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "uniforms-0000-0006",
+                                          "for": "optgroupfield-enabled-0003",
+                                          "id": "optgroupfield-enabled-0003-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -3469,10 +3530,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "text",
@@ -3506,7 +3569,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiFieldNumber",
-                                                "id": "uniforms-0000-0006",
+                                                "id": "optgroupfield-enabled-0003",
                                                 "name": "x.b",
                                                 "placeholder": "",
                                                 "step": "1",
@@ -3609,7 +3672,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "uniforms-0000-0006",
+                                              "id": "optgroupfield-enabled-0003",
                                               "name": "x.b",
                                               "placeholder": "",
                                               "step": "1",
@@ -3683,7 +3746,8 @@ initialize {
                                     Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0006",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -3718,10 +3782,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     Node {
@@ -3748,7 +3814,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "uniforms-0000-0006",
+                                          "for": "optgroupfield-enabled-0003",
+                                          "id": "optgroupfield-enabled-0003-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -3760,10 +3827,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "text",
@@ -3784,7 +3853,8 @@ initialize {
                                         "prev": Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "uniforms-0000-0006",
+                                            "for": "optgroupfield-enabled-0003",
+                                            "id": "optgroupfield-enabled-0003-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -3796,10 +3866,12 @@ initialize {
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         "type": "text",
@@ -3880,7 +3952,7 @@ initialize {
                             Node {
                               "attribs": Object {
                                 "class": "euiFormRow euiFormRow--fullWidth",
-                                "id": "uniforms-0000-0007-row",
+                                "id": "optgroupfield-enabled-0004-row",
                               },
                               "children": Array [
                                 Node {
@@ -3891,7 +3963,8 @@ initialize {
                                     Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0007",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -3926,10 +3999,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     Node {
@@ -3956,7 +4031,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "uniforms-0000-0007",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -3968,10 +4044,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "text",
@@ -3992,7 +4070,8 @@ initialize {
                                         "prev": Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "uniforms-0000-0007",
+                                            "for": "optgroupfield-enabled-0004",
+                                            "id": "optgroupfield-enabled-0004-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -4004,10 +4083,12 @@ initialize {
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         "type": "text",
@@ -4041,7 +4122,7 @@ initialize {
                                               Node {
                                                 "attribs": Object {
                                                   "class": "euiFieldNumber",
-                                                  "id": "uniforms-0000-0007",
+                                                  "id": "optgroupfield-enabled-0004",
                                                   "name": "x.c",
                                                   "placeholder": "",
                                                   "step": "1",
@@ -4144,7 +4225,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiFieldNumber",
-                                                "id": "uniforms-0000-0007",
+                                                "id": "optgroupfield-enabled-0004",
                                                 "name": "x.c",
                                                 "placeholder": "",
                                                 "step": "1",
@@ -4218,7 +4299,8 @@ initialize {
                                       Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "uniforms-0000-0007",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -4253,10 +4335,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       Node {
@@ -4283,7 +4367,8 @@ initialize {
                                         "prev": Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "uniforms-0000-0007",
+                                            "for": "optgroupfield-enabled-0004",
+                                            "id": "optgroupfield-enabled-0004-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -4295,10 +4380,12 @@ initialize {
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         "type": "text",
@@ -4319,7 +4406,8 @@ initialize {
                                           "prev": Node {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
-                                              "for": "uniforms-0000-0007",
+                                              "for": "optgroupfield-enabled-0004",
+                                              "id": "optgroupfield-enabled-0004-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -4331,10 +4419,12 @@ initialize {
                                             "x-attribsNamespace": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                             "x-attribsPrefix": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                           },
                                           "type": "text",
@@ -4446,7 +4536,7 @@ initialize {
                         Node {
                           "attribs": Object {
                             "class": "euiFormRow euiFormRow--fullWidth",
-                            "id": "uniforms-0000-0006-row",
+                            "id": "optgroupfield-enabled-0003-row",
                           },
                           "children": Array [
                             Node {
@@ -4457,7 +4547,8 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "uniforms-0000-0006",
+                                    "for": "optgroupfield-enabled-0003",
+                                    "id": "optgroupfield-enabled-0003-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -4492,10 +4583,12 @@ initialize {
                                   "x-attribsNamespace": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                   "x-attribsPrefix": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                 },
                                 Node {
@@ -4522,7 +4615,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0006",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -4534,10 +4628,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   "type": "text",
@@ -4558,7 +4654,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0006",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -4570,10 +4667,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -4607,7 +4706,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "uniforms-0000-0006",
+                                              "id": "optgroupfield-enabled-0003",
                                               "name": "x.b",
                                               "placeholder": "",
                                               "step": "1",
@@ -4710,7 +4809,7 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFieldNumber",
-                                            "id": "uniforms-0000-0006",
+                                            "id": "optgroupfield-enabled-0003",
                                             "name": "x.b",
                                             "placeholder": "",
                                             "step": "1",
@@ -4784,7 +4883,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0006",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -4819,10 +4919,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   Node {
@@ -4849,7 +4951,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0006",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -4861,10 +4964,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -4885,7 +4990,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "uniforms-0000-0006",
+                                          "for": "optgroupfield-enabled-0003",
+                                          "id": "optgroupfield-enabled-0003-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -4897,10 +5003,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "text",
@@ -4981,7 +5089,7 @@ initialize {
                           Node {
                             "attribs": Object {
                               "class": "euiFormRow euiFormRow--fullWidth",
-                              "id": "uniforms-0000-0007-row",
+                              "id": "optgroupfield-enabled-0004-row",
                             },
                             "children": Array [
                               Node {
@@ -4992,7 +5100,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0007",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -5027,10 +5136,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   Node {
@@ -5057,7 +5168,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0007",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -5069,10 +5181,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -5093,7 +5207,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "uniforms-0000-0007",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -5105,10 +5220,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "text",
@@ -5142,7 +5259,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiFieldNumber",
-                                                "id": "uniforms-0000-0007",
+                                                "id": "optgroupfield-enabled-0004",
                                                 "name": "x.c",
                                                 "placeholder": "",
                                                 "step": "1",
@@ -5245,7 +5362,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "uniforms-0000-0007",
+                                              "id": "optgroupfield-enabled-0004",
                                               "name": "x.c",
                                               "placeholder": "",
                                               "step": "1",
@@ -5319,7 +5436,8 @@ initialize {
                                     Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0007",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -5354,10 +5472,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     Node {
@@ -5384,7 +5504,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "uniforms-0000-0007",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -5396,10 +5517,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "text",
@@ -5420,7 +5543,8 @@ initialize {
                                         "prev": Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "uniforms-0000-0007",
+                                            "for": "optgroupfield-enabled-0004",
+                                            "id": "optgroupfield-enabled-0004-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -5432,10 +5556,12 @@ initialize {
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         "type": "text",
@@ -5552,6 +5678,7 @@ initialize {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
                                               "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -5586,10 +5713,12 @@ initialize {
                                             "x-attribsNamespace": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                             "x-attribsPrefix": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                           },
                                           Node {
@@ -5617,6 +5746,7 @@ initialize {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
                                                 "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -5628,10 +5758,12 @@ initialize {
                                               "x-attribsNamespace": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                               "x-attribsPrefix": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                             },
                                             "type": "text",
@@ -5653,6 +5785,7 @@ initialize {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
                                                   "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -5664,10 +5797,12 @@ initialize {
                                                 "x-attribsNamespace": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                                 "x-attribsPrefix": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                               },
                                               "type": "text",
@@ -6219,6 +6354,7 @@ initialize {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
                                                 "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -6253,10 +6389,12 @@ initialize {
                                               "x-attribsNamespace": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                               "x-attribsPrefix": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                             },
                                             Node {
@@ -6284,6 +6422,7 @@ initialize {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
                                                   "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -6295,10 +6434,12 @@ initialize {
                                                 "x-attribsNamespace": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                                 "x-attribsPrefix": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                               },
                                               "type": "text",
@@ -6320,6 +6461,7 @@ initialize {
                                                   "attribs": Object {
                                                     "class": "euiFormLabel euiFormRow__label",
                                                     "for": "x",
+                                                    "id": "x-label",
                                                   },
                                                   "children": Array [],
                                                   "name": "label",
@@ -6331,10 +6473,12 @@ initialize {
                                                   "x-attribsNamespace": Object {
                                                     "class": undefined,
                                                     "for": undefined,
+                                                    "id": undefined,
                                                   },
                                                   "x-attribsPrefix": Object {
                                                     "class": undefined,
                                                     "for": undefined,
+                                                    "id": undefined,
                                                   },
                                                 },
                                                 "type": "text",
@@ -6466,7 +6610,7 @@ initialize {
                         Node {
                           "attribs": Object {
                             "class": "euiFormRow euiFormRow--fullWidth",
-                            "id": "uniforms-0000-0007-row",
+                            "id": "optgroupfield-enabled-0004-row",
                           },
                           "children": Array [
                             Node {
@@ -6477,7 +6621,8 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "uniforms-0000-0007",
+                                    "for": "optgroupfield-enabled-0004",
+                                    "id": "optgroupfield-enabled-0004-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -6512,10 +6657,12 @@ initialize {
                                   "x-attribsNamespace": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                   "x-attribsPrefix": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                 },
                                 Node {
@@ -6542,7 +6689,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0007",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -6554,10 +6702,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   "type": "text",
@@ -6578,7 +6728,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0007",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -6590,10 +6741,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -6627,7 +6780,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "uniforms-0000-0007",
+                                              "id": "optgroupfield-enabled-0004",
                                               "name": "x.c",
                                               "placeholder": "",
                                               "step": "1",
@@ -6730,7 +6883,7 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFieldNumber",
-                                            "id": "uniforms-0000-0007",
+                                            "id": "optgroupfield-enabled-0004",
                                             "name": "x.c",
                                             "placeholder": "",
                                             "step": "1",
@@ -6804,7 +6957,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0007",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -6839,10 +6993,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   Node {
@@ -6869,7 +7025,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0007",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -6881,10 +7038,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -6905,7 +7064,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "uniforms-0000-0007",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -6917,10 +7077,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "text",
@@ -7003,7 +7165,7 @@ initialize {
                           Node {
                             "attribs": Object {
                               "class": "euiFormRow euiFormRow--fullWidth",
-                              "id": "uniforms-0000-0006-row",
+                              "id": "optgroupfield-enabled-0003-row",
                             },
                             "children": Array [
                               Node {
@@ -7014,7 +7176,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0006",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -7049,10 +7212,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   Node {
@@ -7079,7 +7244,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0006",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -7091,10 +7257,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -7115,7 +7283,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "uniforms-0000-0006",
+                                          "for": "optgroupfield-enabled-0003",
+                                          "id": "optgroupfield-enabled-0003-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -7127,10 +7296,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "text",
@@ -7164,7 +7335,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiFieldNumber",
-                                                "id": "uniforms-0000-0006",
+                                                "id": "optgroupfield-enabled-0003",
                                                 "name": "x.b",
                                                 "placeholder": "",
                                                 "step": "1",
@@ -7267,7 +7438,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "uniforms-0000-0006",
+                                              "id": "optgroupfield-enabled-0003",
                                               "name": "x.b",
                                               "placeholder": "",
                                               "step": "1",
@@ -7341,7 +7512,8 @@ initialize {
                                     Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0006",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -7376,10 +7548,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     Node {
@@ -7406,7 +7580,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "uniforms-0000-0006",
+                                          "for": "optgroupfield-enabled-0003",
+                                          "id": "optgroupfield-enabled-0003-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -7418,10 +7593,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "text",
@@ -7442,7 +7619,8 @@ initialize {
                                         "prev": Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "uniforms-0000-0006",
+                                            "for": "optgroupfield-enabled-0003",
+                                            "id": "optgroupfield-enabled-0003-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -7454,10 +7632,12 @@ initialize {
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         "type": "text",
@@ -7564,6 +7744,7 @@ initialize {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
                                                 "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -7598,10 +7779,12 @@ initialize {
                                               "x-attribsNamespace": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                               "x-attribsPrefix": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                             },
                                             Node {
@@ -7629,6 +7812,7 @@ initialize {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
                                                   "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -7640,10 +7824,12 @@ initialize {
                                                 "x-attribsNamespace": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                                 "x-attribsPrefix": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                               },
                                               "type": "text",
@@ -7665,6 +7851,7 @@ initialize {
                                                   "attribs": Object {
                                                     "class": "euiFormLabel euiFormRow__label",
                                                     "for": "x",
+                                                    "id": "x-label",
                                                   },
                                                   "children": Array [],
                                                   "name": "label",
@@ -7676,10 +7863,12 @@ initialize {
                                                   "x-attribsNamespace": Object {
                                                     "class": undefined,
                                                     "for": undefined,
+                                                    "id": undefined,
                                                   },
                                                   "x-attribsPrefix": Object {
                                                     "class": undefined,
                                                     "for": undefined,
+                                                    "id": undefined,
                                                   },
                                                 },
                                                 "type": "text",
@@ -8231,6 +8420,7 @@ initialize {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
                                                   "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -8265,10 +8455,12 @@ initialize {
                                                 "x-attribsNamespace": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                                 "x-attribsPrefix": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                               },
                                               Node {
@@ -8296,6 +8488,7 @@ initialize {
                                                   "attribs": Object {
                                                     "class": "euiFormLabel euiFormRow__label",
                                                     "for": "x",
+                                                    "id": "x-label",
                                                   },
                                                   "children": Array [],
                                                   "name": "label",
@@ -8307,10 +8500,12 @@ initialize {
                                                   "x-attribsNamespace": Object {
                                                     "class": undefined,
                                                     "for": undefined,
+                                                    "id": undefined,
                                                   },
                                                   "x-attribsPrefix": Object {
                                                     "class": undefined,
                                                     "for": undefined,
+                                                    "id": undefined,
                                                   },
                                                 },
                                                 "type": "text",
@@ -8332,6 +8527,7 @@ initialize {
                                                     "attribs": Object {
                                                       "class": "euiFormLabel euiFormRow__label",
                                                       "for": "x",
+                                                      "id": "x-label",
                                                     },
                                                     "children": Array [],
                                                     "name": "label",
@@ -8343,10 +8539,12 @@ initialize {
                                                     "x-attribsNamespace": Object {
                                                       "class": undefined,
                                                       "for": undefined,
+                                                      "id": undefined,
                                                     },
                                                     "x-attribsPrefix": Object {
                                                       "class": undefined,
                                                       "for": undefined,
+                                                      "id": undefined,
                                                     },
                                                   },
                                                   "type": "text",
@@ -8539,6 +8737,7 @@ initialize {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
                                           "for": "x",
+                                          "id": "x-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -8573,10 +8772,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       Node {
@@ -8604,6 +8805,7 @@ initialize {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
                                             "for": "x",
+                                            "id": "x-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -8615,10 +8817,12 @@ initialize {
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         "type": "text",
@@ -8640,6 +8844,7 @@ initialize {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
                                               "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -8651,10 +8856,12 @@ initialize {
                                             "x-attribsNamespace": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                             "x-attribsPrefix": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                           },
                                           "type": "text",
@@ -9206,6 +9413,7 @@ initialize {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
                                             "for": "x",
+                                            "id": "x-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -9240,10 +9448,12 @@ initialize {
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         Node {
@@ -9271,6 +9481,7 @@ initialize {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
                                               "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -9282,10 +9493,12 @@ initialize {
                                             "x-attribsNamespace": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                             "x-attribsPrefix": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                           },
                                           "type": "text",
@@ -9307,6 +9520,7 @@ initialize {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
                                                 "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -9318,10 +9532,12 @@ initialize {
                                               "x-attribsNamespace": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                               "x-attribsPrefix": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                             },
                                             "type": "text",
@@ -9434,7 +9650,7 @@ initialize {
                         Node {
                           "attribs": Object {
                             "class": "euiFormRow euiFormRow--fullWidth",
-                            "id": "uniforms-0000-0006-row",
+                            "id": "optgroupfield-enabled-0003-row",
                           },
                           "children": Array [
                             Node {
@@ -9445,7 +9661,8 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "uniforms-0000-0006",
+                                    "for": "optgroupfield-enabled-0003",
+                                    "id": "optgroupfield-enabled-0003-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -9480,10 +9697,12 @@ initialize {
                                   "x-attribsNamespace": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                   "x-attribsPrefix": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                 },
                                 Node {
@@ -9510,7 +9729,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0006",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -9522,10 +9742,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   "type": "text",
@@ -9546,7 +9768,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0006",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -9558,10 +9781,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -9595,7 +9820,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "uniforms-0000-0006",
+                                              "id": "optgroupfield-enabled-0003",
                                               "name": "x.b",
                                               "placeholder": "",
                                               "step": "1",
@@ -9698,7 +9923,7 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFieldNumber",
-                                            "id": "uniforms-0000-0006",
+                                            "id": "optgroupfield-enabled-0003",
                                             "name": "x.b",
                                             "placeholder": "",
                                             "step": "1",
@@ -9772,7 +9997,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0006",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -9807,10 +10033,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   Node {
@@ -9837,7 +10065,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0006",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -9849,10 +10078,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -9873,7 +10104,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "uniforms-0000-0006",
+                                          "for": "optgroupfield-enabled-0003",
+                                          "id": "optgroupfield-enabled-0003-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -9885,10 +10117,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "text",
@@ -9969,7 +10203,7 @@ initialize {
                           Node {
                             "attribs": Object {
                               "class": "euiFormRow euiFormRow--fullWidth",
-                              "id": "uniforms-0000-0007-row",
+                              "id": "optgroupfield-enabled-0004-row",
                             },
                             "children": Array [
                               Node {
@@ -9980,7 +10214,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0007",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -10015,10 +10250,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   Node {
@@ -10045,7 +10282,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0007",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -10057,10 +10295,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -10081,7 +10321,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "uniforms-0000-0007",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -10093,10 +10334,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "text",
@@ -10130,7 +10373,7 @@ initialize {
                                             Node {
                                               "attribs": Object {
                                                 "class": "euiFieldNumber",
-                                                "id": "uniforms-0000-0007",
+                                                "id": "optgroupfield-enabled-0004",
                                                 "name": "x.c",
                                                 "placeholder": "",
                                                 "step": "1",
@@ -10233,7 +10476,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "uniforms-0000-0007",
+                                              "id": "optgroupfield-enabled-0004",
                                               "name": "x.c",
                                               "placeholder": "",
                                               "step": "1",
@@ -10307,7 +10550,8 @@ initialize {
                                     Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0007",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -10342,10 +10586,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     Node {
@@ -10372,7 +10618,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "uniforms-0000-0007",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -10384,10 +10631,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "text",
@@ -10408,7 +10657,8 @@ initialize {
                                         "prev": Node {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
-                                            "for": "uniforms-0000-0007",
+                                            "for": "optgroupfield-enabled-0004",
+                                            "id": "optgroupfield-enabled-0004-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -10420,10 +10670,12 @@ initialize {
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         "type": "text",
@@ -10535,7 +10787,7 @@ initialize {
                       Node {
                         "attribs": Object {
                           "class": "euiFormRow euiFormRow--fullWidth",
-                          "id": "uniforms-0000-0006-row",
+                          "id": "optgroupfield-enabled-0003-row",
                         },
                         "children": Array [
                           Node {
@@ -10546,7 +10798,8 @@ initialize {
                               Node {
                                 "attribs": Object {
                                   "class": "euiFormLabel euiFormRow__label",
-                                  "for": "uniforms-0000-0006",
+                                  "for": "optgroupfield-enabled-0003",
+                                  "id": "optgroupfield-enabled-0003-label",
                                 },
                                 "children": Array [],
                                 "name": "label",
@@ -10581,10 +10834,12 @@ initialize {
                                 "x-attribsNamespace": Object {
                                   "class": undefined,
                                   "for": undefined,
+                                  "id": undefined,
                                 },
                                 "x-attribsPrefix": Object {
                                   "class": undefined,
                                   "for": undefined,
+                                  "id": undefined,
                                 },
                               },
                               Node {
@@ -10611,7 +10866,8 @@ initialize {
                                 "prev": Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "uniforms-0000-0006",
+                                    "for": "optgroupfield-enabled-0003",
+                                    "id": "optgroupfield-enabled-0003-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -10623,10 +10879,12 @@ initialize {
                                   "x-attribsNamespace": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                   "x-attribsPrefix": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                 },
                                 "type": "text",
@@ -10647,7 +10905,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0006",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -10659,10 +10918,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   "type": "text",
@@ -10696,7 +10957,7 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFieldNumber",
-                                            "id": "uniforms-0000-0006",
+                                            "id": "optgroupfield-enabled-0003",
                                             "name": "x.b",
                                             "placeholder": "",
                                             "step": "1",
@@ -10799,7 +11060,7 @@ initialize {
                                       Node {
                                         "attribs": Object {
                                           "class": "euiFieldNumber",
-                                          "id": "uniforms-0000-0006",
+                                          "id": "optgroupfield-enabled-0003",
                                           "name": "x.b",
                                           "placeholder": "",
                                           "step": "1",
@@ -10873,7 +11134,8 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "uniforms-0000-0006",
+                                    "for": "optgroupfield-enabled-0003",
+                                    "id": "optgroupfield-enabled-0003-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -10908,10 +11170,12 @@ initialize {
                                   "x-attribsNamespace": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                   "x-attribsPrefix": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                 },
                                 Node {
@@ -10938,7 +11202,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0006",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -10950,10 +11215,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   "type": "text",
@@ -10974,7 +11241,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0006",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -10986,10 +11254,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -11070,7 +11340,7 @@ initialize {
                         Node {
                           "attribs": Object {
                             "class": "euiFormRow euiFormRow--fullWidth",
-                            "id": "uniforms-0000-0007-row",
+                            "id": "optgroupfield-enabled-0004-row",
                           },
                           "children": Array [
                             Node {
@@ -11081,7 +11351,8 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "uniforms-0000-0007",
+                                    "for": "optgroupfield-enabled-0004",
+                                    "id": "optgroupfield-enabled-0004-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -11116,10 +11387,12 @@ initialize {
                                   "x-attribsNamespace": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                   "x-attribsPrefix": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                 },
                                 Node {
@@ -11146,7 +11419,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0007",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -11158,10 +11432,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   "type": "text",
@@ -11182,7 +11458,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0007",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -11194,10 +11471,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -11231,7 +11510,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "uniforms-0000-0007",
+                                              "id": "optgroupfield-enabled-0004",
                                               "name": "x.c",
                                               "placeholder": "",
                                               "step": "1",
@@ -11334,7 +11613,7 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFieldNumber",
-                                            "id": "uniforms-0000-0007",
+                                            "id": "optgroupfield-enabled-0004",
                                             "name": "x.c",
                                             "placeholder": "",
                                             "step": "1",
@@ -11408,7 +11687,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0007",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -11443,10 +11723,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   Node {
@@ -11473,7 +11755,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0007",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -11485,10 +11768,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -11509,7 +11794,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "uniforms-0000-0007",
+                                          "for": "optgroupfield-enabled-0004",
+                                          "id": "optgroupfield-enabled-0004-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -11521,10 +11807,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "text",
@@ -11641,6 +11929,7 @@ initialize {
                                           "attribs": Object {
                                             "class": "euiFormLabel euiFormRow__label",
                                             "for": "x",
+                                            "id": "x-label",
                                           },
                                           "children": Array [],
                                           "name": "label",
@@ -11675,10 +11964,12 @@ initialize {
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
                                             "for": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         Node {
@@ -11706,6 +11997,7 @@ initialize {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
                                               "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -11717,10 +12009,12 @@ initialize {
                                             "x-attribsNamespace": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                             "x-attribsPrefix": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                           },
                                           "type": "text",
@@ -11742,6 +12036,7 @@ initialize {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
                                                 "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -11753,10 +12048,12 @@ initialize {
                                               "x-attribsNamespace": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                               "x-attribsPrefix": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                             },
                                             "type": "text",
@@ -12308,6 +12605,7 @@ initialize {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
                                               "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -12342,10 +12640,12 @@ initialize {
                                             "x-attribsNamespace": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                             "x-attribsPrefix": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                           },
                                           Node {
@@ -12373,6 +12673,7 @@ initialize {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
                                                 "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -12384,10 +12685,12 @@ initialize {
                                               "x-attribsNamespace": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                               "x-attribsPrefix": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                             },
                                             "type": "text",
@@ -12409,6 +12712,7 @@ initialize {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
                                                   "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -12420,10 +12724,12 @@ initialize {
                                                 "x-attribsNamespace": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                                 "x-attribsPrefix": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                               },
                                               "type": "text",
@@ -12555,7 +12861,7 @@ initialize {
                       Node {
                         "attribs": Object {
                           "class": "euiFormRow euiFormRow--fullWidth",
-                          "id": "uniforms-0000-0007-row",
+                          "id": "optgroupfield-enabled-0004-row",
                         },
                         "children": Array [
                           Node {
@@ -12566,7 +12872,8 @@ initialize {
                               Node {
                                 "attribs": Object {
                                   "class": "euiFormLabel euiFormRow__label",
-                                  "for": "uniforms-0000-0007",
+                                  "for": "optgroupfield-enabled-0004",
+                                  "id": "optgroupfield-enabled-0004-label",
                                 },
                                 "children": Array [],
                                 "name": "label",
@@ -12601,10 +12908,12 @@ initialize {
                                 "x-attribsNamespace": Object {
                                   "class": undefined,
                                   "for": undefined,
+                                  "id": undefined,
                                 },
                                 "x-attribsPrefix": Object {
                                   "class": undefined,
                                   "for": undefined,
+                                  "id": undefined,
                                 },
                               },
                               Node {
@@ -12631,7 +12940,8 @@ initialize {
                                 "prev": Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "uniforms-0000-0007",
+                                    "for": "optgroupfield-enabled-0004",
+                                    "id": "optgroupfield-enabled-0004-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -12643,10 +12953,12 @@ initialize {
                                   "x-attribsNamespace": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                   "x-attribsPrefix": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                 },
                                 "type": "text",
@@ -12667,7 +12979,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0007",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -12679,10 +12992,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   "type": "text",
@@ -12716,7 +13031,7 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFieldNumber",
-                                            "id": "uniforms-0000-0007",
+                                            "id": "optgroupfield-enabled-0004",
                                             "name": "x.c",
                                             "placeholder": "",
                                             "step": "1",
@@ -12819,7 +13134,7 @@ initialize {
                                       Node {
                                         "attribs": Object {
                                           "class": "euiFieldNumber",
-                                          "id": "uniforms-0000-0007",
+                                          "id": "optgroupfield-enabled-0004",
                                           "name": "x.c",
                                           "placeholder": "",
                                           "step": "1",
@@ -12893,7 +13208,8 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "uniforms-0000-0007",
+                                    "for": "optgroupfield-enabled-0004",
+                                    "id": "optgroupfield-enabled-0004-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -12928,10 +13244,12 @@ initialize {
                                   "x-attribsNamespace": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                   "x-attribsPrefix": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                 },
                                 Node {
@@ -12958,7 +13276,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0007",
+                                      "for": "optgroupfield-enabled-0004",
+                                      "id": "optgroupfield-enabled-0004-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -12970,10 +13289,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   "type": "text",
@@ -12994,7 +13315,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0007",
+                                        "for": "optgroupfield-enabled-0004",
+                                        "id": "optgroupfield-enabled-0004-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -13006,10 +13328,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -13092,7 +13416,7 @@ initialize {
                         Node {
                           "attribs": Object {
                             "class": "euiFormRow euiFormRow--fullWidth",
-                            "id": "uniforms-0000-0006-row",
+                            "id": "optgroupfield-enabled-0003-row",
                           },
                           "children": Array [
                             Node {
@@ -13103,7 +13427,8 @@ initialize {
                                 Node {
                                   "attribs": Object {
                                     "class": "euiFormLabel euiFormRow__label",
-                                    "for": "uniforms-0000-0006",
+                                    "for": "optgroupfield-enabled-0003",
+                                    "id": "optgroupfield-enabled-0003-label",
                                   },
                                   "children": Array [],
                                   "name": "label",
@@ -13138,10 +13463,12 @@ initialize {
                                   "x-attribsNamespace": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                   "x-attribsPrefix": Object {
                                     "class": undefined,
                                     "for": undefined,
+                                    "id": undefined,
                                   },
                                 },
                                 Node {
@@ -13168,7 +13495,8 @@ initialize {
                                   "prev": Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0006",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -13180,10 +13508,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   "type": "text",
@@ -13204,7 +13534,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0006",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -13216,10 +13547,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -13253,7 +13586,7 @@ initialize {
                                           Node {
                                             "attribs": Object {
                                               "class": "euiFieldNumber",
-                                              "id": "uniforms-0000-0006",
+                                              "id": "optgroupfield-enabled-0003",
                                               "name": "x.b",
                                               "placeholder": "",
                                               "step": "1",
@@ -13356,7 +13689,7 @@ initialize {
                                         Node {
                                           "attribs": Object {
                                             "class": "euiFieldNumber",
-                                            "id": "uniforms-0000-0006",
+                                            "id": "optgroupfield-enabled-0003",
                                             "name": "x.b",
                                             "placeholder": "",
                                             "step": "1",
@@ -13430,7 +13763,8 @@ initialize {
                                   Node {
                                     "attribs": Object {
                                       "class": "euiFormLabel euiFormRow__label",
-                                      "for": "uniforms-0000-0006",
+                                      "for": "optgroupfield-enabled-0003",
+                                      "id": "optgroupfield-enabled-0003-label",
                                     },
                                     "children": Array [],
                                     "name": "label",
@@ -13465,10 +13799,12 @@ initialize {
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
                                       "for": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   Node {
@@ -13495,7 +13831,8 @@ initialize {
                                     "prev": Node {
                                       "attribs": Object {
                                         "class": "euiFormLabel euiFormRow__label",
-                                        "for": "uniforms-0000-0006",
+                                        "for": "optgroupfield-enabled-0003",
+                                        "id": "optgroupfield-enabled-0003-label",
                                       },
                                       "children": Array [],
                                       "name": "label",
@@ -13507,10 +13844,12 @@ initialize {
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
                                         "for": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "text",
@@ -13531,7 +13870,8 @@ initialize {
                                       "prev": Node {
                                         "attribs": Object {
                                           "class": "euiFormLabel euiFormRow__label",
-                                          "for": "uniforms-0000-0006",
+                                          "for": "optgroupfield-enabled-0003",
+                                          "id": "optgroupfield-enabled-0003-label",
                                         },
                                         "children": Array [],
                                         "name": "label",
@@ -13543,10 +13883,12 @@ initialize {
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
                                           "for": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "text",
@@ -13653,6 +13995,7 @@ initialize {
                                             "attribs": Object {
                                               "class": "euiFormLabel euiFormRow__label",
                                               "for": "x",
+                                              "id": "x-label",
                                             },
                                             "children": Array [],
                                             "name": "label",
@@ -13687,10 +14030,12 @@ initialize {
                                             "x-attribsNamespace": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                             "x-attribsPrefix": Object {
                                               "class": undefined,
                                               "for": undefined,
+                                              "id": undefined,
                                             },
                                           },
                                           Node {
@@ -13718,6 +14063,7 @@ initialize {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
                                                 "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -13729,10 +14075,12 @@ initialize {
                                               "x-attribsNamespace": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                               "x-attribsPrefix": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                             },
                                             "type": "text",
@@ -13754,6 +14102,7 @@ initialize {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
                                                   "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -13765,10 +14114,12 @@ initialize {
                                                 "x-attribsNamespace": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                                 "x-attribsPrefix": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                               },
                                               "type": "text",
@@ -14320,6 +14671,7 @@ initialize {
                                               "attribs": Object {
                                                 "class": "euiFormLabel euiFormRow__label",
                                                 "for": "x",
+                                                "id": "x-label",
                                               },
                                               "children": Array [],
                                               "name": "label",
@@ -14354,10 +14706,12 @@ initialize {
                                               "x-attribsNamespace": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                               "x-attribsPrefix": Object {
                                                 "class": undefined,
                                                 "for": undefined,
+                                                "id": undefined,
                                               },
                                             },
                                             Node {
@@ -14385,6 +14739,7 @@ initialize {
                                                 "attribs": Object {
                                                   "class": "euiFormLabel euiFormRow__label",
                                                   "for": "x",
+                                                  "id": "x-label",
                                                 },
                                                 "children": Array [],
                                                 "name": "label",
@@ -14396,10 +14751,12 @@ initialize {
                                                 "x-attribsNamespace": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                                 "x-attribsPrefix": Object {
                                                   "class": undefined,
                                                   "for": undefined,
+                                                  "id": undefined,
                                                 },
                                               },
                                               "type": "text",
@@ -14421,6 +14778,7 @@ initialize {
                                                   "attribs": Object {
                                                     "class": "euiFormLabel euiFormRow__label",
                                                     "for": "x",
+                                                    "id": "x-label",
                                                   },
                                                   "children": Array [],
                                                   "name": "label",
@@ -14432,10 +14790,12 @@ initialize {
                                                   "x-attribsNamespace": Object {
                                                     "class": undefined,
                                                     "for": undefined,
+                                                    "id": undefined,
                                                   },
                                                   "x-attribsPrefix": Object {
                                                     "class": undefined,
                                                     "for": undefined,
+                                                    "id": undefined,
                                                   },
                                                 },
                                                 "type": "text",

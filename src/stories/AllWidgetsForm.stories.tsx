@@ -27,10 +27,6 @@ import { InputForm } from "utils/types";
 
 export default {
     title: "Complete Input widgets form new",
-    // Needed to match snapshot file to story, should be done bij injectFileNames but that does not work
-    parameters: {
-        fileName: __filename,
-    },
 };
 
 function prepare() {
@@ -54,23 +50,21 @@ function prepare() {
     );
     mock.onGet("subscriptions/?filter=tags%2CNode%2Cstatuses%2Cactive").reply(
         200,
-        SN8PortSubscriptions.filter((p) => ["active"].includes(p.status)).filter((p) =>
-            ["Node"].includes(p.product.tag)
-        )
+        allNodeSubscriptions.filter((p) => p.status == "active").filter((p) => p.product.tag == "Node")
     );
     mock.onGet("subscriptions/?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(
         200,
-        SN8PortSubscriptions.filter((p) => ["active", "provisioning"].includes(p.status)).filter((p) =>
-            ["Node"].includes(p.product.tag)
-        )
+        allNodeSubscriptions
+            .filter((p) => ["active", "provisioning"].includes(p.status))
+            .filter((p) => p.product.tag == "Node")
     );
     mock.onGet("subscriptions/?filter=tags%2CIPS%2Cstatuses%2Cactive-provisioning").reply(
         200,
-        SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => ["IPS"].includes(p.product.tag))
+        SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => p.product.tag == "IPS")
     );
     mock.onGet("subscriptions/?filter=tags%2CIPBGP%2Cstatuses%2Cactive-provisioning").reply(
         200,
-        SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => ["IPBGP"].includes(p.product.tag))
+        SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => p.product.tag == "IPBGP")
     );
     mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP-AGGSPNL%2Cstatuses%2Cactive").reply(
         200,
@@ -85,6 +79,11 @@ function prepare() {
     mock.onGet(/surf\/crm\/contacts\/.*/).reply(200, contactPersons);
 
     mock.onGet(/subscriptions\/in_use_by\/.*/).reply(200, []);
+    // Ports for the first node in node_id_port_select
+    mock.onGet(/surf\/ims\/free_ports\/5e3341c2.*/).reply(200, freeCorelinkPorts.slice(0, 2));
+    // Ports for the second node in node_id_port_select
+    mock.onGet(/surf\/ims\/free_ports\/faf4766b.*/).reply(200, freeCorelinkPorts.slice(2, 4));
+    // Ports for other widgets
     mock.onGet(/surf\/ims\/free_ports\/.*\/1000\/.*/).reply(200, freeCorelinkPorts);
     mock.onGet("surf/ims/nodes/MT001A/PL?unsubscribed_only=true").reply(200, imsNodes);
     mock.onGet("surf/ims/nodes/Asd001a/IS").reply(200, imsNodes);

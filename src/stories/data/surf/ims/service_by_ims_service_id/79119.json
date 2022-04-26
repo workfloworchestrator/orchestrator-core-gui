@@ -1,0 +1,37 @@
+{
+    "aliases": ["SUBSCRIPTION_ID=358D5A85-49C2-46E2-AC5C-F55601957282"],
+    "customer_id": "7C41E5E3-0911-E511-80D0-005056956C1A",
+    "domain": "SURFNET8",
+    "endpoints": [
+        {
+            "id": 31420,
+            "type": "internet",
+            "vlanranges": [
+                {
+                    "end": 0,
+                    "start": 0,
+                    "sub_circuit_id": null
+                }
+            ]
+        },
+        {
+            "id": 57514,
+            "type": "service",
+            "vlanranges": [
+                {
+                    "end": 13,
+                    "start": 13,
+                    "sub_circuit_id": null
+                }
+            ]
+        }
+    ],
+    "extra_info": "100 Mbit/s SN8 SURFinternet BGP in HAMBURG van ASTRON",
+    "id": 79119,
+    "location": null,
+    "name": "HB001A_IP_BGP_ASTRON_358D5A85",
+    "order_id": "PID: 173B0283-DEE7-4367-BD99-6F30FF9E476A",
+    "product": "IP",
+    "speed": "SERVICE",
+    "status": "IS"
+}

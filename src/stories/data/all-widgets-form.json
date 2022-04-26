@@ -81,7 +81,7 @@
             "default": 1,
             "uniforms": {
                 "interfaceSpeed": 1000,
-                "nodeSubscriptionId": "1234",
+                "nodeSubscriptionId": "5e3341c2-0017-4d32-9005-56e9b2cbf86c",
                 "imsPortMode": "all",
                 "nodeStatuses": ["active", "provisioning"]
             },

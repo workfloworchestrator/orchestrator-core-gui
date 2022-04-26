@@ -18,10 +18,14 @@ import { ListAddField, ListField, ListItemField } from "lib/uniforms-surfnet/src
 import React from "react";
 
 test("<ListField> - works", () => {
-    const element = <ListField name="x" />;
-    const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
+    const element = <ListField name="x" id="snapshot-test" />;
+    const wrapper = mount(
+        element,
+        createContext({ x: { type: Array }, "x.$": { type: String } }, undefined, "listfield-works")
+    );
 
     expect(wrapper.find(ListField)).toHaveLength(1);
+    expect(wrapper.render()).toMatchSnapshot();
 });
 
 test("<ListField> - renders ListAddField", () => {
@@ -83,10 +87,14 @@ test("<ListField> - renders children with correct name (children)", () => {
 });
 
 test("<ListField> - renders children with correct values", () => {
-    const element = <ListField name="x" />;
+    const element = <ListField name="x" id="snapshot-test" />;
     const wrapper = mount(
         element,
-        createContext({ x: { type: Array }, "x.$": { type: String } }, { model: { x: ["a", "b", "c"] } })
+        createContext(
+            { x: { type: Array }, "x.$": { type: String } },
+            { model: { x: ["a", "b", "c"] } },
+            "listfield-correct-values"
+        )
     );
 
     expect(wrapper.find(ListItemField)).toHaveLength(3);
@@ -99,8 +107,11 @@ test("<ListField> - renders children with correct values", () => {
 });
 
 test("<ListField> - renders children with correct name (value)", () => {
-    const element = <ListField name="x" initialCount={2} />;
-    const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
+    const element = <ListField name="x" initialCount={2} id="snapshot-test" />;
+    const wrapper = mount(
+        element,
+        createContext({ x: { type: Array }, "x.$": { type: String } }, undefined, "listfield-correct-name")
+    );
 
     expect(wrapper.find(ListItemField).at(0).prop("name")).toBe("0");
     expect(wrapper.find(ListItemField).at(1).prop("name")).toBe("1");
@@ -108,12 +119,13 @@ test("<ListField> - renders children with correct name (value)", () => {
 });
 
 test("<ListField> - renders correctly when child is list", () => {
-    const element = <ListField name="x" />;
+    const element = <ListField name="x" id="snapshot-test" />;
     const wrapper = mount(
         element,
         createContext(
             { x: { type: Array }, "x.$": { type: Array }, "x.$.$": { type: String } },
-            { model: { x: [["test"]] } }
+            { model: { x: [["test"]] } },
+            "listfield-childlist"
         )
     );
 
