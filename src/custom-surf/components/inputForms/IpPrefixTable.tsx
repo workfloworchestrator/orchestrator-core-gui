@@ -226,7 +226,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         ];
 
         const { id, name, selected_prefix_id } = this.props;
-        const { sorted, filteredPrefixes, manualOverrideVisible, selectionDone } = this.state;
+        const { filteredPrefixes, manualOverrideVisible, selectionDone } = this.state;
         const { state, prefix } = { ...this.state.filter };
         let parentPrefix = prefix?.id;
 
