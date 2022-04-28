@@ -42,6 +42,7 @@ function IPvAnyNetwork({
     ...props
 }: IPvAnyNetworkFieldProps) {
     const [selectedPrefix, setSelectedPrefix] = useState<IpBlock | undefined>(undefined);
+    const [manualOverride, setManualOverride] = useState(false);
 
     const usePrefix = selectedPrefix?.prefix ?? value;
     const [subnet, netmask] = usePrefix?.split("/") ?? ["", ""];
@@ -68,13 +69,20 @@ function IPvAnyNetwork({
                                         if (prefix.state === 0 || prefix.state === 1) {
                                             setSelectedPrefix(prefix);
                                         }
+                                        setManualOverride(manualOverride);
                                         onChange(prefix.prefix);
+                                    }
+                                }}
+                                onManualOverride={(prefixString: string) => {
+                                    if (!readOnly) {
+                                        setManualOverride(true);
+                                        onChange(prefixString);
                                     }
                                 }}
                                 selected_prefix_id={selectedPrefix?.id}
                             />
                         )}
-                        {usePrefix && (
+                        {usePrefix && !manualOverride && (
                             <SplitPrefix
                                 id={id}
                                 name={name}
@@ -89,6 +97,7 @@ function IPvAnyNetwork({
                                 selectedSubnet={usePrefix}
                             />
                         )}
+                        {usePrefix && manualOverride && <div>Manually selected {value}</div>}
                     </div>
                 </section>
             </EuiFormRow>
