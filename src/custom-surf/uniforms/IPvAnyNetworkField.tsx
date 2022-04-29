@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiFormRow, EuiText } from "@elastic/eui";
+import { EuiCallOut, EuiFormRow, EuiText } from "@elastic/eui";
 import IPPrefixTable from "custom/components/inputForms/IpPrefixTable";
 import SplitPrefix from "custom/components/inputForms/SplitPrefix";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
@@ -69,7 +69,7 @@ function IPvAnyNetwork({
                                         if (prefix.state === 0 || prefix.state === 1) {
                                             setSelectedPrefix(prefix);
                                         }
-                                        setManualOverride(manualOverride);
+                                        setManualOverride(false);
                                         onChange(prefix.prefix);
                                     }
                                 }}
@@ -97,7 +97,11 @@ function IPvAnyNetwork({
                                 selectedSubnet={usePrefix}
                             />
                         )}
-                        {usePrefix && manualOverride && <div>Manually selected {value}</div>}
+                        {usePrefix && manualOverride && (
+                            <EuiCallOut title="Manually selected prefix" color="primary" iconType="check">
+                                <p>{value}</p>
+                            </EuiCallOut>
+                        )}
                     </div>
                 </section>
             </EuiFormRow>

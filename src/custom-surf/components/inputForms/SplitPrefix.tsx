@@ -17,8 +17,9 @@ import "custom/components/inputForms/SplitPrefix.scss";
 
 import { range } from "lodash";
 import React from "react";
-import Select, { ValueType } from "react-select";
+import ReactSelect, { ValueType } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
+import { getReactSelectTheme } from "utils/Colors";
 import { Option } from "utils/types";
 
 interface IProps {
@@ -89,14 +90,17 @@ export default class SplitPrefix extends React.PureComponent<IProps> {
 
         const prefix_options = this.state.subnets.map((sn) => ({ label: sn, value: sn }));
         const prefix_value = prefix_options.find((option) => option.value === selectedSubnet);
+        const customStyles = getReactSelectTheme(this.context.theme);
+
         return (
             <section>
                 <h3>
                     Selected prefix: {subnet}/{prefixlen}
                 </h3>
                 <div>Desired netmask of the new subnet:</div>
-                <Select
+                <ReactSelect
                     id={`${id}.desired-netmask`}
+                    styles={customStyles}
                     inputId={`${id}.desired-netmask.search`}
                     name={`${name}.desired-netmask`}
                     onChange={this.changePrefixLength}
@@ -106,8 +110,9 @@ export default class SplitPrefix extends React.PureComponent<IProps> {
                 {this.state.subnets && (
                     <div>
                         <div>Desired prefix:</div>
-                        <Select
+                        <ReactSelect
                             id={`${id}.desired-prefix`}
+                            styles={customStyles}
                             inputId={`${id}.desired-prefix.search`}
                             name={`${name}.desired-prefix`}
                             options={prefix_options}

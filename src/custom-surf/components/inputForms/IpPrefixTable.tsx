@@ -19,7 +19,6 @@ import {
     EuiButton,
     EuiButtonIcon,
     EuiCheckbox,
-    EuiEmptyPrompt,
     EuiFieldText,
     EuiFlexGroup,
     EuiFlexItem,
@@ -29,8 +28,9 @@ import {
     EuiText,
 } from "@elastic/eui";
 import React from "react";
-import Select, { ValueType } from "react-select";
+import ReactSelect, { ValueType } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
+import { getReactSelectTheme } from "utils/Colors";
 import { ipamStates } from "utils/Lookups";
 import { IpBlock, IpPrefix, Option, SortOption, prop } from "utils/types";
 import { stop } from "utils/Utils";
@@ -53,6 +53,7 @@ interface IState {
     filter: { state: number[]; prefix?: IpPrefix };
     sorted: SortOption<SortKeys>;
     manualOverrideVisible: boolean;
+    manualOverrideValue: string;
     selectionDone: boolean;
 }
 
@@ -77,6 +78,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
             descending: false,
         },
         manualOverrideVisible: false,
+        manualOverrideValue: "",
     };
 
     componentDidMount() {
@@ -142,6 +144,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
     };
 
     filterParentPrefix = (e: ValueType<Option, false>) => {
+        this.setState({ loading: true });
         const parentPrefix = parseInt(e!.value, 10);
         let { filter, filteredPrefixes } = this.state;
         let the_prefix: IpPrefix | undefined = undefined;
@@ -182,15 +185,9 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         }
     };
 
-    renderMessage = () => (
-        <EuiEmptyPrompt
-            title={<h3>No data yet</h3>}
-            titleSize="xs"
-            body="Looks like you don&rsquo;t have any users. Let&rsquo;s create some!"
-        />
-    );
-
     render() {
+        const { id, name, selected_prefix_id } = this.props;
+        const { filteredPrefixes, manualOverrideVisible, selectionDone, loading, manualOverrideValue } = this.state;
         let ipBlocks = this.filterAndSortBlocks();
 
         const columns = [
@@ -220,13 +217,13 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                 field: "Action",
                 name: "",
                 render: (id: string, record: IpBlock) => (
-                    <EuiButton onClick={this.selectPrefix(record)}>Select</EuiButton>
+                    <EuiButton onClick={this.selectPrefix(record)} id={`select-prefix-${id}-button`}>
+                        Select
+                    </EuiButton>
                 ),
             },
         ];
 
-        const { id, name, selected_prefix_id } = this.props;
-        const { filteredPrefixes, manualOverrideVisible, selectionDone } = this.state;
         const { state, prefix } = { ...this.state.filter };
         let parentPrefix = prefix?.id;
 
@@ -242,8 +239,17 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         };
 
         if (selected_prefix_id && selectionDone) {
-            return <EuiButton name="Choose another prefix" onClick={() => this.setState({ selectionDone: false })} />;
+            return (
+                <EuiButton
+                    id="undo-parent-prefix-choice-button"
+                    iconType="editorUndo"
+                    onClick={() => this.setState({ selectionDone: false })}
+                >
+                    Reset parent prefix choice
+                </EuiButton>
+            );
         }
+        const customStyles = getReactSelectTheme(this.context.theme);
 
         return (
             <div>
@@ -257,7 +263,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                         <EuiFlexItem grow={false}>
                             <EuiButtonIcon
                                 iconType={manualOverrideVisible ? "arrowDown" : "arrowRight"}
-                                aria-label="Toggle related subscriptions"
+                                aria-label="Toggle manual override"
                                 onClick={() => this.setState({ manualOverrideVisible: !manualOverrideVisible })}
                             />
                         </EuiFlexItem>
@@ -270,18 +276,22 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                                 label="Manually enter a prefix"
                                 labelAppend={
                                     <EuiText size="m">
-                                        Generating free spaces for a big IPv6 root prefix would yield an enormous list.
-                                        If you know the address of a free subnet you can provide it here:
+                                        Generating free spaces for a big IPv6 root prefix could yield an enormous list.
+                                        If you know the address of a free subnet you can provide it here. The prefix
+                                        will be created in the biggest existing prefix above it in one of the root
+                                        prefixes.
                                     </EuiText>
                                 }
+                                helpText="Example: 145.145.10/17"
                             >
-                                <EuiFieldText name={name}></EuiFieldText>
+                                <EuiFieldText
+                                    value={manualOverrideValue}
+                                    onChange={(e) => this.setState({ manualOverrideValue: e.target.value })}
+                                ></EuiFieldText>
                             </EuiFormRow>
-                            <EuiButton
-                                type="submit"
-                                title="Confirm"
-                                onClick={() => this.props.onManualOverride("10.0.0.0/8")}
-                            />
+                            <EuiButton onClick={() => this.props.onManualOverride(manualOverrideValue)}>
+                                Confirm
+                            </EuiButton>
                         </EuiPanel>
                     )}
                 </div>
@@ -323,10 +333,11 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                                     />
                                 </EuiFlexItem>
                             </EuiFlexGroup>
-                            <span>Root filter</span>
+                            <div style={{ marginTop: "4px", marginBottom: "4px" }}>Root filter</div>
                             <span>
-                                <Select
+                                <ReactSelect
                                     id={`${id}.root-filter`}
+                                    styles={customStyles}
                                     inputId={`${id}.root-filter.search`}
                                     name={`${name}.root-filter`}
                                     options={options}
@@ -336,7 +347,10 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                             </span>
                         </div>
                         <EuiInMemoryTable
+                            style={{ marginTop: "6px" }}
+                            itemId="id"
                             tableCaption="Prefix table"
+                            loading={loading}
                             items={ipBlocks}
                             columns={columns}
                             pagination={pagination}
