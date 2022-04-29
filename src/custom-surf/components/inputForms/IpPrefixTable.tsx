@@ -16,6 +16,7 @@
 import "custom/components/inputForms/IpPrefixTable.scss";
 
 import {
+    EuiBadge,
     EuiButton,
     EuiButtonIcon,
     EuiCheckbox,
@@ -209,18 +210,22 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                 sortable: true,
             },
             {
-                field: "state_repr",
+                field: "state",
                 name: "Status",
                 sortable: true,
+                render: (prefixState: number) => (
+                    <EuiBadge color={prefixState === 3 ? "danger" : "success"}>{ipamStates[prefixState]}</EuiBadge>
+                ),
             },
             {
                 field: "Action",
                 name: "",
-                render: (id: string, record: IpBlock) => (
-                    <EuiButton onClick={this.selectPrefix(record)} id={`select-prefix-${id}-button`}>
-                        Select
-                    </EuiButton>
-                ),
+                render: (id: string, record: IpBlock) =>
+                    record.state !== 3 ? (
+                        <EuiButton onClick={this.selectPrefix(record)} id={`select-prefix-${id}-button`}>
+                            Select
+                        </EuiButton>
+                    ) : null,
             },
         ];
 
