@@ -90,8 +90,10 @@ $z-index: (
 .euiButton--accent.euiButton {
     background-color: #e39846 !important;
 }
-.euiButton--accent.euiButton--fill {
-    color: #fff !important;
+.euiButton--accent {
+    &.euiButton--fill{
+        color: #fff !important;
+    }
 }
 
 .euiButton--warning.euiButton {

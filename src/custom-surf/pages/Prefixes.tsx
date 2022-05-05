@@ -4,7 +4,7 @@
  */
 
 import "custom/pages/Prefixes.scss";
-
+// import "../../emotion/custom-surf/pages/Prefixes"
 import { EuiFieldSearch, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody, EuiSpacer } from "@elastic/eui";
 import LabelledFilter from "custom/components/LabelledFilter";
 import debounce from "lodash/debounce";
@@ -16,6 +16,9 @@ import ApplicationContext from "utils/ApplicationContext";
 import { familyFullName, ipAddressToNumber, ipamStates, organisationNameByUuid, renderDate } from "utils/Lookups";
 import { Filter, IpPrefix, IpPrefixSubscription, Product, SortOption } from "utils/types";
 import { isEmpty, isValidUUIDv4, stop } from "utils/Utils";
+import {mediaQueriesPhone} from "../../emotion/custom-surf/pages/Prefixes";
+import { css } from '@emotion/core';
+
 
 interface ExtendedIpPrefixSubscription extends IpPrefixSubscription {
     customer: string;
@@ -412,7 +415,7 @@ class Prefixes extends React.PureComponent<IProps, IState> {
                         </EuiFlexGroup>
                         <EuiSpacer size="m" />
                     </div>
-                    <table className="prefixes">
+                    <table css={css``} className="prefixes">
                         <thead>
                             <tr>{columns.map((column, index) => th(index))}</tr>
                         </thead>

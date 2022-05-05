@@ -41,7 +41,7 @@ table.prefixes {
         &.dark {
             background-color: vars.$darkest-primary;
         }
-
+        //TODO:
         &:hover {
             &.light {
                 background-color: color.adjust(vars.$light-primary, $lightness: -10%);
@@ -193,29 +193,29 @@ table.prefixes {
             }
         }
     }
-    @include media_queries.phone {
-        thead {
-            display: none;
-        }
-        tr {
-            margin-bottom: 10px;
-            display: block;
-            border-bottom: 2px solid vars.$lighter-grey;
-        }
-        td {
-            display: block;
-            text-align: right;
-            border-bottom: 1px dotted vars.$light-primary;
-            padding: 8px 0;
-
-            &:before {
-                content: attr(data-label);
-                float: left;
-                text-transform: uppercase;
-                font-weight: bold;
-                font-size: 14px;
-                color: vars.$medium-grey;
-            }
-        }
-    }
+    //@include media_queries.phone {
+    //    thead {
+    //        display: none;
+    //    }
+    //    tr {
+    //        margin-bottom: 10px;
+    //        display: block;
+    //        border-bottom: 2px solid vars.$lighter-grey;
+    //    }
+    //    td {
+    //        display: block;
+    //        text-align: right;
+    //        border-bottom: 1px dotted vars.$light-primary;
+    //        padding: 8px 0;
+    //
+    //        &:before {
+    //            content: attr(data-label);
+    //            float: left;
+    //            text-transform: uppercase;
+    //            font-weight: bold;
+    //            font-size: 14px;
+    //            color: vars.$medium-grey;
+    //        }
+    //    }
+    //}
 }
