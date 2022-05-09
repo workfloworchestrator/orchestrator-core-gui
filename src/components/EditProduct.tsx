@@ -54,7 +54,7 @@ interface IState {
     statuses: string[];
     duplicateName: boolean;
     showConfirmDialog: ShowConfirmDialogType;
-    cancelConfirmDialog: () => void;
+    closeConfirmDialog: () => void;
 }
 
 class EditProduct extends React.Component<IProps, IState> {
@@ -72,7 +72,7 @@ class EditProduct extends React.Component<IProps, IState> {
         statuses: [],
         duplicateName: false,
         showConfirmDialog: () => {},
-        cancelConfirmDialog: () => {},
+        closeConfirmDialog: () => {},
     };
 
     componentDidMount() {
@@ -117,7 +117,7 @@ class EditProduct extends React.Component<IProps, IState> {
                 })
                 .catch((err: any) => {
                     if (err.response && err.response.status === 400) {
-                        this.state.cancelConfirmDialog();
+                        this.state.closeConfirmDialog();
                         if (err.response.data) {
                             setFlash(err.response.data.error);
                         }
@@ -219,8 +219,8 @@ class EditProduct extends React.Component<IProps, IState> {
         this.setState({ product: product });
     };
 
-    addConfirmDialogActions = ({ showConfirmDialog, cancelConfirmDialog }: ConfirmDialogActions) => {
-        this.setState({ showConfirmDialog, cancelConfirmDialog });
+    addConfirmDialogActions = ({ showConfirmDialog, closeConfirmDialog }: ConfirmDialogActions) => {
+        this.setState({ showConfirmDialog, closeConfirmDialog });
         return <></>;
     };
 

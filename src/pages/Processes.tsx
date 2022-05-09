@@ -42,7 +42,6 @@ interface IProps extends WrappedComponentProps {}
 interface IState {
     showExplanation: boolean;
     showConfirmDialog: ShowConfirmDialogType;
-    cancelConfirmDialog: () => void;
 }
 
 class Processes extends React.PureComponent<IProps, IState> {
@@ -52,7 +51,6 @@ class Processes extends React.PureComponent<IProps, IState> {
         this.state = {
             showExplanation: false,
             showConfirmDialog: () => {},
-            cancelConfirmDialog: () => {},
         };
     }
 

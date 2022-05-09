@@ -61,7 +61,6 @@ interface IState {
     productName: string;
     customerName: string;
     showConfirmDialog: ShowConfirmDialogType;
-    cancelConfirmDialog: () => void;
 }
 
 class ProcessDetail extends React.PureComponent<IProps, IState> {
@@ -81,7 +80,6 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             productName: "",
             customerName: "",
             showConfirmDialog: () => {},
-            cancelConfirmDialog: () => {},
         };
     }
 
@@ -445,8 +443,8 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         </span>
     );
 
-    addConfirmDialogActions = ({ showConfirmDialog, cancelConfirmDialog }: ConfirmDialogActions) => {
-        this.setState({ showConfirmDialog, cancelConfirmDialog });
+    addConfirmDialogActions = ({ showConfirmDialog }: ConfirmDialogActions) => {
+        this.setState({ showConfirmDialog });
         return <></>;
     };
 

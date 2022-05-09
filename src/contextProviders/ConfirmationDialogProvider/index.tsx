@@ -19,51 +19,53 @@ export type ShowConfirmDialogType = ({
 
 export interface ConfirmDialogActions {
     showConfirmDialog: ShowConfirmDialogType;
-    cancelConfirmDialog: () => void;
+    closeConfirmDialog: () => void;
 }
 
 const ConfirmationDialogContext = createContext<ConfirmDialogActions>({
     showConfirmDialog: () => {},
-    cancelConfirmDialog: () => {},
+    closeConfirmDialog: () => {},
 });
 
 export const ConfirmationDialogProvider = ConfirmationDialogContext.Provider;
 export default ConfirmationDialogContext;
 
 export function ConfirmationDialogContextWrapper({ children }: any) {
-    const [confirmationDialogOpen, setCnfirmationDialogOpen] = useState(false);
+    const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
     const [state, setState] = useState({
         confirmationDialogQuestion: "",
-        confirmationDialogAction: (e: React.MouseEvent) => {},
-        cancelConfirmDialogAction: (e: React.MouseEvent) => {},
+        confirmDialogAction: (e: React.MouseEvent, cancelConfirm: boolean = false) => {},
         leavePage: false,
         isError: false,
     });
-    const cancelConfirmDialog = () => setCnfirmationDialogOpen(false);
+    const closeConfirmDialog = () => setConfirmationDialogOpen(false);
 
     const showConfirmDialog = ({ question, confirmAction, cancelAction, leavePage, isError }: ShowConfirmDialog) => {
-        setCnfirmationDialogOpen(true);
+        setConfirmationDialogOpen(true);
         setState({
             confirmationDialogQuestion: question,
             leavePage: !!leavePage,
             isError: !!isError,
-            confirmationDialogAction: (e: React.MouseEvent) => {
-                cancelConfirmDialog();
-                confirmAction(e);
-            },
-            cancelConfirmDialogAction: (e: React.MouseEvent) => {
-                cancelConfirmDialog();
-                if (cancelAction) cancelAction(e);
+            confirmDialogAction: (e: React.MouseEvent, cancelConfirm: boolean = false) => {
+                closeConfirmDialog();
+
+                if (!cancelConfirm) {
+                    return confirmAction(e);
+                }
+
+                if (cancelAction) {
+                    return cancelAction(e);
+                }
             },
         });
     };
 
     return (
-        <ConfirmationDialogProvider value={{ showConfirmDialog, cancelConfirmDialog }}>
+        <ConfirmationDialogProvider value={{ showConfirmDialog, closeConfirmDialog }}>
             <ConfirmationDialog
                 isOpen={confirmationDialogOpen}
-                cancel={state.cancelConfirmDialogAction}
-                confirm={state.confirmationDialogAction}
+                cancel={(e) => state.confirmDialogAction(e, true)}
+                confirm={state.confirmDialogAction}
                 question={state.confirmationDialogQuestion}
                 leavePage={state.leavePage}
                 isError={state.isError}

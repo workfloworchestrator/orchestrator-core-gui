@@ -38,7 +38,7 @@ function Products() {
     const [products, setProducts] = useState<Product[]>([]);
     const [productsLoaded, setProductsLoaded] = useState(true);
     const [reload, setReload] = useState(false);
-    const { showConfirmDialog, cancelConfirmDialog } = useContext(ConfirmationDialogContext);
+    const { showConfirmDialog, closeConfirmDialog } = useContext(ConfirmationDialogContext);
     const history = useHistory();
 
     useEffect(() => {
@@ -67,7 +67,7 @@ function Products() {
                     throw err;
                 }
             });
-        cancelConfirmDialog();
+        closeConfirmDialog();
     };
 
     const handleDeleteProduct = (product: Product) => (e: React.MouseEvent<HTMLButtonElement>) => {

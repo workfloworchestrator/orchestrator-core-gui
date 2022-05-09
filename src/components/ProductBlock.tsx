@@ -54,7 +54,7 @@ interface IState {
     resourceTypes: ResourceType[];
     productBlocks: iProductBlock[];
     showConfirmDialog: ShowConfirmDialogType;
-    cancelConfirmDialog: () => void;
+    closeConfirmDialog: () => void;
 }
 
 class ProductBlock extends React.Component<IProps, IState> {
@@ -68,7 +68,7 @@ class ProductBlock extends React.Component<IProps, IState> {
         resourceTypes: [],
         productBlocks: [],
         showConfirmDialog: () => {},
-        cancelConfirmDialog: () => {},
+        closeConfirmDialog: () => {},
     };
 
     componentDidMount() {
@@ -115,7 +115,7 @@ class ProductBlock extends React.Component<IProps, IState> {
                 })
                 .catch((err: any) => {
                     if (err.response && err.response.status === 400) {
-                        this.state.cancelConfirmDialog();
+                        this.state.closeConfirmDialog();
                         if (err.response.data) {
                             setFlash(err.response.data.error);
                         }
@@ -226,8 +226,8 @@ class ProductBlock extends React.Component<IProps, IState> {
         this.setState({ productBlock: productBlock });
     };
 
-    addConfirmDialogActions = ({ showConfirmDialog, cancelConfirmDialog }: ConfirmDialogActions) => {
-        this.setState({ showConfirmDialog, cancelConfirmDialog });
+    addConfirmDialogActions = ({ showConfirmDialog, closeConfirmDialog }: ConfirmDialogActions) => {
+        this.setState({ showConfirmDialog, closeConfirmDialog });
         return <></>;
     };
 
