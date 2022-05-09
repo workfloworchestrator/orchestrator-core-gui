@@ -1,5 +1,6 @@
 import { EuiCallOut, EuiFlexGroup, EuiFlexItem, EuiSwitch } from "@elastic/eui";
 import { SubscriptionDetailSection } from "components/subscriptionDetail/SubscriptionDetailSection";
+import ConfirmationDialogContext from "contextProviders/ConfirmationDialogProvider";
 import React, { useContext, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
@@ -27,14 +28,13 @@ let create_readable_description = function (wf: any): object {
 export function RenderActions({
     subscription,
     workflows,
-    confirmation,
 }: {
     subscription: SubscriptionModel;
     workflows: WorkflowReasons;
-    confirmation?: (message: string, callback: () => void) => void;
 }) {
     const intl = useIntl();
     const { allowed, organisations, redirect, theme } = useContext(ApplicationContext);
+    const { showConfirmDialog: confirmation } = useContext(ConfirmationDialogContext);
 
     if (!confirmation) {
         return null;

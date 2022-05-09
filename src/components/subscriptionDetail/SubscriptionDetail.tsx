@@ -51,10 +51,9 @@ import { findObjects, importPlugin } from "utils/Utils";
 
 interface IProps {
     subscriptionId: string;
-    confirmation?: (question: string, action: (e: React.MouseEvent) => void) => void;
 }
 
-function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
+function SubscriptionDetail({ subscriptionId }: IProps) {
     const [loadedPlugins, setLoadedPlugins] = useState([]);
     const [loadedSubscriptionModel, setLoadedSubscriptionModel] = useState(false);
 
@@ -225,7 +224,7 @@ function SubscriptionDetail({ subscriptionId, confirmation }: IProps) {
     );
     const renderedActions = (
         <div className="mod-subscription-detail">
-            <RenderActions subscription={subscription} workflows={workflows} confirmation={confirmation} />
+            <RenderActions subscription={subscription} workflows={workflows} />
         </div>
     );
 
