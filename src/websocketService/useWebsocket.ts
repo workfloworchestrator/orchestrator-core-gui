@@ -38,7 +38,7 @@ const useWebsocket = <T extends object>(
     function pong() {
         pingTimeout.current && clearTimeout(pingTimeout.current);
         pingTimeout.current = undefined;
-        setTimeout(() => ping, 30000);
+        setTimeout(ping, 30000);
     }
 
     const connectWebsocket = () => {
