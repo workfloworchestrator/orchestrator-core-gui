@@ -17,12 +17,15 @@ import "pages/Subscriptions.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
 import Explain from "components/Explain";
-import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import {
     SubscriptionsTable,
     initialSubscriptionTableSettings,
     initialSubscriptionsFilterAndSort,
 } from "components/tables/Subscriptions";
+import ConfirmationDialogContext, {
+    ConfirmDialogActions,
+    ShowConfirmDialogType,
+} from "contextProviders/ConfirmationDialogProvider";
 import React from "react";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
@@ -31,11 +34,8 @@ import { Subscription } from "utils/types";
 interface IProps {}
 
 interface IState {
-    confirmationDialogOpen: boolean;
-    confirmationDialogAction: (e: React.MouseEvent) => void;
-    confirm: () => void;
-    confirmationDialogQuestion: string;
     showExplanation: boolean;
+    showConfirmDialog: ShowConfirmDialogType;
 }
 
 export default class SubscriptionsPage extends React.PureComponent<IProps, IState> {
@@ -43,25 +43,13 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
         super(props);
 
         this.state = {
-            confirmationDialogOpen: false,
-            confirmationDialogAction: () => this,
-            confirm: () => this,
-            confirmationDialogQuestion: "",
             showExplanation: false,
+            showConfirmDialog: () => {},
         };
     }
 
-    cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
-
-    confirmation = (question: string, action: (e: React.MouseEvent) => void) =>
-        this.setState({
-            confirmationDialogOpen: true,
-            confirmationDialogQuestion: question,
-            confirmationDialogAction: (e: React.MouseEvent) => {
-                this.cancelConfirmation();
-                action(e);
-            },
-        });
+    confirmation = (question: string, confirmAction: (e: React.MouseEvent) => void) =>
+        this.state.showConfirmDialog({ question, confirmAction });
 
     showSubscription = (subscription: Subscription) => () => {
         this.context.redirect("/subscriptions/" + subscription.subscription_id);
@@ -79,6 +67,11 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
         );
     }
 
+    addConfirmDialogActions = ({ showConfirmDialog }: ConfirmDialogActions) => {
+        this.setState({ showConfirmDialog });
+        return <></>;
+    };
+
     render() {
         const completeSettings = initialSubscriptionTableSettings(
             "table.subscriptions.complete",
@@ -95,6 +88,9 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
 
         return (
             <EuiPage>
+                <ConfirmationDialogContext.Consumer>
+                    {(cdc) => this.addConfirmDialogActions(cdc)}
+                </ConfirmationDialogContext.Consumer>
                 <EuiPageBody component="div">
                     <Explain
                         close={() => this.setState({ showExplanation: false })}
@@ -159,12 +155,6 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
                             <br />
                         </p>
                     </Explain>
-                    <ConfirmationDialog
-                        isOpen={this.state.confirmationDialogOpen}
-                        cancel={this.cancelConfirmation}
-                        confirm={this.state.confirmationDialogAction}
-                        question={this.state.confirmationDialogQuestion}
-                    />
                     <div className="actions">{this.renderExplain()}</div>
                     <SubscriptionsTable
                         key={"complete"}

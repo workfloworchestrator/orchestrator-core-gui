@@ -18,7 +18,10 @@ import "components/ProductBlock.scss";
 import "./ProductBlock.scss";
 
 import { EuiButton } from "@elastic/eui";
-import ConfirmationDialog from "components/modals/ConfirmationDialog";
+import ConfirmationDialogContext, {
+    ConfirmDialogActions,
+    ShowConfirmDialogType,
+} from "contextProviders/ConfirmationDialogProvider";
 import { isDate } from "date-fns";
 import { formDate, formInput, formSelect } from "forms/Builder";
 import React from "react";
@@ -41,11 +44,6 @@ interface IProps extends Partial<RouteComponentProps<MatchParams>>, WrappedCompo
 }
 
 interface IState {
-    confirmationDialogOpen: boolean;
-    confirmationDialogAction: () => void;
-    cancelDialogAction: () => void;
-    confirmationDialogQuestion: string;
-    leavePage: boolean;
     errors: Partial<Record<keyof iProductBlock, boolean>>;
     required: Column[];
     duplicateName: boolean;
@@ -55,15 +53,12 @@ interface IState {
     processing: boolean;
     resourceTypes: ResourceType[];
     productBlocks: iProductBlock[];
+    showConfirmDialog: ShowConfirmDialogType;
+    cancelConfirmDialog: () => void;
 }
 
 class ProductBlock extends React.Component<IProps, IState> {
     state: IState = {
-        confirmationDialogOpen: false,
-        confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
-        cancelDialogAction: () => this.context.redirect("/metadata/product_blocks"),
-        confirmationDialogQuestion: "",
-        leavePage: true,
         errors: {},
         required: ["name", "description"],
         duplicateName: false,
@@ -72,6 +67,8 @@ class ProductBlock extends React.Component<IProps, IState> {
         processing: false,
         resourceTypes: [],
         productBlocks: [],
+        showConfirmDialog: () => {},
+        cancelConfirmDialog: () => {},
     };
 
     componentDidMount() {
@@ -88,11 +85,11 @@ class ProductBlock extends React.Component<IProps, IState> {
 
     cancel = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
-        this.setState({
-            confirmationDialogOpen: true,
+        this.state.showConfirmDialog({
+            question: "",
+            confirmAction: () => {},
+            cancelAction: () => this.context.redirect("/metadata/product_blocks"),
             leavePage: true,
-            confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
-            cancelDialogAction: () => this.context.redirect("/metadata/product_blocks"),
         });
     };
 
@@ -104,7 +101,7 @@ class ProductBlock extends React.Component<IProps, IState> {
             { id: "metadata.deleteConfirmation" },
             { type: "Product Block", name: productBlock!.name }
         );
-        const action = () =>
+        const confirmAction = () =>
             this.context.apiClient
                 .deleteProductBlock(productBlock!.product_block_id)
                 .then(() => {
@@ -118,7 +115,7 @@ class ProductBlock extends React.Component<IProps, IState> {
                 })
                 .catch((err: any) => {
                     if (err.response && err.response.status === 400) {
-                        this.setState({ confirmationDialogOpen: false });
+                        this.state.cancelConfirmDialog();
                         if (err.response.data) {
                             setFlash(err.response.data.error);
                         }
@@ -126,13 +123,7 @@ class ProductBlock extends React.Component<IProps, IState> {
                         throw err;
                     }
                 });
-        this.setState({
-            confirmationDialogOpen: true,
-            confirmationDialogQuestion: question,
-            leavePage: false,
-            confirmationDialogAction: action,
-            cancelDialogAction: () => this.setState({ confirmationDialogOpen: false }),
-        });
+        this.state.showConfirmDialog({ question, confirmAction });
     };
 
     submit = (e: React.MouseEvent<HTMLElement>) => {
@@ -235,17 +226,13 @@ class ProductBlock extends React.Component<IProps, IState> {
         this.setState({ productBlock: productBlock });
     };
 
+    addConfirmDialogActions = ({ showConfirmDialog, cancelConfirmDialog }: ConfirmDialogActions) => {
+        this.setState({ showConfirmDialog, cancelConfirmDialog });
+        return <></>;
+    };
+
     render() {
-        const {
-            confirmationDialogOpen,
-            confirmationDialogAction,
-            cancelDialogAction,
-            productBlock,
-            leavePage,
-            duplicateName,
-            initial,
-            confirmationDialogQuestion,
-        } = this.state;
+        const { productBlock, duplicateName, initial } = this.state;
         const { intl } = this.props;
 
         if (!productBlock) {
@@ -264,13 +251,9 @@ class ProductBlock extends React.Component<IProps, IState> {
 
         return (
             <div className="mod-product-block">
-                <ConfirmationDialog
-                    isOpen={confirmationDialogOpen}
-                    cancel={cancelDialogAction}
-                    confirm={confirmationDialogAction}
-                    leavePage={leavePage}
-                    question={confirmationDialogQuestion}
-                />
+                <ConfirmationDialogContext.Consumer>
+                    {(cdc) => this.addConfirmDialogActions(cdc)}
+                </ConfirmationDialogContext.Consumer>
                 <section className="card">
                     {formInput(
                         "metadata.productBlocks.name",

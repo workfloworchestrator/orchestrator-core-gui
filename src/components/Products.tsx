@@ -22,7 +22,7 @@ import {
     EuiPageContentHeader,
     EuiSpacer,
 } from "@elastic/eui";
-import ConfirmationDialog from "components/modals/ConfirmationDialog";
+import ConfirmationDialogContext from "contextProviders/ConfirmationDialogProvider";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { injectIntl } from "react-intl";
 import { useHistory } from "react-router";
@@ -38,9 +38,7 @@ function Products() {
     const [products, setProducts] = useState<Product[]>([]);
     const [productsLoaded, setProductsLoaded] = useState(true);
     const [reload, setReload] = useState(false);
-    const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
-    const [confirmationDialogAction, setConfirmationDialogAction] = useState(() => () => deleteProduct({} as Product));
-    const [confirmationDialogQuestion, setConfirmationDialogQuestion] = useState("");
+    const { showConfirmDialog, cancelConfirmDialog } = useContext(ConfirmationDialogContext);
     const history = useHistory();
 
     useEffect(() => {
@@ -52,10 +50,6 @@ function Products() {
     }, [apiClient, reload]);
 
     const handleOnClick = useCallback((path) => history.push(path), [history]);
-
-    const cancelConfirmation = () => {
-        setConfirmationDialogOpen(false);
-    };
 
     const deleteProduct = (product: Product) => {
         apiClient
@@ -73,17 +67,17 @@ function Products() {
                     throw err;
                 }
             });
-        cancelConfirmation();
+        cancelConfirmDialog();
     };
 
     const handleDeleteProduct = (product: Product) => (e: React.MouseEvent<HTMLButtonElement>) => {
-        setConfirmationDialogOpen(true);
-        const question = intl.formatMessage(
-            { id: "metadata.deleteConfirmation" },
-            { type: "Product", name: product.name }
-        );
-        setConfirmationDialogQuestion(question);
-        setConfirmationDialogAction(() => () => deleteProduct(product));
+        showConfirmDialog({
+            question: intl.formatMessage(
+                { id: "metadata.deleteConfirmation" },
+                { type: "Product", name: product.name }
+            ),
+            confirmAction: () => deleteProduct(product),
+        });
     };
 
     const search = {
@@ -238,12 +232,6 @@ function Products() {
     return (
         <EuiPageContent>
             <EuiPageContentHeader>
-                <ConfirmationDialog
-                    isOpen={confirmationDialogOpen}
-                    cancel={cancelConfirmation}
-                    confirm={confirmationDialogAction}
-                    question={confirmationDialogQuestion}
-                />
                 <EuiSpacer size="l" />
                 <EuiInMemoryTable
                     items={products}

@@ -18,12 +18,15 @@ import "pages/Processes.scss";
 import { EuiPage, EuiPageBody } from "@elastic/eui";
 import DropDownActions from "components/DropDownActions";
 import Explain from "components/Explain";
-import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import {
     ProcessesTable,
     initialProcessTableSettings,
     initialProcessesFilterAndSort,
 } from "components/tables/Processes";
+import ConfirmationDialogContext, {
+    ConfirmDialogActions,
+    ShowConfirmDialogType,
+} from "contextProviders/ConfirmationDialogProvider";
 import React from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import ScrollUpButton from "react-scroll-up-button";
@@ -37,11 +40,9 @@ import { actionOptions } from "validations/Processes";
 interface IProps extends WrappedComponentProps {}
 
 interface IState {
-    confirmationDialogOpen: boolean;
-    confirmationDialogAction: (e: React.MouseEvent) => void;
-    confirm: () => void;
-    confirmationDialogQuestion: string;
     showExplanation: boolean;
+    showConfirmDialog: ShowConfirmDialogType;
+    cancelConfirmDialog: () => void;
 }
 
 class Processes extends React.PureComponent<IProps, IState> {
@@ -49,25 +50,14 @@ class Processes extends React.PureComponent<IProps, IState> {
         super(props);
 
         this.state = {
-            confirmationDialogOpen: false,
-            confirmationDialogAction: () => this,
-            confirm: () => this,
-            confirmationDialogQuestion: "",
             showExplanation: false,
+            showConfirmDialog: () => {},
+            cancelConfirmDialog: () => {},
         };
     }
 
-    cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
-
-    confirmation = (question: string, action: (e: React.MouseEvent) => void) =>
-        this.setState({
-            confirmationDialogOpen: true,
-            confirmationDialogQuestion: question,
-            confirmationDialogAction: (e: React.MouseEvent) => {
-                this.cancelConfirmation();
-                action(e);
-            },
-        });
+    confirmation = (question: string, confirmAction: (e: React.MouseEvent) => void) =>
+        this.state.showConfirmDialog({ question, confirmAction });
 
     handleAbortProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
         stop(e);
@@ -121,6 +111,11 @@ class Processes extends React.PureComponent<IProps, IState> {
         );
     }
 
+    addConfirmDialogActions = ({ showConfirmDialog }: ConfirmDialogActions) => {
+        this.setState({ showConfirmDialog });
+        return <></>;
+    };
+
     render() {
         const activeSettings = initialProcessTableSettings(
             "table.processes.active",
@@ -143,6 +138,9 @@ class Processes extends React.PureComponent<IProps, IState> {
 
         return (
             <EuiPage>
+                <ConfirmationDialogContext.Consumer>
+                    {(cdc) => this.addConfirmDialogActions(cdc)}
+                </ConfirmationDialogContext.Consumer>
                 <EuiPageBody component="div" className="process-container">
                     <Explain
                         close={() => this.setState({ showExplanation: false })}
@@ -161,12 +159,6 @@ class Processes extends React.PureComponent<IProps, IState> {
                             on the reset button.
                         </p>
                     </Explain>
-                    <ConfirmationDialog
-                        isOpen={this.state.confirmationDialogOpen}
-                        cancel={this.cancelConfirmation}
-                        confirm={this.state.confirmationDialogAction}
-                        question={this.state.confirmationDialogQuestion}
-                    />
                     <div className="actions">{this.renderExplain()}</div>
                     <ProcessesTable
                         key={"active"}

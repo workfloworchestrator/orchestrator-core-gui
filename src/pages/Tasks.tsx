@@ -18,12 +18,15 @@ import "pages/Tasks.scss";
 import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody } from "@elastic/eui";
 import DropDownActions from "components/DropDownActions";
 import Explain from "components/Explain";
-import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import {
     ProcessesTable,
     initialProcessTableSettings,
     initialProcessesFilterAndSort,
 } from "components/tables/Processes";
+import ConfirmationDialogContext, {
+    ConfirmDialogActions,
+    ShowConfirmDialogType,
+} from "contextProviders/ConfirmationDialogProvider";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ScrollUpButton from "react-scroll-up-button";
@@ -36,26 +39,18 @@ import { actionOptions } from "validations/Processes";
 
 interface IProps extends WrappedComponentProps {}
 interface IState {
-    confirmationDialogOpen: boolean;
-    confirmationDialogAction: (e: React.MouseEvent) => void;
-    confirm: () => void;
-    confirmationDialogQuestion: string;
     showExplanation: boolean;
+    showConfirmDialog: ShowConfirmDialogType;
 }
 class Tasks extends React.PureComponent<IProps, IState> {
     constructor(props: IProps) {
         super(props);
 
         this.state = {
-            confirmationDialogOpen: false,
-            confirmationDialogAction: () => {},
-            confirm: () => {},
-            confirmationDialogQuestion: "",
             showExplanation: false,
+            showConfirmDialog: () => {},
         };
     }
-
-    cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
 
     newTask = () => {
         this.context.redirect("/new-task");
@@ -63,32 +58,25 @@ class Tasks extends React.PureComponent<IProps, IState> {
 
     runAllTasks = () => {
         const { intl } = this.props;
-        this.confirmation(intl.formatMessage({ id: "tasks.runallConfirmation" }), () => {
-            this.context.apiClient
-                .resumeAllProcesses()
-                .then((res: { count: number }) => {
-                    setFlash(intl.formatMessage({ id: "tasks.flash.runallbulk" }, { count: res.count }));
-                })
-                .catch((err: any) => {
-                    if (err.response && err.response.status === 409) {
-                        setFlash(intl.formatMessage({ id: "tasks.flash.runallinprogress" }), "warning");
-                    } else {
-                        setFlash(intl.formatMessage({ id: "tasks.flash.runallfailed" }), "error");
-                        throw err;
-                    }
-                });
-        });
-    };
-
-    confirmation = (question: string, action: (e: React.MouseEvent) => void) =>
-        this.setState({
-            confirmationDialogOpen: true,
-            confirmationDialogQuestion: question,
-            confirmationDialogAction: (e: React.MouseEvent) => {
-                this.cancelConfirmation();
-                action(e);
+        this.state.showConfirmDialog({
+            question: intl.formatMessage({ id: "tasks.runallConfirmation" }),
+            confirmAction: () => {
+                this.context.apiClient
+                    .resumeAllProcesses()
+                    .then((res: { count: number }) => {
+                        setFlash(intl.formatMessage({ id: "tasks.flash.runallbulk" }, { count: res.count }));
+                    })
+                    .catch((err: any) => {
+                        if (err.response && err.response.status === 409) {
+                            setFlash(intl.formatMessage({ id: "tasks.flash.runallinprogress" }), "warning");
+                        } else {
+                            setFlash(intl.formatMessage({ id: "tasks.flash.runallfailed" }), "error");
+                            throw err;
+                        }
+                    });
             },
         });
+    };
 
     handleAbortProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
         stop(e);
@@ -96,13 +84,16 @@ class Tasks extends React.PureComponent<IProps, IState> {
 
         const product_name = process.subscriptions[0].product.name;
         const customer_name = organisationNameByUuid(process.subscriptions[0].customer_id, this.context.organisations);
-        this.confirmation(
-            intl.formatMessage({ id: "processes.abortConfirmation" }, { name: product_name, customer: customer_name }),
-            () =>
+        this.state.showConfirmDialog({
+            question: intl.formatMessage(
+                { id: "processes.abortConfirmation" },
+                { name: product_name, customer: customer_name }
+            ),
+            confirmAction: () =>
                 this.context.apiClient.abortProcess(process.pid).then(() => {
                     setFlash(intl.formatMessage({ id: "processes.flash.abort" }, { name: product_name }));
-                })
-        );
+                }),
+        });
     };
 
     handleDeleteProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
@@ -110,11 +101,13 @@ class Tasks extends React.PureComponent<IProps, IState> {
         const { intl } = this.props;
 
         const workflow_name = process.workflow;
-        this.confirmation(intl.formatMessage({ id: "tasks.deleteConfirmation" }, { name: workflow_name }), () =>
-            this.context.apiClient.deleteProcess(process.pid).then(() => {
-                setFlash(intl.formatMessage({ id: "tasks.flash.delete" }, { name: workflow_name }));
-            })
-        );
+        this.state.showConfirmDialog({
+            question: intl.formatMessage({ id: "tasks.deleteConfirmation" }, { name: workflow_name }),
+            confirmAction: () =>
+                this.context.apiClient.deleteProcess(process.pid).then(() => {
+                    setFlash(intl.formatMessage({ id: "tasks.flash.delete" }, { name: workflow_name }));
+                }),
+        });
     };
 
     handleRetryProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
@@ -123,13 +116,16 @@ class Tasks extends React.PureComponent<IProps, IState> {
 
         const product_name = process.subscriptions[0].product.name;
         const customer_name = organisationNameByUuid(process.subscriptions[0].customer_id, this.context.organisations);
-        this.confirmation(
-            intl.formatMessage({ id: "processes.retryConfirmation" }, { name: product_name, customer: customer_name }),
-            () =>
+        this.state.showConfirmDialog({
+            question: intl.formatMessage(
+                { id: "processes.retryConfirmation" },
+                { name: product_name, customer: customer_name }
+            ),
+            confirmAction: () =>
                 this.context.apiClient.retryProcess(process.pid).then(() => {
                     setFlash(intl.formatMessage({ id: "processes.flash.retry" }, { name: product_name }));
-                })
-        );
+                }),
+        });
     };
 
     showProcess = (process: ProcessV2) => () => {
@@ -156,8 +152,12 @@ class Tasks extends React.PureComponent<IProps, IState> {
         );
     }
 
+    addConfirmDialogActions = ({ showConfirmDialog }: ConfirmDialogActions) => {
+        this.setState({ showConfirmDialog });
+        return <></>;
+    };
+
     render() {
-        const { confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion } = this.state;
         const { allowed } = this.context;
 
         const tasksSettings = initialProcessTableSettings(
@@ -168,6 +168,9 @@ class Tasks extends React.PureComponent<IProps, IState> {
         );
         return (
             <EuiPage>
+                <ConfirmationDialogContext.Consumer>
+                    {(cdc) => this.addConfirmDialogActions(cdc)}
+                </ConfirmationDialogContext.Consumer>
                 <EuiPageBody component="div" className="tasks-container">
                     <Explain
                         close={() => this.setState({ showExplanation: false })}
@@ -183,12 +186,6 @@ class Tasks extends React.PureComponent<IProps, IState> {
                             on the reset button.
                         </p>
                     </Explain>
-                    <ConfirmationDialog
-                        isOpen={confirmationDialogOpen}
-                        cancel={this.cancelConfirmation}
-                        confirm={confirmationDialogAction}
-                        question={confirmationDialogQuestion}
-                    />
                     <EuiFlexGroup className="actions actions-buttons">
                         {allowed("/orchestrator/processes/all-tasks/retry") && (
                             <EuiFlexItem>

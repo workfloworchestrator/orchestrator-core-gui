@@ -17,8 +17,11 @@ import "pages/ProcessDetail.scss";
 
 import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody, EuiPanel, EuiText } from "@elastic/eui";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
-import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import ProcessStateDetails from "components/ProcessStateDetails";
+import ConfirmationDialogContext, {
+    ConfirmDialogActions,
+    ShowConfirmDialogType,
+} from "contextProviders/ConfirmationDialogProvider";
 import RunningProcessesContext from "contextProviders/runningProcessesProvider";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
@@ -52,14 +55,13 @@ interface IState {
     subscriptionProcesses: ProcessSubscription[];
     loaded: boolean;
     stepUserInput?: InputForm;
-    confirmationDialogOpen: boolean;
-    confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => void;
-    confirmationDialogQuestion: string;
     product?: Product;
     httpIntervalFallback: NodeJS.Timeout | undefined;
     wsProcess?: WsProcessV2;
     productName: string;
     customerName: string;
+    showConfirmDialog: ShowConfirmDialogType;
+    cancelConfirmDialog: () => void;
 }
 
 class ProcessDetail extends React.PureComponent<IProps, IState> {
@@ -74,13 +76,12 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             selectedTab: "process",
             subscriptionProcesses: [],
             loaded: false,
-            confirmationDialogOpen: false,
-            confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => {},
-            confirmationDialogQuestion: "",
             httpIntervalFallback: undefined,
             wsProcess: undefined,
             productName: "",
             customerName: "",
+            showConfirmDialog: () => {},
+            cancelConfirmDialog: () => {},
         };
     }
 
@@ -294,17 +295,8 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         this.props.setQuery({ scrollToStep: step }, "replaceIn");
     };
 
-    cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
-
-    confirmation = (question: string, action: (e: React.MouseEvent<HTMLButtonElement>) => void) =>
-        this.setState({
-            confirmationDialogOpen: true,
-            confirmationDialogQuestion: question,
-            confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => {
-                this.cancelConfirmation();
-                action(e);
-            },
-        });
+    confirmation = (question: string, confirmAction: (e: React.MouseEvent) => void) =>
+        this.state.showConfirmDialog({ question, confirmAction });
 
     renderActions = (process: ProcessWithDetails) => {
         const { intl } = this.props;
@@ -453,19 +445,13 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         </span>
     );
 
+    addConfirmDialogActions = ({ showConfirmDialog, cancelConfirmDialog }: ConfirmDialogActions) => {
+        this.setState({ showConfirmDialog, cancelConfirmDialog });
+        return <></>;
+    };
+
     render() {
-        const {
-            loaded,
-            notFound,
-            process,
-            tabs,
-            stepUserInput,
-            selectedTab,
-            subscriptionProcesses,
-            confirmationDialogOpen,
-            confirmationDialogAction,
-            confirmationDialogQuestion,
-        } = this.state;
+        const { loaded, notFound, process, tabs, stepUserInput, selectedTab, subscriptionProcesses } = this.state;
         if (!process) {
             return null;
         }
@@ -478,14 +464,10 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                 <RunningProcessesContext.Consumer>
                     {(rpc: any) => this.handleUpdateProcess(rpc.runningProcesses)}
                 </RunningProcessesContext.Consumer>
+                <ConfirmationDialogContext.Consumer>
+                    {(cdc) => this.addConfirmDialogActions(cdc)}
+                </ConfirmationDialogContext.Consumer>
                 <EuiPageBody component="div" className="mod-process-detail">
-                    <ConfirmationDialog
-                        isOpen={confirmationDialogOpen}
-                        cancel={this.cancelConfirmation}
-                        confirm={confirmationDialogAction}
-                        question={confirmationDialogQuestion}
-                    />
-
                     <section className="tabs">{tabs.map((tab) => this.renderTab(tab, selectedTab))}</section>
                     {renderContent &&
                         this.renderTabContent(selectedTab, process, step, stepUserInput, subscriptionProcesses)}
