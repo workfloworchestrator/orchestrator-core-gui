@@ -227,7 +227,9 @@ class ProductBlock extends React.Component<IProps, IState> {
     };
 
     addConfirmDialogActions = ({ showConfirmDialog, closeConfirmDialog }: ConfirmDialogActions) => {
-        this.setState({ showConfirmDialog, closeConfirmDialog });
+        if (this.state.showConfirmDialog !== showConfirmDialog) {
+            this.setState({ showConfirmDialog, closeConfirmDialog });
+        }
         return <></>;
     };
 

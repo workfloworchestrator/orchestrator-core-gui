@@ -299,11 +299,12 @@ class UserInputForm extends React.Component<IProps, IState> {
         hasNext: false,
     };
 
-    cancel = (e: React.FormEvent) => {
+    openDialog = (e: React.FormEvent) => {
         stop(e);
         this.state.showConfirmDialog({
             question: "",
             confirmAction: () => {},
+            cancelAction: this.props.cancel,
             leavePage: true,
         });
     };
@@ -364,7 +365,7 @@ class UserInputForm extends React.Component<IProps, IState> {
             </EuiButton>
         ) : (
             <EuiFlexItem>
-                <EuiButton id="button-cancel-form-submit" color="warning" onClick={this.cancel}>
+                <EuiButton id="button-cancel-form-submit" color="warning" onClick={this.openDialog}>
                     <FormattedMessage id="process.cancel" />
                 </EuiButton>
             </EuiFlexItem>
@@ -403,7 +404,9 @@ class UserInputForm extends React.Component<IProps, IState> {
     };
 
     addConfirmDialogActions = ({ showConfirmDialog }: ConfirmDialogActions) => {
-        this.setState({ showConfirmDialog });
+        if (this.state.showConfirmDialog !== showConfirmDialog) {
+            this.setState({ showConfirmDialog });
+        }
         return <></>;
     };
 

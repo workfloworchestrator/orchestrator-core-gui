@@ -68,7 +68,9 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
     }
 
     addConfirmDialogActions = ({ showConfirmDialog }: ConfirmDialogActions) => {
-        this.setState({ showConfirmDialog });
+        if (this.state.showConfirmDialog !== showConfirmDialog) {
+            this.setState({ showConfirmDialog });
+        }
         return <></>;
     };
 

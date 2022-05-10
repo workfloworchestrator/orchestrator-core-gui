@@ -96,7 +96,9 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
         });
 
     addConfirmDialogActions = ({ showConfirmDialog }: ConfirmDialogActions) => {
-        this.setState({ showConfirmDialog });
+        if (this.state.showConfirmDialog !== showConfirmDialog) {
+            this.setState({ showConfirmDialog });
+        }
         return <></>;
     };
 

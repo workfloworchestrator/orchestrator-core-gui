@@ -444,7 +444,9 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
     );
 
     addConfirmDialogActions = ({ showConfirmDialog }: ConfirmDialogActions) => {
-        this.setState({ showConfirmDialog });
+        if (this.state.showConfirmDialog !== showConfirmDialog) {
+            this.setState({ showConfirmDialog });
+        }
         return <></>;
     };
 

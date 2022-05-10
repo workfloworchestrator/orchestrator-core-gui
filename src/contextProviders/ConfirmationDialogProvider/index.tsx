@@ -3,8 +3,8 @@ import { createContext, useState } from "react";
 
 export interface ShowConfirmDialog {
     question: string;
-    confirmAction: (e: React.MouseEvent) => void;
-    cancelAction?: (e: React.MouseEvent) => void;
+    confirmAction: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    cancelAction?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     leavePage?: boolean;
     isError?: boolean;
 }
@@ -34,10 +34,11 @@ export function ConfirmationDialogContextWrapper({ children }: any) {
     const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
     const [state, setState] = useState({
         confirmationDialogQuestion: "",
-        confirmDialogAction: (e: React.MouseEvent, cancelConfirm: boolean = false) => {},
+        confirmDialogAction: (e: React.MouseEvent<HTMLButtonElement>, cancelConfirm: boolean = false) => {},
         leavePage: false,
         isError: false,
     });
+
     const closeConfirmDialog = () => setConfirmationDialogOpen(false);
 
     const showConfirmDialog = ({ question, confirmAction, cancelAction, leavePage, isError }: ShowConfirmDialog) => {
@@ -46,7 +47,7 @@ export function ConfirmationDialogContextWrapper({ children }: any) {
             confirmationDialogQuestion: question,
             leavePage: !!leavePage,
             isError: !!isError,
-            confirmDialogAction: (e: React.MouseEvent, cancelConfirm: boolean = false) => {
+            confirmDialogAction: (e: React.MouseEvent<HTMLButtonElement>, cancelConfirm: boolean = false) => {
                 closeConfirmDialog();
 
                 if (!cancelConfirm) {

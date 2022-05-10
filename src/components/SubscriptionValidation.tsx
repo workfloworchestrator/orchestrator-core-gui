@@ -231,7 +231,9 @@ class SubscriptionValidation extends React.Component<IProps, IState> {
     }
 
     addConfirmDialogActions = ({ showConfirmDialog }: ConfirmDialogActions) => {
-        this.setState({ showConfirmDialog });
+        if (this.state.showConfirmDialog !== showConfirmDialog) {
+            this.setState({ showConfirmDialog });
+        }
         return <></>;
     };
 
