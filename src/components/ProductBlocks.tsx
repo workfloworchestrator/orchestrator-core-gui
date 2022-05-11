@@ -21,7 +21,10 @@ import {
     EuiPageContentHeader,
     EuiSpacer,
 } from "@elastic/eui";
-import ConfirmationDialog from "components/modals/ConfirmationDialog";
+import ConfirmationDialogContext, {
+    ConfirmDialogActions,
+    ShowConfirmDialogType,
+} from "contextProviders/ConfirmationDialogProvider";
 import React from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
@@ -34,11 +37,7 @@ interface IState {
     productBlocks: ProductBlock[];
     productBlocksLoaded: boolean;
     isLoading: boolean;
-    confirmationDialogOpen: boolean;
-    confirmationDialogAction: () => void;
-    confirm: () => void;
-    confirmationDialogQuestion: string;
-    leavePage: boolean;
+    showConfirmDialog: ShowConfirmDialogType;
 }
 
 class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
@@ -48,11 +47,7 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
         productBlocks: [],
         productBlocksLoaded: true,
         isLoading: false,
-        confirmationDialogOpen: false,
-        confirmationDialogAction: () => this,
-        confirm: () => this,
-        confirmationDialogQuestion: "",
-        leavePage: true,
+        showConfirmDialog: () => {},
     };
 
     componentDidMount() {
@@ -60,8 +55,6 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
             this.setState({ productBlocks: productBlocks, productBlocksLoaded: false });
         });
     }
-
-    cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
 
     handleDeleteProductBlock = (productBlock: ProductBlock) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
@@ -96,24 +89,21 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
         );
     };
 
-    confirmation = (question: string, action: () => void) =>
-        this.setState({
-            confirmationDialogOpen: true,
-            confirmationDialogQuestion: question,
-            confirmationDialogAction: () => {
-                this.cancelConfirmation();
-                action();
-            },
+    confirmation = (question: string, confirmAction: () => void) =>
+        this.state.showConfirmDialog({
+            question,
+            confirmAction,
         });
 
+    addConfirmDialogActions = ({ showConfirmDialog }: ConfirmDialogActions) => {
+        if (this.state.showConfirmDialog !== showConfirmDialog) {
+            this.setState({ showConfirmDialog });
+        }
+        return <></>;
+    };
+
     render() {
-        const {
-            productBlocks,
-            productBlocksLoaded,
-            confirmationDialogOpen,
-            confirmationDialogAction,
-            confirmationDialogQuestion,
-        } = this.state;
+        const { productBlocks, productBlocksLoaded } = this.state;
 
         const search = {
             box: {
@@ -222,13 +212,10 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
 
         return (
             <EuiPageContent>
+                <ConfirmationDialogContext.Consumer>
+                    {(cdc) => this.addConfirmDialogActions(cdc)}
+                </ConfirmationDialogContext.Consumer>
                 <EuiPageContentHeader>
-                    <ConfirmationDialog
-                        isOpen={confirmationDialogOpen}
-                        cancel={this.cancelConfirmation}
-                        confirm={confirmationDialogAction}
-                        question={confirmationDialogQuestion}
-                    />
                     <EuiSpacer size="l" />
                     <EuiInMemoryTable
                         items={productBlocks}

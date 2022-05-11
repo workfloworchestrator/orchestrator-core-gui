@@ -16,8 +16,11 @@
 import "components/inputForms/UserInputForm.scss";
 
 import { EuiButton, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
-import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { SubscriptionsContextProvider } from "components/subscriptionContext";
+import ConfirmationDialogContext, {
+    ConfirmDialogActions,
+    ShowConfirmDialogType,
+} from "contextProviders/ConfirmationDialogProvider";
 import { autoFieldFunction } from "custom/uniforms/AutoFieldLoader";
 import invariant from "invariant";
 import { JSONSchema6 } from "json-schema";
@@ -49,10 +52,10 @@ interface IProps extends RouteComponentProps {
 }
 
 interface IState {
-    confirmationDialogOpen: boolean;
     nrOfValidationErrors: number;
     processing: boolean;
     rootErrors: string[];
+    showConfirmDialog: ShowConfirmDialogType;
 }
 
 declare module "uniforms" {
@@ -284,10 +287,10 @@ function fillPreselection(form: JSONSchema6, query: string) {
 class UserInputForm extends React.Component<IProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {
-        confirmationDialogOpen: false,
         processing: false,
         nrOfValidationErrors: 0,
         rootErrors: [],
+        showConfirmDialog: () => {},
     };
 
     public static defaultProps = {
@@ -296,9 +299,14 @@ class UserInputForm extends React.Component<IProps, IState> {
         hasNext: false,
     };
 
-    cancel = (e: React.FormEvent) => {
+    openDialog = (e: React.FormEvent) => {
         stop(e);
-        this.setState({ confirmationDialogOpen: true });
+        this.state.showConfirmDialog({
+            question: "",
+            confirmAction: () => {},
+            cancelAction: this.props.cancel,
+            leavePage: true,
+        });
     };
 
     submit = async (userInput: any = {}) => {
@@ -357,7 +365,7 @@ class UserInputForm extends React.Component<IProps, IState> {
             </EuiButton>
         ) : (
             <EuiFlexItem>
-                <EuiButton id="button-cancel-form-submit" color="warning" onClick={this.cancel}>
+                <EuiButton id="button-cancel-form-submit" color="warning" onClick={this.openDialog}>
                     <FormattedMessage id="process.cancel" />
                 </EuiButton>
             </EuiFlexItem>
@@ -395,9 +403,16 @@ class UserInputForm extends React.Component<IProps, IState> {
         );
     };
 
+    addConfirmDialogActions = ({ showConfirmDialog }: ConfirmDialogActions) => {
+        if (this.state.showConfirmDialog !== showConfirmDialog) {
+            this.setState({ showConfirmDialog });
+        }
+        return <></>;
+    };
+
     render() {
-        const { confirmationDialogOpen, nrOfValidationErrors, rootErrors } = this.state;
-        const { cancel, stepUserInput, userInput, location } = this.props;
+        const { nrOfValidationErrors, rootErrors } = this.state;
+        const { stepUserInput, userInput, location } = this.props;
         const prefilledForm = fillPreselection(stepUserInput, location.search);
         const bridge = new CustomTitleJSONSchemaBridge(prefilledForm, () => {});
 
@@ -405,12 +420,9 @@ class UserInputForm extends React.Component<IProps, IState> {
 
         return (
             <div className="user-input-form">
-                <ConfirmationDialog
-                    isOpen={confirmationDialogOpen}
-                    cancel={cancel}
-                    confirm={() => this.setState({ confirmationDialogOpen: false })}
-                    leavePage={true}
-                />
+                <ConfirmationDialogContext.Consumer>
+                    {(cdc) => this.addConfirmDialogActions(cdc)}
+                </ConfirmationDialogContext.Consumer>
                 <section className="form-fieldset">
                     {stepUserInput.title && stepUserInput.title !== "unknown" && <h3>{stepUserInput.title}</h3>}
                     <SubscriptionsContextProvider>

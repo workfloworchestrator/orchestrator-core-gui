@@ -34,33 +34,33 @@ export function RenderActions({
 }) {
     const intl = useIntl();
     const { allowed, organisations, redirect, theme } = useContext(ApplicationContext);
-    const { showConfirmDialog: confirmation } = useContext(ConfirmationDialogContext);
+    const { showConfirmDialog } = useContext(ConfirmationDialogContext);
 
-    if (!confirmation) {
+    if (!showConfirmDialog) {
         return null;
     }
 
     const terminate = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
 
-        confirmation(
-            intl.formatMessage(
+        showConfirmDialog({
+            question: intl.formatMessage(
                 { id: "subscription.terminateConfirmation" },
                 {
                     name: subscription.product.name,
                     customer: organisationNameByUuid(subscription.customer_id, organisations),
                 }
             ),
-            () => redirect(`/terminate-subscription?subscription=${subscription.subscription_id}`)
-        );
+            confirmAction: () => redirect(`/terminate-subscription?subscription=${subscription.subscription_id}`),
+        });
     };
 
     const modify = (workflow_name: string) => (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
 
         const change = intl.formatMessage({ id: `workflow.${workflow_name}` }).toLowerCase();
-        confirmation(
-            intl.formatMessage(
+        showConfirmDialog({
+            question: intl.formatMessage(
                 { id: "subscription.modifyConfirmation" },
                 {
                     name: subscription.product.name,
@@ -68,9 +68,9 @@ export function RenderActions({
                     change: change,
                 }
             ),
-            () =>
-                redirect(`/modify-subscription?workflow=${workflow_name}&subscription=${subscription.subscription_id}`)
-        );
+            confirmAction: () =>
+                redirect(`/modify-subscription?workflow=${workflow_name}&subscription=${subscription.subscription_id}`),
+        });
     };
 
     return (

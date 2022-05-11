@@ -16,7 +16,10 @@
 import "components/SubscriptionValidation.scss";
 
 import CheckBox from "components/CheckBox";
-import ConfirmationDialog from "components/modals/ConfirmationDialog";
+import ConfirmationDialogContext, {
+    ConfirmDialogActions,
+    ShowConfirmDialogType,
+} from "contextProviders/ConfirmationDialogProvider";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
@@ -43,19 +46,13 @@ interface IProps extends WrappedComponentProps {
 interface IState {
     sorted: SortOption;
     subscriptions?: SubscriptionWithDetails[];
-    confirmationDialogOpen: boolean;
-    confirmationDialogAction: () => void;
-    confirm: () => void;
-    confirmationDialogQuestion: string;
+    showConfirmDialog: ShowConfirmDialogType;
 }
 
 class SubscriptionValidation extends React.Component<IProps, IState> {
     state: IState = {
         sorted: { name: "status", descending: false },
-        confirmationDialogOpen: false,
-        confirmationDialogAction: () => this,
-        confirm: () => this,
-        confirmationDialogQuestion: "",
+        showConfirmDialog: () => {},
     };
 
     componentDidUpdate(prevProps: IProps) {
@@ -101,16 +98,10 @@ class SubscriptionValidation extends React.Component<IProps, IState> {
         return <i />;
     };
 
-    cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
-
-    confirmation = (question: string, action: () => void) =>
-        this.setState({
-            confirmationDialogOpen: true,
-            confirmationDialogQuestion: question,
-            confirmationDialogAction: () => {
-                this.cancelConfirmation();
-                action();
-            },
+    confirmation = (question: string, confirmAction: () => void) =>
+        this.state.showConfirmDialog({
+            question,
+            confirmAction,
         });
 
     handleDeleteSubscription = (subscription: SubscriptionWithDetails) => (e: React.MouseEvent<HTMLElement>) => {
@@ -239,23 +230,21 @@ class SubscriptionValidation extends React.Component<IProps, IState> {
         );
     }
 
+    addConfirmDialogActions = ({ showConfirmDialog }: ConfirmDialogActions) => {
+        if (this.state.showConfirmDialog !== showConfirmDialog) {
+            this.setState({ showConfirmDialog });
+        }
+        return <></>;
+    };
+
     render() {
-        const {
-            subscriptions,
-            sorted,
-            confirmationDialogOpen,
-            confirmationDialogAction,
-            confirmationDialogQuestion,
-        } = this.state;
+        const { subscriptions, sorted } = this.state;
         const { workflow } = this.props;
         return (
             <section className="subscription-validation">
-                <ConfirmationDialog
-                    isOpen={confirmationDialogOpen}
-                    cancel={this.cancelConfirmation}
-                    confirm={confirmationDialogAction}
-                    question={confirmationDialogQuestion}
-                />
+                <ConfirmationDialogContext.Consumer>
+                    {(cdc) => this.addConfirmDialogActions(cdc)}
+                </ConfirmationDialogContext.Consumer>
                 <h3>
                     <FormattedMessage id="validations.workflow_key" values={{ workflow: workflow }} />
                 </h3>
