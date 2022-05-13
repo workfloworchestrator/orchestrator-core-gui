@@ -45,3 +45,13 @@ export function getReactSelectTheme(theme: Theme) {
     };
     return customStyles;
 }
+
+export const getStatusBadgeColor = (status: string) => {
+    const statusColors: any = {
+        "end of life": "danger",
+        active: "success",
+        "phase out": "danger",
+        "pre production": "warning",
+    };
+    return statusColors.hasOwnProperty(status) ? statusColors[status] : "primary";
+};

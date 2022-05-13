@@ -33,6 +33,8 @@ import { renderDateTime } from "utils/Lookups";
 import { ProductBlock, ResourceType } from "utils/types";
 import { stop } from "utils/Utils";
 
+import { getStatusBadgeColor } from "../utils/Colors";
+
 interface IState {
     productBlocks: ProductBlock[];
     productBlocksLoaded: boolean;
@@ -134,40 +136,11 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
                 sortable: true,
                 truncateText: false,
                 width: "8%",
-                render: (status: string) => {
-                    switch (status) {
-                        case "end of life":
-                            return (
-                                <EuiBadge color="error" isDisabled={false}>
-                                    {status}
-                                </EuiBadge>
-                            );
-                        case "active":
-                            return (
-                                <EuiBadge color="success" isDisabled={false}>
-                                    {status}
-                                </EuiBadge>
-                            );
-                        case "phase out":
-                            return (
-                                <EuiBadge color="danger" isDisabled={false}>
-                                    {status}
-                                </EuiBadge>
-                            );
-                        case "pre production":
-                            return (
-                                <EuiBadge color="warning" isDisabled={false}>
-                                    {status}
-                                </EuiBadge>
-                            );
-                        default:
-                            return (
-                                <EuiBadge color="primary" isDisabled={false}>
-                                    {status}
-                                </EuiBadge>
-                            );
-                    }
-                },
+                render: (status: string) => (
+                    <EuiBadge color={getStatusBadgeColor(status)} isDisabled={false}>
+                        {status}
+                    </EuiBadge>
+                ),
             },
             {
                 field: "tag",

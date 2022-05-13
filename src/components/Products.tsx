@@ -24,14 +24,16 @@ import {
     EuiSpacer,
 } from "@elastic/eui";
 import ConfirmationDialogContext from "contextProviders/ConfirmationDialogProvider";
-import React, { useCallback, useContext, useEffect, useState } from "react";
 import { intl } from "locale/i18n";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { injectIntl } from "react-intl";
 import { useHistory } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { renderDateTime } from "utils/Lookups";
 import { Product, ProductBlock } from "utils/types";
+
+import { getStatusBadgeColor } from "../utils/Colors";
 
 function Products() {
     const { apiClient, allowed } = useContext(ApplicationContext);
@@ -123,40 +125,11 @@ function Products() {
             sortable: true,
             truncateText: false,
             width: "5%",
-            render: (status: string) => {
-                switch (status) {
-                    case "end of life":
-                        return (
-                            <EuiBadge color="error" isDisabled={false}>
-                                {status}
-                            </EuiBadge>
-                        );
-                    case "active":
-                        return (
-                            <EuiBadge color="success" isDisabled={false}>
-                                {status}
-                            </EuiBadge>
-                        );
-                    case "phase out":
-                        return (
-                            <EuiBadge color="danger" isDisabled={false}>
-                                {status}
-                            </EuiBadge>
-                        );
-                    case "pre production":
-                        return (
-                            <EuiBadge color="warning" isDisabled={false}>
-                                {status}
-                            </EuiBadge>
-                        );
-                    default:
-                        return (
-                            <EuiBadge color="primary" isDisabled={false}>
-                                {status}
-                            </EuiBadge>
-                        );
-                }
-            },
+            render: (status: string) => (
+                <EuiBadge color={getStatusBadgeColor(status)} isDisabled={false}>
+                    {status}
+                </EuiBadge>
+            ),
         },
         {
             field: "product_blocks",
