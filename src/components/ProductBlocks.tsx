@@ -33,6 +33,8 @@ import { renderDateTime } from "utils/Lookups";
 import { ProductBlock, ResourceType } from "utils/types";
 import { stop } from "utils/Utils";
 
+import { getStatusBadgeColor } from "../utils/Colors";
+
 interface IState {
     productBlocks: ProductBlock[];
     productBlocksLoaded: boolean;
@@ -134,6 +136,11 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
                 sortable: true,
                 truncateText: false,
                 width: "8%",
+                render: (status: string) => (
+                    <EuiBadge color={getStatusBadgeColor(status)} isDisabled={false}>
+                        {status}
+                    </EuiBadge>
+                ),
             },
             {
                 field: "tag",

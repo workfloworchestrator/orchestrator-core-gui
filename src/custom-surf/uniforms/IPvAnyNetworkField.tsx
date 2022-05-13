@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiFormRow, EuiText } from "@elastic/eui";
+import { EuiCallOut, EuiFormRow, EuiText } from "@elastic/eui";
 import IPPrefixTable from "custom/components/inputForms/IpPrefixTable";
 import SplitPrefix from "custom/components/inputForms/SplitPrefix";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
@@ -42,6 +42,7 @@ function IPvAnyNetwork({
     ...props
 }: IPvAnyNetworkFieldProps) {
     const [selectedPrefix, setSelectedPrefix] = useState<IpBlock | undefined>(undefined);
+    const [manualOverride, setManualOverride] = useState(false);
 
     const usePrefix = selectedPrefix?.prefix ?? value;
     const [subnet, netmask] = usePrefix?.split("/") ?? ["", ""];
@@ -68,13 +69,20 @@ function IPvAnyNetwork({
                                         if (prefix.state === 0 || prefix.state === 1) {
                                             setSelectedPrefix(prefix);
                                         }
+                                        setManualOverride(false);
                                         onChange(prefix.prefix);
+                                    }
+                                }}
+                                onManualOverride={(prefixString: string) => {
+                                    if (!readOnly) {
+                                        setManualOverride(true);
+                                        onChange(prefixString);
                                     }
                                 }}
                                 selected_prefix_id={selectedPrefix?.id}
                             />
                         )}
-                        {usePrefix && (
+                        {usePrefix && !manualOverride && (
                             <SplitPrefix
                                 id={id}
                                 name={name}
@@ -88,6 +96,11 @@ function IPvAnyNetwork({
                                 }}
                                 selectedSubnet={usePrefix}
                             />
+                        )}
+                        {usePrefix && manualOverride && (
+                            <EuiCallOut title="Manually selected prefix" color="primary" iconType="check">
+                                <p>{value}</p>
+                            </EuiCallOut>
                         )}
                     </div>
                 </section>
