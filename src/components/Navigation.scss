@@ -18,10 +18,10 @@
 @use "../stylesheets/vars";
 
 .sync {
-    position: fixed;
+    position: fixed !important;
     bottom: 8px;
     left: 8px;
-    width: auto;
+    width: auto !important;
     z-index: map-get(vars.$z-index, sync);
     &__label {
         font-size: 0.875em;
