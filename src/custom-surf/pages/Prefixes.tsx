@@ -3,8 +3,6 @@
  *
  */
 
-import "custom/pages/Prefixes.scss";
-// import "../../emotion/custom-surf/pages/Prefixes"
 import { EuiFieldSearch, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody, EuiSpacer } from "@elastic/eui";
 import LabelledFilter from "custom/components/LabelledFilter";
 import debounce from "lodash/debounce";
@@ -16,9 +14,8 @@ import ApplicationContext from "utils/ApplicationContext";
 import { familyFullName, ipAddressToNumber, ipamStates, organisationNameByUuid, renderDate } from "utils/Lookups";
 import { Filter, IpPrefix, IpPrefixSubscription, Product, SortOption } from "utils/types";
 import { isEmpty, isValidUUIDv4, stop } from "utils/Utils";
-import {mediaQueriesPhone} from "../../emotion/custom-surf/pages/Prefixes";
-import { css } from '@emotion/core';
 
+import { tablePrefixes } from "../../emotion/custom-surf/pages/Prefixes";
 
 interface ExtendedIpPrefixSubscription extends IpPrefixSubscription {
     customer: string;
@@ -379,29 +376,27 @@ class Prefixes extends React.PureComponent<IProps, IState> {
         const filteredPrefixes = isEmpty(query) ? this.filter(prefixes) : this.filter(searchResults);
         const sortedPrefixes = this.sort(filteredPrefixes);
         return (
-            <EuiPage>
+            <EuiPage css={tablePrefixes}>
                 <EuiPageBody component="div" className="mod-prefixes">
                     <div>
-                        <div className="options">
-                            <EuiFlexGroup>
-                                <EuiFlexItem>
-                                    <LabelledFilter
-                                        items={filterAttributes.state}
-                                        filterBy={this.setFilterList("state")}
-                                        selectAll={this.selectAll("state")}
-                                        label={intl.formatMessage({ id: "prefixes.filters.state" })}
-                                    />
-                                </EuiFlexItem>
-                                <EuiFlexItem grow={true}>
-                                    <LabelledFilter
-                                        items={filterAttributes.rootPrefix}
-                                        filterBy={this.setFilterList("rootPrefix")}
-                                        selectAll={this.selectAll("rootPrefix")}
-                                        label={intl.formatMessage({ id: "prefixes.filters.root_prefix" })}
-                                    />
-                                </EuiFlexItem>
-                            </EuiFlexGroup>
-                        </div>
+                        <EuiFlexGroup>
+                            <EuiFlexItem>
+                                <LabelledFilter
+                                    items={filterAttributes.state}
+                                    filterBy={this.setFilterList("state")}
+                                    selectAll={this.selectAll("state")}
+                                    label={intl.formatMessage({ id: "prefixes.filters.state" })}
+                                />
+                            </EuiFlexItem>
+                            <EuiFlexItem grow={true}>
+                                <LabelledFilter
+                                    items={filterAttributes.rootPrefix}
+                                    filterBy={this.setFilterList("rootPrefix")}
+                                    selectAll={this.selectAll("rootPrefix")}
+                                    label={intl.formatMessage({ id: "prefixes.filters.root_prefix" })}
+                                />
+                            </EuiFlexItem>
+                        </EuiFlexGroup>
                         <EuiFlexGroup>
                             <EuiFlexItem>
                                 <EuiFieldSearch
@@ -415,7 +410,7 @@ class Prefixes extends React.PureComponent<IProps, IState> {
                         </EuiFlexGroup>
                         <EuiSpacer size="m" />
                     </div>
-                    <table css={css``} className="prefixes">
+                    <table className="prefixes">
                         <thead>
                             <tr>{columns.map((column, index) => th(index))}</tr>
                         </thead>
