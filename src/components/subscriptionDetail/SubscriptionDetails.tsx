@@ -37,7 +37,8 @@ import { FavoriteSubscriptionStorage, SubscriptionModel, SubscriptionProcesses }
 function renderFailedTask(subscriptionProcesses: SubscriptionProcesses[]) {
     let failed_tasks = subscriptionProcesses
         .map((sp) => sp.process)
-        .filter((process) => process.last_status !== "completed");
+        .filter((process) => process.last_status !== "completed")
+        .sort((a, b) => b.started_at - a.started_at);
 
     if (failed_tasks.length)
         return (
