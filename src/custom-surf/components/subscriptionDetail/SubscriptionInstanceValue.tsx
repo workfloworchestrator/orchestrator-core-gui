@@ -377,6 +377,10 @@ export function getExternalTypeData(
         case "ipam_prefix_id":
         case "customer_ptp_ipv4_ipam_id":
         case "customer_ptp_ipv6_ipam_id":
+        case "customer_ptp_ipv4_primary_ipam_id":
+        case "customer_ptp_ipv4_secondary_ipam_ids":
+        case "customer_ptp_ipv6_primary_ipam_id":
+        case "customer_ptp_ipv6_secondary_ipam_ids":
             return {
                 getter: (identifier: string) => customApiClient.prefixById(parseInt(identifier)),
                 render: (data: IPAMPrefix) => <IpamPrefix prefix={data} />,
