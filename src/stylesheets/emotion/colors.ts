@@ -8,37 +8,33 @@ export const LIGHT_BACKGROUND_COLOR = "#f6f6f6";
 export const DARK_SELECTED_FONT_COLOR = "#0799fc";
 export const LIGHT_SELECTED_FONT_COLOR = "#0077CCFF";
 
-export const primary = "#0077cc";
+/* Copy of EUI colors */
+export const PRIMARY_COLOR = "#0077cc";
+export const ACCENT = "#274b72";
+export const SUCCESS = "#00bfb3";
+export const WARNING = "#fec514";
+export const DANGER = "#bd271e";
 
-export const lightestSuccess = "#e5ffed";
+/* Todo: sort remaining colors and investigate if we need them all (we could use `shadeColor()`) */
+export const LIGHTEST_SUCCESS = "#e5ffed";
 export const LIGHT_PRIMARY_COLOR = "#cbe7fb";
-export const lightestPrimary = "#fcfdff";
+export const LIGHTEST_PRIMARY_COLOR = "#fcfdff";
 export const DARKEST_PRIMARY_COLOR = "#08314bff";
-
-export const accent = "#274b72";
-
-export const lighterPrimary = "#a8d9e6";
-export const lightDanger = "#ffcdc6";
-export const lightestDanger = "#ffddd6";
-export const success = "#00bfb3";
+export const LIGHTER_PRIMARY = "#a8d9e6";
+export const LIGHT_DANGER = "#ffcdc6";
+export const LIGHTEST_DANGER = "#ffddd6";
 export const DARK_SUCCESS_COLOR = "#034b43";
 export const LIGHT_SUCCESS_COLOR = "#d0ffd9";
-export const darkerPrimary = "#0077cc";
-export const gold = "#d4af37";
-export const warning = "#fec514";
+export const DARKER_PRIMARY = "#0077cc";
+export const GOLD = "#d4af37";
 export const DARK_GOLD_COlOR = "#524217";
-export const lightWarning = "#ffe4ab";
+export const LIGHT_WARNING = "#ffe4ab";
 export const LIGHT_GOLD_COLOR = "#fdf6d4";
-export const background = "#f9f9f9";
-export const lightestGold = "#fdfde3";
+export const BACKGROUND_COLOR = "#f9f9f9";
+export const LIGHTEST_GOLD = "#fdfde3";
 export const MEDIUM_GREY_COLOR = "#a6b6be";
-export const tableOddEven = "#fbfbfb";
 export const DARK_GREY_COLOR = "#565656";
-export const border = "rgba(black, 0.1)";
-export const darkestGrey = "#414141";
-export const borderLight = "rgba(white, 0.2)";
+export const DARKEST_GREY = "#414141";
 export const LIGHT_GREY_COLOR = "#eff2f3";
-export const br = "3px";
 export const LIGHTER_GREY_COLOR = "#d9d9d8";
-export const lightestGrey = "#fbfbfb";
-export const danger = "#bd271e";
+export const LIGHTEST_GREY = "#fbfbfb";
