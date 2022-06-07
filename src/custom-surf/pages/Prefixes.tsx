@@ -4,8 +4,8 @@
  */
 
 import { EuiFieldSearch, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody, EuiSpacer } from "@elastic/eui";
-import { tablePrefixes } from "custom/pages/PrefixesStyling";
 import LabelledFilter from "custom/components/LabelledFilter";
+import { tablePrefixes } from "custom/pages/PrefixesStyling";
 import debounce from "lodash/debounce";
 import pMap from "p-map";
 import React from "react";
