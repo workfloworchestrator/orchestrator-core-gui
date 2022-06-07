@@ -1,19 +1,18 @@
 import { css } from "@emotion/core";
-
-import { phone } from "../../stylesheets/media_queries";
 import {
-    darkGold,
-    darkGrey,
-    darkSuccess,
-    darkestPrimary,
-    hover,
-    lightGold,
-    lightGrey,
-    lightPrimary,
-    lightSuccess,
-    lighterGrey,
-    mediumGrey,
-} from "../../vars";
+    DARKEST_PRIMARY_COLOR,
+    DARK_GOLD_COlOR,
+    DARK_GREY_COLOR,
+    DARK_SUCCESS_COLOR,
+    LIGHTER_GREY_COLOR,
+    LIGHT_GOLD_COLOR,
+    LIGHT_GREY_COLOR,
+    LIGHT_PRIMARY_COLOR,
+    LIGHT_SUCCESS_COLOR,
+    MEDIUM_GREY_COLOR,
+} from "stylesheets/emotion/colors";
+import { phoneMediaQuery } from "stylesheets/emotion/mediaQueries";
+import { shadeColor } from "stylesheets/emotion/utils";
 
 const table_phone = css`
     thead {
@@ -22,12 +21,12 @@ const table_phone = css`
     tr {
         margin-bottom: 10px;
         display: block;
-        border-bottom: 2px solid ${lighterGrey};
+        border-bottom: 2px solid ${LIGHTER_GREY_COLOR};
     }
     td {
         display: block;
         text-align: right;
-        border-bottom: 1px dotted ${lightPrimary};
+        border-bottom: 1px dotted ${LIGHT_PRIMARY_COLOR};
         padding: 8px 0;
 
         &:before {
@@ -36,7 +35,7 @@ const table_phone = css`
             text-transform: uppercase;
             font-weight: bold;
             font-size: 14px;
-            color: ${mediumGrey};
+            color: ${MEDIUM_GREY_COLOR};
         }
     }
 `;
@@ -54,31 +53,30 @@ export const tablePrefixes = css`
 
         tr {
             &.light {
-                border-bottom: 1px solid ${lightGrey};
+                border-bottom: 1px solid ${LIGHT_GREY_COLOR};
             }
 
             &.dark {
-                border-bottom: 1px solid ${darkGrey};
+                border-bottom: 1px solid ${DARK_GREY_COLOR};
             }
         }
 
         tr.Allocated {
             &.light {
-                background-color: ${lightPrimary};
+                background-color: ${LIGHT_PRIMARY_COLOR};
             }
 
             &.dark {
-                background-color: ${darkestPrimary};
+                background-color: ${DARKEST_PRIMARY_COLOR};
             }
 
-            //TODO:
             &:hover {
                 &.light {
-                    background-color: color .adjust(${lightPrimary}, $lightness: -10%);
+                    background-color: ${shadeColor(LIGHT_PRIMARY_COLOR, -10)};
                 }
 
                 &.dark {
-                    background-color: color .adjust(${darkestPrimary}, $lightness: -10%);
+                    background-color: ${shadeColor(DARKEST_PRIMARY_COLOR, -10)};
                 }
             }
         }
@@ -87,40 +85,40 @@ export const tablePrefixes = css`
             cursor: default;
 
             &.light {
-                background-color: ${lightGold};
+                background-color: ${LIGHT_GOLD_COLOR};
             }
 
             &.dark {
-                background-color: ${darkGold};
+                background-color: ${DARK_GOLD_COlOR};
             }
 
             &:hover {
                 &.light {
-                    background-color: color .adjust(${lightGold}, $lightness: -10%);
+                    background-color: ${shadeColor(LIGHT_GOLD_COLOR, -10)};
                 }
 
                 &.dark {
-                    background-color: color .adjust(${darkGold}, $lightness: -10%);
+                    background-color: ${shadeColor(DARK_GOLD_COlOR, -10)};
                 }
             }
         }
 
         tr.Free {
             &.light {
-                background-color: ${lightSuccess};
+                background-color: ${LIGHT_SUCCESS_COLOR};
             }
 
             &.dark {
-                background-color: ${darkSuccess};
+                background-color: ${DARK_SUCCESS_COLOR};
             }
 
             &:hover {
                 &.light {
-                    background-color: color .adjust(${lightSuccess}, $lightness: -10%);
+                    background-color: ${shadeColor(LIGHT_SUCCESS_COLOR, -10)};
                 }
 
                 &.dark {
-                    background-color: color .adjust(${darkSuccess}, $lightness: -10%);
+                    background-color: ${shadeColor(DARK_SUCCESS_COLOR, -10)};
                 }
             }
         }
@@ -169,38 +167,18 @@ export const tablePrefixes = css`
             text-transform: uppercase;
             font-weight: bold;
             font-size: larger;
-            color: ${mediumGrey};
+            color: ${MEDIUM_GREY_COLOR};
             padding: 7px 2px 7px 0;
         }
 
         i.fa {
             float: right;
             margin-right: 15px;
-            color: ${mediumGrey};
+            color: ${MEDIUM_GREY_COLOR};
             font-size: 18px;
         }
 
         tbody {
-            tr {
-                &:hover {
-                    background-color: ${hover};
-
-                    &.Planned {
-                        background-color: color.adjust(${lightGold}, $lightness: -10%);
-                    }
-
-                    &.Free {
-                        background-color: color.adjust(${lightSuccess}, $lightness: -10%);
-                    }
-
-                    &.Allocated {
-                        //color.adjust seems to not work with emotion shoud we user rgba() ?
-                        //background-color: ${lightPrimary}
-                        background-color: rgba(203, 231, 251, 0.1);
-                    }
-                }
-            }
-
             td {
                 i.fa-info-circle {
                     @include mixins . info-icon;
@@ -231,6 +209,6 @@ export const tablePrefixes = css`
                 }
             }
         }
-        ${phone(table_phone)}
+        ${phoneMediaQuery(table_phone)}
     }
 `;

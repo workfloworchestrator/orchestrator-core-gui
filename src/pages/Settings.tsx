@@ -13,8 +13,6 @@
  *
  */
 
-import "emotion/pages/Settings";
-
 import {
     EuiButton,
     EuiCard,
@@ -32,7 +30,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 
-import { description } from "../emotion/pages/Settings";
+import { descriptionStyle } from "./SettingsStyling";
 
 enum Cache {
     ims = "ims",
@@ -151,7 +149,7 @@ export const Settings: FunctionComponent = (props: IProps) => {
                     </EuiButton>
                     <EuiHorizontalRule margin="l" />
                     <EuiDescriptionList
-                        css={description}
+                        css={descriptionStyle}
                         type="column"
                         listItems={engineDescription}
                         style={{ maxWidth: "400px" }}

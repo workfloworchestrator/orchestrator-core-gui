@@ -28,12 +28,11 @@ import { intl } from "locale/i18n";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { injectIntl } from "react-intl";
 import { useHistory } from "react-router";
+import { getStatusBadgeColor } from "stylesheets/emotion/utils";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { renderDateTime } from "utils/Lookups";
 import { Product, ProductBlock } from "utils/types";
-
-import { getStatusBadgeColor } from "../utils/Colors";
 
 function Products() {
     const { apiClient, allowed } = useContext(ApplicationContext);

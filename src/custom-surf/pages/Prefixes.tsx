@@ -4,6 +4,7 @@
  */
 
 import { EuiFieldSearch, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody, EuiSpacer } from "@elastic/eui";
+import { tablePrefixes } from "custom-surf/pages/PrefixesStyling";
 import LabelledFilter from "custom/components/LabelledFilter";
 import debounce from "lodash/debounce";
 import pMap from "p-map";
@@ -14,8 +15,6 @@ import ApplicationContext from "utils/ApplicationContext";
 import { familyFullName, ipAddressToNumber, ipamStates, organisationNameByUuid, renderDate } from "utils/Lookups";
 import { Filter, IpPrefix, IpPrefixSubscription, Product, SortOption } from "utils/types";
 import { isEmpty, isValidUUIDv4, stop } from "utils/Utils";
-
-import { tablePrefixes } from "../../emotion/custom-surf/pages/Prefixes";
 
 interface ExtendedIpPrefixSubscription extends IpPrefixSubscription {
     customer: string;

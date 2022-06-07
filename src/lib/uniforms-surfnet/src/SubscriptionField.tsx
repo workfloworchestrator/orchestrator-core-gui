@@ -25,13 +25,12 @@ import get from "lodash/get";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import ReactSelect from "react-select";
+import { getReactSelectTheme } from "stylesheets/emotion/utils";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { productById } from "utils/Lookups";
 import { Option, Organization, Product, ServicePortSubscription, Subscription as iSubscription } from "utils/types";
 import { filterProductsByBandwidth } from "validations/Products";
-
-import { getReactSelectTheme } from "../../../utils/Colors";
 
 export function makeLabel(subscription: iSubscription, products: Product[], organisations?: Organization[]) {
     const organisation = organisations && organisations.find((org) => org.uuid === subscription.customer_id);
@@ -59,6 +58,7 @@ export function getPortMode(subscription: ServicePortSubscription, products: Pro
 
     return subscription?.port_mode || (["MSC", "MSCNL", "IRBSP"].includes(product.tag!) ? "tagged" : "untagged");
 }
+
 declare module "uniforms" {
     interface FilterDOMProps {
         excludedSubscriptionIds: never;
