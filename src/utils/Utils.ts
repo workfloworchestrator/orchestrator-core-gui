@@ -14,6 +14,7 @@
  */
 
 import { isDate } from "date-fns";
+import { flatten } from "lodash";
 import isEqual from "lodash/isEqual";
 import { lazy } from "react";
 
@@ -117,7 +118,7 @@ export function findObjects(obj: Object, targetProp: string) {
 
     getObject(obj);
     if (finalResult.length) {
-        return finalResult[0];
+        return flatten(finalResult)
     }
     return [];
 }
