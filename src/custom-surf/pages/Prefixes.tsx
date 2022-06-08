@@ -3,10 +3,9 @@
  *
  */
 
-import "custom/pages/Prefixes.scss";
-
 import { EuiFieldSearch, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody, EuiSpacer } from "@elastic/eui";
 import LabelledFilter from "custom/components/LabelledFilter";
+import { tablePrefixes } from "custom/pages/PrefixesStyling";
 import debounce from "lodash/debounce";
 import pMap from "p-map";
 import React from "react";
@@ -376,29 +375,27 @@ class Prefixes extends React.PureComponent<IProps, IState> {
         const filteredPrefixes = isEmpty(query) ? this.filter(prefixes) : this.filter(searchResults);
         const sortedPrefixes = this.sort(filteredPrefixes);
         return (
-            <EuiPage>
+            <EuiPage css={tablePrefixes}>
                 <EuiPageBody component="div" className="mod-prefixes">
                     <div>
-                        <div className="options">
-                            <EuiFlexGroup>
-                                <EuiFlexItem>
-                                    <LabelledFilter
-                                        items={filterAttributes.state}
-                                        filterBy={this.setFilterList("state")}
-                                        selectAll={this.selectAll("state")}
-                                        label={intl.formatMessage({ id: "prefixes.filters.state" })}
-                                    />
-                                </EuiFlexItem>
-                                <EuiFlexItem grow={true}>
-                                    <LabelledFilter
-                                        items={filterAttributes.rootPrefix}
-                                        filterBy={this.setFilterList("rootPrefix")}
-                                        selectAll={this.selectAll("rootPrefix")}
-                                        label={intl.formatMessage({ id: "prefixes.filters.root_prefix" })}
-                                    />
-                                </EuiFlexItem>
-                            </EuiFlexGroup>
-                        </div>
+                        <EuiFlexGroup>
+                            <EuiFlexItem>
+                                <LabelledFilter
+                                    items={filterAttributes.state}
+                                    filterBy={this.setFilterList("state")}
+                                    selectAll={this.selectAll("state")}
+                                    label={intl.formatMessage({ id: "prefixes.filters.state" })}
+                                />
+                            </EuiFlexItem>
+                            <EuiFlexItem grow={true}>
+                                <LabelledFilter
+                                    items={filterAttributes.rootPrefix}
+                                    filterBy={this.setFilterList("rootPrefix")}
+                                    selectAll={this.selectAll("rootPrefix")}
+                                    label={intl.formatMessage({ id: "prefixes.filters.root_prefix" })}
+                                />
+                            </EuiFlexItem>
+                        </EuiFlexGroup>
                         <EuiFlexGroup>
                             <EuiFlexItem>
                                 <EuiFieldSearch

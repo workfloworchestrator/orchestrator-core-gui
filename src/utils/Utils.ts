@@ -118,7 +118,7 @@ export function findObjects(obj: Object, targetProp: string) {
 
     getObject(obj);
     if (finalResult.length) {
-        return flatten(finalResult)
+        return flatten(finalResult);
     }
     return [];
 }

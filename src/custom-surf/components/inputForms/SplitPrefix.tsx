@@ -18,8 +18,8 @@ import "custom/components/inputForms/SplitPrefix.scss";
 import { range } from "lodash";
 import React from "react";
 import ReactSelect, { ValueType } from "react-select";
+import { getReactSelectTheme } from "stylesheets/emotion/utils";
 import ApplicationContext from "utils/ApplicationContext";
-import { getReactSelectTheme } from "utils/Colors";
 import { Option } from "utils/types";
 
 interface IProps {

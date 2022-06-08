@@ -30,8 +30,8 @@ import {
 } from "@elastic/eui";
 import React from "react";
 import ReactSelect, { ValueType } from "react-select";
+import { getReactSelectTheme } from "stylesheets/emotion/utils";
 import ApplicationContext from "utils/ApplicationContext";
-import { getReactSelectTheme } from "utils/Colors";
 import { ipamStates } from "utils/Lookups";
 import { IpBlock, IpPrefix, Option, SortOption, prop } from "utils/types";
 import { stop } from "utils/Utils";

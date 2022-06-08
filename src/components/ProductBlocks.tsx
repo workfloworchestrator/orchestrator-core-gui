@@ -27,13 +27,12 @@ import ConfirmationDialogContext, {
 } from "contextProviders/ConfirmationDialogProvider";
 import React from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
+import { getStatusBadgeColor } from "stylesheets/emotion/utils";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { renderDateTime } from "utils/Lookups";
 import { ProductBlock, ResourceType } from "utils/types";
 import { stop } from "utils/Utils";
-
-import { getStatusBadgeColor } from "../utils/Colors";
 
 interface IState {
     productBlocks: ProductBlock[];

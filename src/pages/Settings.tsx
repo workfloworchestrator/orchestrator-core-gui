@@ -13,8 +13,6 @@
  *
  */
 
-import "pages/Settings.scss";
-
 import {
     EuiButton,
     EuiCard,
@@ -31,6 +29,8 @@ import { FunctionComponent, useContext, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
+
+import { descriptionStyle } from "./SettingsStyling";
 
 enum Cache {
     ims = "ims",
@@ -148,7 +148,12 @@ export const Settings: FunctionComponent = (props: IProps) => {
                         <FormattedMessage id={`settings.status.options.${isRunning}`} />
                     </EuiButton>
                     <EuiHorizontalRule margin="l" />
-                    <EuiDescriptionList type="column" listItems={engineDescription} style={{ maxWidth: "400px" }} />
+                    <EuiDescriptionList
+                        css={descriptionStyle}
+                        type="column"
+                        listItems={engineDescription}
+                        style={{ maxWidth: "400px" }}
+                    />
                 </EuiCard>
             </EuiPageBody>
         </EuiPage>

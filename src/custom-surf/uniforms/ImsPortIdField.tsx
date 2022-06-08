@@ -19,11 +19,10 @@ import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import ReactSelect, { ValueType } from "react-select";
+import { getReactSelectTheme } from "stylesheets/emotion/utils";
 import { connectField, filterDOMProps } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { IMSNode, IMSPort, Option, Subscription } from "utils/types";
-
-import { getReactSelectTheme } from "../../utils/Colors";
 
 export type ImsPortFieldProps = FieldProps<
     number,

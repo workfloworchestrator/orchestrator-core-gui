@@ -23,9 +23,9 @@ import { get } from "lodash";
 import React, { useContext } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import ReactSelect from "react-select";
+import { getReactSelectTheme } from "stylesheets/emotion/utils";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
-import { getReactSelectTheme } from "utils/Colors";
 import { Option } from "utils/types";
 
 export type SelectFieldProps = FieldProps<

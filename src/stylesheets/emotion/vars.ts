@@ -1,4 +1,9 @@
-/*!
+import { css } from "@emotion/core";
+
+export const zIndex = '("sync": 900,"flash": 1020,"explain": 1010)';
+export const MEDIUM_SCREEN_WITH = "1680px";
+/*
+!
  * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,10 +16,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
-//.euiDescriptionList {
-//    &__description {
-//        display: flex;
-//        align-items: center;
-//    }
-//}
+*/
+
+export const euiButton = css`
+    background-color: #e39846 !important;
+`;
+
+export const euiButtonFill = css`
+    color: #fff !important;
+`;
+
+export const euiTab = css`
+    color: red;
+`;
