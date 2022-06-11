@@ -25,6 +25,8 @@ const useWebsocket = <T extends object>(
 } => {
     const client = useRef<WebSocket | undefined>(undefined);
     const timeout = useRef<NodeJS.Timeout | undefined>(undefined);
+    const closeTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
+
     const pingTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
     const [message, setMessage] = useState<T>({} as T);
     const [useFallback, setUsefallback] = useState<boolean>(false);
@@ -32,13 +34,15 @@ const useWebsocket = <T extends object>(
     const ping = () => {
         if (!client.current) return;
         client.current.send("__ping__");
-        pingTimeout.current = setTimeout(disconnectWebsocket, 5000);
+        pingTimeout.current = setTimeout(() => disconnectWebsocket(false), 5000);
+        console.log("Ping")
     };
 
     function pong() {
         pingTimeout.current && clearTimeout(pingTimeout.current);
         pingTimeout.current = undefined;
         setTimeout(ping, 30000);
+        console.log("Pong")
     }
 
     const connectWebsocket = () => {
@@ -46,6 +50,7 @@ const useWebsocket = <T extends object>(
 
         if (!client.current) {
             const newClient = websocketService.connect(endpoint);
+            client.current = newClient;
             newClient.onopen = () => {
                 setUsefallback(false);
                 ping();
@@ -60,24 +65,65 @@ const useWebsocket = <T extends object>(
                 setUsefallback(true);
             };
             newClient.close = () => {
-                setUsefallback(true);
+                // client.current = undefined;
+                console.log("Close called this should trigger reconnect")
+                client.current = undefined;
+                disconnectWebsocket(true);
             };
-            client.current = newClient;
+
         }
+
+        closeTimeout.current = setInterval(() => {
+            console.log("Checking if connection is still ok")
+            if (!client.current) {
+                console.log("Re-connecting:")
+                connectWebsocket();
+                console.log("Reconnected due to unexpected close")
+            }
+            else {
+                console.log("No reconnect needed")
+            }
+        }, 3000);
+
 
         // timeout to reconnect to enforce re-auth.
         timeout.current = setTimeout(() => {
             connectWebsocket();
+            console.log("Reconnect due to re-auth")
         }, websocketReconnectTime);
+
+        // Todo: add a timer based function that checks if client.current is undefined : and call reconnect?
+
+
     };
 
-    const disconnectWebsocket = () => {
+    // const reconnectWebsocket = () => {
+    //     pingTimeout.current && clearTimeout(pingTimeout.current);
+    //     pingTimeout.current = undefined;
+    //
+    //     console.log("Reconnecting")
+    //     connectWebsocket()
+    // }
+
+
+    const disconnectWebsocket = (reconnect=false) => {
+        // Todo: investigate if we also need to clear ping timer?
+        pingTimeout.current && clearTimeout(pingTimeout.current);
         if (client.current) {
             client.current.close(WebSocketCodes.NORMAL_CLOSURE);
+            client.current = undefined;
         }
         if (timeout.current) {
             clearTimeout(timeout.current);
             timeout.current = undefined;
+        }
+        if (closeTimeout.current) {
+            clearTimeout(closeTimeout.current);
+            closeTimeout.current = undefined;
+        }
+        if(reconnect) {
+            console.log("Reconnecting")
+            connectWebsocket()
         }
     };
 
