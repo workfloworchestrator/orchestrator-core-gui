@@ -128,7 +128,6 @@ if (ENV.OAUTH2_ENABLED) {
         appElement
     );
 } else {
-    // Todo: also implement it in the if
     ReactDOM.render(
         <>
             <link
