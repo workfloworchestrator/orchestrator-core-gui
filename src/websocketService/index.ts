@@ -18,6 +18,5 @@ class WebsocketService {
     };
 }
 
-export const websocketReconnectTime = 28800000;
 export const websocketService = new WebsocketService();
 export { WebSocketCodes };
