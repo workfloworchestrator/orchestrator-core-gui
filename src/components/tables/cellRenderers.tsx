@@ -12,24 +12,28 @@
  * limitations under the License.
  *
  */
+import "components/tables/cellRenderers.scss";
+
 import { intl } from "locale/i18n";
 import uniq from "lodash/uniq";
-import React from "react";
 import { Link } from "react-router-dom";
 import { Cell } from "react-table";
 import { Organization, Product, Subscription } from "utils/types";
 
 export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;
-    return subscriptions.map((subscription: Subscription) => {
+    return subscriptions.map((subscription: Subscription, index: number) => {
         return (
-            <Link
-                key={subscription.subscription_id}
-                onClick={(e) => e.stopPropagation()}
-                to={`/subscriptions/${subscription.subscription_id}`}
-            >
-                {subscription.description}
-            </Link>
+            <>
+                {index !== 0 && <span className={"subscriptions__description-spacer"}>/</span>}
+                <Link
+                    key={subscription.subscription_id}
+                    onClick={(e) => e.stopPropagation()}
+                    to={`/subscriptions/${subscription.subscription_id}`}
+                >
+                    {subscription.description}
+                </Link>
+            </>
         );
     });
 }
