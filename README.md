@@ -131,6 +131,13 @@ console.log(wrapper.html());
 console.log(wrapper.render());
 ```
 
+**Websocket problems while using the dev server** Websockets can react a bit quirky to the hot reloading of the 
+webserver. We noticed a re-connect loop that would spawn a new websocket connection every 5 seconds, after the first 
+hot reload (e.g. when you're developing and changed some code with the dev server running). Disabling FAST_REFRESH 
+seems to fix that issue, whilst keeping hot reload intact. So try adding this to you `.env.local`:
+
+`FAST_REFRESH=false`
+
 ### Storybook
 
 To run the storybook, do: `yarn storybook`.
