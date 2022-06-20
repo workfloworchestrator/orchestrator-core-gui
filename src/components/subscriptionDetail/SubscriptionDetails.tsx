@@ -47,6 +47,17 @@ function renderFailedTask(subscriptionProcesses: SubscriptionProcesses[]) {
             </a>
         );
 }
+
+function renderLastRunTask(subscriptionProcesses: SubscriptionProcesses[]) {
+    let last_run_task = subscriptionProcesses
+        .map((sp) => sp.process)
+        .filter((process) => process.last_status === "completed")
+        .filter((process) => process.is_task === true)
+        .sort((a, b) => b.started_at - a.started_at);
+
+    if (last_run_task.length) return <p>({renderDate(last_run_task[0].started_at)})</p>;
+}
+
 interface IProps {
     subscription: SubscriptionModel;
     className?: string;
@@ -264,6 +275,9 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                                             </EuiButton>
                                         )}
                                     </EuiFlexItem>
+                                )}
+                                {subscription.insync && (
+                                    <EuiFlexItem grow={false}>{renderLastRunTask(subscriptionProcesses)}</EuiFlexItem>
                                 )}
                             </EuiFlexGroup>
                         </td>
