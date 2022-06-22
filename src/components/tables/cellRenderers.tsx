@@ -16,6 +16,7 @@ import "components/tables/cellRenderers.scss";
 
 import { intl } from "locale/i18n";
 import uniq from "lodash/uniq";
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Cell } from "react-table";
 import { Organization, Product, Subscription } from "utils/types";
@@ -24,7 +25,7 @@ export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;
     return subscriptions.map((subscription: Subscription, index: number) => {
         return (
-            <>
+            <Fragment key={`${subscription.subscription_id}-${index}`}>
                 {index !== 0 && <span className={"subscriptions__description-spacer"}>/</span>}
                 <Link
                     key={subscription.subscription_id}
@@ -33,7 +34,7 @@ export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
                 >
                     {subscription.description}
                 </Link>
-            </>
+            </Fragment>
         );
     });
 }
