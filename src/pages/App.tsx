@@ -42,6 +42,8 @@ import NotFound from "pages/NotFound";
 import ProcessDetail from "pages/ProcessDetail";
 import Processes from "pages/Processes";
 import ServerError from "pages/ServerError";
+import ServiceTicketDetail from "pages/ServiceTicketDetail";
+import ServiceTickets from "pages/ServiceTickets";
 import Settings from "pages/Settings";
 import StyleGuide from "pages/StyleGuide";
 import SubscriptionDetailPage from "pages/SubscriptionDetailPage";
@@ -61,7 +63,6 @@ import { AppError } from "utils/types";
 import { isEmpty } from "utils/Utils";
 
 import CreateServiceTicket from "../components/CreateServiceTicket";
-import ServiceTickets from "./ServiceTickets";
 
 export const history = createBrowserHistory();
 
@@ -319,6 +320,10 @@ class App extends React.PureComponent<IProps, IState> {
                                                 <ProtectedRoute
                                                     path="/tickets/create"
                                                     render={(props) => <CreateServiceTicket />}
+                                                />
+                                                <ProtectedRoute
+                                                    path="/tickets/:id"
+                                                    render={(props) => <ServiceTicketDetail {...props} />}
                                                 />
                                                 <ProtectedRoute
                                                     path="/tickets"

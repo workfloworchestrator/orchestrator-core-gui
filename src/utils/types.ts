@@ -160,12 +160,101 @@ export interface IpPrefixSubscription extends Subscription {
     network_address_as_int: number;
 }
 
+/** Service Ticket types */
+
+export enum ServiceTicketState {
+    "initial" = "inital",
+    "active" = "active",
+    "aborted" = "aborted",
+    "closed" = "closed",
+}
+
+export enum ServiceTicketProcessState {
+    "open" = "open",
+    "open_related" = "open_related",
+    "open_accepted" = "open_accepted",
+    "updated" = "updated",
+    "aborted" = "aborted",
+    "closed" = "closed",
+}
+
 export interface ServiceTicket {
-    jira_ticket: string;
-    subject: string;
-    state: number;
+    _id: string;
+    jira_ticket_id: string;
+    title: string;
+    ticket_state: ServiceTicketState;
+    process_state: ServiceTicketProcessState;
     opened_by: string;
-    plandate: number;
+    start_date: number;
+}
+
+export enum ServiceTicketLogType {
+    "open" = "open",
+    "update" = "update",
+    "close" = "close",
+}
+
+export interface ServiceTicketLog {
+    entry_time: number;
+    update_nl: string;
+    update_en: string;
+    logtype: ServiceTicketLogType;
+    logged_by: string;
+}
+
+export enum ServiceTicketImpactedObjectImpact {
+    "down" = "down",
+    "no_impact" = "no_impact",
+    "reduced_redundancy" = "reduced_redundancy",
+}
+
+export interface ServiceTicketImpactedIMSCircuit {
+    ims_circuit_id: number;
+    ims_circuit_name: string;
+    impact: ServiceTicketImpactedObjectImpact;
+    impact_override: ServiceTicketImpactedObjectImpact;
+    extra_information: string | null;
+}
+
+export interface ServiceTicketCustomer {
+    customer_id: string;
+    customer_name: string;
+    customer_abbrev: string;
+}
+
+export interface ServiceTicketContact {
+    name: string;
+    email: string;
+}
+
+export interface ServiceTicketRelatedCustomer {
+    customer: ServiceTicketCustomer;
+    customer_subscription_description: string | null;
+    contact: ServiceTicketContact[];
+}
+
+export interface ServiceTicketImpactedObject {
+    subscription_id: string; // title: Subscription Id
+    logged_by: string; // title: Logged By
+    ims_circuits: ServiceTicketImpactedIMSCircuit[]; // Ims Circuits[...]
+    owner_customer: ServiceTicketCustomer; //	Customer{...}
+    subscription_description: string; // title: Subscription Description
+    owner_customer_description: string | null; // title: Owner Customer Description
+    owner_customer_contacts: ServiceTicketContact[]; // Owner Customer Contacts[...]
+    related_customers: ServiceTicketRelatedCustomer[]; // Related Customers[...]
+}
+
+export enum ServiceTicketType {
+    "planned work" = "planned work",
+    "incident" = "incident",
+}
+
+export interface ServiceTicketWithDetails extends ServiceTicket {
+    end_date: number;
+    last_update_time: number;
+    type: ServiceTicketType;
+    logs: ServiceTicketLog[];
+    impacted_objects: ServiceTicketImpactedObject[];
 }
 
 export interface ServicePortSubscription extends Subscription {

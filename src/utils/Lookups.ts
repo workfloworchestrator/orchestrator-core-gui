@@ -65,7 +65,7 @@ export function capitalize(s: string) {
 export const ipamStates = ["Free", "Allocated", null, "Planned", null, null];
 
 //states for tickets
-export const ticketStates = ["Open", "Aborted", "Closed", null];
+// export const ticketStates = ["Open", "Aborted", "Closed", null];
 
 // AFI returned by IPAM as index in this array returns IPv4 for 4 and IPv6 for 6 and "N/A" for other cases
 //                             0      1      2      3      4       5      6
