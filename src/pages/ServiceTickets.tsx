@@ -14,6 +14,7 @@ import ApplicationContext from "utils/ApplicationContext";
 // import { ticketStates } from "utils/Lookups";
 import { Filter, ServiceTicket, ServiceTicketProcessState, ServiceTicketState, SortOption } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
+
 import { tableTickets } from "./ServiceTicketsStyling";
 
 // interface ServiceTicket {
