@@ -13,6 +13,8 @@ import {
     Organization,
     ServicePortFilterItem,
     ServicePortSubscription,
+    ServiceTicket,
+    ServiceTicketWithDetails,
 } from "utils/types";
 
 abstract class CustomApiClientInterface extends BaseApiClient {
@@ -192,5 +194,13 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.fetchJson<Dienstafname>(`surf/crm/dienstafname/${subscriptionId}`, {}, {}, false).catch((err) =>
             Promise.resolve(undefined)
         );
+    };
+
+    tickets = (): Promise<ServiceTicket[]> => {
+        return this.fetchJson<ServiceTicket[]>("http://localhost:8081/cim/tickets");
+    };
+
+    ticketById = (_id: string): Promise<ServiceTicketWithDetails> => {
+        return this.fetchJson<ServiceTicketWithDetails>(`http://localhost:8081/cim/tickets/${_id}`);
     };
 }

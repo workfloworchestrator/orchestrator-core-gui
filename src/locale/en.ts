@@ -498,14 +498,17 @@ I18n.translations.en = {
             ims: "IMS",
         },
         filters: {
-            state: "Select states",
+            state: "Select process states",
         },
         table: {
-            jira_ticket: "Jira ticket",
+            jira_ticket_id: "Jira ticket",
             subject: "Subject",
-            state: "State",
+            title: "Title",
+            ticket_state: "Ticket State",
+            process_state: "Process State",
             opened_by: "Opened by",
             plandate: "Plandate",
+            start_date: "Start Date",
         },
     },
     metadata: {
