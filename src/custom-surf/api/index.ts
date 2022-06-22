@@ -50,6 +50,8 @@ abstract class CustomApiClientInterface extends BaseApiClient {
     abstract free_subnets: (subnet: string, netmask: number, prefixlen: number) => Promise<string[]>;
     abstract contacts: (organisationId: string) => Promise<ContactPerson[]>;
     abstract dienstafnameBySubscription: (subscriptionId: string) => Promise<Dienstafname | undefined>;
+    // abstract showForms: () => Promise<string[]>;
+    // abstract postForm: (workflow_name: string, process: {}[]) => Promise<{ id: string }>;
 }
 
 export class CustomApiClient extends CustomApiClientInterface {

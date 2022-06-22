@@ -19,6 +19,7 @@ import "pages/App.scss";
 
 import { EuiLoadingSpinner, EuiProvider, EuiToast } from "@elastic/eui";
 import * as Sentry from "@sentry/react";
+import CreateServiceTicket from "components/cim/CreateServiceTicket";
 import EditProduct from "components/EditProduct";
 import Flash from "components/Flash";
 import Header from "components/Header";
@@ -60,7 +61,6 @@ import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
 import { isEmpty } from "utils/Utils";
 
-import CreateServiceTicket from "../components/CreateServiceTicket";
 import ServiceTickets from "./ServiceTickets";
 
 export const history = createBrowserHistory();
