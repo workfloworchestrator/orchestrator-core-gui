@@ -120,10 +120,11 @@ class Header extends React.PureComponent<IProps, IState> {
                         <FailedTaskBanner />
                         <EuiHeaderLink
                             id="switchTheme"
+                            color="primary"
                             onClick={this.switchTheme}
                             iconType={this.context.theme === "dark" ? "sun" : "moon"}
                         />
-                        <EuiHeaderLink id="logout" onClick={this.logout} iconType="exit" />
+                        <EuiHeaderLink id="logout" color="primary" onClick={this.logout} iconType="exit" />
 
                         {currentUser && (
                             <EuiHeaderLink
