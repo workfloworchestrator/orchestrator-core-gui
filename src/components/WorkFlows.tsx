@@ -91,8 +91,8 @@ export default class WorkFlows extends React.Component {
                 sortable: true,
                 truncateText: false,
                 render: (product_tags: any) => {
-                    const renderPT = product_tags.map((item: any) => (
-                        <EuiBadge color="primary" isDisabled={false}>
+                    const renderPT = product_tags.map((item: any, index: number) => (
+                        <EuiBadge key={`product_tag-${index}`} color="primary" isDisabled={false}>
                             {item}
                         </EuiBadge>
                     ));
