@@ -118,7 +118,11 @@ class Header extends React.PureComponent<IProps, IState> {
                     <EuiHeaderLinks aria-label="App navigation links extra">
                         <EngineStatusBanner />
                         <FailedTaskBanner />
-                        <EuiHeaderLink id="switchTheme" onClick={this.switchTheme} iconType={this.context.theme === "dark" ? "sun" : "moon"} />
+                        <EuiHeaderLink
+                            id="switchTheme"
+                            onClick={this.switchTheme}
+                            iconType={this.context.theme === "dark" ? "sun" : "moon"}
+                        />
                         <EuiHeaderLink id="logout" onClick={this.logout} iconType="exit" />
 
                         {currentUser && (
