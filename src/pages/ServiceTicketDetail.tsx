@@ -14,25 +14,30 @@
  */
 
 import {
+    EuiBasicTable,
     EuiButton,
     EuiCopy,
     EuiFlexGroup,
     EuiFlexItem,
+    EuiHealth,
     EuiHorizontalRule,
+    EuiLink,
     EuiPage,
     EuiPageBody,
     EuiPanel,
     EuiSpacer,
     EuiText,
     EuiTitle,
-    formatDate, EuiBasicTable, EuiLink, EuiHealth,
+    formatDate,
 } from "@elastic/eui";
+import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
 import { ShowConfirmDialogType } from "contextProviders/ConfirmationDialogProvider";
 import React, { useContext } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { RouteComponentProps } from "react-router";
 import { DecodedValueMap, NumberParam, QueryParamConfigMap, SetQuery, withQueryParams } from "use-query-params";
 import ApplicationContext from "utils/ApplicationContext";
+import { renderDate, renderDateTime } from "utils/Lookups";
 import { CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
 import {
     InputForm,
@@ -46,8 +51,7 @@ import {
     TabView,
     WsProcessV2,
 } from "utils/types";
-import { renderDate, renderDateTime } from "utils/Lookups";
-import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
+
 import { ticketDetail } from "./ServiceTicketDetailStyling";
 
 const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
@@ -108,30 +112,28 @@ class ServiceTicketDetail extends React.PureComponent<IProps, IState> {
         const { theme } = this.context;
 
         // TODO entry time should be a number, currently a datetime string
-        ticket.logs.sort((a: ServiceTicketLog, b: ServiceTicketLog) => (a.entry_time - b.entry_time));
+        ticket.logs.sort((a: ServiceTicketLog, b: ServiceTicketLog) => a.entry_time - b.entry_time);
 
-        const logitem_tabs: TabView[] = ticket.logs.map((logitem: ServiceTicketLog, index:number) => (
-            {
-                id: `mod-ticket-logitem-${index}`,
-                name: logitem.logtype,
-                disabled: false,
-                content: (
-                    <EuiPanel hasBorder={true}>
-                        {logitem.entry_time}
-                        <EuiHorizontalRule margin="xs"></EuiHorizontalRule>
-                        {logitem.update_nl}
-                        <EuiHorizontalRule margin="xs"></EuiHorizontalRule>
-                        {logitem.update_en}
-                    </EuiPanel>
-                )
-            }
-        ));
+        const logitem_tabs: TabView[] = ticket.logs.map((logitem: ServiceTicketLog, index: number) => ({
+            id: `mod-ticket-logitem-${index}`,
+            name: logitem.logtype,
+            disabled: false,
+            content: (
+                <EuiPanel hasBorder={true}>
+                    {logitem.entry_time}
+                    <EuiHorizontalRule margin="xs"></EuiHorizontalRule>
+                    {logitem.update_nl}
+                    <EuiHorizontalRule margin="xs"></EuiHorizontalRule>
+                    {logitem.update_en}
+                </EuiPanel>
+            ),
+        }));
 
         // TODO REMOVE THIS THERE MUST BE A BETTER WAY
         const impactedCircuits: ImpactedCircuit[] = [];
         for (const impacted of ticket.impacted_objects) {
             for (const circuit of impacted.ims_circuits) {
-                impactedCircuits.push({object: impacted, circuit:circuit});
+                impactedCircuits.push({ object: impacted, circuit: circuit });
             }
         }
         console.log("IMPACTED CIRCUITS");
@@ -139,68 +141,68 @@ class ServiceTicketDetail extends React.PureComponent<IProps, IState> {
 
         const columns: any = [
             {
-              field: 'object.subscription_id',
-              name: 'Subscription ID',
-              sortable: true,
-              render: (subscription_id: string) => (
-                      <span>
+                field: "object.subscription_id",
+                name: "Subscription ID",
+                sortable: true,
+                render: (subscription_id: string) => (
+                    <span>
                         <EuiLink href={`/subscriptions/${subscription_id}`} target="_blank">
-                          {subscription_id}
+                            {subscription_id}
                         </EuiLink>
-                      </span>
-                    ),
-            //   'data-test-subj': 'subscriptionIdCell',
-            //   mobileOptions: {
-            //     render: (item: ImpactedCircuit) => (
-            //       <span>
-            //         {item.object.subscription_id}{' '}
-            //         <EuiLink href="#" target="_blank">
-            //           {item.object.subscription_id}
-            //         </EuiLink>
-            //       </span>
-            //     ),
-            //     header: false,
-            //     truncateText: false,
-            //     enlarge: true,
-            //     width: '100%',
-            //   },
+                    </span>
+                ),
+                //   'data-test-subj': 'subscriptionIdCell',
+                //   mobileOptions: {
+                //     render: (item: ImpactedCircuit) => (
+                //       <span>
+                //         {item.object.subscription_id}{' '}
+                //         <EuiLink href="#" target="_blank">
+                //           {item.object.subscription_id}
+                //         </EuiLink>
+                //       </span>
+                //     ),
+                //     header: false,
+                //     truncateText: false,
+                //     enlarge: true,
+                //     width: '100%',
+                //   },
             },
             {
-              field: 'object.subscriptionDescription',
-              name: 'Subscription Desc',
-              truncateText: true,
-            //   render: (item: ImpactedCircuit) => (
-            //     <EuiLink href="#" target="_blank">
-            //       {item.object.subscription_description}
-            //     </EuiLink>
-            //   ),
-            //   mobileOptions: {
-            //     show: false,
-            //   },
+                field: "object.subscriptionDescription",
+                name: "Subscription Desc",
+                truncateText: true,
+                //   render: (item: ImpactedCircuit) => (
+                //     <EuiLink href="#" target="_blank">
+                //       {item.object.subscription_description}
+                //     </EuiLink>
+                //   ),
+                //   mobileOptions: {
+                //     show: false,
+                //   },
             },
             {
-              field: 'circuit.ims_circuit_id',
-              name: 'Circuit ID',
+                field: "circuit.ims_circuit_id",
+                name: "Circuit ID",
             },
-          ];
+        ];
 
         const getRowProps = (item: ImpactedCircuit) => {
             const { object } = item;
             return {
-              'data-test-subj': `row-${object.subscription_id}`,
-              className: 'customRowClass',
-              onClick: () => {},
+                "data-test-subj": `row-${object.subscription_id}`,
+                className: "customRowClass",
+                onClick: () => {},
             };
-          };
+        };
         const getCellProps = (item: ImpactedCircuit, column: any) => {
             const { object } = item;
             const { field } = column;
             return {
-              className: 'customCellClass',
-              'data-test-subj': `cell-${object.subscription_id}-${field}`,
-              textOnly: true,
+                className: "customCellClass",
+                "data-test-subj": `cell-${object.subscription_id}-${field}`,
+                textOnly: true,
             };
-          };
+        };
 
         return (
             <EuiPage css={ticketDetail}>
@@ -213,7 +215,6 @@ class ServiceTicketDetail extends React.PureComponent<IProps, IState> {
                                 </EuiTitle>
                             </EuiFlexItem>
                         </EuiFlexGroup>
-
                         <div className="mod-ticket-detail">
                             <div className="ticket-details">
                                 <table className={`detail-block`}>
@@ -284,7 +285,6 @@ class ServiceTicketDetail extends React.PureComponent<IProps, IState> {
                                 </table>
                             </div>
                         </div>
-
                         <EuiFlexGroup>
                             <EuiFlexItem grow={true}>
                                 <EuiTitle size="m">
@@ -292,19 +292,18 @@ class ServiceTicketDetail extends React.PureComponent<IProps, IState> {
                                 </EuiTitle>
                             </EuiFlexItem>
                         </EuiFlexGroup>
-
                         <div className="mod-ticket-logitems">
                             <div className="ticket-logitems">
                                 <TabbedSection
                                     id="ticket-logitems-tabs"
                                     tabs={logitem_tabs}
                                     className="tabbed-logitems-parent"
-                                    name={<FormattedMessage id="tickets.logitems"/>}
+                                    name={<FormattedMessage id="tickets.logitems" />}
                                 ></TabbedSection>
-                            </div> {/* ticket-logitems */}
-                        </div> {/* mod-ticket-logitems */}
-
-
+                            </div>{" "}
+                            {/* ticket-logitems */}
+                        </div>{" "}
+                        {/* mod-ticket-logitems */}
                         <EuiFlexGroup>
                             <EuiFlexItem grow={true}>
                                 <EuiTitle size="m">
@@ -312,21 +311,21 @@ class ServiceTicketDetail extends React.PureComponent<IProps, IState> {
                                 </EuiTitle>
                             </EuiFlexItem>
                         </EuiFlexGroup>
-
                         <div className="mod-ticket-impactedobjects">
                             <div className="ticket-impactedobjects">
-                            <EuiBasicTable
-                                tableCaption="Demo of EuiBasicTable"
-                                items={impactedCircuits}
-                                rowHeader="firstName"
-                                columns={columns}
-                                rowProps={getRowProps}
-                                cellProps={getCellProps}
-                                className="detail-block"
+                                <EuiBasicTable
+                                    tableCaption="Demo of EuiBasicTable"
+                                    items={impactedCircuits}
+                                    rowHeader="firstName"
+                                    columns={columns}
+                                    rowProps={getRowProps}
+                                    cellProps={getCellProps}
+                                    className="detail-block"
                                 />
-                            </div> {/* ticket-impactedobjects */}
-                        </div> {/* mod-ticket-impactedobjects */}
-
+                            </div>{" "}
+                            {/* ticket-impactedobjects */}
+                        </div>{" "}
+                        {/* mod-ticket-impactedobjects */}
                     </EuiPanel>
                 </EuiPageBody>
             </EuiPage>
