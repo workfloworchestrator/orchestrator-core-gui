@@ -154,8 +154,8 @@ class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
                 sortable: true,
                 truncateText: false,
                 render: (resource_types: ResourceType[]) => {
-                    const renderPB = resource_types.map((item) => (
-                        <EuiBadge color="primary" isDisabled={false}>
+                    const renderPB = resource_types.map((item, index) => (
+                        <EuiBadge key={`${item.resource_type}-${index}`} color="primary" isDisabled={false}>
                             {item.resource_type}
                         </EuiBadge>
                     ));
