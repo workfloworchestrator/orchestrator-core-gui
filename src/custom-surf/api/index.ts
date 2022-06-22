@@ -13,6 +13,8 @@ import {
     Organization,
     ServicePortFilterItem,
     ServicePortSubscription,
+    ServiceTicket,
+    ServiceTicketWithDetails,
 } from "utils/types";
 
 import { CreateTicketPayload } from "../types";
@@ -206,5 +208,13 @@ export class CustomApiClient extends CustomApiClientInterface {
     };
     createTicket = (ticket: CreateTicketPayload): Promise<{ id: string }> => {
         return this.postPutJson("surf/cim/tickets/", ticket, "post", false, true);
+    };
+
+    tickets = (): Promise<ServiceTicket[]> => {
+        return this.fetchJson<ServiceTicket[]>("http://localhost:8081/cim/tickets");
+    };
+
+    ticketById = (_id: string): Promise<ServiceTicketWithDetails> => {
+        return this.fetchJson<ServiceTicketWithDetails>(`http://localhost:8081/cim/tickets/${_id}`);
     };
 }
