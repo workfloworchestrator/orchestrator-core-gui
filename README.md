@@ -131,9 +131,9 @@ console.log(wrapper.html());
 console.log(wrapper.render());
 ```
 
-**Websocket problems while using the dev server** Websockets can react a bit quirky to the hot reloading of the 
-webserver. We noticed a re-connect loop that would spawn a new websocket connection every 5 seconds, after the first 
-hot reload (e.g. when you're developing and changed some code with the dev server running). Disabling FAST_REFRESH 
+**Websocket problems while using the dev server** Websockets can react a bit quirky to the hot reloading of the
+webserver. We noticed a re-connect loop that would spawn a new websocket connection every 5 seconds, after the first
+hot reload (e.g. when you're developing and changed some code with the dev server running). Disabling FAST_REFRESH
 seems to fix that issue, whilst keeping hot reload intact. So try adding this to you `.env.local`:
 
 `FAST_REFRESH=false`
@@ -206,3 +206,15 @@ Actions are disabled in the same manner as menu items. The following actions are
 
 New actions or other actions can be enabled or disabled in the same way as menu items, by adding an arbitrary resource
 to the project.
+
+
+## Development tips
+
+### IDE plugins
+
+
+**Visual Studio Code**
+
+* [vscode-styled-components](https://marketplace.visualstudio.com/items?itemName=styled-components.vscode-styled-components) for syntax highlighting `emotion/css`
+
+
