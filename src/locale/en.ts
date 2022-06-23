@@ -477,6 +477,7 @@ I18n.translations.en = {
         copy: "Copy to clipboard",
     },
     tickets: {
+        notFound: "No Ticket found (e.g. 404)",
         create: {
             new_ticket: "New Service Ticket",
             create: "Create new Service ticket",
