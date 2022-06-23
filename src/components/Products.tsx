@@ -18,7 +18,6 @@ import {
     EuiButton,
     EuiButtonIcon,
     EuiInMemoryTable,
-    EuiLink,
     EuiPageContent,
     EuiPageContentHeader,
     EuiSpacer,

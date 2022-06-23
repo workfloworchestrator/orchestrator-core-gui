@@ -15,7 +15,7 @@
 
 import "components/Header.scss";
 
-import { EuiButtonIcon, EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderSectionItem, EuiText } from "@elastic/eui";
+import { EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderSectionItem, EuiText } from "@elastic/eui";
 import EngineStatusBanner from "components/engineStatusBanner";
 import FailedTaskBanner from "components/failedTaskBanner";
 import UserProfile from "components/UserProfile";
