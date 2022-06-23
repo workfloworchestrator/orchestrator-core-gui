@@ -28,7 +28,7 @@ function ProcessSubscriptionLink({
     };
 
     const renderButtons = subscriptionProcesses.map((ps, index: number) => (
-        <EuiSplitPanel.Inner paddingSize="s">
+        <EuiSplitPanel.Inner paddingSize="s" key={`splitpanel-${ps.id}-${index}`}>
             <EuiFlexGroup gutterSize="s" alignItems="center">
                 <EuiFlexItem grow={false}>
                     <EuiText>

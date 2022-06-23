@@ -18,7 +18,6 @@ import {
     EuiButton,
     EuiButtonIcon,
     EuiInMemoryTable,
-    EuiLink,
     EuiPageContent,
     EuiPageContentHeader,
     EuiSpacer,
@@ -136,19 +135,16 @@ function Products() {
             sortable: true,
             truncateText: false,
             render: (product_blocks: ProductBlock[]) => {
-                const renderPB = product_blocks.map((item) => (
+                const renderPB = product_blocks.map((item, index) => (
                     <EuiButton
+                        key={`product_block-${item.name}-${index}`}
                         size="s"
                         color="primary"
                         isDisabled={false}
                         style={{ marginRight: "5px", marginBottom: "5px" }}
+                        onClick={() => handleOnClick(`/metadata/product-block/${item.product_block_id}`)}
                     >
-                        <EuiLink
-                            color="text"
-                            onClick={() => handleOnClick(`/metadata/product-block/${item.product_block_id}`)}
-                        >
-                            {item.name}
-                        </EuiLink>
+                        {item.name}
                     </EuiButton>
                 ));
                 return <div>{renderPB}</div>;
