@@ -14,44 +14,26 @@
  */
 
 import {
-    EuiBasicTable,
     EuiButton,
-    EuiCopy,
     EuiFlexGroup,
     EuiFlexItem,
-    EuiHealth,
     EuiHorizontalRule,
-    EuiLink,
     EuiPage,
     EuiPageBody,
     EuiPanel,
     EuiSpacer,
-    EuiText,
     EuiTitle,
-    formatDate,
 } from "@elastic/eui";
 import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
-import { ShowConfirmDialogType } from "contextProviders/ConfirmationDialogProvider";
-import React, { useContext } from "react";
+import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { RouteComponentProps } from "react-router";
 import { DecodedValueMap, NumberParam, QueryParamConfigMap, SetQuery, withQueryParams } from "use-query-params";
 import ApplicationContext from "utils/ApplicationContext";
-import { renderDate, renderDateTime } from "utils/Lookups";
 import { CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
-import {
-    InputForm,
-    ProcessSubscription,
-    ProcessWithDetails,
-    Product,
-    ServiceTicketImpactedIMSCircuit,
-    ServiceTicketImpactedObject,
-    ServiceTicketLog,
-    ServiceTicketWithDetails,
-    TabView,
-    WsProcessV2,
-} from "utils/types";
+import { ServiceTicketLog, ServiceTicketProcessState, ServiceTicketWithDetails, TabView } from "utils/types";
 
+import ServiceTicketDetailImpactedObjects from "./ServiceTicketDetailImpactedObjects";
 import { ticketDetail } from "./ServiceTicketDetailStyling";
 
 const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
@@ -70,14 +52,6 @@ interface IState {
     loaded: boolean;
 }
 
-// TODO temporary, there must be a better way
-interface ImpactedCircuit {
-    object: ServiceTicketImpactedObject;
-    circuit: ServiceTicketImpactedIMSCircuit;
-}
-
-type Column = "subscription_id" | "subscription_name" | "ims_circuit_id";
-
 class ServiceTicketDetail extends React.PureComponent<IProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
 
@@ -92,7 +66,7 @@ class ServiceTicketDetail extends React.PureComponent<IProps, IState> {
 
     componentDidMount = () => {
         this.context.customApiClient
-            .ticketById(this.props.match.params.id)
+            .cimTicketById(this.props.match.params.id)
             .then((res) => {
                 this.setState({ ticket: res, loaded: true });
             })
@@ -105,10 +79,85 @@ class ServiceTicketDetail extends React.PureComponent<IProps, IState> {
             });
     };
 
+    renderButtons = () => {
+        if (!this.state.ticket) return null;
+
+        const { ticket } = this.state;
+
+        return (
+            <EuiFlexGroup gutterSize="s" className="buttons">
+                <EuiFlexItem>
+                    <EuiButton
+                        id="button-action-open"
+                        // onClick={this.props.previous}
+                        isDisabled={ticket.process_state !== ServiceTicketProcessState.open_accepted}
+                    >
+                        <FormattedMessage id="tickets.action.opening" />
+                    </EuiButton>
+                </EuiFlexItem>
+                <EuiFlexItem>
+                    <EuiButton
+                        id="button-action-update"
+                        // onClick={this.props.previous}
+                        isDisabled={
+                            ![ServiceTicketProcessState.open, ServiceTicketProcessState.updated].includes(
+                                ticket.process_state
+                            )
+                        }
+                    >
+                        <FormattedMessage id="tickets.action.updating" />
+                    </EuiButton>
+                </EuiFlexItem>
+                <EuiFlexItem>
+                    <EuiButton
+                        id="button-action-close"
+                        // onClick={this.props.previous}
+                        isDisabled={
+                            ![ServiceTicketProcessState.open, ServiceTicketProcessState.updated].includes(
+                                ticket.process_state
+                            )
+                        }
+                    >
+                        <FormattedMessage id="tickets.action.closing" />
+                    </EuiButton>
+                </EuiFlexItem>
+                <EuiFlexItem>
+                    <EuiButton
+                        id="button-action-abort"
+                        // onClick={this.props.previous}
+                        isDisabled={
+                            ![ServiceTicketProcessState.open_accepted, ServiceTicketProcessState.open_related].includes(
+                                ticket.process_state
+                            )
+                        }
+                    >
+                        <FormattedMessage id="tickets.action.aborting" />
+                    </EuiButton>
+                </EuiFlexItem>
+                <EuiFlexItem>
+                    <EuiButton
+                        id="button-action-show"
+                        // onClick={this.props.previous}
+                        isDisabled={
+                            ![
+                                ServiceTicketProcessState.open,
+                                ServiceTicketProcessState.updated,
+                                ServiceTicketProcessState.closed,
+                            ].includes(ticket.process_state)
+                        }
+                    >
+                        <FormattedMessage id="tickets.action.show" />
+                    </EuiButton>
+                </EuiFlexItem>
+            </EuiFlexGroup>
+        );
+    };
+
     render() {
         if (!this.state.ticket) return null;
 
         const { ticket } = this.state;
+
         const { theme } = this.context;
 
         // TODO entry time should be a number, currently a datetime string
@@ -119,90 +168,15 @@ class ServiceTicketDetail extends React.PureComponent<IProps, IState> {
             name: logitem.logtype,
             disabled: false,
             content: (
-                <EuiPanel hasBorder={true}>
-                    {logitem.entry_time}
-                    <EuiHorizontalRule margin="xs"></EuiHorizontalRule>
+                <EuiPanel hasBorder={false} hasShadow={false}>
                     {logitem.update_nl}
                     <EuiHorizontalRule margin="xs"></EuiHorizontalRule>
                     {logitem.update_en}
+                    <EuiHorizontalRule margin="xs"></EuiHorizontalRule>
+                    Logged by {logitem.logged_by}, {logitem.entry_time}
                 </EuiPanel>
             ),
         }));
-
-        // TODO REMOVE THIS THERE MUST BE A BETTER WAY
-        const impactedCircuits: ImpactedCircuit[] = [];
-        for (const impacted of ticket.impacted_objects) {
-            for (const circuit of impacted.ims_circuits) {
-                impactedCircuits.push({ object: impacted, circuit: circuit });
-            }
-        }
-        console.log("IMPACTED CIRCUITS");
-        console.log(impactedCircuits);
-
-        const columns: any = [
-            {
-                field: "object.subscription_id",
-                name: "Subscription ID",
-                sortable: true,
-                render: (subscription_id: string) => (
-                    <span>
-                        <EuiLink href={`/subscriptions/${subscription_id}`} target="_blank">
-                            {subscription_id}
-                        </EuiLink>
-                    </span>
-                ),
-                //   'data-test-subj': 'subscriptionIdCell',
-                //   mobileOptions: {
-                //     render: (item: ImpactedCircuit) => (
-                //       <span>
-                //         {item.object.subscription_id}{' '}
-                //         <EuiLink href="#" target="_blank">
-                //           {item.object.subscription_id}
-                //         </EuiLink>
-                //       </span>
-                //     ),
-                //     header: false,
-                //     truncateText: false,
-                //     enlarge: true,
-                //     width: '100%',
-                //   },
-            },
-            {
-                field: "object.subscriptionDescription",
-                name: "Subscription Desc",
-                truncateText: true,
-                //   render: (item: ImpactedCircuit) => (
-                //     <EuiLink href="#" target="_blank">
-                //       {item.object.subscription_description}
-                //     </EuiLink>
-                //   ),
-                //   mobileOptions: {
-                //     show: false,
-                //   },
-            },
-            {
-                field: "circuit.ims_circuit_id",
-                name: "Circuit ID",
-            },
-        ];
-
-        const getRowProps = (item: ImpactedCircuit) => {
-            const { object } = item;
-            return {
-                "data-test-subj": `row-${object.subscription_id}`,
-                className: "customRowClass",
-                onClick: () => {},
-            };
-        };
-        const getCellProps = (item: ImpactedCircuit, column: any) => {
-            const { object } = item;
-            const { field } = column;
-            return {
-                className: "customCellClass",
-                "data-test-subj": `cell-${object.subscription_id}-${field}`,
-                textOnly: true,
-            };
-        };
 
         return (
             <EuiPage css={ticketDetail}>
@@ -248,43 +222,13 @@ class ServiceTicketDetail extends React.PureComponent<IProps, IState> {
                                             <td id="ticket-end_date-k">
                                                 <FormattedMessage id="tickets.table.end_date" />
                                             </td>
-                                            <td id="ticket-end_date-v">{ticket.start_date}</td>
+                                            <td id="ticket-end_date-v">{ticket.end_date}</td>
                                         </tr>
-                                        {/* {customer_name && customer_name !== subscription.customer_id && (
-                            <tr className={theme}>
-                                <td id="subscriptions-customer-name-k">
-                                    <FormattedMessage id="subscriptions.customer_name" />
-                                </td>
-                                <td id="subscriptions-customer-name-v">{customer_name}</td>
-                            </tr>
-                        )} */}
-                                        {/* <tr className={theme}>
-                            <td id="subscriptions-customer-id-k">
-                                <FormattedMessage id="subscriptions.customer_id" />
-                            </td>
-                            <td id="subscriptions-customer-id-v">{subscription.customer_id}</td>
-                        </tr>
-                        {subscription.customer_descriptions && (
-                            <tr className={theme}>
-                                <td id="subscriptions-customer-descriptions-k">
-                                    <FormattedMessage id="subscriptions.customer_descriptions" />
-                                </td>
-                                <td id="subscriptions-customer-descriptions-v">
-                                    <dl>
-                                        {subscription.customer_descriptions.map((description, index) => (
-                                            <React.Fragment key={index}>
-                                                <dt>{organisationNameByUuid(description.customer_id, organisations)}</dt>
-                                                <dd>{description.description}</dd>
-                                            </React.Fragment>
-                                        ))}
-                                    </dl>
-                                </td>
-                            </tr>
-                        )} */}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                        <EuiSpacer />
                         <EuiFlexGroup>
                             <EuiFlexItem grow={true}>
                                 <EuiTitle size="m">
@@ -300,10 +244,14 @@ class ServiceTicketDetail extends React.PureComponent<IProps, IState> {
                                     className="tabbed-logitems-parent"
                                     name={<FormattedMessage id="tickets.logitems" />}
                                 ></TabbedSection>
-                            </div>{" "}
-                            {/* ticket-logitems */}
-                        </div>{" "}
-                        {/* mod-ticket-logitems */}
+                            </div>
+                        </div>
+
+                        <EuiSpacer />
+
+                        {this.renderButtons()}
+
+                        <EuiSpacer />
                         <EuiFlexGroup>
                             <EuiFlexItem grow={true}>
                                 <EuiTitle size="m">
@@ -311,21 +259,8 @@ class ServiceTicketDetail extends React.PureComponent<IProps, IState> {
                                 </EuiTitle>
                             </EuiFlexItem>
                         </EuiFlexGroup>
-                        <div className="mod-ticket-impactedobjects">
-                            <div className="ticket-impactedobjects">
-                                <EuiBasicTable
-                                    tableCaption="Demo of EuiBasicTable"
-                                    items={impactedCircuits}
-                                    rowHeader="firstName"
-                                    columns={columns}
-                                    rowProps={getRowProps}
-                                    cellProps={getCellProps}
-                                    className="detail-block"
-                                />
-                            </div>{" "}
-                            {/* ticket-impactedobjects */}
-                        </div>{" "}
-                        {/* mod-ticket-impactedobjects */}
+
+                        <ServiceTicketDetailImpactedObjects ticket={ticket} />
                     </EuiPanel>
                 </EuiPageBody>
             </EuiPage>

@@ -56,6 +56,8 @@ abstract class CustomApiClientInterface extends BaseApiClient {
     abstract dienstafnameBySubscription: (subscriptionId: string) => Promise<Dienstafname | undefined>;
     abstract showForms: () => Promise<string[]>;
     abstract startForm: (formKey: string, userInputs: {}[]) => Promise<any>;
+    abstract cimTickets: () => Promise<ServiceTicket[]>;
+    abstract cimTicketById: (_id: string) => Promise<ServiceTicket>;
 }
 
 export class CustomApiClient extends CustomApiClientInterface {
@@ -210,11 +212,11 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.postPutJson("surf/cim/tickets/", ticket, "post", false, true);
     };
 
-    tickets = (): Promise<ServiceTicket[]> => {
+    cimTickets = (): Promise<ServiceTicket[]> => {
         return this.fetchJson<ServiceTicket[]>("http://localhost:8081/cim/tickets");
     };
 
-    ticketById = (_id: string): Promise<ServiceTicketWithDetails> => {
+    cimTicketById = (_id: string): Promise<ServiceTicketWithDetails> => {
         return this.fetchJson<ServiceTicketWithDetails>(`http://localhost:8081/cim/tickets/${_id}`);
     };
 }

@@ -11,28 +11,17 @@ import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
-// import { ticketStates } from "utils/Lookups";
 import { Filter, ServiceTicket, ServiceTicketProcessState, ServiceTicketState, SortOption } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
 import { tableTickets } from "./ServiceTicketsStyling";
 
-// interface ServiceTicket {
-//     jira_ticket: string;
-//     subject: string;
-//     state: number;
-//     opened_by: string;
-//     plandate: string;
-// }
-
-// type Column = "jira_ticket" | "subject" | "state" | "opened_by" | "plandate";
 type Column = "jira_ticket_id" | "title" | "ticket_state" | "process_state" | "opened_by" | "start_date";
 
 interface IProps extends WrappedComponentProps {}
 
 interface FilterAttributes {
     state: Filter[];
-    // rootPrefix: Filter[];
 }
 
 interface IState {
@@ -48,42 +37,12 @@ interface IState {
 class ServiceTickets extends React.PureComponent<IProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {
-        serviceTickets: [
-            // {
-            //     jira_ticket: "SNNP-65541",
-            //     subject: "Fiber werkzaamheden rond Amersfoort",
-            //     state: 0,
-            //     opened_by: "Hans",
-            //     plandate: "29-04-2021",
-            // },
-            // {
-            //     jira_ticket: "SNNP-65596",
-            //     subject: "SW upgrade Juniper MX in Zwolle",
-            //     state: 0,
-            //     opened_by: "Peter",
-            //     plandate: "15-04-2021",
-            // },
-            // {
-            //     jira_ticket: "SNNP-65741",
-            //     subject: "SW upgrade Juniper MX in Deventer",
-            //     state: 2,
-            //     opened_by: "Wouter",
-            //     plandate: "30-04-2021",
-            // },
-            // {
-            //     jira_ticket: "SNTT-33541",
-            //     subject: "Fiver breuk op Amsterdam - London ling",
-            //     state: 0,
-            //     opened_by: "Migiel",
-            //     plandate: "15-04-2021",
-            // },
-        ],
+        serviceTickets: [],
         query: "",
         searchResults: [],
         sortOrder: { name: "jira_ticket_id", descending: false },
         filterAttributes: {
             state: Object.values(ServiceTicketProcessState)
-                // state: ticketStates
                 .filter((s) => s)
                 .map((state) => ({
                     name: state ?? "",
@@ -99,16 +58,12 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
         this.setState({});
 
         this.context.customApiClient
-            .tickets()
+            .cimTickets()
             .then((res) => {
                 this.setState({ serviceTickets: res });
             })
             .catch((err) => {
-                // if (err.response && err.response.status === 404) {
-                //     this.setState({ notFound: true, loaded: true });
-                // } else {
                 throw err;
-                // }
             });
     }
 
@@ -245,7 +200,6 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
     };
 
     render() {
-        // const columns: Column[] = ["jira_ticket", "subject", "state", "opened_by", "plandate"];
         const columns: Column[] = [
             "jira_ticket_id",
             "title",

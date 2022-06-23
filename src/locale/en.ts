@@ -510,6 +510,20 @@ I18n.translations.en = {
             plandate: "Plandate",
             start_date: "Start Date",
         },
+        action: {
+            opening: "Send OPEN email",
+            updating: "Send UPDATE email",
+            closing: "Send CLOSE email",
+            aborting: "Abort",
+            show: "View last sent email",
+        },
+        impactedobject: {
+            customer: "Customer",
+            impact: "Impact",
+            type: "Type",
+            subscription: "Subscription",
+            impact_override: "Impact override",
+        },
     },
     metadata: {
         tabs: {
