@@ -50,8 +50,9 @@ abstract class CustomApiClientInterface extends BaseApiClient {
     abstract free_subnets: (subnet: string, netmask: number, prefixlen: number) => Promise<string[]>;
     abstract contacts: (organisationId: string) => Promise<ContactPerson[]>;
     abstract dienstafnameBySubscription: (subscriptionId: string) => Promise<Dienstafname | undefined>;
-    // abstract showForms: () => Promise<string[]>;
-    // abstract postForm: (workflow_name: string, process: {}[]) => Promise<{ id: string }>;
+    abstract showForms: () => Promise<string[]>;
+    // Todo: check if we can make type a bit more fine grained
+    abstract startForm: (formKey: string, userInputs: {}[]) => Promise<any>;
 }
 
 export class CustomApiClient extends CustomApiClientInterface {
@@ -194,5 +195,12 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.fetchJson<Dienstafname>(`surf/crm/dienstafname/${subscriptionId}`, {}, {}, false).catch((err) =>
             Promise.resolve(undefined)
         );
+    };
+    showForms = (): Promise<string[]> => {
+        return this.fetchJson("http://localhost:8082/cim/forms");
+    };
+
+    startForm = (formKey: string, userInputs: {}[]): Promise<{ id: string }> => {
+        return this.postPutJson("http://localhost:8082/cim/forms/" + formKey, userInputs, "post", false, true);
     };
 }

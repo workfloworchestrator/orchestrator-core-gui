@@ -30,38 +30,96 @@ import {
     EuiTitle,
 } from "@elastic/eui";
 import Explain from "components/Explain";
+import { JSONSchema6 } from "json-schema";
 import { intl } from "locale/i18n";
-import React, { useContext, useEffect, useState } from "react";
-import { injectIntl } from "react-intl";
-import ApplicationContext from "utils/ApplicationContext";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { injectIntl, useIntl } from "react-intl";
+import ApplicationContext, { customApiClient } from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
+import { productById } from "utils/Lookups";
+import { EngineStatus, Form, FormNotCompleteResponse } from "utils/types";
+import { isEmpty } from "utils/Utils";
+import { TARGET_CREATE } from "validations/Products";
 
-const I18N_KEY_PREFIX = "tickets.create.";
+import UserInputFormWizard from "../inputForms/UserInputFormWizard";
 
-function CreateServiceTicket() {
-    const { redirect } = useContext(ApplicationContext);
+interface PreselectedInput {
+    formKey?: string;
+}
 
-    const [page, setPage] = useState(0);
-    const [formInitialised, setFormInitialised] = useState(false);
+interface IProps {
+    preselectedInput: PreselectedInput;
+}
+
+export default function CreateServiceTicket(props: IProps) {
+    const intl = useIntl();
+    const { preselectedInput } = props;
+    const { products, redirect, customApiClient } = useContext(ApplicationContext);
+    const [form, setForm] = useState<Form>({});
+    const { stepUserInput, hasNext } = form;
     const [showExplanation, setShowExplanation] = useState(false);
 
+    const submit = useCallback(
+        (userInputs: {}[]) => {
+            // if (preselectedInput.formKey) {
+            //     userInputs = [{ form_key: preselectedInput.formKey }, ...userInputs];
+            // }
+
+            let promise = customApiClient.startForm("customer_form", userInputs).then(
+                (form) => {
+                    // Todo: handle ticket output and cal the endpoint to save the ticket
+                    console.log("Posted form inputs", form);
+                    setFlash(
+                        intl.formatMessage(
+                            { id: "forms.flash.create_create" }
+                            // { name: product.name, pid: process.id }
+                        )
+                    );
+                },
+                (e) => {
+                    throw e;
+                }
+            );
+
+            return customApiClient.catchErrorStatus<EngineStatus>(promise, 503, (json) => {
+                setFlash(
+                    intl.formatMessage({ id: `settings.status.engine.${json.global_status.toLowerCase()}` }),
+                    "error"
+                );
+                redirect("/tickets");
+            });
+        },
+        [redirect, preselectedInput, intl, customApiClient]
+    );
+
     useEffect(() => {
-        //get labels from ticket objects for combobox
-        if (page === 0) {
+        if (preselectedInput.formKey) {
+            customApiClient.catchErrorStatus<FormNotCompleteResponse>(submit([]), 510, (json) => {
+                setForm({
+                    stepUserInput: json.form,
+                    hasNext: json.hasNext ?? false,
+                });
+            });
+        } else {
+            setForm({
+                stepUserInput: {
+                    title: intl.formatMessage({ id: "forms.choose_form" }),
+                    type: "object",
+                    properties: {
+                        product: {
+                            type: "string",
+                            format: "productId",
+                            productIds: products
+                                .filter((prod) => !isEmpty(prod.workflows.find((wf) => wf.target === TARGET_CREATE)))
+                                .filter((prod) => prod.status === "active")
+                                .map((product) => product.product_id),
+                        },
+                    },
+                } as JSONSchema6,
+                hasNext: true,
+            });
         }
-        console.log("useEffect");
-    }, []);
-
-    const nextPage = () => {
-        setPage(page + 1);
-    };
-
-    const renderPage0 = () => {
-        return <EuiLoadingSpinner></EuiLoadingSpinner>;
-    };
-
-    const renderPage1 = () => {
-        return <EuiPanel>We are gonna show form here</EuiPanel>;
-    };
+    }, [products, submit, preselectedInput, intl, customApiClient]);
 
     return (
         <EuiPage>
@@ -87,15 +145,19 @@ function CreateServiceTicket() {
                     </p>
                 </Explain>
                 <EuiText grow={true}>
-                    <h1>Create ticket: step {page}</h1>
+                    <h1>Create ticket</h1>
                 </EuiText>
                 <div>
-                    {page === 0 && renderPage0()}
-                    {page === 1 && renderPage1()}
+                    {stepUserInput && (
+                        <UserInputFormWizard
+                            stepUserInput={stepUserInput}
+                            validSubmit={submit}
+                            cancel={() => redirect("/tickets")}
+                            hasNext={hasNext ?? false}
+                        />
+                    )}
                 </div>
             </EuiPageBody>
         </EuiPage>
     );
 }
-
-export default injectIntl(CreateServiceTicket);

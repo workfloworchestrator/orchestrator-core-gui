@@ -318,7 +318,11 @@ class App extends React.PureComponent<IProps, IState> {
                                                 <ProtectedRoute path="/processes" render={(props) => <Processes />} />
                                                 <ProtectedRoute
                                                     path="/tickets/create"
-                                                    render={(props) => <CreateServiceTicket />}
+                                                    render={(props) => (
+                                                        <CreateServiceTicket
+                                                            preselectedInput={{ formKey: "create_ticket_form" }}
+                                                        />
+                                                    )}
                                                 />
                                                 <ProtectedRoute
                                                     path="/tickets"
