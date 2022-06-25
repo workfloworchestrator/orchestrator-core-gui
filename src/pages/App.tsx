@@ -19,7 +19,6 @@ import "pages/App.scss";
 
 import { EuiLoadingSpinner, EuiProvider, EuiToast } from "@elastic/eui";
 import * as Sentry from "@sentry/react";
-import CreateServiceTicket from "components/cim/CreateServiceTicket";
 import EditProduct from "components/EditProduct";
 import Flash from "components/Flash";
 import Header from "components/Header";
@@ -30,6 +29,7 @@ import ProtectedRoute from "components/ProtectedRoute";
 import ViewProduct from "components/ViewProduct";
 import GlobalContextProviders from "contextProviders/globalContextProviders";
 import manifest from "custom/manifest.json";
+import CreateServiceTicket from "custom/pages/CreateServiceTicket";
 import { ENV } from "env";
 import { createBrowserHistory } from "history";
 import { intl, setLocale } from "locale/i18n";
@@ -318,11 +318,7 @@ class App extends React.PureComponent<IProps, IState> {
                                                 <ProtectedRoute path="/processes" render={(props) => <Processes />} />
                                                 <ProtectedRoute
                                                     path="/tickets/create"
-                                                    render={(props) => (
-                                                        <CreateServiceTicket
-                                                            preselectedInput={{ formKey: "create_ticket_form" }}
-                                                        />
-                                                    )}
+                                                    render={(props) => <CreateServiceTicket />}
                                                 />
                                                 <ProtectedRoute
                                                     path="/tickets"
