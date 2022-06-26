@@ -13,8 +13,6 @@
  *
  */
 
-import "pages/NewProcess.scss";
-
 import { EuiPage, EuiPageBody } from "@elastic/eui";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import { JSONSchema6 } from "json-schema";
@@ -26,6 +24,8 @@ import { productById } from "utils/Lookups";
 import { EngineStatus, Form, FormNotCompleteResponse } from "utils/types";
 import { isEmpty } from "utils/Utils";
 import { TARGET_CREATE } from "validations/Products";
+
+import { newProcessStyling } from "./NewProcessStyling";
 
 interface PreselectedInput {
     product?: string;
@@ -112,7 +112,7 @@ export default function NewProcess(props: IProps) {
     }, [products, submit, preselectedInput, intl, apiClient]);
 
     return (
-        <EuiPage>
+        <EuiPage css={newProcessStyling}>
             <EuiPageBody component="div" className="mod-new-process">
                 <section className="card">
                     <h1>

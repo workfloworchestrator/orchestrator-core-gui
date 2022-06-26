@@ -13,8 +13,6 @@
  *
  */
 
-import "pages/ProcessDetail.scss";
-
 import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody, EuiPanel, EuiText } from "@elastic/eui";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import ProcessStateDetails from "components/ProcessStateDetails";
@@ -35,6 +33,8 @@ import { CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
 import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step, WsProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
+
+import { processDetailStyling } from "./ProcessDetailStyling";
 
 const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 
@@ -460,7 +460,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
         return (
-            <EuiPage>
+            <EuiPage css={processDetailStyling}>
                 <RunningProcessesContext.Consumer>
                     {(rpc: any) => this.handleUpdateProcess(rpc.runningProcesses)}
                 </RunningProcessesContext.Consumer>

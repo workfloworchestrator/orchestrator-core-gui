@@ -13,6 +13,7 @@
  *
  */
 
+import { EuiPanel } from "@elastic/eui";
 import SubscriptionDetail from "components/subscriptionDetail/SubscriptionDetail";
 import {
     renderInsyncCell,
@@ -30,6 +31,7 @@ import {
     renderSingleSelectFilter,
 } from "components/tables/filterRenderers";
 import { NwaTable, isLocalTableSettings } from "components/tables/NwaTable";
+import { subscriptionsStyling } from "components/tables/SubscriptionsStyling";
 import chunk from "lodash/chunk";
 import isNull from "lodash/isNull";
 import last from "lodash/last";
@@ -292,7 +294,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
 
     return (
         <div key={name}>
-            <section className="nwa-table" id={`${name}-subscriptions`}>
+            <EuiPanel css={subscriptionsStyling} className="nwa-table" id={`${name}-subscriptions`}>
                 <NwaTable<Subscription>
                     columns={columns}
                     initialState={initialState as TableState<Subscription>}
@@ -304,7 +306,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                     excludeInFilter={["description"]}
                     advancedSearch={true}
                 />
-            </section>
+            </EuiPanel>
         </div>
     );
 }
