@@ -17,10 +17,6 @@
 @use "../../stylesheets/buttons.scss";
 @use "../../stylesheets/vars";
 
-.card {
-    @include mixins.card;
-}
-
 .euiDescriptionList {
     a {
         margin-top: 15px;

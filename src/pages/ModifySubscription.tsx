@@ -13,8 +13,6 @@
  *
  */
 
-import "pages/ModifySubscription.scss";
-
 import { EuiPage, EuiPageBody } from "@elastic/eui";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import React from "react";
@@ -24,6 +22,7 @@ import { setFlash } from "utils/Flash";
 import { FormNotCompleteResponse, InputForm } from "utils/types";
 
 import ApplicationContext from "../utils/ApplicationContext";
+import { modifySubscriptionsStyling } from "./ModifySubscriptionStyling";
 
 interface IProps extends RouteComponentProps, WrappedComponentProps {
     subscriptionId: string;
@@ -89,7 +88,7 @@ class ModifySubscription extends React.Component<IProps, IState> {
         }
 
         return (
-            <EuiPage>
+            <EuiPage css={modifySubscriptionsStyling}>
                 <EuiPageBody component="div" className="mod-modify-subscription">
                     <section className="card">
                         <h1>

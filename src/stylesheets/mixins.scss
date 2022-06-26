@@ -17,6 +17,7 @@
 @use "sass:color";
 @use "vars.scss";
 
+// not used anymore
 @mixin card {
     //background-color: white;
     border-bottom-left-radius: vars.$br;
@@ -49,6 +50,7 @@
     font-weight: bold;
 }
 
+// currently not used anywhere, should we delete this one ?
 @mixin select-dropdown {
     span.Select-clear-zone {
         display: none;
@@ -84,27 +86,7 @@
     }
 }
 
-@mixin copy-icon-pulse {
-    i.copied {
-        animation: pulse 1s;
-        animation-iteration-count: 1;
-        border-radius: 50%;
-        position: relative;
-    }
-
-    @keyframes pulse {
-        0% {
-            box-shadow: 0 0 0 0 white;
-        }
-        70% {
-            box-shadow: 0 0 10px 8px color.adjust(vars.$primary, $lightness: 15%);
-        }
-        100% {
-            box-shadow: 0 0 0 0 white;
-        }
-    }
-}
-
+// currently not used anywhere, should we delete this one ?
 @mixin no-text-decoration {
     text-decoration: none;
     &:hover,
@@ -113,6 +95,7 @@
     }
 }
 
+// currently not used anywhere, should we delete this one ?
 @mixin inputField {
     width: 100%;
     font-size: 14px;

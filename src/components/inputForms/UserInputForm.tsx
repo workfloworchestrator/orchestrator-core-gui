@@ -13,9 +13,7 @@
  *
  */
 
-import "components/inputForms/UserInputForm.scss";
-
-import { EuiButton, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
+import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
 import { SubscriptionsContextProvider } from "components/subscriptionContext";
 import ConfirmationDialogContext, {
     ConfirmDialogActions,
@@ -38,6 +36,8 @@ import ApplicationContext from "utils/ApplicationContext";
 import { getQueryParameters } from "utils/QueryParameters";
 import { ValidationError } from "utils/types";
 import { stop } from "utils/Utils";
+
+import { userInputFormStyling } from "./UserInputFormStyling";
 
 type JSONSchemaFormProperty = JSONSchema6 & { uniforms: any; defaultValue: any };
 
@@ -420,51 +420,53 @@ class UserInputForm extends React.Component<IProps, IState> {
         const AutoFieldProvider = AutoField.componentDetectorContext.Provider;
 
         return (
-            <div className="user-input-form">
-                <ConfirmationDialogContext.Consumer>
-                    {(cdc) => this.addConfirmDialogActions(cdc)}
-                </ConfirmationDialogContext.Consumer>
-                <section className="form-fieldset">
-                    {stepUserInput.title && stepUserInput.title !== "unknown" && <h3>{stepUserInput.title}</h3>}
-                    <SubscriptionsContextProvider>
-                        {/*
-                        // @ts-ignore */}
-                        <AutoFieldProvider value={autoFieldFunction}>
-                            <AutoForm
-                                schema={bridge}
-                                onSubmit={this.submit}
-                                showInlineError={true}
-                                validate="onSubmit"
-                                model={userInput}
-                            >
-                                <AutoFields />
-                                {/* Show top level validation info about backend validation */}
-                                {nrOfValidationErrors > 0 && (
-                                    <section className="form-errors">
-                                        <em className="error backend-validation-metadata">
-                                            <FormattedMessage
-                                                id="process.input_fields_have_validation_errors"
-                                                values={{ nrOfValidationErrors: nrOfValidationErrors }}
-                                            />
-                                        </em>
-                                    </section>
-                                )}
-                                {rootErrors.length > 0 && (
-                                    <section className="form-errors">
-                                        <em className="error backend-validation-metadata">
-                                            {rootErrors.map((error) => (
-                                                <div className="euiFormErrorText euiFormRow__text">{error}</div>
-                                            ))}
-                                        </em>
-                                    </section>
-                                )}
+            <EuiPanel css={userInputFormStyling}>
+                <div className="user-input-form">
+                    <ConfirmationDialogContext.Consumer>
+                        {(cdc) => this.addConfirmDialogActions(cdc)}
+                    </ConfirmationDialogContext.Consumer>
+                    <section className="form-fieldset">
+                        {stepUserInput.title && stepUserInput.title !== "unknown" && <h3>{stepUserInput.title}</h3>}
+                        <SubscriptionsContextProvider>
+                            {/*
+                            // @ts-ignore */}
+                            <AutoFieldProvider value={autoFieldFunction}>
+                                <AutoForm
+                                    schema={bridge}
+                                    onSubmit={this.submit}
+                                    showInlineError={true}
+                                    validate="onSubmit"
+                                    model={userInput}
+                                >
+                                    <AutoFields />
+                                    {/* Show top level validation info about backend validation */}
+                                    {nrOfValidationErrors > 0 && (
+                                        <section className="form-errors">
+                                            <em className="error backend-validation-metadata">
+                                                <FormattedMessage
+                                                    id="process.input_fields_have_validation_errors"
+                                                    values={{ nrOfValidationErrors: nrOfValidationErrors }}
+                                                />
+                                            </em>
+                                        </section>
+                                    )}
+                                    {rootErrors.length > 0 && (
+                                        <section className="form-errors">
+                                            <em className="error backend-validation-metadata">
+                                                {rootErrors.map((error) => (
+                                                    <div className="euiFormErrorText euiFormRow__text">{error}</div>
+                                                ))}
+                                            </em>
+                                        </section>
+                                    )}
 
-                                {this.renderButtons()}
-                            </AutoForm>
-                        </AutoFieldProvider>
-                    </SubscriptionsContextProvider>
-                </section>
-            </div>
+                                    {this.renderButtons()}
+                                </AutoForm>
+                            </AutoFieldProvider>
+                        </SubscriptionsContextProvider>
+                    </section>
+                </div>
+            </EuiPanel>
         );
     }
 }

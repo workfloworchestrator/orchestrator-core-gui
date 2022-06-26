@@ -13,8 +13,6 @@
  *
  */
 
-import "components/ProcessStateDetails.scss";
-
 import {
     EuiButtonIcon,
     EuiCheckbox,
@@ -40,6 +38,8 @@ import { FormattedMessage } from "react-intl";
 import { capitalize, renderDateTime } from "utils/Lookups";
 import { ProcessSubscription, ProcessWithDetails, Step, prop } from "utils/types";
 import { applyIdNamingConvention, isEmpty, stateDelta } from "utils/Utils";
+
+import { processStateDetailsStyling } from "./ProcessStateDetailsStyling";
 
 const HIDDEN_KEYS = ["label_", "divider_", "__"];
 
@@ -392,120 +392,124 @@ function ProcessStateDetails({
     };
 
     return (
-        <section className="process-state-detail">
-            {subscriptionDelta.modalOpen && (
-                <EuiFlyout size={window.window.innerWidth} onClose={closeSubscriptionDeltaModal}>
-                    <EuiFlyoutHeader hasBorder aria-labelledby="subscription-delta-modal">
-                        <EuiTitle>
-                            <h3 id="subscription-delta-modal-header">
-                                Inspect subscription changes for {subscriptionDelta.subscriptionId}
-                            </h3>
-                        </EuiTitle>
-                    </EuiFlyoutHeader>
-                    <EuiFlyoutBody>
-                        <>
-                            <EuiFlexGroup gutterSize="s">
-                                <EuiFlexItem grow={false}>
-                                    <EuiText>
-                                        <h4>Delta</h4>
-                                    </EuiText>
-                                </EuiFlexItem>
-                                <EuiFlexItem grow={false}>
-                                    <EuiButtonIcon
-                                        iconType={collapsedDeltaPanel ? "arrowRight" : "arrowDown"}
-                                        aria-label="Toggle related subscriptions"
-                                        onClick={() => setCollapsedDeltaPanel(!collapsedDeltaPanel)}
-                                    />
-                                </EuiFlexItem>
-                                <EuiFlexItem></EuiFlexItem>
-                            </EuiFlexGroup>
-                            {!collapsedDeltaPanel && (
-                                <EuiPanel color="transparent" hasBorder={true}>
-                                    <HighlightCode
-                                        data={JSON.stringify(
-                                            stateDelta(subscriptionDelta.before, subscriptionDelta.now),
-                                            null,
-                                            2
-                                        )}
-                                    />
-                                </EuiPanel>
-                            )}
-
-                            <EuiResizableContainer style={{ height: "100%" }}>
-                                {(EuiResizablePanel, EuiResizableButton) => (
-                                    <>
-                                        <EuiResizablePanel
-                                            initialSize={window.window.innerWidth / 2}
-                                            style={{ marginLeft: "-15px" }}
-                                        >
-                                            <EuiText>
-                                                <h4>Before</h4>
-                                            </EuiText>
-                                            <HighlightCode data={JSON.stringify(subscriptionDelta.before, null, 2)} />
-                                        </EuiResizablePanel>
-
-                                        <EuiResizableButton />
-
-                                        <EuiResizablePanel initialSize={window.window.innerWidth / 2}>
-                                            <EuiText>
-                                                <h4>Now</h4>
-                                            </EuiText>
-                                            <HighlightCode data={JSON.stringify(subscriptionDelta.now, null, 2)} />
-                                        </EuiResizablePanel>
-                                    </>
+        <EuiPanel hasShadow={false} css={processStateDetailsStyling}>
+            <section className="process-state-detail">
+                {subscriptionDelta.modalOpen && (
+                    <EuiFlyout size={window.window.innerWidth} onClose={closeSubscriptionDeltaModal}>
+                        <EuiFlyoutHeader hasBorder aria-labelledby="subscription-delta-modal">
+                            <EuiTitle>
+                                <h3 id="subscription-delta-modal-header">
+                                    Inspect subscription changes for {subscriptionDelta.subscriptionId}
+                                </h3>
+                            </EuiTitle>
+                        </EuiFlyoutHeader>
+                        <EuiFlyoutBody>
+                            <>
+                                <EuiFlexGroup gutterSize="s">
+                                    <EuiFlexItem grow={false}>
+                                        <EuiText>
+                                            <h4>Delta</h4>
+                                        </EuiText>
+                                    </EuiFlexItem>
+                                    <EuiFlexItem grow={false}>
+                                        <EuiButtonIcon
+                                            iconType={collapsedDeltaPanel ? "arrowRight" : "arrowDown"}
+                                            aria-label="Toggle related subscriptions"
+                                            onClick={() => setCollapsedDeltaPanel(!collapsedDeltaPanel)}
+                                        />
+                                    </EuiFlexItem>
+                                    <EuiFlexItem></EuiFlexItem>
+                                </EuiFlexGroup>
+                                {!collapsedDeltaPanel && (
+                                    <EuiPanel color="transparent" hasBorder={true}>
+                                        <HighlightCode
+                                            data={JSON.stringify(
+                                                stateDelta(subscriptionDelta.before, subscriptionDelta.now),
+                                                null,
+                                                2
+                                            )}
+                                        />
+                                    </EuiPanel>
                                 )}
-                            </EuiResizableContainer>
-                        </>
-                    </EuiFlyoutBody>
-                </EuiFlyout>
-            )}
 
-            {renderProcessHeaderInformation(process)}
-            {traceback && (
-                <section className="traceback-container">
-                    <pre>{process.traceback}</pre>
-                </section>
-            )}
-            {raw ? (
-                renderRaw(process)
-            ) : (
-                <>
-                    {details && (
-                        <section className="process-summary">
-                            <table>
-                                <tbody>
-                                    {summaryKeys.map((key) => (
-                                        <tr key={key}>
-                                            <td className="title">
-                                                <FormattedMessage id={`process_state.summary.${key}`} />
-                                            </td>
-                                            <td className="value">{renderSummaryValue(prop(process, key))}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </section>
-                    )}
-                    {loading && <EuiLoadingChart size="xl" mono />}
-                    {!loading && (
-                        <ProcessSubscriptionLink
-                            subscriptionProcesses={subscriptionProcesses}
-                            isProcess={isProcess}
-                            currentState={process.current_state}
-                            handleDeltaClick={handleDeltaClick}
+                                <EuiResizableContainer style={{ height: "100%" }}>
+                                    {(EuiResizablePanel, EuiResizableButton) => (
+                                        <>
+                                            <EuiResizablePanel
+                                                initialSize={window.window.innerWidth / 2}
+                                                style={{ marginLeft: "-15px" }}
+                                            >
+                                                <EuiText>
+                                                    <h4>Before</h4>
+                                                </EuiText>
+                                                <HighlightCode
+                                                    data={JSON.stringify(subscriptionDelta.before, null, 2)}
+                                                />
+                                            </EuiResizablePanel>
+
+                                            <EuiResizableButton />
+
+                                            <EuiResizablePanel initialSize={window.window.innerWidth / 2}>
+                                                <EuiText>
+                                                    <h4>Now</h4>
+                                                </EuiText>
+                                                <HighlightCode data={JSON.stringify(subscriptionDelta.now, null, 2)} />
+                                            </EuiResizablePanel>
+                                        </>
+                                    )}
+                                </EuiResizableContainer>
+                            </>
+                        </EuiFlyoutBody>
+                    </EuiFlyout>
+                )}
+
+                {renderProcessHeaderInformation(process)}
+                {traceback && (
+                    <section className="traceback-container">
+                        <pre>{process.traceback}</pre>
+                    </section>
+                )}
+                {raw ? (
+                    renderRaw(process)
+                ) : (
+                    <>
+                        {details && (
+                            <section className="process-summary">
+                                <table>
+                                    <tbody>
+                                        {summaryKeys.map((key) => (
+                                            <tr key={key}>
+                                                <td className="title">
+                                                    <FormattedMessage id={`process_state.summary.${key}`} />
+                                                </td>
+                                                <td className="value">{renderSummaryValue(prop(process, key))}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </section>
+                        )}
+                        {loading && <EuiLoadingChart size="xl" mono />}
+                        {!loading && (
+                            <ProcessSubscriptionLink
+                                subscriptionProcesses={subscriptionProcesses}
+                                isProcess={isProcess}
+                                currentState={process.current_state}
+                                handleDeltaClick={handleDeltaClick}
+                            />
+                        )}
+                        <EuiSpacer />
+                        <ProcessOverview
+                            steps={process.steps}
+                            stateChanges={stateChanges}
+                            onChangeCollapsed={onChangeCollapsed}
+                            collapsed={collapsed}
+                            showHiddenKeys={showHiddenKeys}
                         />
-                    )}
-                    <EuiSpacer />
-                    <ProcessOverview
-                        steps={process.steps}
-                        stateChanges={stateChanges}
-                        onChangeCollapsed={onChangeCollapsed}
-                        collapsed={collapsed}
-                        showHiddenKeys={showHiddenKeys}
-                    />
-                </>
-            )}
-        </section>
+                    </>
+                )}
+            </section>
+        </EuiPanel>
     );
 }
 

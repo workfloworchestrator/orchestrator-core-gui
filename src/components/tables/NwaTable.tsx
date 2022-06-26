@@ -14,11 +14,11 @@
  */
 
 import "stylesheets/buttons.scss";
-import "components/tables/NwaTable.scss";
 
 import { EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
 import AdvancedSearch from "components/tables/AdvancedSearch";
 import MiniPaginator from "components/tables/MiniPaginator";
+import { nwaTableStyling } from "components/tables/NwaTableStyling";
 import Paginator from "components/tables/Paginator";
 import Preferences from "components/tables/Preferences";
 import { TableRenderer } from "components/tables/TableRenderer";
@@ -169,15 +169,6 @@ export function tableSettingsReducer<T extends object>(
             case ActionType.LOADING_STOP:
                 draft.loading = false;
                 break;
-            case ActionType.MINIMIZE:
-                draft.minimized = true;
-                draft.refresh = false;
-                draft.showSettings = false;
-                break;
-            case ActionType.MAXIMIZE:
-                draft.minimized = false;
-                draft.refresh = true;
-                break;
             default:
             // Uncomment to see unhandled actions in the console
             // console.log(action);
@@ -322,25 +313,25 @@ export function NwaTable<T extends object>({
     }, [runningProcesses]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <EuiPanel id={name} style={{ marginBottom: "20px" }}>
+        <EuiPanel css={nwaTableStyling} id={name} style={{ marginBottom: "20px" }}>
             <EuiFlexGroup>
                 <EuiFlexItem grow={false} component="span">
                     <Preferences<T> {...preferencesProps} />
                 </EuiFlexItem>
-                {!minimized && !showSettings && (
+                {!showSettings && (
                     <EuiFlexItem grow={false} component="span">
                         <MiniPaginator {...paginatorProps} />
                     </EuiFlexItem>
                 )}
             </EuiFlexGroup>
-            {!minimized && advancedSearch && <AdvancedSearch {...advancedSearchProps} />}
-            {!minimized && <TableRenderer {...TableRendererProps} />}
-            {!minimized && data.length === 0 && (
+            {advancedSearch && <AdvancedSearch {...advancedSearchProps} />}
+            {<TableRenderer {...TableRendererProps} />}
+            {data.length === 0 && (
                 <div className={"no-results"}>
                     <FormattedMessage id="table.no_results" />
                 </div>
             )}
-            {!minimized && showPaginator && <Paginator {...paginatorProps} />}
+            {showPaginator && <Paginator {...paginatorProps} />}
         </EuiPanel>
     );
 }

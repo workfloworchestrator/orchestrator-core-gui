@@ -13,6 +13,7 @@
  *
  */
 
+import { EuiPanel } from "@elastic/eui";
 import ActionContainer from "components/ActionContainer";
 import {
     renderCustomersCell,
@@ -25,6 +26,7 @@ import {
 } from "components/tables/cellRenderers";
 import { renderCustomersFilter, renderILikeFilter, renderMultiSelectFilter } from "components/tables/filterRenderers";
 import { NwaTable, isLocalTableSettings } from "components/tables/NwaTable";
+import { processesStyling } from "components/tables/ProcessesStyling";
 import chunk from "lodash/chunk";
 import isNull from "lodash/isNull";
 import last from "lodash/last";
@@ -347,7 +349,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
     const excludeInFilter = ["info", "workflow"];
     return (
         <div key={name}>
-            <section className="nwa-table" id={`${name}-processes`}>
+            <EuiPanel css={processesStyling} className="nwa-table" id={`${name}-processes`}>
                 <NwaTable<ProcessV2>
                     columns={columns}
                     initialState={initialState as TableState<ProcessV2>}
@@ -359,7 +361,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                     excludeInFilter={excludeInFilter}
                     advancedSearch={false}
                 />
-            </section>
+            </EuiPanel>
         </div>
     );
 }

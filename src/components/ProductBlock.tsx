@@ -13,11 +13,7 @@
  *
  */
 
-import "components/ProductBlock.scss";
-
-import "./ProductBlock.scss";
-
-import { EuiButton } from "@elastic/eui";
+import { EuiButton, EuiPanel } from "@elastic/eui";
 import ConfirmationDialogContext, {
     ConfirmDialogActions,
     ShowConfirmDialogType,
@@ -32,6 +28,8 @@ import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { Option, ResourceType, ProductBlock as iProductBlock } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
+
+import { productBlockStyling } from "./ProductBlockStyling";
 
 type Column = "name" | "description";
 
@@ -252,47 +250,56 @@ class ProductBlock extends React.Component<IProps, IState> {
         );
 
         return (
-            <div className="mod-product-block">
-                <ConfirmationDialogContext.Consumer>
-                    {(cdc) => this.addConfirmDialogActions(cdc)}
-                </ConfirmationDialogContext.Consumer>
-                <section className="card">
-                    {formInput(
-                        "metadata.productBlocks.name",
-                        "name",
-                        productBlock.name || "",
-                        readOnly,
-                        this.state.errors,
-                        this.changeProperty("name"),
-                        this.validateProperty("name"),
-                        duplicateName ? intl.formatMessage({ id: "metadata.productBlocks.duplicate_name" }) : undefined
-                    )}
-                    {formInput(
-                        "metadata.productBlocks.description",
-                        "description",
-                        productBlock.description || "",
-                        readOnly,
-                        this.state.errors,
-                        this.changeProperty("description"),
-                        this.validateProperty("description")
-                    )}
-                    {formSelect(
-                        "metadata.productBlocks.status",
-                        this.changeProperty("status"),
-                        ["active", "phase out", "pre production", "end of life"],
-                        readOnly,
-                        productBlock.status || "active"
-                    )}
-                    {formDate(
-                        "metadata.productBlocks.created_at",
-                        () => false,
-                        true,
-                        productBlock.created_at ? new Date(productBlock.created_at * 1000) : new Date()
-                    )}
-                    {formDate("metadata.productBlocks.end_date", this.changeProperty("end_date"), readOnly, endDate)}
-                    {this.renderButtons(initial, productBlock)}
-                </section>
-            </div>
+            <EuiPanel css={productBlockStyling}>
+                <div className="mod-product-block">
+                    <ConfirmationDialogContext.Consumer>
+                        {(cdc) => this.addConfirmDialogActions(cdc)}
+                    </ConfirmationDialogContext.Consumer>
+                    <section className="card">
+                        {formInput(
+                            "metadata.productBlocks.name",
+                            "name",
+                            productBlock.name || "",
+                            readOnly,
+                            this.state.errors,
+                            this.changeProperty("name"),
+                            this.validateProperty("name"),
+                            duplicateName
+                                ? intl.formatMessage({ id: "metadata.productBlocks.duplicate_name" })
+                                : undefined
+                        )}
+                        {formInput(
+                            "metadata.productBlocks.description",
+                            "description",
+                            productBlock.description || "",
+                            readOnly,
+                            this.state.errors,
+                            this.changeProperty("description"),
+                            this.validateProperty("description")
+                        )}
+                        {formSelect(
+                            "metadata.productBlocks.status",
+                            this.changeProperty("status"),
+                            ["active", "phase out", "pre production", "end of life"],
+                            readOnly,
+                            productBlock.status || "active"
+                        )}
+                        {formDate(
+                            "metadata.productBlocks.created_at",
+                            () => false,
+                            true,
+                            productBlock.created_at ? new Date(productBlock.created_at * 1000) : new Date()
+                        )}
+                        {formDate(
+                            "metadata.productBlocks.end_date",
+                            this.changeProperty("end_date"),
+                            readOnly,
+                            endDate
+                        )}
+                        {this.renderButtons(initial, productBlock)}
+                    </section>
+                </div>
+            </EuiPanel>
         );
     }
 }

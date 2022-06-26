@@ -2,6 +2,7 @@ import { css } from "@emotion/core";
 
 export const zIndex = '("sync": 900,"flash": 1020,"explain": 1010)';
 export const MEDIUM_SCREEN_WITH = "1680px";
+export const SIZE_BR = "3px";
 /*
 !
  * Copyright 2019-2022 SURF.
