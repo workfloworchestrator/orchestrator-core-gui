@@ -3,10 +3,10 @@
  *
  */
 
-import "pages/ServiceTickets.scss";
+import "custom/pages/ServiceTickets.scss";
 
 import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPage, EuiPanel, EuiSpacer } from "@elastic/eui";
-import ServiceTicketFilter from "components/ServiceTicketFilter";
+import ServiceTicketFilter from "custom/components/ServiceTicketFilter";
 import { intl } from "locale/i18n";
 import debounce from "lodash/debounce";
 import React from "react";

@@ -5,7 +5,22 @@
             "name": "prefixes",
             "path": "pages",
             "file": "Prefixes",
-            "component": "Prefixes"
+            "component": "Prefixes",
+            "showInMenu": true
+        },
+        {
+            "name": "tickets",
+            "path": "pages",
+            "file": "ServiceTickets",
+            "component": "ServiceTickets",
+            "showInMenu": true
+        },
+        {
+            "name": "tickets/create",
+            "path": "pages",
+            "file": "CreateServiceTicket",
+            "component": "CreateServiceTicket",
+            "showInMenu": false
         }
     ],
     "disabledRoutes": ["/YOUR_DISABLED_ROUTE_HERE"],

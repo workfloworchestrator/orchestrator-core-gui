@@ -1,18 +1,14 @@
-import { EuiButton } from "@elastic/eui";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
-import { JSONSchema6 } from "json-schema";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
 import { EngineStatus, Form, FormNotCompleteResponse } from "utils/types";
-import { isEmpty } from "utils/Utils";
-import { TARGET_CREATE } from "validations/Products";
-
-import { setFlash } from "../../../utils/Flash";
 
 interface IProps {
     preselectedInput?: any;
     formKey: string;
+    // handleSubmit: any
 }
 
 export default function CreateForm(props: IProps) {
@@ -23,7 +19,7 @@ export default function CreateForm(props: IProps) {
     const { stepUserInput, hasNext } = form;
 
     const submit = useCallback(
-        (userInputs: any[]) => {
+        (userInputs: {}[]) => {
             // if (preselectedInput.product) {
             // Todo: decide if we want to implement pre-selections and design a way to do it generic
             //     userInputs = [{ preselectedInput }, ...processInput];

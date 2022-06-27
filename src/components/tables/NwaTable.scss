@@ -204,6 +204,9 @@ table.nwa-table {
             position: relative;
         }
         td.subscription_id,
+        td.step {
+            width: 15%;
+        }
         td.pid {
             width: 80px;
         }

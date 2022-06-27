@@ -3,8 +3,8 @@
  */
 
 @use "sass:color";
-@use "../stylesheets/mixins.scss";
-@use "../stylesheets/vars";
+@use "../../stylesheets/mixins";
+@use "../../stylesheets/vars";
 
 .options {
     display: flex;
