@@ -212,8 +212,8 @@ export interface ServiceTicketImpactedIMSCircuit {
     ims_circuit_id: number;
     ims_circuit_name: string;
     impact: ServiceTicketImpactedObjectImpact;
-    impact_override: ServiceTicketImpactedObjectImpact;
-    extra_information: string | null;
+    impact_override?: ServiceTicketImpactedObjectImpact;
+    extra_information?: string;
 }
 
 export interface ServiceTicketCustomer {
@@ -229,7 +229,7 @@ export interface ServiceTicketContact {
 
 export interface ServiceTicketRelatedCustomer {
     customer: ServiceTicketCustomer;
-    customer_subscription_description: string | null;
+    customer_subscription_description?: string;
     contact: ServiceTicketContact[];
 }
 
@@ -239,7 +239,7 @@ export interface ServiceTicketImpactedObject {
     ims_circuits: ServiceTicketImpactedIMSCircuit[]; // Ims Circuits[...]
     owner_customer: ServiceTicketCustomer; //	Customer{...}
     subscription_description: string; // title: Subscription Description
-    owner_customer_description: string | null; // title: Owner Customer Description
+    owner_customer_description?: string; // title: Owner Customer Description
     owner_customer_contacts: ServiceTicketContact[]; // Owner Customer Contacts[...]
     related_customers: ServiceTicketRelatedCustomer[]; // Related Customers[...]
 }

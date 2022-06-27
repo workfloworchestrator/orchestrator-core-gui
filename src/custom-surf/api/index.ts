@@ -14,6 +14,7 @@ import {
     ServicePortFilterItem,
     ServicePortSubscription,
     ServiceTicket,
+    ServiceTicketImpactedIMSCircuit,
     ServiceTicketWithDetails,
 } from "utils/types";
 
@@ -57,7 +58,13 @@ abstract class CustomApiClientInterface extends BaseApiClient {
     abstract showForms: () => Promise<string[]>;
     abstract startForm: (formKey: string, userInputs: {}[]) => Promise<any>;
     abstract cimTickets: () => Promise<ServiceTicket[]>;
-    abstract cimTicketById: (_id: string) => Promise<ServiceTicket>;
+    abstract cimTicketById: (ticket_id: string) => Promise<ServiceTicketWithDetails>;
+    abstract cimPatchImpactedService: (
+        ticket_id: string,
+        subscription_id: string,
+        circuit_id: number,
+        impactedService: ServiceTicketImpactedIMSCircuit
+    ) => Promise<ServiceTicketWithDetails>;
 }
 
 export class CustomApiClient extends CustomApiClientInterface {
@@ -216,7 +223,21 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.fetchJson<ServiceTicket[]>("http://localhost:8081/cim/tickets");
     };
 
-    cimTicketById = (_id: string): Promise<ServiceTicketWithDetails> => {
-        return this.fetchJson<ServiceTicketWithDetails>(`http://localhost:8081/cim/tickets/${_id}`);
+    cimTicketById = (ticket_id: string): Promise<ServiceTicketWithDetails> => {
+        return this.fetchJson<ServiceTicketWithDetails>(`http://localhost:8081/cim/tickets/${ticket_id}`);
+    };
+    cimPatchImpactedService = (
+        ticket_id: string,
+        subscription_id: string,
+        circuit_id: number,
+        impactedService: ServiceTicketImpactedIMSCircuit
+    ): Promise<ServiceTicketWithDetails> => {
+        return this.postPutJson(
+            `http://localhost:8081/cim/objects/${ticket_id}/subscription/${subscription_id}/service/${circuit_id}`,
+            impactedService,
+            "patch",
+            true,
+            false
+        );
     };
 }

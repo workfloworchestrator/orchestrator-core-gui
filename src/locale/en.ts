@@ -524,6 +524,7 @@ I18n.translations.en = {
             type: "Type",
             subscription: "Subscription",
             impact_override: "Impact override",
+            impact_override_info: "Use this to override the impact, or clear to remove override",
         },
     },
     metadata: {
