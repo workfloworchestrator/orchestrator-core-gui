@@ -129,14 +129,11 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
     };
 
     filter = (unfiltered: ServiceTicket[]) => {
-        // const { rootPrefix } = this.state.filterAttributes;
-        // return unfiltered.filter((ticket) => {
-        //     const rootFilter = rootPrefix.find((attr) => attr.name === ticket.jira_ticket_id);
-
-        //     return rootFilter ? rootFilter.selected : true;
-        // });
-
         const { state } = this.state.filterAttributes;
+        if (!state.some((attr) => attr.selected)) {
+            // If no filter selected, show all tickets
+            return unfiltered;
+        }
         return unfiltered.filter((ticket) => {
             const stateFilter = state.find((attr) => attr.name === ticket.process_state);
             return stateFilter ? stateFilter.selected : true;
