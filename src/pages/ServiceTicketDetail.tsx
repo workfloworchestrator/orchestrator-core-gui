@@ -54,7 +54,7 @@ import {
 } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
-import ServiceTicketDetailImpactedServices, { ImpactedService } from "./ServiceTicketDetailImpactedServices";
+import ServiceTicketDetailImpactedObjects, { ImpactedObject } from "./ServiceTicketDetailImpactedObjects";
 import { ticketDetail } from "./ServiceTicketDetailStyling";
 
 interface IProps {
@@ -66,7 +66,7 @@ function ServiceTicketDetail({ ticketId }: IProps) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [notFound, setNotFound] = useState(false);
 
-    const [openedImpactedService, setOpenedImpactedService] = useState<ImpactedService>();
+    const [openedImpactedObject, setOpenedImpactedObject] = useState<ImpactedObject>();
     const { theme, customApiClient } = useContext(ApplicationContext);
 
     const onCloseModal = () => {
@@ -74,29 +74,28 @@ function ServiceTicketDetail({ ticketId }: IProps) {
     };
     const onSubmitModal = (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
         stop(event);
-        if (!openedImpactedService || !ticket) {
+        if (!openedImpactedObject || !ticket) {
             // TODO this is just to make typescript happy, but how to prevent this?
             return;
         }
 
         const impactedCircuit: ServiceTicketImpactedIMSCircuit = {
-            ims_circuit_id: openedImpactedService?.ims_circuit_id,
-            impact: openedImpactedService.impact,
-            ims_circuit_name: openedImpactedService?.ims_circuit_name,
-            extra_information: openedImpactedService?.extra_information,
+            ims_circuit_id: openedImpactedObject?.ims_circuit_id,
+            impact: openedImpactedObject.impact,
+            ims_circuit_name: openedImpactedObject?.ims_circuit_name,
+            extra_information: openedImpactedObject?.extra_information,
             impact_override: impactOverrideValue,
         };
 
         customApiClient
-            .cimPatchImpactedService(
+            .cimPatchImpactedObject(
                 ticket?._id,
-                openedImpactedService?.subscription_id,
-                openedImpactedService?.ims_circuit_id,
+                openedImpactedObject?.subscription_id,
+                openedImpactedObject?.ims_circuit_id,
                 impactedCircuit
             )
             .then((res) => {
                 // Successfully patched the impacted circuit in the serviceticket
-                console.log("setTicket from onSubmitModal");
                 setTicket(res);
                 onCloseModal();
             })
@@ -106,8 +105,8 @@ function ServiceTicketDetail({ ticketId }: IProps) {
             });
     };
 
-    const showModal = (circuit: ImpactedService) => {
-        setOpenedImpactedService(circuit);
+    const showModal = (circuit: ImpactedObject) => {
+        setOpenedImpactedObject(circuit);
         setImpactOverrideValue(circuit.impact_override);
         setIsModalVisible(true);
     };
@@ -115,7 +114,7 @@ function ServiceTicketDetail({ ticketId }: IProps) {
     const modalFormId = useGeneratedHtmlId({ prefix: "modalForm" });
 
     // Impact-override Dropdown in the modal
-    const [impactOverrideValue, setImpactOverrideValue] = useState(openedImpactedService?.impact_override);
+    const [impactOverrideValue, setImpactOverrideValue] = useState(openedImpactedObject?.impact_override);
     const onImpactOverrideChange = (
         e:
             | Date
@@ -135,7 +134,6 @@ function ServiceTicketDetail({ ticketId }: IProps) {
     };
 
     useEffect(() => {
-        console.log("useEffect");
         customApiClient
             .cimTicketById(ticketId)
             .then((res) => {
@@ -264,33 +262,33 @@ function ServiceTicketDetail({ ticketId }: IProps) {
             <EuiModal onClose={onCloseModal} initialFocus="[name=popswitch]">
                 <EuiModalHeader>
                     <EuiModalHeaderTitle>
-                        <h1>Edit service impact</h1>
+                        <h1>Impacted object</h1>
                     </EuiModalHeaderTitle>
                 </EuiModalHeader>
 
                 <EuiModalBody>
                     <EuiForm id={modalFormId} component="form">
                         <EuiFormRow label="Customer">
-                            <EuiFieldText readOnly name="customer" value={openedImpactedService?.customer} />
+                            <EuiFieldText readOnly name="customer" value={openedImpactedObject?.customer} />
                         </EuiFormRow>
                         <EuiFormRow label="Impact">
-                            <EuiFieldText readOnly name="impact" value={openedImpactedService?.impact} />
+                            <EuiFieldText readOnly name="impact" value={openedImpactedObject?.impact} />
                         </EuiFormRow>
                         <EuiFormRow label="Type">
-                            <EuiFieldText readOnly name="type" value={openedImpactedService?.type} />
+                            <EuiFieldText readOnly name="type" value={openedImpactedObject?.type} />
                         </EuiFormRow>
                         <EuiFormRow label="Subscription">
-                            <EuiFieldText readOnly name="subscription" value={openedImpactedService?.subscription} />
+                            <EuiFieldText readOnly name="subscription" value={openedImpactedObject?.subscription} />
                         </EuiFormRow>
                         {formSelect(
-                            "tickets.impactedservice.impact_override",
+                            "tickets.impactedobject.impact_override",
                             onImpactOverrideChange,
                             Object.values(ServiceTicketImpactedObjectImpact),
                             // Make dropdown readonly if ticket is not in one these 2 states
                             ![ServiceTicketProcessState.open_accepted, ServiceTicketProcessState.open_related].includes(
                                 _ticket.process_state
                             ),
-                            openedImpactedService?.impact_override,
+                            openedImpactedObject?.impact_override,
                             true
                         )}
                     </EuiForm>
@@ -414,12 +412,12 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                             <EuiFlexGroup>
                                 <EuiFlexItem grow={true}>
                                     <EuiTitle size="m">
-                                        <h1>Impacted services</h1>
+                                        <h1>Impacted objects</h1>
                                     </EuiTitle>
                                 </EuiFlexItem>
                             </EuiFlexGroup>
 
-                            <ServiceTicketDetailImpactedServices ticket={ticket} modalFunc={showModal} />
+                            <ServiceTicketDetailImpactedObjects ticket={ticket} modalFunc={showModal} />
                         </EuiPanel>
                     </EuiFlexGroup>
                 </EuiPageBody>

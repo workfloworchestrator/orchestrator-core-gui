@@ -20,7 +20,7 @@ import ApplicationContext from "utils/ApplicationContext";
 import { ServiceTicketImpactedObjectImpact, ServiceTicketWithDetails, SortOption } from "utils/types";
 import { stop } from "utils/Utils";
 
-import { tableImpactedServices } from "./ServiceTicketDetailImpactedServicesStyling";
+import { tableImpactedObjects } from "./ServiceTicketDetailImpactedObjectsStyling";
 
 type Column = "customer" | "impact" | "type" | "subscription" | "impact_override";
 
@@ -29,7 +29,7 @@ interface IProps extends WrappedComponentProps {
     modalFunc: Function;
 }
 
-export interface ImpactedService {
+export interface ImpactedObject {
     customer: string;
     impact: ServiceTicketImpactedObjectImpact;
     type: string;
@@ -42,23 +42,23 @@ export interface ImpactedService {
 }
 
 interface IState {
-    impactedServices: ImpactedService[];
+    impactedObjects: ImpactedObject[];
     sortOrder: SortOption<Column>;
 }
 
-class ServiceTicketDetailImpactedServices extends React.Component<IProps, IState> {
+class ServiceTicketDetailImpactedObjects extends React.Component<IProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {
-        impactedServices: [],
+        impactedObjects: [],
         sortOrder: { name: "subscription", descending: false },
     };
 
     /**
      * Loops through impacted objects in the serviceticket, then through circuits in each impacted object.
-     * Information of each circuit is then wrapper in a ImpactedService along with information of the
+     * Information of each circuit is then wrapper in a ImpactedObject along with information of the
      * corresponding impacted object and subcription.
      */
-    async getImpactedServices(): Promise<ImpactedService[]> {
+    async getImpactedObjects(): Promise<ImpactedObject[]> {
         // TODO how to specify here that the values are of type SubscriptionModel ?
         const subscriptions: any = {};
 
@@ -71,11 +71,11 @@ class ServiceTicketDetailImpactedServices extends React.Component<IProps, IState
                 impacted.subscription_id
             );
         }
-        const impactedServices: ImpactedService[] = [];
+        const impactedObjects: ImpactedObject[] = [];
         for (const impactedObject of this.props.ticket.impacted_objects) {
             const subscription = subscriptions[impactedObject.subscription_id];
             for (const imsCircuit of impactedObject.ims_circuits) {
-                impactedServices.push({
+                impactedObjects.push({
                     customer: impactedObject.owner_customer.customer_name,
                     impact: imsCircuit.impact,
                     type: subscription.product.product_type,
@@ -88,20 +88,20 @@ class ServiceTicketDetailImpactedServices extends React.Component<IProps, IState
                 });
             }
         }
-        return impactedServices;
+        return impactedObjects;
     }
 
     async componentDidMount() {
-        this.setState({ impactedServices: await this.getImpactedServices() });
+        this.setState({ impactedObjects: await this.getImpactedObjects() });
     }
 
     async componentDidUpdate(prevProps: IProps) {
         if (this.props.ticket.last_update_time !== prevProps.ticket.last_update_time) {
-            this.setState({ impactedServices: await this.getImpactedServices() });
+            this.setState({ impactedObjects: await this.getImpactedObjects() });
         }
     }
 
-    sortBy = (name: Column) => (a: ImpactedService, b: ImpactedService) => {
+    sortBy = (name: Column) => (a: ImpactedObject, b: ImpactedObject) => {
         const aSafe = a[name] || "";
         const bSafe = b[name] || "";
         return typeof aSafe === "string" || typeof bSafe === "string"
@@ -117,7 +117,7 @@ class ServiceTicketDetailImpactedServices extends React.Component<IProps, IState
         this.setState({ sortOrder: sortOrder });
     };
 
-    sort = (unsorted: ImpactedService[]) => {
+    sort = (unsorted: ImpactedObject[]) => {
         const { name, descending } = this.state.sortOrder;
         const sorted = unsorted.sort(this.sortBy(name));
         if (descending) {
@@ -136,42 +136,42 @@ class ServiceTicketDetailImpactedServices extends React.Component<IProps, IState
     render() {
         const columns: Column[] = ["customer", "impact", "type", "subscription", "impact_override"];
         const { theme } = this.context;
-        const { impactedServices } = this.state;
+        const { impactedObjects } = this.state;
 
         const th = (index: number) => {
             const name = columns[index];
             return (
                 <th key={index} className={name} onClick={this.toggleSort(name)}>
                     <span>
-                        <FormattedMessage id={`tickets.impactedservice.${name}`} />
+                        <FormattedMessage id={`tickets.impactedobject.${name}`} />
                     </span>
                     {this.sortColumnIcon(name, this.state.sortOrder)}
                 </th>
             );
         };
-        const sortedImpactedServices = this.sort(impactedServices);
+        const sortedImpactedObjects = this.sort(impactedObjects);
         return (
-            <EuiFlexGroup css={tableImpactedServices}>
+            <EuiFlexGroup css={tableImpactedObjects}>
                 {/* <EuiToolTip
                     position="top"
                     content={<p>Works on any kind of element &mdash; buttons, inputs, you name it!</p>}
                 > */}
-                <table className="ticket-impacted-services">
+                <table className="ticket-impacted-objects">
                     <thead>
                         <tr>{columns.map((column, index) => th(index))}</tr>
                     </thead>
                     <tbody>
-                        {sortedImpactedServices.map((service) => (
+                        {sortedImpactedObjects.map((item) => (
                             <tr
-                                key={`${service.subscription_id}-${service.ims_circuit_id}`}
+                                key={`${item.subscription_id}-${item.ims_circuit_id}`}
                                 className={theme}
-                                onClick={() => this.props.modalFunc(service)}
+                                onClick={() => this.props.modalFunc(item)}
                             >
-                                <td className="customer">{service.customer}</td>
-                                <td className="impact">{service.impact}</td>
-                                <td className="type">{service.type}</td>
-                                <td className="subscription">{service.subscription}</td>
-                                <td className="impact_override">{service.impact_override}</td>
+                                <td className="customer">{item.customer}</td>
+                                <td className="impact">{item.impact}</td>
+                                <td className="type">{item.type}</td>
+                                <td className="subscription">{item.subscription}</td>
+                                <td className="impact_override">{item.impact_override}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -181,6 +181,6 @@ class ServiceTicketDetailImpactedServices extends React.Component<IProps, IState
         );
     }
 }
-ServiceTicketDetailImpactedServices.contextType = ApplicationContext;
+ServiceTicketDetailImpactedObjects.contextType = ApplicationContext;
 
-export default injectIntl(ServiceTicketDetailImpactedServices);
+export default injectIntl(ServiceTicketDetailImpactedObjects);

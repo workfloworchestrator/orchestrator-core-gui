@@ -506,12 +506,13 @@ I18n.translations.en = {
             subject: "Subject",
             title: "Title",
             ticket_state: "Ticket State",
-            process_state: "Process State",
+            process_state: "State",
             opened_by: "Opened by",
             plandate: "Plandate",
-            start_date: "Start Date",
-            end_date: "End Date",
-            type: "Service type",
+            start_date: "Start time",
+            end_date: "End time",
+            type: "Type",
+            last_update_time: "Time last update",
         },
         action: {
             opening: "Send OPEN email",
@@ -520,7 +521,7 @@ I18n.translations.en = {
             aborting: "Abort",
             show: "View last sent email",
         },
-        impactedservice: {
+        impactedobject: {
             customer: "Customer",
             impact: "Impact",
             type: "Type",
