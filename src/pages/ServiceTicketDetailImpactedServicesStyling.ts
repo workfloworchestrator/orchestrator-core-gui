@@ -44,6 +44,7 @@ export const tableImpactedServices = css`
     table.ticket-impacted-services {
         width: 100%;
         word-break: break-all;
+        margin: 10px;
 
         td,
         th {
