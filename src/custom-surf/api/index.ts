@@ -15,6 +15,8 @@ import {
     ServicePortSubscription,
 } from "utils/types";
 
+import { CreateTicketPayload } from "../types";
+
 abstract class CustomApiClientInterface extends BaseApiClient {
     abstract portSubscriptions: (
         tagList?: string[],
@@ -51,7 +53,6 @@ abstract class CustomApiClientInterface extends BaseApiClient {
     abstract contacts: (organisationId: string) => Promise<ContactPerson[]>;
     abstract dienstafnameBySubscription: (subscriptionId: string) => Promise<Dienstafname | undefined>;
     abstract showForms: () => Promise<string[]>;
-    // Todo: check if we can make type a bit more fine grained
     abstract startForm: (formKey: string, userInputs: {}[]) => Promise<any>;
 }
 
@@ -202,5 +203,8 @@ export class CustomApiClient extends CustomApiClientInterface {
 
     startForm = (formKey: string, userInputs: {}[]): Promise<{ id: string }> => {
         return this.postPutJson("http://localhost:8082/cim/forms/" + formKey, userInputs, "post", false, true);
+    };
+    createTicket = (ticket: CreateTicketPayload): Promise<{ id: string }> => {
+        return this.postPutJson("http://localhost:8082/cim/tickets/", ticket, "post", false, true);
     };
 }

@@ -16,10 +16,39 @@
 import { EuiPage, EuiPageBody, EuiText } from "@elastic/eui";
 import Explain from "components/Explain";
 import CreateForm from "custom/components/cim/CreateForm";
-import React, { useState } from "react";
+import { CreateTicketPayload } from "custom/types";
+import React, { useContext, useState } from "react";
+
+import ApplicationContext from "../../utils/ApplicationContext";
 
 export default function CreateServiceTicket() {
     const [showExplanation, setShowExplanation] = useState(false);
+    const { redirect, customApiClient } = useContext(ApplicationContext);
+
+    const handleSubmit = (userInputs: any) => {
+        console.log("Yeah");
+        console.log(userInputs);
+        console.log(userInputs.jira_ticket.start_date);
+        const ticket: CreateTicketPayload = {
+            ims_pw_id: userInputs.ims_ticket.name,
+            jira_ticket_id: userInputs.jira_ticket.ticket_id,
+            ticket_state: "initial",
+            title: userInputs.jira_ticket.summary,
+            process_state: "open",
+            start_date: userInputs.jira_ticket.start_date,
+            end_date: userInputs.jira_ticket.end_date,
+            type: userInputs.ticket_type,
+            // Todo use current timestamp or delegate to api endpoint
+            create_date: userInputs.jira_ticket.start_date,
+            // Todo use current timestamp or delegate to api endpoint
+            last_update_time: userInputs.jira_ticket.start_date,
+            // Todo WHAAAAT? : maybe use endpoint for this?
+            opened_by: "",
+            logs: [],
+            impacted_objects: [],
+        };
+        customApiClient.createTicket(ticket).then((_) => redirect("/tickets"));
+    };
 
     return (
         <EuiPage>
@@ -39,7 +68,11 @@ export default function CreateServiceTicket() {
                 <EuiText grow={true}>
                     <h1>Create ticket</h1>
                 </EuiText>
-                <CreateForm formKey="create_ticket_form"></CreateForm>
+                <CreateForm
+                    formKey="create_ticket_form"
+                    // @ts-ignore
+                    handleSubmit={handleSubmit}
+                />
             </EuiPageBody>
         </EuiPage>
     );

@@ -8,7 +8,7 @@ import { EngineStatus, Form, FormNotCompleteResponse } from "utils/types";
 interface IProps {
     preselectedInput?: any;
     formKey: string;
-    // handleSubmit: any
+    handleSubmit: (userInputs: any) => void;
 }
 
 export default function CreateForm(props: IProps) {
@@ -26,14 +26,9 @@ export default function CreateForm(props: IProps) {
             // }
             let promise = customApiClient.startForm(formKey, userInputs).then(
                 (form) => {
-                    // Todo: handle ticket output and call the endpoint to save the ticket
-                    console.log("Posted form inputs", form);
-                    setFlash(
-                        intl.formatMessage(
-                            { id: "forms.flash.create_create" }
-                            // { name: product.name, pid: process.id }
-                        )
-                    );
+                    // Let parent component handle the submit
+                    props.handleSubmit(form);
+                    setFlash(intl.formatMessage({ id: "cim.flash" }, { name: formKey }));
                 },
                 (e) => {
                     throw e;
