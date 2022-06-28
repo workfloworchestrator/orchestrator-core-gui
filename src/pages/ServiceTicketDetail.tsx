@@ -241,20 +241,30 @@ function ServiceTicketDetail({ ticketId }: IProps) {
         return logtype.toString();
     };
 
-    const logitem_tabs: TabView[] = ticket.logs.map((logitem: ServiceTicketLog, index: number) => ({
-        id: `mod-ticket-logitem-${index}`,
-        name: format_logtype(logitem.logtype),
-        disabled: false,
-        content: (
-            <EuiPanel hasBorder={false} hasShadow={false}>
-                {logitem.update_nl}
-                <EuiHorizontalRule margin="xs"></EuiHorizontalRule>
-                {logitem.update_en}
-                <EuiHorizontalRule margin="xs"></EuiHorizontalRule>
-                Logged by {logitem.logged_by}, {renderStringAsDateTime(logitem.entry_time)}
-            </EuiPanel>
-        ),
-    }));
+    let logitem_tabs: TabView[] = [
+        {
+            id: "mod-ticket-logitem-0",
+            name: "description",
+            disabled: false,
+            content: <EuiPanel hasBorder={true} hasShadow={false} borderRadius="none"></EuiPanel>,
+        },
+    ];
+    if (ticket.logs.length > 0) {
+        logitem_tabs = ticket.logs.map((logitem: ServiceTicketLog, index: number) => ({
+            id: `mod-ticket-logitem-${index}`,
+            name: format_logtype(logitem.logtype),
+            disabled: false,
+            content: (
+                <EuiPanel hasBorder={true} hasShadow={false} borderRadius="none">
+                    {logitem.update_nl}
+                    <EuiHorizontalRule margin="m"></EuiHorizontalRule>
+                    {logitem.update_en}
+                    <EuiHorizontalRule margin="m"></EuiHorizontalRule>
+                    Logged by {logitem.logged_by}, {renderStringAsDateTime(logitem.entry_time)}
+                </EuiPanel>
+            ),
+        }));
+    }
 
     function renderModal(_ticket: ServiceTicketWithDetails) {
         console.log(_ticket.process_state);

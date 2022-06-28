@@ -43,6 +43,13 @@ const table_phone = css`
 `;
 
 export const ticketDetail = css`
+    .tabbed-logitems-parent {
+        .scrollable-tab-content {
+            margin-top: 10px;
+            max-height: 500px;
+            overflow-y: scroll;
+        }
+    }
     .mod-ticket-detail {
         h2 {
             font-size: 20px;
