@@ -270,17 +270,17 @@ function ServiceTicketDetail({ ticketId }: IProps) {
 
                 <EuiModalBody>
                     <EuiForm id={modalFormId} component="form">
-                        <EuiFormRow label="Customer" isDisabled>
-                            <EuiFieldText name="customer" value={openedImpactedService?.customer} />
+                        <EuiFormRow label="Customer">
+                            <EuiFieldText readOnly name="customer" value={openedImpactedService?.customer} />
                         </EuiFormRow>
-                        <EuiFormRow label="Impact" isDisabled>
-                            <EuiFieldText name="impact" value={openedImpactedService?.impact} />
+                        <EuiFormRow label="Impact">
+                            <EuiFieldText readOnly name="impact" value={openedImpactedService?.impact} />
                         </EuiFormRow>
-                        <EuiFormRow label="Type" isDisabled>
-                            <EuiFieldText name="type" value={openedImpactedService?.type} />
+                        <EuiFormRow label="Type">
+                            <EuiFieldText readOnly name="type" value={openedImpactedService?.type} />
                         </EuiFormRow>
-                        <EuiFormRow label="Subscription" isDisabled>
-                            <EuiFieldText name="subscription" value={openedImpactedService?.subscription} />
+                        <EuiFormRow label="Subscription">
+                            <EuiFieldText readOnly name="subscription" value={openedImpactedService?.subscription} />
                         </EuiFormRow>
                         {formSelect(
                             "tickets.impactedservice.impact_override",
