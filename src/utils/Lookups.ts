@@ -50,6 +50,10 @@ export function renderDateTime(epoch: number) {
     return isEmpty(epoch) ? "" : new Date(epoch * 1000).toLocaleString("nl-NL") + " CET";
 }
 
+export function renderStringAsDateTime(datetime: string) {
+    return new Date(datetime).toLocaleString("nl-NL") + " CET";
+}
+
 export function renderDate(epoch: number) {
     return isEmpty(epoch) ? "" : new Date(epoch * 1000).toLocaleDateString("nl-NL") + " CET";
 }

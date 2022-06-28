@@ -20,7 +20,7 @@ import ApplicationContext from "utils/ApplicationContext";
 import { ServiceTicketImpactedObjectImpact, ServiceTicketWithDetails, SortOption } from "utils/types";
 import { stop } from "utils/Utils";
 
-import { tableImpactedObjects } from "./ServiceTicketDetailImpactedObjectsStyling";
+import { tableImpactedServices } from "./ServiceTicketDetailImpactedServicesStyling";
 
 type Column = "customer" | "impact" | "type" | "subscription" | "impact_override";
 
@@ -46,7 +46,7 @@ interface IState {
     sortOrder: SortOption<Column>;
 }
 
-class ServiceTicketDetailImpactedObjects extends React.Component<IProps, IState> {
+class ServiceTicketDetailImpactedServices extends React.Component<IProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {
         impactedServices: [],
@@ -143,7 +143,7 @@ class ServiceTicketDetailImpactedObjects extends React.Component<IProps, IState>
             return (
                 <th key={index} className={name} onClick={this.toggleSort(name)}>
                     <span>
-                        <FormattedMessage id={`tickets.impactedobject.${name}`} />
+                        <FormattedMessage id={`tickets.impactedservice.${name}`} />
                     </span>
                     {this.sortColumnIcon(name, this.state.sortOrder)}
                 </th>
@@ -151,12 +151,12 @@ class ServiceTicketDetailImpactedObjects extends React.Component<IProps, IState>
         };
         const sortedImpactedServices = this.sort(impactedServices);
         return (
-            <EuiFlexGroup css={tableImpactedObjects}>
+            <EuiFlexGroup css={tableImpactedServices}>
                 {/* <EuiToolTip
                     position="top"
                     content={<p>Works on any kind of element &mdash; buttons, inputs, you name it!</p>}
                 > */}
-                <table className="impactedObjects">
+                <table className="ticket-impacted-services">
                     <thead>
                         <tr>{columns.map((column, index) => th(index))}</tr>
                     </thead>
@@ -181,6 +181,6 @@ class ServiceTicketDetailImpactedObjects extends React.Component<IProps, IState>
         );
     }
 }
-ServiceTicketDetailImpactedObjects.contextType = ApplicationContext;
+ServiceTicketDetailImpactedServices.contextType = ApplicationContext;
 
-export default injectIntl(ServiceTicketDetailImpactedObjects);
+export default injectIntl(ServiceTicketDetailImpactedServices);

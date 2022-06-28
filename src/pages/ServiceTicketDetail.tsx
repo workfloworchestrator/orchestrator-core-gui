@@ -41,18 +41,20 @@ import { MouseEvent, useContext, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { ValueType } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
+import { renderStringAsDateTime } from "utils/Lookups";
 import {
     Option,
     ServiceTicketImpactedIMSCircuit,
     ServiceTicketImpactedObjectImpact,
     ServiceTicketLog,
+    ServiceTicketLogType,
     ServiceTicketProcessState,
     ServiceTicketWithDetails,
     TabView,
 } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
-import ServiceTicketDetailImpactedObjects, { ImpactedService } from "./ServiceTicketDetailImpactedObjects";
+import ServiceTicketDetailImpactedServices, { ImpactedService } from "./ServiceTicketDetailImpactedServices";
 import { ticketDetail } from "./ServiceTicketDetailStyling";
 
 interface IProps {
@@ -229,12 +231,21 @@ function ServiceTicketDetail({ ticketId }: IProps) {
         );
     }
 
-    // TODO entry time should be a number, currently a datetime string
-    ticket.logs.sort((a: ServiceTicketLog, b: ServiceTicketLog) => a.entry_time - b.entry_time);
+    ticket.logs.sort((a: ServiceTicketLog, b: ServiceTicketLog) =>
+        (a.entry_time as string).toLowerCase().localeCompare(b.entry_time.toString().toLowerCase())
+    );
+
+    let num_updates = 0;
+    const format_logtype = (logtype: ServiceTicketLogType): string => {
+        if (logtype === ServiceTicketLogType.update) {
+            return `${logtype} #${++num_updates}`;
+        }
+        return logtype.toString();
+    };
 
     const logitem_tabs: TabView[] = ticket.logs.map((logitem: ServiceTicketLog, index: number) => ({
         id: `mod-ticket-logitem-${index}`,
-        name: logitem.logtype,
+        name: format_logtype(logitem.logtype),
         disabled: false,
         content: (
             <EuiPanel hasBorder={false} hasShadow={false}>
@@ -242,12 +253,13 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                 <EuiHorizontalRule margin="xs"></EuiHorizontalRule>
                 {logitem.update_en}
                 <EuiHorizontalRule margin="xs"></EuiHorizontalRule>
-                Logged by {logitem.logged_by}, {logitem.entry_time}
+                Logged by {logitem.logged_by}, {renderStringAsDateTime(logitem.entry_time)}
             </EuiPanel>
         ),
     }));
 
-    function renderModal() {
+    function renderModal(_ticket: ServiceTicketWithDetails) {
+        console.log(_ticket.process_state);
         return (
             <EuiModal onClose={onCloseModal} initialFocus="[name=popswitch]">
                 <EuiModalHeader>
@@ -271,10 +283,13 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                             <EuiFieldText name="subscription" value={openedImpactedService?.subscription} />
                         </EuiFormRow>
                         {formSelect(
-                            "tickets.impactedobject.impact_override",
+                            "tickets.impactedservice.impact_override",
                             onImpactOverrideChange,
                             Object.values(ServiceTicketImpactedObjectImpact),
-                            false,
+                            // Make dropdown readonly if ticket is not in one these 2 states
+                            ![ServiceTicketProcessState.open_accepted, ServiceTicketProcessState.open_related].includes(
+                                _ticket.process_state
+                            ),
                             openedImpactedService?.impact_override,
                             true
                         )}
@@ -295,7 +310,7 @@ function ServiceTicketDetail({ ticketId }: IProps) {
     console.log(ticket);
     return (
         <div>
-            {isModalVisible && renderModal()}
+            {isModalVisible && renderModal(ticket)}
 
             <EuiPage css={ticketDetail}>
                 <EuiPageBody component="div">
@@ -335,13 +350,38 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                                                 <td id="ticket-start_date-k">
                                                     <FormattedMessage id="tickets.table.start_date" />
                                                 </td>
-                                                <td id="ticket-start_date-v">{ticket.start_date}</td>
+                                                <td id="ticket-start_date-v">
+                                                    {renderStringAsDateTime(ticket.start_date)}
+                                                </td>
                                             </tr>
                                             <tr className={theme}>
                                                 <td id="ticket-end_date-k">
                                                     <FormattedMessage id="tickets.table.end_date" />
                                                 </td>
-                                                <td id="ticket-end_date-v">{ticket.end_date}</td>
+                                                <td id="ticket-end_date-v">
+                                                    {renderStringAsDateTime(ticket.end_date)}
+                                                </td>
+                                            </tr>
+                                            <EuiSpacer />
+                                            <tr className={theme}>
+                                                <td id="ticket-opened_by-k">
+                                                    <FormattedMessage id="tickets.table.opened_by" />
+                                                </td>
+                                                <td id="ticket-opened_by-v">{ticket.opened_by}</td>
+                                            </tr>
+                                            <tr className={theme}>
+                                                <td id="ticket-last_update_time-k">
+                                                    <FormattedMessage id="tickets.table.last_update_time" />
+                                                </td>
+                                                <td id="ticket-last_update_time-v">
+                                                    {renderStringAsDateTime(ticket.last_update_time)}
+                                                </td>
+                                            </tr>
+                                            <tr className={theme}>
+                                                <td id="ticket-process_state-k">
+                                                    <FormattedMessage id="tickets.table.process_state" />
+                                                </td>
+                                                <td id="ticket-process_state-v">{ticket.process_state}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -379,7 +419,7 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                                 </EuiFlexItem>
                             </EuiFlexGroup>
 
-                            <ServiceTicketDetailImpactedObjects ticket={ticket} modalFunc={showModal} />
+                            <ServiceTicketDetailImpactedServices ticket={ticket} modalFunc={showModal} />
                         </EuiPanel>
                     </EuiFlexGroup>
                 </EuiPageBody>

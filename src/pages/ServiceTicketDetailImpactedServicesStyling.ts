@@ -40,8 +40,8 @@ const table_phone = css`
     }
 `;
 
-export const tableImpactedObjects = css`
-    table.impactedObjects {
+export const tableImpactedServices = css`
+    table.ticket-impacted-services {
         width: 100%;
         word-break: break-all;
 
@@ -52,6 +52,8 @@ export const tableImpactedObjects = css`
         }
 
         tr {
+            cursor: pointer;
+
             &.light {
                 border-bottom: 1px solid ${LIGHT_GREY_COLOR};
             }
@@ -91,7 +93,7 @@ export const tableImpactedObjects = css`
         }
 
         tr.Planned {
-            cursor: default;
+            /* cursor: default; */
 
             &.light {
                 background-color: ${LIGHT_GOLD_COLOR};

@@ -185,7 +185,7 @@ export interface ServiceTicket {
     ticket_state: ServiceTicketState;
     process_state: ServiceTicketProcessState;
     opened_by: string;
-    start_date: number;
+    start_date: string;
 }
 
 export enum ServiceTicketLogType {
@@ -195,7 +195,7 @@ export enum ServiceTicketLogType {
 }
 
 export interface ServiceTicketLog {
-    entry_time: number;
+    entry_time: string;
     update_nl: string;
     update_en: string;
     logtype: ServiceTicketLogType;
@@ -234,14 +234,14 @@ export interface ServiceTicketRelatedCustomer {
 }
 
 export interface ServiceTicketImpactedObject {
-    subscription_id: string; // title: Subscription Id
-    logged_by: string; // title: Logged By
-    ims_circuits: ServiceTicketImpactedIMSCircuit[]; // Ims Circuits[...]
-    owner_customer: ServiceTicketCustomer; //	Customer{...}
-    subscription_description: string; // title: Subscription Description
-    owner_customer_description?: string; // title: Owner Customer Description
-    owner_customer_contacts: ServiceTicketContact[]; // Owner Customer Contacts[...]
-    related_customers: ServiceTicketRelatedCustomer[]; // Related Customers[...]
+    subscription_id: string;
+    logged_by: string;
+    ims_circuits: ServiceTicketImpactedIMSCircuit[];
+    owner_customer: ServiceTicketCustomer;
+    subscription_description: string;
+    owner_customer_description?: string;
+    owner_customer_contacts: ServiceTicketContact[];
+    related_customers: ServiceTicketRelatedCustomer[];
 }
 
 export enum ServiceTicketType {
@@ -250,8 +250,8 @@ export enum ServiceTicketType {
 }
 
 export interface ServiceTicketWithDetails extends ServiceTicket {
-    end_date: number;
-    last_update_time: number;
+    end_date: string;
+    last_update_time: string;
     type: ServiceTicketType;
     logs: ServiceTicketLog[];
     impacted_objects: ServiceTicketImpactedObject[];

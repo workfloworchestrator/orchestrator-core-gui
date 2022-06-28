@@ -11,6 +11,7 @@ import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
+import { renderStringAsDateTime } from "utils/Lookups";
 import { Filter, ServiceTicket, ServiceTicketProcessState, ServiceTicketState, SortOption } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
@@ -185,7 +186,6 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                 serviceTickets.jira_ticket_id.toLowerCase().includes(queryToLower) ||
                 serviceTickets.opened_by.toLowerCase().includes(queryToLower) ||
                 (serviceTickets.title !== null && serviceTickets.title.toLowerCase().includes(queryToLower))
-                //  || serviceTickets.start_date.includes(query)
             );
         });
         this.setState({ searchResults: results });
@@ -296,7 +296,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                         data-label={intl.formatMessage({ id: "tickets.table.start_date" })}
                                         className="start_date"
                                     >
-                                        {ticket.start_date}
+                                        {renderStringAsDateTime(ticket.start_date)}
                                     </td>
                                 </tr>
                             ))}

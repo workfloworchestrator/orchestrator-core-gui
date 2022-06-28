@@ -510,6 +510,8 @@ I18n.translations.en = {
             opened_by: "Opened by",
             plandate: "Plandate",
             start_date: "Start Date",
+            end_date: "End Date",
+            type: "Service type",
         },
         action: {
             opening: "Send OPEN email",
@@ -518,7 +520,7 @@ I18n.translations.en = {
             aborting: "Abort",
             show: "View last sent email",
         },
-        impactedobject: {
+        impactedservice: {
             customer: "Customer",
             impact: "Impact",
             type: "Type",
