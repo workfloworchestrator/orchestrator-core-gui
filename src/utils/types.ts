@@ -170,6 +170,7 @@ export enum ServiceTicketState {
 }
 
 export enum ServiceTicketProcessState {
+    INITIAL = "initial",
     OPEN = "open",
     OPEN_RELATED = "open_related",
     OPEN_ACCEPTED = "open_accepted",
