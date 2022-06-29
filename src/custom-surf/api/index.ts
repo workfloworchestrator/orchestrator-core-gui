@@ -198,13 +198,13 @@ export class CustomApiClient extends CustomApiClientInterface {
         );
     };
     showForms = (): Promise<string[]> => {
-        return this.fetchJson("http://localhost:8082/cim/forms");
+        return this.fetchJson("surf/cim/forms");
     };
 
     startForm = (formKey: string, userInputs: {}[]): Promise<{ id: string }> => {
-        return this.postPutJson("http://localhost:8082/cim/forms/" + formKey, userInputs, "post", false, true);
+        return this.postPutJson("surf/cim/forms/" + formKey, userInputs, "post", false, true);
     };
     createTicket = (ticket: CreateTicketPayload): Promise<{ id: string }> => {
-        return this.postPutJson("http://localhost:8082/cim/tickets/", ticket, "post", false, true);
+        return this.postPutJson("surf/cim/tickets/", ticket, "post", false, true);
     };
 }
