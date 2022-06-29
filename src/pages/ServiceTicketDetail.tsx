@@ -297,7 +297,7 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                             ![ServiceTicketProcessState.OPEN_ACCEPTED, ServiceTicketProcessState.OPEN_RELATED].includes(
                                 _ticket.process_state
                             ),
-                            openedImpactedObject?.impact_override,
+                            impactOverrideValue,
                             true
                         )}
                     </EuiForm>
