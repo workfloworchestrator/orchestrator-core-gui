@@ -165,7 +165,7 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                     <EuiButton
                         id="button-action-open"
                         // onClick={this.props.previous}
-                        isDisabled={_ticket.process_state !== ServiceTicketProcessState.open_accepted}
+                        isDisabled={_ticket.process_state !== ServiceTicketProcessState.OPEN_ACCEPTED}
                     >
                         <FormattedMessage id="tickets.action.opening" />
                     </EuiButton>
@@ -175,7 +175,7 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                         id="button-action-update"
                         // onClick={this.props.previous}
                         isDisabled={
-                            ![ServiceTicketProcessState.open, ServiceTicketProcessState.updated].includes(
+                            ![ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED].includes(
                                 _ticket.process_state
                             )
                         }
@@ -188,7 +188,7 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                         id="button-action-close"
                         // onClick={this.props.previous}
                         isDisabled={
-                            ![ServiceTicketProcessState.open, ServiceTicketProcessState.updated].includes(
+                            ![ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED].includes(
                                 _ticket.process_state
                             )
                         }
@@ -201,7 +201,7 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                         id="button-action-abort"
                         // onClick={this.props.previous}
                         isDisabled={
-                            ![ServiceTicketProcessState.open_accepted, ServiceTicketProcessState.open_related].includes(
+                            ![ServiceTicketProcessState.OPEN_ACCEPTED, ServiceTicketProcessState.OPEN_RELATED].includes(
                                 _ticket.process_state
                             )
                         }
@@ -215,9 +215,9 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                         // onClick={this.props.previous}
                         isDisabled={
                             ![
-                                ServiceTicketProcessState.open,
-                                ServiceTicketProcessState.updated,
-                                ServiceTicketProcessState.closed,
+                                ServiceTicketProcessState.OPEN,
+                                ServiceTicketProcessState.UPDATED,
+                                ServiceTicketProcessState.CLOSED,
                             ].includes(_ticket.process_state)
                         }
                     >
@@ -234,7 +234,7 @@ function ServiceTicketDetail({ ticketId }: IProps) {
 
     let num_updates = 0;
     const format_logtype = (logtype: ServiceTicketLogType): string => {
-        if (logtype === ServiceTicketLogType.update) {
+        if (logtype === ServiceTicketLogType.UPDATE) {
             return `${logtype} #${++num_updates}`;
         }
         return logtype.toString();
@@ -294,7 +294,7 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                             onImpactOverrideChange,
                             Object.values(ServiceTicketImpactedObjectImpact),
                             // Make dropdown readonly if ticket is not in one these 2 states
-                            ![ServiceTicketProcessState.open_accepted, ServiceTicketProcessState.open_related].includes(
+                            ![ServiceTicketProcessState.OPEN_ACCEPTED, ServiceTicketProcessState.OPEN_RELATED].includes(
                                 _ticket.process_state
                             ),
                             openedImpactedObject?.impact_override,

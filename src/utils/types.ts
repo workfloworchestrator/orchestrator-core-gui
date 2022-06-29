@@ -163,19 +163,19 @@ export interface IpPrefixSubscription extends Subscription {
 /** Service Ticket types */
 
 export enum ServiceTicketState {
-    "initial" = "inital",
-    "active" = "active",
-    "aborted" = "aborted",
-    "closed" = "closed",
+    INITIAL = "inital",
+    ACTIVE = "active",
+    ABORTED = "aborted",
+    CLOSED = "closed",
 }
 
 export enum ServiceTicketProcessState {
-    "open" = "open",
-    "open_related" = "open_related",
-    "open_accepted" = "open_accepted",
-    "updated" = "updated",
-    "aborted" = "aborted",
-    "closed" = "closed",
+    OPEN = "open",
+    OPEN_RELATED = "open_related",
+    OPEN_ACCEPTED = "open_accepted",
+    UPDATED = "updated",
+    ABORTED = "aborted",
+    CLOSED = "closed",
 }
 
 export interface ServiceTicket {
@@ -189,9 +189,9 @@ export interface ServiceTicket {
 }
 
 export enum ServiceTicketLogType {
-    "open" = "open",
-    "update" = "update",
-    "close" = "close",
+    OPEN = "open",
+    UPDATE = "update",
+    CLOSE = "close",
 }
 
 export interface ServiceTicketLog {
@@ -203,9 +203,9 @@ export interface ServiceTicketLog {
 }
 
 export enum ServiceTicketImpactedObjectImpact {
-    "down" = "down",
-    "no_impact" = "no_impact",
-    "reduced_redundancy" = "reduced_redundancy",
+    DOWN = "down",
+    NO_IMPACT = "no_impact",
+    REDUCED_REDUNDANCY = "reduced_redundancy",
 }
 
 export interface ServiceTicketImpactedIMSCircuit {
@@ -245,8 +245,8 @@ export interface ServiceTicketImpactedObject {
 }
 
 export enum ServiceTicketType {
-    "planned work" = "planned work",
-    "incident" = "incident",
+    PLANNED_WORK = "planned work",
+    INCIDENT = "incident",
 }
 
 export interface ServiceTicketWithDetails extends ServiceTicket {
