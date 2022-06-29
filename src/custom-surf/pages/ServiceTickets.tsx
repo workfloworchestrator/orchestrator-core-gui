@@ -3,7 +3,7 @@
  *
  */
 
-import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPage, EuiPanel, EuiSpacer } from "@elastic/eui";
+import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPanel, EuiSpacer } from "@elastic/eui";
 import ServiceTicketFilter from "custom/components/ServiceTicketFilter";
 import { intl } from "locale/i18n";
 import debounce from "lodash/debounce";
@@ -12,7 +12,7 @@ import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl"
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
 import { renderStringAsDateTime } from "utils/Lookups";
-import { Filter, ServiceTicket, ServiceTicketProcessState, ServiceTicketState, SortOption } from "utils/types";
+import { Filter, ServiceTicket, ServiceTicketProcessState, SortOption } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
 import { tableTickets } from "./ServiceTicketsStyling";
@@ -262,8 +262,9 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.jira_ticket_id" })}
                                         className="subscription"
+                                        onClick={() => this.context.redirect(`/tickets/${ticket._id}`)}
                                     >
-                                        <EuiLink href={`/tickets/${ticket._id}`}>{ticket.jira_ticket_id}</EuiLink>
+                                        {ticket.jira_ticket_id}
                                     </td>
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.title" })}
