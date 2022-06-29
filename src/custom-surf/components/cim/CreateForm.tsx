@@ -13,7 +13,7 @@ interface IProps {
 
 export default function CreateForm(props: IProps) {
     const intl = useIntl();
-    const { preselectedInput, formKey } = props;
+    const { preselectedInput, formKey, handleSubmit } = props;
     const { products, redirect, customApiClient } = useContext(ApplicationContext);
     const [form, setForm] = useState<Form>({});
     const { stepUserInput, hasNext } = form;
@@ -27,7 +27,7 @@ export default function CreateForm(props: IProps) {
             let promise = customApiClient.startForm(formKey, userInputs).then(
                 (form) => {
                     // Let parent component handle the submit
-                    props.handleSubmit(form);
+                    handleSubmit(form);
                     setFlash(intl.formatMessage({ id: "cim.flash" }, { name: formKey }));
                 },
                 (e) => {
@@ -44,7 +44,7 @@ export default function CreateForm(props: IProps) {
                 redirect("/tickets");
             });
         },
-        [redirect, preselectedInput, intl, customApiClient]
+        [redirect, intl, customApiClient, formKey, handleSubmit]
     );
 
     useEffect(() => {
