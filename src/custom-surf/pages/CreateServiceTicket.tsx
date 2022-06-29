@@ -18,8 +18,7 @@ import Explain from "components/Explain";
 import CreateForm from "custom/components/cim/CreateForm";
 import { CreateTicketPayload } from "custom/types";
 import React, { useContext, useState } from "react";
-
-import ApplicationContext from "../../utils/ApplicationContext";
+import ApplicationContext from "utils/ApplicationContext";
 
 export default function CreateServiceTicket() {
     const [showExplanation, setShowExplanation] = useState(false);
@@ -58,11 +57,7 @@ export default function CreateServiceTicket() {
                 <EuiText grow={true}>
                     <h1>Create ticket</h1>
                 </EuiText>
-                <CreateForm
-                    formKey="create_ticket_form"
-                    // @ts-ignore
-                    handleSubmit={handleSubmit}
-                />
+                <CreateForm formKey="create_ticket_form" handleSubmit={handleSubmit} />
             </EuiPageBody>
         </EuiPage>
     );

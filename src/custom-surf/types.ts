@@ -4,15 +4,16 @@ export interface Filter {
     selected: boolean;
 }
 
-export type ticket_type = "planned work" | "incident";
-export type ticket_state = "initial" | "active" | "closed" | "aborted";
-export type process_state = "open" | "open_related" | "open_accepted" | "updated" | "aborted" | "closed";
+export enum TicketType {
+    PLANNED_WORK = "created",
+    INCIDENT = "running",
+}
 
 export interface CreateTicketPayload {
     start_date: string;
     end_date?: string;
     jira_ticket_id: string;
     ims_pw_id: string;
-    type: ticket_type;
+    type: TicketType;
     title: string;
 }
