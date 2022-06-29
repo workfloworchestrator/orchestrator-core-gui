@@ -40,7 +40,7 @@ function Radio({
 }: RadioFieldProps) {
     return (
         <div {...omit(filterDOMProps(props), ["checkboxes"])}>
-            {label && <label>{label}</label>}
+            {label && <label style={{ fontWeight: "bolder" }}>{label}</label>}
 
             {allowedValues?.map((item) => (
                 <div key={item}>
@@ -57,7 +57,7 @@ function Radio({
                         type="radio"
                     />
 
-                    <label htmlFor={`${id}-${escape(item)}`}>{transform ? transform(item) : item}</label>
+                    <label htmlFor={`${id}-${escape(item)}`} style={{ paddingLeft: "5px" }}>{transform ? transform(item) : item}</label>
                 </div>
             ))}
         </div>
