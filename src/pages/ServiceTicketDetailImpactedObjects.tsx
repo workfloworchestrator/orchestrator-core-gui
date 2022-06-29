@@ -63,8 +63,7 @@ class ServiceTicketDetailImpactedObjects extends React.Component<IProps, IState>
      * corresponding impacted object and subcription.
      */
     async getImpactedObjects(): Promise<ImpactedObject[]> {
-        // TODO how to specify here that the values are of type SubscriptionModel ?
-        const subscriptions: any = {};
+        const subscriptions: Record<string, SubscriptionModel> = {};
 
         // Retrieve each subscription once
         for (const impacted of this.props.ticket.impacted_objects) {
