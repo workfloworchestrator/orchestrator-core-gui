@@ -321,8 +321,8 @@ function ServiceTicketDetail({ ticketId }: IProps) {
 
             <EuiPage css={ticketDetail}>
                 <EuiPageBody component="div">
-                    <EuiFlexGroup>
-                        <EuiPanel>
+                    <EuiPanel>
+                        <div className="mod-ticket">
                             <EuiFlexGroup>
                                 <EuiFlexItem grow={true}>
                                     <EuiTitle size="m">
@@ -331,70 +331,70 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                                 </EuiFlexItem>
                             </EuiFlexGroup>
                             <div className="mod-ticket-detail">
-                                <div className="ticket-details">
-                                    <table className={`detail-block`}>
-                                        <thead />
-                                        <tbody>
-                                            <tr className={theme}>
-                                                <td id="ticket-title-k">
-                                                    <FormattedMessage id="tickets.table.title" />
-                                                </td>
-                                                <td id="ticket-title-v">{ticket.title}</td>
-                                            </tr>
-                                            <tr className={theme}>
-                                                <td id="ticket-jira_ticket_id-k">
-                                                    <FormattedMessage id="tickets.table.jira_ticket_id" />
-                                                </td>
-                                                <td id="ticket-jira_ticket_id-v">{ticket.jira_ticket_id}</td>
-                                            </tr>
-                                            <tr className={theme}>
-                                                <td id="ticket-type-k">
-                                                    <FormattedMessage id="tickets.table.type" />
-                                                </td>
-                                                <td id="ticket-type-v">{ticket.type}</td>
-                                            </tr>
-                                            <tr className={theme}>
-                                                <td id="ticket-start_date-k">
-                                                    <FormattedMessage id="tickets.table.start_date" />
-                                                </td>
-                                                <td id="ticket-start_date-v">
-                                                    {renderStringAsDateTime(ticket.start_date)}
-                                                </td>
-                                            </tr>
-                                            <tr className={theme}>
-                                                <td id="ticket-end_date-k">
-                                                    <FormattedMessage id="tickets.table.end_date" />
-                                                </td>
-                                                <td id="ticket-end_date-v">
-                                                    {renderStringAsDateTime(ticket.end_date)}
-                                                </td>
-                                            </tr>
-                                            <EuiSpacer />
-                                            <tr className={theme}>
-                                                <td id="ticket-opened_by-k">
-                                                    <FormattedMessage id="tickets.table.opened_by" />
-                                                </td>
-                                                <td id="ticket-opened_by-v">{ticket.opened_by}</td>
-                                            </tr>
-                                            <tr className={theme}>
-                                                <td id="ticket-last_update_time-k">
-                                                    <FormattedMessage id="tickets.table.last_update_time" />
-                                                </td>
-                                                <td id="ticket-last_update_time-v">
-                                                    {renderStringAsDateTime(ticket.last_update_time)}
-                                                </td>
-                                            </tr>
-                                            <tr className={theme}>
-                                                <td id="ticket-process_state-k">
-                                                    <FormattedMessage id="tickets.table.process_state" />
-                                                </td>
-                                                <td id="ticket-process_state-v">{ticket.process_state}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <table className={`detail-block`}>
+                                    <thead />
+                                    <tbody>
+                                        <tr className={theme}>
+                                            <td id="ticket-title-k">
+                                                <FormattedMessage id="tickets.table.title" />
+                                            </td>
+                                            <td id="ticket-title-v">{ticket.title}</td>
+                                        </tr>
+                                        <tr className={theme}>
+                                            <td id="ticket-jira_ticket_id-k">
+                                                <FormattedMessage id="tickets.table.jira_ticket_id" />
+                                            </td>
+                                            <td id="ticket-jira_ticket_id-v">{ticket.jira_ticket_id}</td>
+                                        </tr>
+                                        <tr className={theme}>
+                                            <td id="ticket-type-k">
+                                                <FormattedMessage id="tickets.table.type" />
+                                            </td>
+                                            <td id="ticket-type-v">{ticket.type}</td>
+                                        </tr>
+                                        <tr className={theme}>
+                                            <td id="ticket-start_date-k">
+                                                <FormattedMessage id="tickets.table.start_date" />
+                                            </td>
+                                            <td id="ticket-start_date-v">
+                                                {renderStringAsDateTime(ticket.start_date)}
+                                            </td>
+                                        </tr>
+                                        <tr className={theme}>
+                                            <td id="ticket-end_date-k">
+                                                <FormattedMessage id="tickets.table.end_date" />
+                                            </td>
+                                            <td id="ticket-end_date-v">
+                                                {renderStringAsDateTime(ticket.end_date)}
+                                            </td>
+                                        </tr>
+                                        <EuiSpacer />
+                                        <tr className={theme}>
+                                            <td id="ticket-opened_by-k">
+                                                <FormattedMessage id="tickets.table.opened_by" />
+                                            </td>
+                                            <td id="ticket-opened_by-v">{ticket.opened_by}</td>
+                                        </tr>
+                                        <tr className={theme}>
+                                            <td id="ticket-last_update_time-k">
+                                                <FormattedMessage id="tickets.table.last_update_time" />
+                                            </td>
+                                            <td id="ticket-last_update_time-v">
+                                                {renderStringAsDateTime(ticket.last_update_time)}
+                                            </td>
+                                        </tr>
+                                        <tr className={theme}>
+                                            <td id="ticket-process_state-k">
+                                                <FormattedMessage id="tickets.table.process_state" />
+                                            </td>
+                                            <td id="ticket-process_state-v">{ticket.process_state}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
+
                             <EuiSpacer />
+
                             <EuiFlexGroup>
                                 <EuiFlexItem grow={true}>
                                     <EuiTitle size="m">
@@ -403,14 +403,12 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                                 </EuiFlexItem>
                             </EuiFlexGroup>
                             <div className="mod-ticket-logitems">
-                                <div className="ticket-logitems">
-                                    <TabbedSection
-                                        id="ticket-logitems-tabs"
-                                        tabs={logitem_tabs}
-                                        className="tabbed-logitems-parent"
-                                        name={<FormattedMessage id="tickets.logitems" />}
-                                    ></TabbedSection>
-                                </div>
+                                <TabbedSection
+                                    id="ticket-logitems-tabs"
+                                    tabs={logitem_tabs}
+                                    className="tabbed-logitems-parent"
+                                    name={<FormattedMessage id="tickets.logitems" />}
+                                ></TabbedSection>
                             </div>
 
                             <EuiSpacer />
@@ -418,6 +416,7 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                             {renderLogItemButtons(ticket)}
 
                             <EuiSpacer />
+
                             <EuiFlexGroup>
                                 <EuiFlexItem grow={true}>
                                     <EuiTitle size="m">
@@ -425,10 +424,9 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                                     </EuiTitle>
                                 </EuiFlexItem>
                             </EuiFlexGroup>
-
                             <ServiceTicketDetailImpactedObjects ticket={ticket} modalFunc={showModal} />
-                        </EuiPanel>
-                    </EuiFlexGroup>
+                        </div>
+                    </EuiPanel>
                 </EuiPageBody>
             </EuiPage>
         </div>
