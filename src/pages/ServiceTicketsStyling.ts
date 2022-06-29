@@ -189,15 +189,11 @@ export const tableTickets = css`
 
         tbody {
             td {
-                i.fa-info-circle {
-                    @include mixins.info-icon;
-                }
                 word-break: break-word;
                 word-wrap: break-word;
                 padding: 15px 0 10px 5px;
 
                 div.tool-tip {
-                    @include mixins.tool-tip;
                     span {
                         text-transform: none;
 

@@ -195,14 +195,5 @@ export const ticketDetail = css`
             }
             ${phoneMediaQuery(table_phone)}
         }
-        p {
-            margin-left: 25px;
-            padding-top: 5px;
-        }
-        p.label {
-            font-weight: bold;
-            margin-left: 0px;
-            padding-top: 5px;
-        }
     }
 `;
