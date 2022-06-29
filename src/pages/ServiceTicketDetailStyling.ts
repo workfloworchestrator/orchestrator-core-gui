@@ -1,20 +1,13 @@
 import { css } from "@emotion/core";
 import {
     DANGER,
-    DARKEST_PRIMARY_COLOR,
-    DARK_GOLD_COlOR,
-    DARK_GREY_COLOR,
-    DARK_SUCCESS_COLOR,
     LIGHTER_GREY_COLOR,
-    LIGHT_GOLD_COLOR,
     LIGHT_GREY_COLOR,
     LIGHT_PRIMARY_COLOR,
-    LIGHT_SUCCESS_COLOR,
     MEDIUM_GREY_COLOR,
     PRIMARY_COLOR,
 } from "stylesheets/emotion/colors";
 import { phoneMediaQuery } from "stylesheets/emotion/mediaQueries";
-import { shadeColor } from "stylesheets/emotion/utils";
 
 const table_phone = css`
     thead {

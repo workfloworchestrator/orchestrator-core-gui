@@ -54,8 +54,8 @@ import {
 } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
-import ServiceTicketDetailImpactedObjects, { ImpactedObject } from "./ServiceTicketDetailImpactedObjects";
-import { ticketDetail } from "./ServiceTicketDetailStyling";
+import ServiceTicketDetailImpactedObjects, { ImpactedObject } from "pages/ServiceTicketDetailImpactedObjects";
+import { ticketDetail } from "pages/ServiceTicketDetailStyling";
 
 interface IProps {
     ticketId: string;

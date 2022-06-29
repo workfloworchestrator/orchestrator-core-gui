@@ -20,7 +20,7 @@ import ApplicationContext from "utils/ApplicationContext";
 import { ServiceTicketImpactedObjectImpact, ServiceTicketWithDetails, SortOption } from "utils/types";
 import { stop } from "utils/Utils";
 
-import { tableImpactedObjects } from "./ServiceTicketDetailImpactedObjectsStyling";
+import { tableImpactedObjects } from "pages/ServiceTicketDetailImpactedObjectsStyling";
 
 type Column = "customer" | "impact" | "type" | "subscription" | "impact_override";
 
