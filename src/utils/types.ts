@@ -427,6 +427,11 @@ export interface EngineStatus {
     global_status: GlobalStatus;
 }
 
+export interface Form {
+    stepUserInput?: JSONSchema6;
+    hasNext?: boolean;
+}
+
 export type InputForm = JSONSchema6;
 
 export interface ContactPerson {

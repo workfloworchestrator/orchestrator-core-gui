@@ -60,9 +60,6 @@ import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
 import { isEmpty } from "utils/Utils";
 
-import CreateServiceTicket from "../components/CreateServiceTicket";
-import ServiceTickets from "./ServiceTickets";
-
 export const history = createBrowserHistory();
 
 interface IProps {
@@ -263,7 +260,11 @@ class App extends React.PureComponent<IProps, IState> {
                                             <div>
                                                 <Flash />
                                                 <Header />
-                                                <Navigation extraPages={importedModules.map((i) => i.name)} />
+                                                <Navigation
+                                                    extraPages={importedModules
+                                                        .filter((i) => i.showInMenu)
+                                                        .map((i) => i.name)}
+                                                />
                                                 <ErrorDialog isOpen={errorDialogOpen} close={errorDialogAction} />
                                             </div>
                                             <Switch>
@@ -316,14 +317,6 @@ class App extends React.PureComponent<IProps, IState> {
                                                     render={(props) => <ProcessDetail {...props} />}
                                                 />
                                                 <ProtectedRoute path="/processes" render={(props) => <Processes />} />
-                                                <ProtectedRoute
-                                                    path="/tickets/create"
-                                                    render={(props) => <CreateServiceTicket />}
-                                                />
-                                                <ProtectedRoute
-                                                    path="/tickets"
-                                                    render={(props) => <ServiceTickets />}
-                                                />
                                                 <Route
                                                     path="/subscription/:id"
                                                     render={(props) => (

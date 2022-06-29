@@ -751,7 +751,6 @@ I18n.translations.en = {
         stay: "Stay",
         leave: "Leave",
     },
-
     ims_changes: {
         circuit_changed:
             "In LP Circuit {{id}} {{description}} the old endpoint references has been replaced by the new endpoint reference",
@@ -856,6 +855,12 @@ I18n.translations.en = {
         add: "Add favorite",
         remove: "Remove favorite",
         toomany: "You can only have 10 favorites. Please remove one before adding a new one.",
+    },
+    cim: {
+        backendProblem: "Couldn't query CIM backend",
+        flash: {
+            create_ticket_form: "Create ticket form submitted",
+        },
     },
 };
 

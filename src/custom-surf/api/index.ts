@@ -15,6 +15,8 @@ import {
     ServicePortSubscription,
 } from "utils/types";
 
+import { CreateTicketPayload } from "../types";
+
 abstract class CustomApiClientInterface extends BaseApiClient {
     abstract portSubscriptions: (
         tagList?: string[],
@@ -50,6 +52,8 @@ abstract class CustomApiClientInterface extends BaseApiClient {
     abstract free_subnets: (subnet: string, netmask: number, prefixlen: number) => Promise<string[]>;
     abstract contacts: (organisationId: string) => Promise<ContactPerson[]>;
     abstract dienstafnameBySubscription: (subscriptionId: string) => Promise<Dienstafname | undefined>;
+    abstract showForms: () => Promise<string[]>;
+    abstract startForm: (formKey: string, userInputs: {}[]) => Promise<any>;
 }
 
 export class CustomApiClient extends CustomApiClientInterface {
@@ -192,5 +196,15 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.fetchJson<Dienstafname>(`surf/crm/dienstafname/${subscriptionId}`, {}, {}, false).catch((err) =>
             Promise.resolve(undefined)
         );
+    };
+    showForms = (): Promise<string[]> => {
+        return this.fetchJson("surf/cim/forms");
+    };
+
+    startForm = (formKey: string, userInputs: {}[]): Promise<{ id: string }> => {
+        return this.postPutJson("surf/cim/forms/" + formKey, userInputs, "post", false, true);
+    };
+    createTicket = (ticket: CreateTicketPayload): Promise<{ id: string }> => {
+        return this.postPutJson("surf/cim/tickets/", ticket, "post", false, true);
     };
 }

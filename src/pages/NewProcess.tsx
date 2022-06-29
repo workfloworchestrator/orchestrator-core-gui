@@ -23,7 +23,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { productById } from "utils/Lookups";
-import { EngineStatus, FormNotCompleteResponse } from "utils/types";
+import { EngineStatus, Form, FormNotCompleteResponse } from "utils/types";
 import { isEmpty } from "utils/Utils";
 import { TARGET_CREATE } from "validations/Products";
 
@@ -37,11 +37,6 @@ interface PreselectedInput {
 
 interface IProps {
     preselectedInput: PreselectedInput;
-}
-
-interface Form {
-    stepUserInput?: JSONSchema6;
-    hasNext?: boolean;
 }
 
 export default function NewProcess(props: IProps) {

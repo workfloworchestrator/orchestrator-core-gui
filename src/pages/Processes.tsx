@@ -126,7 +126,7 @@ class Processes extends React.PureComponent<IProps, IState> {
                 ProcessStatus.CREATED,
                 ProcessStatus.WAITING,
             ]),
-            ["pid", "step", "tag", "creator", "customer", "product"],
+            ["pid", "assignee", "tag", "creator", "customer", "product"],
             { showSettings: false, pageSize: 10, refresh: false }
         );
         const completedSettings = initialProcessTableSettings(
