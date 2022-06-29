@@ -74,23 +74,26 @@ class ServiceTicketDetailImpactedObjects extends React.Component<IProps, IState>
                 impacted.subscription_id
             );
         }
-        const impactedObjects: ImpactedObject[] = [];
-        for (const impactedObject of this.props.ticket.impacted_objects) {
-            const subscription = subscriptions[impactedObject.subscription_id];
-            for (const imsCircuit of impactedObject.ims_circuits) {
-                impactedObjects.push({
-                    customer: impactedObject.owner_customer.customer_name,
-                    impact: imsCircuit.impact,
-                    type: subscription.product.product_type,
-                    subscription: subscription.description,
-                    impact_override: imsCircuit.impact_override,
-                    subscription_id: impactedObject.subscription_id,
-                    ims_circuit_id: imsCircuit.ims_circuit_id,
-                    ims_circuit_name: imsCircuit.ims_circuit_name,
-                    extra_information: imsCircuit.extra_information,
+
+        const impactedObjects: ImpactedObject[] = this.props.ticket.impacted_objects
+            .map((impactedObject) => {
+                let subscription = subscriptions[impactedObject.subscription_id];
+                return impactedObject.ims_circuits.map((imsCircuit) => {
+                    return {
+                        customer: impactedObject.owner_customer.customer_name,
+                        impact: imsCircuit.impact,
+                        type: subscription.product.product_type,
+                        subscription: subscription.description,
+                        impact_override: imsCircuit.impact_override,
+                        subscription_id: impactedObject.subscription_id,
+                        ims_circuit_id: imsCircuit.ims_circuit_id,
+                        ims_circuit_name: imsCircuit.ims_circuit_name,
+                        extra_information: imsCircuit.extra_information,
+                    };
                 });
-            }
-        }
+            })
+            .reduce((a, b) => a.concat(b));
+
         return impactedObjects;
     }
 
