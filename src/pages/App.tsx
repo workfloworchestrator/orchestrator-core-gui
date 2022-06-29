@@ -29,7 +29,6 @@ import ProtectedRoute from "components/ProtectedRoute";
 import ViewProduct from "components/ViewProduct";
 import GlobalContextProviders from "contextProviders/globalContextProviders";
 import manifest from "custom/manifest.json";
-// import CreateServiceTicket from "custom/pages/CreateServiceTicket";
 import { ENV } from "env";
 import { createBrowserHistory } from "history";
 import { intl, setLocale } from "locale/i18n";
@@ -318,10 +317,6 @@ class App extends React.PureComponent<IProps, IState> {
                                                     render={(props) => <ProcessDetail {...props} />}
                                                 />
                                                 <ProtectedRoute path="/processes" render={(props) => <Processes />} />
-                                                {/*<ProtectedRoute*/}
-                                                {/*    path="/tickets/create"*/}
-                                                {/*    render={(props) => <CreateServiceTicket />}*/}
-                                                {/*/>*/}
                                                 <Route
                                                     path="/subscription/:id"
                                                     render={(props) => (

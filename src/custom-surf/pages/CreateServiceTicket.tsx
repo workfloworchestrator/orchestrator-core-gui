@@ -25,9 +25,6 @@ export default function CreateServiceTicket() {
     const { redirect, customApiClient } = useContext(ApplicationContext);
 
     const handleSubmit = (userInputs: any) => {
-        console.log("Yeah");
-        console.log(userInputs);
-        console.log(userInputs.jira_ticket.start_date);
         const ticket: CreateTicketPayload = {
             ims_pw_id: userInputs.ims_ticket.name,
             jira_ticket_id: userInputs.jira_ticket.ticket_id,
