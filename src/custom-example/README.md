@@ -1,9 +1,9 @@
 This folder contains a manifest file that holds the metainfo about the available modules and components in the custom
 package.
 
-An examples that show some included
+An example that shows some extra pages and subscription detail plugins that are included from the custom folder:
 
-```JS
+```JSON
 {
     "name": "SURF",
     "customPages": [
@@ -36,11 +36,3 @@ An examples that show some included
     }
 }
 ```
-
-        {
-            "name": "prefixes",
-            "path": "pages",
-            "file": "Prefixes",
-            "component": "Prefixes",
-            "showInMenu": true
-        },

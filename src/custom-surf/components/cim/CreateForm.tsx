@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
-import { EngineStatus, Form, FormNotCompleteResponse } from "utils/types";
+import { Form, FormNotCompleteResponse } from "utils/types";
 
 interface IProps {
     preselectedInput?: any;
@@ -22,25 +22,20 @@ export default function CreateForm(props: IProps) {
         (userInputs: {}[]) => {
             // if (preselectedInput.product) {
             // Todo: decide if we want to implement pre-selections and design a way to do it generic
-            //     userInputs = [{ preselectedInput }, ...processInput];
+            //     userInputs = [{ preselectedInput }, ...userInputs];
             // }
             let promise = customApiClient.startForm(formKey, userInputs).then(
                 (form) => {
-                    // Let parent component handle the submit
                     handleSubmit(form);
-                    setFlash(intl.formatMessage({ id: "cim.flash" }, { name: formKey }));
+                    setFlash(intl.formatMessage({ id: `cim.flash.${formKey}` }));
                 },
                 (e) => {
                     throw e;
                 }
             );
 
-            // Todo: fix type
-            return customApiClient.catchErrorStatus<EngineStatus>(promise, 503, (json) => {
-                setFlash(
-                    intl.formatMessage({ id: `settings.status.engine.${json.global_status.toLowerCase()}` }),
-                    "error"
-                );
+            return customApiClient.catchErrorStatus<any>(promise, 503, (json) => {
+                setFlash(intl.formatMessage({ id: `cim.backendProblem` }), "error");
                 redirect("/tickets");
             });
         },

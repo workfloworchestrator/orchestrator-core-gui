@@ -32,20 +32,10 @@ export default function CreateServiceTicket() {
         const ticket: CreateTicketPayload = {
             ims_pw_id: userInputs.ims_ticket.name,
             jira_ticket_id: userInputs.jira_ticket.ticket_id,
-            ticket_state: "initial",
             title: userInputs.jira_ticket.summary,
-            process_state: "open",
             start_date: userInputs.jira_ticket.start_date,
             end_date: userInputs.jira_ticket.end_date,
             type: userInputs.ticket_type,
-            // Todo use current timestamp or delegate to api endpoint
-            create_date: userInputs.jira_ticket.start_date,
-            // Todo use current timestamp or delegate to api endpoint
-            last_update_time: userInputs.jira_ticket.start_date,
-            // Todo WHAAAAT? : maybe use endpoint for this?
-            opened_by: "",
-            logs: [],
-            impacted_objects: [],
         };
         customApiClient.createTicket(ticket).then((_) => redirect("/tickets"));
     };
