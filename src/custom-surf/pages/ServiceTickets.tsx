@@ -7,6 +7,7 @@ import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPanel, EuiSpacer } fr
 import ServiceTicketFilter from "custom/components/ServiceTicketFilter";
 import { intl } from "locale/i18n";
 import debounce from "lodash/debounce";
+import { tableTickets } from "pages/ServiceTicketsStyling";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ScrollUpButton from "react-scroll-up-button";
@@ -14,8 +15,6 @@ import ApplicationContext from "utils/ApplicationContext";
 import { renderStringAsDateTime } from "utils/Lookups";
 import { Filter, ServiceTicket, ServiceTicketProcessState, SortOption } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
-
-import { tableTickets } from "pages/ServiceTicketsStyling";
 
 type Column = "jira_ticket_id" | "title" | "ticket_state" | "process_state" | "opened_by" | "start_date";
 

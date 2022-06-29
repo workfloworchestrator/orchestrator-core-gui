@@ -37,6 +37,8 @@ import {
 import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
 import { isDate } from "date-fns";
 import { formSelect } from "forms/Builder";
+import ServiceTicketDetailImpactedObjects, { ImpactedObject } from "pages/ServiceTicketDetailImpactedObjects";
+import { ticketDetail } from "pages/ServiceTicketDetailStyling";
 import { MouseEvent, useContext, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { ValueType } from "react-select";
@@ -53,9 +55,6 @@ import {
     TabView,
 } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
-
-import ServiceTicketDetailImpactedObjects, { ImpactedObject } from "pages/ServiceTicketDetailImpactedObjects";
-import { ticketDetail } from "pages/ServiceTicketDetailStyling";
 
 interface IProps {
     ticketId: string;
