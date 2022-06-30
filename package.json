@@ -3,7 +3,6 @@
     "version": "1.0.0",
     "private": false,
     "license": "Apache-2.0",
-    "proxy": "http://localhost:8080",
     "scripts": {
         "analyze": "source-map-explorer build/static/js/main.*",
         "clear-cache": "rm -rf node_modules/.cache",
