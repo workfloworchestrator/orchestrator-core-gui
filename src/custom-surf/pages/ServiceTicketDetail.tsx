@@ -51,6 +51,7 @@ import { isDate } from "date-fns";
 import { formSelect } from "forms/Builder";
 import { MouseEvent, useContext, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
+import { useParams } from "react-router";
 import { ValueType } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
 import { renderStringAsDateTime } from "utils/Lookups";
@@ -58,10 +59,11 @@ import { Option, TabView } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
 interface IProps {
-    ticketId: string;
+    id: string;
 }
 
-function ServiceTicketDetail({ ticketId }: IProps) {
+function ServiceTicketDetail() {
+    const { id } = useParams<IProps>();
     const [ticket, setTicket] = useState<ServiceTicketWithDetails>();
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [notFound, setNotFound] = useState(false);
@@ -135,7 +137,7 @@ function ServiceTicketDetail({ ticketId }: IProps) {
 
     useEffect(() => {
         customApiClient
-            .cimTicketById(ticketId)
+            .cimTicketById(id)
             .then((res) => {
                 console.log("setTicket from useEffect");
                 setTicket(res);
@@ -147,7 +149,7 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                     throw err;
                 }
             });
-    }, [ticketId, customApiClient]);
+    }, [id, customApiClient]);
 
     if (notFound) {
         return (

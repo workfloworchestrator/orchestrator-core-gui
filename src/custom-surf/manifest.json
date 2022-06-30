@@ -21,6 +21,13 @@
             "file": "CreateServiceTicket",
             "component": "CreateServiceTicket",
             "showInMenu": false
+        },
+        {
+            "name": "tickets/:id",
+            "path": "pages",
+            "file": "ServiceTicketDetail",
+            "component": "ServiceTicketDetail",
+            "showInMenu": false
         }
     ],
     "disabledRoutes": ["/YOUR_DISABLED_ROUTE_HERE"],
