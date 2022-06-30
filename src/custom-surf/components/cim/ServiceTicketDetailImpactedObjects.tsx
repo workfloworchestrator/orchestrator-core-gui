@@ -14,16 +14,12 @@
  */
 
 import { EuiFlexGroup } from "@elastic/eui";
-import { tableImpactedObjects } from "pages/ServiceTicketDetailImpactedObjectsStyling";
+import { tableImpactedObjects } from "custom/components/cim/ServiceTicketDetailImpactedObjectsStyling";
+import { ServiceTicketImpactedObjectImpact, ServiceTicketWithDetails } from "custom/types";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
-import {
-    ServiceTicketImpactedObjectImpact,
-    ServiceTicketWithDetails,
-    SortOption,
-    SubscriptionModel,
-} from "utils/types";
+import { SortOption, SubscriptionModel } from "utils/types";
 import { stop } from "utils/Utils";
 
 type Column = "customer" | "impact" | "type" | "subscription" | "impact_override";

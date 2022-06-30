@@ -35,25 +35,26 @@ import {
     useGeneratedHtmlId,
 } from "@elastic/eui";
 import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
-import { isDate } from "date-fns";
-import { formSelect } from "forms/Builder";
-import ServiceTicketDetailImpactedObjects, { ImpactedObject } from "pages/ServiceTicketDetailImpactedObjects";
-import { ticketDetail } from "pages/ServiceTicketDetailStyling";
-import { MouseEvent, useContext, useEffect, useState } from "react";
-import { FormattedMessage } from "react-intl";
-import { ValueType } from "react-select";
-import ApplicationContext from "utils/ApplicationContext";
-import { renderStringAsDateTime } from "utils/Lookups";
+import ServiceTicketDetailImpactedObjects, {
+    ImpactedObject,
+} from "custom/components/cim/ServiceTicketDetailImpactedObjects";
+import { ticketDetail } from "custom/pages/ServiceTicketDetailStyling";
 import {
-    Option,
     ServiceTicketImpactedIMSCircuit,
     ServiceTicketImpactedObjectImpact,
     ServiceTicketLog,
     ServiceTicketLogType,
     ServiceTicketProcessState,
     ServiceTicketWithDetails,
-    TabView,
-} from "utils/types";
+} from "custom/types";
+import { isDate } from "date-fns";
+import { formSelect } from "forms/Builder";
+import { MouseEvent, useContext, useEffect, useState } from "react";
+import { FormattedMessage } from "react-intl";
+import { ValueType } from "react-select";
+import ApplicationContext from "utils/ApplicationContext";
+import { renderStringAsDateTime } from "utils/Lookups";
+import { Option, TabView } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
 interface IProps {
@@ -73,8 +74,8 @@ function ServiceTicketDetail({ ticketId }: IProps) {
     };
     const onSubmitModal = (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
         stop(event);
+
         if (!openedImpactedObject || !ticket) {
-            // TODO this is just to make typescript happy, but how to prevent this?
             return;
         }
 
@@ -365,9 +366,7 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                                             <td id="ticket-end_date-k">
                                                 <FormattedMessage id="tickets.table.end_date" />
                                             </td>
-                                            <td id="ticket-end_date-v">
-                                                {renderStringAsDateTime(ticket.end_date)}
-                                            </td>
+                                            <td id="ticket-end_date-v">{renderStringAsDateTime(ticket.end_date)}</td>
                                         </tr>
                                         <EuiSpacer />
                                         <tr className={theme}>

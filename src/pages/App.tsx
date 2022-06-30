@@ -42,8 +42,6 @@ import NotFound from "pages/NotFound";
 import ProcessDetail from "pages/ProcessDetail";
 import Processes from "pages/Processes";
 import ServerError from "pages/ServerError";
-import ServiceTicketDetail from "pages/ServiceTicketDetail";
-import ServiceTickets from "pages/ServiceTickets";
 import Settings from "pages/Settings";
 import StyleGuide from "pages/StyleGuide";
 import SubscriptionDetailPage from "pages/SubscriptionDetailPage";
