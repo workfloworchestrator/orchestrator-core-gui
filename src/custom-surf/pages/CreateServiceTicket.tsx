@@ -16,7 +16,7 @@
 import { EuiPage, EuiPageBody, EuiText } from "@elastic/eui";
 import Explain from "components/Explain";
 import CreateForm from "custom/components/cim/CreateForm";
-import { CreateTicketPayload } from "custom/types";
+import { CreateServiceTicketPayload } from "custom/types";
 import React, { useContext, useState } from "react";
 import ApplicationContext from "utils/ApplicationContext";
 
@@ -25,7 +25,7 @@ export default function CreateServiceTicket() {
     const { redirect, customApiClient } = useContext(ApplicationContext);
 
     const handleSubmit = (userInputs: any) => {
-        const ticket: CreateTicketPayload = {
+        const ticket: CreateServiceTicketPayload = {
             ims_pw_id: userInputs.ims_ticket.name,
             jira_ticket_id: userInputs.jira_ticket.ticket_id,
             title: userInputs.jira_ticket.summary,
@@ -33,7 +33,7 @@ export default function CreateServiceTicket() {
             end_date: userInputs.jira_ticket.end_date,
             type: userInputs.ticket_type,
         };
-        customApiClient.createTicket(ticket).then((_) => redirect("/tickets"));
+        customApiClient.cimCreateTicket(ticket).then((_) => redirect("/tickets"));
     };
 
     return (

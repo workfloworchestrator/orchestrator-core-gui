@@ -477,6 +477,7 @@ I18n.translations.en = {
         copy: "Copy to clipboard",
     },
     tickets: {
+        notFound: "No Ticket found (e.g. 404)",
         create: {
             new_ticket: "New Service Ticket",
             create: "Create new Service ticket",
@@ -498,14 +499,35 @@ I18n.translations.en = {
             ims: "IMS",
         },
         filters: {
-            state: "Select states",
+            state: "Select process states",
         },
         table: {
-            jira_ticket: "Jira ticket",
+            jira_ticket_id: "Jira ticket",
             subject: "Subject",
-            state: "State",
+            title: "Title",
+            ticket_state: "Ticket State",
+            process_state: "State",
             opened_by: "Opened by",
             plandate: "Plandate",
+            start_date: "Start time",
+            end_date: "End time",
+            type: "Type",
+            last_update_time: "Time last update",
+        },
+        action: {
+            opening: "Send OPEN email",
+            updating: "Send UPDATE email",
+            closing: "Send CLOSE email",
+            aborting: "Abort",
+            show: "View last sent email",
+        },
+        impactedobject: {
+            customer: "Customer",
+            impact: "Impact",
+            type: "Type",
+            subscription: "Subscription",
+            impact_override: "Impact override",
+            impact_override_info: "Use this to override the impact, or clear to remove override",
         },
     },
     metadata: {

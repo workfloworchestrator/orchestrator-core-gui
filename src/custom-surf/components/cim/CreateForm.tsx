@@ -24,7 +24,7 @@ export default function CreateForm(props: IProps) {
             // Todo: decide if we want to implement pre-selections and design a way to do it generic
             //     userInputs = [{ preselectedInput }, ...userInputs];
             // }
-            let promise = customApiClient.startForm(formKey, userInputs).then(
+            let promise = customApiClient.cimStartForm(formKey, userInputs).then(
                 (form) => {
                     handleSubmit(form);
                     setFlash(intl.formatMessage({ id: `cim.flash.${formKey}` }));

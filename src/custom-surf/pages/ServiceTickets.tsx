@@ -3,35 +3,26 @@
  *
  */
 
-import "custom/pages/ServiceTickets.scss";
-
-import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPage, EuiPanel, EuiSpacer } from "@elastic/eui";
+import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPanel, EuiSpacer } from "@elastic/eui";
 import ServiceTicketFilter from "custom/components/ServiceTicketFilter";
+import { tableTickets } from "custom/pages/ServiceTicketsStyling";
+import { ServiceTicket, ServiceTicketProcessState } from "custom/types";
 import { intl } from "locale/i18n";
 import debounce from "lodash/debounce";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
-import { ticketStates } from "utils/Lookups";
+import { renderStringAsDateTime } from "utils/Lookups";
 import { Filter, SortOption } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
-interface ServiceTicket {
-    jira_ticket: string;
-    subject: string;
-    state: number;
-    opened_by: string;
-    plandate: string;
-}
-
-type Column = "jira_ticket" | "subject" | "state" | "opened_by" | "plandate";
+type Column = "jira_ticket_id" | "title" | "ticket_state" | "process_state" | "opened_by" | "start_date";
 
 interface IProps extends WrappedComponentProps {}
 
 interface FilterAttributes {
     state: Filter[];
-    rootPrefix: Filter[];
 }
 
 interface IState {
@@ -47,48 +38,18 @@ interface IState {
 class ServiceTickets extends React.PureComponent<IProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {
-        serviceTickets: [
-            {
-                jira_ticket: "SNNP-65541",
-                subject: "Fiber werkzaamheden rond Amersfoort",
-                state: 0,
-                opened_by: "Hans",
-                plandate: "29-04-2021",
-            },
-            {
-                jira_ticket: "SNNP-65596",
-                subject: "SW upgrade Juniper MX in Zwolle",
-                state: 0,
-                opened_by: "Peter",
-                plandate: "15-04-2021",
-            },
-            {
-                jira_ticket: "SNNP-65741",
-                subject: "SW upgrade Juniper MX in Deventer",
-                state: 2,
-                opened_by: "Wouter",
-                plandate: "30-04-2021",
-            },
-            {
-                jira_ticket: "SNTT-33541",
-                subject: "Fiver breuk op Amsterdam - London ling",
-                state: 0,
-                opened_by: "Migiel",
-                plandate: "15-04-2021",
-            },
-        ],
+        serviceTickets: [],
         query: "",
         searchResults: [],
-        sortOrder: { name: "jira_ticket", descending: false },
+        sortOrder: { name: "jira_ticket_id", descending: false },
         filterAttributes: {
-            state: ticketStates
+            state: Object.values(ServiceTicketProcessState)
                 .filter((s) => s)
                 .map((state) => ({
                     name: state ?? "",
-                    selected: state === "Allocated",
+                    selected: state === ServiceTicketProcessState.OPEN,
                     count: 0,
                 })),
-            rootPrefix: [],
         },
         availablePrefixId: 10000,
         ipPrefixProductId: "",
@@ -96,9 +57,18 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
 
     componentDidMount() {
         this.setState({});
+
+        this.context.customApiClient
+            .cimTickets()
+            .then((res) => {
+                this.setState({ serviceTickets: res });
+            })
+            .catch((err) => {
+                throw err;
+            });
     }
 
-    setFilter = (filterName: "state" | "rootPrefix") => (item: Filter) => {
+    setFilter = (filterName: "state") => (item: Filter) => {
         const currentFilterAttributes = this.state.filterAttributes;
         var modifiedAttributes: Partial<FilterAttributes> = {};
         modifiedAttributes[filterName] = currentFilterAttributes[filterName].map((attr) => {
@@ -112,7 +82,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
         });
     };
 
-    setFilterList = (filterName: "state" | "rootPrefix") => (item: Filter[]) => {
+    setFilterList = (filterName: "state") => (item: Filter[]) => {
         const currentFilterAttributes = this.state.filterAttributes;
         const incomingFilterNames = item.map((f) => f.name);
         let modifiedAttributes: Partial<FilterAttributes> = {};
@@ -126,7 +96,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
         });
     };
 
-    singleSelectFilter = (filterName: "state" | "rootPrefix") => (e: React.MouseEvent<HTMLElement>, item: Filter) => {
+    singleSelectFilter = (filterName: "state") => (e: React.MouseEvent<HTMLElement>, item: Filter) => {
         stop(e);
         const currentFilterAttributes = this.state.filterAttributes;
         var modifiedAttributes: Partial<FilterAttributes> = {};
@@ -143,7 +113,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
         });
     };
 
-    selectAll = (filterName: "state" | "rootPrefix") => (e: React.MouseEvent<HTMLElement>) => {
+    selectAll = (filterName: "state") => (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
         const currentFilterAttributes = this.state.filterAttributes;
         var modifiedAttributes: Partial<FilterAttributes> = {};
@@ -159,19 +129,22 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
     };
 
     filter = (unfiltered: ServiceTicket[]) => {
-        const { rootPrefix } = this.state.filterAttributes;
+        const { state } = this.state.filterAttributes;
+        if (!state.some((attr) => attr.selected)) {
+            // If no filter selected, show all tickets
+            return unfiltered;
+        }
         return unfiltered.filter((ticket) => {
-            const rootFilter = rootPrefix.find((attr) => attr.name === ticket.jira_ticket);
-
-            return rootFilter ? rootFilter.selected : true;
+            const stateFilter = state.find((attr) => attr.name === ticket.process_state);
+            return stateFilter ? stateFilter.selected : true;
         });
     };
 
     sortBy = (name: Column) => (a: ServiceTicket, b: ServiceTicket) => {
         const aSafe = a[name] === undefined ? "" : a[name];
         const bSafe = b[name] === undefined ? "" : b[name];
-        if (name === "state") {
-            return (ticketStates[a[name]] ?? "").localeCompare(ticketStates[b[name]] ?? "");
+        if (name === "ticket_state") {
+            return (a[name] ?? "").localeCompare(b[name] ?? "");
         } else {
             return typeof aSafe === "string" || typeof bSafe === "string"
                 ? (aSafe as string).toLowerCase().localeCompare(bSafe.toString().toLowerCase())
@@ -207,10 +180,9 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
         const queryToLower = query.toLowerCase();
         const results = serviceTickets.filter((serviceTickets) => {
             return (
-                serviceTickets.jira_ticket.toLowerCase().includes(queryToLower) ||
+                serviceTickets.jira_ticket_id.toLowerCase().includes(queryToLower) ||
                 serviceTickets.opened_by.toLowerCase().includes(queryToLower) ||
-                (serviceTickets.subject !== null && serviceTickets.subject.toLowerCase().includes(queryToLower)) ||
-                serviceTickets.plandate.includes(query)
+                (serviceTickets.title !== null && serviceTickets.title.toLowerCase().includes(queryToLower))
             );
         });
         this.setState({ searchResults: results });
@@ -225,7 +197,14 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
     };
 
     render() {
-        const columns: Column[] = ["jira_ticket", "subject", "state", "opened_by", "plandate"];
+        const columns: Column[] = [
+            "jira_ticket_id",
+            "title",
+            "ticket_state",
+            "process_state",
+            "opened_by",
+            "start_date",
+        ];
         const { theme } = this.context;
 
         const th = (index: number) => {
@@ -233,18 +212,18 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
             return (
                 <th key={index} className={name} onClick={this.toggleSort(name)}>
                     <span>
-                        <FormattedMessage id={`prefixes.${name}`} />
+                        <FormattedMessage id={`tickets.table.${name}`} />
                     </span>
                     {this.sortColumnIcon(name, this.state.sortOrder)}
                 </th>
             );
         };
         const { serviceTickets, query, searchResults, filterAttributes } = this.state;
-        const filteredPrefixes = isEmpty(query) ? this.filter(serviceTickets) : this.filter(searchResults);
+        const filteredTickets = isEmpty(query) ? this.filter(serviceTickets) : this.filter(searchResults);
         // @ts-ignore
-        const sortedPrefixes = this.sort(filteredPrefixes);
+        const sortedTickets = this.sort(filteredTickets);
         return (
-            <EuiPage>
+            <EuiPage css={tableTickets}>
                 <EuiPanel>
                     <div>
                         <div className="options">
@@ -278,27 +257,32 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                             <tr>{columns.map((column, index) => th(index))}</tr>
                         </thead>
                         <tbody>
-                            {sortedPrefixes.map((ticket) => (
-                                <tr key={ticket.jira_ticket} className={theme}>
+                            {sortedTickets.map((ticket) => (
+                                <tr key={ticket._id} className={theme}>
                                     <td
-                                        data-label={intl.formatMessage({ id: "tickets.table.jira_ticket" })}
+                                        data-label={intl.formatMessage({ id: "tickets.table.jira_ticket_id" })}
                                         className="subscription"
+                                        onClick={() => this.context.redirect(`/tickets/${ticket._id}`)}
                                     >
-                                        <EuiLink href={"#"} target="_blank" rel="noopener noreferrer">
-                                            {ticket.jira_ticket}
-                                        </EuiLink>
+                                        {ticket.jira_ticket_id}
                                     </td>
                                     <td
-                                        data-label={intl.formatMessage({ id: "tickets.table.subject" })}
+                                        data-label={intl.formatMessage({ id: "tickets.table.title" })}
                                         className="customer"
                                     >
-                                        {ticket.subject}
+                                        {ticket.title}
                                     </td>
                                     <td
-                                        data-label={intl.formatMessage({ id: "tickets.table.state" })}
-                                        className="state"
+                                        data-label={intl.formatMessage({ id: "tickets.table.ticket_state" })}
+                                        className="ticket_state"
                                     >
-                                        {ticketStates[ticket.state]}
+                                        {ticket.ticket_state}
+                                    </td>
+                                    <td
+                                        data-label={intl.formatMessage({ id: "tickets.table.process_state" })}
+                                        className="process_state"
+                                    >
+                                        {ticket.process_state}
                                     </td>
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.opened_by" })}
@@ -307,10 +291,10 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                         {ticket.opened_by}
                                     </td>
                                     <td
-                                        data-label={intl.formatMessage({ id: "tickets.table.plandate" })}
+                                        data-label={intl.formatMessage({ id: "tickets.table.start_date" })}
                                         className="start_date"
                                     >
-                                        {ticket.plandate}
+                                        {renderStringAsDateTime(ticket.start_date)}
                                     </td>
                                 </tr>
                             ))}

@@ -1,4 +1,5 @@
 import { BaseApiClient } from "api";
+import { ServiceTicket, ServiceTicketImpactedIMSCircuit, ServiceTicketWithDetails } from "custom/types";
 import { intl } from "locale/i18n";
 import { setFlash } from "utils/Flash";
 import {
@@ -15,7 +16,7 @@ import {
     ServicePortSubscription,
 } from "utils/types";
 
-import { CreateTicketPayload } from "../types";
+import { CreateServiceTicketPayload } from "../types";
 
 abstract class CustomApiClientInterface extends BaseApiClient {
     abstract portSubscriptions: (
@@ -52,8 +53,16 @@ abstract class CustomApiClientInterface extends BaseApiClient {
     abstract free_subnets: (subnet: string, netmask: number, prefixlen: number) => Promise<string[]>;
     abstract contacts: (organisationId: string) => Promise<ContactPerson[]>;
     abstract dienstafnameBySubscription: (subscriptionId: string) => Promise<Dienstafname | undefined>;
-    abstract showForms: () => Promise<string[]>;
-    abstract startForm: (formKey: string, userInputs: {}[]) => Promise<any>;
+    abstract cimShowForms: () => Promise<string[]>;
+    abstract cimStartForm: (formKey: string, userInputs: {}[]) => Promise<any>;
+    abstract cimTickets: () => Promise<ServiceTicket[]>;
+    abstract cimTicketById: (ticket_id: string) => Promise<ServiceTicketWithDetails>;
+    abstract cimPatchImpactedObject: (
+        ticket_id: string,
+        subscription_id: string,
+        circuit_id: number,
+        impactedObject: ServiceTicketImpactedIMSCircuit
+    ) => Promise<ServiceTicketWithDetails>;
 }
 
 export class CustomApiClient extends CustomApiClientInterface {
@@ -197,14 +206,39 @@ export class CustomApiClient extends CustomApiClientInterface {
             Promise.resolve(undefined)
         );
     };
-    showForms = (): Promise<string[]> => {
+
+    cimShowForms = (): Promise<string[]> => {
         return this.fetchJson("surf/cim/forms");
     };
 
-    startForm = (formKey: string, userInputs: {}[]): Promise<{ id: string }> => {
+    cimStartForm = (formKey: string, userInputs: {}[]): Promise<{ id: string }> => {
         return this.postPutJson("surf/cim/forms/" + formKey, userInputs, "post", false, true);
     };
-    createTicket = (ticket: CreateTicketPayload): Promise<{ id: string }> => {
+
+    cimCreateTicket = (ticket: CreateServiceTicketPayload): Promise<{ id: string }> => {
         return this.postPutJson("surf/cim/tickets/", ticket, "post", false, true);
+    };
+
+    cimTickets = (): Promise<ServiceTicket[]> => {
+        return this.fetchJson<ServiceTicket[]>("surf/cim/tickets");
+    };
+
+    cimTicketById = (ticket_id: string): Promise<ServiceTicketWithDetails> => {
+        return this.fetchJson<ServiceTicketWithDetails>(`surf/cim/tickets/${ticket_id}`);
+    };
+
+    cimPatchImpactedObject = (
+        ticket_id: string,
+        subscription_id: string,
+        circuit_id: number,
+        impactedObject: ServiceTicketImpactedIMSCircuit
+    ): Promise<ServiceTicketWithDetails> => {
+        return this.postPutJson(
+            `surf/cim/objects/${ticket_id}/subscription/${subscription_id}/circuit/${circuit_id}`,
+            impactedObject,
+            "patch",
+            true,
+            false
+        );
     };
 }

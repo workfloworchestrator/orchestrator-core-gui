@@ -60,7 +60,8 @@ export function formSelect(
     onChange: (value: ValueType<Option, false>) => void,
     values: (Option | string)[],
     readOnly: boolean,
-    selected_value?: string | string[]
+    selected_value?: string | string[],
+    clearable: boolean = false
 ) {
     const options: Option[] = !values.length
         ? []
@@ -84,6 +85,7 @@ export function formSelect(
                     isSearchable={false}
                     value={value}
                     isDisabled={readOnly}
+                    isClearable={clearable}
                 />
             </EuiFormRow>
         </section>
