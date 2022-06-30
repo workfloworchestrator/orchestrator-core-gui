@@ -277,6 +277,18 @@ function ServiceTicketDetail({ ticketId }: IProps) {
 
                 <EuiModalBody>
                     <EuiForm id={modalFormId} component="form">
+                        <EuiSpacer size="s" />
+                        {formSelect(
+                            "tickets.impactedobject.impact_override",
+                            onImpactOverrideChange,
+                            Object.values(ServiceTicketImpactedObjectImpact),
+                            // Make dropdown readonly if ticket is not in one these 2 states
+                            ![ServiceTicketProcessState.OPEN_ACCEPTED, ServiceTicketProcessState.OPEN_RELATED].includes(
+                                _ticket.process_state
+                            ),
+                            impactOverrideValue,
+                            true
+                        )}
                         <EuiFormRow label="Customer">
                             <EuiFieldText readOnly name="customer" value={openedImpactedObject?.customer} />
                         </EuiFormRow>
@@ -289,17 +301,6 @@ function ServiceTicketDetail({ ticketId }: IProps) {
                         <EuiFormRow label="Subscription">
                             <EuiFieldText readOnly name="subscription" value={openedImpactedObject?.subscription} />
                         </EuiFormRow>
-                        {formSelect(
-                            "tickets.impactedobject.impact_override",
-                            onImpactOverrideChange,
-                            Object.values(ServiceTicketImpactedObjectImpact),
-                            // Make dropdown readonly if ticket is not in one these 2 states
-                            ![ServiceTicketProcessState.OPEN_ACCEPTED, ServiceTicketProcessState.OPEN_RELATED].includes(
-                                _ticket.process_state
-                            ),
-                            impactOverrideValue,
-                            true
-                        )}
                     </EuiForm>
                 </EuiModalBody>
 
