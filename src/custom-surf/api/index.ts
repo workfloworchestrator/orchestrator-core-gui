@@ -18,6 +18,10 @@ import {
 
 import { CreateServiceTicketPayload } from "../types";
 
+function prefix_cim_dev_uri(uri: string): string {
+    return process.env.NODE_ENV === "development" ? `http://localhost:8081/${uri.replace("surf/", "")}` : uri;
+}
+
 abstract class CustomApiClientInterface extends BaseApiClient {
     abstract portSubscriptions: (
         tagList?: string[],
@@ -208,23 +212,23 @@ export class CustomApiClient extends CustomApiClientInterface {
     };
 
     cimShowForms = (): Promise<string[]> => {
-        return this.fetchJson("surf/cim/forms");
+        return this.fetchJson(prefix_cim_dev_uri("surf/cim/forms"));
     };
 
     cimStartForm = (formKey: string, userInputs: {}[]): Promise<{ id: string }> => {
-        return this.postPutJson("surf/cim/forms/" + formKey, userInputs, "post", false, true);
+        return this.postPutJson(prefix_cim_dev_uri("surf/cim/forms/" + formKey), userInputs, "post", false, true);
     };
 
     cimCreateTicket = (ticket: CreateServiceTicketPayload): Promise<{ id: string }> => {
-        return this.postPutJson("surf/cim/tickets/", ticket, "post", false, true);
+        return this.postPutJson(prefix_cim_dev_uri("surf/cim/tickets/"), ticket, "post", false, true);
     };
 
     cimTickets = (): Promise<ServiceTicket[]> => {
-        return this.fetchJson<ServiceTicket[]>("surf/cim/tickets");
+        return this.fetchJson<ServiceTicket[]>(prefix_cim_dev_uri("surf/cim/tickets"));
     };
 
     cimTicketById = (ticket_id: string): Promise<ServiceTicketWithDetails> => {
-        return this.fetchJson<ServiceTicketWithDetails>(`surf/cim/tickets/${ticket_id}`);
+        return this.fetchJson<ServiceTicketWithDetails>(prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}`));
     };
 
     cimPatchImpactedObject = (
@@ -234,7 +238,7 @@ export class CustomApiClient extends CustomApiClientInterface {
         impactedObject: ServiceTicketImpactedIMSCircuit
     ): Promise<ServiceTicketWithDetails> => {
         return this.postPutJson(
-            `surf/cim/objects/${ticket_id}/subscription/${subscription_id}/circuit/${circuit_id}`,
+            prefix_cim_dev_uri(`surf/cim/objects/${ticket_id}/subscription/${subscription_id}/circuit/${circuit_id}`),
             impactedObject,
             "patch",
             true,
