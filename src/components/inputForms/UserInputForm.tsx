@@ -189,7 +189,7 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
     getProps(name: string) {
         let props = super.getProps(name);
         const translation_key = name.replace(/\.\d+(.\d+)*/, "_fields");
-        let label = intl.formatMessage({ id: `forms.fields.${translation_key}` });
+        let label = props.label === undefined ? intl.formatMessage({ id: `forms.fields.${translation_key}` }) : props.label
 
         // Mark required inputs. Might be delegated to the form components itself in the future.
         if (props.required && !props.readOnly && !props.isDisabled && !name.includes(".")) {
@@ -290,11 +290,11 @@ class UserInputForm extends React.Component<IProps, IState> {
         processing: false,
         nrOfValidationErrors: 0,
         rootErrors: [],
-        showConfirmDialog: () => {},
+        showConfirmDialog: () => { },
     };
 
     public static defaultProps = {
-        previous: () => {},
+        previous: () => { },
         hasPrev: false,
         hasNext: false,
     };
@@ -303,7 +303,7 @@ class UserInputForm extends React.Component<IProps, IState> {
         stop(e);
         this.state.showConfirmDialog({
             question: "",
-            confirmAction: () => {},
+            confirmAction: () => { },
             cancelAction: this.props.cancel,
             leavePage: true,
         });
@@ -414,7 +414,7 @@ class UserInputForm extends React.Component<IProps, IState> {
         const { nrOfValidationErrors, rootErrors } = this.state;
         const { stepUserInput, userInput, location } = this.props;
         const prefilledForm = fillPreselection(stepUserInput, location.search);
-        const bridge = new CustomTitleJSONSchemaBridge(prefilledForm, () => {});
+        const bridge = new CustomTitleJSONSchemaBridge(prefilledForm, () => { });
 
         const AutoFieldProvider = AutoField.componentDetectorContext.Provider;
 
