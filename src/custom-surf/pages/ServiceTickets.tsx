@@ -47,7 +47,8 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                 .filter((s) => s)
                 .map((state) => ({
                     name: state ?? "",
-                    selected: state === ServiceTicketProcessState.OPEN,
+                    // selected: state === ServiceTicketProcessState.OPEN,
+                    selected: false,
                     count: 0,
                 })),
         },
