@@ -137,7 +137,8 @@ function SubscriptionDetail({ subscriptionId }: IProps) {
     useEffect(() => {
         if (loadedSubscriptionModel && subscription) {
             const inUseByIds = findObjects(subscription, "in_use_by_ids");
-            apiClient.subscriptionsByInUsedByIds(inUseByIds).then((i) => setInUseBySubscriptions(i));
+            const inUseByIdsUnique = [...new Set(inUseByIds)]
+            apiClient.subscriptionsByInUsedByIds(inUseByIdsUnique).then((i) => setInUseBySubscriptions(i));
         }
     }, [loadedSubscriptionModel, subscription, apiClient]);
 
