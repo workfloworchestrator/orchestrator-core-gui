@@ -15124,7 +15124,7 @@ obuf@^1.0.0, obuf@^1.1.2:
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
   integrity sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==
 
-oidc-client@^1.11.3, oidc-client@^1.9.1:
+oidc-client@^1.11.5:
   version "1.11.5"
   resolved "https://registry.yarnpkg.com/oidc-client/-/oidc-client-1.11.5.tgz#020aa193d68a3e1f87a24fcbf50073b738de92bb"
   integrity sha512-LcKrKC8Av0m/KD/4EFmo9Sg8fSQ+WFJWBrmtWd+tZkNn3WT/sQG3REmPANE9tzzhbjW6VkTNy4xhAXCfPApAOg==
@@ -15135,15 +15135,12 @@ oidc-client@^1.11.3, oidc-client@^1.9.1:
     crypto-js "^4.0.0"
     serialize-javascript "^4.0.0"
 
-oidc-react@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/oidc-react/-/oidc-react-1.1.1.tgz#68c99c90816c9cf9d1dbb22701a8aa195abd2f36"
-  integrity sha512-wZmbTKjn6jPO7Jp1orTVLd0Yguql7N2Cvg2wygaUmuCbARG2A0C68aTA4PYY9Sx5pe6xmN3iV64vMffEllifrg==
+oidc-react@1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/oidc-react/-/oidc-react-1.5.1.tgz#afe83335252b7657835298b80f5e4b8bbb8f5bd1"
+  integrity sha512-rbNfWUBRiqolht9J5tRu5HktDs8yXii1KfOBXtM9uwQNaiY0UgvIzl2h7NNOYA04TFxKtGlXkwrs9cPn28JwEg==
   dependencies:
-    oidc-client "^1.9.1"
-    react "^16.11.0"
-    react-dom "^16.11.0"
-    react-router "^5.1.2"
+    oidc-client "^1.11.5"
 
 on-finished@~2.3.0:
   version "2.3.0"
@@ -16993,7 +16990,7 @@ react-docgen@^5.0.0:
     node-dir "^0.1.10"
     strip-indent "^3.0.0"
 
-react-dom@^16.11.0, react-dom@^16.14.0, react-dom@^16.8.3:
+react-dom@^16.14.0, react-dom@^16.8.3:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
   integrity sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
@@ -17457,7 +17454,7 @@ react@^15.3.0:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-react@^16.11.0, react@^16.14.0, react@^16.8.3:
+react@^16.14.0, react@^16.8.3:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
   integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
