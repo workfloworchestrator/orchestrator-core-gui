@@ -57,7 +57,9 @@ function Radio({
                         type="radio"
                     />
 
-                    <label htmlFor={`${id}-${escape(item)}`} style={{ paddingLeft: "5px" }}>{transform ? transform(item) : item}</label>
+                    <label htmlFor={`${id}-${escape(item)}`} style={{ paddingLeft: "5px" }}>
+                        {transform ? transform(item) : item}
+                    </label>
                 </div>
             ))}
         </div>
