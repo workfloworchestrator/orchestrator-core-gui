@@ -13,8 +13,6 @@
  *
  */
 
-import "./SubscriptionDetail.scss";
-
 import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiTitle } from "@elastic/eui";
 import {
     RenderActions,
@@ -48,6 +46,8 @@ import {
     WorkflowReasons,
 } from "utils/types";
 import { findObjects, importPlugin } from "utils/Utils";
+
+import { subscriptionDetailStyling } from "./SubsciptionDetailStyling";
 
 interface IProps {
     subscriptionId: string;
@@ -286,61 +286,63 @@ function SubscriptionDetail({ subscriptionId }: IProps) {
     ];
 
     return (
-        <div className="mod-subscription-detail">
-            {subscriptionDetailHeader("subscription-details")}
-            {tabViewSettingsForId("subscription-details").viewType === "tree" && (
-                <>
-                    {renderedSubscriptionDetails}
-                    <RenderFixedInputs product={product} />
-                </>
-            )}
-            {tabViewSettingsForId("subscription-details").viewType === "tabs" && (
-                <TabbedSection
-                    id="subscription-detail-tabs"
-                    tabs={subscriptionTabs}
-                    className="tabbed-details-parent"
-                    name={<FormattedMessage id="subscription.subscription_title" />}
-                ></TabbedSection>
-            )}
+        <EuiFlexItem css={subscriptionDetailStyling}>
+            <div className="mod-subscription-detail">
+                {subscriptionDetailHeader("subscription-details")}
+                {tabViewSettingsForId("subscription-details").viewType === "tree" && (
+                    <>
+                        {renderedSubscriptionDetails}
+                        <RenderFixedInputs product={product} />
+                    </>
+                )}
+                {tabViewSettingsForId("subscription-details").viewType === "tabs" && (
+                    <TabbedSection
+                        id="subscription-detail-tabs"
+                        tabs={subscriptionTabs}
+                        className="tabbed-details-parent"
+                        name={<FormattedMessage id="subscription.subscription_title" />}
+                    ></TabbedSection>
+                )}
 
-            {subscriptionDetailHeader("subscription-product-blocks", "Service configuration details")}
-            {tabViewSettingsForId("subscription-product-blocks").viewType === "tree" && (
-                <>
-                    {subscription_instances && (
-                        <SubscriptionDetailSection
-                            name={<FormattedMessage id="subscriptions.productBlocks" />}
-                            className="subscription-product-blocks"
-                        >
-                            {subscription_instances.map((entry, index) => (
-                                <SubscriptionInstance
-                                    //@ts-ignore
-                                    key={index}
-                                    subscription_instance={entry[1]}
-                                    field_name={entry[0]}
-                                    inUseBySubscriptions={inUseBySubscriptions}
-                                />
-                            ))}
-                        </SubscriptionDetailSection>
-                    )}
-                </>
-            )}
-            {tabViewSettingsForId("subscription-product-blocks").viewType === "tabs" && (
-                <RenderServiceConfiguration
-                    subscriptionInstances={subscription_instances}
-                    subscription_id={subscription.subscription_id}
-                    inUseBySubscriptions={inUseBySubscriptions}
-                />
-            )}
+                {subscriptionDetailHeader("subscription-product-blocks", "Service configuration details")}
+                {tabViewSettingsForId("subscription-product-blocks").viewType === "tree" && (
+                    <>
+                        {subscription_instances && (
+                            <SubscriptionDetailSection
+                                name={<FormattedMessage id="subscriptions.productBlocks" />}
+                                className="subscription-product-blocks"
+                            >
+                                {subscription_instances.map((entry, index) => (
+                                    <SubscriptionInstance
+                                        //@ts-ignore
+                                        key={index}
+                                        subscription_instance={entry[1]}
+                                        field_name={entry[0]}
+                                        inUseBySubscriptions={inUseBySubscriptions}
+                                    />
+                                ))}
+                            </SubscriptionDetailSection>
+                        )}
+                    </>
+                )}
+                {tabViewSettingsForId("subscription-product-blocks").viewType === "tabs" && (
+                    <RenderServiceConfiguration
+                        subscriptionInstances={subscription_instances}
+                        subscription_id={subscription.subscription_id}
+                        inUseBySubscriptions={inUseBySubscriptions}
+                    />
+                )}
 
-            {tabViewSettingsForId("subscription-details").viewType === "tree" && (
-                <>
-                    {renderedActions}
-                    {renderedProductDetails}
-                    {renderedProcesses}
-                    {renderedInUseBySubscriptions}
-                </>
-            )}
-        </div>
+                {tabViewSettingsForId("subscription-details").viewType === "tree" && (
+                    <>
+                        {renderedActions}
+                        {renderedProductDetails}
+                        {renderedProcesses}
+                        {renderedInUseBySubscriptions}
+                    </>
+                )}
+            </div>
+        </EuiFlexItem>
     );
 }
 

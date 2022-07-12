@@ -13,9 +13,7 @@
  *
  */
 
-import "./FailedTaskBanner.scss";
-
-import { EuiText, EuiToolTip } from "@elastic/eui";
+import { EuiFlexItem, EuiText, EuiToolTip } from "@elastic/eui";
 import RunningProcessesContext from "contextProviders/runningProcessesProvider";
 import { groupBy } from "lodash";
 import { useCallback, useContext, useEffect, useState } from "react";
@@ -24,6 +22,7 @@ import { Process, ProcessStatus } from "utils/types";
 import useHttpIntervalFallback from "utils/useHttpIntervalFallback";
 import { FailedProcess } from "websocketService/useRunningProcesses";
 
+import { failedTaskBannerStyling } from "./FailedTaskBannerStyling";
 import useFailedTaskFetcher from "./useFailedTaskFetcher";
 
 enum CheckboxStatus {
@@ -96,15 +95,17 @@ export default function FailedTaskBanner() {
     const showTasksStatus = () => (failedTasks.all ? CheckboxStatus.FAILED : CheckboxStatus.OK);
 
     return (
-        <div onClick={handleOnClick} className="failed-task-container">
-            <EuiToolTip position="bottom" content={renderTooltipContent()}>
-                <div className="failed-task-banner">
-                    <i className={`fa fa-check-square failed-task-banner__icon ${showTasksStatus()}`} />
-                    <EuiText grow={false} className="failed-task-banner__counter">
-                        {failedTasks.all}
-                    </EuiText>
-                </div>
-            </EuiToolTip>
-        </div>
+        <EuiFlexItem css={failedTaskBannerStyling}>
+            <div onClick={handleOnClick} className="failed-task-container">
+                <EuiToolTip position="bottom" content={renderTooltipContent()}>
+                    <div className="failed-task-banner">
+                        <i className={`fa fa-check-square failed-task-banner__icon ${showTasksStatus()}`} />
+                        <EuiText grow={false} className="failed-task-banner__counter">
+                            {failedTasks.all}
+                        </EuiText>
+                    </div>
+                </EuiToolTip>
+            </div>
+        </EuiFlexItem>
     );
 }

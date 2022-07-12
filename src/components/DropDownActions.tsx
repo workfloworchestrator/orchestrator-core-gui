@@ -13,8 +13,6 @@
  *
  */
 
-// import "components/DropDownActions.scss";
-
 import { EuiContextMenu } from "@elastic/eui";
 import React from "react";
 import { FormattedMessage } from "react-intl";
