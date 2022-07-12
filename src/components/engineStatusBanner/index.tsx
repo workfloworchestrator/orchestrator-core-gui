@@ -13,19 +13,19 @@
  *
  */
 
-import "./EngineStatusBanner.scss";
-
 import { EuiText } from "@elastic/eui";
 import EngineSettingsContext from "contextProviders/engineSettingsProvider";
 import { useContext } from "react";
 import { FormattedMessage } from "react-intl";
+
+import { engineStatusBannerStyling } from "./EngineStatusBannerStyling";
 
 export default function EngineStatusBanner() {
     const { engineStatus } = useContext(EngineSettingsContext);
     const globalStatus = engineStatus.global_status.toLocaleLowerCase();
 
     return (
-        <EuiText>
+        <EuiText css={engineStatusBannerStyling}>
             <FormattedMessage id={`settings.status.engine.${globalStatus}`} />
             <i className={`fa fa-circle engine-status-banner__status ${globalStatus}`}></i>
         </EuiText>

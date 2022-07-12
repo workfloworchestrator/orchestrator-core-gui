@@ -30,3 +30,7 @@ export const euiButtonFill = css`
 export const euiTab = css`
     color: red;
 `;
+
+// borders
+export const BORDER_COLOR = css`rgba(black, 0.1)`;
+export const BORDER_LIGHT_COLOR = css`rgba(white, 0.2)`;
