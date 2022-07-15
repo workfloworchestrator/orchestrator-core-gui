@@ -102,18 +102,18 @@ export const ticketDetail = css`
                     &.light {
                         border-bottom: 1px solid ${LIGHT_GREY_COLOR};
                         border-left: 1px solid ${PRIMARY_COLOR};
-                        &:nth-child(even) {
+                        &:nth-of-type(even) {
                         }
-                        &:nth-child(odd) {
+                        &:nth-of-type(odd) {
                             background: #f6f6f6;
                         }
                     }
                     &.dark {
                         border-bottom: 1px solid #141519;
                         border-left: 1px solid ${PRIMARY_COLOR};
-                        &:nth-child(even) {
+                        &:nth-of-type(even) {
                         }
-                        &:nth-child(odd) {
+                        &:nth-of-type(odd) {
                             background: #141519;
                         }
                     }
@@ -129,19 +129,15 @@ export const ticketDetail = css`
                         display: flex;
                     }
 
-                    &:first-child {
-                        width: 10%;
+                    &.key-row {
+                        width: 30%;
                     }
-                    &:nth-child(2) {
-                        width: 50%;
+                    &.name-row {
                         text-align: left;
                         div.checkbox {
                             display: inline;
                             margin: 15px 15px 0 0;
                         }
-                    }
-                    &:last-child {
-                        width: 30%;
                     }
                     &.insync {
                         text-align: center;
@@ -161,18 +157,18 @@ export const ticketDetail = css`
                     &.light {
                         border-bottom: 1px solid ${LIGHT_GREY_COLOR};
                         border-left: 1px solid ${PRIMARY_COLOR};
-                        &:nth-child(even) {
+                        &:nth-of-type(even) {
                         }
-                        &:nth-child(odd) {
+                        &:nth-of-type(odd) {
                             background: #f6f6f6;
                         }
                     }
                     &.dark {
                         border-bottom: 1px solid #141519;
                         border-left: 1px solid ${PRIMARY_COLOR};
-                        &:nth-child(even) {
+                        &:nth-of-type(even) {
                         }
-                        &:nth-child(odd) {
+                        &:nth-of-type(odd) {
                             background: #141519;
                         }
                     }

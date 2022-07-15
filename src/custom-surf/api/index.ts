@@ -233,6 +233,12 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.fetchJson<ServiceTicketWithDetails>(prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}`));
     };
 
+    cimAcceptTicketImpactById = (ticket_id: string): Promise<ServiceTicketWithDetails> => {
+        return this.fetchJson<ServiceTicketWithDetails>(
+            prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/accept_impact`)
+        );
+    };
+
     cimPatchImpactedObject = (
         ticket_id: string,
         subscription_id: string,
