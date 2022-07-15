@@ -19,7 +19,9 @@ import {
 import { CreateServiceTicketPayload } from "../types";
 
 function prefix_cim_dev_uri(uri: string): string {
-    return process.env.NODE_ENV === "development" ? `http://localhost:8081/${uri.replace("surf/", "")}` : uri;
+    return process.env.NODE_ENV === "development"
+        ? `http://localhost:${process.env.REACT_APP_CIM_PORT ?? 8081}/${uri.replace("surf/", "")}`
+        : uri;
 }
 
 abstract class CustomApiClientInterface extends BaseApiClient {
