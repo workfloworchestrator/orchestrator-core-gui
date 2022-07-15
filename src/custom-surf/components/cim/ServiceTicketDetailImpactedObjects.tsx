@@ -13,20 +13,23 @@
  *
  */
 
-import { EuiFlexGroup } from "@elastic/eui";
+import { EuiButton, EuiButtonIcon, EuiFlexGroup, EuiFlexItem, EuiSpacer, EuiText, EuiTitle } from "@elastic/eui";
 import { tableImpactedObjects } from "custom/components/cim/ServiceTicketDetailImpactedObjectsStyling";
 import { ServiceTicketImpactedObjectImpact, ServiceTicketWithDetails } from "custom/types";
-import React from "react";
+import { isDate, isEmpty } from "lodash";
+import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
+import Select from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
-import { SortOption, SubscriptionModel } from "utils/types";
+import { Option, SortOption, SubscriptionModel } from "utils/types";
 import { stop } from "utils/Utils";
 
 type Column = "customer" | "impact" | "type" | "subscription" | "impact_override";
 
 interface IProps extends WrappedComponentProps {
     ticket: ServiceTicketWithDetails;
-    modalFunc: Function;
+    updateable: boolean;
+    acceptImpactedObjects: () => void;
 }
 
 export interface ImpactedObject {
@@ -41,37 +44,52 @@ export interface ImpactedObject {
     extra_information?: string;
 }
 
-interface IState {
-    impactedObjects: ImpactedObject[];
-    sortOrder: SortOption<Column>;
-}
+const options: Option[] = (Object.values(ServiceTicketImpactedObjectImpact) as string[]).map((val) => ({
+    value: val,
+    label: val,
+}));
 
-class ServiceTicketDetailImpactedObjects extends React.Component<IProps, IState> {
-    context!: React.ContextType<typeof ApplicationContext>;
-    state: IState = {
-        impactedObjects: [],
-        sortOrder: { name: "subscription", descending: false },
-    };
+const columns: Column[] = ["customer", "impact", "type", "subscription", "impact_override"];
 
-    /**
-     * Loops through impacted objects in the serviceticket, then through circuits in each impacted object.
-     * Information of each circuit is then wrapper in a ImpactedObject along with information of the
-     * corresponding impacted object and subcription.
-     */
-    async getImpactedObjects(): Promise<ImpactedObject[]> {
+const sortBy = (name: Column) => (a: ImpactedObject, b: ImpactedObject) => {
+    const aSafe = a[name] || "";
+    const bSafe = b[name] || "";
+    return typeof aSafe === "string" || typeof bSafe === "string"
+        ? (aSafe as string).toLowerCase().localeCompare(bSafe.toString().toLowerCase())
+        : aSafe - bSafe;
+};
+
+const sortColumnIcon = (name: string, sorted: SortOption) => {
+    if (sorted.name === name) {
+        return <i className={sorted.descending ? "fas fa-sort-down" : "fas fa-sort-up"} />;
+    }
+    return <i />;
+};
+
+const ServiceTicketDetailImpactedObjects = ({ ticket, updateable, acceptImpactedObjects }: IProps) => {
+    const { theme, customApiClient, apiClient } = useContext(ApplicationContext);
+    const [impactedObjects, setImpactedObjects] = useState<Array<ImpactedObject>>([]);
+    const [editImpactedObject, setEditImpactedObject] = useState<ImpactedObject>();
+    const [sortOrder, setSortOrder] = useState<SortOption<Column>>({ name: "subscription", descending: false });
+
+    useEffect(() => {
+        getImpactedObjects();
+    }, [ticket]);
+
+    const getImpactedObjects = async () => {
         const subscriptions: Record<string, SubscriptionModel> = {};
 
         // Retrieve each subscription once
-        for (const impacted of this.props.ticket.impacted_objects) {
+        for (const impacted of ticket.impacted_objects) {
             if (impacted.subscription_id in subscriptions) {
                 continue;
             }
-            subscriptions[impacted.subscription_id] = await this.context.apiClient.subscriptionsDetailWithModel(
+            subscriptions[impacted.subscription_id] = await apiClient.subscriptionsDetailWithModel(
                 impacted.subscription_id
             );
         }
 
-        const impactedObjects: ImpactedObject[] = this.props.ticket.impacted_objects
+        const newImpactedObjects: ImpactedObject[] = ticket.impacted_objects
             .map((impactedObject) => {
                 let subscription = subscriptions[impactedObject.subscription_id];
                 return impactedObject.ims_circuits.map((imsCircuit) => {
@@ -88,101 +106,143 @@ class ServiceTicketDetailImpactedObjects extends React.Component<IProps, IState>
                     };
                 });
             })
-            .reduce((a, b) => a.concat(b));
-
-        return impactedObjects;
-    }
-
-    async componentDidMount() {
-        this.setState({ impactedObjects: await this.getImpactedObjects() });
-    }
-
-    async componentDidUpdate(prevProps: IProps) {
-        if (this.props.ticket.last_update_time !== prevProps.ticket.last_update_time) {
-            this.setState({ impactedObjects: await this.getImpactedObjects() });
-        }
-    }
-
-    sortBy = (name: Column) => (a: ImpactedObject, b: ImpactedObject) => {
-        const aSafe = a[name] || "";
-        const bSafe = b[name] || "";
-        return typeof aSafe === "string" || typeof bSafe === "string"
-            ? (aSafe as string).toLowerCase().localeCompare(bSafe.toString().toLowerCase())
-            : aSafe - bSafe;
+            .reduce((a, b) => a.concat(b), []);
+        setImpactedObjects(newImpactedObjects);
     };
 
-    toggleSort = (name: Column) => (e: React.MouseEvent<HTMLTableHeaderCellElement>) => {
+    const toggleSort = (name: Column) => (e: React.MouseEvent<HTMLTableHeaderCellElement>) => {
         stop(e);
-        const sortOrder = { ...this.state.sortOrder };
-        sortOrder.descending = sortOrder.name === name ? !sortOrder.descending : false;
-        sortOrder.name = name;
-        this.setState({ sortOrder: sortOrder });
+        const newSortOrder = { ...sortOrder };
+        newSortOrder.descending = newSortOrder.name === name ? !newSortOrder.descending : false;
+        newSortOrder.name = name;
+        setSortOrder(newSortOrder);
     };
 
-    sort = (unsorted: ImpactedObject[]) => {
-        const { name, descending } = this.state.sortOrder;
-        const sorted = unsorted.sort(this.sortBy(name));
+    const sort = (unsorted: ImpactedObject[]) => {
+        const { name, descending } = sortOrder;
+        const sorted = unsorted.sort(sortBy(name));
         if (descending) {
             sorted.reverse();
         }
         return sorted;
     };
 
-    sortColumnIcon = (name: string, sorted: SortOption) => {
-        if (sorted.name === name) {
-            return <i className={sorted.descending ? "fas fa-sort-down" : "fas fa-sort-up"} />;
-        }
-        return <i />;
+    const sumbitImpactOverride = async (impactedObject: ImpactedObject): Promise<void> => {
+        await customApiClient.cimPatchImpactedObject(
+            ticket._id,
+            impactedObject.subscription_id,
+            impactedObject.ims_circuit_id,
+            impactedObject
+        );
     };
 
-    render() {
-        const columns: Column[] = ["customer", "impact", "type", "subscription", "impact_override"];
-        const { theme } = this.context;
-        const { impactedObjects } = this.state;
+    const editImpact = (impactedObject: ImpactedObject): (() => void) => {
+        return () => updateable && setEditImpactedObject(impactedObject);
+    };
 
-        const th = (index: number) => {
-            const name = columns[index];
+    const removeEdit = (): void => {
+        setEditImpactedObject(undefined);
+    };
+
+    const onChangeImpactOverride = (impactedObject: ImpactedObject) => async (e: any): Promise<void> => {
+        let value: any;
+        if (isEmpty(e) || isDate(e)) {
+            value = e;
+        } else {
+            // @ts-ignore
+            value = e.target ? e.target.value : e.value;
+        }
+        removeEdit();
+        await sumbitImpactOverride(impactedObject);
+        setImpactedObjects(
+            impactedObjects.map((obj: ImpactedObject) =>
+                obj.subscription_id === impactedObject.subscription_id ? { ...obj, impact_override: value } : obj
+            )
+        );
+    };
+
+    const showImpact = (impact: ImpactedObject): any => {
+        if (impact === editImpactedObject) {
             return (
-                <th key={index} className={name} onClick={this.toggleSort(name)}>
-                    <span>
-                        <FormattedMessage id={`tickets.impactedobject.${name}`} />
-                    </span>
-                    {this.sortColumnIcon(name, this.state.sortOrder)}
-                </th>
+                <Select<Option>
+                    className="impact-override__select"
+                    onChange={onChangeImpactOverride(impact)}
+                    onBlur={removeEdit}
+                    options={options}
+                    isSearchable={false}
+                    value={options.filter(
+                        (option) => impact.impact_override && option["value"] === impact.impact_override
+                    )}
+                    isClearable={true}
+                    defaultMenuIsOpen={true}
+                    autoFocus
+                />
             );
-        };
-        const sortedImpactedObjects = this.sort(impactedObjects);
+        } else if (updateable) {
+            return (
+                <>
+                    <EuiFlexGroup gutterSize="s">
+                        <EuiFlexItem grow={false} className="impact-override__text">
+                            {impact.impact_override && <EuiText> {impact.impact_override}</EuiText>}
+                        </EuiFlexItem>
+                        <EuiButtonIcon iconType={"pencil"} size="s" aria-label={"edit"} onClick={editImpact(impact)} />
+                    </EuiFlexGroup>
+                </>
+            );
+        }
+        return impact.impact_override || "-";
+    };
+
+    const th = (name: Column, index: number) => {
         return (
+            <th key={index} className={name} onClick={toggleSort(name)}>
+                <span>
+                    <FormattedMessage id={`tickets.impactedobject.${name}`} />
+                </span>
+                {sortColumnIcon(name, sortOrder)}
+            </th>
+        );
+    };
+
+    const createImpactObjectValueRow = (item: ImpactedObject) => {
+        return (
+            <tr key={`${item.subscription_id}-${item.ims_circuit_id}`} className={theme}>
+                <td className="customer">{item.customer}</td>
+                <td className="impact">{item.impact}</td>
+                <td className="type">{item.type}</td>
+                <td className="subscription">{item.subscription}</td>
+                <td className={"impact-override"}>{showImpact(item)}</td>
+            </tr>
+        );
+    };
+
+    return (
+        <>
+            <EuiFlexGroup>
+                <EuiFlexItem grow={false}>
+                    <EuiTitle size="m">
+                        <h1>Impacted objects</h1>
+                    </EuiTitle>
+                </EuiFlexItem>
+            </EuiFlexGroup>
             <EuiFlexGroup css={tableImpactedObjects}>
-                {/* <EuiToolTip
-                    position="top"
-                    content={<p>Works on any kind of element &mdash; buttons, inputs, you name it!</p>}
-                > */}
                 <table className="ticket-impacted-objects">
                     <thead>
-                        <tr>{columns.map((column, index) => th(index))}</tr>
+                        <tr>{columns.map((column, index) => th(column, index))}</tr>
                     </thead>
-                    <tbody>
-                        {sortedImpactedObjects.map((item) => (
-                            <tr
-                                key={`${item.subscription_id}-${item.ims_circuit_id}`}
-                                className={theme}
-                                onClick={() => this.props.modalFunc(item)}
-                            >
-                                <td className="customer">{item.customer}</td>
-                                <td className="impact">{item.impact}</td>
-                                <td className="type">{item.type}</td>
-                                <td className="subscription">{item.subscription}</td>
-                                <td className="impact_override">{item.impact_override}</td>
-                            </tr>
-                        ))}
-                    </tbody>
+                    <tbody>{sort(impactedObjects).map(createImpactObjectValueRow)}</tbody>
                 </table>
-                {/* </EuiToolTip> */}
             </EuiFlexGroup>
-        );
-    }
-}
-ServiceTicketDetailImpactedObjects.contextType = ApplicationContext;
+            <EuiSpacer />
+            <EuiFlexGroup gutterSize="s" className="buttons">
+                <EuiFlexItem>
+                    <EuiButton onClick={acceptImpactedObjects} isDisabled={!updateable}>
+                        <FormattedMessage id="tickets.action.accept_impact" />
+                    </EuiButton>
+                </EuiFlexItem>
+            </EuiFlexGroup>
+        </>
+    );
+};
 
 export default injectIntl(ServiceTicketDetailImpactedObjects);
