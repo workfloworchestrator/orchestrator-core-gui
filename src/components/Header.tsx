@@ -13,9 +13,7 @@
  *
  */
 
-import "components/Header.scss";
-
-import { EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderSectionItem, EuiText } from "@elastic/eui";
+import { EuiFlexItem, EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderSectionItem, EuiText } from "@elastic/eui";
 import EngineStatusBanner from "components/engineStatusBanner";
 import FailedTaskBanner from "components/failedTaskBanner";
 import UserProfile from "components/UserProfile";
@@ -26,6 +24,8 @@ import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { Link } from "react-router-dom";
 import ApplicationContext from "utils/ApplicationContext";
+
+import { headerStyling } from "./HeaderStyling";
 
 interface IState {
     dropDownActive: boolean;
@@ -95,50 +95,52 @@ class Header extends React.PureComponent<IProps, IState> {
         const { environment } = this.state;
 
         return (
-            <EuiHeader className="header">
-                <EuiHeaderSectionItem border="none">
-                    <Link to="/" className="header__logo">
-                        <img className={`header__logo-img ${this.context.theme}`} src={logo} alt="logo" />
-                    </Link>
+            <EuiFlexItem css={headerStyling}>
+                <EuiHeader className="header">
                     <EuiHeaderSectionItem border="none">
-                        <EuiText grow={false}>
-                            <h1 className={`header__app-title`}>
-                                <FormattedMessage id="header.title" />
-                            </h1>
-                        </EuiText>
-                        {environment !== "production" && (
+                        <Link to="/" className="header__logo">
+                            <img className={`header__logo-img ${this.context.theme}`} src={logo} alt="logo" />
+                        </Link>
+                        <EuiHeaderSectionItem border="none">
                             <EuiText grow={false}>
-                                <h1 className={`header__app-title ${environment}`}>{environment}</h1>
+                                <h1 className={`header__app-title`}>
+                                    <FormattedMessage id="header.title" />
+                                </h1>
                             </EuiText>
-                        )}
+                            {environment !== "production" && (
+                                <EuiText grow={false}>
+                                    <h1 className={`header__app-title ${environment}`}>{environment}</h1>
+                                </EuiText>
+                            )}
+                        </EuiHeaderSectionItem>
                     </EuiHeaderSectionItem>
-                </EuiHeaderSectionItem>
 
-                <EuiHeaderSectionItem border="none">
-                    <EuiHeaderLinks aria-label="App navigation links extra">
-                        <EngineStatusBanner />
-                        <FailedTaskBanner />
-                        <EuiHeaderLink
-                            id="switchTheme"
-                            color="primary"
-                            onClick={this.switchTheme}
-                            iconType={this.context.theme === "dark" ? "sun" : "moon"}
-                        />
-                        <EuiHeaderLink id="logout" color="primary" onClick={this.logout} iconType="exit" />
-
-                        {currentUser && (
+                    <EuiHeaderSectionItem border="none">
+                        <EuiHeaderLinks aria-label="App navigation links extra">
+                            <EngineStatusBanner />
+                            <FailedTaskBanner />
                             <EuiHeaderLink
-                                className="profile"
-                                tabIndex={1}
-                                onBlur={() => this.setState({ dropDownActive: false })}
-                            >
-                                {currentUser && this.renderProfileLink(currentUser)}
-                                {currentUser && this.renderDropDown()}
-                            </EuiHeaderLink>
-                        )}
-                    </EuiHeaderLinks>
-                </EuiHeaderSectionItem>
-            </EuiHeader>
+                                id="switchTheme"
+                                color="primary"
+                                onClick={this.switchTheme}
+                                iconType={this.context.theme === "dark" ? "sun" : "moon"}
+                            />
+                            <EuiHeaderLink id="logout" color="primary" onClick={this.logout} iconType="exit" />
+
+                            {currentUser && (
+                                <EuiHeaderLink
+                                    className="profile"
+                                    tabIndex={1}
+                                    onBlur={() => this.setState({ dropDownActive: false })}
+                                >
+                                    {currentUser && this.renderProfileLink(currentUser)}
+                                    {currentUser && this.renderDropDown()}
+                                </EuiHeaderLink>
+                            )}
+                        </EuiHeaderLinks>
+                    </EuiHeaderSectionItem>
+                </EuiHeader>
+            </EuiFlexItem>
         );
     }
 }

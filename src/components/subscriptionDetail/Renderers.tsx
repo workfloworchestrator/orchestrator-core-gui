@@ -1,4 +1,4 @@
-import { EuiCallOut, EuiFlexGroup, EuiFlexItem, EuiSwitch } from "@elastic/eui";
+import { EuiCallOut, EuiCheckbox, EuiFlexGroup, EuiFlexItem, EuiSwitch } from "@elastic/eui";
 import { SubscriptionDetailSection } from "components/subscriptionDetail/SubscriptionDetailSection";
 import ConfirmationDialogContext from "contextProviders/ConfirmationDialogProvider";
 import React, { useContext, useState } from "react";
@@ -13,8 +13,6 @@ import {
     WorkflowReasons,
 } from "utils/types";
 import { applyIdNamingConvention, isEmpty, stop } from "utils/Utils";
-
-import CheckBox from "../CheckBox";
 
 let create_readable_description = function (wf: any): object {
     if ("unterminated_in_use_by_subscriptions" in wf)
@@ -467,7 +465,13 @@ export function RenderSubscriptions({ inUseBySubscriptions }: { inUseBySubscript
                                     {subscription.description}
                                 </td>
                                 <td data-label={intl.formatMessage({ id: "subscriptions.insync" })} className="insync">
-                                    <CheckBox value={subscription.insync} name="insync" readOnly={true} />
+                                    <EuiCheckbox
+                                        id="insync"
+                                        name="insync"
+                                        checked={subscription.insync}
+                                        onChange={() => {}}
+                                        disabled
+                                    />
                                 </td>
                                 <td
                                     data-label={intl.formatMessage({ id: "subscriptions.product_name" })}

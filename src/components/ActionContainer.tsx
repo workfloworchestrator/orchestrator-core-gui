@@ -1,4 +1,5 @@
-import "components/ActionContainer.scss";
+import { EuiButtonIcon, EuiFlexItem, EuiPopover } from "@elastic/eui";
+import React, { useState } from "react";
 
 /*
  * Copyright 2019-2022 SURF.
@@ -14,8 +15,7 @@ import "components/ActionContainer.scss";
  * limitations under the License.
  *
  */
-import { EuiButtonIcon, EuiPopover } from "@elastic/eui";
-import React, { useState } from "react";
+import { actionContainerStyling } from "./ActionContainerStyling";
 
 function ActionContainer({
     title,
@@ -40,11 +40,13 @@ function ActionContainer({
         />
     );
     return (
-        <div className={"action-container"}>
-            <EuiPopover ownFocus button={button} isOpen={isPopoverOpen} closePopover={closePopover}>
-                {renderContent(true)}
-            </EuiPopover>
-        </div>
+        <EuiFlexItem css={actionContainerStyling}>
+            <div className={"action-container"}>
+                <EuiPopover ownFocus button={button} isOpen={isPopoverOpen} closePopover={closePopover}>
+                    {renderContent(true)}
+                </EuiPopover>
+            </div>
+        </EuiFlexItem>
     );
 }
 

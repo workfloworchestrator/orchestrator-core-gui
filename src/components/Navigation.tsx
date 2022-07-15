@@ -13,11 +13,10 @@
  *
  */
 
-import "components/Navigation.scss";
-
 import {
     EuiButton,
     EuiControlBar,
+    EuiFlexItem,
     EuiLoadingSpinner,
     EuiModal,
     EuiModalBody,
@@ -37,6 +36,7 @@ import { Spinner } from "spin.js";
 import ApplicationContext from "utils/ApplicationContext";
 
 import FavoritesManagementModal from "./modals/FavoritesManagementModal";
+import { navigationStyling } from "./NavigationStyling";
 
 const Navigation = ({ extraPages = [] }: { extraPages: string[] }) => {
     const { allowed } = useContext(ApplicationContext);
@@ -134,7 +134,7 @@ const Navigation = ({ extraPages = [] }: { extraPages: string[] }) => {
     };
 
     return (
-        <>
+        <EuiFlexItem css={navigationStyling}>
             <EuiControlBar aria-label="navigationbar" controls={getControls()} position="relative" showOnMobile />
             {loading && (
                 <EuiToast className="sync" color="primary">
@@ -155,7 +155,7 @@ const Navigation = ({ extraPages = [] }: { extraPages: string[] }) => {
                     </EuiModal>
                 </EuiOverlayMask>
             )}
-        </>
+        </EuiFlexItem>
     );
 };
 export default Navigation;

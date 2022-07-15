@@ -13,8 +13,7 @@
  *
  */
 
-import { EuiFlexItem } from "@elastic/eui";
-import CheckBox from "components/CheckBox";
+import { EuiCheckbox, EuiFlexItem } from "@elastic/eui";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
@@ -76,10 +75,12 @@ export default class FixedInputConfiguration extends React.Component<{}, IState>
                                     <td>{this.fixedInputValues(Object.keys(fi)[0], configuration)}</td>
                                     <td>{this.fixedInputDescription(Object.keys(fi)[0], configuration)}</td>
                                     <td>
-                                        <CheckBox
+                                        <EuiCheckbox
+                                            id={Object.keys(fi)[0]}
                                             name={Object.keys(fi)[0]}
-                                            value={Object.values(fi)[0]}
-                                            readOnly={true}
+                                            checked={Object.values(fi)[0]}
+                                            onChange={() => {}}
+                                            disabled
                                         />
                                     </td>
                                 </tr>

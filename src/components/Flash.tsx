@@ -13,11 +13,12 @@
  *
  */
 
-import "components/Flash.scss";
-
+import { EuiFlexItem } from "@elastic/eui";
 import React from "react";
 import { FlashData, clearFlash, emitter, getFlash } from "utils/Flash";
 import { isEmpty } from "utils/Utils";
+
+import { flashStyling } from "./FlashStyling";
 
 interface IState {
     flash?: FlashData;
@@ -49,14 +50,16 @@ export default class Flash extends React.PureComponent<{}, IState> {
     render() {
         const { flash, className } = this.state;
         return (
-            <div className={`flash ${className} ${flash?.type}`}>
-                <div className="message-container">
-                    <p>{flash?.message}</p>
-                    <button className="close" onClick={clearFlash}>
-                        <i className="fas fa-times" />
-                    </button>
+            <EuiFlexItem css={flashStyling}>
+                <div className={`flash ${className} ${flash?.type}`}>
+                    <div className="message-container">
+                        <p>{flash?.message}</p>
+                        <button className="close" onClick={clearFlash}>
+                            <i className="fas fa-times" />
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </EuiFlexItem>
         );
     }
 }
