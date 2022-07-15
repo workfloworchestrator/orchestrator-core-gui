@@ -141,11 +141,11 @@ class App extends React.PureComponent<IProps, IState> {
         if (manifest.customPages) {
             try {
                 const importedModules: any[] = [];
-                const importPromises = manifest.customPages.map((page) =>
+                const importPromises = manifest.customPages.map((page, index) =>
                     // @ts-ignore
                     import(`../custom/${page.path}/${page.file}`).then((module) => {
                         // @ts-ignore
-                        importedModules.push({ ...page, Component: module.default });
+                        importedModules.push({ ...page, page_order: index, Component: module.default });
                     })
                 );
 
@@ -263,6 +263,7 @@ class App extends React.PureComponent<IProps, IState> {
                                                 <Navigation
                                                     extraPages={importedModules
                                                         .filter((i) => i.showInMenu)
+                                                        .sort((a, b) => a.page_order - b.page_order) // Ensure same order as manifest
                                                         .map((i) => i.name)}
                                                 />
                                                 <ErrorDialog isOpen={errorDialogOpen} close={errorDialogAction} />
