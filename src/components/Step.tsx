@@ -13,10 +13,11 @@
  *
  */
 
-import "components/Step.scss";
-
+import { EuiFlexItem } from "@elastic/eui";
 import React from "react";
 import { capitalize, renderDateTime } from "utils/Lookups";
+
+import { stepStyling } from "./StepStyling";
 
 interface IProps {
     step: { name: string; status: string; executed: number };
@@ -26,11 +27,13 @@ export default class Step extends React.PureComponent<IProps> {
     render() {
         const { step } = this.props;
         return (
-            <section className={`step ${step.status}`}>
-                <span className="name">{step.name}</span>
-                <span className="status">{capitalize(step.status)}</span>
-                {step.executed && <span className="started">{renderDateTime(step.executed)}</span>}
-            </section>
+            <EuiFlexItem css={stepStyling}>
+                <section className={`step ${step.status}`}>
+                    <span className="name">{step.name}</span>
+                    <span className="status">{capitalize(step.status)}</span>
+                    {step.executed && <span className="started">{renderDateTime(step.executed)}</span>}
+                </section>
+            </EuiFlexItem>
         );
     }
 }

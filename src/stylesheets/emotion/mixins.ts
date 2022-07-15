@@ -1,6 +1,6 @@
 import { css } from "@emotion/core";
 import { DARKER_PRIMARY, DARK_GREY_COLOR, LIGHTER_GREY_COLOR, PRIMARY_COLOR } from "stylesheets/emotion/colors";
-import { SIZE_BR } from "stylesheets/emotion/vars";
+import { SIZE_BORDER_RADIUS } from "stylesheets/emotion/vars";
 
 import { phoneMediaQuery } from "./mediaQueries";
 
@@ -12,8 +12,8 @@ export const infoIconMixin = css`
 `;
 
 export const cardMixin = css`
-    border-bottom-left-radius: ${SIZE_BR};
-    border-bottom-right-radius: ${SIZE_BR};
+    border-bottom-left-radius: ${SIZE_BORDER_RADIUS};
+    border-bottom-right-radius: ${SIZE_BORDER_RADIUS};
     padding: 0 15px;
     padding-bottom: 15px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
