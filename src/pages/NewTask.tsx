@@ -13,8 +13,6 @@
  *
  */
 
-import "pages/NewTask.scss";
-
 import { EuiPage, EuiPageBody } from "@elastic/eui";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import { JSONSchema6 } from "json-schema";
@@ -23,6 +21,8 @@ import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl"
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { EngineStatus, InputForm } from "utils/types";
+
+import { newTaskStyling } from "./NewTaskStyling";
 
 interface IState {
     stepUserInput?: InputForm;
@@ -78,7 +78,7 @@ class NewTask extends React.Component<WrappedComponentProps, IState> {
     render() {
         const { stepUserInput, hasNext } = this.state;
         return (
-            <EuiPage>
+            <EuiPage css={newTaskStyling}>
                 <EuiPageBody component="div" className="mod-new-task">
                     <section className="card">
                         <section className="form-step">

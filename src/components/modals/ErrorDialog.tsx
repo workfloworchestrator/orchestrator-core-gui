@@ -13,8 +13,6 @@
  *
  */
 
-import "components/modals/ConfirmationDialog.scss";
-
 import {
     EuiButton,
     EuiModal,

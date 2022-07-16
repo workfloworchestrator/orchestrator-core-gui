@@ -12,7 +12,6 @@
  * limitations under the License.
  *
  */
-import "components/Explain.scss";
 
 import { EuiFlyout, EuiFlyoutBody, EuiFlyoutHeader, EuiText, EuiTitle } from "@elastic/eui";
 import React from "react";

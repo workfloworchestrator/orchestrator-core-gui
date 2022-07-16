@@ -13,13 +13,13 @@
  *
  */
 
-import "components/FixedInputConfiguration.scss";
-
-import CheckBox from "components/CheckBox";
+import { EuiCheckbox, EuiFlexItem } from "@elastic/eui";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { FixedInputConfiguration as iFixedInputConfiguration } from "utils/types";
+
+import { fixedInputConfigurationStyling } from "./FixedInputConfigurationStyling";
 
 interface IState {
     configuration: iFixedInputConfiguration;
@@ -46,41 +46,49 @@ export default class FixedInputConfiguration extends React.Component<{}, IState>
     render() {
         const { configuration } = this.state;
         return Object.keys(configuration.by_tag).map((tag, index) => (
-            <section className="fixed-input-configuration" key={index}>
-                <h3 className="description">
-                    <FormattedMessage id="metadata.fixedInputs.tags" values={{ tag: tag }} />
-                </h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th className={"fixed-input"}>
-                                <FormattedMessage id="metadata.fixedInputs.fixedInput" />
-                            </th>
-                            <th className={"values"}>
-                                <FormattedMessage id="metadata.fixedInputs.values" />
-                            </th>
-                            <th className={"description"}>
-                                <FormattedMessage id="metadata.fixedInputs.description" />
-                            </th>
-                            <th className={"required"}>
-                                <FormattedMessage id="metadata.fixedInputs.required" />
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {configuration.by_tag[tag].map((fi, index) => (
-                            <tr key={index}>
-                                <td>{Object.keys(fi)[0]}</td>
-                                <td>{this.fixedInputValues(Object.keys(fi)[0], configuration)}</td>
-                                <td>{this.fixedInputDescription(Object.keys(fi)[0], configuration)}</td>
-                                <td>
-                                    <CheckBox name={Object.keys(fi)[0]} value={Object.values(fi)[0]} readOnly={true} />
-                                </td>
+            <EuiFlexItem css={fixedInputConfigurationStyling}>
+                <section className="fixed-input-configuration" key={index}>
+                    <h3 className="description">
+                        <FormattedMessage id="metadata.fixedInputs.tags" values={{ tag: tag }} />
+                    </h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th className={"fixed-input"}>
+                                    <FormattedMessage id="metadata.fixedInputs.fixedInput" />
+                                </th>
+                                <th className={"values"}>
+                                    <FormattedMessage id="metadata.fixedInputs.values" />
+                                </th>
+                                <th className={"description"}>
+                                    <FormattedMessage id="metadata.fixedInputs.description" />
+                                </th>
+                                <th className={"required"}>
+                                    <FormattedMessage id="metadata.fixedInputs.required" />
+                                </th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </section>
+                        </thead>
+                        <tbody>
+                            {configuration.by_tag[tag].map((fi, index) => (
+                                <tr key={index}>
+                                    <td>{Object.keys(fi)[0]}</td>
+                                    <td>{this.fixedInputValues(Object.keys(fi)[0], configuration)}</td>
+                                    <td>{this.fixedInputDescription(Object.keys(fi)[0], configuration)}</td>
+                                    <td>
+                                        <EuiCheckbox
+                                            id={Object.keys(fi)[0]}
+                                            name={Object.keys(fi)[0]}
+                                            checked={Object.values(fi)[0]}
+                                            onChange={() => {}}
+                                            disabled
+                                        />
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </section>
+            </EuiFlexItem>
         ));
     }
 }

@@ -1,7 +1,8 @@
 import { css } from "@emotion/core";
 
-export const zIndex = '("sync": 900,"flash": 1020,"explain": 1010)';
+export const zIndex = { sync: 900, flash: 1020, explain: 1010 };
 export const MEDIUM_SCREEN_WITH = "1680px";
+export const SIZE_BORDER_RADIUS = "3px";
 /*
 !
  * Copyright 2019-2022 SURF.
@@ -29,3 +30,7 @@ export const euiButtonFill = css`
 export const euiTab = css`
     color: red;
 `;
+
+// borders
+export const BORDER_COLOR = css`rgba(black, 0.1)`;
+export const BORDER_LIGHT_COLOR = css`rgba(white, 0.2)`;

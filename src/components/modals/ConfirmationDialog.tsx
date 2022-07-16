@@ -13,8 +13,6 @@
  *
  */
 
-import "components/modals/ConfirmationDialog.scss";
-
 import {
     EuiButton,
     EuiModal,
@@ -26,6 +24,8 @@ import {
 } from "@elastic/eui";
 import React from "react";
 import { FormattedMessage } from "react-intl";
+
+import { confirmationDialogStyling } from "./ConfirmationDialogStyling";
 
 interface IProps {
     isOpen?: boolean;
@@ -68,7 +68,12 @@ export default function ConfirmationDialog({
     if (isOpen) {
         modal = (
             <EuiOverlayMask>
-                <EuiModal className="confirm-modal" onClose={cancel} initialFocus="[name=popfirst]">
+                <EuiModal
+                    css={confirmationDialogStyling}
+                    className="confirm-modal"
+                    onClose={cancel}
+                    initialFocus="[name=popfirst]"
+                >
                     <EuiModalHeader>
                         <EuiModalHeaderTitle>
                             <FormattedMessage id="confirmation_dialog.title" />

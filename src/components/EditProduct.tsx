@@ -12,11 +12,8 @@
  * limitations under the License.
  *
  */
-import "components/Product.scss";
 
-import "./Product.scss";
-
-import { EuiButton } from "@elastic/eui";
+import { EuiButton, EuiPanel } from "@elastic/eui";
 import ConfirmationDialogContext, {
     ConfirmDialogActions,
     ShowConfirmDialogType,
@@ -31,6 +28,8 @@ import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { Option, ProductBlock, Product as ProductData, Workflow } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
+
+import { editProductStyling } from "./EditProductStyling";
 
 interface MatchParams {
     id: string;
@@ -239,47 +238,49 @@ class EditProduct extends React.Component<IProps, IState> {
             ? ((product.end_date as unknown) as Date)
             : new Date(product.end_date * 1000);
         return (
-            <div className="mod-product">
-                <ConfirmationDialogContext.Consumer>
-                    {(cdc) => this.addConfirmDialogActions(cdc)}
-                </ConfirmationDialogContext.Consumer>
-                <section className="card">
-                    {formInput(
-                        "metadata.products.name",
-                        "name",
-                        product.name || "",
-                        readOnly,
-                        this.state.errors,
-                        this.changeProperty("name"),
-                        this.validateProperty("name"),
-                        duplicateName ? intl.formatMessage({ id: "metadata.products.duplicate_name" }) : undefined
-                    )}
-                    {formInput(
-                        "metadata.products.description",
-                        "description",
-                        product.description || "",
-                        readOnly,
-                        this.state.errors,
-                        this.changeProperty("description"),
-                        this.validateProperty("description")
-                    )}
-                    {formSelect(
-                        "metadata.products.status",
-                        this.changeProperty("status"),
-                        statuses,
-                        readOnly,
-                        product.status ?? "active"
-                    )}
-                    {formDate(
-                        "metadata.products.created_at",
-                        () => false,
-                        true,
-                        product.created_at ? new Date(product.created_at * 1000) : new Date()
-                    )}
-                    {formDate("metadata.products.end_date", this.changeProperty("end_date"), readOnly, endDate)}
-                    {this.renderButtons(initial, product)}
-                </section>
-            </div>
+            <EuiPanel css={editProductStyling}>
+                <div className="mod-product">
+                    <ConfirmationDialogContext.Consumer>
+                        {(cdc) => this.addConfirmDialogActions(cdc)}
+                    </ConfirmationDialogContext.Consumer>
+                    <section className="card">
+                        {formInput(
+                            "metadata.products.name",
+                            "name",
+                            product.name || "",
+                            readOnly,
+                            this.state.errors,
+                            this.changeProperty("name"),
+                            this.validateProperty("name"),
+                            duplicateName ? intl.formatMessage({ id: "metadata.products.duplicate_name" }) : undefined
+                        )}
+                        {formInput(
+                            "metadata.products.description",
+                            "description",
+                            product.description || "",
+                            readOnly,
+                            this.state.errors,
+                            this.changeProperty("description"),
+                            this.validateProperty("description")
+                        )}
+                        {formSelect(
+                            "metadata.products.status",
+                            this.changeProperty("status"),
+                            statuses,
+                            readOnly,
+                            product.status ?? "active"
+                        )}
+                        {formDate(
+                            "metadata.products.created_at",
+                            () => false,
+                            true,
+                            product.created_at ? new Date(product.created_at * 1000) : new Date()
+                        )}
+                        {formDate("metadata.products.end_date", this.changeProperty("end_date"), readOnly, endDate)}
+                        {this.renderButtons(initial, product)}
+                    </section>
+                </div>
+            </EuiPanel>
         );
     }
 }

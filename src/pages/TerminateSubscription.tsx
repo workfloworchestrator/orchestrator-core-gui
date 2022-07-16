@@ -13,10 +13,9 @@
  *
  */
 
-import "pages/TerminateSubscription.scss";
-
 import { EuiPage, EuiPageBody } from "@elastic/eui";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
+import { terminateSubscriptionsStyling } from "pages/TerminateSubscriptionStyling";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { Redirect, RouteComponentProps, withRouter } from "react-router";
@@ -107,7 +106,7 @@ class TerminateSubscription extends React.Component<IProps, IState> {
         }
 
         return (
-            <EuiPage>
+            <EuiPage css={terminateSubscriptionsStyling}>
                 <EuiPageBody component="div" className="mod-terminate-subscription">
                     <section className="card">
                         <h1>

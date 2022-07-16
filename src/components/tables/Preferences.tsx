@@ -36,15 +36,14 @@ function Preferences<T extends object>({
     initialTableSettings,
     excludeInFilter,
 }: IProps<T>) {
-    const { name, minimized, showSettings, showPaginator } = state;
+    const { name, showSettings } = state;
     const intl = useIntl();
 
     return (
         <span key={`preferences_${name}`}>
-            <div className={`table-preferences-icon-bar${minimized ? " minimized" : ""}`}>
+            <div className={"table-preferences-icon-bar"}>
                 <span className="table-name">
                     <FormattedMessage id={name} />
-                    {minimized && <FormattedMessage id="table.is_minimized" />}
                 </span>
                 {"   "}
                 <span
@@ -54,22 +53,6 @@ function Preferences<T extends object>({
                     <i className={showSettings ? "fa fa-cog active" : "fa fa-cog"} />
                 </span>
                 {"   "}
-
-                {minimized ? (
-                    <span
-                        title={intl.formatMessage({ id: "table.preferences.maximize" })}
-                        onClick={() => dispatch({ type: ActionType.MAXIMIZE })}
-                    >
-                        <i className={"fa fa-caret-up"} />
-                    </span>
-                ) : (
-                    <span
-                        title={intl.formatMessage({ id: "table.preferences.minimize" })}
-                        onClick={() => dispatch({ type: ActionType.MINIMIZE })}
-                    >
-                        <i className={"fa fa-caret-down"} />
-                    </span>
-                )}
             </div>
             {showSettings && (
                 <div className={"preferences"}>
@@ -80,20 +63,6 @@ function Preferences<T extends object>({
                                 iconType="refresh"
                             >
                                 <FormattedMessage id="table.preferences.reset" />
-                            </EuiButton>
-                        </EuiFlexItem>
-                        <EuiFlexItem>
-                            <EuiButton
-                                onClick={() => dispatch({ type: ActionType.SHOW_PAGINATOR_TOGGLE })}
-                                color="primary"
-                            >
-                                <FormattedMessage
-                                    id={
-                                        showPaginator
-                                            ? "table.preferences.hide_paginator"
-                                            : "table.preferences.show_paginator"
-                                    }
-                                />
                             </EuiButton>
                         </EuiFlexItem>
                     </EuiFlexGroup>
