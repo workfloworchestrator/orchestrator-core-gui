@@ -1,5 +1,10 @@
 import { BaseApiClient } from "api";
-import { ServiceTicket, ServiceTicketImpactedIMSCircuit, ServiceTicketWithDetails } from "custom/types";
+import {
+    ServiceTicket,
+    ServiceTicketImpactedIMSCircuit,
+    ServiceTicketProcessState,
+    ServiceTicketWithDetails,
+} from "custom/types";
 import { intl } from "locale/i18n";
 import { setFlash } from "utils/Flash";
 import {
@@ -233,9 +238,12 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.fetchJson<ServiceTicketWithDetails>(prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}`));
     };
 
-    cimAcceptTicketImpactById = (ticket_id: string): Promise<ServiceTicketWithDetails> => {
+    cimChangeTicketStateById = (
+        ticket_id: string,
+        state: ServiceTicketProcessState
+    ): Promise<ServiceTicketWithDetails> => {
         return this.fetchJson<ServiceTicketWithDetails>(
-            prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/accept_impact`)
+            prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/state/${state}`)
         );
     };
 
