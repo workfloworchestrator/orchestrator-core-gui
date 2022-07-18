@@ -72,10 +72,6 @@ const ServiceTicketDetailImpactedObjects = ({ ticket, updateable, acceptImpacted
     const [editImpactedObject, setEditImpactedObject] = useState<ImpactedObject>();
     const [sortOrder, setSortOrder] = useState<SortOption<Column>>({ name: "subscription", descending: false });
 
-    useEffect(() => {
-        getImpactedObjects();
-    }, [ticket]);
-
     const getImpactedObjects = async () => {
         const subscriptions: Record<string, SubscriptionModel> = {};
 
@@ -215,6 +211,10 @@ const ServiceTicketDetailImpactedObjects = ({ ticket, updateable, acceptImpacted
             </tr>
         );
     };
+
+    useEffect(() => {
+        getImpactedObjects();
+    }, [ticket]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <>
