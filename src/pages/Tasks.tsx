@@ -13,8 +13,6 @@
  *
  */
 
-import "pages/Tasks.scss";
-
 import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody } from "@elastic/eui";
 import DropDownActions from "components/DropDownActions";
 import Explain from "components/Explain";
@@ -36,6 +34,8 @@ import { organisationNameByUuid } from "utils/Lookups";
 import { ProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
+
+import { tasksStyling } from "./TasksStyling";
 
 interface IProps extends WrappedComponentProps {}
 interface IState {
@@ -172,7 +172,7 @@ class Tasks extends React.PureComponent<IProps, IState> {
             { refresh: true }
         );
         return (
-            <EuiPage>
+            <EuiPage css={tasksStyling}>
                 <ConfirmationDialogContext.Consumer>
                     {(cdc) => this.addConfirmDialogActions(cdc)}
                 </ConfirmationDialogContext.Consumer>

@@ -13,22 +13,25 @@
  *
  */
 
-import "components/UserProfile.scss";
-
+import { EuiFlexItem } from "@elastic/eui";
 import { useAuth } from "oidc-react";
 import React from "react";
+
+import { userProfileStyling } from "./UserProfileStyling";
 
 export default function UserProfile() {
     const auth = useAuth();
 
     return (
-        <ul className="user-profile">
-            {Object.keys(auth?.userData?.profile || []).map((key) => (
-                <li key={key} className="user-attribute">
-                    <span className="user-key">{key.toString()}</span>
-                    <span className="value">{auth?.userData?.profile[key]}</span>
-                </li>
-            ))}
-        </ul>
+        <EuiFlexItem css={userProfileStyling}>
+            <ul className="user-profile">
+                {Object.keys(auth?.userData?.profile || []).map((key) => (
+                    <li key={key} className="user-attribute">
+                        <span className="user-key">{key.toString()}</span>
+                        <span className="value">{auth?.userData?.profile[key]}</span>
+                    </li>
+                ))}
+            </ul>
+        </EuiFlexItem>
     );
 }

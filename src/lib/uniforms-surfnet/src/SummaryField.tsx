@@ -12,9 +12,8 @@
  * limitations under the License.
  *
  */
-import "lib/uniforms-surfnet/src/SummaryField.scss";
 
-import { EuiFormRow, EuiText } from "@elastic/eui";
+import { EuiFlexItem, EuiFormRow, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React, { useContext } from "react";
 import ReactHtmlParser from "react-html-parser";
@@ -22,6 +21,7 @@ import { connectField, filterDOMProps } from "uniforms";
 import { isEmpty } from "utils/Utils";
 
 import ApplicationContext from "../../../utils/ApplicationContext";
+import { summaryFieldStyling } from "./SummaryFieldStyling";
 
 export type SummaryFieldProps = FieldProps<
     null,
@@ -64,16 +64,18 @@ function Summary({ id, name, label, description, onChange, data, ...props }: Sum
     );
 
     return (
-        <section {...filterDOMProps(props)}>
-            <EuiFormRow label={label} labelAppend={<EuiText size="m">{description}</EuiText>} id={id} fullWidth>
-                <section className="table-summary">
-                    <table id={`${id}-table`}>
-                        <thead>{table_header}</thead>
-                        <tbody>{rows}</tbody>
-                    </table>
-                </section>
-            </EuiFormRow>
-        </section>
+        <EuiFlexItem css={summaryFieldStyling}>
+            <section {...filterDOMProps(props)}>
+                <EuiFormRow label={label} labelAppend={<EuiText size="m">{description}</EuiText>} id={id} fullWidth>
+                    <section className="table-summary">
+                        <table id={`${id}-table`}>
+                            <thead>{table_header}</thead>
+                            <tbody>{rows}</tbody>
+                        </table>
+                    </section>
+                </EuiFormRow>
+            </section>
+        </EuiFlexItem>
     );
 }
 

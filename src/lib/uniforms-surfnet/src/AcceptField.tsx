@@ -12,13 +12,14 @@
  * limitations under the License.
  *
  */
-import "lib/uniforms-surfnet/src/AcceptField.scss";
 
-import { EuiCheckbox, EuiText } from "@elastic/eui";
+import { EuiCheckbox, EuiFlexItem, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React, { useReducer } from "react";
 import { FormattedMessage } from "react-intl";
 import { connectField, filterDOMProps } from "uniforms";
+
+import { acceptFieldStyling } from "./AcceptFieldStyling";
 
 type AcceptItemType =
     | "info"
@@ -104,85 +105,87 @@ function Accept({
     );
 
     return (
-        <section {...filterDOMProps(props)} className={`${className} accept-field`}>
-            {data.map((entry: any[], index: number) => {
-                const label = <FormattedMessage id={`${i18nBaseKey}.${entry[0]}`} values={entry[2]} />;
-                switch (entry[1]) {
-                    case "label":
-                        return (
-                            <label key={index} className="euiFormLabel euiFormRow__label">
-                                {label}
-                            </label>
-                        );
-                    case "info":
-                        return (
-                            <EuiText key={index} size="m">
-                                {label}
-                            </EuiText>
-                        );
-                    case "url":
-                        return (
-                            <div key={index}>
-                                <a href={entry[0]} target="_blank" rel="noopener noreferrer">
-                                    {entry[0]}
-                                </a>
-                            </div>
-                        );
-                    case "value":
-                        return (
-                            <div key={index}>
-                                <input value={entry[0]} disabled={true} />
-                            </div>
-                        );
-                    case "margin":
-                        return <br key={index} />;
-                    case "warning":
-                        return (
-                            <label key={index} className="euiFormLabel euiFormRow__label warning">
-                                {label}
-                            </label>
-                        );
-                    case "skip":
-                        return (
-                            <EuiCheckbox
-                                id={entry[0]}
-                                key={index}
-                                name={entry[0]}
-                                onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                                    const target = e.target as HTMLInputElement;
-                                    dispatch({ field: index, type: "skip", value: target.checked });
-                                }}
-                                checked={state.skip}
-                                label={label}
-                                className={"skip"}
-                            />
-                        );
-                    default:
-                        return (
-                            <EuiCheckbox
-                                id={entry[0] + (legacy ? "" : index)}
-                                key={index}
-                                name={entry[0] + (legacy ? "" : index)} // Index needed to allow checkboxes with same name (we can skip this in legacy mode)
-                                className={entry[1].startsWith(">") ? "level_2" : undefined}
-                                onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                                    const target = e.target as HTMLInputElement;
+        <EuiFlexItem css={acceptFieldStyling}>
+            <section {...filterDOMProps(props)} className={`${className} accept-field`}>
+                {data.map((entry: any[], index: number) => {
+                    const label = <FormattedMessage id={`${i18nBaseKey}.${entry[0]}`} values={entry[2]} />;
+                    switch (entry[1]) {
+                        case "label":
+                            return (
+                                <label key={index} className="euiFormLabel euiFormRow__label">
+                                    {label}
+                                </label>
+                            );
+                        case "info":
+                            return (
+                                <EuiText key={index} size="m">
+                                    {label}
+                                </EuiText>
+                            );
+                        case "url":
+                            return (
+                                <div key={index}>
+                                    <a href={entry[0]} target="_blank" rel="noopener noreferrer">
+                                        {entry[0]}
+                                    </a>
+                                </div>
+                            );
+                        case "value":
+                            return (
+                                <div key={index}>
+                                    <input value={entry[0]} disabled={true} />
+                                </div>
+                            );
+                        case "margin":
+                            return <br key={index} />;
+                        case "warning":
+                            return (
+                                <label key={index} className="euiFormLabel euiFormRow__label warning">
+                                    {label}
+                                </label>
+                            );
+                        case "skip":
+                            return (
+                                <EuiCheckbox
+                                    id={entry[0]}
+                                    key={index}
+                                    name={entry[0]}
+                                    onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                        const target = e.target as HTMLInputElement;
+                                        dispatch({ field: index, type: "skip", value: target.checked });
+                                    }}
+                                    checked={state.skip}
+                                    label={label}
+                                    className={"skip"}
+                                />
+                            );
+                        default:
+                            return (
+                                <EuiCheckbox
+                                    id={entry[0] + (legacy ? "" : index)}
+                                    key={index}
+                                    name={entry[0] + (legacy ? "" : index)} // Index needed to allow checkboxes with same name (we can skip this in legacy mode)
+                                    className={entry[1].startsWith(">") ? "level_2" : undefined}
+                                    onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                        const target = e.target as HTMLInputElement;
 
-                                    dispatch({ field: index, type: "check", value: target.checked });
-                                }}
-                                checked={state.checks[index]}
-                                label={label}
-                                readOnly={state.skip || disabled}
-                            />
-                        );
-                }
-            })}
+                                        dispatch({ field: index, type: "check", value: target.checked });
+                                    }}
+                                    checked={state.checks[index]}
+                                    label={label}
+                                    readOnly={state.skip || disabled}
+                                />
+                            );
+                    }
+                })}
 
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
-        </section>
+                {error && showInlineError && (
+                    <em className="error">
+                        <div className="backend-validation">{errorMessage}</div>
+                    </em>
+                )}
+            </section>
+        </EuiFlexItem>
     );
 }
 

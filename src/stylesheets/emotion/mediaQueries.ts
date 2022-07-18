@@ -7,7 +7,7 @@ export const minDesktop = 1024;
 
 export function desktopMediaQuery(content: SerializedStyles) {
     return css`
-        @media (min-width: #{${minDesktop}}) {
+        @media (min-width: ${minDesktop}px) {
             ${content}
         }
     `;
@@ -15,7 +15,7 @@ export function desktopMediaQuery(content: SerializedStyles) {
 
 export function tabletMediaQuery(content: SerializedStyles) {
     return css`
-        @media (min-width: #{${minTablet}}) {
+        @media (min-width: ${minTablet}px) {
             ${content}
         }
     `;
@@ -31,7 +31,7 @@ export function phoneMediaQuery(content: SerializedStyles) {
 
 export function smallPhoneMediaQuery(content: SerializedStyles) {
     return css`
-        @media (max-width: #{${maxSmallPhone}} ) {
+        @media (max-width: ${maxSmallPhone}px) {
             ${content}
         }
     `;

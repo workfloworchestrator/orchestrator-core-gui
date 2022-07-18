@@ -13,8 +13,6 @@
  *
  */
 
-import "stylesheets/buttons.scss";
-
 import { EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
 import AdvancedSearch from "components/tables/AdvancedSearch";
 import MiniPaginator from "components/tables/MiniPaginator";

@@ -3,6 +3,7 @@ import { DARKER_PRIMARY, DARK_GREY_COLOR, LIGHTER_GREY_COLOR, PRIMARY_COLOR } fr
 import { SIZE_BORDER_RADIUS } from "stylesheets/emotion/vars";
 
 import { phoneMediaQuery } from "./mediaQueries";
+import { shadeColor } from "./utils";
 
 export const infoIconMixin = css`
     color: ${PRIMARY_COLOR};
@@ -55,7 +56,7 @@ export const copyIconPulseMixin = css`
             box-shadow: 0 0 0 0 white;
         }
         70% {
-            box-shadow: 0 0 10px 8px color.adjust(vars.$primary, $lightness: 15%);
+            box-shadow: 0 0 10px 8px ${shadeColor(PRIMARY_COLOR, 15)};
         }
         100% {
             box-shadow: 0 0 0 0 white;

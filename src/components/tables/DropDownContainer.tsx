@@ -1,3 +1,6 @@
+import { EuiFlexItem } from "@elastic/eui";
+import React, { useState } from "react";
+
 /*
  * Copyright 2019-2022 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,9 +15,7 @@
  * limitations under the License.
  *
  */
-import "components/tables/DropDownContainer.scss";
-
-import React, { useState } from "react";
+import { dropDownContainerStyling } from "./DropDownContainerStyling";
 
 function DropDownContainer({
     title,
@@ -29,33 +30,35 @@ function DropDownContainer({
     const [hover, setHover] = useState(false);
 
     return (
-        <div className={"dropdown-container"}>
-            <button
-                className={"dropdown-button"}
-                onClick={(e) => {
-                    e.stopPropagation();
-                    if (active) {
-                        setActive(false);
-                        setHover(false);
-                    } else {
-                        setActive(true);
-                    }
-                }}
-            >
-                {renderButtonContent(active, hover)}
-            </button>
-            <div
-                className={active ? "dropdown open" : hover ? "dropdown open" : "dropdown"}
-                onClick={(e) => {
-                    e.stopPropagation();
-                    if (!active) {
-                        setActive(true);
-                    }
-                }}
-            >
-                {(active || hover) && renderContent(!active, () => setActive(false))}
+        <EuiFlexItem css={dropDownContainerStyling}>
+            <div className={"dropdown-container"}>
+                <button
+                    className={"dropdown-button"}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        if (active) {
+                            setActive(false);
+                            setHover(false);
+                        } else {
+                            setActive(true);
+                        }
+                    }}
+                >
+                    {renderButtonContent(active, hover)}
+                </button>
+                <div
+                    className={active ? "dropdown open" : hover ? "dropdown open" : "dropdown"}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        if (!active) {
+                            setActive(true);
+                        }
+                    }}
+                >
+                    {(active || hover) && renderContent(!active, () => setActive(false))}
+                </div>
             </div>
-        </div>
+        </EuiFlexItem>
     );
 }
 

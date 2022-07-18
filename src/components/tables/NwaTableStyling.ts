@@ -2,7 +2,10 @@ import { css } from "@emotion/core";
 import { DANGER, DARK_GREY_COLOR, PRIMARY_COLOR, SUCCESS } from "stylesheets/emotion/colors";
 import { infoIconMixin, toolTipMixin } from "stylesheets/emotion/mixins";
 
+import { buttonsCss } from "../../stylesheets/emotion/buttons";
+
 export const nwaTableStyling = css`
+    ${buttonsCss}
     .table-preferences-icon-bar {
         padding: 20px 0 5px 0;
         margin: 0 0 5px 0;

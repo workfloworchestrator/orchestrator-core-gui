@@ -12,9 +12,8 @@
  * limitations under the License.
  *
  */
-import "custom/uniforms/ImsPortIdField.scss";
 
-import { EuiFormRow, EuiText } from "@elastic/eui";
+import { EuiFlexItem, EuiFormRow, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
@@ -23,6 +22,8 @@ import { getReactSelectTheme } from "stylesheets/emotion/utils";
 import { connectField, filterDOMProps } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { IMSNode, IMSPort, Option, Subscription } from "utils/types";
+
+import { imsPortIdFieldStyling } from "./ImsPortIdFieldStyling";
 
 export type ImsPortFieldProps = FieldProps<
     number,
@@ -143,51 +144,53 @@ function ImsPortId({
     const customStyles = getReactSelectTheme(theme);
 
     return (
-        <section {...filterDOMProps(props)}>
-            <EuiFormRow
-                label={label}
-                labelAppend={<EuiText size="m">{description}</EuiText>}
-                error={showInlineError ? errorMessage : false}
-                isInvalid={error}
-                id={id}
-                fullWidth
-            >
-                <section className="node-port">
-                    <div className="node-select">
-                        <EuiFormRow label="Node" id={`${id}.node`} fullWidth>
-                            <ReactSelect<Option, false>
-                                inputId={`${id}.node.search`}
-                                name={`${name}.node`}
-                                onChange={onChangeNodes}
-                                options={node_options}
-                                placeholder={nodesPlaceholder}
-                                value={node_value}
-                                isSearchable={true}
-                                isDisabled={disabled || readOnly || !!nodeSubscriptionId || nodes.length === 0}
-                                styles={customStyles}
-                            />
-                        </EuiFormRow>
-                    </div>
-                    <div className="port-select">
-                        <EuiFormRow label="Port" id={id} fullWidth>
-                            <ReactSelect<Option<number>, false>
-                                inputId={`${id}.search`}
-                                name={name}
-                                onChange={(selected) => {
-                                    onChange(selected?.value);
-                                }}
-                                options={port_options}
-                                placeholder={portPlaceholder}
-                                value={port_value}
-                                isSearchable={true}
-                                isDisabled={disabled || readOnly || ports.length === 0}
-                                styles={customStyles}
-                            />
-                        </EuiFormRow>
-                    </div>
-                </section>
-            </EuiFormRow>
-        </section>
+        <EuiFlexItem css={imsPortIdFieldStyling}>
+            <section {...filterDOMProps(props)}>
+                <EuiFormRow
+                    label={label}
+                    labelAppend={<EuiText size="m">{description}</EuiText>}
+                    error={showInlineError ? errorMessage : false}
+                    isInvalid={error}
+                    id={id}
+                    fullWidth
+                >
+                    <section className="node-port">
+                        <div className="node-select">
+                            <EuiFormRow label="Node" id={`${id}.node`} fullWidth>
+                                <ReactSelect<Option, false>
+                                    inputId={`${id}.node.search`}
+                                    name={`${name}.node`}
+                                    onChange={onChangeNodes}
+                                    options={node_options}
+                                    placeholder={nodesPlaceholder}
+                                    value={node_value}
+                                    isSearchable={true}
+                                    isDisabled={disabled || readOnly || !!nodeSubscriptionId || nodes.length === 0}
+                                    styles={customStyles}
+                                />
+                            </EuiFormRow>
+                        </div>
+                        <div className="port-select">
+                            <EuiFormRow label="Port" id={id} fullWidth>
+                                <ReactSelect<Option<number>, false>
+                                    inputId={`${id}.search`}
+                                    name={name}
+                                    onChange={(selected) => {
+                                        onChange(selected?.value);
+                                    }}
+                                    options={port_options}
+                                    placeholder={portPlaceholder}
+                                    value={port_value}
+                                    isSearchable={true}
+                                    isDisabled={disabled || readOnly || ports.length === 0}
+                                    styles={customStyles}
+                                />
+                            </EuiFormRow>
+                        </div>
+                    </section>
+                </EuiFormRow>
+            </section>
+        </EuiFlexItem>
     );
 }
 

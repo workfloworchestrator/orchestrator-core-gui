@@ -12,15 +12,16 @@
  * limitations under the License.
  *
  */
-import "lib/uniforms-surfnet/src/ListField.scss";
 
-import { EuiFormRow, EuiText } from "@elastic/eui";
+import { EuiFlexItem, EuiFormRow, EuiText } from "@elastic/eui";
 import ListAddField from "lib/uniforms-surfnet/src/ListAddField";
 import ListItemField from "lib/uniforms-surfnet/src/ListItemField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import range from "lodash/range";
 import React, { Children, cloneElement, isValidElement } from "react";
 import { connectField, filterDOMProps, joinName, useField } from "uniforms";
+
+import { listFieldStyling } from "./ListFieldStyling";
 
 declare module "uniforms" {
     interface FilterDOMProps {
@@ -63,35 +64,37 @@ function List({
     const hasListAsChild = child.fieldType === Array;
 
     return (
-        <section {...filterDOMProps(props)} className={`list-field${hasListAsChild ? " outer-list" : ""}`}>
-            <EuiFormRow
-                label={label}
-                labelAppend={<EuiText size="m">{description}</EuiText>}
-                error={showInlineError ? errorMessage : false}
-                isInvalid={error}
-                id={`formrow-${name}`}
-                fullWidth
-            >
-                <></>
-            </EuiFormRow>
+        <EuiFlexItem css={listFieldStyling}>
+            <section {...filterDOMProps(props)} className={`list-field${hasListAsChild ? " outer-list" : ""}`}>
+                <EuiFormRow
+                    label={label}
+                    labelAppend={<EuiText size="m">{description}</EuiText>}
+                    error={showInlineError ? errorMessage : false}
+                    isInvalid={error}
+                    id={`formrow-${name}`}
+                    fullWidth
+                >
+                    <></>
+                </EuiFormRow>
 
-            <ul>
-                {range(Math.max(value?.length ?? 0, initialCount ?? 0)).map((itemIndex) =>
-                    Children.map(children, (child, childIndex) =>
-                        isValidElement(child)
-                            ? cloneElement(child, {
-                                  key: `${itemIndex}-${childIndex}`,
-                                  name: child.props.name?.replace("$", "" + itemIndex),
-                                  outerList: hasListAsChild,
-                                  ...itemProps,
-                              })
-                            : child
-                    )
-                )}
+                <ul>
+                    {range(Math.max(value?.length ?? 0, initialCount ?? 0)).map((itemIndex) =>
+                        Children.map(children, (child, childIndex) =>
+                            isValidElement(child)
+                                ? cloneElement(child, {
+                                      key: `${itemIndex}-${childIndex}`,
+                                      name: child.props.name?.replace("$", "" + itemIndex),
+                                      outerList: hasListAsChild,
+                                      ...itemProps,
+                                  })
+                                : child
+                        )
+                    )}
 
-                <ListAddField initialCount={initialCount} name="$" disabled={disabled} outerList={hasListAsChild} />
-            </ul>
-        </section>
+                    <ListAddField initialCount={initialCount} name="$" disabled={disabled} outerList={hasListAsChild} />
+                </ul>
+            </section>
+        </EuiFlexItem>
     );
 }
 
