@@ -192,7 +192,6 @@ function ServiceTicketDetail() {
         customApiClient
             .cimAcceptTicketImpactById(id)
             .then((res) => {
-                console.log("setTicket from useEffect");
                 setTicket(res);
             })
             .catch((err) => {
@@ -231,36 +230,36 @@ function ServiceTicketDetail() {
                                     <thead />
                                     <tbody>
                                         <tr className={theme}>
-                                            <td id="ticket-title-k">
+                                            <td className={keyRowClass}>
                                                 <FormattedMessage id="tickets.table.title" />
                                             </td>
-                                            <td id="ticket-title-v">{ticket.title}</td>
+                                            <td className={valueRowClass}>{ticket.title}</td>
                                         </tr>
                                         <tr className={theme}>
-                                            <td id="ticket-jira_ticket_id-k">
+                                            <td className={keyRowClass}>
                                                 <FormattedMessage id="tickets.table.jira_ticket_id" />
                                             </td>
-                                            <td id="ticket-jira_ticket_id-v">{ticket.jira_ticket_id}</td>
+                                            <td className={valueRowClass}>{ticket.jira_ticket_id}</td>
                                         </tr>
                                         <tr className={theme}>
-                                            <td id="ticket-type-k">
+                                            <td className={keyRowClass}>
                                                 <FormattedMessage id="tickets.table.type" />
                                             </td>
-                                            <td id="ticket-type-v">{ticket.type}</td>
+                                            <td className={valueRowClass}>{ticket.type}</td>
                                         </tr>
                                         <tr className={theme}>
-                                            <td id="ticket-start_date-k">
+                                            <td className={keyRowClass}>
                                                 <FormattedMessage id="tickets.table.start_date" />
                                             </td>
-                                            <td id="ticket-start_date-v">
+                                            <td className={valueRowClass}>
                                                 {renderStringAsDateTime(ticket.start_date)}
                                             </td>
                                         </tr>
                                         <tr className={theme}>
-                                            <td id="ticket-end_date-k">
+                                            <td className={keyRowClass}>
                                                 <FormattedMessage id="tickets.table.end_date" />
                                             </td>
-                                            <td id="ticket-end_date-v">{renderStringAsDateTime(ticket.end_date)}</td>
+                                            <td className={valueRowClass}>{renderStringAsDateTime(ticket.end_date)}</td>
                                         </tr>
                                     </tbody>
                                 </table>
