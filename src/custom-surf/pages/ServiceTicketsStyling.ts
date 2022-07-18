@@ -51,6 +51,10 @@ export const tableTickets = css`
             vertical-align: middle;
         }
 
+        td.jira_ticket_id {
+            cursor: pointer;
+        }
+
         tr {
             &.light {
                 border-bottom: 1px solid ${LIGHT_GREY_COLOR};
