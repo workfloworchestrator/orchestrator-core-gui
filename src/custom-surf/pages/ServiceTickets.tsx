@@ -262,14 +262,14 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                 <tr key={ticket._id} className={theme}>
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.jira_ticket_id" })}
-                                        className="subscription"
+                                        className="jira_ticket_id"
                                         onClick={() => this.context.redirect(`/tickets/${ticket._id}`)}
                                     >
                                         {ticket.jira_ticket_id}
                                     </td>
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.title" })}
-                                        className="customer"
+                                        className="title"
                                     >
                                         {ticket.title}
                                     </td>
@@ -287,7 +287,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                     </td>
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.opened_by" })}
-                                        className="description"
+                                        className="opened_by"
                                     >
                                         {ticket.opened_by}
                                     </td>
