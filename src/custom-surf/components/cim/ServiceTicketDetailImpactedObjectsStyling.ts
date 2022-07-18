@@ -143,36 +143,16 @@ export const tableImpactedObjects = css`
             width: 15%;
         }
 
-        th.sub_id {
-            width: 7%;
-        }
+        td.impact-override {
+            padding: 0 0 0 5px;
 
-        th.description {
-            width: 20%;
-        }
+            & div.impact-override__select {
+                max-width: 200px;
+            }
 
-        th.fam {
-            width: 5%;
-        }
-
-        th.len {
-            width: 5%;
-        }
-
-        th.prefix {
-            width: 14%;
-        }
-
-        th.parent {
-            width: 14%;
-        }
-
-        th.status {
-            width: 10%;
-        }
-
-        th.start_date {
-            width: 10%;
+            & div.impact-override__text {
+                width: 170px;
+            }
         }
 
         span {

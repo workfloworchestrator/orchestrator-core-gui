@@ -520,6 +520,7 @@ I18n.translations.en = {
             closing: "Send CLOSE email",
             aborting: "Abort",
             show: "View last sent email",
+            accept_impact: "Accept impact",
         },
         impactedobject: {
             customer: "Customer",
