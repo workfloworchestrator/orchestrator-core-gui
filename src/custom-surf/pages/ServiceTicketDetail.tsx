@@ -157,11 +157,15 @@ const ServiceTicketDetail = () => {
     const abortTicket = () => {
         changeTicketState(ServiceTicketProcessState.ABORTED);
     };
+    const openTicket = () => {
+        redirect(`/tickets/${ticket._id}/open`);
+    }
 
     const actions: Action[] = [
         {
             translation: "tickets.action.opening",
-            onClick: () => {},
+            // onClick: () => {},
+            onClick: () => openTicket,
             requiredState: [ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED],
         },
         {
