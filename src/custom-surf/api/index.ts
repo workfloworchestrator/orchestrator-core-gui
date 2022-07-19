@@ -238,6 +238,7 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.fetchJson<ServiceTicketWithDetails>(prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}`));
     };
 
+    // todo cim#18
     cimChangeTicketStateById = (
         ticket_id: string,
         state: ServiceTicketProcessState
