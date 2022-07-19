@@ -69,7 +69,7 @@ function ServiceTicketDetail() {
     const [notFound, setNotFound] = useState(false);
 
     const [openedImpactedObject, setOpenedImpactedObject] = useState<ImpactedObject>();
-    const { theme, customApiClient } = useContext(ApplicationContext);
+    const { theme, customApiClient, redirect } = useContext(ApplicationContext);
 
     const onCloseModal = () => {
         setIsModalVisible(false);
@@ -167,7 +167,7 @@ function ServiceTicketDetail() {
                 <EuiFlexItem>
                     <EuiButton
                         id="button-action-open"
-                        // onClick={this.props.previous}
+                        onClick={() => redirect(`/tickets/${_ticket._id}/open`)}
                         isDisabled={_ticket.process_state !== ServiceTicketProcessState.OPEN_ACCEPTED}
                     >
                         <FormattedMessage id="tickets.action.opening" />
