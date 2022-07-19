@@ -44,7 +44,30 @@ interface IProps {
     id: string;
 }
 
-function ServiceTicketDetail() {
+interface Action {
+    translation: string;
+    onClick: () => void;
+    requiredState: ServiceTicketProcessState[];
+}
+
+const renderLogItemActions = (ticket: ServiceTicketWithDetails, actions: Action[]) => {
+    return (
+        <EuiFlexGroup gutterSize="s" className="buttons">
+            {actions.map((action: Action, index: number) => (
+                <EuiFlexItem key={index}>
+                    <EuiButton
+                        onClick={action.onClick}
+                        isDisabled={!action.requiredState.includes(ticket.process_state)}
+                    >
+                        <FormattedMessage id={action.translation} />
+                    </EuiButton>
+                </EuiFlexItem>
+            ))}
+        </EuiFlexGroup>
+    );
+};
+
+const ServiceTicketDetail = () => {
     const { id } = useParams<IProps>();
     const [ticket, setTicket] = useState<ServiceTicketWithDetails>();
     const [notFound, setNotFound] = useState(false);
@@ -75,80 +98,6 @@ function ServiceTicketDetail() {
         );
     } else if (!ticket) {
         return null;
-    }
-
-    function renderLogItemButtons(_ticket: ServiceTicketWithDetails) {
-        return (
-            <EuiFlexGroup gutterSize="s" className="buttons">
-                <EuiFlexItem>
-                    <EuiButton
-                        id="button-action-open"
-                        // onClick={this.props.previous}
-                        isDisabled={
-                            ![ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED].includes(
-                                _ticket.process_state
-                            )
-                        }
-                    >
-                        <FormattedMessage id="tickets.action.opening" />
-                    </EuiButton>
-                </EuiFlexItem>
-                <EuiFlexItem>
-                    <EuiButton
-                        id="button-action-update"
-                        // onClick={this.props.previous}
-                        isDisabled={
-                            ![ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED].includes(
-                                _ticket.process_state
-                            )
-                        }
-                    >
-                        <FormattedMessage id="tickets.action.updating" />
-                    </EuiButton>
-                </EuiFlexItem>
-                <EuiFlexItem>
-                    <EuiButton
-                        id="button-action-close"
-                        // onClick={this.props.previous}
-                        isDisabled={
-                            ![ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED].includes(
-                                _ticket.process_state
-                            )
-                        }
-                    >
-                        <FormattedMessage id="tickets.action.closing" />
-                    </EuiButton>
-                </EuiFlexItem>
-                <EuiFlexItem>
-                    <EuiButton
-                        id="button-action-abort"
-                        // onClick={this.props.previous}
-                        isDisabled={
-                            ![ServiceTicketProcessState.OPEN_ACCEPTED, ServiceTicketProcessState.OPEN_RELATED].includes(
-                                _ticket.process_state
-                            )
-                        }
-                    >
-                        <FormattedMessage id="tickets.action.aborting" />
-                    </EuiButton>
-                </EuiFlexItem>
-                <EuiFlexItem>
-                    <EuiButton
-                        id="button-action-show"
-                        // onClick={this.props.previous}
-                        isDisabled={
-                            ![
-                                ServiceTicketProcessState.OPEN,
-                                ServiceTicketProcessState.UPDATED,
-                                ServiceTicketProcessState.CLOSED,
-                            ].includes(_ticket.process_state)
-                        }
-                    >
-                        <FormattedMessage id="tickets.action.show" />
-                    </EuiButton>
-                </EuiFlexItem>
-            </EuiFlexGroup>
-        );
     }
 
     ticket.logs.sort((a: ServiceTicketLog, b: ServiceTicketLog) =>
@@ -188,9 +137,9 @@ function ServiceTicketDetail() {
         }));
     }
 
-    const acceptImpactedObjects = () => {
+    const changeTicketState = (state: ServiceTicketProcessState) => {
         customApiClient
-            .cimAcceptTicketImpactById(id)
+            .cimChangeTicketStateById(id, state)
             .then((res) => {
                 setTicket(res);
             })
@@ -202,6 +151,45 @@ function ServiceTicketDetail() {
                 }
             });
     };
+    const acceptImpactedObjects = () => {
+        changeTicketState(ServiceTicketProcessState.OPEN_ACCEPTED);
+    };
+    const abortTicket = () => {
+        changeTicketState(ServiceTicketProcessState.ABORTED);
+    };
+
+    const actions: Action[] = [
+        {
+            translation: "tickets.action.opening",
+            onClick: () => {},
+            requiredState: [ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED],
+        },
+        {
+            translation: "tickets.action.updating",
+            onClick: () => {},
+            requiredState: [ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED],
+        },
+        {
+            translation: "tickets.action.closing",
+            onClick: () => {},
+            requiredState: [ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED],
+        },
+        {
+            translation: "tickets.action.aborting",
+            onClick: abortTicket,
+            requiredState: [ServiceTicketProcessState.OPEN_ACCEPTED, ServiceTicketProcessState.OPEN_RELATED],
+        },
+        {
+            translation: "tickets.action.show",
+            onClick: () => {},
+            requiredState: [
+                ServiceTicketProcessState.OPEN,
+                ServiceTicketProcessState.UPDATED,
+                ServiceTicketProcessState.CLOSED,
+            ],
+        },
+    ];
+
     const isUpdateImpactActive = [
         ServiceTicketProcessState.OPEN_ACCEPTED,
         ServiceTicketProcessState.OPEN_RELATED,
@@ -310,7 +298,7 @@ function ServiceTicketDetail() {
 
                             <EuiSpacer />
 
-                            {renderLogItemButtons(ticket)}
+                            {renderLogItemActions(ticket, actions)}
 
                             <EuiSpacer />
 
@@ -325,6 +313,6 @@ function ServiceTicketDetail() {
             </EuiPage>
         </div>
     );
-}
+};
 
 export default ServiceTicketDetail;
