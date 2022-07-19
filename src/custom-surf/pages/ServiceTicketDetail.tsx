@@ -72,7 +72,7 @@ const ServiceTicketDetail = () => {
     const [ticket, setTicket] = useState<ServiceTicketWithDetails>();
     const [notFound, setNotFound] = useState(false);
 
-    const { theme, customApiClient } = useContext(ApplicationContext);
+    const { theme, customApiClient, redirect } = useContext(ApplicationContext);
 
     useEffect(() => {
         customApiClient
