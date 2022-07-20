@@ -149,10 +149,11 @@ const ServiceTicketDetailImpactedObjects = ({ ticket, updateable, acceptImpacted
             value = e.target ? e.target.value : e.value;
         }
         removeEdit();
-        await sumbitImpactOverride(impactedObject);
+        let updatedImpactedObject: ImpactedObject = { ...impactedObject, impact_override: value };
+        await sumbitImpactOverride(updatedImpactedObject);
         setImpactedObjects(
             impactedObjects.map((obj: ImpactedObject) =>
-                obj.subscription_id === impactedObject.subscription_id ? { ...obj, impact_override: value } : obj
+                obj.ims_circuit_id === impactedObject.ims_circuit_id ? updatedImpactedObject : obj
             )
         );
     };
