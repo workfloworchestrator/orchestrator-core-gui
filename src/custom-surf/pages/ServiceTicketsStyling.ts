@@ -140,40 +140,23 @@ export const tableTickets = css`
             padding: 5px 5px 10px 5px;
         }
 
-        th.customer {
-            width: 15%;
-        }
-
-        th.sub_id {
-            width: 7%;
-        }
-
-        th.description {
-            width: 20%;
-        }
-
-        th.fam {
-            width: 5%;
-        }
-
-        th.len {
-            width: 5%;
-        }
-
-        th.prefix {
-            width: 14%;
-        }
-
-        th.parent {
-            width: 14%;
-        }
-
-        th.status {
+        th.jira_ticket_id {
             width: 10%;
         }
-
+        th.title_nl {
+            width: 25%;
+        }
+        th.ticket_state {
+            width: 10%;
+        }
+        th.process_state {
+            width: 10%;
+        }
+        th.opened_by {
+            width: 10%;
+        }
         th.start_date {
-            width: 10%;
+            width: 12%;
         }
 
         span {
