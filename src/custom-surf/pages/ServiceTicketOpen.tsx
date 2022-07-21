@@ -17,7 +17,6 @@ import { EuiPage, EuiPageBody, EuiText } from "@elastic/eui";
 import Explain from "components/Explain";
 import OpenForm from "custom/components/cim/OpenForm";
 import { OpenServiceTicketPayload, ServiceTicket } from "custom/types";
-// import { CreateServiceTicketPayload } from "custom/types";
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";

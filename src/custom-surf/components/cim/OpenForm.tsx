@@ -28,9 +28,8 @@ interface IProps {
     handleCancel: () => void;
 }
 
-export default function OpenForm(props: IProps) {
+export default function OpenForm({formKey, ticket_id, handleSubmit, handleCancel}: IProps) {
     const intl = useIntl();
-    const { formKey, ticket_id, handleSubmit, handleCancel } = props;
     const { redirect, customApiClient } = useContext(ApplicationContext);
     const [form, setForm] = useState<Form>({});
     const { stepUserInput, hasNext } = form;
@@ -58,9 +57,8 @@ export default function OpenForm(props: IProps) {
     );
 
     const cancel = useCallback(() => {
-        // TODO ask user to confirm leaving the page
         handleCancel();
-    }, [redirect, intl, customApiClient, formKey, handleCancel]);
+    }, [handleCancel]);
 
     useEffect(() => {
         if (formKey) {
