@@ -28,7 +28,7 @@ export default function CreateServiceTicket() {
         const ticket: CreateServiceTicketPayload = {
             ims_pw_id: userInputs.ims_ticket.name,
             jira_ticket_id: userInputs.jira_ticket.ticket_id,
-            title: userInputs.jira_ticket.summary,
+            title_nl: userInputs.jira_ticket.summary,
             start_date: userInputs.jira_ticket.start_date,
             end_date: userInputs.jira_ticket.end_date,
             type: userInputs.ticket_type,

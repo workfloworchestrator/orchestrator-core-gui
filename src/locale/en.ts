@@ -505,6 +505,7 @@ I18n.translations.en = {
             jira_ticket_id: "Jira ticket",
             subject: "Subject",
             title: "Title",
+            title_nl: "Title",
             ticket_state: "Ticket State",
             process_state: "State",
             opened_by: "Opened by",

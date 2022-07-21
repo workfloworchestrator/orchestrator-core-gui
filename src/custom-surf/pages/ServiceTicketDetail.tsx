@@ -224,7 +224,7 @@ const ServiceTicketDetail = () => {
                                             <td className={keyRowClass}>
                                                 <FormattedMessage id="tickets.table.title" />
                                             </td>
-                                            <td className={valueRowClass}>{ticket.title}</td>
+                                            <td className={valueRowClass}>{ticket.title_nl}</td>
                                         </tr>
                                         <tr className={theme}>
                                             <td className={keyRowClass}>

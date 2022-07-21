@@ -16,6 +16,7 @@
 import { EuiPage, EuiPageBody, EuiText } from "@elastic/eui";
 import Explain from "components/Explain";
 import OpenForm from "custom/components/cim/OpenForm";
+import { OpenServiceTicketPayload, ServiceTicket } from "custom/types";
 // import { CreateServiceTicketPayload } from "custom/types";
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router";
@@ -31,16 +32,18 @@ export default function ServiceTicketOpen() {
     const { redirect, customApiClient } = useContext(ApplicationContext);
 
     const handleSubmit = (userInputs: any) => {
-        // TODO final submit
-        // const ticket: CreateServiceTicketPayload = {
-        //     ims_pw_id: userInputs.ims_ticket.name,
-        //     jira_ticket_id: userInputs.jira_ticket.ticket_id,
-        //     title: userInputs.jira_ticket.summary,
-        //     start_date: userInputs.jira_ticket.start_date,
-        //     end_date: userInputs.jira_ticket.end_date,
-        //     type: userInputs.ticket_type,
-        // };
-        // customApiClient.cimCreateTicket(ticket).then((_) => redirect("/tickets"));
+        const payload: OpenServiceTicketPayload = {
+            cim_ticket_id: id,
+            title_nl: userInputs.title_nl,
+            description_nl: userInputs.description_nl,
+            title_en: userInputs.title_en,
+            description_en: userInputs.description_en,
+            mail_subject: userInputs.mail_subject,
+        };
+        // TODO:
+        //   - ask for confirmation here?
+        //   - or suggestion by Rene, redirect to other page for displaying the emails?
+        customApiClient.cimOpenTicket(payload).then((_) => redirect(`/tickets/${id}/`));
     };
 
     const handleCancel = () => {

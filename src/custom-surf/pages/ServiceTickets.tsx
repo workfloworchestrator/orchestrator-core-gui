@@ -17,7 +17,7 @@ import { renderStringAsDateTime } from "utils/Lookups";
 import { Filter, SortOption } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
-type Column = "jira_ticket_id" | "title" | "ticket_state" | "process_state" | "opened_by" | "start_date";
+type Column = "jira_ticket_id" | "title_nl" | "ticket_state" | "process_state" | "opened_by" | "start_date";
 
 interface IProps extends WrappedComponentProps {}
 
@@ -183,7 +183,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
             return (
                 serviceTickets.jira_ticket_id.toLowerCase().includes(queryToLower) ||
                 serviceTickets.opened_by.toLowerCase().includes(queryToLower) ||
-                (serviceTickets.title !== null && serviceTickets.title.toLowerCase().includes(queryToLower))
+                (serviceTickets.title_nl !== null && serviceTickets.title_nl.toLowerCase().includes(queryToLower))
             );
         });
         this.setState({ searchResults: results });
@@ -200,7 +200,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
     render() {
         const columns: Column[] = [
             "jira_ticket_id",
-            "title",
+            "title_nl",
             "ticket_state",
             "process_state",
             "opened_by",
@@ -271,7 +271,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                         data-label={intl.formatMessage({ id: "tickets.table.title" })}
                                         className="title"
                                     >
-                                        {ticket.title}
+                                        {ticket.title_nl}
                                     </td>
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.ticket_state" })}

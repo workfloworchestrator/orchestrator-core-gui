@@ -13,8 +13,17 @@ export interface CreateServiceTicketPayload {
     ims_pw_id: string;
     jira_ticket_id: string;
     start_date: string;
-    title: string;
+    title_nl: string;
     type: ServiceTicketType;
+}
+
+export interface OpenServiceTicketPayload {
+    cim_ticket_id: string;
+    title_nl: string;
+    description_nl: string;
+    title_en: string;
+    description_en: string;
+    mail_subject: string;
 }
 
 export enum ServiceTicketState {
@@ -24,9 +33,7 @@ export enum ServiceTicketState {
     CLOSED = "closed",
 }
 
-// TODO initial is now relating
 export enum ServiceTicketProcessState {
-    // INITIAL = "initial",
     RELATING = "relating",
     OPEN = "open",
     OPEN_RELATED = "open_related",
@@ -43,7 +50,8 @@ export interface ServiceTicket {
     process_state: ServiceTicketProcessState;
     start_date: string;
     ticket_state: ServiceTicketState;
-    title: string;
+    title_nl: string;
+    title_en: string;
 }
 
 export enum ServiceTicketLogType {
