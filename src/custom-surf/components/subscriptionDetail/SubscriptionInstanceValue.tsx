@@ -184,6 +184,7 @@ function EndpointDetail({ endpoint }: { endpoint: IMSEndpoint }) {
     return (
         <DataTable>
             {keys.map((attr) => (
+                // @ts-ignore
                 <DataRow key={attr} type={i18n_base} label={attr} value={prop(endpoint, attr as keyof IMSEndpoint)} />
             ))}
         </DataTable>

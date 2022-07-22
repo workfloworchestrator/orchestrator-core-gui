@@ -45,6 +45,9 @@ interface IState {
 }
 
 class Processes extends React.PureComponent<IProps, IState> {
+    static contextType = ApplicationContext;
+    context!: React.ContextType<typeof ApplicationContext>;
+
     constructor(props: IProps) {
         super(props);
 
@@ -176,7 +179,5 @@ class Processes extends React.PureComponent<IProps, IState> {
         );
     }
 }
-
-Processes.contextType = ApplicationContext;
 
 export default injectIntl(Processes);

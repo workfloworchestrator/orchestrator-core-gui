@@ -19,7 +19,7 @@ import { ActionType, TableSettingsAction } from "components/tables/NwaTable";
 import { intl } from "locale/i18n";
 import debounce from "lodash/debounce";
 import React, { Dispatch, useContext } from "react";
-import ReactSelect, { ActionMeta, ValueType } from "react-select";
+import ReactSelect, { ActionMeta, MultiValue } from "react-select";
 import { ColumnInstance, TableState } from "react-table";
 import ApplicationContext from "utils/ApplicationContext";
 import { Option, Organization, ProcessV2 } from "utils/types";
@@ -81,7 +81,7 @@ function CustomersFilter({
                 <ReactSelect<Option, false>
                     ref={(ref) => ref?.focus()}
                     id={`filter-${state.name}.${column.id}`}
-                    inputID={`input-filter-${state.name}.${column.id}`}
+                    inputId={`input-filter-${state.name}.${column.id}`}
                     onChange={(selected, action) => {
                         // See https://github.com/JedWatson/react-select/issues/2902 why we need this.
                         if (Array.isArray(selected)) {
@@ -141,7 +141,7 @@ export function renderMultiSelectFilter(
         : allOptions.map((val) => ({ value: val, label: val }));
     const selected = currentFilter ? options.filter(({ value }) => currentFilter.includes(value)) : [];
     const filtering = selected.length > 0;
-    const onChange = (selected: ValueType<Option, true>, action: ActionMeta<Option>) => {
+    const onChange = (selected: MultiValue<Option>, action: ActionMeta<Option>) => {
         if (action && action.action === "select-option") {
             dispatch({ type: ActionType.FILTER_ADD, id: column.id, value: action.option!.value });
         } else if (action.action === "remove-value") {
@@ -196,7 +196,7 @@ export function renderSingleSelectFilter(
         : allOptions.map((val) => ({ value: val, label: val }));
     const selected = currentFilter ? options.filter(({ value }) => currentFilter.includes(value)) : [];
     const filtering = selected.length > 0;
-    const onChange = (selected: ValueType<Option, true>, action: ActionMeta<Option>) => {
+    const onChange = (selected: MultiValue<Option>, action: ActionMeta<Option>) => {
         if (action && action.action === "select-option") {
             if (filtering) {
                 dispatch({ type: ActionType.FILTER_CLEAR, id: column.id });

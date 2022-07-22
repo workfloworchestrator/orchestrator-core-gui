@@ -40,6 +40,8 @@ interface IState {
 }
 
 class FavoritePortSelector extends React.PureComponent<IProps, IState> {
+    static contextType = ApplicationContext;
+    context!: React.ContextType<typeof ApplicationContext>;
     constructor(props: IProps) {
         super(props);
 
@@ -280,6 +282,5 @@ class FavoritePortSelector extends React.PureComponent<IProps, IState> {
         );
     }
 }
-FavoritePortSelector.contextType = ApplicationContext;
 
 export default injectIntl(FavoritePortSelector);

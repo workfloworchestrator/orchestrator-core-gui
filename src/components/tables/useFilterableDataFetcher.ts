@@ -39,7 +39,7 @@ function useFilterableDataFetcher<T extends object>(endpoint: string): [T[], num
     const fetchIdRef = useRef(0);
     const entityTag = useRef<string | null>(null);
     const fetchData = useCallback(
-        (dispatch, pageIndex, pageSize, sortBy, filterBy) => {
+        (dispatch: any, pageIndex: number, pageSize: number, sortBy: any, filterBy: any) => {
             const fetchId = ++fetchIdRef.current;
             dispatch({ type: ActionType.LOADING_START });
             const startRow = pageSize * pageIndex;

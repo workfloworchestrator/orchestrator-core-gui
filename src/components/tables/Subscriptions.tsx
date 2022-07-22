@@ -148,7 +148,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
         [filterQ, pageQ, sortQ]
     );
 
-    const extraRowPropGetter: RowPropGetter<Subscription> = useCallback((props, { row }) => {
+    const extraRowPropGetter: RowPropGetter<Subscription> = useCallback((props: any, { row }: any) => {
         return {
             ...props,
             id: row.values.subscription_id,

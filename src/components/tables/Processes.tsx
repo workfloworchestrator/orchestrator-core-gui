@@ -152,7 +152,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
     );
 
     const extraRowPropGetter: RowPropGetter<ProcessV2> = useCallback(
-        (props, { row }) => {
+        (props: any, { row }: any) => {
             const highlighted = row.values.pid === highlightQ ? " highlighted" : "";
             return {
                 ...props,
@@ -176,6 +176,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
     }, []);
 
     const initialState = useMemo(() => initialize(initialTableSettings), [initialTableSettings, initialize]);
+    // @ts-ignore
     const columns: Column<ProcessV2>[] = useMemo(
         () => [
             {

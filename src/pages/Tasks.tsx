@@ -43,6 +43,9 @@ interface IState {
     showConfirmDialog: ShowConfirmDialogType;
 }
 class Tasks extends React.PureComponent<IProps, IState> {
+    static contextType = ApplicationContext;
+    context!: React.ContextType<typeof ApplicationContext>;
+
     constructor(props: IProps) {
         super(props);
 
@@ -212,7 +215,5 @@ class Tasks extends React.PureComponent<IProps, IState> {
         );
     }
 }
-
-Tasks.contextType = ApplicationContext;
 
 export default injectIntl(Tasks);

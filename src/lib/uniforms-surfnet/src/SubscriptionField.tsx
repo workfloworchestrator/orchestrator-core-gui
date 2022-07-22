@@ -299,8 +299,6 @@ function Subscription({
                         isClearable={false}
                         placeholder={intl.formatMessage({ id: "forms.widgets.subscription.placeholder" })}
                         isDisabled={disabled || readOnly}
-                        required={required}
-                        inputRef={inputRef}
                         styles={customStyles}
                         className="subscription-field-select"
                     />

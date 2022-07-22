@@ -20,7 +20,6 @@ import { ENV } from "env";
 import Oidc, { UserManager, UserManagerSettings, WebStorageStateStore } from "oidc-client";
 import { AuthContext, AuthProvider } from "oidc-react";
 import App, { history } from "pages/App";
-import React from "react";
 import ReactDOM from "react-dom";
 import { apiClient } from "utils/ApplicationContext";
 import { websocketService } from "websocketService";
@@ -62,38 +61,40 @@ if (ENV.OAUTH2_ENABLED) {
 
     const userManager = new UserManager(oidcConfig);
 
-    ReactDOM.render(
-        <AuthProvider
-            userManager={userManager}
-            onBeforeSignIn={() => {
-                localStorage.setItem(REDIRECT_URL_KEY, window.location.href);
-            }}
-            onSignIn={(user) => {
-                if (user !== null) {
-                    setUser(user);
-                    websocketService.setToken(user.access_token);
+    const authProviderConfig = {
+        userManager: userManager,
+        onBeforeSignIn: () => {
+            localStorage.setItem(REDIRECT_URL_KEY, window.location.href);
+        },
+        onSignIn: (user: Oidc.User | null) => {
+            if (user !== null) {
+                setUser(user);
+                websocketService.setToken(user.access_token);
 
-                    if (user.profile.email) {
-                        // Todo: remove this ugliness
-                        apiClient.logUserInfo(user.profile.email, "logged in").then();
-                    }
+                if (user.profile.email) {
+                    // Todo: remove this ugliness
+                    apiClient.logUserInfo(user.profile.email, "logged in").then();
                 }
+            }
 
-                userManager.clearStaleState();
+            userManager.clearStaleState();
 
-                const redirectUrl = localStorage.getItem(REDIRECT_URL_KEY) || "/";
-                localStorage.removeItem(REDIRECT_URL_KEY);
-                window.location.replace(redirectUrl);
-            }}
-            onSignOut={() => {
-                setUser(null);
-                websocketService.setToken(null);
+            const redirectUrl = localStorage.getItem(REDIRECT_URL_KEY) || "/";
+            localStorage.removeItem(REDIRECT_URL_KEY);
+            window.location.replace(redirectUrl);
+        },
+        onSignOut: () => {
+            setUser(null);
+            websocketService.setToken(null);
 
-                window.location.assign("/");
+            window.location.assign("/");
 
-                userManager.signinRedirect({});
-            }}
-        >
+            userManager.signinRedirect({});
+        },
+    };
+
+    ReactDOM.render(
+        <AuthProvider {...authProviderConfig}>
             <AuthContext.Consumer>
                 {(props) => {
                     // @ts-ignore

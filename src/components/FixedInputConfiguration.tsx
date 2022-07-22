@@ -26,6 +26,8 @@ interface IState {
 }
 
 export default class FixedInputConfiguration extends React.Component<{}, IState> {
+    static contextType = ApplicationContext;
+    context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {
         configuration: { by_tag: {}, fixed_inputs: [] },
     };
@@ -92,4 +94,3 @@ export default class FixedInputConfiguration extends React.Component<{}, IState>
         ));
     }
 }
-FixedInputConfiguration.contextType = ApplicationContext;

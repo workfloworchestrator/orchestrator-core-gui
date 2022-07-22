@@ -119,6 +119,9 @@ let topology: Topology;
 const radius = 50;
 
 export default class TopologyDiagram extends React.Component<IProps, IState> {
+    static contextType = ApplicationContext;
+    context!: React.ContextType<typeof ApplicationContext>;
+
     state: IState = {
         mapMode: 0,
         imsServices: [],
@@ -145,6 +148,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
             try {
                 await this.getPortSubscriptions();
             } catch (e) {
+                // @ts-ignore
                 console.log("failed to get a subscription", e.config.url);
             }
             this.setState({ portsLoaded: true });
@@ -590,4 +594,3 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         );
     }
 }
-TopologyDiagram.contextType = ApplicationContext;

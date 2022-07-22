@@ -42,7 +42,7 @@
                 flex-direction: column;
                 width: 99%;
                 margin-left: 5px;
-                &:first-child {
+                &:first-of-type {
                     margin-left: 0;
                 }
             }

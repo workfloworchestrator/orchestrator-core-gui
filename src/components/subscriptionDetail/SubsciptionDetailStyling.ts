@@ -140,7 +140,7 @@ export const subscriptionDetailStyling = css`
                         display: flex;
                     }
 
-                    &:first-child {
+                    &:first-of-type {
                         width: 10%;
                     }
                     &:nth-child(2) {

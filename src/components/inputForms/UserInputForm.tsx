@@ -323,7 +323,9 @@ class UserInputForm extends React.Component<IProps, IState> {
             } catch (error) {
                 this.setState({ processing: false });
 
+                // @ts-ignore
                 if (error.response.status === 400) {
+                    // @ts-ignore
                     let json = error.response.data;
 
                     this.setState({

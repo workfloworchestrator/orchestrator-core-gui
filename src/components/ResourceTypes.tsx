@@ -26,6 +26,8 @@ interface IState {
 }
 
 export default class ResourceTypes extends React.Component {
+    static contextType = ApplicationContext;
+    context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {
         resourceTypes: [],
         resourceTypesLoaded: true,
@@ -89,5 +91,3 @@ export default class ResourceTypes extends React.Component {
         );
     }
 }
-
-ResourceTypes.contextType = ApplicationContext;

@@ -17,7 +17,7 @@ import { EuiDatePicker, EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import { intl } from "locale/i18n";
 import moment, { Moment } from "moment";
 import React from "react";
-import Select, { ValueType } from "react-select";
+import Select, { SingleValue } from "react-select";
 import { Option } from "utils/types";
 
 export function formInput<T extends { [index: string]: any }>(
@@ -57,7 +57,7 @@ export function formInput<T extends { [index: string]: any }>(
 
 export function formSelect(
     i18nKey: string,
-    onChange: (value: ValueType<Option, false>) => void,
+    onChange: (value: SingleValue<Option>) => void,
     values: (Option | string)[],
     readOnly: boolean,
     selected_value?: string | string[],

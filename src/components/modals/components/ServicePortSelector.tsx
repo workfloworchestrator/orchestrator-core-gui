@@ -45,6 +45,8 @@ interface IState {
 
 export default class ServicePortSelector extends React.PureComponent<IProps, IState> {
     //Todo: we might need some default props here (depending on how we feed in the subscriptions
+    static contextType = ApplicationContext;
+    context!: React.ContextType<typeof ApplicationContext>;
 
     constructor(props: IProps) {
         super(props);
@@ -340,4 +342,3 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         );
     }
 }
-ServicePortSelector.contextType = ApplicationContext;

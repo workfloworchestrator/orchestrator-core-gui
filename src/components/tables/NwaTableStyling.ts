@@ -66,7 +66,7 @@ export const nwaTableStyling = css`
             vertical-align: middle;
             color: white;
         }
-        th:first-child {
+        th:first-of-type {
             border-radius: 10px 0 0 0;
         }
         th:last-child {
