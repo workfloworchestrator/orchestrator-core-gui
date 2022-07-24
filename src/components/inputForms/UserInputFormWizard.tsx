@@ -105,7 +105,6 @@ class UserInputFormWizard extends React.Component<IProps, IState> {
          * has a changing ".length" attribute.
          * */
         const key = hash.sha1({ form: currentForm.form, length: forms.length });
-
         return (
             <UserInputForm
                 key={key}
