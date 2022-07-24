@@ -28,7 +28,7 @@ interface IProps {
     handleCancel: () => void;
 }
 
-export default function OpenForm({formKey, ticket_id, handleSubmit, handleCancel}: IProps) {
+export default function OpenForm({ formKey, ticket_id, handleSubmit, handleCancel }: IProps) {
     const intl = useIntl();
     const { redirect, customApiClient } = useContext(ApplicationContext);
     const [form, setForm] = useState<Form>({});
