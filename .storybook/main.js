@@ -14,5 +14,6 @@ module.exports = {
         "@storybook/addon-knobs",
         "@storybook/addon-viewport/register",
         "storybook-addon-intl/register",
+        "storybook-dark-mode",
     ],
 };

@@ -1,12 +1,14 @@
 import "../src/pages/App.scss";
 import "./storybook.scss";
 
+import { EuiProvider } from "@elastic/eui";
 import { action } from "@storybook/addon-actions";
 import { withKnobs } from "@storybook/addon-knobs";
 import mock from "axios-mock";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { setIntlConfig, withIntl } from "storybook-addon-intl";
+import { useDarkMode } from "storybook-dark-mode";
 
 import en from "../src/locale/en";
 import { parse_translations_dict } from "../src/locale/i18n";
@@ -20,21 +22,32 @@ const withContainerSection = (cb) => <section className="storybook-container">{c
 const queryClient = new QueryClient();
 
 function withContext(Story) {
+    const isDarkMode = useDarkMode();
+    const themeType = isDarkMode ? "dark" : "light";
     return (
         <QueryClientProvider client={queryClient}>
-            <ApplicationContext.Provider
-                value={{
-                    organisations: ORGANISATIONS,
-                    locationCodes: LOCATION_CODES,
-                    products: PRODUCTS,
-                    redirect: action("Change url"),
-                    allowed: (resource) => true,
-                    apiClient: apiClient,
-                    customApiClient: customApiClient,
-                }}
-            >
-                <Story />
-            </ApplicationContext.Provider>
+            <EuiProvider colorMode={themeType}>
+                <ApplicationContext.Provider
+                    value={{
+                        organisations: ORGANISATIONS,
+                        locationCodes: LOCATION_CODES,
+                        products: PRODUCTS,
+                        redirect: action("Change url"),
+                        allowed: (resource) => true,
+                        apiClient: apiClient,
+                        customApiClient: customApiClient,
+                        theme: themeType,
+                    }}
+                >
+                    <link
+                        rel="stylesheet"
+                        type="text/css"
+                        href={isDarkMode || false ? "/eui_theme_dark.css" : "/eui_theme_light.css"}
+                    />
+                    <link rel="stylesheet" type="text/css" href={isDarkMode || false ? "/dark.css" : "/light.css"} />
+                    <Story />
+                </ApplicationContext.Provider>
+            </EuiProvider>
         </QueryClientProvider>
     );
 }
