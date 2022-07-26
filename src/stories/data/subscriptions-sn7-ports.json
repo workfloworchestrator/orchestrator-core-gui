@@ -10,7 +10,7 @@
             "description": "Multi Service Port 100GE Redundant",
             "end_date": null,
             "name": "MSP 100G Redundant",
-            "product_id": "0158797f-9968-496d-a768-8537da84f4a1",
+            "product_id": "16b98a8b-9cdd-424c-9f4a-96380a7b1526",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -30,7 +30,7 @@
             "description": "Multi Service Port 10G",
             "end_date": null,
             "name": "MSP 10G",
-            "product_id": "6ca5d002-e401-42ef-96f1-e2f97506b321",
+            "product_id": "45b04171-a197-4c85-a4fa-72bbd1d18590",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -40,7 +40,7 @@
         "subscription_id": "4a705807-c3a6-4b5c-bac4-1b5cce5a863f"
     },
     {
-        "customer_id": "7c41e5e3-0911-e511-80d0-005056956c1a",
+        "customer_id": "nonExistingOrgToFilterEverything",
         "description": "ASTRON MSP DGL001A 10 Gbit/s (IP) 03108",
         "end_date": null,
         "insync": true,
@@ -50,7 +50,7 @@
             "description": "Multi Service Port 10G",
             "end_date": null,
             "name": "MSP 10G",
-            "product_id": "6ca5d002-e401-42ef-96f1-e2f97506b321",
+            "product_id": "45b04171-a197-4c85-a4fa-72bbd1d18590",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -70,7 +70,7 @@
             "description": "Single Service Port 10G",
             "end_date": null,
             "name": "SSP 10G",
-            "product_id": "fbec2336-c0c9-4b9c-9b79-8a119da36da6",
+            "product_id": "99e527b2-7424-48eb-9015-6f46e8a40923",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -90,7 +90,7 @@
             "description": "Multi Service Port 10GE Redundant",
             "end_date": null,
             "name": "MSP 10G Redundant",
-            "product_id": "820f4537-0121-4960-9728-dc071ec4c639",
+            "product_id": "c738fc9e-cd74-4ade-8716-1fcd2c24da8b",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -110,7 +110,7 @@
             "description": "Multi Service Port 10GE Redundant",
             "end_date": null,
             "name": "MSP 10G Redundant",
-            "product_id": "820f4537-0121-4960-9728-dc071ec4c639",
+            "product_id": "c738fc9e-cd74-4ade-8716-1fcd2c24da8b",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -130,7 +130,7 @@
             "description": "Multi Service Port 10GE Redundant",
             "end_date": null,
             "name": "MSP 10G Redundant",
-            "product_id": "820f4537-0121-4960-9728-dc071ec4c639",
+            "product_id": "c738fc9e-cd74-4ade-8716-1fcd2c24da8b",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -150,7 +150,7 @@
             "description": "Multi Service Port 10GE Redundant",
             "end_date": null,
             "name": "MSP 10G Redundant",
-            "product_id": "820f4537-0121-4960-9728-dc071ec4c639",
+            "product_id": "c738fc9e-cd74-4ade-8716-1fcd2c24da8b",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -170,7 +170,7 @@
             "description": "Single Service Port 10G",
             "end_date": null,
             "name": "SSP 10G",
-            "product_id": "fbec2336-c0c9-4b9c-9b79-8a119da36da6",
+            "product_id": "99e527b2-7424-48eb-9015-6f46e8a40923",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -190,7 +190,7 @@
             "description": "Multi Service Port 10G",
             "end_date": null,
             "name": "MSP 10G",
-            "product_id": "6ca5d002-e401-42ef-96f1-e2f97506b321",
+            "product_id": "45b04171-a197-4c85-a4fa-72bbd1d18590",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -210,7 +210,7 @@
             "description": "Single Service Port 10G",
             "end_date": null,
             "name": "SSP 10G",
-            "product_id": "fbec2336-c0c9-4b9c-9b79-8a119da36da6",
+            "product_id": "99e527b2-7424-48eb-9015-6f46e8a40923",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -230,7 +230,7 @@
             "description": "Multi Service Port 10G",
             "end_date": null,
             "name": "MSP 10G",
-            "product_id": "6ca5d002-e401-42ef-96f1-e2f97506b321",
+            "product_id": "45b04171-a197-4c85-a4fa-72bbd1d18590",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -250,7 +250,7 @@
             "description": "Multi Service Port 10G",
             "end_date": null,
             "name": "MSP 10G",
-            "product_id": "6ca5d002-e401-42ef-96f1-e2f97506b321",
+            "product_id": "45b04171-a197-4c85-a4fa-72bbd1d18590",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -270,7 +270,7 @@
             "description": "Single Service Port 10G",
             "end_date": null,
             "name": "SSP 10G",
-            "product_id": "fbec2336-c0c9-4b9c-9b79-8a119da36da6",
+            "product_id": "99e527b2-7424-48eb-9015-6f46e8a40923",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -290,7 +290,7 @@
             "description": "Single Service Port 10G",
             "end_date": null,
             "name": "SSP 10G",
-            "product_id": "fbec2336-c0c9-4b9c-9b79-8a119da36da6",
+            "product_id": "99e527b2-7424-48eb-9015-6f46e8a40923",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -310,7 +310,7 @@
             "description": "Single Service Port 10G",
             "end_date": null,
             "name": "SSP 10G",
-            "product_id": "fbec2336-c0c9-4b9c-9b79-8a119da36da6",
+            "product_id": "99e527b2-7424-48eb-9015-6f46e8a40923",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -330,7 +330,7 @@
             "description": "Single Service Port 10G",
             "end_date": null,
             "name": "SSP 10G",
-            "product_id": "fbec2336-c0c9-4b9c-9b79-8a119da36da6",
+            "product_id": "99e527b2-7424-48eb-9015-6f46e8a40923",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -350,7 +350,7 @@
             "description": "Single Service Port 10G",
             "end_date": null,
             "name": "SSP 10G",
-            "product_id": "fbec2336-c0c9-4b9c-9b79-8a119da36da6",
+            "product_id": "99e527b2-7424-48eb-9015-6f46e8a40923",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -370,7 +370,7 @@
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -390,7 +390,7 @@
             "description": "Multi Service Port 100GE Redundant",
             "end_date": null,
             "name": "MSP 100G Redundant",
-            "product_id": "0158797f-9968-496d-a768-8537da84f4a1",
+            "product_id": "16b98a8b-9cdd-424c-9f4a-96380a7b1526",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -410,7 +410,7 @@
             "description": "Single Service Port 10G",
             "end_date": null,
             "name": "SSP 10G",
-            "product_id": "fbec2336-c0c9-4b9c-9b79-8a119da36da6",
+            "product_id": "99e527b2-7424-48eb-9015-6f46e8a40923",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -430,7 +430,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -450,7 +450,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -470,7 +470,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -490,7 +490,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -510,7 +510,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -530,7 +530,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -550,7 +550,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -570,7 +570,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -590,7 +590,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -610,7 +610,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -630,7 +630,7 @@
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -650,7 +650,7 @@
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -670,7 +670,7 @@
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -684,13 +684,13 @@
         "description": "DESIGNACADEMY SSP MT001A 1 Gbit/s",
         "end_date": null,
         "insync": true,
-        "port_mode": null,
+        "port_mode": "tagged",
         "product": {
             "created_at": 1512133184.0,
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -710,7 +710,7 @@
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -724,13 +724,13 @@
         "description": "DESIGNACADEMY MSP MT001A 1 Gbit/s",
         "end_date": null,
         "insync": true,
-        "port_mode": null,
+        "port_mode": "tagged",
         "product": {
             "created_at": 1531342997.0,
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -750,7 +750,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -770,7 +770,7 @@
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -790,7 +790,7 @@
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -810,7 +810,7 @@
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -830,7 +830,7 @@
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -850,7 +850,7 @@
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -870,7 +870,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -890,7 +890,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -910,7 +910,7 @@
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -930,7 +930,7 @@
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -950,7 +950,7 @@
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -970,7 +970,7 @@
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -990,7 +990,7 @@
             "description": "Single Service Port 1G",
             "end_date": null,
             "name": "SSP 1G",
-            "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+            "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
             "product_type": "Port",
             "status": "active",
             "tag": "SSP"
@@ -1010,7 +1010,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -1030,7 +1030,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -1050,7 +1050,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"
@@ -1070,7 +1070,7 @@
             "description": "Multi Service Port 1G",
             "end_date": null,
             "name": "MSP 1G",
-            "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+            "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
             "product_type": "Port",
             "status": "active",
             "tag": "MSP"

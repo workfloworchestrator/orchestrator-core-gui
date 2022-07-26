@@ -14,13 +14,13 @@
  */
 
 import mock from "axios-mock";
-import React from "react";
 import FORM from "stories/data/all-widgets-form.json";
 import IP_BLOCKS from "stories/data/ip_blocks.json";
 import PRODUCTS from "stories/data/products.json";
 import SUBSCRIPTION_JSON from "stories/data/subscription.json";
 import SN7PortSubscriptions from "stories/data/subscriptions-sn7-ports.json";
 import SN8PortSubscriptions from "stories/data/subscriptions-sn8-ports.json";
+import SubscriptionsWithTags from "stories/data/subscriptions-with-tags.json";
 import { allNodeSubscriptions, contactPersons, freeCorelinkPorts, imsNodes } from "stories/data/UserInputForm.data";
 import UserInputContainer from "stories/UserInputContainer";
 import { InputForm } from "utils/types";
@@ -41,7 +41,10 @@ function prepare() {
             ["MSP", "MSPNL", "SSP"].includes(p.product.tag)
         )
     );
-    mock.onGet("subscriptions/?filter=tags%2CIP_PREFIX%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("subscriptions/?filter=tags%2CIP_PREFIX%2Cstatuses%2Cactive").reply(
+        200,
+        SubscriptionsWithTags.filter((s) => ["active"].includes(s.status)).filter((s) => s.product.tag === "IP_PREFIX")
+    );
     mock.onGet("surf/subscriptions/ports?filter=tags%2CMSP-MSPNL%2Cstatuses%2Cactive").reply(
         200,
         SN7PortSubscriptions.filter((p) => p.status === "active").filter((p) =>
@@ -60,11 +63,15 @@ function prepare() {
     );
     mock.onGet("subscriptions/?filter=tags%2CIPS%2Cstatuses%2Cactive-provisioning").reply(
         200,
-        SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => p.product.tag == "IPS")
+        SubscriptionsWithTags.filter((s) => ["active", "provisioning"].includes(s.status)).filter(
+            (s) => s.product.tag === "IPS"
+        )
     );
     mock.onGet("subscriptions/?filter=tags%2CIPBGP%2Cstatuses%2Cactive-provisioning").reply(
         200,
-        SN8PortSubscriptions.filter((p) => p.status === "active").filter((p) => p.product.tag == "IPBGP")
+        SubscriptionsWithTags.filter((s) => ["active", "provisioning"].includes(s.status)).filter(
+            (s) => s.product.tag === "IPBGP"
+        )
     );
     mock.onGet("surf/subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP-AGGSPNL%2Cstatuses%2Cactive").reply(
         200,
