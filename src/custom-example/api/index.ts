@@ -1,7 +1,7 @@
 import { BaseApiClient } from "api";
 import { intl } from "locale/i18n";
 import { setFlash } from "utils/Flash";
-import { Organization, ServicePortSubscription } from "utils/types";
+import { Organization, ServicePortFilterItem, ServicePortSubscription } from "utils/types";
 
 abstract class CustomApiClientInterface extends BaseApiClient {
     abstract portSubscriptions: (
@@ -11,6 +11,7 @@ abstract class CustomApiClientInterface extends BaseApiClient {
     ) => Promise<ServicePortSubscription[]>;
     abstract organisations: () => Promise<Organization[] | undefined>;
     abstract locationCodes: () => Promise<string[] | undefined>;
+    abstract getPortSubscriptionsForNode: (id: string) => Promise<ServicePortFilterItem[]>;
 }
 
 export class CustomApiClient extends CustomApiClientInterface {
@@ -55,5 +56,9 @@ export class CustomApiClient extends CustomApiClientInterface {
             });
             return undefined;
         });
+    };
+
+    getPortSubscriptionsForNode = (id: string): Promise<ServicePortFilterItem[]> => {
+        return this.fetchJson(`surf/subscriptions/port-services-by-node/${id}`);
     };
 }

@@ -16,7 +16,6 @@
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import { ProductField, SelectField } from "lib/uniforms-surfnet/src";
-import React from "react";
 import PRODUCTS_JSON from "stories/data/products.json";
 import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
@@ -25,7 +24,7 @@ jest.mock("lib/uniforms-surfnet/src/SelectField", () => {
 });
 
 describe("<ProductField>", () => {
-    test("<ProductField> - calls selectField with all products", () => {
+    test("<ProductField> - calls selectField with all products", async () => {
         const element = (
             <ApplicationContext.Provider
                 value={({ products: PRODUCTS_JSON } as unknown) as ApplicationContextInterface}
@@ -60,9 +59,19 @@ describe("<ProductField>", () => {
                 "04f3a816-b892-474a-ba4d-58350b357e11",
                 "c9b3fbf5-677c-46c3-ad79-06b3beeffdca",
                 "9a8bd1ea-6650-4900-b820-3c7f0f16ef1d",
-                "a3bf8b26-50a6-4586-8e58-ad552cb39798",
                 "182b7c39-6c98-40da-9122-d7d27f61d449",
                 "7a980481-8d2e-4779-9f51-3a29e8c88ad5",
+                "5914a916-7980-4523-b24e-1c3f3fcc1cf4",
+                "9b8046f2-8cb0-47be-9f77-59e39462aea6",
+                "5867f7eb-68c2-469f-987e-2fee0672c33e",
+                "4a4e2c2c-017f-43eb-b12d-836c6ea689c4",
+                "a1f3cf7d-c3c5-469b-9aab-e8cafb262ad7",
+                "a0a6c2b1-fcb9-4c5c-9293-5867f06a6356",
+                "4163c35b-d8cb-492c-b841-700dcf3bfddf",
+                "40128a3f-1303-48be-bda0-375bb3299432",
+                "f19f01a3-45a4-4d21-87d9-a3f216f3a0a8",
+                "31a8264c-855d-4f7a-805f-5899c3d9692c",
+                "57c6e033-2fd9-4116-8bb0-5cd991a4a1e3",
             ],
             disabled: false,
             error: null,
