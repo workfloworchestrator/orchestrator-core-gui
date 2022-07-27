@@ -23,12 +23,12 @@ import { Form, FormNotCompleteResponse } from "utils/types";
 
 interface IProps {
     formKey: string;
-    ticket_id: string;
+    ticketId: string;
     handleSubmit: (userInputs: any) => void;
     handleCancel: () => void;
 }
 
-export default function OpenForm({ formKey, ticket_id, handleSubmit, handleCancel }: IProps) {
+export default function OpenForm({ formKey, ticketId, handleSubmit, handleCancel }: IProps) {
     const intl = useIntl();
     const { redirect, customApiClient } = useContext(ApplicationContext);
     const [form, setForm] = useState<Form>({});
@@ -37,7 +37,7 @@ export default function OpenForm({ formKey, ticket_id, handleSubmit, handleCance
     const submit = useCallback(
         (userInputs: {}[]) => {
             // Pass the ticket id and next process state. Backend validates the state transition.
-            userInputs = [{ ticket_id: ticket_id, next_process_state: ServiceTicketProcessState.OPEN }, ...userInputs];
+            userInputs = [{ ticket_id: ticketId, next_process_state: ServiceTicketProcessState.OPEN }, ...userInputs];
             let promise = customApiClient.cimStartForm(formKey, userInputs).then(
                 (form) => {
                     handleSubmit(form);
@@ -53,7 +53,7 @@ export default function OpenForm({ formKey, ticket_id, handleSubmit, handleCance
                 redirect("/tickets");
             });
         },
-        [redirect, intl, customApiClient, formKey, handleSubmit]
+        [redirect, intl, customApiClient, formKey, ticketId, handleSubmit]
     );
 
     const cancel = useCallback(() => {

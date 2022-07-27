@@ -16,7 +16,7 @@
 import { EuiPage, EuiPageBody, EuiText } from "@elastic/eui";
 import Explain from "components/Explain";
 import OpenForm from "custom/components/cim/OpenForm";
-import { OpenServiceTicketPayload, ServiceTicket } from "custom/types";
+import { OpenServiceTicketPayload } from "custom/types";
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
@@ -39,9 +39,6 @@ export default function ServiceTicketOpen() {
             description_en: userInputs.description_en,
             mail_subject: userInputs.mail_subject,
         };
-        // TODO:
-        //   - ask for confirmation here?
-        //   - or suggestion by Rene, redirect to other page for displaying the emails?
         customApiClient.cimOpenTicket(payload).then((_) => redirect(`/tickets/${id}/`));
     };
 
@@ -67,7 +64,7 @@ export default function ServiceTicketOpen() {
                     formKey="open_ticket_form"
                     handleSubmit={handleSubmit}
                     handleCancel={handleCancel}
-                    ticket_id={id}
+                    ticketId={id}
                 />
             </EuiPageBody>
         </EuiPage>
