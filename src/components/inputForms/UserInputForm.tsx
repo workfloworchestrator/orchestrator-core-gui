@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
+import { ButtonColor, EuiButton, EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
 import { SubscriptionsContextProvider } from "components/subscriptionContext";
 import ConfirmationDialogContext, {
     ConfirmDialogActions,
@@ -56,6 +56,19 @@ interface IState {
     processing: boolean;
     rootErrors: string[];
     showConfirmDialog: ShowConfirmDialogType;
+}
+
+interface Buttons {
+    previous: {
+        text?: string;
+        dialog?: string;
+        color?: ButtonColor;
+    };
+    next: {
+        text?: string;
+        dialog?: string;
+        color?: ButtonColor;
+    };
 }
 
 declare module "uniforms" {
@@ -357,17 +370,48 @@ class UserInputForm extends React.Component<IProps, IState> {
         }
     };
 
-    renderButtons = () => {
+    onButtonClick = (
+        e: React.MouseEvent<HTMLButtonElement>,
+        question: string | undefined,
+        confirm: (e: React.MouseEvent<HTMLButtonElement>) => void
+    ) => {
+        if (!question) {
+            return confirm(e);
+        }
+
+        stop(e);
+        this.state.showConfirmDialog({
+            question: question,
+            confirmAction: confirm,
+            cancelAction: () => {},
+            leavePage: false,
+        });
+    };
+
+    renderButtons = (buttons: Buttons) => {
         const { hasNext, hasPrev } = this.props;
 
         const prevButton = hasPrev ? (
-            <EuiButton id="button-prev-form-submit" fill onClick={this.props.previous}>
-                <FormattedMessage id="process.previous" />
+            <EuiButton
+                id="button-prev-form-submit"
+                fill
+                color={buttons.previous.color ?? "primary"}
+                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                    this.onButtonClick(e, buttons.previous.dialog, this.props.previous);
+                }}
+            >
+                {buttons.previous.text ?? <FormattedMessage id="process.previous" />}
             </EuiButton>
         ) : (
             <EuiFlexItem>
-                <EuiButton id="button-cancel-form-submit" color="warning" onClick={this.openDialog}>
-                    <FormattedMessage id="process.cancel" />
+                <EuiButton
+                    id="button-cancel-form-submit"
+                    color={buttons.previous.color ?? "warning"}
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                        this.onButtonClick(e, buttons.previous.dialog, this.openDialog);
+                    }}
+                >
+                    {buttons.previous.text ?? <FormattedMessage id="process.cancel" />}
                 </EuiButton>
             </EuiFlexItem>
         );
@@ -377,22 +421,22 @@ class UserInputForm extends React.Component<IProps, IState> {
                 id="button-next-form-submit"
                 tabIndex={0}
                 fill
-                color="primary"
+                color={buttons.next.color ?? "primary"}
                 isLoading={this.state.processing}
                 type="submit"
             >
-                <FormattedMessage id="process.next" />
+                {buttons.next.text ?? <FormattedMessage id="process.next" />}
             </EuiButton>
         ) : (
             <EuiButton
                 id="button-submit-form-submit"
                 tabIndex={0}
                 fill
-                color="primary"
+                color={buttons.next.color ?? "primary"}
                 isLoading={this.state.processing}
                 type="submit"
             >
-                <FormattedMessage id="process.submit" />
+                {buttons.next.text ?? <FormattedMessage id="process.submit" />}
             </EuiButton>
         );
 
@@ -419,6 +463,8 @@ class UserInputForm extends React.Component<IProps, IState> {
 
         const AutoFieldProvider = AutoField.componentDetectorContext.Provider;
 
+        // @ts-ignore Get the Button config from the form default values, or default to empty config
+        const buttons: Buttons = stepUserInput.properties?.buttons?.default ?? { previous: {}, next: {} };
         return (
             <EuiPanel css={userInputFormStyling}>
                 <div className="user-input-form">
@@ -438,7 +484,7 @@ class UserInputForm extends React.Component<IProps, IState> {
                                     validate="onSubmit"
                                     model={userInput}
                                 >
-                                    <AutoFields />
+                                    <AutoFields omitFields={["buttons"]} />
                                     {/* Show top level validation info about backend validation */}
                                     {nrOfValidationErrors > 0 && (
                                         <section className="form-errors">
@@ -460,7 +506,7 @@ class UserInputForm extends React.Component<IProps, IState> {
                                         </section>
                                     )}
 
-                                    {this.renderButtons()}
+                                    {this.renderButtons(buttons)}
                                 </AutoForm>
                             </AutoFieldProvider>
                         </SubscriptionsContextProvider>
