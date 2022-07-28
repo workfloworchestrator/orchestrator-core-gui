@@ -35,7 +35,6 @@ import { AutoField, AutoForm } from "uniforms-unstyled";
 import ApplicationContext from "utils/ApplicationContext";
 import { getQueryParameters } from "utils/QueryParameters";
 import { ValidationError } from "utils/types";
-import { stop } from "utils/Utils";
 
 import { userInputFormStyling } from "./UserInputFormStyling";
 
@@ -314,7 +313,6 @@ class UserInputForm extends React.Component<IProps, IState> {
     };
 
     openDialog = (e: React.FormEvent) => {
-        stop(e);
         this.state.showConfirmDialog({
             question: "",
             confirmAction: () => {},
@@ -379,7 +377,6 @@ class UserInputForm extends React.Component<IProps, IState> {
             return confirm(e);
         }
 
-        stop(e);
         this.state.showConfirmDialog({
             question: question,
             confirmAction: confirm,
