@@ -14,6 +14,7 @@
  */
 
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
+import { ServiceTicketProcessState } from "custom/types";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
@@ -21,24 +22,22 @@ import { setFlash } from "utils/Flash";
 import { Form, FormNotCompleteResponse } from "utils/types";
 
 interface IProps {
-    preselectedInput?: any;
     formKey: string;
+    ticketId: string;
     handleSubmit: (userInputs: any) => void;
+    handleCancel: () => void;
 }
 
-export default function CreateForm(props: IProps) {
+export default function OpenForm({ formKey, ticketId, handleSubmit, handleCancel }: IProps) {
     const intl = useIntl();
-    const { preselectedInput, formKey, handleSubmit } = props;
-    const { products, redirect, customApiClient } = useContext(ApplicationContext);
+    const { redirect, customApiClient } = useContext(ApplicationContext);
     const [form, setForm] = useState<Form>({});
     const { stepUserInput, hasNext } = form;
 
     const submit = useCallback(
         (userInputs: {}[]) => {
-            // if (preselectedInput.product) {
-            // Todo: decide if we want to implement pre-selections and design a way to do it generic
-            //     userInputs = [{ preselectedInput }, ...userInputs];
-            // }
+            // Pass the ticket id and next process state. Backend validates the state transition.
+            userInputs = [{ ticket_id: ticketId, next_process_state: ServiceTicketProcessState.OPEN }, ...userInputs];
             let promise = customApiClient.cimStartForm(formKey, userInputs).then(
                 (form) => {
                     handleSubmit(form);
@@ -54,8 +53,12 @@ export default function CreateForm(props: IProps) {
                 redirect("/tickets");
             });
         },
-        [redirect, intl, customApiClient, formKey, handleSubmit]
+        [redirect, intl, customApiClient, formKey, ticketId, handleSubmit]
     );
+
+    const cancel = useCallback(() => {
+        handleCancel();
+    }, [handleCancel]);
 
     useEffect(() => {
         if (formKey) {
@@ -66,7 +69,7 @@ export default function CreateForm(props: IProps) {
                 });
             });
         }
-    }, [formKey, products, submit, preselectedInput, intl, customApiClient]);
+    }, [formKey, submit, intl, customApiClient]);
 
     return (
         <div>
@@ -74,7 +77,7 @@ export default function CreateForm(props: IProps) {
                 <UserInputFormWizard
                     stepUserInput={stepUserInput}
                     validSubmit={submit}
-                    cancel={() => redirect("/tickets")}
+                    cancel={cancel}
                     hasNext={hasNext ?? false}
                 />
             )}

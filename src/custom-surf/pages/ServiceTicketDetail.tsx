@@ -72,7 +72,7 @@ const ServiceTicketDetail = () => {
     const [ticket, setTicket] = useState<ServiceTicketWithDetails>();
     const [notFound, setNotFound] = useState(false);
 
-    const { theme, customApiClient } = useContext(ApplicationContext);
+    const { theme, customApiClient, redirect } = useContext(ApplicationContext);
 
     useEffect(() => {
         customApiClient
@@ -157,12 +157,15 @@ const ServiceTicketDetail = () => {
     const abortTicket = () => {
         changeTicketState(ServiceTicketProcessState.ABORTED);
     };
+    const openTicket = () => {
+        redirect(`/tickets/${ticket._id}/open`);
+    };
 
     const actions: Action[] = [
         {
             translation: "tickets.action.opening",
-            onClick: () => {},
-            requiredState: [ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED],
+            onClick: openTicket,
+            requiredState: [ServiceTicketProcessState.OPEN_ACCEPTED],
         },
         {
             translation: "tickets.action.updating",
@@ -221,7 +224,7 @@ const ServiceTicketDetail = () => {
                                             <td className={keyRowClass}>
                                                 <FormattedMessage id="tickets.table.title" />
                                             </td>
-                                            <td className={valueRowClass}>{ticket.title}</td>
+                                            <td className={valueRowClass}>{ticket.title_nl}</td>
                                         </tr>
                                         <tr className={theme}>
                                             <td className={keyRowClass}>

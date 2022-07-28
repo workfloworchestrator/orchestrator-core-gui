@@ -15,25 +15,35 @@
 
 import { EuiPage, EuiPageBody, EuiText } from "@elastic/eui";
 import Explain from "components/Explain";
-import CreateForm from "custom/components/cim/CreateForm";
-import { CreateServiceTicketPayload } from "custom/types";
+import OpenForm from "custom/components/cim/OpenForm";
+import { OpenServiceTicketPayload } from "custom/types";
 import React, { useContext, useState } from "react";
+import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
 
-export default function CreateServiceTicket() {
+interface IProps {
+    id: string;
+}
+
+export default function ServiceTicketOpen() {
+    const { id } = useParams<IProps>();
     const [showExplanation, setShowExplanation] = useState(false);
     const { redirect, customApiClient } = useContext(ApplicationContext);
 
     const handleSubmit = (userInputs: any) => {
-        const ticket: CreateServiceTicketPayload = {
-            ims_pw_id: userInputs.ims_ticket.name,
-            jira_ticket_id: userInputs.jira_ticket.ticket_id,
-            title_nl: userInputs.jira_ticket.summary,
-            start_date: userInputs.jira_ticket.start_date,
-            end_date: userInputs.jira_ticket.end_date,
-            type: userInputs.ticket_type,
+        const payload: OpenServiceTicketPayload = {
+            cim_ticket_id: id,
+            title_nl: userInputs.title_nl,
+            description_nl: userInputs.description_nl,
+            title_en: userInputs.title_en,
+            description_en: userInputs.description_en,
+            mail_subject: userInputs.mail_subject,
         };
-        customApiClient.cimCreateTicket(ticket).then((_) => redirect("/tickets"));
+        customApiClient.cimOpenTicket(payload).then((_) => redirect(`/tickets/${id}/`));
+    };
+
+    const handleCancel = () => {
+        redirect(`/tickets/${id}`);
     };
 
     return (
@@ -44,17 +54,18 @@ export default function CreateServiceTicket() {
                         <i className="fa fa-question-circle" />
                     </div>
                 </div>
-                <Explain
-                    close={() => setShowExplanation(false)}
-                    isVisible={showExplanation}
-                    title="How to create a CIM ticket"
-                >
-                    <p>Starting a ticket will execute a state machine that guides you through the process.</p>
+                <Explain close={() => setShowExplanation(false)} isVisible={showExplanation} title="What is this?">
+                    <p>This wizard will guide you through the process of sending the OPEN email to institutes.</p>
                 </Explain>
                 <EuiText grow={true}>
-                    <h1>Create ticket</h1>
+                    <h1>Prepare to send OPEN email to institutes</h1>
                 </EuiText>
-                <CreateForm formKey="create_ticket_form" handleSubmit={handleSubmit} />
+                <OpenForm
+                    formKey="open_ticket_form"
+                    handleSubmit={handleSubmit}
+                    handleCancel={handleCancel}
+                    ticketId={id}
+                />
             </EuiPageBody>
         </EuiPage>
     );

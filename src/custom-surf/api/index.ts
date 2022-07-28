@@ -1,5 +1,6 @@
 import { BaseApiClient } from "api";
 import {
+    OpenServiceTicketPayload,
     ServiceTicket,
     ServiceTicketImpactedIMSCircuit,
     ServiceTicketProcessState,
@@ -24,7 +25,9 @@ import {
 import { CreateServiceTicketPayload } from "../types";
 
 function prefix_cim_dev_uri(uri: string): string {
-    return process.env.NODE_ENV === "development" ? `http://localhost:8081/${uri.replace("surf/", "")}` : uri;
+    return process.env.NODE_ENV === "development"
+        ? `http://localhost:${process.env.REACT_APP_CIM_PORT ?? 8081}/${uri.replace("surf/", "")}`
+        : uri;
 }
 
 abstract class CustomApiClientInterface extends BaseApiClient {
@@ -226,6 +229,16 @@ export class CustomApiClient extends CustomApiClientInterface {
 
     cimCreateTicket = (ticket: CreateServiceTicketPayload): Promise<{ id: string }> => {
         return this.postPutJson(prefix_cim_dev_uri("surf/cim/tickets/"), ticket, "post", false, true);
+    };
+
+    cimOpenTicket = (payload: OpenServiceTicketPayload): Promise<{ id: string }> => {
+        return this.postPutJson(
+            prefix_cim_dev_uri(`surf/cim/tickets/${payload.cim_ticket_id}/open`),
+            payload,
+            "post",
+            false,
+            true
+        );
     };
 
     cimTickets = (): Promise<ServiceTicket[]> => {
