@@ -10,6 +10,7 @@
         "start": "react-scripts start",
         "build": "set \"INLINE_RUNTIME_CHUNK=false\" && react-scripts build",
         "test": "react-scripts test --testPathIgnorePatterns=src/custom-surf",
+        "test-surf": "react-scripts test --testPathIgnorePatterns=src/custom-example",
         "eject": "react-scripts eject",
         "storybook": "start-storybook -p 9009 -s ./public",
         "storybook-build": "build-storybook -s ./public",

@@ -354,6 +354,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                             </span>
                         </div>
                         <EuiInMemoryTable
+                            id="test"
                             style={{ marginTop: "6px" }}
                             itemId="id"
                             tableCaption="Prefix table"
