@@ -1824,119 +1824,6 @@
         ]
     },
     {
-        "created_at": 1553777225,
-        "description": "SN8 SURFinternet connection using BGP",
-        "end_date": null,
-        "fixed_inputs": [
-            {
-                "created_at": 1553777225,
-                "fixed_input_id": "25337b27-e37e-4ee2-85be-81dd025f7162",
-                "name": "ip_routing_type",
-                "product_id": "a3bf8b26-50a6-4586-8e58-ad552cb39798",
-                "value": "BGP"
-            },
-            {
-                "created_at": 1553777225,
-                "fixed_input_id": "eb4f4621-f55d-4c07-9ecb-699dfb246683",
-                "name": "domain",
-                "product_id": "a3bf8b26-50a6-4586-8e58-ad552cb39798",
-                "value": "SURFNET8"
-            }
-        ],
-        "name": "SN8 SURFinternet BGP",
-        "product_blocks": [
-            {
-                "created_at": 1529997837,
-                "description": "Service settings exclusive to IP products",
-                "end_date": null,
-                "name": "IP Service Settings",
-                "product_block_id": "37edae3d-174f-4fe2-b847-3aed75d68c4b",
-                "status": "active",
-                "tag": "IPSS"
-            },
-            {
-                "created_at": 1512057451,
-                "description": "Service Attach Point describes the port for this service",
-                "end_date": null,
-                "name": "Service Attach Point",
-                "product_block_id": "c3e955bf-4e7c-4df8-9a92-65da12a5755e",
-                "status": "active",
-                "tag": "SAP"
-            },
-            {
-                "created_at": 1512057415,
-                "description": "Virtual Circuit represents the point to point circuit between minimal two endpoints",
-                "end_date": null,
-                "name": "Virtual Circuit",
-                "product_block_id": "86238ed2-e8a1-45fa-a3c3-6b9a562103f4",
-                "status": "active",
-                "tag": "VC"
-            }
-        ],
-        "product_id": "a3bf8b26-50a6-4586-8e58-ad552cb39798",
-        "product_type": "IP",
-        "status": "active",
-        "tag": "IPBGP",
-        "workflows": [
-            {
-                "created_at": 1571908307,
-                "description": "Change a SN8 IP BGP subscription",
-                "name": "modify_sn8_ip_bgp",
-                "target": "MODIFY",
-                "workflow_id": "4cfb32e8-5195-428d-aa93-4367d17ed87d"
-            },
-            {
-                "created_at": 1569406425,
-                "description": "Change a port to a different port in a SN8 IP BGP subscription",
-                "name": "modify_sn8_ip_bgp_change_port",
-                "target": "MODIFY",
-                "workflow_id": "36b25e39-eb9d-470a-bfcd-2a26d1263e29"
-            },
-            {
-                "created_at": 1551438093,
-                "description": "Terminate SN8 IP BGP",
-                "name": "terminate_sn8_ip_bgp",
-                "target": "TERMINATE",
-                "workflow_id": "2fabf195-978f-4f91-939c-70573186edfc"
-            },
-            {
-                "created_at": 1553777225,
-                "description": "Modify SN8 IP: Change Service Settings",
-                "name": "modify_sn8_ip_ipss",
-                "target": "MODIFY",
-                "workflow_id": "6cd944eb-c69e-4ed5-ab6e-443253dbde8a"
-            },
-            {
-                "created_at": 1553777225,
-                "description": "Modify SN8 IP BGP: Remove Ports",
-                "name": "modify_sn8_ip_bgp_remove_ports",
-                "target": "MODIFY",
-                "workflow_id": "6a9bbbfd-b35f-4c34-939a-4381af130ee6"
-            },
-            {
-                "created_at": 1553777225,
-                "description": "Modify SN8 IP BGP: Add Ports",
-                "name": "modify_sn8_ip_bgp_add_ports",
-                "target": "MODIFY",
-                "workflow_id": "de8a7389-2c60-4c0f-87c2-eab8e72b1a2c"
-            },
-            {
-                "created_at": 1551359422,
-                "description": "Modify SN8 IP BGP: Change SAP Settings",
-                "name": "modify_sn8_ip_bgp_resources",
-                "target": "MODIFY",
-                "workflow_id": "69627f42-ad64-4a4c-a032-1978df0d7ecf"
-            },
-            {
-                "created_at": 1549550363,
-                "description": "Create SN8 IP BGP",
-                "name": "create_sn8_ip_bgp",
-                "target": "CREATE",
-                "workflow_id": "ed223e62-aaeb-4b91-8dca-45ee097e332a"
-            }
-        ]
-    },
-    {
         "created_at": 1579012220.260219,
         "description": "Redundant Surfnet8 Lightpath using L2VPN",
         "end_date": null,
@@ -2021,7 +1908,6 @@
             }
         ]
     },
-
     {
         "product_id": "7a980481-8d2e-4779-9f51-3a29e8c88ad5",
         "name": "SN8 SURFinternet BGP",
@@ -2134,6 +2020,1377 @@
                 "description": "Validate SN8 IP BGP",
                 "created_at": 1567673595.784087,
                 "workflow_id": "95f9bca5-5b33-4dd7-9d82-726cdfb3d2db"
+            }
+        ]
+    },
+    {
+        "product_id": "5914a916-7980-4523-b24e-1c3f3fcc1cf4",
+        "name": "NL8 MSC",
+        "description": "SURFnet8 Multi Service Carrier for NetherLight",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "MSCNL",
+        "created_at": 1571908307.50079,
+        "end_date": null,
+        "product_blocks": [
+            {
+                "product_block_id": "ee41be54-3745-4938-b510-5b3a71fd097f",
+                "name": "Service Port Multi Service Carrier SN8",
+                "description": "Service Port for Multi Service Carrier for SN8",
+                "tag": "MSC",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "service_tag",
+                        "description": "The service VLAN tag for this MSC",
+                        "resource_type_id": "43d9b2b3-d333-45c6-8e34-20f9154d3892"
+                    },
+                    {
+                        "resource_type": "ims_circuit_id",
+                        "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+                        "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83"
+                    }
+                ],
+                "created_at": 1571908307.50079,
+                "end_date": null
+            }
+        ],
+        "fixed_inputs": [
+            {
+                "fixed_input_id": "72c54eec-35d1-4c9b-9787-aa3a700ed254",
+                "name": "domain",
+                "value": "NETHERLIGHT8",
+                "product_id": "5914a916-7980-4523-b24e-1c3f3fcc1cf4",
+                "created_at": 1571908307.50079
+            }
+        ],
+        "workflows": [
+            {
+                "name": "create_sn8_msc",
+                "target": "CREATE",
+                "description": "Create SN8 Multi Service Carrier",
+                "created_at": 1571908307.50079,
+                "workflow_id": "ef52b0cc-74b1-46ce-aa52-582b46a0ca73"
+            },
+            {
+                "name": "terminate_sn8_msc",
+                "target": "TERMINATE",
+                "description": "Terminate the Surfnet8 Multi Service Carrier subscription",
+                "created_at": 1572866402.057758,
+                "workflow_id": "4dc29124-99b0-4098-ab8c-fc59a59a2e8e"
+            },
+            {
+                "name": "validate_sn8_msc",
+                "target": "SYSTEM",
+                "description": "Check if the SN8 MSC subscription is still inline with external system info",
+                "created_at": 1576663852.525234,
+                "workflow_id": "b5ea4ddc-b1a5-41f9-9fd8-20081b554dbe"
+            },
+            {
+                "name": "modify_sn8_msc",
+                "target": "MODIFY",
+                "description": "Modify SN8 Multi Service Carrier",
+                "created_at": 1635167260.200703,
+                "workflow_id": "d7abd172-32be-48d9-91f1-16ecf25ac5f5"
+            },
+            {
+                "name": "resend_email",
+                "target": "MODIFY",
+                "description": "Resend Email",
+                "created_at": 1635167260.200703,
+                "workflow_id": "f0a150a6-9aac-4e65-8558-a400432dd4c7"
+            },
+            {
+                "name": "modify_note",
+                "target": "MODIFY",
+                "description": "Modify Note",
+                "created_at": 1646220530.349738,
+                "workflow_id": "2bdff290-89ef-4880-b0ad-6d059738734b"
+            }
+        ]
+    },
+    {
+        "product_id": "9b8046f2-8cb0-47be-9f77-59e39462aea6",
+        "name": "SN8 MSC",
+        "description": "SURFnet8 Multi Service Carrier",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "MSC",
+        "created_at": 1571908307.50079,
+        "end_date": null,
+        "product_blocks": [
+            {
+                "product_block_id": "ee41be54-3745-4938-b510-5b3a71fd097f",
+                "name": "Service Port Multi Service Carrier SN8",
+                "description": "Service Port for Multi Service Carrier for SN8",
+                "tag": "MSC",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "service_tag",
+                        "description": "The service VLAN tag for this MSC",
+                        "resource_type_id": "43d9b2b3-d333-45c6-8e34-20f9154d3892"
+                    },
+                    {
+                        "resource_type": "ims_circuit_id",
+                        "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+                        "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83"
+                    }
+                ],
+                "created_at": 1571908307.50079,
+                "end_date": null
+            }
+        ],
+        "fixed_inputs": [
+            {
+                "fixed_input_id": "2fae187e-4dd6-4806-bdbc-dd44237f5c17",
+                "name": "domain",
+                "value": "SURFNET8",
+                "product_id": "9b8046f2-8cb0-47be-9f77-59e39462aea6",
+                "created_at": 1571908307.50079
+            }
+        ],
+        "workflows": [
+            {
+                "name": "create_sn8_msc",
+                "target": "CREATE",
+                "description": "Create SN8 Multi Service Carrier",
+                "created_at": 1571908307.50079,
+                "workflow_id": "ef52b0cc-74b1-46ce-aa52-582b46a0ca73"
+            },
+            {
+                "name": "terminate_sn8_msc",
+                "target": "TERMINATE",
+                "description": "Terminate the Surfnet8 Multi Service Carrier subscription",
+                "created_at": 1572866402.057758,
+                "workflow_id": "4dc29124-99b0-4098-ab8c-fc59a59a2e8e"
+            },
+            {
+                "name": "validate_sn8_msc",
+                "target": "SYSTEM",
+                "description": "Check if the SN8 MSC subscription is still inline with external system info",
+                "created_at": 1576663852.525234,
+                "workflow_id": "b5ea4ddc-b1a5-41f9-9fd8-20081b554dbe"
+            },
+            {
+                "name": "modify_sn8_msc",
+                "target": "MODIFY",
+                "description": "Modify SN8 Multi Service Carrier",
+                "created_at": 1635167260.200703,
+                "workflow_id": "d7abd172-32be-48d9-91f1-16ecf25ac5f5"
+            },
+            {
+                "name": "resend_email",
+                "target": "MODIFY",
+                "description": "Resend Email",
+                "created_at": 1635167260.200703,
+                "workflow_id": "f0a150a6-9aac-4e65-8558-a400432dd4c7"
+            },
+            {
+                "name": "modify_note",
+                "target": "MODIFY",
+                "description": "Modify Note",
+                "created_at": 1646220530.349738,
+                "workflow_id": "2bdff290-89ef-4880-b0ad-6d059738734b"
+            }
+        ]
+    },
+    {
+        "product_id": "5867f7eb-68c2-469f-987e-2fee0672c33e",
+        "name": "SN8 Aggregated Service Port",
+        "description": "Aggregated Service Port on SURFnet8",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "AGGSP",
+        "created_at": 1569495190.511414,
+        "end_date": null,
+        "product_blocks": [
+            {
+                "product_block_id": "f225c1de-1548-4199-934b-310cd47f345a",
+                "name": "SN8 Aggregated Service Port",
+                "description": "Aggregated Service Port for SURFnet8",
+                "tag": "AGGSP",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "nso_service_id",
+                        "description": "The UUID of a NSO service",
+                        "resource_type_id": "4530f9b7-e6f0-4985-9640-228207045402"
+                    },
+                    {
+                        "resource_type": "port_mode",
+                        "description": "untagged, tagged or link_member",
+                        "resource_type_id": "1434a7c7-ef30-47ee-8a73-f9ca59b73e5f"
+                    },
+                    {
+                        "resource_type": "ims_circuit_id",
+                        "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+                        "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83"
+                    }
+                ],
+                "created_at": 1569495190.511414,
+                "end_date": null
+            }
+        ],
+        "fixed_inputs": [
+            {
+                "fixed_input_id": "c8c35e23-eb10-4014-8a12-5b4aafd95ad6",
+                "name": "domain",
+                "value": "SURFNET8",
+                "product_id": "5867f7eb-68c2-469f-987e-2fee0672c33e",
+                "created_at": 1569495190.511414
+            }
+        ],
+        "workflows": [
+            {
+                "name": "create_sn8_aggregated_service_port",
+                "target": "CREATE",
+                "description": "Create SN8 Aggregated Service Port",
+                "created_at": 1569495190.511414,
+                "workflow_id": "5de0f8f3-e8a0-42af-93aa-d5ce8fd98b15"
+            },
+            {
+                "name": "terminate_sn8_aggregated_service_port",
+                "target": "TERMINATE",
+                "description": "Terminate the Surfnet8 Aggregated Service Port subscription",
+                "created_at": 1570440594.766004,
+                "workflow_id": "edeb57da-a3d5-41e7-8608-ab69bc5823bf"
+            },
+            {
+                "name": "modify_sn8_aggregated_service_port",
+                "target": "MODIFY",
+                "description": "Change a SN8 aggregated service port subscription",
+                "created_at": 1571908307.50079,
+                "workflow_id": "2ec056be-7846-41d3-a3e7-3b850e7b227a"
+            },
+            {
+                "name": "validate_sn8_aggregated_service_port",
+                "target": "SYSTEM",
+                "description": "Validate SN8 AGGSP",
+                "created_at": 1576663852.525234,
+                "workflow_id": "0cb58e49-219e-4985-8db5-1d4f282b6305"
+            },
+            {
+                "name": "modify_sn8_aggregated_service_port_move",
+                "target": "MODIFY",
+                "description": "Move SN8 Aggregated Service Port",
+                "created_at": 1635167260.200703,
+                "workflow_id": "ca3fbbcb-8164-4136-8dd6-0d5ab73d0175"
+            },
+            {
+                "name": "resend_email",
+                "target": "MODIFY",
+                "description": "Resend Email",
+                "created_at": 1635167260.200703,
+                "workflow_id": "f0a150a6-9aac-4e65-8558-a400432dd4c7"
+            },
+            {
+                "name": "modify_note",
+                "target": "MODIFY",
+                "description": "Modify Note",
+                "created_at": 1646220530.349738,
+                "workflow_id": "2bdff290-89ef-4880-b0ad-6d059738734b"
+            }
+        ]
+    },
+    {
+        "product_id": "4a4e2c2c-017f-43eb-b12d-836c6ea689c4",
+        "name": "SN8 SURFinternet Static",
+        "description": "SN8 SURFinternet connection using static routing",
+        "product_type": "IP",
+        "status": "active",
+        "tag": "IPS",
+        "created_at": 1553777225.153753,
+        "end_date": null,
+        "product_blocks": [
+            {
+                "product_block_id": "6b34efc1-a2fc-4264-a546-86a1976bc011",
+                "name": "IP Static Virtual Circuit",
+                "description": "Virtual Circuit represents the point to point circuit between minimal two endpoints",
+                "tag": "VC",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "service_speed",
+                        "description": "Policer speed in Mbps",
+                        "resource_type_id": "bbb5e12b-ae1b-471b-9d2f-ca188a0e633c"
+                    },
+                    {
+                        "resource_type": "nso_service_id",
+                        "description": "The UUID of a NSO service",
+                        "resource_type_id": "4530f9b7-e6f0-4985-9640-228207045402"
+                    },
+                    {
+                        "resource_type": "ims_circuit_id",
+                        "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+                        "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83"
+                    }
+                ],
+                "created_at": 1657717311.844116,
+                "end_date": null
+            }
+        ],
+        "fixed_inputs": [
+            {
+                "fixed_input_id": "b31ccc94-422e-43d4-a7ea-77b04ae36a1b",
+                "name": "ip_routing_type",
+                "value": "Static",
+                "product_id": "4a4e2c2c-017f-43eb-b12d-836c6ea689c4",
+                "created_at": 1553777225.153753
+            },
+            {
+                "fixed_input_id": "b8d33890-e4cc-4051-8aba-5dbda27eb007",
+                "name": "domain",
+                "value": "SURFNET8",
+                "product_id": "4a4e2c2c-017f-43eb-b12d-836c6ea689c4",
+                "created_at": 1553777225.153753
+            }
+        ],
+        "workflows": [
+            {
+                "name": "create_sn8_ip_static",
+                "target": "CREATE",
+                "description": "Create SN8 IP Static",
+                "created_at": 1549569974.851678,
+                "workflow_id": "8046c1c9-8690-47ac-b9c4-3125d4737d61"
+            },
+            {
+                "name": "terminate_sn8_ip_static",
+                "target": "TERMINATE",
+                "description": "Terminate SN8 IP Static",
+                "created_at": 1551261228.458866,
+                "workflow_id": "88ccf4fb-41ed-46f4-8640-e5be785c20cc"
+            },
+            {
+                "name": "modify_sn8_ip_static",
+                "target": "MODIFY",
+                "description": "Change a SN8 IP Static subscription",
+                "created_at": 1576663852.525234,
+                "workflow_id": "56986b9e-7a4e-4b4c-92fa-c5d0e567869e"
+            },
+            {
+                "name": "validate_sn8_ip_static",
+                "target": "SYSTEM",
+                "description": "Validate SN8 IP Static",
+                "created_at": 1568101288.574804,
+                "workflow_id": "1de02105-a36a-4668-9f88-0bb4af92905a"
+            },
+            {
+                "name": "resend_email",
+                "target": "MODIFY",
+                "description": "Resend Email",
+                "created_at": 1635167260.200703,
+                "workflow_id": "f0a150a6-9aac-4e65-8558-a400432dd4c7"
+            },
+            {
+                "name": "modify_note",
+                "target": "MODIFY",
+                "description": "Modify Note",
+                "created_at": 1646220530.349738,
+                "workflow_id": "2bdff290-89ef-4880-b0ad-6d059738734b"
+            }
+        ]
+    },
+    {
+        "product_id": "a1f3cf7d-c3c5-469b-9aab-e8cafb262ad7",
+        "name": "IP Prefix",
+        "description": "IPv4 and IPv6 Prefix product",
+        "product_type": "IP_PREFIX",
+        "status": "active",
+        "tag": "IP_PREFIX",
+        "created_at": 1527604600.765065,
+        "end_date": null,
+        "product_blocks": [
+            {
+                "product_block_id": "351907fc-f49c-4563-a4b9-db77d50ff35b",
+                "name": "IP_PREFIX",
+                "description": "This is the ip_prefix prefix product block to link toards the IP address management system",
+                "tag": "IP_PREFIX",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "ipam_prefix_id",
+                        "description": "Prefix of IP ranges as administered in IPAM",
+                        "resource_type_id": "3a234d95-f1c6-4951-ac88-2cc4ae8823ad"
+                    },
+                    {
+                        "resource_type": "to_internet",
+                        "description": "Indien waar wordt deze IP reeks exact naar buiten verkondigd (announced)",
+                        "resource_type_id": "59ad3cb5-bbfa-4c2a-982e-e6fa07d198c5"
+                    },
+                    {
+                        "resource_type": "customer_aggregate",
+                        "description": "Indien waar wordt voor deze IP reeks een aggregate aangemaakt waaronder de kinderen geagreggeerd\n    naar buiten worden verkondigd",
+                        "resource_type_id": "fe5f5838-b5a5-4074-94b8-6d9615b6f543"
+                    },
+                    {
+                        "resource_type": "extra_information",
+                        "description": "IP Prefix extra information",
+                        "resource_type_id": "0168e33a-9fd4-43b8-b1de-29d01420469c"
+                    },
+                    {
+                        "resource_type": "planned",
+                        "description": "Is this prefix planned or already in use",
+                        "resource_type_id": "3f9f474e-3666-4d3c-a1f6-bd43d0e5bf55"
+                    }
+                ],
+                "created_at": 1527604600.765065,
+                "end_date": null
+            }
+        ],
+        "fixed_inputs": [],
+        "workflows": [
+            {
+                "name": "modify_ip_prefix",
+                "target": "MODIFY",
+                "description": "Modify IP Prefix",
+                "created_at": 1545141521.067968,
+                "workflow_id": "f2c74e68-c296-4d4d-8fcf-90e2aa4a1bb7"
+            },
+            {
+                "name": "create_ip_prefix",
+                "target": "CREATE",
+                "description": "Create IP Prefix",
+                "created_at": 1527604600.765065,
+                "workflow_id": "52515413-f521-4a89-8056-673a648d651a"
+            },
+            {
+                "name": "terminate_ip_prefix",
+                "target": "TERMINATE",
+                "description": "Terminate IP Prefix",
+                "created_at": 1527604600.765065,
+                "workflow_id": "36484acc-457e-4757-aca1-e4be9a5e43e4"
+            },
+            {
+                "name": "validate_ip_prefix",
+                "target": "SYSTEM",
+                "description": "Validate IP Prefix",
+                "created_at": 1543246580.008788,
+                "workflow_id": "c482a716-dec2-403a-aeee-4ea24e36df85"
+            },
+            {
+                "name": "modify_note",
+                "target": "MODIFY",
+                "description": "Modify Note",
+                "created_at": 1646220530.349738,
+                "workflow_id": "2bdff290-89ef-4880-b0ad-6d059738734b"
+            }
+        ]
+    },
+    {
+        "product_id": "a0a6c2b1-fcb9-4c5c-9293-5867f06a6356",
+        "name": "SN8 Node",
+        "description": "A product that can be used to set a planned node to in service",
+        "product_type": "Node",
+        "status": "active",
+        "tag": "Node",
+        "created_at": 1533115751.559395,
+        "end_date": null,
+        "product_blocks": [
+            {
+                "product_block_id": "cd417dcd-777b-4d14-a489-0ff8ed0a35ac",
+                "name": "Node",
+                "description": "This is the container for the Node product",
+                "tag": "Node",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "ims_node_id",
+                        "description": "The ID of the Node in IMS",
+                        "resource_type_id": "0ea89247-fdca-4626-8d37-19cdec862c48"
+                    },
+                    {
+                        "resource_type": "nso_device_id",
+                        "description": "The device name is used as an NSO identifier",
+                        "resource_type_id": "9a8ff760-c09e-492f-a84e-f96d7b35c7fe"
+                    },
+                    {
+                        "resource_type": "nso_service_id",
+                        "description": "The UUID of a NSO service",
+                        "resource_type_id": "4530f9b7-e6f0-4985-9640-228207045402"
+                    },
+                    {
+                        "resource_type": "node_ipv4_ipam_id",
+                        "description": "IPv4 Node IPAM ID",
+                        "resource_type_id": "1e95b1de-ec24-450e-9d90-0fe381d808e7"
+                    },
+                    {
+                        "resource_type": "node_ipv6_ipam_id",
+                        "description": "IPv6 Node IPAM ID",
+                        "resource_type_id": "3c8c39bd-40ef-403e-af78-26c9a823471b"
+                    },
+                    {
+                        "resource_type": "sr_node_segment_id",
+                        "description": "Node Segment ID",
+                        "resource_type_id": "7beecf19-3463-46cb-99cd-d599a9e39f15"
+                    },
+                    {
+                        "resource_type": "node_location",
+                        "description": "Node location",
+                        "resource_type_id": "0ba5bc9c-5983-4903-866c-6769ffeb5fde"
+                    },
+                    {
+                        "resource_type": "bgp_full_table",
+                        "description": "Node has full routing table.",
+                        "resource_type_id": "334c3585-6c1d-4502-b409-eb08425bde54"
+                    }
+                ],
+                "created_at": 1533035397.518047,
+                "end_date": null
+            }
+        ],
+        "fixed_inputs": [],
+        "workflows": [
+            {
+                "name": "create_node",
+                "target": "CREATE",
+                "description": "Create Node",
+                "created_at": 1533035396.837389,
+                "workflow_id": "f326ede0-1830-400f-963a-d692a92081f2"
+            },
+            {
+                "name": "modify_node_in_service",
+                "target": "MODIFY",
+                "description": "Modify Node: Set In Service",
+                "created_at": 1536243458.505477,
+                "workflow_id": "87ae82eb-f75b-4bfa-b36d-00ebca092240"
+            },
+            {
+                "name": "terminate_node",
+                "target": "TERMINATE",
+                "description": "Terminate Node",
+                "created_at": 1547540270.423837,
+                "workflow_id": "eea33b56-9747-4259-948a-8a497b3d5693"
+            },
+            {
+                "name": "validate_node",
+                "target": "SYSTEM",
+                "description": "Validate Node",
+                "created_at": 1537971294.63012,
+                "workflow_id": "1def1f09-96dd-42b8-b0fc-f3e7135e584b"
+            },
+            {
+                "name": "modify_node",
+                "target": "MODIFY",
+                "description": "Modify Node",
+                "created_at": 1635167260.200703,
+                "workflow_id": "5c36f5e2-cd30-4d0b-a2af-8dd04db205a4"
+            },
+            {
+                "name": "modify_note",
+                "target": "MODIFY",
+                "description": "Modify Note",
+                "created_at": 1646220530.349738,
+                "workflow_id": "2bdff290-89ef-4880-b0ad-6d059738734b"
+            }
+        ]
+    },
+    {
+        "product_id": "4163c35b-d8cb-492c-b841-700dcf3bfddf",
+        "name": "SURFinternet 10G Static",
+        "description": "SURFinternet 10 Gb/s internet connection using static routing",
+        "product_type": "IP",
+        "status": "end of life",
+        "tag": "IPS",
+        "created_at": 1533115751.559395,
+        "end_date": 1635167260.200703,
+        "product_blocks": [
+            {
+                "product_block_id": "86238ed2-e8a1-45fa-a3c3-6b9a562103f4",
+                "name": "Virtual Circuit",
+                "description": "Virtual Circuit represents the point to point circuit between minimal two endpoints",
+                "tag": "VC",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "service_speed",
+                        "description": "Policer speed in Mbps",
+                        "resource_type_id": "bbb5e12b-ae1b-471b-9d2f-ca188a0e633c"
+                    },
+                    {
+                        "resource_type": "nso_service_id",
+                        "description": "The UUID of a NSO service",
+                        "resource_type_id": "4530f9b7-e6f0-4985-9640-228207045402"
+                    },
+                    {
+                        "resource_type": "ims_circuit_id",
+                        "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+                        "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83"
+                    }
+                ],
+                "created_at": 1512057415.411105,
+                "end_date": null
+            },
+            {
+                "product_block_id": "c3e955bf-4e7c-4df8-9a92-65da12a5755e",
+                "name": "Service Attach Point",
+                "description": "Service Attach Point describes the port for this service",
+                "tag": "SAPSS",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "bfd",
+                        "description": "Bidirectional Forwarding Detection",
+                        "resource_type_id": "814124f0-4a72-4719-a3d0-e456f71ef6ca"
+                    },
+                    {
+                        "resource_type": "ptp_ipv4_ipam_id",
+                        "description": "IPv4 Point-to-Point IPAM ID",
+                        "resource_type_id": "b1fa7d3f-782f-4692-96be-13fda2b3d417"
+                    },
+                    {
+                        "resource_type": "ptp_ipv6_ipam_id",
+                        "description": "IPv6 Point-to-Point IPAM ID",
+                        "resource_type_id": "2565f4c0-b0d5-437d-a75b-c99893a438db"
+                    },
+                    {
+                        "resource_type": "bfd_minimum_interval",
+                        "description": "BFD interval tuning in seconds",
+                        "resource_type_id": "ef6dfc3b-6fc7-45a2-9435-03792389e0ea"
+                    },
+                    {
+                        "resource_type": "bfd_multiplier",
+                        "description": "BFD tuning",
+                        "resource_type_id": "808b89f1-7518-4c04-8f2d-0567ae28dd26"
+                    },
+                    {
+                        "resource_type": "customer_ipv4_mtu",
+                        "description": "Customer MTU IPv4",
+                        "resource_type_id": "4cb385ac-2093-465a-a33b-669dbd6ce7c5"
+                    },
+                    {
+                        "resource_type": "customer_ipv6_mtu",
+                        "description": "Customer MTU IPv6",
+                        "resource_type_id": "46d487c6-e092-47ce-9975-2610e3b2028d"
+                    },
+                    {
+                        "resource_type": "bgp_session_priority",
+                        "description": "Border Gateway Protocol local preference, enum with primary, secondary, tertiary and quaternary, in SURFNet8 only primary and secondary",
+                        "resource_type_id": "67e44594-b9e5-48ab-8446-2df533ad9d12"
+                    },
+                    {
+                        "resource_type": "bgp_export_policy",
+                        "description": "Border Gateway Protocol routing table option, enum with full or default",
+                        "resource_type_id": "12882a79-42ca-4b30-b77c-cb6cf6bee779"
+                    },
+                    {
+                        "resource_type": "bgp_hash_algorithm",
+                        "description": "enum with MD5 and no, default MD5",
+                        "resource_type_id": "c7d66805-2237-4fd6-8d2f-0846c6a88029"
+                    },
+                    {
+                        "resource_type": "bgp_password",
+                        "description": "Border Gateway Protocol authentication hash",
+                        "resource_type_id": "24886bd8-dc86-4698-96be-aa0809571615"
+                    },
+                    {
+                        "resource_type": "enable_routing",
+                        "description": "Enable routing for IP BGP",
+                        "resource_type_id": "24c4d416-e14d-4bb3-b2b1-043a7520237a"
+                    }
+                ],
+                "created_at": 1512057451.555066,
+                "end_date": null
+            },
+            {
+                "product_block_id": "37edae3d-174f-4fe2-b847-3aed75d68c4b",
+                "name": "IP Service Settings",
+                "description": "Service Attach Point Settings describes the port for this service",
+                "tag": "IPSS",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "asn",
+                        "description": "The Autonomous System number allocated to this customer, needed if IP routing type is BGP",
+                        "resource_type_id": "8188e6d3-57af-4f80-ad4e-293268c0df7f"
+                    },
+                    {
+                        "resource_type": "multicast",
+                        "description": "Does customer use IP multicast or not",
+                        "resource_type_id": "ee750d9d-fa98-4364-a07c-f4eca3d29772"
+                    },
+                    {
+                        "resource_type": "surfcert_filter_enabled",
+                        "description": "Whether a SURFCERT filter is to be applied to IP service",
+                        "resource_type_id": "681ec961-925c-429a-a89b-c53fea1a1712"
+                    },
+                    {
+                        "resource_type": "surfcert_filter",
+                        "description": "Which SURFCERT filter is to be applied to IP service",
+                        "resource_type_id": "394ba5f5-e9c6-467d-af70-c0f18238da35"
+                    }
+                ],
+                "created_at": 1529997837.853542,
+                "end_date": null
+            }
+        ],
+        "fixed_inputs": [
+            {
+                "fixed_input_id": "b9294051-8a6e-4df5-b3cb-d0b73fe447bb",
+                "name": "domain",
+                "value": "SURFNET7",
+                "product_id": "4163c35b-d8cb-492c-b841-700dcf3bfddf",
+                "created_at": 1533115751.559395
+            },
+            {
+                "fixed_input_id": "ded5afdb-8d7f-4502-8aac-2079261b7fba",
+                "name": "service_speed",
+                "value": "10000",
+                "product_id": "4163c35b-d8cb-492c-b841-700dcf3bfddf",
+                "created_at": 1533115751.559395
+            },
+            {
+                "fixed_input_id": "e5657c89-83da-4d65-a0f1-2c7413db2732",
+                "name": "ip_routing_type",
+                "value": "Static",
+                "product_id": "4163c35b-d8cb-492c-b841-700dcf3bfddf",
+                "created_at": 1533115751.559395
+            }
+        ],
+        "workflows": [
+            {
+                "name": "resend_email",
+                "target": "MODIFY",
+                "description": "Resend Email",
+                "created_at": 1635167260.200703,
+                "workflow_id": "f0a150a6-9aac-4e65-8558-a400432dd4c7"
+            },
+            {
+                "name": "modify_note",
+                "target": "MODIFY",
+                "description": "Modify Note",
+                "created_at": 1646220530.349738,
+                "workflow_id": "2bdff290-89ef-4880-b0ad-6d059738734b"
+            }
+        ]
+    },
+    {
+        "product_id": "40128a3f-1303-48be-bda0-375bb3299432",
+        "name": "SURFinternet 10G BGP",
+        "description": "SURFinternet 10 Gb/s internet connection using BGP",
+        "product_type": "IP",
+        "status": "end of life",
+        "tag": "IPBGP",
+        "created_at": 1545141521.067968,
+        "end_date": 1635167260.200703,
+        "product_blocks": [
+            {
+                "product_block_id": "86238ed2-e8a1-45fa-a3c3-6b9a562103f4",
+                "name": "Virtual Circuit",
+                "description": "Virtual Circuit represents the point to point circuit between minimal two endpoints",
+                "tag": "VC",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "service_speed",
+                        "description": "Policer speed in Mbps",
+                        "resource_type_id": "bbb5e12b-ae1b-471b-9d2f-ca188a0e633c"
+                    },
+                    {
+                        "resource_type": "nso_service_id",
+                        "description": "The UUID of a NSO service",
+                        "resource_type_id": "4530f9b7-e6f0-4985-9640-228207045402"
+                    },
+                    {
+                        "resource_type": "ims_circuit_id",
+                        "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+                        "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83"
+                    }
+                ],
+                "created_at": 1512057415.411105,
+                "end_date": null
+            },
+            {
+                "product_block_id": "c3e955bf-4e7c-4df8-9a92-65da12a5755e",
+                "name": "Service Attach Point",
+                "description": "Service Attach Point describes the port for this service",
+                "tag": "SAPSS",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "bfd",
+                        "description": "Bidirectional Forwarding Detection",
+                        "resource_type_id": "814124f0-4a72-4719-a3d0-e456f71ef6ca"
+                    },
+                    {
+                        "resource_type": "ptp_ipv4_ipam_id",
+                        "description": "IPv4 Point-to-Point IPAM ID",
+                        "resource_type_id": "b1fa7d3f-782f-4692-96be-13fda2b3d417"
+                    },
+                    {
+                        "resource_type": "ptp_ipv6_ipam_id",
+                        "description": "IPv6 Point-to-Point IPAM ID",
+                        "resource_type_id": "2565f4c0-b0d5-437d-a75b-c99893a438db"
+                    },
+                    {
+                        "resource_type": "bfd_minimum_interval",
+                        "description": "BFD interval tuning in seconds",
+                        "resource_type_id": "ef6dfc3b-6fc7-45a2-9435-03792389e0ea"
+                    },
+                    {
+                        "resource_type": "bfd_multiplier",
+                        "description": "BFD tuning",
+                        "resource_type_id": "808b89f1-7518-4c04-8f2d-0567ae28dd26"
+                    },
+                    {
+                        "resource_type": "customer_ipv4_mtu",
+                        "description": "Customer MTU IPv4",
+                        "resource_type_id": "4cb385ac-2093-465a-a33b-669dbd6ce7c5"
+                    },
+                    {
+                        "resource_type": "customer_ipv6_mtu",
+                        "description": "Customer MTU IPv6",
+                        "resource_type_id": "46d487c6-e092-47ce-9975-2610e3b2028d"
+                    },
+                    {
+                        "resource_type": "bgp_session_priority",
+                        "description": "Border Gateway Protocol local preference, enum with primary, secondary, tertiary and quaternary, in SURFNet8 only primary and secondary",
+                        "resource_type_id": "67e44594-b9e5-48ab-8446-2df533ad9d12"
+                    },
+                    {
+                        "resource_type": "bgp_export_policy",
+                        "description": "Border Gateway Protocol routing table option, enum with full or default",
+                        "resource_type_id": "12882a79-42ca-4b30-b77c-cb6cf6bee779"
+                    },
+                    {
+                        "resource_type": "bgp_hash_algorithm",
+                        "description": "enum with MD5 and no, default MD5",
+                        "resource_type_id": "c7d66805-2237-4fd6-8d2f-0846c6a88029"
+                    },
+                    {
+                        "resource_type": "bgp_password",
+                        "description": "Border Gateway Protocol authentication hash",
+                        "resource_type_id": "24886bd8-dc86-4698-96be-aa0809571615"
+                    },
+                    {
+                        "resource_type": "enable_routing",
+                        "description": "Enable routing for IP BGP",
+                        "resource_type_id": "24c4d416-e14d-4bb3-b2b1-043a7520237a"
+                    }
+                ],
+                "created_at": 1512057451.555066,
+                "end_date": null
+            },
+            {
+                "product_block_id": "37edae3d-174f-4fe2-b847-3aed75d68c4b",
+                "name": "IP Service Settings",
+                "description": "Service Attach Point Settings describes the port for this service",
+                "tag": "IPSS",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "asn",
+                        "description": "The Autonomous System number allocated to this customer, needed if IP routing type is BGP",
+                        "resource_type_id": "8188e6d3-57af-4f80-ad4e-293268c0df7f"
+                    },
+                    {
+                        "resource_type": "multicast",
+                        "description": "Does customer use IP multicast or not",
+                        "resource_type_id": "ee750d9d-fa98-4364-a07c-f4eca3d29772"
+                    },
+                    {
+                        "resource_type": "surfcert_filter_enabled",
+                        "description": "Whether a SURFCERT filter is to be applied to IP service",
+                        "resource_type_id": "681ec961-925c-429a-a89b-c53fea1a1712"
+                    },
+                    {
+                        "resource_type": "surfcert_filter",
+                        "description": "Which SURFCERT filter is to be applied to IP service",
+                        "resource_type_id": "394ba5f5-e9c6-467d-af70-c0f18238da35"
+                    }
+                ],
+                "created_at": 1529997837.853542,
+                "end_date": null
+            }
+        ],
+        "fixed_inputs": [
+            {
+                "fixed_input_id": "099d9ba2-4267-434b-bbff-d424fcd5a350",
+                "name": "ip_routing_type",
+                "value": "BGP",
+                "product_id": "40128a3f-1303-48be-bda0-375bb3299432",
+                "created_at": 1545141521.067968
+            },
+            {
+                "fixed_input_id": "76cf8037-8882-4fd8-809d-060ab2654018",
+                "name": "service_speed",
+                "value": "10000",
+                "product_id": "40128a3f-1303-48be-bda0-375bb3299432",
+                "created_at": 1545141521.067968
+            },
+            {
+                "fixed_input_id": "f97b0f59-ebc3-4989-90ff-167563e799c1",
+                "name": "domain",
+                "value": "SURFNET7",
+                "product_id": "40128a3f-1303-48be-bda0-375bb3299432",
+                "created_at": 1545141521.067968
+            }
+        ],
+        "workflows": [
+            {
+                "name": "resend_email",
+                "target": "MODIFY",
+                "description": "Resend Email",
+                "created_at": 1635167260.200703,
+                "workflow_id": "f0a150a6-9aac-4e65-8558-a400432dd4c7"
+            },
+            {
+                "name": "modify_note",
+                "target": "MODIFY",
+                "description": "Modify Note",
+                "created_at": 1646220530.349738,
+                "workflow_id": "2bdff290-89ef-4880-b0ad-6d059738734b"
+            }
+        ]
+    },
+    {
+        "product_id": "f19f01a3-45a4-4d21-87d9-a3f216f3a0a8",
+        "name": "SURFlichtpaden 10GP - Inter-City",
+        "description": "Inter-City Protected Lichtpad service 10Gbit/s.",
+        "product_type": "LightPath",
+        "status": "end of life",
+        "tag": "LightPath",
+        "created_at": 1527604600.474788,
+        "end_date": 1635167260.200703,
+        "product_blocks": [
+            {
+                "product_block_id": "86238ed2-e8a1-45fa-a3c3-6b9a562103f4",
+                "name": "Virtual Circuit",
+                "description": "Virtual Circuit represents the point to point circuit between minimal two endpoints",
+                "tag": "VC",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "service_speed",
+                        "description": "Policer speed in Mbps",
+                        "resource_type_id": "bbb5e12b-ae1b-471b-9d2f-ca188a0e633c"
+                    },
+                    {
+                        "resource_type": "nso_service_id",
+                        "description": "The UUID of a NSO service",
+                        "resource_type_id": "4530f9b7-e6f0-4985-9640-228207045402"
+                    },
+                    {
+                        "resource_type": "ims_circuit_id",
+                        "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+                        "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83"
+                    }
+                ],
+                "created_at": 1512057415.411105,
+                "end_date": null
+            },
+            {
+                "product_block_id": "c3e955bf-4e7c-4df8-9a92-65da12a5755e",
+                "name": "Service Attach Point",
+                "description": "Service Attach Point describes the port for this service",
+                "tag": "SAPSS",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "bfd",
+                        "description": "Bidirectional Forwarding Detection",
+                        "resource_type_id": "814124f0-4a72-4719-a3d0-e456f71ef6ca"
+                    },
+                    {
+                        "resource_type": "ptp_ipv4_ipam_id",
+                        "description": "IPv4 Point-to-Point IPAM ID",
+                        "resource_type_id": "b1fa7d3f-782f-4692-96be-13fda2b3d417"
+                    },
+                    {
+                        "resource_type": "ptp_ipv6_ipam_id",
+                        "description": "IPv6 Point-to-Point IPAM ID",
+                        "resource_type_id": "2565f4c0-b0d5-437d-a75b-c99893a438db"
+                    },
+                    {
+                        "resource_type": "bfd_minimum_interval",
+                        "description": "BFD interval tuning in seconds",
+                        "resource_type_id": "ef6dfc3b-6fc7-45a2-9435-03792389e0ea"
+                    },
+                    {
+                        "resource_type": "bfd_multiplier",
+                        "description": "BFD tuning",
+                        "resource_type_id": "808b89f1-7518-4c04-8f2d-0567ae28dd26"
+                    },
+                    {
+                        "resource_type": "customer_ipv4_mtu",
+                        "description": "Customer MTU IPv4",
+                        "resource_type_id": "4cb385ac-2093-465a-a33b-669dbd6ce7c5"
+                    },
+                    {
+                        "resource_type": "customer_ipv6_mtu",
+                        "description": "Customer MTU IPv6",
+                        "resource_type_id": "46d487c6-e092-47ce-9975-2610e3b2028d"
+                    },
+                    {
+                        "resource_type": "bgp_session_priority",
+                        "description": "Border Gateway Protocol local preference, enum with primary, secondary, tertiary and quaternary, in SURFNet8 only primary and secondary",
+                        "resource_type_id": "67e44594-b9e5-48ab-8446-2df533ad9d12"
+                    },
+                    {
+                        "resource_type": "bgp_export_policy",
+                        "description": "Border Gateway Protocol routing table option, enum with full or default",
+                        "resource_type_id": "12882a79-42ca-4b30-b77c-cb6cf6bee779"
+                    },
+                    {
+                        "resource_type": "bgp_hash_algorithm",
+                        "description": "enum with MD5 and no, default MD5",
+                        "resource_type_id": "c7d66805-2237-4fd6-8d2f-0846c6a88029"
+                    },
+                    {
+                        "resource_type": "bgp_password",
+                        "description": "Border Gateway Protocol authentication hash",
+                        "resource_type_id": "24886bd8-dc86-4698-96be-aa0809571615"
+                    },
+                    {
+                        "resource_type": "enable_routing",
+                        "description": "Enable routing for IP BGP",
+                        "resource_type_id": "24c4d416-e14d-4bb3-b2b1-043a7520237a"
+                    }
+                ],
+                "created_at": 1512057451.555066,
+                "end_date": null
+            }
+        ],
+        "fixed_inputs": [
+            {
+                "fixed_input_id": "a60086a6-aa3a-4a41-9fdc-24d2b6e33208",
+                "name": "domain",
+                "value": "SURFNET7",
+                "product_id": "f19f01a3-45a4-4d21-87d9-a3f216f3a0a8",
+                "created_at": 1527604600.474788
+            },
+            {
+                "fixed_input_id": "6b58e7f7-f759-460d-bac4-b64e22327e85",
+                "name": "service_speed",
+                "value": "10000",
+                "product_id": "f19f01a3-45a4-4d21-87d9-a3f216f3a0a8",
+                "created_at": 1527604600.474788
+            },
+            {
+                "fixed_input_id": "b01a2dec-98ac-4ec6-b5bc-a9dbd8ee35b3",
+                "name": "protection_type",
+                "value": "Protected",
+                "product_id": "f19f01a3-45a4-4d21-87d9-a3f216f3a0a8",
+                "created_at": 1527604600.474788
+            },
+            {
+                "fixed_input_id": "8c2d861e-216b-4367-83d9-8192add43919",
+                "name": "city_type",
+                "value": "inter_city",
+                "product_id": "f19f01a3-45a4-4d21-87d9-a3f216f3a0a8",
+                "created_at": 1527604600.474788
+            },
+            {
+                "fixed_input_id": "171f2c2a-0e5c-46ac-a87f-571b0ded3816",
+                "name": "netherlight",
+                "value": "False",
+                "product_id": "f19f01a3-45a4-4d21-87d9-a3f216f3a0a8",
+                "created_at": 1527604601.067047
+            }
+        ],
+        "workflows": [
+            {
+                "name": "modify_note",
+                "target": "MODIFY",
+                "description": "Modify Note",
+                "created_at": 1646220530.349738,
+                "workflow_id": "2bdff290-89ef-4880-b0ad-6d059738734b"
+            }
+        ]
+    },
+    {
+        "product_id": "31a8264c-855d-4f7a-805f-5899c3d9692c",
+        "name": "SURFlichtpaden P MSP-MSP",
+        "description": "Protected Lichtpad MSP-MSP",
+        "product_type": "LightPath",
+        "status": "end of life",
+        "tag": "LightPath",
+        "created_at": 1533035398.016972,
+        "end_date": 1635167260.200703,
+        "product_blocks": [
+            {
+                "product_block_id": "86238ed2-e8a1-45fa-a3c3-6b9a562103f4",
+                "name": "Virtual Circuit",
+                "description": "Virtual Circuit represents the point to point circuit between minimal two endpoints",
+                "tag": "VC",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "service_speed",
+                        "description": "Policer speed in Mbps",
+                        "resource_type_id": "bbb5e12b-ae1b-471b-9d2f-ca188a0e633c"
+                    },
+                    {
+                        "resource_type": "nso_service_id",
+                        "description": "The UUID of a NSO service",
+                        "resource_type_id": "4530f9b7-e6f0-4985-9640-228207045402"
+                    },
+                    {
+                        "resource_type": "ims_circuit_id",
+                        "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+                        "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83"
+                    }
+                ],
+                "created_at": 1512057415.411105,
+                "end_date": null
+            },
+            {
+                "product_block_id": "c3e955bf-4e7c-4df8-9a92-65da12a5755e",
+                "name": "Service Attach Point",
+                "description": "Service Attach Point describes the port for this service",
+                "tag": "SAPSS",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "bfd",
+                        "description": "Bidirectional Forwarding Detection",
+                        "resource_type_id": "814124f0-4a72-4719-a3d0-e456f71ef6ca"
+                    },
+                    {
+                        "resource_type": "ptp_ipv4_ipam_id",
+                        "description": "IPv4 Point-to-Point IPAM ID",
+                        "resource_type_id": "b1fa7d3f-782f-4692-96be-13fda2b3d417"
+                    },
+                    {
+                        "resource_type": "ptp_ipv6_ipam_id",
+                        "description": "IPv6 Point-to-Point IPAM ID",
+                        "resource_type_id": "2565f4c0-b0d5-437d-a75b-c99893a438db"
+                    },
+                    {
+                        "resource_type": "bfd_minimum_interval",
+                        "description": "BFD interval tuning in seconds",
+                        "resource_type_id": "ef6dfc3b-6fc7-45a2-9435-03792389e0ea"
+                    },
+                    {
+                        "resource_type": "bfd_multiplier",
+                        "description": "BFD tuning",
+                        "resource_type_id": "808b89f1-7518-4c04-8f2d-0567ae28dd26"
+                    },
+                    {
+                        "resource_type": "customer_ipv4_mtu",
+                        "description": "Customer MTU IPv4",
+                        "resource_type_id": "4cb385ac-2093-465a-a33b-669dbd6ce7c5"
+                    },
+                    {
+                        "resource_type": "customer_ipv6_mtu",
+                        "description": "Customer MTU IPv6",
+                        "resource_type_id": "46d487c6-e092-47ce-9975-2610e3b2028d"
+                    },
+                    {
+                        "resource_type": "bgp_session_priority",
+                        "description": "Border Gateway Protocol local preference, enum with primary, secondary, tertiary and quaternary, in SURFNet8 only primary and secondary",
+                        "resource_type_id": "67e44594-b9e5-48ab-8446-2df533ad9d12"
+                    },
+                    {
+                        "resource_type": "bgp_export_policy",
+                        "description": "Border Gateway Protocol routing table option, enum with full or default",
+                        "resource_type_id": "12882a79-42ca-4b30-b77c-cb6cf6bee779"
+                    },
+                    {
+                        "resource_type": "bgp_hash_algorithm",
+                        "description": "enum with MD5 and no, default MD5",
+                        "resource_type_id": "c7d66805-2237-4fd6-8d2f-0846c6a88029"
+                    },
+                    {
+                        "resource_type": "bgp_password",
+                        "description": "Border Gateway Protocol authentication hash",
+                        "resource_type_id": "24886bd8-dc86-4698-96be-aa0809571615"
+                    },
+                    {
+                        "resource_type": "enable_routing",
+                        "description": "Enable routing for IP BGP",
+                        "resource_type_id": "24c4d416-e14d-4bb3-b2b1-043a7520237a"
+                    }
+                ],
+                "created_at": 1512057451.555066,
+                "end_date": null
+            }
+        ],
+        "fixed_inputs": [
+            {
+                "fixed_input_id": "575419f0-d535-4517-b235-a8444d54fbd0",
+                "name": "netherlight",
+                "value": "False",
+                "product_id": "31a8264c-855d-4f7a-805f-5899c3d9692c",
+                "created_at": 1533035398.016972
+            },
+            {
+                "fixed_input_id": "3a24316c-eb7e-4b54-af98-238d1d8e39a2",
+                "name": "domain",
+                "value": "SURFNET7",
+                "product_id": "31a8264c-855d-4f7a-805f-5899c3d9692c",
+                "created_at": 1533035398.016972
+            },
+            {
+                "fixed_input_id": "01fecca3-b4b2-4f2e-bc6f-2ba8b32f7fd2",
+                "name": "protection_type",
+                "value": "Protected",
+                "product_id": "31a8264c-855d-4f7a-805f-5899c3d9692c",
+                "created_at": 1533035398.016972
+            }
+        ],
+        "workflows": [
+            {
+                "name": "modify_note",
+                "target": "MODIFY",
+                "description": "Modify Note",
+                "created_at": 1646220530.349738,
+                "workflow_id": "2bdff290-89ef-4880-b0ad-6d059738734b"
+            }
+        ]
+    },
+    {
+        "product_id": "57c6e033-2fd9-4116-8bb0-5cd991a4a1e3",
+        "name": "SURFlichtpaden 10GE",
+        "description": "Unprotected Lichtpad service 10Gbit/s.",
+        "product_type": "LightPath",
+        "status": "end of life",
+        "tag": "LightPath",
+        "created_at": 1527604600.474788,
+        "end_date": 1635167260.200703,
+        "product_blocks": [
+            {
+                "product_block_id": "86238ed2-e8a1-45fa-a3c3-6b9a562103f4",
+                "name": "Virtual Circuit",
+                "description": "Virtual Circuit represents the point to point circuit between minimal two endpoints",
+                "tag": "VC",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "service_speed",
+                        "description": "Policer speed in Mbps",
+                        "resource_type_id": "bbb5e12b-ae1b-471b-9d2f-ca188a0e633c"
+                    },
+                    {
+                        "resource_type": "nso_service_id",
+                        "description": "The UUID of a NSO service",
+                        "resource_type_id": "4530f9b7-e6f0-4985-9640-228207045402"
+                    },
+                    {
+                        "resource_type": "ims_circuit_id",
+                        "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+                        "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83"
+                    }
+                ],
+                "created_at": 1512057415.411105,
+                "end_date": null
+            },
+            {
+                "product_block_id": "c3e955bf-4e7c-4df8-9a92-65da12a5755e",
+                "name": "Service Attach Point",
+                "description": "Service Attach Point describes the port for this service",
+                "tag": "SAPSS",
+                "status": "active",
+                "resource_types": [
+                    {
+                        "resource_type": "bfd",
+                        "description": "Bidirectional Forwarding Detection",
+                        "resource_type_id": "814124f0-4a72-4719-a3d0-e456f71ef6ca"
+                    },
+                    {
+                        "resource_type": "ptp_ipv4_ipam_id",
+                        "description": "IPv4 Point-to-Point IPAM ID",
+                        "resource_type_id": "b1fa7d3f-782f-4692-96be-13fda2b3d417"
+                    },
+                    {
+                        "resource_type": "ptp_ipv6_ipam_id",
+                        "description": "IPv6 Point-to-Point IPAM ID",
+                        "resource_type_id": "2565f4c0-b0d5-437d-a75b-c99893a438db"
+                    },
+                    {
+                        "resource_type": "bfd_minimum_interval",
+                        "description": "BFD interval tuning in seconds",
+                        "resource_type_id": "ef6dfc3b-6fc7-45a2-9435-03792389e0ea"
+                    },
+                    {
+                        "resource_type": "bfd_multiplier",
+                        "description": "BFD tuning",
+                        "resource_type_id": "808b89f1-7518-4c04-8f2d-0567ae28dd26"
+                    },
+                    {
+                        "resource_type": "customer_ipv4_mtu",
+                        "description": "Customer MTU IPv4",
+                        "resource_type_id": "4cb385ac-2093-465a-a33b-669dbd6ce7c5"
+                    },
+                    {
+                        "resource_type": "customer_ipv6_mtu",
+                        "description": "Customer MTU IPv6",
+                        "resource_type_id": "46d487c6-e092-47ce-9975-2610e3b2028d"
+                    },
+                    {
+                        "resource_type": "bgp_session_priority",
+                        "description": "Border Gateway Protocol local preference, enum with primary, secondary, tertiary and quaternary, in SURFNet8 only primary and secondary",
+                        "resource_type_id": "67e44594-b9e5-48ab-8446-2df533ad9d12"
+                    },
+                    {
+                        "resource_type": "bgp_export_policy",
+                        "description": "Border Gateway Protocol routing table option, enum with full or default",
+                        "resource_type_id": "12882a79-42ca-4b30-b77c-cb6cf6bee779"
+                    },
+                    {
+                        "resource_type": "bgp_hash_algorithm",
+                        "description": "enum with MD5 and no, default MD5",
+                        "resource_type_id": "c7d66805-2237-4fd6-8d2f-0846c6a88029"
+                    },
+                    {
+                        "resource_type": "bgp_password",
+                        "description": "Border Gateway Protocol authentication hash",
+                        "resource_type_id": "24886bd8-dc86-4698-96be-aa0809571615"
+                    },
+                    {
+                        "resource_type": "enable_routing",
+                        "description": "Enable routing for IP BGP",
+                        "resource_type_id": "24c4d416-e14d-4bb3-b2b1-043a7520237a"
+                    }
+                ],
+                "created_at": 1512057451.555066,
+                "end_date": null
+            }
+        ],
+        "fixed_inputs": [
+            {
+                "fixed_input_id": "3dbaae73-d539-4864-bdde-8ba235f80c5b",
+                "name": "city_type",
+                "value": "inter_city",
+                "product_id": "57c6e033-2fd9-4116-8bb0-5cd991a4a1e3",
+                "created_at": 1533115751.559395
+            },
+            {
+                "fixed_input_id": "18873044-ac73-4383-914a-8a052c10ad1e",
+                "name": "domain",
+                "value": "SURFNET7",
+                "product_id": "57c6e033-2fd9-4116-8bb0-5cd991a4a1e3",
+                "created_at": 1527604600.474788
+            },
+            {
+                "fixed_input_id": "6b67fcb8-c0a8-4cc9-a414-6b1f5f679165",
+                "name": "service_speed",
+                "value": "10000",
+                "product_id": "57c6e033-2fd9-4116-8bb0-5cd991a4a1e3",
+                "created_at": 1527604600.474788
+            },
+            {
+                "fixed_input_id": "875efdc8-40c1-4f5c-8d29-333586953461",
+                "name": "protection_type",
+                "value": "Unprotected",
+                "product_id": "57c6e033-2fd9-4116-8bb0-5cd991a4a1e3",
+                "created_at": 1527604600.474788
+            },
+            {
+                "fixed_input_id": "ab9782e8-4671-4723-be10-0ee46e529583",
+                "name": "netherlight",
+                "value": "False",
+                "product_id": "57c6e033-2fd9-4116-8bb0-5cd991a4a1e3",
+                "created_at": 1527604601.068895
+            }
+        ],
+        "workflows": [
+            {
+                "name": "modify_note",
+                "target": "MODIFY",
+                "description": "Modify Note",
+                "created_at": 1646220530.349738,
+                "workflow_id": "2bdff290-89ef-4880-b0ad-6d059738734b"
             }
         ]
     }

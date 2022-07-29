@@ -122,8 +122,6 @@ function Select({
                         isClearable={true}
                         placeholder={placeholder || intl.formatMessage({ id: "forms.widgets.select.placeholder" })}
                         isDisabled={disabled || readOnly}
-                        required={required}
-                        inputRef={inputRef}
                     />
                 </EuiFormRow>
             </section>

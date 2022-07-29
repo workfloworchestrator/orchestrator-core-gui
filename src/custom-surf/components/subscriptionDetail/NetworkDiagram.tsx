@@ -81,6 +81,8 @@ const circuitTypeProperties = {
 const graphList: Graph[] = [];
 
 export default class NetworkDiagram extends React.Component<IProps, IState> {
+    static contextType = ApplicationContext;
+    context!: React.ContextType<typeof ApplicationContext>;
     constructor(props: IProps) {
         super(props);
 
@@ -392,4 +394,3 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
         );
     }
 }
-NetworkDiagram.contextType = ApplicationContext;

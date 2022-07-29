@@ -29,7 +29,7 @@ import {
     EuiText,
 } from "@elastic/eui";
 import React from "react";
-import ReactSelect, { ValueType } from "react-select";
+import ReactSelect, { SingleValue } from "react-select";
 import { getReactSelectTheme } from "stylesheets/emotion/utils";
 import ApplicationContext from "utils/ApplicationContext";
 import { ipamStates } from "utils/Lookups";
@@ -59,6 +59,8 @@ interface IState {
 }
 
 export default class IPPrefixTable extends React.PureComponent<IProps> {
+    static contextType = ApplicationContext;
+    context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {
         ipBlocks: [],
         loading: true,
@@ -144,7 +146,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         });
     };
 
-    filterParentPrefix = (e: ValueType<Option, false>) => {
+    filterParentPrefix = (e: SingleValue<Option>) => {
         this.setState({ loading: true });
         const parentPrefix = parseInt(e!.value, 10);
         let { filter, filteredPrefixes } = this.state;
@@ -352,6 +354,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                             </span>
                         </div>
                         <EuiInMemoryTable
+                            id="test"
                             style={{ marginTop: "6px" }}
                             itemId="id"
                             tableCaption="Prefix table"
@@ -367,4 +370,3 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         );
     }
 }
-IPPrefixTable.contextType = ApplicationContext;

@@ -23,7 +23,7 @@ import { formDate, formInput, formSelect } from "forms/Builder";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { RouteComponentProps } from "react-router";
-import { ValueType } from "react-select";
+import { SingleValue } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { Option, ProductBlock, Product as ProductData, Workflow } from "utils/types";
@@ -57,6 +57,8 @@ interface IState {
 }
 
 class EditProduct extends React.Component<IProps, IState> {
+    static contextType = ApplicationContext;
+    context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {
         errors: {},
         required: ["name", "description", "status", "product_type", "tag"],
@@ -203,7 +205,7 @@ class EditProduct extends React.Component<IProps, IState> {
             | React.MouseEvent<HTMLSpanElement | HTMLButtonElement>
             | null
             | React.ChangeEvent<HTMLInputElement>
-            | ValueType<Option, false>
+            | SingleValue<Option>
     ) => {
         const { product } = this.state;
         let value: any;
@@ -285,5 +287,4 @@ class EditProduct extends React.Component<IProps, IState> {
     }
 }
 
-EditProduct.contextType = ApplicationContext;
 export default injectIntl(EditProduct);

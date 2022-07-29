@@ -25,7 +25,7 @@ export const editProductStyling = css`
             div.wrapper {
                 position: relative;
                 flex-grow: 2;
-                &:first-child {
+                &:first-of-type {
                     margin-right: 25px;
                 }
                 em {

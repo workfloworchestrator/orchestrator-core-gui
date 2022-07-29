@@ -39,7 +39,7 @@ export const processDetailStyling = css`
             padding-top: 25px;
             a {
                 margin-left: 40px;
-                &:first-child {
+                &:first-of-type {
                     margin-left: auto;
                 }
             }

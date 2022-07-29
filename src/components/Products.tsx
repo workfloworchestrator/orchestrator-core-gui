@@ -49,7 +49,7 @@ function Products() {
         setReload(false);
     }, [apiClient, reload]);
 
-    const handleOnClick = useCallback((path) => history.push(path), [history]);
+    const handleOnClick = useCallback((path: string) => history.push(path), [history]);
 
     const deleteProduct = (product: Product) => {
         apiClient

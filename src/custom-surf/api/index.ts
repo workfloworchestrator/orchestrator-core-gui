@@ -137,7 +137,7 @@ export class CustomApiClient extends CustomApiClientInterface {
         );
     };
 
-    portByImsPortId = (portId: number) => {
+    portByImsPortId = (portId: number): Promise<IMSPort> => {
         return this.fetchJson(`surf/ims/port_by_ims_port/${portId}`);
     };
 

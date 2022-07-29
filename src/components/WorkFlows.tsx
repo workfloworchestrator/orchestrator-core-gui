@@ -26,6 +26,8 @@ interface IState {
 }
 
 export default class WorkFlows extends React.Component {
+    static contextType = ApplicationContext;
+    context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {
         workFlows: [],
         workFlowsLoaded: true,
@@ -33,7 +35,7 @@ export default class WorkFlows extends React.Component {
     };
 
     componentDidMount() {
-        this.context.apiClient.allWorkflowsWithProductTags().then((workFlows: WorkflowWithProductTags) => {
+        this.context.apiClient.allWorkflowsWithProductTags().then((workFlows: WorkflowWithProductTags[]) => {
             this.setState({ workFlows: workFlows, workFlowsLoaded: false });
         });
     }
@@ -129,4 +131,3 @@ export default class WorkFlows extends React.Component {
         );
     }
 }
-WorkFlows.contextType = ApplicationContext;

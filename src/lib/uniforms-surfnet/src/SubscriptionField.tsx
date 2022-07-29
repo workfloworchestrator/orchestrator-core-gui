@@ -128,7 +128,8 @@ function Subscription({
     intl,
     ...props
 }: SubscriptionFieldProps) {
-    const { theme } = useContext(ApplicationContext);
+    const { theme, organisations, products: allProducts, apiClient, customApiClient } = useContext(ApplicationContext);
+    const { getSubscriptions, clearSubscriptions } = useContext(SubscriptionsContext);
 
     const nameArray = joinName(null, name);
     let parentName = joinName(nameArray.slice(0, -1));
@@ -146,8 +147,6 @@ function Subscription({
     let [subscriptions, updateSubscriptions] = useState<iSubscription[]>([]);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let [loading, setLoading] = useState<boolean>(false);
-    const { organisations, products: allProducts, apiClient, customApiClient } = useContext(ApplicationContext);
-    const { getSubscriptions, clearSubscriptions } = useContext(SubscriptionsContext);
 
     const bandwithFromField = bandwidthKey
         ? get(model, bandwidthKey!) || schema.getInitialValue(bandwidthKey, {})
@@ -182,29 +181,33 @@ function Subscription({
     }, [getSubscriptions, tags, statuses, apiClient, customApiClient]);
 
     // Filter by product, needed because getSubscriptions might return more than we want
-    subscriptions =
+    let subscriptionsFiltered =
         filteredProductIds.length === allProducts.length
             ? subscriptions
             : subscriptions.filter((sp) => filteredProductIds.includes(sp.product.product_id));
 
     if (excludedSubscriptionIds) {
-        subscriptions = subscriptions.filter((item) => !excludedSubscriptionIds.includes(item.subscription_id));
+        subscriptionsFiltered = subscriptionsFiltered.filter(
+            (item) => !excludedSubscriptionIds.includes(item.subscription_id)
+        );
     }
 
     // Port mode filter
     if (visiblePortMode !== "all") {
         if (visiblePortMode === "normal") {
-            subscriptions = subscriptions.filter(
+            subscriptionsFiltered = subscriptionsFiltered.filter(
                 (item) => getPortMode(item, allProducts) === "tagged" || getPortMode(item, allProducts) === "untagged"
             );
         } else {
-            subscriptions = subscriptions.filter((item) => getPortMode(item, allProducts) === visiblePortMode);
+            subscriptionsFiltered = subscriptionsFiltered.filter(
+                (item) => getPortMode(item, allProducts) === visiblePortMode
+            );
         }
     }
 
     // Customer filter toggle
     if (usedOrganisationId) {
-        subscriptions = subscriptions.filter((item) => item.customer_id === usedOrganisationId);
+        subscriptionsFiltered = subscriptionsFiltered.filter((item) => item.customer_id === usedOrganisationId);
     }
 
     if (parentName !== name) {
@@ -214,13 +217,13 @@ function Subscription({
                 (_item, index) => index.toString() !== nameArray[nameArray.length - 1]
             );
 
-            subscriptions = subscriptions.filter(
+            subscriptionsFiltered = subscriptionsFiltered.filter(
                 (subscription) => !chosenValues.includes(subscription.subscription_id)
             );
         }
     }
 
-    const options = subscriptions.map((subscription: iSubscription) => ({
+    const options = subscriptionsFiltered.map((subscription: iSubscription) => ({
         label: makeLabel(subscription, allProducts, organisations),
         value: subscription.subscription_id,
     }));
@@ -280,7 +283,7 @@ function Subscription({
                                 <ServicePortSelectorModal
                                     selectedTabId="nodeFilter"
                                     handleSelect={selectSubscriptionFromModal}
-                                    subscriptions={subscriptions}
+                                    subscriptions={subscriptionsFiltered}
                                 />
                             </EuiModal>
                         </EuiOverlayMask>
@@ -299,8 +302,6 @@ function Subscription({
                         isClearable={false}
                         placeholder={intl.formatMessage({ id: "forms.widgets.subscription.placeholder" })}
                         isDisabled={disabled || readOnly}
-                        required={required}
-                        inputRef={inputRef}
                         styles={customStyles}
                         className="subscription-field-select"
                     />

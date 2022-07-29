@@ -18,7 +18,7 @@ import { EuiFormRow, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
-import ReactSelect, { ValueType } from "react-select";
+import ReactSelect, { SingleValue } from "react-select";
 import { getReactSelectTheme } from "stylesheets/emotion/utils";
 import { connectField, filterDOMProps } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
@@ -79,7 +79,7 @@ function ImsPortId({
     const [loading, setLoading] = useState(true);
 
     const onChangeNodes = useCallback(
-        (option: ValueType<Option, false>) => {
+        (option: SingleValue<Option>) => {
             let value = option?.value;
 
             if (value === undefined) {

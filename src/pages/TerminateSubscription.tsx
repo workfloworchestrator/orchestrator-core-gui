@@ -40,6 +40,8 @@ function getTerminateWorkflow(product: Product) {
 }
 
 class TerminateSubscription extends React.Component<IProps, IState> {
+    static contextType = ApplicationContext;
+    context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {};
 
     componentDidMount = () => {
@@ -125,6 +127,5 @@ class TerminateSubscription extends React.Component<IProps, IState> {
         );
     }
 }
-TerminateSubscription.contextType = ApplicationContext;
 
 export default injectIntl(withRouter(TerminateSubscription));

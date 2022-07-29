@@ -17,7 +17,7 @@ import "custom/components/inputForms/SplitPrefix.scss";
 
 import { range } from "lodash";
 import React from "react";
-import ReactSelect, { ValueType } from "react-select";
+import ReactSelect, { SingleValue } from "react-select";
 import { getReactSelectTheme } from "stylesheets/emotion/utils";
 import ApplicationContext from "utils/ApplicationContext";
 import { Option } from "utils/types";
@@ -38,6 +38,8 @@ interface IState {
 }
 
 export default class SplitPrefix extends React.PureComponent<IProps> {
+    static contextType = ApplicationContext;
+    context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {
         subnets: [],
         desiredPrefixlen: 0,
@@ -66,7 +68,7 @@ export default class SplitPrefix extends React.PureComponent<IProps> {
         this.fetchFreePrefixes(subnet, prefixlen, prefixMin);
     }
 
-    changePrefixLength = (e: ValueType<Option<number>, false>) => {
+    changePrefixLength = (e: SingleValue<Option<number>>) => {
         const { subnet, prefixlen } = { ...this.props };
 
         const desiredPrefixlen = e?.value;
@@ -75,7 +77,7 @@ export default class SplitPrefix extends React.PureComponent<IProps> {
         }
     };
 
-    selectSubnet = (e: ValueType<Option, false>) => {
+    selectSubnet = (e: SingleValue<Option>) => {
         this.props.onChange(e?.value ?? "");
     };
 
@@ -125,4 +127,3 @@ export default class SplitPrefix extends React.PureComponent<IProps> {
         );
     }
 }
-SplitPrefix.contextType = ApplicationContext;

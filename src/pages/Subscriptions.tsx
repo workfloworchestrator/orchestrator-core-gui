@@ -39,6 +39,9 @@ interface IState {
 }
 
 export default class SubscriptionsPage extends React.PureComponent<IProps, IState> {
+    static contextType = ApplicationContext;
+    context!: React.ContextType<typeof ApplicationContext>;
+
     constructor(props: IProps) {
         super(props);
 
@@ -176,5 +179,3 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
         );
     }
 }
-
-SubscriptionsPage.contextType = ApplicationContext;

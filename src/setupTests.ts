@@ -13,8 +13,7 @@
  *
  */
 import { configure } from "enzyme";
-//@ts-ignore
-import Adapter from "enzyme-adapter-react-16";
+import Adapter from "enzyme-adapter-react-17-updated";
 import I18n from "i18n-js";
 import en from "locale/en";
 
@@ -23,4 +22,5 @@ expect(I18n).toBeDefined();
 expect(en).toBeDefined();
 I18n.locale = "en";
 
+//@ts-ignore
 configure({ adapter: new Adapter() });

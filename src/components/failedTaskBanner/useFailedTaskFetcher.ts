@@ -32,7 +32,7 @@ function useFailedTaskFetcher<T extends object>(endpoint: string): [T[], number,
     const fetchIdRef = useRef(0);
     const entityTag = useRef<string | null>(null);
     const fetchData = useCallback(
-        (pageIndex, pageSize, sortBy, filterBy) => {
+        (pageIndex: number, pageSize: number, sortBy: any, filterBy: any) => {
             const fetchId = ++fetchIdRef.current;
             const startRow = pageSize * pageIndex;
             const endRow = startRow + pageSize;

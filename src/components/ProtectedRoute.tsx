@@ -15,16 +15,15 @@
 
 import { ENV } from "env";
 import { useAuth } from "oidc-react";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Redirect, Route, RouteComponentProps } from "react-router-dom";
 
-export default function ProtectedRoute({
-    path,
-    render,
-}: {
+interface IProps {
     path: string;
     render: (props: RouteComponentProps<any>) => ReactNode;
-}) {
+}
+
+function ProtectedRouteWithAuth({ path, render }: IProps) {
     /**
      * This provides the hook to restrict access based on memberships of the logged in user. For
      * now we will allow everyone access
@@ -32,8 +31,16 @@ export default function ProtectedRoute({
 
     const auth = useAuth();
 
-    if (!ENV.OAUTH2_ENABLED || (auth?.userData && !auth?.userData.expired)) {
+    if (auth?.userData && !auth?.userData.expired) {
         return <Route path={path} render={render} />;
     }
     return <Redirect to={"/not-allowed"} />;
+}
+
+export default function ProtectedRoute({ path, render }: IProps) {
+    if (ENV.OAUTH2_ENABLED) {
+        return <ProtectedRouteWithAuth path={path} render={render} />;
+    }
+
+    return <Route path={path} render={render} />;
 }

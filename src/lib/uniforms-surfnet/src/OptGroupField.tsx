@@ -45,23 +45,25 @@ function OptGroup({
             description={intl.formatMessage({ id: `forms.fields.${name}.info` })}
             className={`${className} optgroup-field`}
         >
-            <EuiFlexItem>
-                <EuiFormRow
-                    error={false}
-                    isInvalid={false}
-                    id={name} // Not sure if this is always unique...
-                >
-                    <BoolField name="enabled" readOnly={readOnly} />
-                </EuiFormRow>
-            </EuiFlexItem>
-            {enabled &&
-                fields
-                    ?.filter((field) => field !== "enabled")
-                    .map((field) => (
-                        <EuiFlexItem key={field}>
-                            <AutoField name={field} {...itemProps} />
-                        </EuiFlexItem>
-                    ))}
+            <>
+                <EuiFlexItem>
+                    <EuiFormRow
+                        error={false}
+                        isInvalid={false}
+                        id={name} // Not sure if this is always unique...
+                    >
+                        <BoolField name="enabled" readOnly={readOnly} />
+                    </EuiFormRow>
+                </EuiFlexItem>
+                {enabled &&
+                    fields
+                        ?.filter((field) => field !== "enabled")
+                        .map((field) => (
+                            <EuiFlexItem key={field}>
+                                <AutoField name={field} {...itemProps} />
+                            </EuiFlexItem>
+                        ))}
+            </>
         </EuiDescribedFormGroup>
     );
 }

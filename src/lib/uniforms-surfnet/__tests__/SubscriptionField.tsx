@@ -20,7 +20,6 @@ import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import withSubscriptions from "lib/uniforms-surfnet/__tests__/_withSubscriptions";
 import { ListField, SubscriptionField } from "lib/uniforms-surfnet/src";
 import { getPortMode, makeLabel } from "lib/uniforms-surfnet/src/SubscriptionField";
-import React from "react";
 import ReactSelect from "react-select";
 import { apiClient, customApiClient } from "utils/ApplicationContext";
 import { Product, ServicePortSubscription } from "utils/types";

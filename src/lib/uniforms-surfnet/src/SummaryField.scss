@@ -23,7 +23,7 @@ section.table-summary {
         padding: 10px;
     }
 
-    td:not(:first-child):not(:last-child) {
+    td:not(:first-of-type):not(:last-child) {
         &.light {
             border-right: 1px solid vars.$light-grey;
         }

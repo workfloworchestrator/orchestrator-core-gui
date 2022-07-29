@@ -35,6 +35,9 @@ interface IState {
 }
 
 class ModifySubscription extends React.Component<IProps, IState> {
+    static contextType = ApplicationContext;
+    context!: React.ContextType<typeof ApplicationContext>;
+
     state: IState = {};
 
     componentDidMount = () => {
@@ -106,7 +109,5 @@ class ModifySubscription extends React.Component<IProps, IState> {
         );
     }
 }
-
-ModifySubscription.contextType = ApplicationContext;
 
 export default injectIntl(withRouter(ModifySubscription));
