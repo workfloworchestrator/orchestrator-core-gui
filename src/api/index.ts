@@ -278,7 +278,7 @@ export class ApiClient extends ApiClientInterface {
     };
 
     workflowsByTarget = (target: string): Promise<Workflow[]> => {
-        return this.fetchJson(`workflows?target=${target}`);
+        return this.fetchJson(`workflows/?target=${target}`);
     };
 
     // @ts-ignore
