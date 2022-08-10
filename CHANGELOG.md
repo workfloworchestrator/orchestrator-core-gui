@@ -7,7 +7,7 @@ reference the gitlab/github issue that is related to the change.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [v10.4.0] - 2022-08-10
+## [v10.4.0] - TBD
 
 - `#134` Replace SCSS with Emotion CSS
 - `#138` Improve getting subs with inUseByIds by making the list unique
