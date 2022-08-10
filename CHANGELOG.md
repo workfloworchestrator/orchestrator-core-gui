@@ -7,6 +7,32 @@ reference the gitlab/github issue that is related to the change.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v10.4.0] - 2022-08-10
+
+- `#134` Replace SCSS with Emotion CSS
+- `#138` Improve getting subs with inUseByIds by making the list unique
+- `#143` Allow overriding Button text, dialog and color in the FormWizard; Order custompages consistently
+- `#147` Upgrade React 17, fixes to storybook styling and mock data
+- `#149` Fix "new task" button triggering an unexpected error
+
+
+Surf specific:
+- `#139` cim: update impact override
+- `#142` cim: serviceticket abort
+- `#143` cim#10: serviceticket open
+
+
+## [v10.3.0] - 2022-07-04
+
+- `#135` Allow user to specify label for dynamic form field
+
+Surf specific:
+- `#130` cim#4: serviceticket details
+- `#132` cim: ticket forms and form generator
+
+
+...
+
 ## [7.5.0] - unreleased
 
 - `#orchestrator:1044` Show subscription description on subscription detail page for resource types
