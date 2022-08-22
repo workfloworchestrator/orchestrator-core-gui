@@ -21,6 +21,8 @@ Surf specific:
 - `#139` cim: update impact override
 - `#142` cim: serviceticket abort
 - `#143` cim#10: serviceticket open
+- `#150` cim: remove trailing slash in api call
+- `#153` cim: hide servicetickets from menu bar
 
 
 ## [v10.3.0] - 2022-07-04
