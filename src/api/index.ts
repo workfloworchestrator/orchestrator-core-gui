@@ -15,6 +15,7 @@
 import {
     EngineStatus,
     FixedInputConfiguration,
+    ProcessStatusCounts,
     ProcessSubscription,
     ProcessWithDetails,
     Product,
@@ -267,6 +268,10 @@ export class ApiClient extends ApiClientInterface {
     processStatuses = (): Promise<string[]> => {
         // Todo: Test status (refactored from axios fetch)
         return this.fetchJson("processes/statuses");
+    };
+
+    processStatusCounts = (): Promise<ProcessStatusCounts> => {
+        return this.fetchJson("processes/status-counts");
     };
 
     allWorkflows = (): Promise<Workflow[]> => {
