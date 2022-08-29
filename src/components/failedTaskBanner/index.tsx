@@ -59,20 +59,21 @@ export default function FailedTaskBanner() {
     const history = useHistory();
     const handleOnClick = useCallback(() => history.push("/tasks"), [history]);
 
-    useHttpIntervalFallback(useFallback, () => getSummary());
+    useHttpIntervalFallback(useFallback, () =>
+        apiClient.processStatusCounts().then((res) => {
+            setSummary(res);
+        })
+    );
+
+    useEffect(() => {
+        apiClient.processStatusCounts().then((res) => {
+            setSummary(res);
+        })
+    }, [apiClient, setSummary, runningProcesses, completedProcessIds]);
 
     useEffect(() => {
         setFailedTasks(countFailedTasks(summary));
     }, [summary]);
-
-    const getSummary = () =>
-        apiClient.processStatusCounts().then((res) => {
-            setSummary(res);
-        });
-
-    useEffect(() => {
-        getSummary();
-    }, [runningProcesses, completedProcessIds]);
 
     const renderTooltipContent = () => (
         <>
