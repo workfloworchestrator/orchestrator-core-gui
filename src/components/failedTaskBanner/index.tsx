@@ -15,15 +15,13 @@
 
 import { EuiFlexItem, EuiText, EuiToolTip } from "@elastic/eui";
 import RunningProcessesContext from "contextProviders/runningProcessesProvider";
-import { groupBy } from "lodash";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { Process, ProcessStatus } from "utils/types";
+import ApplicationContext from "utils/ApplicationContext";
+import { Process, ProcessStatus, ProcessStatusCounts } from "utils/types";
 import useHttpIntervalFallback from "utils/useHttpIntervalFallback";
-import { FailedProcess } from "websocketService/useRunningProcesses";
 
 import { failedTaskBannerStyling } from "./FailedTaskBannerStyling";
-import useFailedTaskFetcher from "./useFailedTaskFetcher";
 
 enum CheckboxStatus {
     "OK" = "ok",
@@ -34,25 +32,17 @@ export interface ProcessData extends Process {
     status: ProcessStatus;
 }
 
-interface ProcessWithStatus {
-    last_status: string;
-}
-
-interface CountFailedProcesses {
+interface CountFailedTasks {
     failed: number;
     inconsistentData: number;
     apiUnavailable: number;
     all: number;
 }
 
-const failedProcessStatuses = ["failed", "api_unavailable", "inconsistent_data"];
-const filterFailedTasks = [{ id: "status", values: failedProcessStatuses }];
-
-const countFailedProcesses = (processes: ProcessWithStatus[]): CountFailedProcesses => {
-    const groupStatuses = groupBy(processes, (p) => p.last_status);
-    const failed = groupStatuses[ProcessStatus.FAILED]?.length || 0;
-    const inconsistentData = groupStatuses[ProcessStatus.INCONSISTENT_DATA]?.length || 0;
-    const apiUnavailable = groupStatuses[ProcessStatus.API_UNAVAILABLE]?.length || 0;
+const countFailedTasks = (summary?: ProcessStatusCounts): CountFailedTasks => {
+    const failed = summary?.task_counts.failed ?? 0;
+    const inconsistentData = summary?.task_counts.inconsistent_data ?? 0;
+    const apiUnavailable = summary?.task_counts.api_unavailable ?? 0;
     return {
         failed,
         inconsistentData,
@@ -63,26 +53,26 @@ const countFailedProcesses = (processes: ProcessWithStatus[]): CountFailedProces
 
 export default function FailedTaskBanner() {
     const { runningProcesses, completedProcessIds, useFallback } = useContext(RunningProcessesContext);
-    const [data, , fetchData] = useFailedTaskFetcher<FailedProcess>("processes/");
-    const [failedProcesses, setFailedProcesses] = useState<FailedProcess[]>([]);
-    const [failedTasks, setFailedTasks] = useState(countFailedProcesses([]));
+    const { apiClient } = useContext(ApplicationContext);
+    const [summary, setSummary] = useState<ProcessStatusCounts>();
+    const [failedTasks, setFailedTasks] = useState<CountFailedTasks>(countFailedTasks(summary));
     const history = useHistory();
     const handleOnClick = useCallback(() => history.push("/tasks"), [history]);
 
-    useHttpIntervalFallback(useFallback, () => fetchData(0, 10, [], filterFailedTasks));
+    const getSummary = useCallback(async () => {
+        let res = await apiClient.processStatusCounts();
+        setSummary(res);
+    }, [apiClient, setSummary]);
+
+    useHttpIntervalFallback(useFallback, getSummary);
 
     useEffect(() => {
-        const newList = [...data, ...runningProcesses.filter((p) => failedProcessStatuses.includes(p.last_status))];
-        setFailedProcesses(newList.filter((p) => !completedProcessIds.includes(p.pid)));
-    }, [data, runningProcesses, completedProcessIds]);
+        getSummary();
+    }, [getSummary, runningProcesses, completedProcessIds]);
 
     useEffect(() => {
-        setFailedTasks(countFailedProcesses(failedProcesses));
-    }, [failedProcesses]);
-
-    useEffect(() => {
-        fetchData(0, 10, [], filterFailedTasks);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        setFailedTasks(countFailedTasks(summary));
+    }, [summary]);
 
     const renderTooltipContent = () => (
         <>

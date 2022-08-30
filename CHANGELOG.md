@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `#147` Upgrade React 17, fixes to storybook styling and mock data
 - `#149` Fix "new task" button triggering an unexpected error
 - `#150` Fix form inputs to use translation before the label
+- `#154` Fix number of failed tasks displayed by FailedTaskBanner
 
 
 Surf specific:

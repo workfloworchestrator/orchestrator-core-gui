@@ -252,6 +252,11 @@ export interface ProcessSubscription {
     workflow_target: string;
 }
 
+export interface ProcessStatusCounts {
+    process_counts: Record<ProcessStatus, number>;
+    task_counts: Record<ProcessStatus, number>;
+}
+
 export interface ProcessV2 {
     pid: string;
     assignee: Assignee;
