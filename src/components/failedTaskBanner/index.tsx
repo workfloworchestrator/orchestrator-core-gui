@@ -68,7 +68,7 @@ export default function FailedTaskBanner() {
     useEffect(() => {
         apiClient.processStatusCounts().then((res) => {
             setSummary(res);
-        })
+        });
     }, [apiClient, setSummary, runningProcesses, completedProcessIds]);
 
     useEffect(() => {
