@@ -77,7 +77,7 @@ const ServiceTicketDetailImpactedObjects = ({ ticket, updateable, acceptImpacted
 
         // Retrieve each subscription once
         for (const impacted of ticket.impacted_objects) {
-            if (impacted.subscription_id in subscriptions) {
+            if (impacted.subscription_id in subscriptions || !impacted.subscription_id) {
                 continue;
             }
             subscriptions[impacted.subscription_id] = await apiClient.subscriptionsDetailWithModel(
@@ -88,6 +88,10 @@ const ServiceTicketDetailImpactedObjects = ({ ticket, updateable, acceptImpacted
         const newImpactedObjects: ImpactedObject[] = ticket.impacted_objects
             .map((impactedObject) => {
                 let subscription = subscriptions[impactedObject.subscription_id];
+                if (!subscription) {
+                    return [];
+                }
+
                 return impactedObject.ims_circuits.map((imsCircuit) => {
                     return {
                         customer: impactedObject.owner_customer.customer_name,
