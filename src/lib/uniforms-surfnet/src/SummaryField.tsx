@@ -17,6 +17,7 @@ import "lib/uniforms-surfnet/src/SummaryField.scss";
 import { EuiFormRow, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React, { useContext } from "react";
+import ReactHtmlParser from "react-html-parser";
 import { connectField, filterDOMProps } from "uniforms";
 import { isEmpty } from "utils/Utils";
 
@@ -41,7 +42,7 @@ function Summary({ id, name, label, description, onChange, data, ...props }: Sum
     const rows = columns[0].map((row, index) => (
         <tr key={index}>
             {labels && <td className={`label ${theme}`}>{labels[index]}</td>}
-            <td className={`value ${theme}`}>{row}</td>
+            <td className={`value ${theme}`}>{row.includes("<!doctype html>") ? ReactHtmlParser(row) : row}</td>
             {extra_columns_data &&
                 extra_columns_data.map((cell, idx) => (
                     <td className={`value ${theme}`} key={idx}>
