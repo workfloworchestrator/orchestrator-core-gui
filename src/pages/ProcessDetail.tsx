@@ -123,7 +123,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         let enrichedProcess = processInstance as ProcessWithDetails;
 
         const stepUserInput: InputForm | undefined = enrichedProcess.form;
-        const tabs = stepUserInput ? this.state.tabs : ["process"];
+        const tabs = stepUserInput ? ["user_input", "process"] : ["process"];
         const selectedTab = stepUserInput ? "user_input" : "process";
 
         this.setState({
@@ -163,7 +163,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
         const enrichedProcess = { ...(this.state.process as ProcessWithDetails), ...process };
         const stepUserInput: InputForm | undefined = process.form;
-        const tabs = stepUserInput ? this.state.tabs : ["process"];
+        const tabs = stepUserInput ? ["user_input", "process"] : ["process"];
         const selectedTab = stepUserInput ? "user_input" : "process";
         this.setState({
             wsProcess: process,
@@ -365,8 +365,6 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         }
 
         return this.context.apiClient.resumeProcess(process.id, processInput).then((e) => {
-            this.context.redirect(`/${process.is_task ? "tasks" : `processes?highlight=${process.id}`}`);
-
             setFlash(
                 intl.formatMessage(
                     { id: `${process.is_task ? "task" : "process"}.flash.update` },
