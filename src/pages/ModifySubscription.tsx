@@ -83,7 +83,7 @@ class ModifySubscription extends React.Component<IProps, IState> {
                     }
                 )
             );
-            return <Redirect to={workflowName.startsWith("validate") ? "/tasks" : `/processes?highlight=${pid}`} />;
+            return <Redirect to={`/processes/${pid}`} />;
         }
 
         if (!stepUserInput) {

@@ -100,7 +100,7 @@ class TerminateSubscription extends React.Component<IProps, IState> {
                     }
                 )
             );
-            return <Redirect to={`/processes?highlight=${pid}`} />;
+            return <Redirect to={`/processes/${pid}`} />;
         }
 
         if (!stepUserInput) {

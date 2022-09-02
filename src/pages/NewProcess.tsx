@@ -58,7 +58,7 @@ export default function NewProcess(props: IProps) {
 
             let promise = apiClient.startProcess(workflow, processInput).then(
                 (process) => {
-                    redirect(`/processes?highlight=${process.id}`);
+                    redirect(`/processes/${process.id}`);
                     setFlash(
                         intl.formatMessage(
                             { id: "process.flash.create_create" },
