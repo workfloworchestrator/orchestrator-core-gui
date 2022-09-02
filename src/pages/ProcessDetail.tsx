@@ -133,6 +133,8 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             selectedTab: selectedTab,
         });
 
+        this.scrollToLast();
+
         if (enrichedProcess.status === "completed" && this.state.httpIntervalFallback) {
             clearInterval(this.state.httpIntervalFallback);
         }
@@ -172,7 +174,15 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             tabs: tabs,
             selectedTab: selectedTab,
         });
+        this.scrollToLast();
         return <></>;
+    };
+
+    scrollToLast = () => {
+        const finsihed_steps = this.state.process?.steps.filter((step) => step.status !== "pending");
+        if (finsihed_steps) {
+            this.handleScrollTo(finsihed_steps.length - 1);
+        }
     };
 
     handleDeleteProcess = (process: ProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
