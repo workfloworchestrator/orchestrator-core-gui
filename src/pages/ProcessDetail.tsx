@@ -21,7 +21,7 @@ import ConfirmationDialogContext, {
     ShowConfirmDialogType,
 } from "contextProviders/ConfirmationDialogProvider";
 import RunningProcessesContext from "contextProviders/runningProcessesProvider";
-import React from "react";
+import React, { RefObject, createRef } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { RouteComponentProps } from "react-router-dom";
 import ScrollUpButton from "react-scroll-up-button";
@@ -61,13 +61,18 @@ interface IState {
     productName: string;
     customerName: string;
     showConfirmDialog: ShowConfirmDialogType;
+    isActionsMenuOnScreen: boolean;
+    observer: IntersectionObserver | undefined;
+    autoScrollToLast: boolean;
 }
 
 class ProcessDetail extends React.PureComponent<IProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
+    actionsRef: RefObject<HTMLElement>;
 
     constructor(props: IProps) {
         super(props);
+        this.actionsRef = createRef();
         this.state = {
             process: undefined,
             notFound: false,
@@ -80,6 +85,9 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             productName: "",
             customerName: "",
             showConfirmDialog: () => {},
+            isActionsMenuOnScreen: true,
+            observer: undefined,
+            autoScrollToLast: true,
         };
     }
 
@@ -133,7 +141,9 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             selectedTab: selectedTab,
         });
 
-        this.scrollToLast();
+        if (this.state.autoScrollToLast) {
+            this.scrollToLast();
+        }
 
         if (enrichedProcess.status === "completed" && this.state.httpIntervalFallback) {
             clearInterval(this.state.httpIntervalFallback);
@@ -157,6 +167,27 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         this.context.apiClient.process(this.props.match.params.id).then(this.initializeProcessDetails);
     };
 
+    componentDidUpdate = () => {
+        const el = this.actionsRef.current;
+        if (this.state.observer || !this.actionsRef.current) {
+            return;
+        }
+
+        const observer = new IntersectionObserver(([entry]) => {
+            this.setState({ isActionsMenuOnScreen: entry.isIntersecting });
+        });
+        if (el) {
+            observer.observe(el);
+        }
+        this.setState({ observer: observer });
+    };
+
+    componentWillUnmount = () => {
+        if (this.state.observer) {
+            this.state.observer.disconnect();
+        }
+    };
+
     handleUpdateProcess = (runningProcesses: WsProcessV2[]) => {
         const process = runningProcesses.find((p) => p.pid === this.props.match.params.id);
         if (this.state.wsProcess === process || !process) {
@@ -174,7 +205,10 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             tabs: tabs,
             selectedTab: selectedTab,
         });
-        this.scrollToLast();
+
+        if (this.state.autoScrollToLast) {
+            this.scrollToLast();
+        }
         return <></>;
     };
 
@@ -306,6 +340,13 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
     confirmation = (question: string, confirmAction: (e: React.MouseEvent) => void) =>
         this.state.showConfirmDialog({ question, confirmAction });
 
+    setIsAutoScrollToLast = (on: boolean) => {
+        this.setState({ autoScrollToLast: on });
+        if (on) {
+            this.scrollToLast();
+        }
+    };
+
     renderActions = (process: ProcessWithDetails) => {
         const { intl } = this.props;
         const { allowed } = this.context;
@@ -323,10 +364,8 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             options = options.filter((option) => option.label !== "delete");
         }
 
-        const lastStepIndex = process.steps.findIndex((item: Step) => item.name === process.step);
-
         return (
-            <section className="process-actions">
+            <section ref={this.actionsRef} className="process-actions">
                 <EuiFlexGroup gutterSize="s" alignItems="center">
                     {options.map((option, index) => (
                         <EuiFlexItem grow={true} key={index}>
@@ -353,13 +392,18 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                         </EuiButton>
                     </EuiFlexItem>
                     <EuiFlexItem grow={true}>
+                        <EuiButton fill iconType="sortDown" iconSide="right" onClick={() => this.scrollToLast()}>
+                            SCROLL TO LAST
+                        </EuiButton>
+                    </EuiFlexItem>
+                    <EuiFlexItem grow={true}>
                         <EuiButton
                             fill
-                            iconType="sortDown"
+                            iconType={this.state.autoScrollToLast ? "checkInCircleFilled" : "crossInACircleFilled"}
                             iconSide="right"
-                            onClick={() => this.handleScrollTo(lastStepIndex)}
+                            onClick={() => this.setIsAutoScrollToLast(!this.state.autoScrollToLast)}
                         >
-                            SCROLL TO LAST
+                            AUTO SCROLL TO LAST
                         </EuiButton>
                     </EuiFlexItem>
                 </EuiFlexGroup>
@@ -387,6 +431,17 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
     switchTab = (tab: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
         this.setState({ selectedTab: tab });
+    };
+
+    renderFixedTabMenu = (
+        selectedTab: string,
+        process: ProcessWithDetails,
+        step: Step | undefined,
+        stepUserInput: InputForm | undefined
+    ) => {
+        if (!step || !stepUserInput || selectedTab === "process") {
+            return <div className="fixed_tab_menu">{this.renderActions(process)}</div>;
+        }
     };
 
     renderTabContent = (
@@ -459,7 +514,16 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
     };
 
     render() {
-        const { loaded, notFound, process, tabs, stepUserInput, selectedTab, subscriptionProcesses } = this.state;
+        const {
+            loaded,
+            notFound,
+            process,
+            tabs,
+            stepUserInput,
+            selectedTab,
+            subscriptionProcesses,
+            isActionsMenuOnScreen,
+        } = this.state;
         if (!process) {
             return null;
         }
@@ -479,6 +543,9 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                     <section className="tabs">{tabs.map((tab) => this.renderTab(tab, selectedTab))}</section>
                     {renderContent &&
                         this.renderTabContent(selectedTab, process, step, stepUserInput, subscriptionProcesses)}
+                    {renderContent &&
+                        !isActionsMenuOnScreen &&
+                        this.renderFixedTabMenu(selectedTab, process, step, stepUserInput)}
                     {renderNotFound && (
                         <section className="not-found">
                             <EuiPanel>
