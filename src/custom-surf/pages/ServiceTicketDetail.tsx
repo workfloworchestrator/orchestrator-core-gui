@@ -160,6 +160,9 @@ const ServiceTicketDetail = () => {
     const openTicket = () => {
         redirect(`/tickets/${ticket._id}/open`);
     };
+    const updateTicket = () => {
+        redirect(`/tickets/${ticket._id}/update`);
+    };
 
     const actions: Action[] = [
         {
@@ -169,7 +172,7 @@ const ServiceTicketDetail = () => {
         },
         {
             translation: "tickets.action.updating",
-            onClick: () => {},
+            onClick: () => updateTicket,
             requiredState: [ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED],
         },
         {

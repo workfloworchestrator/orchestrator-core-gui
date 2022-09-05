@@ -15,6 +15,8 @@ import { FieldProps } from "lib/uniforms-surfnet/src/types";
  */
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
+import {EuiDatePicker, EuiFormRow, EuiText} from "@elastic/eui";
+import moment from "moment";
 
 const DateConstructor = (typeof global === "object" ? global : window).Date;
 const dateFormat = (value?: Date) => value?.toISOString().slice(0, -8);
@@ -26,6 +28,7 @@ function Date({
     id,
     inputRef,
     label,
+    description,
     max,
     min,
     name,
@@ -33,32 +36,53 @@ function Date({
     readOnly,
     placeholder,
     value,
+    error,
+    showInlineError,
+    errorMessage,
     ...props
 }: DateFieldProps) {
     return (
         <div {...filterDOMProps(props)}>
-            {label && <label htmlFor={id}>{label}</label>}
-
-            <input
-                disabled={disabled}
+            <EuiFormRow
+                label={label}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={showInlineError ? errorMessage : false}
+                isInvalid={error}
                 id={id}
-                max={dateFormat(max)}
-                min={dateFormat(min)}
-                name={name}
-                onChange={(event) => {
-                    const date = new DateConstructor(event.target.valueAsNumber);
-                    if (date.getFullYear() < 10000) {
-                        onChange(date);
-                    } else if (isNaN(event.target.valueAsNumber)) {
-                        onChange(undefined);
-                    }
-                }}
-                placeholder={placeholder}
-                readOnly={readOnly}
-                ref={inputRef}
-                type="datetime-local"
-                value={dateFormat(value) ?? ""}
-            />
+                fullWidth
+            >
+                <EuiDatePicker
+                    selected={value ? moment(value) : null}
+                    // @ts-ignore
+                    value={value ? value : ""}
+                    // @ts-ignore
+                    onChange={(event) => {alert(event)}}
+
+                    // Todo: make dynamic based on type?
+                    showTimeSelect={true}
+
+                />
+            {/*<input*/}
+            {/*    disabled={disabled}*/}
+            {/*    id={id}*/}
+            {/*    max={dateFormat(max)}*/}
+            {/*    min={dateFormat(min)}*/}
+            {/*    name={name}*/}
+            {/*    onChange={(event) => {*/}
+            {/*        const date = new DateConstructor(event.target.valueAsNumber);*/}
+            {/*        if (date.getFullYear() < 10000) {*/}
+            {/*            onChange(date);*/}
+            {/*        } else if (isNaN(event.target.valueAsNumber)) {*/}
+            {/*            onChange(undefined);*/}
+            {/*        }*/}
+            {/*    }}*/}
+            {/*    placeholder={placeholder}*/}
+            {/*    readOnly={readOnly}*/}
+            {/*    ref={inputRef}*/}
+            {/*    type="datetime-local"*/}
+            {/*    value={dateFormat(value) ?? ""}*/}
+            {/*/>*/}
+            </EuiFormRow>
         </div>
     );
 }

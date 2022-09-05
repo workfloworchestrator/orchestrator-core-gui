@@ -35,6 +35,13 @@
             "file": "ServiceTicketOpen",
             "component": "ServiceTicketOpen",
             "showInMenu": false
+        },
+        {
+            "name": "tickets/:id/update",
+            "path": "pages",
+            "file": "ServiceTicketUpdate",
+            "component": "ServiceTicketUpdate",
+            "showInMenu": false
         }
     ],
     "disabledRoutes": ["/YOUR_DISABLED_ROUTE_HERE"],
