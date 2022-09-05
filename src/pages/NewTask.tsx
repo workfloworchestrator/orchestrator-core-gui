@@ -60,7 +60,7 @@ class NewTask extends React.Component<WrappedComponentProps, IState> {
         const { select_task } = taskInput[0] as { select_task: string };
 
         let promise = this.context.apiClient.startProcess(select_task, taskInput.slice(1)).then((process) => {
-            this.context.redirect(`/tasks?highlight=${process.id}`);
+            this.context.redirect(`/processes/${process.id}`);
             setFlash(
                 intl.formatMessage(
                     { id: "task.flash.create" },
