@@ -45,4 +45,17 @@ export const processDetailStyling = css`
             }
         }
     }
+
+    .fixed_tab_menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        border-bottom: 3px solid ${DARKER_PRIMARY};
+        background-color: ${LIGHT_GREY_COLOR};
+
+        section.process-actions {
+            padding: 5px 30px;
+        }
+    }
 `;
