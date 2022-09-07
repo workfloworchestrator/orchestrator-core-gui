@@ -117,6 +117,9 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             .processSubscriptionsByProcessId(enrichedProcess.id)
             .then((res) => {
                 this.setState({ subscriptionProcesses: res, loaded: true });
+                if (enrichedProcess.step !== "Done") {
+                    this.scrollToLast();
+                }
             })
             .catch((err) => {
                 if (err.response && err.response.status === 404) {
