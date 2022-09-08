@@ -3,7 +3,7 @@
  *
  */
 
-import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPanel, EuiSpacer } from "@elastic/eui";
+import { EuiButton, EuiFacetButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPanel, EuiSpacer } from "@elastic/eui";
 import ServiceTicketFilter from "custom/components/ServiceTicketFilter";
 import { tableTickets } from "custom/pages/ServiceTicketsStyling";
 import { ServiceTicket, ServiceTicketProcessState } from "custom/types";
@@ -17,7 +17,7 @@ import { renderStringAsDateTime } from "utils/Lookups";
 import { Filter, SortOption } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
-type Column = "jira_ticket_id" | "title_nl" | "ticket_state" | "process_state" | "opened_by" | "start_date";
+type Column = "jira_ticket_id" | "title_nl" | "process_state" | "opened_by" | "start_date" | "create_date";
 
 interface IProps extends WrappedComponentProps {}
 
@@ -31,8 +31,8 @@ interface IState {
     searchResults: ServiceTicket[];
     sortOrder: SortOption<Column>;
     filterAttributes: FilterAttributes;
-    availablePrefixId: number;
     ipPrefixProductId: string;
+    activeBackgroundJobs: number;
 }
 
 class ServiceTickets extends React.PureComponent<IProps, IState> {
@@ -52,8 +52,8 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                     count: 0,
                 })),
         },
-        availablePrefixId: 10000,
         ipPrefixProductId: "",
+        activeBackgroundJobs: 0,
     };
 
     componentDidMount() {
@@ -62,7 +62,10 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
         this.context.customApiClient
             .cimTickets()
             .then((res) => {
-                this.setState({ serviceTickets: res });
+                this.setState({
+                    serviceTickets: res,
+                    activeBackgroundJobs: res.filter((ticket) => ticket.transitioning).length,
+                });
             })
             .catch((err) => {
                 throw err;
@@ -71,7 +74,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
 
     setFilter = (filterName: "state") => (item: Filter) => {
         const currentFilterAttributes = this.state.filterAttributes;
-        var modifiedAttributes: Partial<FilterAttributes> = {};
+        let modifiedAttributes: Partial<FilterAttributes> = {};
         modifiedAttributes[filterName] = currentFilterAttributes[filterName].map((attr) => {
             if (attr.name === item.name) {
                 attr.selected = !attr.selected;
@@ -100,7 +103,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
     singleSelectFilter = (filterName: "state") => (e: React.MouseEvent<HTMLElement>, item: Filter) => {
         stop(e);
         const currentFilterAttributes = this.state.filterAttributes;
-        var modifiedAttributes: Partial<FilterAttributes> = {};
+        let modifiedAttributes: Partial<FilterAttributes> = {};
         modifiedAttributes[filterName] = currentFilterAttributes[filterName].map((attr) => {
             if (attr.name !== item.name && attr.selected) {
                 attr.selected = false;
@@ -117,7 +120,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
     selectAll = (filterName: "state") => (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
         const currentFilterAttributes = this.state.filterAttributes;
-        var modifiedAttributes: Partial<FilterAttributes> = {};
+        let modifiedAttributes: Partial<FilterAttributes> = {};
         modifiedAttributes[filterName] = currentFilterAttributes[filterName].map((attr) => {
             if (!attr.selected) {
                 attr.selected = true;
@@ -144,13 +147,9 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
     sortBy = (name: Column) => (a: ServiceTicket, b: ServiceTicket) => {
         const aSafe = a[name] === undefined ? "" : a[name];
         const bSafe = b[name] === undefined ? "" : b[name];
-        if (name === "ticket_state") {
-            return (a[name] ?? "").localeCompare(b[name] ?? "");
-        } else {
-            return typeof aSafe === "string" || typeof bSafe === "string"
-                ? (aSafe as string).toLowerCase().localeCompare(bSafe.toString().toLowerCase())
-                : aSafe - bSafe;
-        }
+        return typeof aSafe === "string" || typeof bSafe === "string"
+            ? (aSafe as string).toLowerCase().localeCompare(bSafe.toString().toLowerCase())
+            : aSafe - bSafe;
     };
 
     toggleSort = (name: Column) => (e: React.MouseEvent<HTMLTableHeaderCellElement>) => {
@@ -201,10 +200,10 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
         const columns: Column[] = [
             "jira_ticket_id",
             "title_nl",
-            "ticket_state",
             "process_state",
             "opened_by",
             "start_date",
+            "create_date",
         ];
         const { theme } = this.context;
 
@@ -219,9 +218,9 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                 </th>
             );
         };
-        const { serviceTickets, query, searchResults, filterAttributes } = this.state;
+        const { activeBackgroundJobs, serviceTickets, query, searchResults, filterAttributes } = this.state;
         const filteredTickets = isEmpty(query) ? this.filter(serviceTickets) : this.filter(searchResults);
-        // @ts-ignore
+
         const sortedTickets = this.sort(filteredTickets);
         return (
             <EuiPage css={tableTickets}>
@@ -237,17 +236,26 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                         label={intl.formatMessage({ id: "tickets.filters.state" })}
                                     />
                                 </EuiFlexItem>
-                                <EuiFlexItem grow={false} style={{ minWidth: 200 }}>
-                                    <EuiButton
-                                        color={"primary"}
-                                        iconType="plusInCircle"
-                                        isDisabled={false}
-                                        size="m"
-                                        fill
-                                        onClick={() => this.context.redirect("/tickets/create")}
-                                    >
-                                        {intl.formatMessage({ id: "tickets.create.new_ticket" })}
-                                    </EuiButton>
+                                <EuiFlexItem grow={false} style={{ minWidth: 300 }}>
+                                    <EuiFlexGroup justifyContent="spaceBetween">
+                                        <EuiFlexItem grow={false} style={{ minWidth: 100 }}>
+                                            <EuiFacetButton quantity={activeBackgroundJobs}>
+                                                active background job(s)
+                                            </EuiFacetButton>
+                                        </EuiFlexItem>
+                                        <EuiFlexItem grow={false} style={{ minWidth: 200 }}>
+                                            <EuiButton
+                                                color={"primary"}
+                                                iconType="plusInCircle"
+                                                isDisabled={false}
+                                                size="m"
+                                                fill
+                                                onClick={() => this.context.redirect("/tickets/create")}
+                                            >
+                                                {intl.formatMessage({ id: "tickets.create.new_ticket" })}
+                                            </EuiButton>
+                                        </EuiFlexItem>
+                                    </EuiFlexGroup>
                                 </EuiFlexItem>
                             </EuiFlexGroup>
                         </div>
@@ -274,12 +282,6 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                         {ticket.title_nl}
                                     </td>
                                     <td
-                                        data-label={intl.formatMessage({ id: "tickets.table.ticket_state" })}
-                                        className="ticket_state"
-                                    >
-                                        {ticket.ticket_state}
-                                    </td>
-                                    <td
                                         data-label={intl.formatMessage({ id: "tickets.table.process_state" })}
                                         className="process_state"
                                     >
@@ -296,6 +298,12 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                         className="start_date"
                                     >
                                         {renderStringAsDateTime(ticket.start_date)}
+                                    </td>
+                                    <td
+                                        data-label={intl.formatMessage({ id: "tickets.table.create_date" })}
+                                        className="create_date"
+                                    >
+                                        {renderStringAsDateTime(ticket.create_date)}
                                     </td>
                                 </tr>
                             ))}
