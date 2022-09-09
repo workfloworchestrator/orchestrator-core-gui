@@ -47,7 +47,7 @@ export interface ServiceTicket {
     _id: string;
     jira_ticket_id: string;
     opened_by: string;
-    transitioning?: string;
+    transition_action?: string;
     process_state: ServiceTicketProcessState;
     start_date: string;
     create_date: string;

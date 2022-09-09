@@ -64,7 +64,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
             .then((res) => {
                 this.setState({
                     serviceTickets: res,
-                    activeBackgroundJobs: res.filter((ticket) => ticket.transitioning).length,
+                    activeBackgroundJobs: res.filter((ticket) => ticket.transition_action).length,
                 });
             })
             .catch((err) => {

@@ -21,7 +21,10 @@ import { connectField, filterDOMProps } from "uniforms";
 // const DateConstructor = (typeof global === "object" ? global : window).Date;
 // const dateFormat = (value?: Date) => value?.toISOString().slice(0, -8);
 
-export type TimestampFieldProps = FieldProps<number, { max?: number; min?: number }>;
+export type TimestampFieldProps = FieldProps<
+    number,
+    { max?: number; min?: number; showTimeSelect: boolean; locale?: string; dateFormat?: string; timeFormat?: string }
+>;
 
 function TimestampField({
     disabled,
@@ -31,6 +34,10 @@ function TimestampField({
     description,
     max,
     min,
+    showTimeSelect,
+    locale,
+    dateFormat,
+    timeFormat,
     name,
     onChange,
     readOnly,
@@ -54,17 +61,16 @@ function TimestampField({
                 <EuiDatePicker
                     selected={value ? moment.unix(value) : null}
                     // @ts-ignore
-                    value={value ? moment.unix(value) : null}
-                    // @ts-ignore
+                    value={value ? moment.unix(value) : undefined}
                     onChange={(event) => {
-                        // alert(event);
                         onChange(event?.unix());
                     }}
-                    showTimeSelect={true}
-                    // Todo: come up with a smart way to set this to NL for SURF
-                    dateFormat="DD-MM-YYYY HH:mm"
-                    timeFormat="HH:mm"
-                    locale="nl-nl"
+                    showTimeSelect={showTimeSelect}
+                    dateFormat={dateFormat ? dateFormat : undefined}
+                    timeFormat={timeFormat ? timeFormat : undefined}
+                    locale={locale ? locale : "en-en"}
+                    maxDate={max ? moment.unix(max) : undefined}
+                    minDate={min ? moment.unix(min) : undefined}
                 />
             </EuiFormRow>
         </div>
