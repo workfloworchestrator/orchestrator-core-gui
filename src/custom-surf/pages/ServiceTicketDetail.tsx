@@ -15,6 +15,7 @@
 
 import {
     EuiButton,
+    EuiFacetButton,
     EuiFlexGroup,
     EuiFlexItem,
     EuiHorizontalRule,
@@ -33,7 +34,8 @@ import {
     ServiceTicketProcessState,
     ServiceTicketWithDetails,
 } from "custom/types";
-import { useContext, useEffect, useState } from "react";
+import useInterval from "hooks/useInterval";
+import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
@@ -73,6 +75,14 @@ const ServiceTicketDetail = () => {
     const [notFound, setNotFound] = useState(false);
 
     const { theme, customApiClient, redirect } = useContext(ApplicationContext);
+
+    useInterval(async () => {
+        if (ticket?.transition_action) {
+            console.log("Refreshing");
+            const ticket = await customApiClient.cimTicketById(id);
+            setTicket(ticket);
+        }
+    }, 3000);
 
     useEffect(() => {
         customApiClient
@@ -217,6 +227,11 @@ const ServiceTicketDetail = () => {
                                     <EuiTitle size="m">
                                         <h1>Service ticket</h1>
                                     </EuiTitle>
+                                </EuiFlexItem>
+                                <EuiFlexItem grow={false} style={{ minWidth: 90 }}>
+                                    <EuiFacetButton quantity={ticket?.transition_action ? 1 : 0}>
+                                        active background job(s)
+                                    </EuiFacetButton>
                                 </EuiFlexItem>
                             </EuiFlexGroup>
                             <div className="mod-ticket-detail">

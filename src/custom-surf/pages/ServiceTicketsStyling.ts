@@ -74,7 +74,7 @@ export const tableTickets = css`
             }
         }
 
-        tr.Allocated {
+        tr.updated {
             &.light {
                 background-color: ${LIGHT_PRIMARY_COLOR};
             }
@@ -94,7 +94,8 @@ export const tableTickets = css`
             }
         }
 
-        tr.Planned {
+        tr.open_related,
+        tr.open_accepted {
             cursor: default;
 
             &.light {
@@ -116,7 +117,7 @@ export const tableTickets = css`
             }
         }
 
-        tr.Free {
+        tr.open {
             &.light {
                 background-color: ${LIGHT_SUCCESS_COLOR};
             }
@@ -136,12 +137,32 @@ export const tableTickets = css`
             }
         }
 
+        tr.updated {
+            &.light {
+                background-color: ${LIGHT_PRIMARY_COLOR};
+            }
+
+            &.dark {
+                background-color: ${DARKEST_PRIMARY_COLOR};
+            }
+
+            &:hover {
+                &.light {
+                    background-color: ${shadeColor(LIGHT_PRIMARY_COLOR, -10)};
+                }
+
+                &.dark {
+                    background-color: ${shadeColor(DARKEST_PRIMARY_COLOR, -10)};
+                }
+            }
+        }
+
         th {
             padding: 5px 5px 10px 5px;
         }
 
         th.jira_ticket_id {
-            width: 10%;
+            width: 14%;
         }
         th.title_nl {
             width: 25%;
@@ -156,6 +177,9 @@ export const tableTickets = css`
             width: 10%;
         }
         th.start_date {
+            width: 12%;
+        }
+        th.create_date {
             width: 12%;
         }
 

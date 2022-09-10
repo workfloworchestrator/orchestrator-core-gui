@@ -241,6 +241,16 @@ export class CustomApiClient extends CustomApiClientInterface {
         );
     };
 
+    cimUpdateTicket = (payload: OpenServiceTicketPayload): Promise<{ id: string }> => {
+        return this.postPutJson(
+            prefix_cim_dev_uri(`surf/cim/tickets/${payload.cim_ticket_id}/update`),
+            payload,
+            "post",
+            false,
+            true
+        );
+    };
+
     cimTickets = (): Promise<ServiceTicket[]> => {
         return this.fetchJson<ServiceTicket[]>(prefix_cim_dev_uri("surf/cim/tickets"));
     };

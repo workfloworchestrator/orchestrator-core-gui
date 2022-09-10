@@ -51,6 +51,7 @@ export interface ServiceTicket {
     process_state: ServiceTicketProcessState;
     start_date: string;
     create_date: string;
+    last_update_time: string;
     title_nl: string;
     title_en: string;
 }

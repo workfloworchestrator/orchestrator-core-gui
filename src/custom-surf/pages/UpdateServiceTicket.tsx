@@ -25,7 +25,7 @@ interface IProps {
     id: string;
 }
 
-export default function ServiceTicketOpen() {
+export default function UpdateServiceTicket() {
     const { id } = useParams<IProps>();
     const [showExplanation, setShowExplanation] = useState(false);
     const { redirect, customApiClient } = useContext(ApplicationContext);
@@ -39,7 +39,7 @@ export default function ServiceTicketOpen() {
             description_en: userInputs.description_en,
             mail_subject: userInputs.mail_subject,
         };
-        customApiClient.cimOpenTicket(payload).then((_) => redirect(`/tickets/${id}/`));
+        customApiClient.cimUpdateTicket(payload).then((_) => redirect(`/tickets/${id}/`));
     };
 
     const handleCancel = () => {
@@ -55,13 +55,13 @@ export default function ServiceTicketOpen() {
                     </div>
                 </div>
                 <Explain close={() => setShowExplanation(false)} isVisible={showExplanation} title="What is this?">
-                    <p>This wizard will guide you through the process of sending the OPEN email to institutes.</p>
+                    <p>This wizard will guide you through the process of sending the UPDATE email to institutes.</p>
                 </Explain>
                 <EuiText grow={true}>
-                    <h1>Prepare to send OPEN email to institutes</h1>
+                    <h1>Prepare to send UPDATE email to institutes</h1>
                 </EuiText>
                 <OpenForm
-                    formKey="open_ticket_form"
+                    formKey="update_ticket_form"
                     handleSubmit={handleSubmit}
                     handleCancel={handleCancel}
                     ticketId={id}

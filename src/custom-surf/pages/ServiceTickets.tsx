@@ -17,7 +17,7 @@ import { renderStringAsDateTime } from "utils/Lookups";
 import { Filter, SortOption } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
-type Column = "jira_ticket_id" | "title_nl" | "process_state" | "opened_by" | "start_date" | "create_date";
+type Column = "jira_ticket_id" | "title_nl" | "process_state" | "opened_by" | "start_date" | "create_date" | "last_update_time";
 
 interface IProps extends WrappedComponentProps {}
 
@@ -55,10 +55,22 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
         ipPrefixProductId: "",
         activeBackgroundJobs: 0,
     };
+    private interval: any;
 
     componentDidMount() {
-        this.setState({});
+        this.refreshData();
+        this.interval = setInterval(this.checkAndRefresh, 3000);
+    }
 
+    checkAndRefresh = () => {
+        if (this.state.activeBackgroundJobs) {
+            this.refreshData();
+        }
+        console.log("Checked");
+    };
+
+    refreshData() {
+        console.log("Fetching tickets");
         this.context.customApiClient
             .cimTickets()
             .then((res) => {
@@ -204,6 +216,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
             "opened_by",
             "start_date",
             "create_date",
+            "last_update_time"
         ];
         const { theme } = this.context;
 
@@ -267,7 +280,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                         </thead>
                         <tbody>
                             {sortedTickets.map((ticket) => (
-                                <tr key={ticket._id} className={theme}>
+                                <tr key={ticket._id} className={`${theme} ${ticket.process_state}`}>
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.jira_ticket_id" })}
                                         className="jira_ticket_id"
@@ -298,6 +311,12 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                         className="start_date"
                                     >
                                         {renderStringAsDateTime(ticket.start_date)}
+                                    </td>
+                                    <td
+                                        data-label={intl.formatMessage({ id: "tickets.table.updated_on" })}
+                                        className="create_date"
+                                    >
+                                        {renderStringAsDateTime(ticket.create_date)}
                                     </td>
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.create_date" })}

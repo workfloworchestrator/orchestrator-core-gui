@@ -513,8 +513,8 @@ I18n.translations.en = {
             start_date: "Start time",
             end_date: "End time",
             create_date: "Created on",
+            last_update_time: "Updated on",
             type: "Type",
-            last_update_time: "Time last update",
         },
         action: {
             opening: "Send OPEN email",
