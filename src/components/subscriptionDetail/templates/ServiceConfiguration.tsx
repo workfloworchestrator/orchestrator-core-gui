@@ -34,7 +34,7 @@ export const mapSplitFields = (
     inUseBySubscriptions: Record<string, any>
 ) => {
     let hasInUseByExpandableRow = false;
-    return value_fields
+    const elements = value_fields
         .sort((entryA, entryB) => entryA[0].localeCompare(entryB[0]))
         .flatMap((entry) => entry[1].map((value: any) => [entry[0], value !== null ? value : "NULL"]))
         .map((entry, i) => {
@@ -46,13 +46,13 @@ export const mapSplitFields = (
                         <ExpandableRow
                             title="USED_BY_SUBSCRIPTIONS"
                             text="Show info about subscriptions that use this product block"
-                            key={`${instance_id}.${i}`}
+                            key={`expandable-${instance_id}-${i}`}
                         >
                             <SubscriptionInfo label="used_by_subscription" value={value} />
                         </ExpandableRow>
                     );
                 }
-                return <></>;
+                return null;
             }
             return (
                 <SubscriptionInstanceValue
@@ -61,8 +61,8 @@ export const mapSplitFields = (
                     value={entry[1] !== null ? entry[1] : "null"}
                 />
             );
-        })
-        .filter((entry) => entry !== <></>);
+        });
+    return elements.filter((entry) => entry !== null) as JSX.Element[];
 };
 
 export function RenderServiceConfiguration({
