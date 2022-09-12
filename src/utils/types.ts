@@ -488,17 +488,15 @@ export interface Dienstafname {
 
 export interface ISubscriptionInstance {
     subscription_instance_id: string;
+    owner_subscription_id: string;
     name: string;
     label?: string;
     [index: string]: any;
 }
 
-export const SUBSCRIPTION_VIEWTYPE_SELECTOR = "subscription-viewtype";
-
-export interface StoredViewPreferences {
-    viewType: string;
-    tabViewId: string;
-}
+export const SUBSCRIPTION_VIEWTYPE_KEY = "subscription-viewtype";
+export const SUBSCRIPTION_BLOCK_VIEWTYPE_KEY = "subscription-block-viewtype";
+export const SHOW_RELATED_BLOCKS_KEY = "show-related-blocks";
 
 export interface TabView {
     id: string;

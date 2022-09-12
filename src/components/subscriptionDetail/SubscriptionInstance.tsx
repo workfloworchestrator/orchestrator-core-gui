@@ -22,26 +22,36 @@ import { FormattedMessage } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
 import { ISubscriptionInstance } from "utils/types";
 
+import { mapSplitFields } from "./templates/ServiceConfiguration";
+
 interface IProps {
+    subscription_id: string;
     subscription_instance: ISubscriptionInstance;
     field_name?: string;
     inUseBySubscriptions: {};
+    showRelatedBlocks?: boolean;
 }
 
-export default function SubscriptionInstance({ subscription_instance, field_name, inUseBySubscriptions }: IProps) {
-    const { theme } = useContext(ApplicationContext);
-    const [subscriptionInfoExpanded, setSubscriptionInfoExpanded] = useState(false);
-
+export default function SubscriptionInstance({
+    subscription_instance,
+    field_name,
+    inUseBySubscriptions,
+    subscription_id,
+    showRelatedBlocks,
+}: IProps) {
     if (!subscription_instance) {
         return null;
     }
-    let isSubscriptionInfoSection = false;
-    const subscriptionInstanceId = subscription_instance.subscription_instance_id;
     const fields = Object.entries(subscription_instance)
         .filter((entry) => !["label", "subscription_instance_id", "name"].includes(entry[0]))
         .map<[string, any]>((entry) => (isArray(entry[1]) ? entry : [entry[0], [entry[1]]]));
 
     const [value_fields, instance_fields] = partition(fields, (entry) => typeof entry[1][0] !== "object");
+
+    if (subscription_id !== subscription_instance.owner_subscription_id && !showRelatedBlocks) {
+        return null;
+    }
+
     return (
         <section className="product-block">
             <h3>{subscription_instance.name}</h3>
@@ -55,69 +65,18 @@ export default function SubscriptionInstance({ subscription_instance, field_name
             <p className="label">{`Instance ID: ${subscription_instance.subscription_instance_id}`}</p>
             <table className="detail-block multiple-tbody">
                 <thead />
-                {value_fields
-                    .sort((entryA, entryB) => entryA[0].localeCompare(entryB[0]))
-                    .flatMap((entry) => entry[1].map((value: any) => [entry[0], value]))
-                    .map((entry, i) => {
-                        if (entry[0] === "in_use_by_ids") {
-                            let SubscriptionInfoExpandButton = <></>;
-                            if (!isSubscriptionInfoSection) {
-                                // render button once per product block
-                                SubscriptionInfoExpandButton = (
-                                    <tbody className={theme}>
-                                        <tr>
-                                            <td>USED_BY_SUBSCRIPTIONS</td>
-                                            <td>Show info about subscriptions that use this product block</td>
-                                            <td>
-                                                <EuiButton
-                                                    iconType={subscriptionInfoExpanded ? "arrowDown" : "arrowRight"}
-                                                    onClick={() =>
-                                                        setSubscriptionInfoExpanded(!subscriptionInfoExpanded)
-                                                    }
-                                                >
-                                                    {subscriptionInfoExpanded ? "collapse" : "expand"}
-                                                </EuiButton>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                );
-                                isSubscriptionInfoSection = true;
-                            }
-                            // @ts-ignore
-                            const value = inUseBySubscriptions.hasOwnProperty(entry[1])
-                                ? // @ts-ignore
-                                  inUseBySubscriptions[entry[1]]
-                                : entry[1];
-                            return (
-                                <>
-                                    {SubscriptionInfoExpandButton}
-                                    {subscriptionInfoExpanded && (
-                                        <SubscriptionInfo
-                                            key={`${subscriptionInstanceId}.${i}`}
-                                            label="used_by_subscription"
-                                            value={value}
-                                        />
-                                    )}
-                                </>
-                            );
-                        }
-                        return (
-                            <SubscriptionInstanceValue
-                                key={i}
-                                label={entry[0]}
-                                value={entry[1] !== null ? entry[1] : "null"}
-                            />
-                        );
-                    })}
+                {mapSplitFields(subscription_instance.subscription_instance_id, value_fields, inUseBySubscriptions)}
             </table>
             {instance_fields
                 .flatMap((entry) => entry[1].map((value: any) => [entry[0], value]))
                 .map((entry: [string, ISubscriptionInstance], i: number) => (
                     <SubscriptionInstance
                         key={i}
+                        subscription_id={subscription_id}
                         subscription_instance={entry[1]}
                         field_name={field_name ? `${field_name}.${entry[0]}` : entry[0]}
                         inUseBySubscriptions={inUseBySubscriptions}
+                        showRelatedBlocks={showRelatedBlocks}
                     />
                 ))}
         </section>

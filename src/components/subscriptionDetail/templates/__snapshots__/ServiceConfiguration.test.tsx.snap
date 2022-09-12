@@ -1,0 +1,673 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RenderServiceConfiguration Should correctly render inUseBySubscriptions expanded row 1`] = `
+"<QueryClientProvider client={{...}}>
+  <RenderServiceConfiguration subscription_id=\\"70201206-05d3-4486-8fa8-e778d1efc9e1\\" subscriptionInstances={{...}} inUseBySubscriptions={{...}}>
+    <div className=\\"mod-subscription-detail\\">
+      <table className=\\"detail-block multiple-tbody\\">
+        <thead />
+        <SubscriptionInstanceValue label=\\"Instance ID\\" value=\\"da3bf1ea-37fa-466c-bfb0-4c115fed3fd5\\">
+          <SubscriptionInstanceValueRow label=\\"Instance ID\\" value=\\"da3bf1ea-37fa-466c-bfb0-4c115fed3fd5\\" isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+            <tbody className={[undefined]}>
+              <tr>
+                <td>
+                  INSTANCE ID
+                </td>
+                <td colSpan={2}>
+                  <div className=\\"resource-type\\">
+                    <span>
+                      da3bf1ea-37fa-466c-bfb0-4c115fed3fd5
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </SubscriptionInstanceValueRow>
+        </SubscriptionInstanceValue>
+        <SubscriptionInstanceValue label=\\"asn\\" value={1}>
+          <SubscriptionInstanceValueRow label=\\"asn\\" value={1} isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+            <tbody className={[undefined]}>
+              <tr>
+                <td>
+                  ASN
+                </td>
+                <td colSpan={2}>
+                  <div className=\\"resource-type\\">
+                    <span>
+                      1
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </SubscriptionInstanceValueRow>
+        </SubscriptionInstanceValue>
+        <SubscriptionInstanceValue label=\\"customer_asn\\" value={2}>
+          <SubscriptionInstanceValueRow label=\\"customer_asn\\" value={2} isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+            <tbody className={[undefined]}>
+              <tr>
+                <td>
+                  CUSTOMER_ASN
+                </td>
+                <td colSpan={2}>
+                  <div className=\\"resource-type\\">
+                    <span>
+                      2
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </SubscriptionInstanceValueRow>
+        </SubscriptionInstanceValue>
+      </table>
+      <TabbedSection id=\\"subscription-configuration-tabs\\" tabs={{...}} name=\\"Subscription Configuration\\">
+        <section className=\\" tabbed-details\\">
+          <EuiTabs>
+            <div className=\\"euiTabs euiTabs--bottomBorder\\" role=\\"tablist\\">
+              <EuiTab href={[undefined]} onClick={[Function: onClick]} isSelected={false} disabled={false}>
+                <button role=\\"tab\\" aria-selected={false} type=\\"button\\" className=\\"euiTab\\" disabled={false} onClick={[Function: onClick]}>
+                  <span className=\\"euiTab__content\\">
+                    FW L3 Endpoint
+                  </span>
+                </button>
+              </EuiTab>
+              <EuiTab href={[undefined]} onClick={[Function: onClick]} isSelected={true} disabled={false}>
+                <button role=\\"tab\\" aria-selected={true} type=\\"button\\" className=\\"euiTab euiTab-isSelected\\" disabled={false} onClick={[Function: onClick]}>
+                  <span className=\\"euiTab__content\\">
+                    FW L2 Endpoint
+                  </span>
+                </button>
+              </EuiTab>
+            </div>
+          </EuiTabs>
+          <div className=\\"scrollable-tab-content\\">
+            <table className=\\"detail-block multiple-tbody\\">
+              <thead />
+              <SubscriptionInstanceValue label=\\"Instance ID\\" value=\\"47e9dc18-231a-4a3c-8c12-a15ee9e15d89\\">
+                <SubscriptionInstanceValueRow label=\\"Instance ID\\" value=\\"47e9dc18-231a-4a3c-8c12-a15ee9e15d89\\" isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+                  <tbody className={[undefined]}>
+                    <tr>
+                      <td>
+                        INSTANCE ID
+                      </td>
+                      <td colSpan={2}>
+                        <div className=\\"resource-type\\">
+                          <span>
+                            47e9dc18-231a-4a3c-8c12-a15ee9e15d89
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </SubscriptionInstanceValueRow>
+              </SubscriptionInstanceValue>
+              <SubscriptionInstanceValue label=\\"endpoint_description\\" value=\\"l2 endpoint test\\">
+                <SubscriptionInstanceValueRow label=\\"endpoint_description\\" value=\\"l2 endpoint test\\" isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+                  <tbody className={[undefined]}>
+                    <tr>
+                      <td>
+                        ENDPOINT_DESCRIPTION
+                      </td>
+                      <td colSpan={2}>
+                        <div className=\\"resource-type\\">
+                          <span>
+                            l2 endpoint test
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </SubscriptionInstanceValueRow>
+              </SubscriptionInstanceValue>
+            </table>
+            <div className=\\"indented\\">
+              <TabbedSection id=\\"l2_endpoints-47e9dc18-231a-4a3c-8c12-a15ee9e15d89-tabs\\" tabs={{...}} name=\\"l2_endpoints\\">
+                <section className=\\" tabbed-details\\">
+                  <EuiTabs>
+                    <div className=\\"euiTabs euiTabs--bottomBorder\\" role=\\"tablist\\">
+                      <EuiTab href={[undefined]} onClick={[Function: onClick]} isSelected={false} disabled={false}>
+                        <button role=\\"tab\\" aria-selected={false} type=\\"button\\" className=\\"euiTab\\" disabled={false} onClick={[Function: onClick]}>
+                          <span className=\\"euiTab__content\\">
+                            SN8 L2VPN ESI
+                          </span>
+                        </button>
+                      </EuiTab>
+                    </div>
+                  </EuiTabs>
+                  <div className=\\"scrollable-tab-content\\">
+                    <table className=\\"detail-block multiple-tbody\\">
+                      <thead />
+                      <SubscriptionInstanceValue label=\\"Instance ID\\" value=\\"620d78c8-1da1-4ad5-8749-2c9aaf3b5f12\\">
+                        <SubscriptionInstanceValueRow label=\\"Instance ID\\" value=\\"620d78c8-1da1-4ad5-8749-2c9aaf3b5f12\\" isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+                          <tbody className={[undefined]}>
+                            <tr>
+                              <td>
+                                INSTANCE ID
+                              </td>
+                              <td colSpan={2}>
+                                <div className=\\"resource-type\\">
+                                  <span>
+                                    620d78c8-1da1-4ad5-8749-2c9aaf3b5f12
+                                  </span>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </SubscriptionInstanceValueRow>
+                      </SubscriptionInstanceValue>
+                      <ExpandableRow>
+                        <tbody className={[undefined]}>
+                          <tr>
+                            <td>
+                              USED_BY_SUBSCRIPTIONS
+                            </td>
+                            <td>
+                              Show info about subscriptions that use this product block
+                            </td>
+                            <td>
+                              <EuiButton iconType=\\"arrowDown\\" onClick={[Function: onClick]}>
+                                <EuiButtonDisplay element=\\"button\\" baseClassName=\\"euiButton\\" isDisabled={false} disabled={false} type=\\"button\\" iconType=\\"arrowDown\\" onClick={[Function: onClick]}>
+                                  <button className=\\"euiButton euiButton--primary\\" style={{...}} disabled={false} aria-pressed={[undefined]} type=\\"button\\" onClick={[Function: onClick]}>
+                                    <EuiButtonContent isLoading={[undefined]} iconType=\\"arrowDown\\" iconSide=\\"left\\" textProps={{...}} className=\\"euiButton__content\\">
+                                      <span className=\\"euiButtonContent euiButton__content\\">
+                                        <EuiIcon className=\\"euiButtonContent__icon\\" type=\\"arrowDown\\" size=\\"m\\" color=\\"inherit\\">
+                                          <EuiIconEmpty className=\\"euiIcon euiIcon--medium euiIcon--inherit euiIcon-isLoading euiButtonContent__icon\\" style={{...}} tabIndex={[undefined]} focusable=\\"false\\" role=\\"img\\" title={[undefined]} data-icon-type={[undefined]} aria-hidden={true}>
+                                            <svg xmlns=\\"http://www.w3.org/2000/svg\\" width={16} height={16} viewBox=\\"0 0 16 16\\" aria-labelledby={[undefined]} className=\\"euiIcon euiIcon--medium euiIcon--inherit euiIcon-isLoading euiButtonContent__icon\\" style={{...}} tabIndex={[undefined]} focusable=\\"false\\" role=\\"img\\" data-icon-type={[undefined]} aria-hidden={true} />
+                                          </EuiIconEmpty>
+                                        </EuiIcon>
+                                        <span className=\\"euiButton__text\\">
+                                          collapse
+                                        </span>
+                                      </span>
+                                    </EuiButtonContent>
+                                  </button>
+                                </EuiButtonDisplay>
+                              </EuiButton>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <SubscriptionInfo label=\\"used_by_subscription\\" value={{...}}>
+                          <tbody className={[undefined]}>
+                            <tr>
+                              <td>
+                                USED_BY_SUBSCRIPTION
+                              </td>
+                              <td colSpan={2}>
+                                <EuiFlexGroup wrap={true}>
+                                  <div className=\\"euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive euiFlexGroup--wrap\\">
+                                    <EuiFlexItem style={{...}}>
+                                      <div className=\\"euiFlexItem\\" style={{...}}>
+                                        <EuiDescriptionList>
+                                          <dl className=\\"euiDescriptionList euiDescriptionList--row\\">
+                                            <EuiDescriptionListTitle>
+                                              <dt className=\\"euiDescriptionList__title\\">
+                                                Description
+                                              </dt>
+                                            </EuiDescriptionListTitle>
+                                            <EuiDescriptionListDescription>
+                                              <dd className=\\"euiDescriptionList__description\\">
+                                                TEST L2VPN GV044A-TR001A 1 Gbit/s
+                                              </dd>
+                                            </EuiDescriptionListDescription>
+                                            <EuiDescriptionListTitle>
+                                              <dt className=\\"euiDescriptionList__title\\">
+                                                Product
+                                              </dt>
+                                            </EuiDescriptionListTitle>
+                                            <EuiDescriptionListDescription>
+                                              <dd className=\\"euiDescriptionList__description\\">
+                                                SURFnet8 L2VPN
+                                              </dd>
+                                            </EuiDescriptionListDescription>
+                                          </dl>
+                                        </EuiDescriptionList>
+                                      </div>
+                                    </EuiFlexItem>
+                                    <EuiFlexItem style={{...}}>
+                                      <div className=\\"euiFlexItem\\" style={{...}}>
+                                        <EuiDescriptionList>
+                                          <dl className=\\"euiDescriptionList euiDescriptionList--row\\">
+                                            <EuiDescriptionListTitle>
+                                              <dt className=\\"euiDescriptionList__title\\">
+                                                Status
+                                              </dt>
+                                            </EuiDescriptionListTitle>
+                                            <EuiDescriptionListDescription>
+                                              <dd className=\\"euiDescriptionList__description\\">
+                                                active
+                                              </dd>
+                                            </EuiDescriptionListDescription>
+                                            <EuiDescriptionListTitle>
+                                              <dt className=\\"euiDescriptionList__title\\">
+                                                Subscription ID
+                                              </dt>
+                                            </EuiDescriptionListTitle>
+                                            <EuiDescriptionListDescription>
+                                              <dd className=\\"euiDescriptionList__description\\">
+                                                <EuiLink href=\\"/subscriptions/96e6092f-e0b5-4769-b3ae-1be3244bb48b\\">
+                                                  <a className=\\"euiLink euiLink--primary\\" href=\\"/subscriptions/96e6092f-e0b5-4769-b3ae-1be3244bb48b\\" target={[undefined]} rel=\\"noreferrer\\" onClick={[undefined]}>
+                                                    96e6092f
+                                                  </a>
+                                                </EuiLink>
+                                              </dd>
+                                            </EuiDescriptionListDescription>
+                                          </dl>
+                                        </EuiDescriptionList>
+                                      </div>
+                                    </EuiFlexItem>
+                                  </div>
+                                </EuiFlexGroup>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </SubscriptionInfo>
+                      </ExpandableRow>
+                    </table>
+                    <div className=\\"indented\\">
+                      <TabbedSection id=\\"esis-620d78c8-1da1-4ad5-8749-2c9aaf3b5f12-tabs\\" tabs={{...}} name=\\"esis\\">
+                        <section className=\\" tabbed-details\\">
+                          <EuiTabs>
+                            <div className=\\"euiTabs euiTabs--bottomBorder\\" role=\\"tablist\\">
+                              <EuiTab href={[undefined]} onClick={[Function: onClick]} isSelected={false} disabled={false}>
+                                <button role=\\"tab\\" aria-selected={false} type=\\"button\\" className=\\"euiTab\\" disabled={false} onClick={[Function: onClick]}>
+                                  <span className=\\"euiTab__content\\">
+                                    SN8 Service Attach Point
+                                  </span>
+                                </button>
+                              </EuiTab>
+                              <EuiTab href={[undefined]} onClick={[Function: onClick]} isSelected={false} disabled={false}>
+                                <button role=\\"tab\\" aria-selected={false} type=\\"button\\" className=\\"euiTab\\" disabled={false} onClick={[Function: onClick]}>
+                                  <span className=\\"euiTab__content\\">
+                                    SN8 Service Attach Point
+                                  </span>
+                                </button>
+                              </EuiTab>
+                            </div>
+                          </EuiTabs>
+                          <div className=\\"scrollable-tab-content\\">
+                            <table className=\\"detail-block multiple-tbody\\">
+                              <thead />
+                              <SubscriptionInstanceValue label=\\"Instance ID\\" value=\\"08b09607-0a5a-4c48-89bc-5c629b0ab4e1\\">
+                                <SubscriptionInstanceValueRow label=\\"Instance ID\\" value=\\"08b09607-0a5a-4c48-89bc-5c629b0ab4e1\\" isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+                                  <tbody className={[undefined]}>
+                                    <tr>
+                                      <td>
+                                        INSTANCE ID
+                                      </td>
+                                      <td colSpan={2}>
+                                        <div className=\\"resource-type\\">
+                                          <span>
+                                            08b09607-0a5a-4c48-89bc-5c629b0ab4e1
+                                          </span>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </SubscriptionInstanceValueRow>
+                              </SubscriptionInstanceValue>
+                              <SubscriptionInstanceValue label=\\"vlanrange\\" value=\\"6\\">
+                                <SubscriptionInstanceValueRow label=\\"vlanrange\\" value=\\"6\\" isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+                                  <tbody className={[undefined]}>
+                                    <tr>
+                                      <td>
+                                        VLANRANGE
+                                      </td>
+                                      <td colSpan={2}>
+                                        <div className=\\"resource-type\\">
+                                          <span>
+                                            6
+                                          </span>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </SubscriptionInstanceValueRow>
+                              </SubscriptionInstanceValue>
+                            </table>
+                          </div>
+                        </section>
+                      </TabbedSection>
+                    </div>
+                  </div>
+                </section>
+              </TabbedSection>
+            </div>
+          </div>
+        </section>
+      </TabbedSection>
+    </div>
+  </RenderServiceConfiguration>
+</QueryClientProvider>"
+`;
+
+exports[`RenderServiceConfiguration Should render correctly 1`] = `
+"<QueryClientProvider client={{...}}>
+  <RenderServiceConfiguration subscription_id=\\"70201206-05d3-4486-8fa8-e778d1efc9e1\\" subscriptionInstances={{...}} inUseBySubscriptions={{...}}>
+    <div className=\\"mod-subscription-detail\\">
+      <table className=\\"detail-block multiple-tbody\\">
+        <thead />
+        <SubscriptionInstanceValue label=\\"Instance ID\\" value=\\"da3bf1ea-37fa-466c-bfb0-4c115fed3fd5\\">
+          <SubscriptionInstanceValueRow label=\\"Instance ID\\" value=\\"da3bf1ea-37fa-466c-bfb0-4c115fed3fd5\\" isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+            <tbody className={[undefined]}>
+              <tr>
+                <td>
+                  INSTANCE ID
+                </td>
+                <td colSpan={2}>
+                  <div className=\\"resource-type\\">
+                    <span>
+                      da3bf1ea-37fa-466c-bfb0-4c115fed3fd5
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </SubscriptionInstanceValueRow>
+        </SubscriptionInstanceValue>
+        <SubscriptionInstanceValue label=\\"asn\\" value={1}>
+          <SubscriptionInstanceValueRow label=\\"asn\\" value={1} isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+            <tbody className={[undefined]}>
+              <tr>
+                <td>
+                  ASN
+                </td>
+                <td colSpan={2}>
+                  <div className=\\"resource-type\\">
+                    <span>
+                      1
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </SubscriptionInstanceValueRow>
+        </SubscriptionInstanceValue>
+        <SubscriptionInstanceValue label=\\"customer_asn\\" value={2}>
+          <SubscriptionInstanceValueRow label=\\"customer_asn\\" value={2} isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+            <tbody className={[undefined]}>
+              <tr>
+                <td>
+                  CUSTOMER_ASN
+                </td>
+                <td colSpan={2}>
+                  <div className=\\"resource-type\\">
+                    <span>
+                      2
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </SubscriptionInstanceValueRow>
+        </SubscriptionInstanceValue>
+      </table>
+      <TabbedSection id=\\"subscription-configuration-tabs\\" tabs={{...}} name=\\"Subscription Configuration\\">
+        <section className=\\" tabbed-details\\">
+          <EuiTabs>
+            <div className=\\"euiTabs euiTabs--bottomBorder\\" role=\\"tablist\\">
+              <EuiTab href={[undefined]} onClick={[Function: onClick]} isSelected={true} disabled={false}>
+                <button role=\\"tab\\" aria-selected={true} type=\\"button\\" className=\\"euiTab euiTab-isSelected\\" disabled={false} onClick={[Function: onClick]}>
+                  <span className=\\"euiTab__content\\">
+                    FW L3 Endpoint
+                  </span>
+                </button>
+              </EuiTab>
+              <EuiTab href={[undefined]} onClick={[Function: onClick]} isSelected={false} disabled={false}>
+                <button role=\\"tab\\" aria-selected={false} type=\\"button\\" className=\\"euiTab\\" disabled={false} onClick={[Function: onClick]}>
+                  <span className=\\"euiTab__content\\">
+                    FW L2 Endpoint
+                  </span>
+                </button>
+              </EuiTab>
+            </div>
+          </EuiTabs>
+          <div className=\\"scrollable-tab-content\\">
+            <table className=\\"detail-block multiple-tbody\\">
+              <thead />
+              <SubscriptionInstanceValue label=\\"Instance ID\\" value=\\"c658fad7-5f38-458f-bfe2-600bad3055e2\\">
+                <SubscriptionInstanceValueRow label=\\"Instance ID\\" value=\\"c658fad7-5f38-458f-bfe2-600bad3055e2\\" isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+                  <tbody className={[undefined]}>
+                    <tr>
+                      <td>
+                        INSTANCE ID
+                      </td>
+                      <td colSpan={2}>
+                        <div className=\\"resource-type\\">
+                          <span>
+                            c658fad7-5f38-458f-bfe2-600bad3055e2
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </SubscriptionInstanceValueRow>
+              </SubscriptionInstanceValue>
+              <SubscriptionInstanceValue label=\\"endpoint_description\\" value=\\"l3 endpoint test\\">
+                <SubscriptionInstanceValueRow label=\\"endpoint_description\\" value=\\"l3 endpoint test\\" isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+                  <tbody className={[undefined]}>
+                    <tr>
+                      <td>
+                        ENDPOINT_DESCRIPTION
+                      </td>
+                      <td colSpan={2}>
+                        <div className=\\"resource-type\\">
+                          <span>
+                            l3 endpoint test
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </SubscriptionInstanceValueRow>
+              </SubscriptionInstanceValue>
+            </table>
+            <div className=\\"indented\\">
+              <TabbedSection id=\\"l3_endpoints-c658fad7-5f38-458f-bfe2-600bad3055e2-tabs\\" tabs={{...}} name=\\"l3_endpoints\\">
+                <section className=\\" tabbed-details\\">
+                  <EuiTabs>
+                    <div className=\\"euiTabs euiTabs--bottomBorder\\" role=\\"tablist\\">
+                      <EuiTab href={[undefined]} onClick={[Function: onClick]} isSelected={true} disabled={false}>
+                        <button role=\\"tab\\" aria-selected={true} type=\\"button\\" className=\\"euiTab euiTab-isSelected\\" disabled={false} onClick={[Function: onClick]}>
+                          <span className=\\"euiTab__content\\">
+                            SN8 L2VPN Virtual Circuit
+                          </span>
+                        </button>
+                      </EuiTab>
+                      <EuiTab href={[undefined]} onClick={[Function: onClick]} isSelected={false} disabled={false}>
+                        <button role=\\"tab\\" aria-selected={false} type=\\"button\\" className=\\"euiTab\\" disabled={false} onClick={[Function: onClick]}>
+                          <span className=\\"euiTab__content\\">
+                            SN8 Service Attach Point
+                          </span>
+                        </button>
+                      </EuiTab>
+                      <EuiTab href={[undefined]} onClick={[Function: onClick]} isSelected={false} disabled={false}>
+                        <button role=\\"tab\\" aria-selected={false} type=\\"button\\" className=\\"euiTab\\" disabled={false} onClick={[Function: onClick]}>
+                          <span className=\\"euiTab__content\\">
+                            SN8 Service Attach Point
+                          </span>
+                        </button>
+                      </EuiTab>
+                    </div>
+                  </EuiTabs>
+                  <div className=\\"scrollable-tab-content\\">
+                    <table className=\\"detail-block multiple-tbody\\">
+                      <thead />
+                      <SubscriptionInstanceValue label=\\"Instance ID\\" value=\\"ef380292-d5b5-4ef0-9320-4c4d3726ab11\\">
+                        <SubscriptionInstanceValueRow label=\\"Instance ID\\" value=\\"ef380292-d5b5-4ef0-9320-4c4d3726ab11\\" isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+                          <tbody className={[undefined]}>
+                            <tr>
+                              <td>
+                                INSTANCE ID
+                              </td>
+                              <td colSpan={2}>
+                                <div className=\\"resource-type\\">
+                                  <span>
+                                    ef380292-d5b5-4ef0-9320-4c4d3726ab11
+                                  </span>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </SubscriptionInstanceValueRow>
+                      </SubscriptionInstanceValue>
+                      <SubscriptionInstanceValue label=\\"service_speed\\" value={6000}>
+                        <SubscriptionInstanceValueRow label=\\"service_speed\\" value={6000} isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+                          <tbody className={[undefined]}>
+                            <tr>
+                              <td>
+                                SERVICE_SPEED
+                              </td>
+                              <td colSpan={2}>
+                                <div className=\\"resource-type\\">
+                                  <span>
+                                    6000
+                                  </span>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </SubscriptionInstanceValueRow>
+                      </SubscriptionInstanceValue>
+                      <SubscriptionInstanceValue label=\\"speed_policer\\" value={true}>
+                        <SubscriptionInstanceValueRow label=\\"speed_policer\\" value={true} isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+                          <tbody className={[undefined]}>
+                            <tr>
+                              <td>
+                                SPEED_POLICER
+                              </td>
+                              <td colSpan={2}>
+                                <div className=\\"resource-type\\">
+                                  <span>
+                                    true
+                                  </span>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </SubscriptionInstanceValueRow>
+                      </SubscriptionInstanceValue>
+                    </table>
+                    <div className=\\"indented\\">
+                      <TabbedSection id=\\"l2vpn_internal-ef380292-d5b5-4ef0-9320-4c4d3726ab11-tabs\\" tabs={{...}} name=\\"l2vpn_internal\\">
+                        <section className=\\" tabbed-details\\">
+                          <EuiTabs>
+                            <div className=\\"euiTabs euiTabs--bottomBorder\\" role=\\"tablist\\">
+                              <EuiTab href={[undefined]} onClick={[Function: onClick]} isSelected={true} disabled={false}>
+                                <button role=\\"tab\\" aria-selected={true} type=\\"button\\" className=\\"euiTab euiTab-isSelected\\" disabled={false} onClick={[Function: onClick]}>
+                                  <span className=\\"euiTab__content\\">
+                                    SN8 L2VPN ESI
+                                  </span>
+                                </button>
+                              </EuiTab>
+                              <EuiTab href={[undefined]} onClick={[Function: onClick]} isSelected={false} disabled={false}>
+                                <button role=\\"tab\\" aria-selected={false} type=\\"button\\" className=\\"euiTab\\" disabled={false} onClick={[Function: onClick]}>
+                                  <span className=\\"euiTab__content\\">
+                                    SN8 L2VPN ESI
+                                  </span>
+                                </button>
+                              </EuiTab>
+                              <EuiTab href={[undefined]} onClick={[Function: onClick]} isSelected={false} disabled={false}>
+                                <button role=\\"tab\\" aria-selected={false} type=\\"button\\" className=\\"euiTab\\" disabled={false} onClick={[Function: onClick]}>
+                                  <span className=\\"euiTab__content\\">
+                                    SN8 L2VPN ESI
+                                  </span>
+                                </button>
+                              </EuiTab>
+                            </div>
+                          </EuiTabs>
+                          <div className=\\"scrollable-tab-content\\">
+                            <table className=\\"detail-block multiple-tbody\\">
+                              <thead />
+                              <SubscriptionInstanceValue label=\\"Instance ID\\" value=\\"71842fe3-5001-4097-bbc5-3b9484a40c4b\\">
+                                <SubscriptionInstanceValueRow label=\\"Instance ID\\" value=\\"71842fe3-5001-4097-bbc5-3b9484a40c4b\\" isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+                                  <tbody className={[undefined]}>
+                                    <tr>
+                                      <td>
+                                        INSTANCE ID
+                                      </td>
+                                      <td colSpan={2}>
+                                        <div className=\\"resource-type\\">
+                                          <span>
+                                            71842fe3-5001-4097-bbc5-3b9484a40c4b
+                                          </span>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </SubscriptionInstanceValueRow>
+                              </SubscriptionInstanceValue>
+                            </table>
+                            <div className=\\"indented\\">
+                              <TabbedSection id=\\"esis-71842fe3-5001-4097-bbc5-3b9484a40c4b-tabs\\" tabs={{...}} name=\\"esis\\">
+                                <section className=\\" tabbed-details\\">
+                                  <EuiTabs>
+                                    <div className=\\"euiTabs euiTabs--bottomBorder\\" role=\\"tablist\\">
+                                      <EuiTab href={[undefined]} onClick={[Function: onClick]} isSelected={true} disabled={false}>
+                                        <button role=\\"tab\\" aria-selected={true} type=\\"button\\" className=\\"euiTab euiTab-isSelected\\" disabled={false} onClick={[Function: onClick]}>
+                                          <span className=\\"euiTab__content\\">
+                                            SN8 Service Attach Point
+                                          </span>
+                                        </button>
+                                      </EuiTab>
+                                    </div>
+                                  </EuiTabs>
+                                  <div className=\\"scrollable-tab-content\\">
+                                    <table className=\\"detail-block multiple-tbody\\">
+                                      <thead />
+                                      <SubscriptionInstanceValue label=\\"Instance ID\\" value=\\"4208f24d-a76b-4c00-9396-aa34efbc49ef\\">
+                                        <SubscriptionInstanceValueRow label=\\"Instance ID\\" value=\\"4208f24d-a76b-4c00-9396-aa34efbc49ef\\" isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+                                          <tbody className={[undefined]}>
+                                            <tr>
+                                              <td>
+                                                INSTANCE ID
+                                              </td>
+                                              <td colSpan={2}>
+                                                <div className=\\"resource-type\\">
+                                                  <span>
+                                                    4208f24d-a76b-4c00-9396-aa34efbc49ef
+                                                  </span>
+                                                </div>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </SubscriptionInstanceValueRow>
+                                      </SubscriptionInstanceValue>
+                                      <SubscriptionInstanceValue label=\\"vlanrange\\" value=\\"7\\">
+                                        <SubscriptionInstanceValueRow label=\\"vlanrange\\" value=\\"7\\" isSubscriptionValue={false} isDeleted={false} isExternalLinkValue={false} toggleCollapsed={[Function: toggleCollapsed]} type=\\"\\">
+                                          <tbody className={[undefined]}>
+                                            <tr>
+                                              <td>
+                                                VLANRANGE
+                                              </td>
+                                              <td colSpan={2}>
+                                                <div className=\\"resource-type\\">
+                                                  <span>
+                                                    7
+                                                  </span>
+                                                </div>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </SubscriptionInstanceValueRow>
+                                      </SubscriptionInstanceValue>
+                                    </table>
+                                  </div>
+                                </section>
+                              </TabbedSection>
+                            </div>
+                          </div>
+                        </section>
+                      </TabbedSection>
+                    </div>
+                  </div>
+                </section>
+              </TabbedSection>
+            </div>
+          </div>
+        </section>
+      </TabbedSection>
+    </div>
+  </RenderServiceConfiguration>
+</QueryClientProvider>"
+`;

@@ -21,6 +21,7 @@ import {
     RenderProduct,
     RenderSubscriptions,
 } from "components/subscriptionDetail/Renderers";
+import SubscriptionDetailHeader from "components/subscriptionDetail/SubscriptionDetailHeader";
 import SubscriptionDetails from "components/subscriptionDetail/SubscriptionDetails";
 import { SubscriptionDetailSection } from "components/subscriptionDetail/SubscriptionDetailSection";
 import SubscriptionInstance from "components/subscriptionDetail/SubscriptionInstance";
@@ -36,8 +37,9 @@ import ApplicationContext from "utils/ApplicationContext";
 import { enrichSubscription } from "utils/Lookups";
 import {
     Product,
-    SUBSCRIPTION_VIEWTYPE_SELECTOR,
-    StoredViewPreferences,
+    SHOW_RELATED_BLOCKS_KEY,
+    SUBSCRIPTION_BLOCK_VIEWTYPE_KEY,
+    SUBSCRIPTION_VIEWTYPE_KEY,
     Subscription,
     SubscriptionModel,
     SubscriptionProcesses,
@@ -66,16 +68,18 @@ function SubscriptionDetail({ subscriptionId }: IProps) {
     const [workflows, setWorkflows] = useState<WorkflowReasons>();
     const [inUseBySubscriptions, setInUseBySubscriptions] = useState({});
     const [enrichedInUseBySubscriptions, setEnrichedInUseBySubscriptions] = useState<SubscriptionWithDetails[]>();
-    const [viewTypes, setViewTypes] = useStorageState<StoredViewPreferences[]>(
-        localStorage,
-        SUBSCRIPTION_VIEWTYPE_SELECTOR,
-        []
-    );
 
-    const tabViewSettingsForId = (id: string) => {
-        const defaultViewSetting = { tabViewId: id, viewType: "tabs" } as StoredViewPreferences;
-        return viewTypes.find((s) => s.tabViewId === id) || defaultViewSetting;
-    };
+    const [subscriptionViewType, setSubscriptionViewType] = useStorageState(
+        localStorage,
+        SUBSCRIPTION_VIEWTYPE_KEY,
+        "tabs"
+    );
+    const [subscriptionBlockViewType, setSubscriptionBlockViewType] = useStorageState(
+        localStorage,
+        SUBSCRIPTION_BLOCK_VIEWTYPE_KEY,
+        "tabs"
+    );
+    const [showRelatedBlocks, setShowRelatedBlocks] = useStorageState(localStorage, SHOW_RELATED_BLOCKS_KEY, false);
 
     useQuery<SubscriptionModel, Error>(
         ["subscription", { id: subscriptionId }],
@@ -151,58 +155,6 @@ function SubscriptionDetail({ subscriptionId }: IProps) {
     } else if (!subscription || !workflows || !subscriptionProcesses || !enrichedInUseBySubscriptions) {
         return null;
     }
-
-    const subscriptionDetailHeader = (id: string, title?: string) => (
-        <EuiFlexGroup>
-            <EuiFlexItem grow={true}>
-                <EuiTitle size="m">
-                    <h1>{title ? title : subscription.product?.name}</h1>
-                </EuiTitle>
-            </EuiFlexItem>
-            <EuiFlexItem grow={false}>
-                <EuiButton
-                    id="subscription-detail-viewtype-tree"
-                    fill={tabViewSettingsForId(id).viewType === "tree"}
-                    iconType="list"
-                    size="s"
-                    isSelected={tabViewSettingsForId(id).viewType === "tree"}
-                    onClick={() => {
-                        const existing = viewTypes.find((s) => s.tabViewId === id);
-                        let newViewTypes = viewTypes;
-                        if (existing) {
-                            newViewTypes = viewTypes.map((s) => (s.tabViewId === id ? { ...s, viewType: "tree" } : s));
-                        } else {
-                            newViewTypes = [...viewTypes, { tabViewId: id, viewType: "tree" }];
-                        }
-                        setViewTypes(newViewTypes);
-                    }}
-                >
-                    tree
-                </EuiButton>
-            </EuiFlexItem>
-            <EuiFlexItem grow={false}>
-                <EuiButton
-                    id="subscription-detail-viewtype-tree"
-                    fill={tabViewSettingsForId(id).viewType === "tabs"}
-                    iconType="tableDensityNormal"
-                    size="s"
-                    isSelected={tabViewSettingsForId(id).viewType === "tabs"}
-                    onClick={() => {
-                        const existing = viewTypes.find((s) => s.tabViewId === id);
-                        let newViewTypes = viewTypes;
-                        if (existing) {
-                            newViewTypes = viewTypes.map((s) => (s.tabViewId === id ? { ...s, viewType: "tabs" } : s));
-                        } else {
-                            newViewTypes = [...viewTypes, { tabViewId: id, viewType: "tabs" }];
-                        }
-                        setViewTypes(newViewTypes);
-                    }}
-                >
-                    tabs
-                </EuiButton>
-            </EuiFlexItem>
-        </EuiFlexGroup>
-    );
 
     const subscription_instances = Object.entries(subscription)
         .filter(
@@ -289,14 +241,19 @@ function SubscriptionDetail({ subscriptionId }: IProps) {
     return (
         <EuiFlexItem css={subscriptionDetailStyling}>
             <div className="mod-subscription-detail">
-                {subscriptionDetailHeader("subscription-details")}
-                {tabViewSettingsForId("subscription-details").viewType === "tree" && (
+                <SubscriptionDetailHeader
+                    title={subscription.product.name}
+                    viewType={subscriptionViewType}
+                    setViewType={setSubscriptionViewType}
+                />
+                {subscriptionViewType === "tree" && (
                     <>
                         {renderedSubscriptionDetails}
                         <RenderFixedInputs product={product} />
+                        {renderedActions}
                     </>
                 )}
-                {tabViewSettingsForId("subscription-details").viewType === "tabs" && (
+                {subscriptionViewType === "tabs" && (
                     <TabbedSection
                         id="subscription-detail-tabs"
                         tabs={subscriptionTabs}
@@ -304,9 +261,24 @@ function SubscriptionDetail({ subscriptionId }: IProps) {
                         name={<FormattedMessage id="subscription.subscription_title" />}
                     ></TabbedSection>
                 )}
-
-                {subscriptionDetailHeader("subscription-product-blocks", "Service configuration details")}
-                {tabViewSettingsForId("subscription-product-blocks").viewType === "tree" && (
+                <SubscriptionDetailHeader
+                    title="Service configuration details"
+                    viewType={subscriptionBlockViewType}
+                    setViewType={setSubscriptionBlockViewType}
+                >
+                    <EuiFlexItem grow={false}>
+                        <EuiButton
+                            fill
+                            iconType={showRelatedBlocks ? "checkInCircleFilled" : "crossInACircleFilled"}
+                            iconSide="right"
+                            size="s"
+                            onClick={() => setShowRelatedBlocks(!showRelatedBlocks)}
+                        >
+                            Show related blocks
+                        </EuiButton>
+                    </EuiFlexItem>
+                </SubscriptionDetailHeader>
+                {subscriptionBlockViewType === "tree" && (
                     <>
                         {subscription_instances && (
                             <SubscriptionDetailSection
@@ -315,28 +287,29 @@ function SubscriptionDetail({ subscriptionId }: IProps) {
                             >
                                 {subscription_instances.map((entry, index) => (
                                     <SubscriptionInstance
-                                        //@ts-ignore
                                         key={index}
+                                        subscription_id={subscription.subscription_id}
                                         subscription_instance={entry[1]}
                                         field_name={entry[0]}
                                         inUseBySubscriptions={inUseBySubscriptions}
+                                        showRelatedBlocks={showRelatedBlocks}
                                     />
                                 ))}
                             </SubscriptionDetailSection>
                         )}
                     </>
                 )}
-                {tabViewSettingsForId("subscription-product-blocks").viewType === "tabs" && (
+                {subscriptionBlockViewType === "tabs" && (
                     <RenderServiceConfiguration
                         subscriptionInstances={subscription_instances}
                         subscription_id={subscription.subscription_id}
                         inUseBySubscriptions={inUseBySubscriptions}
+                        showRelatedBlocks={showRelatedBlocks}
                     />
                 )}
 
-                {tabViewSettingsForId("subscription-details").viewType === "tree" && (
+                {subscriptionViewType === "tree" && (
                     <>
-                        {renderedActions}
                         {renderedProductDetails}
                         {renderedProcesses}
                         {renderedInUseBySubscriptions}
