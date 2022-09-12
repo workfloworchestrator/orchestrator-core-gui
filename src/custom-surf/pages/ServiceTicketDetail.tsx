@@ -58,7 +58,7 @@ const renderLogItemActions = (ticket: ServiceTicketWithDetails, actions: Action[
             {actions.map((action: Action, index: number) => (
                 <EuiFlexItem key={index}>
                     <EuiButton
-                        onClick={action.onClick}
+                        onClick={() => action.onClick()}
                         isDisabled={!action.requiredState.includes(ticket.process_state)}
                     >
                         <FormattedMessage id={action.translation} />
@@ -173,6 +173,9 @@ const ServiceTicketDetail = () => {
     const updateTicket = () => {
         redirect(`/tickets/${ticket._id}/update`);
     };
+    const closeTicket = () => {
+        redirect(`/tickets/${ticket._id}/close`);
+    };
 
     const actions: Action[] = [
         {
@@ -182,12 +185,12 @@ const ServiceTicketDetail = () => {
         },
         {
             translation: "tickets.action.updating",
-            onClick: () => updateTicket,
+            onClick: updateTicket,
             requiredState: [ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED],
         },
         {
             translation: "tickets.action.closing",
-            onClick: () => {},
+            onClick: closeTicket,
             requiredState: [ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED],
         },
         {
@@ -211,8 +214,7 @@ const ServiceTicketDetail = () => {
         ServiceTicketProcessState.OPEN_RELATED,
     ].includes(ticket.process_state);
 
-    console.log("Rendering the ServiceTicketDetail page with ticket;");
-    console.log(ticket);
+    console.log("Rendering the ServiceTicketDetail page with ticket;", ticket);
 
     const keyRowClass = "key-row";
     const valueRowClass = "value-row";

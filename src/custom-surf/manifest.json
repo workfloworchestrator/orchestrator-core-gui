@@ -42,6 +42,13 @@
             "file": "UpdateServiceTicket",
             "component": "UpdateServiceTicket",
             "showInMenu": false
+        },
+        {
+            "name": "tickets/:id/close",
+            "path": "pages",
+            "file": "CloseServiceTicket",
+            "component": "CloseServiceTicket",
+            "showInMenu": false
         }
     ],
     "disabledRoutes": ["/YOUR_DISABLED_ROUTE_HERE"],

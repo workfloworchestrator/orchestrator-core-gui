@@ -26,6 +26,15 @@ export interface OpenServiceTicketPayload {
     mail_subject: string;
 }
 
+export interface UpdateServiceTicketPayload extends OpenServiceTicketPayload {
+    start_date?: string;
+    end_date?: string;
+}
+
+export interface CloseServiceTicketPayload extends OpenServiceTicketPayload {
+    end_date?: string;
+}
+
 export enum ServiceTicketState {
     INITIAL = "initial",
     ACTIVE = "active",

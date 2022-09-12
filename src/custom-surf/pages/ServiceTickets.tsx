@@ -17,7 +17,14 @@ import { renderStringAsDateTime } from "utils/Lookups";
 import { Filter, SortOption } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
-type Column = "jira_ticket_id" | "title_nl" | "process_state" | "opened_by" | "start_date" | "create_date" | "last_update_time";
+type Column =
+    | "jira_ticket_id"
+    | "title_nl"
+    | "process_state"
+    | "opened_by"
+    | "start_date"
+    | "create_date"
+    | "last_update_time";
 
 interface IProps extends WrappedComponentProps {}
 
@@ -216,7 +223,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
             "opened_by",
             "start_date",
             "create_date",
-            "last_update_time"
+            "last_update_time",
         ];
         const { theme } = this.context;
 

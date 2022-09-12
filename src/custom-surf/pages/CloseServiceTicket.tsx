@@ -16,7 +16,7 @@
 import { EuiPage, EuiPageBody, EuiText } from "@elastic/eui";
 import Explain from "components/Explain";
 import OpenForm from "custom/components/cim/OpenForm";
-import { UpdateServiceTicketPayload } from "custom/types";
+import { CloseServiceTicketPayload } from "custom/types";
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
@@ -25,24 +25,23 @@ interface IProps {
     id: string;
 }
 
-export default function UpdateServiceTicket() {
+export default function CloseServiceTicket() {
     const { id } = useParams<IProps>();
     const [showExplanation, setShowExplanation] = useState(false);
     const { redirect, customApiClient } = useContext(ApplicationContext);
 
     const handleSubmit = (userInputs: any) => {
-        const payload: UpdateServiceTicketPayload = {
+        const payload: CloseServiceTicketPayload = {
             cim_ticket_id: id,
             title_nl: userInputs.title_nl,
             description_nl: userInputs.description_nl,
             title_en: userInputs.title_en,
             description_en: userInputs.description_en,
             mail_subject: userInputs.mail_subject,
-            start_date: userInputs.start_date,
             end_date: userInputs.end_date,
         };
         console.log(payload);
-        customApiClient.cimUpdateTicket(payload).then((_) => redirect(`/tickets/${id}/`));
+        customApiClient.cimCloseTicket(payload).then((_) => redirect(`/tickets/${id}/`));
     };
 
     const handleCancel = () => {
@@ -58,13 +57,16 @@ export default function UpdateServiceTicket() {
                     </div>
                 </div>
                 <Explain close={() => setShowExplanation(false)} isVisible={showExplanation} title="What is this?">
-                    <p>This wizard will guide you through the process of sending the UPDATE email to institutes.</p>
+                    <p>
+                        This wizard will guide you through the process of closing the ticket and sending the CLOSE email
+                        to institutes.
+                    </p>
                 </Explain>
                 <EuiText grow={true}>
-                    <h1>Prepare to send UPDATE email to institutes</h1>
+                    <h1>Prepare to send CLOSE email to institutes</h1>
                 </EuiText>
                 <OpenForm
-                    formKey="update_ticket_form"
+                    formKey="close_ticket_form"
                     handleSubmit={handleSubmit}
                     handleCancel={handleCancel}
                     ticketId={id}
