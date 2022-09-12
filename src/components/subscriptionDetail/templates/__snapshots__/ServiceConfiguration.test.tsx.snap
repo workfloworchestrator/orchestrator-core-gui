@@ -156,7 +156,7 @@ exports[`RenderServiceConfiguration Should correctly render inUseBySubscriptions
                           </tbody>
                         </SubscriptionInstanceValueRow>
                       </SubscriptionInstanceValue>
-                      <ExpandableRow>
+                      <ExpandableRow title=\\"USED_BY_SUBSCRIPTIONS\\" text=\\"Show info about subscriptions that use this product block\\">
                         <tbody className={[undefined]}>
                           <tr>
                             <td>

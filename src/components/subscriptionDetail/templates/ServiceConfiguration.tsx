@@ -1,11 +1,25 @@
-import { EuiButton } from "@elastic/eui";
+/*
+ * Copyright 2019-2022 SURF.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 import SubscriptionInfo from "components/subscriptionDetail/SubscriptionInfo";
 import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
 import SubscriptionInstanceValue from "custom/components/subscriptionDetail/SubscriptionInstanceValue";
 import { isArray, partition } from "lodash";
-import React, { useContext, useState } from "react";
-import ApplicationContext from "utils/ApplicationContext";
 import { ISubscriptionInstance, TabView } from "utils/types";
+
+import { ExpandableRow } from "../../tables/ExpandableRow";
 
 interface IProps {
     subscriptionInstances: any[][];
@@ -13,39 +27,6 @@ interface IProps {
     inUseBySubscriptions: Record<string, any>;
     showRelatedBlocks?: boolean;
 }
-
-interface IExpandableRow {
-    children: JSX.Element;
-}
-
-export const ExpandableRow = ({ children }: IExpandableRow) => {
-    const [isExpanded, setIsExpanded] = useState(false);
-    const { theme } = useContext(ApplicationContext);
-
-    const ExpandButton = (
-        <tbody className={theme}>
-            <tr>
-                <td>USED_BY_SUBSCRIPTIONS</td>
-                <td>Show info about subscriptions that use this product block</td>
-                <td>
-                    <EuiButton
-                        iconType={isExpanded ? "arrowDown" : "arrowRight"}
-                        onClick={() => setIsExpanded(!isExpanded)}
-                    >
-                        {isExpanded ? "collapse" : "expand"}
-                    </EuiButton>
-                </td>
-            </tr>
-        </tbody>
-    );
-
-    return (
-        <>
-            {ExpandButton}
-            {isExpanded && children}
-        </>
-    );
-};
 
 export const mapSplitFields = (
     instance_id: string,
@@ -62,7 +43,11 @@ export const mapSplitFields = (
                 if (!hasInUseByExpandableRow) {
                     hasInUseByExpandableRow = true;
                     return (
-                        <ExpandableRow key={`${instance_id}.${i}`}>
+                        <ExpandableRow
+                            title="USED_BY_SUBSCRIPTIONS"
+                            text="Show info about subscriptions that use this product block"
+                            key={`${instance_id}.${i}`}
+                        >
                             <SubscriptionInfo label="used_by_subscription" value={value} />
                         </ExpandableRow>
                     );

@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiTitle } from "@elastic/eui";
+import { EuiButton, EuiFlexItem } from "@elastic/eui";
 import {
     RenderActions,
     RenderFixedInputs,
