@@ -47,33 +47,37 @@ LoadedCheerio {
     <div
       class="autocomplete-container"
     >
-      <section
-        class="autocomplete "
+      <div
+        class="euiFlexItem css-a8497q-EuiFlexItem"
       >
-        <table
-          class="result"
+        <section
+          class="autocomplete "
         >
-          <tbody>
-            <tr
-              class=""
-            >
-              <td>
-                <span>
-                  <span
-                    class="matched"
-                  >
-                    n
+          <table
+            class="result"
+          >
+            <tbody>
+              <tr
+                class=""
+              >
+                <td>
+                  <span>
+                    <span
+                      class="matched"
+                    >
+                      n
+                    </span>
+                    ame
                   </span>
-                  ame
-                </span>
-              </td>
-              <td>
-                a@b.nl
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+                </td>
+                <td>
+                  a@b.nl
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
     </div>
   </section>,
   "_root": LoadedCheerio {
