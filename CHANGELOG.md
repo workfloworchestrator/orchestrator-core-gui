@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `#157` Redirect workflow submit to process detail
 - `#158` Add auto scrolling to last finished step in process details, a button to turn auto scrolling off or on and add fixed top menu when scrolling past actions on the page.
 - `#161` Scroll to last step in process details when page is loaded except when process is done and fix summaryfield error.
+- `#166` Fix snapshot difference of standalone and SURF version. (moved to their own folder)
 
 Surf specific:
 - `#155` cim: Check if impacted service has subscription id before calling api
