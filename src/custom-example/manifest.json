@@ -1,4 +1,5 @@
 {
+    "name": "standalone",
     "customPages": [],
     "disabledRoutes": ["some_non_existing_route"],
     "disabledMenuItems": [],
