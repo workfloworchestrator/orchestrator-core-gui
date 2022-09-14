@@ -1,4 +1,4 @@
-import manifest from "custom/manifest.json";
+import manifest from "../custom/manifest.json";
 
 const versionFolder = `__${manifest.name}-snapshots__/`;
 /**
