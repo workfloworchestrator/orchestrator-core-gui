@@ -14,14 +14,13 @@
  */
 
 import { EuiFlexItem, EuiFormRow, EuiText } from "@elastic/eui";
+import { summaryFieldStyling } from "lib/uniforms-surfnet/src/SummaryFieldStyling";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React, { useContext } from "react";
 import ReactHtmlParser from "react-html-parser";
 import { connectField, filterDOMProps } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { isEmpty } from "utils/Utils";
-
-import { summaryFieldStyling } from "lib/uniforms-surfnet/src/SummaryFieldStyling";
 
 export type SummaryFieldProps = FieldProps<
     null,
