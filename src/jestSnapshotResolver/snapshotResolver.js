@@ -3,7 +3,7 @@ import manifest from "../custom/manifest.json";
 const versionFolder = `__${manifest.name}-snapshots__/`;
 /**
  *
- * @param testPath Path of the test file being test3ed
+ * @param testPath Path of the test file being tested
  * @param snapshotExtension The extension for snapshots (.snap usually)
  */
 const resolveSnapshotPath = (testPath, snapshotExtension) => {
