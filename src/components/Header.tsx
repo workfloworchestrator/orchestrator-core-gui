@@ -16,6 +16,7 @@
 import { EuiFlexItem, EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderSectionItem, EuiText } from "@elastic/eui";
 import EngineStatusBanner from "components/engineStatusBanner";
 import FailedTaskBanner from "components/failedTaskBanner";
+import manifest from "custom/manifest.json";
 import { ENV } from "env";
 import logo from "images/logo.svg";
 import { Profile } from "oidc-client";
@@ -28,19 +29,21 @@ import ApplicationContext from "utils/ApplicationContext";
 import { headerStyling } from "./HeaderStyling";
 import UserProfile from "./UserProfile";
 
+const getEnvironmentName = (hostname: string) =>
+    hostname.indexOf("staging") > -1
+        ? "staging"
+        : hostname === "localhost"
+        ? `local ${manifest.name}`
+        : hostname.indexOf("dev") > -1
+        ? "development"
+        : "production";
+
 const HeaderWithAuth = () => {
     const { userData, signOut } = useAuth();
     const hostname = window.location.hostname;
     const [dropDownActive, setDropDownActive] = useState(false);
     const context = useContext(ApplicationContext);
-    const environmentName =
-        hostname.indexOf("staging") > -1
-            ? "staging"
-            : hostname === "localhost"
-            ? "local"
-            : hostname.indexOf("dev") > -1
-            ? "development"
-            : "production";
+    const environmentName = getEnvironmentName(hostname);
 
     const handleToggle = () => setDropDownActive(!dropDownActive);
 
@@ -130,14 +133,7 @@ const HeaderWithAuth = () => {
 const HeaderWithoutAuth = () => {
     const hostname = window.location.hostname;
     const context = useContext(ApplicationContext);
-    const environmentName =
-        hostname.indexOf("staging") > -1
-            ? "staging"
-            : hostname === "localhost"
-            ? "local"
-            : hostname.indexOf("dev") > -1
-            ? "development"
-            : "production";
+    const environmentName = getEnvironmentName(hostname);
 
     const switchTheme = () => {
         if (context.theme === "dark") {
