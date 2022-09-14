@@ -7,7 +7,6 @@ export const processesStyling = css`
         text-align: right;
         position: absolute;
         right: 16px;
-        transform: translateY(-10px);
         .explain {
             margin-right: 10px;
             margin-top: -5px;

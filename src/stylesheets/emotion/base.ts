@@ -24,4 +24,36 @@ export const baseCss = css`
         color: ${PRIMARY_COLOR};
         opacity: 1;
     }
+
+    // Force button text color
+    .euiButton--primary.euiButton--fill {
+        color: #fff !important;
+    }
+
+    .euiButton--warning.euiButton--fill {
+        color: #fff !important;
+    }
+
+    .euiButton--danger.euiButton--fill {
+        color: #fff !important;
+    }
+    .euiButton--secondary.euiButton--fill {
+        color: #fff !important;
+    }
+
+    .euiButton--accent.euiButton {
+        background-color: #e39846 !important;
+    }
+    .euiButton--accent {
+        &.euiButton--fill {
+            color: #fff !important;
+        }
+    }
+
+    .euiButton--warning.euiButton {
+        background-color: #e39846 !important;
+    }
+    .euiButton--warning.euiButton--fill {
+        color: #fff !important;
+    }
 `;

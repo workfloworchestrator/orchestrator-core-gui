@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiPage, EuiPageBody } from "@elastic/eui";
+import { EuiPage, EuiPageBody, EuiSpacer } from "@elastic/eui";
 import DropDownActions from "components/DropDownActions";
 import Explain from "components/Explain";
 import {
@@ -167,6 +167,7 @@ class Processes extends React.PureComponent<IProps, IState> {
                         initialTableSettings={activeSettings}
                         renderActions={this.renderActions}
                     />
+                    <EuiSpacer />
                     <ProcessesTable
                         key={"completed"}
                         initialTableSettings={completedSettings}

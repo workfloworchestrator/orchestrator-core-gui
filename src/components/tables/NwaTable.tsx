@@ -311,7 +311,14 @@ export function NwaTable<T extends object>({
     }, [runningProcesses]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <EuiPanel css={nwaTableStyling} id={name} style={{ marginBottom: "20px" }}>
+        <EuiPanel
+            hasShadow={false}
+            hasBorder={false}
+            paddingSize={"none"}
+            css={nwaTableStyling}
+            id={name}
+            style={{ marginBottom: "-15px" }}
+        >
             <EuiFlexGroup>
                 <EuiFlexItem grow={false} component="span">
                     <Preferences<T> {...preferencesProps} />

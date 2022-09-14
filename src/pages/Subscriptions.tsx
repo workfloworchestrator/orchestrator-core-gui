@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiPage, EuiPageBody } from "@elastic/eui";
+import { EuiPage, EuiPageBody, EuiSpacer } from "@elastic/eui";
 import Explain from "components/Explain";
 import {
     SubscriptionsTable,
@@ -167,6 +167,7 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
                         renderActions={this.renderActions}
                         isSubscription={true}
                     />
+                    <EuiSpacer />
                     <SubscriptionsTable
                         key={"provisioning"}
                         initialTableSettings={provisioningSettings}
