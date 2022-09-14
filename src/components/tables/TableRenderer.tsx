@@ -13,12 +13,13 @@
  *
  */
 
-import "stylesheets/buttons.scss";
-
+import { EuiFlexItem } from "@elastic/eui";
 import React, { useContext } from "react";
 import { ColumnInstance, HeaderGroup, Row, TableBodyProps, TableProps } from "react-table";
 import { DARK_ROW_BORDER_COLOR, LIGHT_ROW_BORDER_COLOR } from "stylesheets/emotion/colors";
 import ApplicationContext from "utils/ApplicationContext";
+
+import { buttonsCss } from "../../stylesheets/emotion/buttons";
 
 interface ITableRendererProps<T extends object> {
     renderSubComponent: ({ row }: { row: Row<T> }) => JSX.Element;
@@ -58,50 +59,52 @@ export function TableRenderer<T extends object>({
     const rowBorderColor = theme === "light" ? LIGHT_ROW_BORDER_COLOR : DARK_ROW_BORDER_COLOR;
 
     return (
-        <table className="nwa-table" {...getTableProps()}>
-            <thead>
-                {headerGroups.map((headerGroup) => (
-                    <React.Fragment key={`header_fragment_${headerGroup.id}`}>
-                        <tr className={"column-ids"} {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) => (
-                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                    {column.render("Header")} {sortIcon(column)}
-                                </th>
-                            ))}
-                        </tr>
-                        <tr className={"filters"} style={{ borderBottom: `1px solid ${rowBorderColor}` }}>
-                            {headerGroup.headers.map((column) => (
-                                <th id={`filter_headers_${column.id}`} key={column.id}>
-                                    {column.canFilter && column.render("Filter")}
-                                </th>
-                            ))}
-                        </tr>
-                    </React.Fragment>
-                ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-                {page.map((row: Row<T>) => {
-                    prepareRow(row);
-                    return (
-                        <React.Fragment key={`row_fragment_${row.id}`}>
-                            <tr {...row.getRowProps()} style={{ borderBottom: `1px solid ${rowBorderColor}` }}>
-                                {row.cells.map((cell) => {
-                                    return (
-                                        <td {...cell.getCellProps([{ className: cell.column.id }])}>
-                                            {cell.render("Cell")}
-                                        </td>
-                                    );
-                                })}
+        <EuiFlexItem css={buttonsCss}>
+            <table className="nwa-table" {...getTableProps()}>
+                <thead>
+                    {headerGroups.map((headerGroup) => (
+                        <React.Fragment key={`header_fragment_${headerGroup.id}`}>
+                            <tr className={"column-ids"} {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) => (
+                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                        {column.render("Header")} {sortIcon(column)}
+                                    </th>
+                                ))}
                             </tr>
-                            {row.isExpanded && (
-                                <tr>
-                                    <td colSpan={visibleColumns.length}>{renderSubComponent({ row })}</td>
-                                </tr>
-                            )}
+                            <tr className={"filters"} style={{ borderBottom: `1px solid ${rowBorderColor}` }}>
+                                {headerGroup.headers.map((column) => (
+                                    <th id={`filter_headers_${column.id}`} key={column.id}>
+                                        {column.canFilter && column.render("Filter")}
+                                    </th>
+                                ))}
+                            </tr>
                         </React.Fragment>
-                    );
-                })}
-            </tbody>
-        </table>
+                    ))}
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                    {page.map((row: Row<T>) => {
+                        prepareRow(row);
+                        return (
+                            <React.Fragment key={`row_fragment_${row.id}`}>
+                                <tr {...row.getRowProps()} style={{ borderBottom: `1px solid ${rowBorderColor}` }}>
+                                    {row.cells.map((cell) => {
+                                        return (
+                                            <td {...cell.getCellProps([{ className: cell.column.id }])}>
+                                                {cell.render("Cell")}
+                                            </td>
+                                        );
+                                    })}
+                                </tr>
+                                {row.isExpanded && (
+                                    <tr>
+                                        <td colSpan={visibleColumns.length}>{renderSubComponent({ row })}</td>
+                                    </tr>
+                                )}
+                            </React.Fragment>
+                        );
+                    })}
+                </tbody>
+            </table>
+        </EuiFlexItem>
     );
 }

@@ -1,7 +1,7 @@
-import "../src/pages/App.scss";
 import "./storybook.scss";
+import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 
-import { EuiProvider } from "@elastic/eui";
+import { EuiFlexItem, EuiProvider } from "@elastic/eui";
 import { action } from "@storybook/addon-actions";
 import { withKnobs } from "@storybook/addon-knobs";
 import mock from "axios-mock";
@@ -13,6 +13,7 @@ import { useDarkMode } from "storybook-dark-mode";
 import en from "../src/locale/en";
 import { parse_translations_dict } from "../src/locale/i18n";
 import nl from "../src/locale/nl";
+import { appStyling } from "../src/pages/AppStyling";
 import LOCATION_CODES from "../src/stories/data/location_codes.json";
 import ORGANISATIONS from "../src/stories/data/organisations.json";
 import PRODUCTS from "../src/stories/data/products.json";
@@ -45,7 +46,9 @@ function withContext(Story) {
                         href={isDarkMode || false ? "/eui_theme_dark.css" : "/eui_theme_light.css"}
                     />
                     <link rel="stylesheet" type="text/css" href={isDarkMode || false ? "/dark.css" : "/light.css"} />
-                    <Story />
+                    <EuiFlexItem css={appStyling}>
+                        <Story />
+                    </EuiFlexItem>
                 </ApplicationContext.Provider>
             </EuiProvider>
         </QueryClientProvider>

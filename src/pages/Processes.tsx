@@ -13,9 +13,7 @@
  *
  */
 
-import "pages/Processes.scss";
-
-import { EuiPage, EuiPageBody } from "@elastic/eui";
+import { EuiPage, EuiPageBody, EuiSpacer } from "@elastic/eui";
 import DropDownActions from "components/DropDownActions";
 import Explain from "components/Explain";
 import {
@@ -27,6 +25,7 @@ import ConfirmationDialogContext, {
     ConfirmDialogActions,
     ShowConfirmDialogType,
 } from "contextProviders/ConfirmationDialogProvider";
+import { processesStyling } from "pages/ProcessesStyling";
 import React from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import ScrollUpButton from "react-scroll-up-button";
@@ -140,7 +139,7 @@ class Processes extends React.PureComponent<IProps, IState> {
         );
 
         return (
-            <EuiPage>
+            <EuiPage css={processesStyling}>
                 <ConfirmationDialogContext.Consumer>
                     {(cdc) => this.addConfirmDialogActions(cdc)}
                 </ConfirmationDialogContext.Consumer>
@@ -168,6 +167,7 @@ class Processes extends React.PureComponent<IProps, IState> {
                         initialTableSettings={activeSettings}
                         renderActions={this.renderActions}
                     />
+                    <EuiSpacer />
                     <ProcessesTable
                         key={"completed"}
                         initialTableSettings={completedSettings}

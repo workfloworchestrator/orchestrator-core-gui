@@ -13,19 +13,19 @@
  *
  */
 
-import "pages/NotFound.scss";
-
 import { EuiPage, EuiPageBody } from "@elastic/eui";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { RouteComponentProps } from "react-router";
+
+import { errorPageStyling } from "./ErrorPageStyling";
 
 export default function ServerError(props: RouteComponentProps<{}>) {
     const params = new URLSearchParams(props.location.search.substring(1));
     const customError = params.get("error");
 
     return (
-        <EuiPage>
+        <EuiPage css={errorPageStyling}>
             <EuiPageBody component="div" className="mod-server-error">
                 <h1>
                     <FormattedMessage id="server_error.title" />

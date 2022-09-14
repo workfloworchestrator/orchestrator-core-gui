@@ -13,8 +13,6 @@
  *
  */
 
-import "custom/components/inputForms/IpPrefixTable.scss";
-
 import {
     EuiBadge,
     EuiButton,
@@ -35,6 +33,8 @@ import ApplicationContext from "utils/ApplicationContext";
 import { ipamStates } from "utils/Lookups";
 import { IpBlock, IpPrefix, Option, SortOption, prop } from "utils/types";
 import { stop } from "utils/Utils";
+
+import { ipPrefixTableStyling } from "./IpPrefixTableStyling";
 
 type SortKeys = "id" | "prefix" | "description" | "state_repr";
 
@@ -259,7 +259,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
         const customStyles = getReactSelectTheme(this.context.theme);
 
         return (
-            <div>
+            <EuiFlexItem css={ipPrefixTableStyling}>
                 <div>
                     <EuiFlexGroup gutterSize="s" style={{ marginTop: "5px", marginBottom: "10px" }}>
                         <EuiFlexItem grow={false}>
@@ -366,7 +366,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                         />
                     </>
                 )}
-            </div>
+            </EuiFlexItem>
         );
     }
 }

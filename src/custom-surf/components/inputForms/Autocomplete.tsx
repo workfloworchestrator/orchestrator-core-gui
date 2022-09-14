@@ -13,12 +13,13 @@
  *
  */
 
-import "custom/components/inputForms/Autocomplete.scss";
-
+import { EuiFlexItem } from "@elastic/eui";
 import React from "react";
 import scrollIntoView from "scroll-into-view";
 import { ContactPerson } from "utils/types";
 import { isEmpty } from "utils/Utils";
+
+import { autocompleteStyling } from "./AutocompleteStyling";
 
 interface IProps {
     query: string;
@@ -70,27 +71,29 @@ export default class Autocomplete extends React.PureComponent<IProps> {
             return null;
         }
         return (
-            <section className={`autocomplete ${className || ""}`}>
-                <table className="result">
-                    <tbody>
-                        {suggestions.map((item, index) => (
-                            <tr
-                                key={index}
-                                className={selectedItem === index ? "active" : ""}
-                                onClick={() => itemSelected(item, personIndex)}
-                                ref={(ref) => {
-                                    if (selectedItem === index) {
-                                        this.selectedRow = ref;
-                                    }
-                                }}
-                            >
-                                <td>{this.itemName(item, query)}</td>
-                                <td>{item.email || ""}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </section>
+            <EuiFlexItem css={autocompleteStyling}>
+                <section className={`autocomplete ${className || ""}`}>
+                    <table className="result">
+                        <tbody>
+                            {suggestions.map((item, index) => (
+                                <tr
+                                    key={index}
+                                    className={selectedItem === index ? "active" : ""}
+                                    onClick={() => itemSelected(item, personIndex)}
+                                    ref={(ref) => {
+                                        if (selectedItem === index) {
+                                            this.selectedRow = ref;
+                                        }
+                                    }}
+                                >
+                                    <td>{this.itemName(item, query)}</td>
+                                    <td>{item.email || ""}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </section>
+            </EuiFlexItem>
         );
     }
 }

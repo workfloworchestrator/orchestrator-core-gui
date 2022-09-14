@@ -13,8 +13,6 @@
  *
  */
 
-import "pages/Subscriptions.scss";
-
 import {
     EuiButton,
     EuiButtonEmpty,
@@ -41,6 +39,8 @@ import {
 } from "@elastic/eui";
 import Explain from "components/Explain";
 import React from "react";
+
+import { subscriptionsStyling } from "./SubscriptionsStyling";
 
 interface IProps {}
 
@@ -160,7 +160,7 @@ export default class StyleGuide extends React.PureComponent<IProps, IState> {
         }
 
         return (
-            <EuiPage>
+            <EuiPage css={subscriptionsStyling}>
                 <EuiPageBody component="div">
                     <div className="actions">{this.renderExplain()}</div>
                     <Explain

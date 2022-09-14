@@ -12,8 +12,8 @@
  * limitations under the License.
  *
  */
-import "components/tables/cellRenderers.scss";
 
+import { EuiFlexGroup } from "@elastic/eui";
 import { intl } from "locale/i18n";
 import uniq from "lodash/uniq";
 import { Fragment } from "react";
@@ -21,20 +21,24 @@ import { Link } from "react-router-dom";
 import { Cell } from "react-table";
 import { Organization, Product, Subscription } from "utils/types";
 
+import { cellRenderersStyling } from "./cellRenderersStyling";
+
 export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;
     return subscriptions.map((subscription: Subscription, index: number) => {
         return (
-            <Fragment key={`${subscription.subscription_id}-${index}`}>
-                {index !== 0 && <span className={"subscriptions__description-spacer"}>/</span>}
-                <Link
-                    key={subscription.subscription_id}
-                    onClick={(e) => e.stopPropagation()}
-                    to={`/subscriptions/${subscription.subscription_id}`}
-                >
-                    {subscription.description}
-                </Link>
-            </Fragment>
+            <EuiFlexGroup css={cellRenderersStyling}>
+                <Fragment key={`${subscription.subscription_id}-${index}`}>
+                    {index !== 0 && <span className={"subscriptions__description-spacer"}>/</span>}
+                    <Link
+                        key={subscription.subscription_id}
+                        onClick={(e) => e.stopPropagation()}
+                        to={`/subscriptions/${subscription.subscription_id}`}
+                    >
+                        {subscription.description}
+                    </Link>
+                </Fragment>
+            </EuiFlexGroup>
         );
     });
 }
@@ -59,6 +63,7 @@ export function renderCustomersCell(organisations: Organization[] | null | undef
         const organisation: Organization | undefined = organisations.find((org) => org.uuid === uuid);
         return organisation ? (abbreviate ? organisation.abbr : organisation.name) : uuid;
     }
+
     return function doRenderCustomersCell({ cell }: { cell: Cell }) {
         const subscriptions: Subscription[] = cell.value;
         return uniq(subscriptions.map((subscription) => subscription.customer_id))
@@ -75,6 +80,7 @@ export function renderSubscriptionCustomersCell(organisations: Organization[] | 
         const organisation: Organization | undefined = organisations.find((org) => org.uuid === uuid);
         return organisation ? (abbreviate ? organisation.abbr : organisation.name) : uuid;
     }
+
     return function doRenderCustomersCell({ cell }: { cell: Cell }) {
         const customer_id: string = cell.value;
         return lookup(customer_id);
@@ -185,6 +191,7 @@ export function renderCustomersCelliv2(organisations: Organization[] | null | un
         const organisation: Organization | undefined = organisations.find((org) => org.uuid === uuid);
         return organisation ? (abbreviate ? organisation.abbr : organisation.name) : uuid;
     }
+
     return function doRenderCustomersCell({ cell }: { cell: Cell }) {
         const subscriptions: Subscription[] = cell.value;
         return uniq(subscriptions.map((subscription) => subscription.customer_id))

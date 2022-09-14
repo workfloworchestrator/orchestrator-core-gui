@@ -12,12 +12,13 @@
  * limitations under the License.
  *
  */
-import "lib/uniforms-surfnet/src/BoolField.scss";
 
-import { EuiCheckbox, EuiFormRow, EuiText } from "@elastic/eui";
+import { EuiCheckbox, EuiFlexItem, EuiFormRow, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
+
+import { boolFieldStyling } from "./BoolFieldStyling";
 
 export type BoolFieldProps = FieldProps<boolean>;
 
@@ -38,25 +39,27 @@ function Bool({
     ...props
 }: BoolFieldProps) {
     return (
-        <section {...filterDOMProps(props)} className={`${className} bool-field`}>
-            <EuiFormRow
-                label={label}
-                labelAppend={<EuiText size="m">{description}</EuiText>}
-                error={showInlineError ? errorMessage : false}
-                isInvalid={error}
-                id={id}
-                fullWidth
-            >
-                <EuiCheckbox
-                    checked={value || false}
-                    disabled={disabled}
+        <EuiFlexItem css={boolFieldStyling}>
+            <section {...filterDOMProps(props)} className={`${className} bool-field`}>
+                <EuiFormRow
+                    label={label}
+                    labelAppend={<EuiText size="m">{description}</EuiText>}
+                    error={showInlineError ? errorMessage : false}
+                    isInvalid={error}
                     id={id}
-                    name={name}
-                    label={name}
-                    onChange={() => !disabled && !readOnly && onChange(!value)}
-                />
-            </EuiFormRow>
-        </section>
+                    fullWidth
+                >
+                    <EuiCheckbox
+                        checked={value || false}
+                        disabled={disabled}
+                        id={id}
+                        name={name}
+                        label={name}
+                        onChange={() => !disabled && !readOnly && onChange(!value)}
+                    />
+                </EuiFormRow>
+            </section>
+        </EuiFlexItem>
     );
 }
 

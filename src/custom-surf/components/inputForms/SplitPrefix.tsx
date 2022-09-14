@@ -13,14 +13,15 @@
  *
  */
 
-import "custom/components/inputForms/SplitPrefix.scss";
-
+import { EuiFlexItem } from "@elastic/eui";
 import { range } from "lodash";
 import React from "react";
 import ReactSelect, { SingleValue } from "react-select";
 import { getReactSelectTheme } from "stylesheets/emotion/utils";
 import ApplicationContext from "utils/ApplicationContext";
 import { Option } from "utils/types";
+
+import { splitPrefixStyling } from "./SplitPrefixStyling";
 
 interface IProps {
     id: string;
@@ -95,35 +96,37 @@ export default class SplitPrefix extends React.PureComponent<IProps> {
         const customStyles = getReactSelectTheme(this.context.theme);
 
         return (
-            <section>
-                <h3>
-                    Selected prefix: {subnet}/{prefixlen}
-                </h3>
-                <div>Desired netmask of the new subnet:</div>
-                <ReactSelect
-                    id={`${id}.desired-netmask`}
-                    styles={customStyles}
-                    inputId={`${id}.desired-netmask.search`}
-                    name={`${name}.desired-netmask`}
-                    onChange={this.changePrefixLength}
-                    options={length_options}
-                    value={length_value}
-                />
-                {this.state.subnets && (
-                    <div>
-                        <div>Desired prefix:</div>
-                        <ReactSelect
-                            id={`${id}.desired-prefix`}
-                            styles={customStyles}
-                            inputId={`${id}.desired-prefix.search`}
-                            name={`${name}.desired-prefix`}
-                            options={prefix_options}
-                            onChange={this.selectSubnet}
-                            value={prefix_value}
-                        />
-                    </div>
-                )}
-            </section>
+            <EuiFlexItem css={splitPrefixStyling}>
+                <section>
+                    <h3>
+                        Selected prefix: {subnet}/{prefixlen}
+                    </h3>
+                    <div>Desired netmask of the new subnet:</div>
+                    <ReactSelect
+                        id={`${id}.desired-netmask`}
+                        styles={customStyles}
+                        inputId={`${id}.desired-netmask.search`}
+                        name={`${name}.desired-netmask`}
+                        onChange={this.changePrefixLength}
+                        options={length_options}
+                        value={length_value}
+                    />
+                    {this.state.subnets && (
+                        <div>
+                            <div>Desired prefix:</div>
+                            <ReactSelect
+                                id={`${id}.desired-prefix`}
+                                styles={customStyles}
+                                inputId={`${id}.desired-prefix.search`}
+                                name={`${name}.desired-prefix`}
+                                options={prefix_options}
+                                onChange={this.selectSubnet}
+                                value={prefix_value}
+                            />
+                        </div>
+                    )}
+                </section>
+            </EuiFlexItem>
         );
     }
 }

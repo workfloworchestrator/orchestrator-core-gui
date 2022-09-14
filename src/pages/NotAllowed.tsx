@@ -13,15 +13,15 @@
  *
  */
 
-import "pages/NotFound.scss";
-
 import { EuiPage, EuiPageBody } from "@elastic/eui";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
+import { errorPageStyling } from "./ErrorPageStyling";
+
 export default function NotAllowed() {
     return (
-        <EuiPage>
+        <EuiPage css={errorPageStyling}>
             <EuiPageBody component="div" className="mod-not-allowed">
                 <h1>
                     <FormattedMessage id="not_allowed.title" />

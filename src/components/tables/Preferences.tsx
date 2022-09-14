@@ -13,13 +13,13 @@
  *
  */
 
-import "components/tables/Preferences.scss";
-
 import { EuiButton, EuiCheckbox, EuiFlexGroup, EuiFlexItem, EuiText } from "@elastic/eui";
 import { ActionType, TableSettingsAction } from "components/tables/NwaTable";
 import { Dispatch } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { ColumnInstance, TableSettings, TableState } from "react-table";
+
+import { preferencesStyling } from "./PreferencesStyling";
 
 interface IProps<T extends object> {
     dispatch: Dispatch<TableSettingsAction<T>>;
@@ -40,45 +40,51 @@ function Preferences<T extends object>({
     const intl = useIntl();
 
     return (
-        <span key={`preferences_${name}`}>
-            <div className={"table-preferences-icon-bar"}>
-                <span className="table-name">
-                    <FormattedMessage id={name} />
-                </span>
-                {"   "}
-                <span
-                    title={intl.formatMessage({ id: "table.preferences.edit" })}
-                    onClick={() => dispatch({ type: ActionType.SHOW_SETTINGS_TOGGLE })}
-                >
-                    <i className={showSettings ? "fa fa-cog active" : "fa fa-cog"} />
-                </span>
-                {"   "}
-            </div>
-            {showSettings && (
-                <div className={"preferences"}>
-                    <EuiFlexGroup className="buttons">
-                        <EuiFlexItem>
-                            <EuiButton
-                                onClick={() => dispatch({ type: ActionType.OVERRIDE, settings: initialTableSettings })}
-                                iconType="refresh"
-                            >
-                                <FormattedMessage id="table.preferences.reset" />
-                            </EuiButton>
-                        </EuiFlexItem>
-                    </EuiFlexGroup>
-                    <EuiText size="s">
-                        <h4>
-                            <FormattedMessage id="table.preferences.hidden_columns" />
-                        </h4>
-                    </EuiText>
-                    {allColumns
-                        .filter((column) => !excludeInFilter.includes(column.id))
-                        .map((column) => {
-                            return <EuiCheckbox id={column.id} {...column.getToggleHiddenProps()} label={column.id} />;
-                        })}
+        <EuiFlexItem css={preferencesStyling}>
+            <span key={`preferences_${name}`}>
+                <div className={"table-preferences-icon-bar"}>
+                    <span className="table-name">
+                        <FormattedMessage id={name} />
+                    </span>
+                    {"   "}
+                    <span
+                        title={intl.formatMessage({ id: "table.preferences.edit" })}
+                        onClick={() => dispatch({ type: ActionType.SHOW_SETTINGS_TOGGLE })}
+                    >
+                        <i className={showSettings ? "fa fa-cog active" : "fa fa-cog"} />
+                    </span>
+                    {"   "}
                 </div>
-            )}
-        </span>
+                {showSettings && (
+                    <div className={"preferences"}>
+                        <EuiFlexGroup className="buttons">
+                            <EuiFlexItem>
+                                <EuiButton
+                                    onClick={() =>
+                                        dispatch({ type: ActionType.OVERRIDE, settings: initialTableSettings })
+                                    }
+                                    iconType="refresh"
+                                >
+                                    <FormattedMessage id="table.preferences.reset" />
+                                </EuiButton>
+                            </EuiFlexItem>
+                        </EuiFlexGroup>
+                        <EuiText size="s">
+                            <h4>
+                                <FormattedMessage id="table.preferences.hidden_columns" />
+                            </h4>
+                        </EuiText>
+                        {allColumns
+                            .filter((column) => !excludeInFilter.includes(column.id))
+                            .map((column) => {
+                                return (
+                                    <EuiCheckbox id={column.id} {...column.getToggleHiddenProps()} label={column.id} />
+                                );
+                            })}
+                    </div>
+                )}
+            </span>
+        </EuiFlexItem>
     );
 }
 

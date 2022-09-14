@@ -13,10 +13,10 @@
  *
  */
 
-import "components/tables/Paginator.scss";
-
 import { EuiButtonIcon, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import React from "react";
+
+import { paginatorStyling } from "./PaginatorStyling";
 
 interface IPaginatorProps {
     canNextPage: boolean;
@@ -42,44 +42,46 @@ function MiniPaginator({
     setPageSize,
 }: IPaginatorProps) {
     return (
-        <EuiFlexGroup className="mini-paginator">
-            <EuiFlexItem>
-                <EuiButtonIcon
-                    onClick={() => gotoPage(0)}
-                    color="primary"
-                    disabled={!canPreviousPage}
-                    iconType="sortLeft"
-                    aria-label="sort left"
-                />
-            </EuiFlexItem>
-            <EuiFlexItem>
-                <EuiButtonIcon
-                    onClick={() => previousPage()}
-                    color="primary"
-                    disabled={!canPreviousPage}
-                    iconType="arrowLeft"
-                    aria-label="arrow left"
-                />
-            </EuiFlexItem>
-            <EuiFlexItem>
-                <EuiButtonIcon
-                    onClick={() => nextPage()}
-                    color="primary"
-                    disabled={!canNextPage}
-                    iconType="arrowRight"
-                    aria-label="arrow right"
-                />
-            </EuiFlexItem>
-            <EuiFlexItem>
-                <EuiButtonIcon
-                    onClick={() => gotoPage(pageOptions.length - 1)}
-                    color="primary"
-                    disabled={!canNextPage}
-                    iconType="sortRight"
-                    aria-label="sort right"
-                />
-            </EuiFlexItem>
-        </EuiFlexGroup>
+        <EuiFlexItem css={paginatorStyling}>
+            <EuiFlexGroup className="mini-paginator">
+                <EuiFlexItem>
+                    <EuiButtonIcon
+                        onClick={() => gotoPage(0)}
+                        color="primary"
+                        disabled={!canPreviousPage}
+                        iconType="sortLeft"
+                        aria-label="sort left"
+                    />
+                </EuiFlexItem>
+                <EuiFlexItem>
+                    <EuiButtonIcon
+                        onClick={() => previousPage()}
+                        color="primary"
+                        disabled={!canPreviousPage}
+                        iconType="arrowLeft"
+                        aria-label="arrow left"
+                    />
+                </EuiFlexItem>
+                <EuiFlexItem>
+                    <EuiButtonIcon
+                        onClick={() => nextPage()}
+                        color="primary"
+                        disabled={!canNextPage}
+                        iconType="arrowRight"
+                        aria-label="arrow right"
+                    />
+                </EuiFlexItem>
+                <EuiFlexItem>
+                    <EuiButtonIcon
+                        onClick={() => gotoPage(pageOptions.length - 1)}
+                        color="primary"
+                        disabled={!canNextPage}
+                        iconType="sortRight"
+                        aria-label="sort right"
+                    />
+                </EuiFlexItem>
+            </EuiFlexGroup>
+        </EuiFlexItem>
     );
 }
 

@@ -2,14 +2,13 @@
  * Copyright 2019-2022 SURF.
  */
 
-import "./FilterDropDown.css";
-
-import { EuiButton, EuiCheckbox, EuiPopover } from "@elastic/eui";
+import { EuiButton, EuiCheckbox, EuiFlexItem, EuiPopover } from "@elastic/eui";
 import React from "react";
 
 // Todo: internationalisation
 // import { FormattedMessage } from "react-intl";
 import { Filter } from "../types";
+import { filterDropDownStyling } from "./FilterDropDownStyling";
 
 type filterCallback = (filter: Filter) => void;
 
@@ -64,14 +63,16 @@ export default class FilterDropDown extends React.PureComponent<IProps, IState> 
         );
 
         return (
-            <EuiPopover
-                button={button}
-                isOpen={dropDownActive}
-                closePopover={() => this.setState({ dropDownActive: false })}
-                className="filterButton"
-            >
-                {this.renderDropDown(items, filterBy)}
-            </EuiPopover>
+            <EuiFlexItem css={filterDropDownStyling}>
+                <EuiPopover
+                    button={button}
+                    isOpen={dropDownActive}
+                    closePopover={() => this.setState({ dropDownActive: false })}
+                    className="filterButton"
+                >
+                    {this.renderDropDown(items, filterBy)}
+                </EuiPopover>
+            </EuiFlexItem>
         );
     }
 }

@@ -13,9 +13,7 @@
  *
  */
 
-import "pages/Subscriptions.scss";
-
-import { EuiPage, EuiPageBody } from "@elastic/eui";
+import { EuiPage, EuiPageBody, EuiSpacer } from "@elastic/eui";
 import Explain from "components/Explain";
 import {
     SubscriptionsTable,
@@ -30,6 +28,8 @@ import React from "react";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
 import { Subscription } from "utils/types";
+
+import { subscriptionsStyling } from "./SubscriptionsStyling";
 
 interface IProps {}
 
@@ -92,7 +92,7 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
         );
 
         return (
-            <EuiPage>
+            <EuiPage css={subscriptionsStyling}>
                 <ConfirmationDialogContext.Consumer>
                     {(cdc) => this.addConfirmDialogActions(cdc)}
                 </ConfirmationDialogContext.Consumer>
@@ -167,6 +167,7 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
                         renderActions={this.renderActions}
                         isSubscription={true}
                     />
+                    <EuiSpacer />
                     <SubscriptionsTable
                         key={"provisioning"}
                         initialTableSettings={provisioningSettings}
