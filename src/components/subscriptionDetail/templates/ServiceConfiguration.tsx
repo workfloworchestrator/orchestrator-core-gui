@@ -111,11 +111,12 @@ export function RenderServiceConfiguration({
         const sorted_instance_fields = splitFields.instance_fields.sort(
             (a, b) => tabOrder.indexOf(a[0]) - tabOrder.indexOf(b[0])
         );
+
+        console.log(sorted_instance_fields);
         const inst_owner_sub =
-            sorted_instance_fields &&
-            sorted_instance_fields[0] &&
-            sorted_instance_fields[0][1] &&
-            sorted_instance_fields[0][1][0] &&
+            sorted_instance_fields[0] && // sorted_instance_fields: [[label, subscription_instance[]], ...]
+            sorted_instance_fields[0][1] && // sorted_instance_fields[0]: [label, subscription_instance[]]
+            sorted_instance_fields[0][1][0] && // sorted_instance_fields[0][1]: subscription_instance[]
             sorted_instance_fields[0][1][0].owner_subscription_id;
 
         const splitFieldInstanceValues = mapSplitFields(
