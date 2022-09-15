@@ -25,22 +25,21 @@ import { cellRenderersStyling } from "./cellRenderersStyling";
 
 export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;
-    return subscriptions.map((subscription: Subscription, index: number) => {
+    const children = subscriptions.map((subscription: Subscription, index: number) => {
         return (
-            <EuiFlexGroup css={cellRenderersStyling}>
-                <Fragment key={`${subscription.subscription_id}-${index}`}>
-                    {index !== 0 && <span className={"subscriptions__description-spacer"}>/</span>}
-                    <Link
-                        key={subscription.subscription_id}
-                        onClick={(e) => e.stopPropagation()}
-                        to={`/subscriptions/${subscription.subscription_id}`}
-                    >
-                        {subscription.description}
-                    </Link>
-                </Fragment>
-            </EuiFlexGroup>
+            <Fragment key={`${subscription.subscription_id}-${index}`}>
+                {index !== 0 && <span className={"subscriptions__description-spacer"}>/</span>}
+                <Link
+                    key={subscription.subscription_id}
+                    onClick={(e) => e.stopPropagation()}
+                    to={`/subscriptions/${subscription.subscription_id}`}
+                >
+                    {subscription.description}
+                </Link>
+            </Fragment>
         );
     });
+    return <EuiFlexGroup css={cellRenderersStyling}>{children}</EuiFlexGroup>;
 }
 
 export function renderProductsCell({ cell }: { cell: Cell }) {
