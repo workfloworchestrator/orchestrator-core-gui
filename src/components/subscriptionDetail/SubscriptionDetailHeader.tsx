@@ -44,7 +44,7 @@ const SubscriptionDetailHeader = ({ viewType, setViewType, title, children }: IP
         </EuiFlexItem>
         <EuiFlexItem grow={false}>
             <EuiButton
-                id="subscription-detail-viewtype-tree"
+                id="subscription-detail-viewtype-tabs"
                 fill={viewType === "tabs"}
                 iconType="tableDensityNormal"
                 size="s"
