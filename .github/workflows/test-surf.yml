@@ -24,5 +24,5 @@ jobs:
           node-version: '14.x'
       - run: yarn install --frozen-lockfile
       - run: mv src/custom-surf src/custom
-      - run: yarn test-surf
+      - run: yarn test
       - run: yarn build
