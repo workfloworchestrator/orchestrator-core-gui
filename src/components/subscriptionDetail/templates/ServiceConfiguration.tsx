@@ -112,7 +112,6 @@ export function RenderServiceConfiguration({
             (a, b) => tabOrder.indexOf(a[0]) - tabOrder.indexOf(b[0])
         );
 
-        console.log(sorted_instance_fields);
         const inst_owner_sub =
             sorted_instance_fields[0] && // sorted_instance_fields: [[label, subscription_instance[]], ...]
             sorted_instance_fields[0][1] && // sorted_instance_fields[0]: [label, subscription_instance[]]
