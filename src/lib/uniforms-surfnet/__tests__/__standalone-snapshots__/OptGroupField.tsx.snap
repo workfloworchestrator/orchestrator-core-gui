@@ -42,52 +42,56 @@ LoadedCheerio {
             <div
               class="euiFormRow__fieldWrapper"
             >
-              <section
-                class=" bool-field"
-                required=""
+              <div
+                class="euiFlexItem css-weze4d-EuiFlexItem"
               >
-                <div
-                  class="euiFormRow euiFormRow--fullWidth"
-                  id="x-row"
+                <section
+                  class=" bool-field"
+                  required=""
                 >
                   <div
-                    class="euiFormRow__labelWrapper"
-                  >
-                    <label
-                      class="euiFormLabel euiFormRow__label"
-                      for="x"
-                      id="x-label"
-                    />
-                     
-                    <div
-                      class="euiText euiText--medium"
-                    />
-                  </div>
-                  <div
-                    class="euiFormRow__fieldWrapper"
+                    class="euiFormRow euiFormRow--fullWidth"
+                    id="x-row"
                   >
                     <div
-                      class="euiCheckbox"
+                      class="euiFormRow__labelWrapper"
                     >
-                      <input
-                        class="euiCheckbox__input"
-                        id="x"
-                        name="x.enabled"
-                        type="checkbox"
-                      />
-                      <div
-                        class="euiCheckbox__square"
-                      />
                       <label
-                        class="euiCheckbox__label"
+                        class="euiFormLabel euiFormRow__label"
                         for="x"
+                        id="x-label"
+                      />
+                       
+                      <div
+                        class="euiText euiText--medium"
+                      />
+                    </div>
+                    <div
+                      class="euiFormRow__fieldWrapper"
+                    >
+                      <div
+                        class="euiCheckbox"
                       >
-                        x.enabled
-                      </label>
+                        <input
+                          class="euiCheckbox__input"
+                          id="x"
+                          name="x.enabled"
+                          type="checkbox"
+                        />
+                        <div
+                          class="euiCheckbox__square"
+                        />
+                        <label
+                          class="euiCheckbox__label"
+                          for="x"
+                        >
+                          x.enabled
+                        </label>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </section>
+                </section>
+              </div>
             </div>
           </div>
         </div>
@@ -167,53 +171,57 @@ LoadedCheerio {
             <div
               class="euiFormRow__fieldWrapper"
             >
-              <section
-                class=" bool-field"
-                required=""
+              <div
+                class="euiFlexItem css-weze4d-EuiFlexItem"
               >
-                <div
-                  class="euiFormRow euiFormRow--fullWidth"
-                  id="x-row"
+                <section
+                  class=" bool-field"
+                  required=""
                 >
                   <div
-                    class="euiFormRow__labelWrapper"
-                  >
-                    <label
-                      class="euiFormLabel euiFormRow__label"
-                      for="x"
-                      id="x-label"
-                    />
-                     
-                    <div
-                      class="euiText euiText--medium"
-                    />
-                  </div>
-                  <div
-                    class="euiFormRow__fieldWrapper"
+                    class="euiFormRow euiFormRow--fullWidth"
+                    id="x-row"
                   >
                     <div
-                      class="euiCheckbox"
+                      class="euiFormRow__labelWrapper"
                     >
-                      <input
-                        checked=""
-                        class="euiCheckbox__input"
-                        id="x"
-                        name="x.enabled"
-                        type="checkbox"
-                      />
-                      <div
-                        class="euiCheckbox__square"
-                      />
                       <label
-                        class="euiCheckbox__label"
+                        class="euiFormLabel euiFormRow__label"
                         for="x"
+                        id="x-label"
+                      />
+                       
+                      <div
+                        class="euiText euiText--medium"
+                      />
+                    </div>
+                    <div
+                      class="euiFormRow__fieldWrapper"
+                    >
+                      <div
+                        class="euiCheckbox"
                       >
-                        x.enabled
-                      </label>
+                        <input
+                          checked=""
+                          class="euiCheckbox__input"
+                          id="x"
+                          name="x.enabled"
+                          type="checkbox"
+                        />
+                        <div
+                          class="euiCheckbox__square"
+                        />
+                        <label
+                          class="euiCheckbox__label"
+                          for="x"
+                        >
+                          x.enabled
+                        </label>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </section>
+                </section>
+              </div>
             </div>
           </div>
         </div>
