@@ -18,9 +18,6 @@ import moment from "moment";
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
 
-// const DateConstructor = (typeof global === "object" ? global : window).Date;
-// const dateFormat = (value?: Date) => value?.toISOString().slice(0, -8);
-
 export type TimestampFieldProps = FieldProps<
     number,
     { max?: number; min?: number; showTimeSelect: boolean; locale?: string; dateFormat?: string; timeFormat?: string }

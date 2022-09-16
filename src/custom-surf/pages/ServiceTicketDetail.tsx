@@ -34,12 +34,12 @@ import {
     ServiceTicketProcessState,
     ServiceTicketWithDetails,
 } from "custom/types";
+import { renderStringAsDateTime } from "custom/Utils";
 import useInterval from "hooks/useInterval";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
-import { renderStringAsDateTime } from "utils/Lookups";
 import { TabView } from "utils/types";
 
 interface IProps {

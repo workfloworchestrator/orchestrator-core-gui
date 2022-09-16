@@ -7,13 +7,13 @@ import { EuiButton, EuiFacetButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPanel
 import ServiceTicketFilter from "custom/components/ServiceTicketFilter";
 import { tableTickets } from "custom/pages/ServiceTicketsStyling";
 import { ServiceTicket, ServiceTicketProcessState } from "custom/types";
+import { renderStringAsDateTime } from "custom/Utils";
 import { intl } from "locale/i18n";
 import debounce from "lodash/debounce";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
-import { renderStringAsDateTime } from "utils/Lookups";
 import { Filter, SortOption } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
@@ -317,19 +317,19 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                         data-label={intl.formatMessage({ id: "tickets.table.start_date" })}
                                         className="start_date"
                                     >
-                                        {renderStringAsDateTime(ticket.start_date)}
+                                        {renderStringAsDateTime(ticket.start_date, true)}
                                     </td>
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.updated_on" })}
                                         className="create_date"
                                     >
-                                        {renderStringAsDateTime(ticket.create_date)}
+                                        {renderStringAsDateTime(ticket.last_update_time, true)}
                                     </td>
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.create_date" })}
                                         className="create_date"
                                     >
-                                        {renderStringAsDateTime(ticket.create_date)}
+                                        {renderStringAsDateTime(ticket.create_date, true)}
                                     </td>
                                 </tr>
                             ))}

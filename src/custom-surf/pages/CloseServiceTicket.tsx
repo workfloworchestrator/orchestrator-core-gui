@@ -40,7 +40,6 @@ export default function CloseServiceTicket() {
             mail_subject: userInputs.mail_subject,
             end_date: userInputs.end_date,
         };
-        console.log(payload);
         customApiClient.cimCloseTicket(payload).then((_) => redirect(`/tickets/${id}/`));
     };
 

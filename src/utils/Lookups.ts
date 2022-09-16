@@ -51,11 +51,6 @@ export function renderDateTime(epoch: number) {
     return isEmpty(epoch) ? "" : new Date(epoch * 1000).toLocaleString("nl-NL");
 }
 
-export function renderStringAsDateTime(datetime: string) {
-    // Todo: locale should be configurable for GPL
-    return new Date(datetime).toLocaleString("nl-NL");
-}
-
 export function renderDate(epoch: number) {
     // Todo: locale should be configurable for GPL
     return isEmpty(epoch) ? "" : new Date(epoch * 1000).toLocaleDateString("nl-NL");
