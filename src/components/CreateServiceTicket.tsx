@@ -29,11 +29,10 @@ import {
     EuiTitle,
 } from "@elastic/eui";
 import { EuiComboBoxOptionOption } from "@elastic/eui/src/components/combo_box/types";
+import { intl } from "locale/i18n";
 import React, { useContext, useEffect, useState } from "react";
 import { injectIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
-
-import { intl } from "../locale/i18n";
 
 const I18N_KEY_PREFIX = "tickets.create.";
 

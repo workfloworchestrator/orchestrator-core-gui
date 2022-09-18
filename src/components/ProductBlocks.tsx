@@ -21,12 +21,10 @@ import {
     EuiPageContentHeader,
     EuiSpacer,
 } from "@elastic/eui";
-import ConfirmationDialogContext, {
-    ConfirmDialogActions,
-    ShowConfirmDialogType,
-} from "contextProviders/ConfirmationDialogProvider";
-import React from "react";
-import { WrappedComponentProps, injectIntl } from "react-intl";
+import ConfirmationDialogContext from "contextProviders/ConfirmationDialogProvider";
+import { intl } from "locale/i18n";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { injectIntl } from "react-intl";
 import { getStatusBadgeColor } from "stylesheets/emotion/utils";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
@@ -34,208 +32,173 @@ import { renderDateTime } from "utils/Lookups";
 import { ProductBlock, ResourceType } from "utils/types";
 import { stop } from "utils/Utils";
 
-interface IState {
-    productBlocks: ProductBlock[];
-    productBlocksLoaded: boolean;
-    isLoading: boolean;
-    showConfirmDialog: ShowConfirmDialogType;
-}
+function ProductBlocks() {
+    const { apiClient, allowed } = useContext(ApplicationContext);
+    const { showConfirmDialog } = useContext(ConfirmationDialogContext);
+    const [productBlocks, setProductBlocks] = useState<ProductBlock[]>([]);
+    const [productBlocksLoaded, setProductBlocksLoaded] = useState(false);
 
-class ProductBlocks extends React.Component<WrappedComponentProps, IState> {
-    context!: React.ContextType<typeof ApplicationContext>;
-
-    state: IState = {
-        productBlocks: [],
-        productBlocksLoaded: true,
-        isLoading: false,
-        showConfirmDialog: () => {},
-    };
-
-    componentDidMount() {
-        this.context.apiClient.productBlocks().then((productBlocks: ProductBlock[]) => {
-            this.setState({ productBlocks: productBlocks, productBlocksLoaded: false });
+    const loadProductBlocks = useCallback(() => {
+        apiClient.productBlocks().then((productBlocks: ProductBlock[]) => {
+            setProductBlocks(productBlocks);
+            setProductBlocksLoaded(true);
         });
-    }
+    }, [apiClient]);
 
-    handleDeleteProductBlock = (productBlock: ProductBlock) => (e: React.MouseEvent<HTMLButtonElement>) => {
+    useEffect(() => {
+        loadProductBlocks();
+    }, [apiClient, loadProductBlocks]);
+
+    const handleDeleteProductBlock = (productBlock: ProductBlock) => (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
-        const { intl } = this.props;
+        const question = intl.formatMessage(
+            { id: "metadata.deleteConfirmation" },
+            { type: "Product Block", name: productBlock!.name }
+        );
 
-        this.confirmation(
-            intl.formatMessage(
-                { id: "metadata.deleteConfirmation" },
-                { type: "Product Block", name: productBlock.name }
-            ),
-            () =>
-                this.context.apiClient
-                    .deleteProductBlock(productBlock.product_block_id)
-                    .then(() => {
-                        this.componentDidMount();
-                        setFlash(
-                            intl.formatMessage(
-                                { id: "metadata.flash.delete" },
-                                { name: productBlock.name, type: "Product Block" }
-                            )
-                        );
-                    })
-                    .catch((err: any) => {
-                        if (err.response && err.response.status === 400) {
-                            if (err.response.data) {
-                                setFlash(err.response.data.error);
-                            }
-                        } else {
-                            throw err;
+        const confirmAction = () =>
+            apiClient
+                .deleteProductBlock(productBlock!.product_block_id)
+                .then(() => {
+                    loadProductBlocks();
+                    setFlash(
+                        intl.formatMessage(
+                            { id: "metadata.flash.delete" },
+                            { type: "Product Block", name: productBlock!.name }
+                        )
+                    );
+                })
+                .catch((err: any) => {
+                    if (err.response && err.response.status === 400) {
+                        if (err.response.data) {
+                            setFlash(err.response.data.error);
                         }
-                    })
-        );
+                    } else {
+                        throw err;
+                    }
+                });
+
+        showConfirmDialog({ question, confirmAction });
     };
 
-    confirmation = (question: string, confirmAction: () => void) =>
-        this.state.showConfirmDialog({
-            question,
-            confirmAction,
-        });
-
-    addConfirmDialogActions = ({ showConfirmDialog }: ConfirmDialogActions) => {
-        if (this.state.showConfirmDialog !== showConfirmDialog) {
-            this.setState({ showConfirmDialog });
-        }
-        return <></>;
-    };
-
-    render() {
-        const { productBlocks, productBlocksLoaded } = this.state;
-
-        const search = {
-            box: {
-                incremental: true,
-                schema: true,
-                placeholder: "Search for product blocks..",
-            },
-        };
-
-        const columns = [
-            {
-                field: "name",
-                name: "NAME",
-                sortable: true,
-                truncateText: false,
-                width: "15%",
-            },
-            {
-                field: "description",
-                name: "DESCRIPTION",
-                sortable: true,
-                truncateText: false,
-                width: "20%",
-            },
-            {
-                field: "status",
-                name: "STATUS",
-                sortable: true,
-                truncateText: false,
-                width: "8%",
-                render: (status: string) => (
-                    <EuiBadge color={getStatusBadgeColor(status)} isDisabled={false}>
-                        {status}
+    const columns = [
+        {
+            field: "name",
+            name: "NAME",
+            sortable: true,
+            truncateText: false,
+            width: "15%",
+        },
+        {
+            field: "description",
+            name: "DESCRIPTION",
+            sortable: true,
+            truncateText: false,
+            width: "20%",
+        },
+        {
+            field: "status",
+            name: "STATUS",
+            sortable: true,
+            truncateText: false,
+            width: "8%",
+            render: (status: string) => (
+                <EuiBadge color={getStatusBadgeColor(status)} isDisabled={false}>
+                    {status}
+                </EuiBadge>
+            ),
+        },
+        {
+            field: "tag",
+            name: "TAG",
+            sortable: true,
+            truncateText: false,
+            width: "8%",
+        },
+        {
+            field: "resource_types",
+            name: "RESOURCE TYPES",
+            sortable: true,
+            truncateText: false,
+            render: (resource_types: ResourceType[]) => {
+                const renderPB = resource_types.map((item, index) => (
+                    <EuiBadge key={`${item.resource_type}-${index}`} color="primary" isDisabled={false}>
+                        {item.resource_type}
                     </EuiBadge>
-                ),
+                ));
+                return <div>{renderPB}</div>;
             },
-            {
-                field: "tag",
-                name: "TAG",
-                sortable: true,
-                truncateText: false,
-                width: "8%",
+            width: "15%",
+        },
+        {
+            field: "created_at",
+            name: "CREATED ",
+            sortable: true,
+            truncateText: false,
+            render: (created_at: number) => {
+                const renderCA = renderDateTime(created_at);
+                return <div>{renderCA}</div>;
             },
-            {
-                field: "resource_types",
-                name: "RESOURCE TYPES",
-                sortable: true,
-                truncateText: false,
-                render: (resource_types: ResourceType[]) => {
-                    const renderPB = resource_types.map((item, index) => (
-                        <EuiBadge key={`${item.resource_type}-${index}`} color="primary" isDisabled={false}>
-                            {item.resource_type}
-                        </EuiBadge>
-                    ));
-                    return <div>{renderPB}</div>;
-                },
-                width: "15%",
-            },
-            {
-                field: "created_at",
-                name: "CREATED ",
-                sortable: true,
-                truncateText: false,
-                render: (created_at: number) => {
-                    const renderCA = renderDateTime(created_at);
-                    return <div>{renderCA}</div>;
-                },
-                width: "15%",
-            },
-            {
-                field: "product_block_id",
-                name: "",
-                width: "2.5%",
-                render: (product_block_id: string) => {
-                    const Edit = this.context.allowed(
-                        "/orchestrator/metadata/product-block/edit/" + product_block_id + "/"
-                    ) ? (
-                        <EuiButtonIcon
-                            href={`/metadata/product-block/${product_block_id}`}
-                            iconType="pencil"
-                            aria-label="Edit"
-                        />
-                    ) : this.context.allowed("/orchestrator/metadata/product-block/view/" + product_block_id) + "/" ? (
-                        <EuiButtonIcon
-                            href={`/metadata/product-block/${product_block_id}`}
-                            iconType="eye"
-                            aria-label="View"
-                        />
-                    ) : null;
-                    return <div>{Edit}</div>;
-                },
-            },
-            {
-                field: "product_block_id",
-                name: "",
-                width: "2%",
-                render: (product_block_id: string, record: ProductBlock) => {
-                    const Delete = this.context.allowed(
-                        "/orchestrator/metadata/product-block/delete/" + product_block_id + "/"
-                    ) ? (
-                        <EuiButtonIcon
-                            onClick={this.handleDeleteProductBlock(record)}
-                            iconType="trash"
-                            aria-label="Delete"
-                        />
-                    ) : null;
-                    return <div>{Delete}</div>;
-                },
-            },
-        ];
-
-        return (
-            <EuiPageContent>
-                <ConfirmationDialogContext.Consumer>
-                    {(cdc) => this.addConfirmDialogActions(cdc)}
-                </ConfirmationDialogContext.Consumer>
-                <EuiPageContentHeader>
-                    <EuiSpacer size="l" />
-                    <EuiInMemoryTable
-                        items={productBlocks}
-                        columns={columns}
-                        search={search}
-                        pagination={true}
-                        sorting={true}
-                        loading={productBlocksLoaded}
-                        hasActions={true}
+            width: "15%",
+        },
+        {
+            field: "product_block_id",
+            name: "",
+            width: "2.5%",
+            render: (product_block_id: string) => {
+                const Edit = allowed("/orchestrator/metadata/product-block/edit/" + product_block_id + "/") ? (
+                    <EuiButtonIcon
+                        href={`/metadata/product-block/${product_block_id}`}
+                        iconType="pencil"
+                        aria-label="Edit"
                     />
-                </EuiPageContentHeader>
-            </EuiPageContent>
-        );
-    }
+                ) : allowed("/orchestrator/metadata/product-block/view/" + product_block_id) + "/" ? (
+                    <EuiButtonIcon
+                        href={`/metadata/product-block/${product_block_id}`}
+                        iconType="eye"
+                        aria-label="View"
+                    />
+                ) : null;
+                return <div>{Edit}</div>;
+            },
+        },
+        {
+            field: "product_block_id",
+            name: "",
+            width: "2%",
+            render: (product_block_id: string, record: ProductBlock) => {
+                const Delete = allowed("/orchestrator/metadata/product-block/delete/" + product_block_id + "/") ? (
+                    <EuiButtonIcon onClick={handleDeleteProductBlock(record)} iconType="trash" aria-label="Delete" />
+                ) : null;
+                return <div>{Delete}</div>;
+            },
+        },
+    ];
+
+    const search = {
+        box: {
+            incremental: true,
+            schema: true,
+            placeholder: "Search for product blocks..",
+        },
+    };
+
+    return (
+        <EuiPageContent>
+            <EuiPageContentHeader>
+                <EuiSpacer size="l" />
+                <EuiInMemoryTable
+                    items={productBlocks}
+                    columns={columns}
+                    search={search}
+                    pagination={true}
+                    sorting={true}
+                    loading={!productBlocksLoaded}
+                    hasActions={true}
+                />
+            </EuiPageContentHeader>
+        </EuiPageContent>
+    );
 }
 ProductBlocks.contextType = ApplicationContext;
 
