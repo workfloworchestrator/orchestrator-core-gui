@@ -1,8 +1,8 @@
-import moment from "moment";
+import moment from "moment-timezone";
 
 export function renderStringAsDateTime(datetime: string, short: boolean = false) {
     if (short) {
-        return moment(datetime).utc().zone(-240).format("Do MMM YYYY, HH:mm:ss");
+        return moment.utc(datetime).tz("Europe/Amsterdam").format("DD-MM-YYYY HH:mm");
     }
-    return moment(datetime).zone(-240).format("dddd, MMMM Do YYYY, h:mm:ss a");
+    return moment.utc(datetime).tz("Europe/Amsterdam").format("DD-MM-YYYY HH:mm:ss");
 }
