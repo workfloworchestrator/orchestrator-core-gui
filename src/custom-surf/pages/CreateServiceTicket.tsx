@@ -13,9 +13,10 @@
  *
  */
 
-import { EuiPage, EuiPageBody, EuiText } from "@elastic/eui";
+import { EuiPage, EuiPageBody, EuiPageHeader } from "@elastic/eui";
 import Explain from "components/Explain";
 import CreateForm from "custom/components/cim/CreateForm";
+import { formStyling } from "custom/pages/FormStyling";
 import { CreateServiceTicketPayload } from "custom/types";
 import React, { useContext, useState } from "react";
 import ApplicationContext from "utils/ApplicationContext";
@@ -37,13 +38,16 @@ export default function CreateServiceTicket() {
     };
 
     return (
-        <EuiPage>
+        <EuiPage css={formStyling}>
             <EuiPageBody component="div">
-                <div className="actions">
-                    <div onClick={() => setShowExplanation(true)}>
-                        <i className="fa fa-question-circle" />
-                    </div>
-                </div>
+                <EuiPageHeader
+                    pageTitle="Create ticket"
+                    rightSideItems={[
+                        <section className="explain">
+                            <i className="fa fa-question-circle" onClick={() => setShowExplanation(true)} />
+                        </section>,
+                    ]}
+                />
                 <Explain
                     close={() => setShowExplanation(false)}
                     isVisible={showExplanation}
@@ -51,9 +55,6 @@ export default function CreateServiceTicket() {
                 >
                     <p>Starting a ticket will execute a state machine that guides you through the process.</p>
                 </Explain>
-                <EuiText grow={true}>
-                    <h1>Create ticket</h1>
-                </EuiText>
                 <CreateForm formKey="create_ticket_form" handleSubmit={handleSubmit} />
             </EuiPageBody>
         </EuiPage>

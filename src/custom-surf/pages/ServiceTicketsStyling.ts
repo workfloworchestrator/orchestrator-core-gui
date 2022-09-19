@@ -182,6 +182,9 @@ export const tableTickets = css`
         th.create_date {
             width: 12%;
         }
+        th.updated_on {
+            width: 12%;
+        }
 
         span {
             text-transform: uppercase;

@@ -13,9 +13,10 @@
  *
  */
 
-import { EuiPage, EuiPageBody, EuiText } from "@elastic/eui";
+import { EuiPage, EuiPageBody, EuiPageHeader } from "@elastic/eui";
 import Explain from "components/Explain";
 import OpenForm from "custom/components/cim/OpenForm";
+import { formStyling } from "custom/pages/FormStyling";
 import { CloseServiceTicketPayload } from "custom/types";
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router";
@@ -48,22 +49,22 @@ export default function CloseServiceTicket() {
     };
 
     return (
-        <EuiPage>
+        <EuiPage css={formStyling}>
             <EuiPageBody component="div">
-                <div className="actions">
-                    <div onClick={() => setShowExplanation(true)}>
-                        <i className="fa fa-question-circle" />
-                    </div>
-                </div>
+                <EuiPageHeader
+                    pageTitle="Prepare to send CLOSE email to institutes"
+                    rightSideItems={[
+                        <section className="explain">
+                            <i className="fa fa-question-circle" onClick={() => setShowExplanation(true)} />
+                        </section>,
+                    ]}
+                />
                 <Explain close={() => setShowExplanation(false)} isVisible={showExplanation} title="What is this?">
                     <p>
                         This wizard will guide you through the process of closing the ticket and sending the CLOSE email
                         to institutes.
                     </p>
                 </Explain>
-                <EuiText grow={true}>
-                    <h1>Prepare to send CLOSE email to institutes</h1>
-                </EuiText>
                 <OpenForm
                     formKey="close_ticket_form"
                     handleSubmit={handleSubmit}

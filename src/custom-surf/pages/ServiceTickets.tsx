@@ -321,7 +321,7 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                     </td>
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.updated_on" })}
-                                        className="create_date"
+                                        className="updated_on"
                                     >
                                         {renderStringAsDateTime(ticket.last_update_time, true)}
                                     </td>

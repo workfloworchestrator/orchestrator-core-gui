@@ -13,7 +13,7 @@
             "path": "pages",
             "file": "ServiceTickets",
             "component": "ServiceTickets",
-            "showInMenu": true
+            "showInMenu": false
         },
         {
             "name": "tickets/create",
