@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiPage, EuiPageBody, EuiPageHeader, EuiText } from "@elastic/eui";
+import { EuiPage, EuiPageBody, EuiPageHeader } from "@elastic/eui";
 import Explain from "components/Explain";
 import OpenForm from "custom/components/cim/OpenForm";
 import { formStyling } from "custom/pages/FormStyling";
