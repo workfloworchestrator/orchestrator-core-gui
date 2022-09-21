@@ -26,15 +26,24 @@ export interface OpenServiceTicketPayload {
     mail_subject: string;
 }
 
+export interface UpdateServiceTicketPayload extends OpenServiceTicketPayload {
+    start_date?: string;
+    end_date?: string;
+}
+
+export interface CloseServiceTicketPayload extends OpenServiceTicketPayload {
+    end_date?: string;
+}
+
 export enum ServiceTicketState {
-    INITIAL = "inital",
+    INITIAL = "initial",
     ACTIVE = "active",
     ABORTED = "aborted",
     CLOSED = "closed",
 }
 
 export enum ServiceTicketProcessState {
-    RELATING = "relating",
+    INITIAL = "initial",
     OPEN = "open",
     OPEN_RELATED = "open_related",
     OPEN_ACCEPTED = "open_accepted",
@@ -47,9 +56,11 @@ export interface ServiceTicket {
     _id: string;
     jira_ticket_id: string;
     opened_by: string;
+    transition_action?: string;
     process_state: ServiceTicketProcessState;
     start_date: string;
-    ticket_state: ServiceTicketState;
+    create_date: string;
+    last_update_time: string;
     title_nl: string;
     title_en: string;
 }

@@ -32,8 +32,22 @@
         {
             "name": "tickets/:id/open",
             "path": "pages",
-            "file": "ServiceTicketOpen",
-            "component": "ServiceTicketOpen",
+            "file": "OpenServiceTicket",
+            "component": "OpenServiceTicket",
+            "showInMenu": false
+        },
+        {
+            "name": "tickets/:id/update",
+            "path": "pages",
+            "file": "UpdateServiceTicket",
+            "component": "UpdateServiceTicket",
+            "showInMenu": false
+        },
+        {
+            "name": "tickets/:id/close",
+            "path": "pages",
+            "file": "CloseServiceTicket",
+            "component": "CloseServiceTicket",
             "showInMenu": false
         }
     ],

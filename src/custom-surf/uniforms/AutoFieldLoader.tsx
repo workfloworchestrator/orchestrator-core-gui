@@ -23,6 +23,7 @@ import {
     SubscriptionSummaryField,
     SummaryField,
     TextField,
+    TimestampField,
 } from "lib/uniforms-surfnet/src";
 import { Context, GuaranteedProps } from "uniforms";
 import { AutoField } from "uniforms-unstyled";
@@ -38,8 +39,9 @@ export function autoFieldFunction(props: GuaranteedProps<unknown> & Record<strin
                     return ImsPortIdField;
                 case "imsNodeId":
                     return ImsNodeIdField;
+                case "timestamp":
+                    return TimestampField;
             }
-
             break;
         case Object:
             switch (format) {

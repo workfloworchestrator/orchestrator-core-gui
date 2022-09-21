@@ -15,6 +15,7 @@
 
 import {
     EuiButton,
+    EuiFacetButton,
     EuiFlexGroup,
     EuiFlexItem,
     EuiHorizontalRule,
@@ -33,11 +34,12 @@ import {
     ServiceTicketProcessState,
     ServiceTicketWithDetails,
 } from "custom/types";
-import { useContext, useEffect, useState } from "react";
+import { renderStringAsDateTime } from "custom/Utils";
+import useInterval from "hooks/useInterval";
+import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
-import { renderStringAsDateTime } from "utils/Lookups";
 import { TabView } from "utils/types";
 
 interface IProps {
@@ -56,7 +58,7 @@ const renderLogItemActions = (ticket: ServiceTicketWithDetails, actions: Action[
             {actions.map((action: Action, index: number) => (
                 <EuiFlexItem key={index}>
                     <EuiButton
-                        onClick={action.onClick}
+                        onClick={() => action.onClick()}
                         isDisabled={!action.requiredState.includes(ticket.process_state)}
                     >
                         <FormattedMessage id={action.translation} />
@@ -73,6 +75,14 @@ const ServiceTicketDetail = () => {
     const [notFound, setNotFound] = useState(false);
 
     const { theme, customApiClient, redirect } = useContext(ApplicationContext);
+
+    useInterval(async () => {
+        if (ticket?.transition_action) {
+            console.log("Refreshing");
+            const ticket = await customApiClient.cimTicketById(id);
+            setTicket(ticket);
+        }
+    }, 3000);
 
     useEffect(() => {
         customApiClient
@@ -160,6 +170,12 @@ const ServiceTicketDetail = () => {
     const openTicket = () => {
         redirect(`/tickets/${ticket._id}/open`);
     };
+    const updateTicket = () => {
+        redirect(`/tickets/${ticket._id}/update`);
+    };
+    const closeTicket = () => {
+        redirect(`/tickets/${ticket._id}/close`);
+    };
 
     const actions: Action[] = [
         {
@@ -169,12 +185,12 @@ const ServiceTicketDetail = () => {
         },
         {
             translation: "tickets.action.updating",
-            onClick: () => {},
+            onClick: updateTicket,
             requiredState: [ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED],
         },
         {
             translation: "tickets.action.closing",
-            onClick: () => {},
+            onClick: closeTicket,
             requiredState: [ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED],
         },
         {
@@ -198,8 +214,7 @@ const ServiceTicketDetail = () => {
         ServiceTicketProcessState.OPEN_RELATED,
     ].includes(ticket.process_state);
 
-    console.log("Rendering the ServiceTicketDetail page with ticket;");
-    console.log(ticket);
+    console.log("Rendering the ServiceTicketDetail page with ticket;", ticket);
 
     const keyRowClass = "key-row";
     const valueRowClass = "value-row";
@@ -214,6 +229,11 @@ const ServiceTicketDetail = () => {
                                     <EuiTitle size="m">
                                         <h1>Service ticket</h1>
                                     </EuiTitle>
+                                </EuiFlexItem>
+                                <EuiFlexItem grow={false} style={{ minWidth: 90 }}>
+                                    <EuiFacetButton quantity={ticket?.transition_action ? 1 : 0}>
+                                        active background job(s)
+                                    </EuiFacetButton>
                                 </EuiFlexItem>
                             </EuiFlexGroup>
                             <div className="mod-ticket-detail">

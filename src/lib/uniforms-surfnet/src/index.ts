@@ -16,6 +16,7 @@
 export { default as AutoFields } from "lib/uniforms-surfnet/src/AutoFields";
 export { default as BoolField } from "lib/uniforms-surfnet/src/BoolField";
 export { default as DateField } from "lib/uniforms-surfnet/src/DateField";
+export { default as TimestampField } from "lib/uniforms-surfnet/src/TimestampField";
 export { default as ErrorField } from "lib/uniforms-surfnet/src/ErrorField";
 export { default as ErrorsField } from "lib/uniforms-surfnet/src/ErrorsField";
 export { default as HiddenField } from "lib/uniforms-surfnet/src/HiddenField";
