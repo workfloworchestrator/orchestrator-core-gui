@@ -9,10 +9,8 @@ export interface Filter {
 /** CIM */
 
 export interface CreateServiceTicketPayload {
-    end_date?: string;
     ims_pw_id: string;
     jira_ticket_id: string;
-    start_date: string;
     title_nl: string;
     type: ServiceTicketType;
 }
