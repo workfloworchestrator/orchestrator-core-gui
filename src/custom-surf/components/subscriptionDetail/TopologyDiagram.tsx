@@ -182,7 +182,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         // Handle IP Static
         if (subscription.product.tag === "IPS") {
             this.context.apiClient
-                .subscriptionsDetailWithModel(subscription.vc.sap.port_subscription_id)
+                .subscriptionsDetailWithModel(subscription.vc.sap.port.owner_subscription_id)
                 .then((result: SubscriptionModel) => {
                     this.setState({ portSubscriptions: [result] });
                 });
@@ -191,9 +191,12 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         // Handle port subscription fetching for other product tags (L2VPN and IP BGP)
         (backlog || []).forEach((esi: any) => {
             (esi.saps || []).forEach((sap: any) => {
+                if ("sap" in sap) {
+                    sap = sap.sap;
+                }
                 promises.push(
                     this.context.apiClient
-                        .subscriptionsDetailWithModel(sap.port_subscription_id)
+                        .subscriptionsDetailWithModel(sap.port.owner_subscription_id)
                         .then((result: SubscriptionModel) => {
                             return result;
                         })
@@ -408,7 +411,12 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         if (subscription.vc.saps) {
             // Handle IP BGP
             subscription.vc.saps.forEach((sap: any, index: number) => {
-                const portSubscription = portSubscriptions.find((s) => s.subscription_id === sap.port_subscription_id);
+                if ("sap" in sap) {
+                    sap = sap.sap;
+                }
+                const portSubscription = portSubscriptions.find(
+                    (s) => s.subscription_id === sap.port.owner_subscription_id
+                );
                 this._updatePrefixInformation(sap);
 
                 if (!portSubscription) {
@@ -422,7 +430,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                     : endpoint?.name;
                 const point = this._calculatePositionFor(radius, index, subscription.vc.saps.length);
                 const node = this._makeNode(
-                    sap.port_subscription_id,
+                    sap.port.owner_subscription_id,
                     `${portSubscription.product.tag}_${label}`,
                     120 + point.x,
                     60 + point.y,
@@ -435,7 +443,9 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         } else if (subscription.vc.sap) {
             // Handle IP Static
             const sap = subscription.vc.sap;
-            const portSubscription = portSubscriptions.find((s) => s.subscription_id === sap.port_subscription_id);
+            const portSubscription = portSubscriptions.find(
+                (s) => s.subscription_id === sap.port.owner_subscription_id
+            );
             this._updatePrefixInformation(sap);
 
             if (!portSubscription) {
@@ -447,7 +457,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
             const label = endpoint?.port ? `${endpoint?.node}__${endpoint?.port.replace(/\//g, "_")}` : endpoint?.name;
             const point = this._calculatePositionFor(radius, 1, 1);
             const node = this._makeNode(
-                sap.port_subscription_id,
+                sap.port.owner_subscription_id,
                 `${portSubscription.product.tag}_${label}`,
                 120 + point.x,
                 60 + point.y,
@@ -483,7 +493,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                 const dependsOnCount = esi.saps.length;
                 esi.saps.forEach((sap: any, index: number) => {
                     // find instance in instances
-                    const portSubscriptionId = sap.port_subscription_id;
+                    const portSubscriptionId = sap.port.owner_subscription_id;
                     const portSubscription = portSubscriptions.find((s) => s.subscription_id === portSubscriptionId);
                     if (!portSubscription) {
                         console.log("failed to find subscription", portSubscriptionId);
