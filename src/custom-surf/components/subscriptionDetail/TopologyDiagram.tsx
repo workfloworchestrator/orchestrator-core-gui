@@ -182,7 +182,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         // Handle IP Static
         if (subscription.product.tag === "IPS") {
             this.context.apiClient
-                .subscriptionsDetailWithModel(subscription.vc.sap.port.owner_subscription_id)
+                .subscriptionsDetailWithModel(subscription.vc.sap.sap.port.owner_subscription_id)
                 .then((result: SubscriptionModel) => {
                     this.setState({ portSubscriptions: [result] });
                 });
@@ -442,7 +442,10 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
             });
         } else if (subscription.vc.sap) {
             // Handle IP Static
-            const sap = subscription.vc.sap;
+            let sap = subscription.vc.sap;
+            if ("sap" in sap) {
+                sap = sap.sap;
+            }
             const portSubscription = portSubscriptions.find(
                 (s) => s.subscription_id === sap.port.owner_subscription_id
             );
@@ -473,6 +476,37 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         return topology;
     }
 
+    _makeWolkExplanation = (subscription: SubscriptionModel) => {
+        return (
+            <EuiCodeBlock>
+                <strong>speed:</strong> {subscription.vc.service_speed}
+                <br />
+                <strong>remote shutdown:</strong> {subscription.vc.remote_port_shutdown ? "yes" : "no"}
+                <br />
+                <strong>speed policer:</strong> {subscription.vc.speed_policer ? "yes" : "no"}
+                <br />
+                <strong>NSO service ID:</strong> {subscription.vc.nso_service_id}
+                <br />
+                {subscription && (
+                    <>
+                        <strong>customer:</strong>
+                        {subscription.customer_name}
+                        <br />
+                    </>
+                )}
+                {subscription && subscription.customer_descriptions.length > 0 && (
+                    <>
+                        <strong>customer descriptions:</strong>
+                        {subscription.customer_descriptions.map((item) => (
+                            <div>{item.description}</div>
+                        ))}
+                        <br />
+                    </>
+                )}
+            </EuiCodeBlock>
+        );
+    };
+
     _build(): Topology {
         const topology: Topology = { names: [], nodes: [], edges: [], paths: [] };
         const { imsEndpoints, portSubscriptions } = this.state;
@@ -486,6 +520,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
 
         const vc = subscription.vc;
         if (vc) {
+            wolk.text = this._makeWolkExplanation(subscription);
             // get ESI's
             const esiList = vc.esis;
             // for each ESI's depends on block: draw.
