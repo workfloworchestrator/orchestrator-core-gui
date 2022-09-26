@@ -473,6 +473,37 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         return topology;
     }
 
+    _makeWolkExplanation = (subscription: SubscriptionModel) => {
+        return (
+            <EuiCodeBlock>
+                <strong>speed:</strong> {subscription.vc.service_speed}
+                <br />
+                <strong>remote shutdown:</strong> {subscription.vc.remote_port_shutdown ? "yes" : "no"}
+                <br />
+                <strong>speed policer:</strong> {subscription.vc.speed_policer ? "yes" : "no"}
+                <br />
+                <strong>NSO service ID:</strong> {subscription.vc.nso_service_id}
+                <br />
+                {subscription && (
+                    <>
+                        <strong>customer:</strong>
+                        {subscription.customer_name}
+                        <br />
+                    </>
+                )}
+                {subscription && subscription.customer_descriptions.length > 0 && (
+                    <>
+                        <strong>customer descriptions:</strong>
+                        {subscription.customer_descriptions.map((item) => (
+                            <div>{item.description}</div>
+                        ))}
+                        <br />
+                    </>
+                )}
+            </EuiCodeBlock>
+        );
+    };
+
     _build(): Topology {
         const topology: Topology = { names: [], nodes: [], edges: [], paths: [] };
         const { imsEndpoints, portSubscriptions } = this.state;
@@ -486,6 +517,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
 
         const vc = subscription.vc;
         if (vc) {
+            wolk.text = this._makeWolkExplanation(subscription);
             // get ESI's
             const esiList = vc.esis;
             // for each ESI's depends on block: draw.
