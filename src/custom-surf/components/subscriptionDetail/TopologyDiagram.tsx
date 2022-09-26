@@ -182,7 +182,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         // Handle IP Static
         if (subscription.product.tag === "IPS") {
             this.context.apiClient
-                .subscriptionsDetailWithModel(subscription.vc.sap.port.owner_subscription_id)
+                .subscriptionsDetailWithModel(subscription.vc.sap.sap.port.owner_subscription_id)
                 .then((result: SubscriptionModel) => {
                     this.setState({ portSubscriptions: [result] });
                 });
@@ -442,7 +442,10 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
             });
         } else if (subscription.vc.sap) {
             // Handle IP Static
-            const sap = subscription.vc.sap;
+            let sap = subscription.vc.sap;
+            if ("sap" in sap) {
+                sap = sap.sap;
+            }
             const portSubscription = portSubscriptions.find(
                 (s) => s.subscription_id === sap.port.owner_subscription_id
             );
