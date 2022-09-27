@@ -413,9 +413,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
             // Handle IP BGP
             subscription.vc.saps.forEach((sap: any, index: number) => {
                 const owner_subscription_id = sap.sap.port.owner_subscription_id;
-                const portSubscription = portSubscriptions.find(
-                    (s) => s.subscription_id === owner_subscription_id
-                );
+                const portSubscription = portSubscriptions.find((s) => s.subscription_id === owner_subscription_id);
                 this._updatePrefixInformation(sap);
 
                 if (!portSubscription) {
