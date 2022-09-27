@@ -16431,16 +16431,16 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-network-diagrams@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.npmjs.org/react-network-diagrams/-/react-network-diagrams-0.8.0.tgz"
-  integrity sha512-qHBnE3LtMCMxsehNX44owrCrR8SzgZNYYEjfwZKruPWhBBORIQXrffzhJamPI/2P4i+hinVM9IhDkBM1ucxrbA==
+react-network-diagrams@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-network-diagrams/-/react-network-diagrams-1.0.0.tgz#26c5a2073505555bc8abf5f9e8c339175a1265f5"
+  integrity sha512-v7AdO05QG6OkQDj2L1Ax7P9VOVvwxItFRkQWZhTmcymSI7UCt4/ZWswGPKyogtUPkec8ak+pgyEg22r2cNmlfw==
   dependencies:
     babel-runtime "^6.23.0"
     d3-scale "^2.0.0"
     keymirror "^0.1.1"
-    prop-types "^15.5.10"
-    underscore "^1.8.3"
+    prop-types "^15.8.1"
+    underscore "^1.13.3"
     victor "^1.1.0"
 
 react-numeric-input@^2.2.3:
@@ -19181,10 +19181,10 @@ unbox-primitive@^1.0.2:
     has-symbols "^1.0.3"
     which-boxed-primitive "^1.0.2"
 
-underscore@^1.8.3:
-  version "1.13.4"
-  resolved "https://registry.npmjs.org/underscore/-/underscore-1.13.4.tgz"
-  integrity sha512-BQFnUDuAQ4Yf/cYY5LNrK9NCJFKriaRbD9uR1fTeXnBeoa97W0i41qkZfGO9pSo8I5KzjAcSY2XYtdf0oKd7KQ==
+underscore@^1.13.3:
+  version "1.13.6"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.13.6.tgz#04786a1f589dc6c09f761fc5f45b89e935136441"
+  integrity sha512-+A5Sja4HP1M08MaXya7p5LvjuM7K6q/2EaC0+iovj/wOcMsTzMvDFbasi/oSapiwOlt252IqsKqPjCl7huKS0A==
 
 unfetch@^4.1.0, unfetch@^4.2.0:
   version "4.2.0"

@@ -8,7 +8,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [v10.5.0] - TBD
-
 - `#141` Convert sass files to emotion 3
 - `#157` Redirect workflow submit to process detail
 - `#158` Add auto scrolling to last finished step in process details, a button to turn auto scrolling off or on and add fixed top menu when scrolling past actions on the page.
@@ -19,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Surf specific:
 - `#155` cim: Check if impacted service has subscription id before calling api
 - `#156` cim: Add html parser to form summary field for email examples
+- `#170, #171, #172` Fix topology diagrams, #172 updates react-network-diagrams package.
 
 ## [v10.4.0] - 2022-08-30
 
