@@ -600,7 +600,6 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
             nodes: this.state.selectionType === "node" ? [this.state.selection] : [],
             edges: this.state.selectionType === "edge" ? [this.state.selection] : [],
         };
-        
         return (
             <EuiFlexGroup justifyContent="spaceAround">
                 <EuiFlexItem grow={5}>
