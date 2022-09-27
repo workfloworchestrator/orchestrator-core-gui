@@ -405,17 +405,16 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         pathColorMap = {};
 
         const wolk: TopologyName = this._makeNode("wolk", "WOLK", 120, 60, "cloud");
+        wolk.text = this._makeWolkExplanation(subscription);
         topology.names.push(wolk);
         topology.nodes.push(wolk);
 
         if (subscription.vc.saps) {
             // Handle IP BGP
             subscription.vc.saps.forEach((sap: any, index: number) => {
-                if ("sap" in sap) {
-                    sap = sap.sap;
-                }
+                const owner_subscription_id = sap.sap.port.owner_subscription_id;
                 const portSubscription = portSubscriptions.find(
-                    (s) => s.subscription_id === sap.port.owner_subscription_id
+                    (s) => s.subscription_id === owner_subscription_id
                 );
                 this._updatePrefixInformation(sap);
 
@@ -430,7 +429,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                     : endpoint?.name;
                 const point = this._calculatePositionFor(radius, index, subscription.vc.saps.length);
                 const node = this._makeNode(
-                    sap.port.owner_subscription_id,
+                    owner_subscription_id,
                     `${portSubscription.product.tag}_${label}`,
                     120 + point.x,
                     60 + point.y,
@@ -442,13 +441,9 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
             });
         } else if (subscription.vc.sap) {
             // Handle IP Static
-            let sap = subscription.vc.sap;
-            if ("sap" in sap) {
-                sap = sap.sap;
-            }
-            const portSubscription = portSubscriptions.find(
-                (s) => s.subscription_id === sap.port.owner_subscription_id
-            );
+            const sap = subscription.vc.sap;
+            const owner_subscription_id = sap.sap.port.owner_subscription_id;
+            const portSubscription = portSubscriptions.find((s) => s.subscription_id === owner_subscription_id);
             this._updatePrefixInformation(sap);
 
             if (!portSubscription) {
@@ -460,7 +455,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
             const label = endpoint?.port ? `${endpoint?.node}__${endpoint?.port.replace(/\//g, "_")}` : endpoint?.name;
             const point = this._calculatePositionFor(radius, 1, 1);
             const node = this._makeNode(
-                sap.port.owner_subscription_id,
+                owner_subscription_id,
                 `${portSubscription.product.tag}_${label}`,
                 120 + point.x,
                 60 + point.y,
@@ -605,6 +600,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
             nodes: this.state.selectionType === "node" ? [this.state.selection] : [],
             edges: this.state.selectionType === "edge" ? [this.state.selection] : [],
         };
+        
         return (
             <EuiFlexGroup justifyContent="spaceAround">
                 <EuiFlexItem grow={5}>
