@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [v10.5.0] - TBD
+- `#42` Fix help button hidden on subscriptions page
 - `#141` Convert sass files to emotion 3
 - `#157` Redirect workflow submit to process detail
 - `#158` Add auto scrolling to last finished step in process details, a button to turn auto scrolling off or on and add fixed top menu when scrolling past actions on the page.
