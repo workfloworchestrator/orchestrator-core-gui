@@ -53,6 +53,7 @@ export enum ServiceTicketProcessState {
 export interface ServiceTicket {
     _id: string;
     jira_ticket_id: string;
+    ims_pw_id: string;
     opened_by: string;
     transition_action?: string;
     process_state: ServiceTicketProcessState;
