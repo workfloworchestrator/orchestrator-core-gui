@@ -503,7 +503,7 @@ I18n.translations.en = {
         },
         table: {
             jira_ticket_id: "Jira ticket",
-            ims_ticket_id: "IMS Planned work",
+            ims_pw_id: "IMS Planned work",
             subject: "Subject",
             title: "Title",
             title_nl: "Title",

@@ -82,6 +82,7 @@ export enum ServiceTicketImpactedObjectImpact {
     DOWN = "down",
     NO_IMPACT = "no_impact",
     REDUCED_REDUNDANCY = "reduced_redundancy",
+    RESILIENCE_LOSS = "resilience_loss",
 }
 
 export interface ServiceTicketImpactedIMSCircuit {
