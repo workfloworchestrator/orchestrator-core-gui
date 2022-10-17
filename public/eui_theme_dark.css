@@ -5778,8 +5778,8 @@ SOFTWARE.
   .euiDescriptionList.euiDescriptionList--column > *, .euiDescriptionList.euiDescriptionList--responsiveColumn > * {
     margin-top: 16px; }
   .euiDescriptionList.euiDescriptionList--column > *:first-child,
-  .euiDescriptionList.euiDescriptionList--column > :nth-child(2), .euiDescriptionList.euiDescriptionList--responsiveColumn > *:first-child,
-  .euiDescriptionList.euiDescriptionList--responsiveColumn > :nth-child(2) {
+  .euiDescriptionList.euiDescriptionList--column > :nth-of-type(2), .euiDescriptionList.euiDescriptionList--responsiveColumn > *:first-child,
+  .euiDescriptionList.euiDescriptionList--responsiveColumn > :nth-of-type(2) {
     margin-top: 0; }
   .euiDescriptionList.euiDescriptionList--column .euiDescriptionList__title, .euiDescriptionList.euiDescriptionList--responsiveColumn .euiDescriptionList__title {
     overflow-wrap: break-word !important;
@@ -11152,46 +11152,46 @@ button.euiLink {
     .euiLoadingChart__bar {
       -webkit-animation: euiLoadingChart 1s infinite;
               animation: euiLoadingChart 1s infinite; } }
-  .euiLoadingChart__bar:nth-child(1) {
+  .euiLoadingChart__bar:nth-of-type(1) {
     background-color: #54B399; }
     @media screen and (prefers-reduced-motion: reduce) {
-      .euiLoadingChart__bar:nth-child(1) {
+      .euiLoadingChart__bar:nth-of-type(1) {
         -webkit-transform: translateY(66%);
                 transform: translateY(66%);
         /* 1 */ } }
-  .euiLoadingChart__bar:nth-child(2) {
+  .euiLoadingChart__bar:nth-of-type(2) {
     background-color: #6092C0;
     -webkit-animation-delay: .1s;
             animation-delay: .1s; }
     @media screen and (prefers-reduced-motion: reduce) {
-      .euiLoadingChart__bar:nth-child(2) {
+      .euiLoadingChart__bar:nth-of-type(2) {
         -webkit-transform: translateY(44%);
                 transform: translateY(44%);
         /* 1 */ } }
-  .euiLoadingChart__bar:nth-child(3) {
+  .euiLoadingChart__bar:nth-of-type(3) {
     background-color: #D36086;
     -webkit-animation-delay: .2s;
             animation-delay: .2s; }
     @media screen and (prefers-reduced-motion: reduce) {
-      .euiLoadingChart__bar:nth-child(3) {
+      .euiLoadingChart__bar:nth-of-type(3) {
         -webkit-transform: translateY(22%);
                 transform: translateY(22%);
         /* 1 */ } }
-  .euiLoadingChart__bar:nth-child(4) {
+  .euiLoadingChart__bar:nth-of-type(4) {
     background-color: #9170B8;
     -webkit-animation-delay: .3s;
             animation-delay: .3s; }
 
-.euiLoadingChart--mono .euiLoadingChart__bar:nth-child(1) {
+.euiLoadingChart--mono .euiLoadingChart__bar:nth-of-type(1) {
   background-color: #343741; }
 
-.euiLoadingChart--mono .euiLoadingChart__bar:nth-child(2) {
+.euiLoadingChart--mono .euiLoadingChart__bar:nth-of-type(2) {
   background-color: #3c3f49; }
 
-.euiLoadingChart--mono .euiLoadingChart__bar:nth-child(3) {
+.euiLoadingChart--mono .euiLoadingChart__bar:nth-of-type(3) {
   background-color: #444750; }
 
-.euiLoadingChart--mono .euiLoadingChart__bar:nth-child(4) {
+.euiLoadingChart--mono .euiLoadingChart__bar:nth-of-type(4) {
   background-color: #4c4f58; }
 
 .euiLoadingChart--medium {
@@ -17340,8 +17340,8 @@ button.euiSuggestItem {
   .euiFormControlLayout--group .euiToolTipAnchor:last-child [class*='euiButton'],
   .euiFormControlLayout--group .euiToolTipAnchor:last-child .euiText {
     border-radius: 0 5px 5px 0; }
-  .euiFormControlLayout--group .euiFormControlLayout__childrenWrapper:nth-child(2) [class*='euiField'],
-  .euiFormControlLayout--group .euiFormControlLayout__childrenWrapper:nth-child(3) [class*='euiField'] {
+  .euiFormControlLayout--group .euiFormControlLayout__childrenWrapper:nth-of-type(2) [class*='euiField'],
+  .euiFormControlLayout--group .euiFormControlLayout__childrenWrapper:nth-of-type(3) [class*='euiField'] {
     border-radius: 0; }
   .euiFormControlLayout--group .euiFormControlLayout__childrenWrapper:first-child .euiSelect,
   .euiFormControlLayout--group .euiFormControlLayout__childrenWrapper:first-child [class*='euiField'] {
@@ -17369,8 +17369,8 @@ button.euiSuggestItem {
     .euiFormControlLayout--group.euiFormControlLayout--compressed .euiToolTipAnchor:last-child [class*='euiButton'],
     .euiFormControlLayout--group.euiFormControlLayout--compressed .euiToolTipAnchor:last-child .euiText {
       border-radius: 0 3px 3px 0; }
-    .euiFormControlLayout--group.euiFormControlLayout--compressed .euiFormControlLayout__childrenWrapper:nth-child(2) [class*='euiField'],
-    .euiFormControlLayout--group.euiFormControlLayout--compressed .euiFormControlLayout__childrenWrapper:nth-child(3) [class*='euiField'] {
+    .euiFormControlLayout--group.euiFormControlLayout--compressed .euiFormControlLayout__childrenWrapper:nth-of-type(2) [class*='euiField'],
+    .euiFormControlLayout--group.euiFormControlLayout--compressed .euiFormControlLayout__childrenWrapper:nth-of-type(3) [class*='euiField'] {
       border-radius: 0; }
     .euiFormControlLayout--group.euiFormControlLayout--compressed .euiFormControlLayout__childrenWrapper:first-child .euiSelect,
     .euiFormControlLayout--group.euiFormControlLayout--compressed .euiFormControlLayout__childrenWrapper:first-child [class*='euiField'] {
