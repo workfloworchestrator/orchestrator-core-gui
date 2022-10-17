@@ -113,18 +113,18 @@ export const subscriptionDetailStyling = css`
                     &.light {
                         border-bottom: 1px solid ${LIGHT_GREY_COLOR};
                         border-left: 1px solid ${PRIMARY_COLOR};
-                        &:nth-child(even) {
+                        &:nth-of-type(even) {
                         }
-                        &:nth-child(odd) {
+                        &:nth-of-type(odd) {
                             background: #f6f6f6;
                         }
                     }
                     &.dark {
                         border-bottom: 1px solid #141519;
                         border-left: 1px solid ${PRIMARY_COLOR};
-                        &:nth-child(even) {
+                        &:nth-of-type(even) {
                         }
-                        &:nth-child(odd) {
+                        &:nth-of-type(odd) {
                             background: #141519;
                         }
                     }
@@ -143,7 +143,7 @@ export const subscriptionDetailStyling = css`
                     &:first-of-type {
                         width: 10%;
                     }
-                    &:nth-child(2) {
+                    &:nth-of-type(2) {
                         width: 50%;
                         text-align: left;
                         div.checkbox {
@@ -172,18 +172,18 @@ export const subscriptionDetailStyling = css`
                     &.light {
                         border-bottom: 1px solid ${LIGHT_GREY_COLOR};
                         border-left: 1px solid ${PRIMARY_COLOR};
-                        &:nth-child(even) {
+                        &:nth-of-type(even) {
                         }
-                        &:nth-child(odd) {
+                        &:nth-of-type(odd) {
                             background: #f6f6f6;
                         }
                     }
                     &.dark {
                         border-bottom: 1px solid #141519;
                         border-left: 1px solid ${PRIMARY_COLOR};
-                        &:nth-child(even) {
+                        &:nth-of-type(even) {
                         }
-                        &:nth-child(odd) {
+                        &:nth-of-type(odd) {
                             background: #141519;
                         }
                     }
@@ -210,18 +210,18 @@ export const subscriptionDetailStyling = css`
                 &.light {
                     border-bottom: 1px solid ${LIGHT_GREY_COLOR};
                     border-left: 1px solid ${PRIMARY_COLOR};
-                    &:nth-child(even) {
+                    &:nth-of-type(even) {
                     }
-                    &:nth-child(odd) {
+                    &:nth-of-type(odd) {
                         background: #f6f6f6;
                     }
                 }
                 &.dark {
                     border-bottom: 1px solid #141519;
                     border-left: 1px solid ${PRIMARY_COLOR};
-                    &:nth-child(even) {
+                    &:nth-of-type(even) {
                     }
-                    &:nth-child(odd) {
+                    &:nth-of-type(odd) {
                         background: #141519;
                     }
                 }
@@ -277,18 +277,18 @@ export const subscriptionDetailStyling = css`
                 &.light {
                     border-bottom: 1px solid ${LIGHT_GREY_COLOR};
                     border-left: 1px solid ${PRIMARY_COLOR};
-                    &:nth-child(even) {
+                    &:nth-of-type(even) {
                     }
-                    &:nth-child(odd) {
+                    &:nth-of-type(odd) {
                         background: #f6f6f6;
                     }
                 }
                 &.dark {
                     border-bottom: 1px solid #141519;
                     border-left: 1px solid ${PRIMARY_COLOR};
-                    &:nth-child(even) {
+                    &:nth-of-type(even) {
                     }
-                    &:nth-child(odd) {
+                    &:nth-of-type(odd) {
                         background: #141519;
                     }
                 }
