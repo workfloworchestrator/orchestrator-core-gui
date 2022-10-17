@@ -53,6 +53,7 @@ export enum ServiceTicketProcessState {
 export interface ServiceTicket {
     _id: string;
     jira_ticket_id: string;
+    ims_pw_id: string;
     opened_by: string;
     transition_action?: string;
     process_state: ServiceTicketProcessState;
@@ -81,6 +82,7 @@ export enum ServiceTicketImpactedObjectImpact {
     DOWN = "down",
     NO_IMPACT = "no_impact",
     REDUCED_REDUNDANCY = "reduced_redundancy",
+    RESILIENCE_LOSS = "resilience_loss",
 }
 
 export interface ServiceTicketImpactedIMSCircuit {

@@ -254,6 +254,12 @@ const ServiceTicketDetail = () => {
                                         </tr>
                                         <tr className={theme}>
                                             <td className={keyRowClass}>
+                                                <FormattedMessage id="tickets.table.ims_pw_id" />
+                                            </td>
+                                            <td className={valueRowClass}>{ticket.ims_pw_id}</td>
+                                        </tr>
+                                        <tr className={theme}>
+                                            <td className={keyRowClass}>
                                                 <FormattedMessage id="tickets.table.type" />
                                             </td>
                                             <td className={valueRowClass}>{ticket.type}</td>
