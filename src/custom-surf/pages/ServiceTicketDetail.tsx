@@ -267,9 +267,7 @@ const ServiceTicketDetail = () => {
                                         <td className={keyRowClass}>
                                             <FormattedMessage id="tickets.table.start_date" />
                                         </td>
-                                        <td className={valueRowClass}>
-                                            {renderStringAsDateTime(ticket.start_date)}
-                                        </td>
+                                        <td className={valueRowClass}>{renderStringAsDateTime(ticket.start_date)}</td>
                                     </tr>
                                     <tr className={theme}>
                                         <td className={keyRowClass}>
