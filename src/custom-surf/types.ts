@@ -127,6 +127,7 @@ export enum ServiceTicketType {
 }
 
 export interface ServiceTicketWithDetails extends ServiceTicket {
+    transitioning_state: any;
     end_date: string;
     last_update_time: string;
     type: ServiceTicketType;

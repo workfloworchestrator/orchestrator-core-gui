@@ -293,4 +293,14 @@ export class CustomApiClient extends CustomApiClientInterface {
             false
         );
     };
+
+    cimRestartOpenRelate = (ticket_id: string): Promise<{ id: string }> => {
+        return this.postPutJson(
+            prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/restart-open-relate-job`),
+            {},
+            "post",
+            false,
+            true
+        );
+    };
 }

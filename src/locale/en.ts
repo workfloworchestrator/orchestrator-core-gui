@@ -516,8 +516,10 @@ I18n.translations.en = {
             create_date: "Created on",
             last_update_time: "Updated on",
             type: "Type",
+            transition_action: "Transitioning",
         },
         action: {
+            restart_open_relate: "Restart open relate",
             opening: "Send OPEN email",
             updating: "Send UPDATE email",
             closing: "Send CLOSE email",
