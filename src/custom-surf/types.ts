@@ -98,6 +98,9 @@ export interface ServiceTicketCustomer {
     customer_name: string;
     customer_abbrev: string;
 }
+export interface ServiceTicketBackgroundJobCount {
+    number_of_active_jobs: number;
+}
 
 export interface ServiceTicketContact {
     name: string;
@@ -127,6 +130,7 @@ export enum ServiceTicketType {
 }
 
 export interface ServiceTicketWithDetails extends ServiceTicket {
+    transitioning_state: any;
     end_date: string;
     last_update_time: string;
     type: ServiceTicketType;

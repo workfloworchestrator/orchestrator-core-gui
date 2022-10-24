@@ -42,6 +42,9 @@ import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
 import { TabView } from "utils/types";
 
+import { intl } from "../../locale/i18n";
+import { setFlash } from "../../utils/Flash";
+
 interface IProps {
     id: string;
 }
@@ -82,7 +85,7 @@ const ServiceTicketDetail = () => {
             const ticket = await customApiClient.cimTicketById(id);
             setTicket(ticket);
         }
-    }, 3000);
+    }, 5000);
 
     useEffect(() => {
         customApiClient
@@ -234,6 +237,29 @@ const ServiceTicketDetail = () => {
                                     active background job(s)
                                 </EuiFacetButton>
                             </EuiFlexItem>
+                            {ticket?.transition_action === null && ticket?.process_state === "initial" && (
+                                <EuiFlexItem grow={false} style={{ minWidth: 200 }}>
+                                    <EuiButton
+                                        color={"danger"}
+                                        iconType="refresh"
+                                        isDisabled={false}
+                                        size="m"
+                                        fill
+                                        onClick={() =>
+                                            customApiClient.cimRestartOpenRelate(ticket._id).then(() => {
+                                                setFlash(
+                                                    intl.formatMessage({
+                                                        id: "tickets.action.background_job_restarted",
+                                                    })
+                                                );
+                                                redirect("/tickets");
+                                            })
+                                        }
+                                    >
+                                        {intl.formatMessage({ id: "tickets.action.restart_open_relate" })}
+                                    </EuiButton>
+                                </EuiFlexItem>
+                            )}
                         </EuiFlexGroup>
                         <div className="mod-ticket-detail">
                             <table className={`detail-block`}>
@@ -294,6 +320,14 @@ const ServiceTicketDetail = () => {
                                             {renderStringAsDateTime(ticket.last_update_time)}
                                         </td>
                                     </tr>
+                                    {ticket?.transition_action && (
+                                        <tr className={theme}>
+                                            <td className={keyRowClass}>
+                                                <FormattedMessage id="tickets.table.transition_action" />
+                                            </td>
+                                            <td className={valueRowClass}>{ticket.transition_action}</td>
+                                        </tr>
+                                    )}
                                     <tr className={theme}>
                                         <td className={keyRowClass}>
                                             <FormattedMessage id="tickets.table.process_state" />

@@ -502,6 +502,7 @@ I18n.translations.en = {
             state: "Select process states",
         },
         table: {
+            background_job_warning: "Background job failed, you can retry the job from the detail page",
             jira_ticket_id: "Jira ticket",
             ims_pw_id: "IMS Planned work",
             subject: "Subject",
@@ -516,8 +517,11 @@ I18n.translations.en = {
             create_date: "Created on",
             last_update_time: "Updated on",
             type: "Type",
+            transition_action: "Transitioning",
         },
         action: {
+            background_job_restarted: "Restarted background job",
+            restart_open_relate: "Restart open relate",
             opening: "Send OPEN email",
             updating: "Send UPDATE email",
             closing: "Send CLOSE email",
