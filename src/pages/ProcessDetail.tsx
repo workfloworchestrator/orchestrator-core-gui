@@ -90,6 +90,7 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
         retry: false,
     });
 
+    // Todo: better to ad the ID to the cache
     useQuery(["process_subscriptions"], () => apiClient.processSubscriptionsByProcessId(process!.id), {
         enabled: !!process,
         onSuccess: (res) => {
