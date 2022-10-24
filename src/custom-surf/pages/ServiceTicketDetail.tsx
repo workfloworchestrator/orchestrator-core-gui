@@ -43,6 +43,7 @@ import ApplicationContext from "utils/ApplicationContext";
 import { TabView } from "utils/types";
 
 import { intl } from "../../locale/i18n";
+import { setFlash } from "../../utils/Flash";
 
 interface IProps {
     id: string;
@@ -84,7 +85,7 @@ const ServiceTicketDetail = () => {
             const ticket = await customApiClient.cimTicketById(id);
             setTicket(ticket);
         }
-    }, 3000);
+    }, 5000);
 
     useEffect(() => {
         customApiClient
@@ -245,9 +246,14 @@ const ServiceTicketDetail = () => {
                                         size="m"
                                         fill
                                         onClick={() =>
-                                            customApiClient
-                                                .cimRestartOpenRelate(ticket._id)
-                                                .then(() => redirect("/tickets"))
+                                            customApiClient.cimRestartOpenRelate(ticket._id).then(() => {
+                                                setFlash(
+                                                    intl.formatMessage({
+                                                        id: "tickets.action.background_job_restarted",
+                                                    })
+                                                );
+                                                redirect("/tickets");
+                                            })
                                         }
                                     >
                                         {intl.formatMessage({ id: "tickets.action.restart_open_relate" })}

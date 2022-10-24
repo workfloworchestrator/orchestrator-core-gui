@@ -98,6 +98,9 @@ export interface ServiceTicketCustomer {
     customer_name: string;
     customer_abbrev: string;
 }
+export interface ServiceTicketBackgroundJobCount {
+    number_of_active_jobs: number;
+}
 
 export interface ServiceTicketContact {
     name: string;

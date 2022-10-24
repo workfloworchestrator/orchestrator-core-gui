@@ -2,6 +2,7 @@ import { BaseApiClient } from "api";
 import {
     OpenServiceTicketPayload,
     ServiceTicket,
+    ServiceTicketBackgroundJobCount,
     ServiceTicketImpactedIMSCircuit,
     ServiceTicketProcessState,
     ServiceTicketWithDetails,
@@ -301,6 +302,11 @@ export class CustomApiClient extends CustomApiClientInterface {
             "post",
             false,
             true
+        );
+    };
+    cimBackgroundJobCount = (): Promise<ServiceTicketBackgroundJobCount> => {
+        return this.fetchJson<ServiceTicketBackgroundJobCount>(
+            prefix_cim_dev_uri("surf/cim/tickets/active-background-jobs")
         );
     };
 }

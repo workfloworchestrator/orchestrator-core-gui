@@ -3,7 +3,17 @@
  *
  */
 
-import { EuiButton, EuiFacetButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPanel, EuiSpacer } from "@elastic/eui";
+import {
+    EuiButton,
+    EuiFacetButton,
+    EuiFlexGroup,
+    EuiFlexItem,
+    EuiIconTip,
+    EuiLoadingSpinner,
+    EuiPage,
+    EuiPanel,
+    EuiSpacer,
+} from "@elastic/eui";
 import ServiceTicketFilter from "custom/components/ServiceTicketFilter";
 import { tableTickets } from "custom/pages/ServiceTicketsStyling";
 import { ServiceTicket, ServiceTicketProcessState } from "custom/types";
@@ -12,6 +22,7 @@ import { intl } from "locale/i18n";
 import debounce from "lodash/debounce";
 import React from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
+import { Link } from "react-router-dom";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
 import { Filter, SortOption } from "utils/types";
@@ -66,14 +77,22 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
 
     componentDidMount() {
         this.refreshData();
-        this.interval = setInterval(this.checkAndRefresh, 3000);
+        this.interval = setInterval(this.checkAndRefresh, 5000);
+    }
+
+    componentWillUnmount() {
+        this.interval = clearInterval(this.interval);
     }
 
     checkAndRefresh = () => {
+        this.context.customApiClient.cimBackgroundJobCount().then((res) =>
+            this.setState({
+                activeBackgroundJobs: res.number_of_active_jobs,
+            })
+        );
         if (this.state.activeBackgroundJobs) {
             this.refreshData();
         }
-        console.log("Checked");
     };
 
     refreshData() {
@@ -291,9 +310,23 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.jira_ticket_id" })}
                                         className="jira_ticket_id"
-                                        onClick={() => this.context.redirect(`/tickets/${ticket._id}`)}
                                     >
-                                        {ticket.jira_ticket_id}
+                                        {ticket.process_state === "initial" && !ticket.transition_action && (
+                                            <EuiIconTip
+                                                aria-label="Warning"
+                                                size="l"
+                                                type="alert"
+                                                color="warning"
+                                                content={intl.formatMessage({
+                                                    id: "tickets.table.background_job_warning",
+                                                })}
+                                            />
+                                        )}
+                                        {ticket.process_state === "initial" &&
+                                            ticket.transition_action === "relating" && (
+                                                <EuiLoadingSpinner size="s" style={{ marginRight: "9px" }} />
+                                            )}
+                                        <Link to={`/tickets/${ticket._id}`}>{ticket.jira_ticket_id}</Link>
                                     </td>
                                     <td
                                         data-label={intl.formatMessage({ id: "tickets.table.title" })}
