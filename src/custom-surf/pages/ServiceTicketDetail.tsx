@@ -237,7 +237,7 @@ const ServiceTicketDetail = () => {
                                     active background job(s)
                                 </EuiFacetButton>
                             </EuiFlexItem>
-                            {ticket?.transition_action === null && ticket?.process_state == "initial" && (
+                            {ticket?.transition_action === null && ticket?.process_state === "initial" && (
                                 <EuiFlexItem grow={false} style={{ minWidth: 200 }}>
                                     <EuiButton
                                         color={"danger"}
