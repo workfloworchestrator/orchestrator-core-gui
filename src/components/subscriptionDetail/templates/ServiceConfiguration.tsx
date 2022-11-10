@@ -34,7 +34,7 @@ export const mapSplitFields = (
     inUseBySubscriptions: Record<string, any>
 ) => {
     let hasInUseByExpandableRow = false;
-    const elements = value_fields
+    return value_fields
         .sort((entryA, entryB) => entryA[0].localeCompare(entryB[0]))
         .flatMap((entry) => entry[1].map((value: any) => [entry[0], value !== null ? value : "NULL"]))
         .map((entry, i) => {
@@ -61,8 +61,33 @@ export const mapSplitFields = (
                     value={entry[1] !== null ? entry[1] : "null"}
                 />
             );
-        });
-    return elements.filter((entry) => entry !== null) as JSX.Element[];
+        })
+        .filter((element) => element !== null) as JSX.Element[];
+};
+
+const getVisibleInstanceFields = (
+    instance_fields: [string, any][],
+    showRelatedBlocks: boolean,
+    subBlockContainsDataForCollapsedView: boolean
+): [string, any][] => {
+    if (showRelatedBlocks || !subBlockContainsDataForCollapsedView) {
+        return [...instance_fields];
+    }
+
+    const { owner_subscription_id, subscription_instance_id, name } = instance_fields[0][1][0];
+
+    return [
+        [
+            instance_fields[0][0],
+            [
+                {
+                    owner_subscription_id,
+                    subscription_instance_id,
+                    name,
+                },
+            ],
+        ],
+    ];
 };
 
 export function RenderServiceConfiguration({
@@ -105,31 +130,36 @@ export function RenderServiceConfiguration({
     };
 
     const parseInstanceToTab = (level: number, field: string) => (inst: ISubscriptionInstance): TabView => {
-        const instance_id = inst.subscription_instance_id;
-        const splitFields = splitValueAndInstanceFields(inst);
-        const subTabs: TabView[] = level < 4 ? parseToTabs(splitFields.instance_fields, level + 1) : [];
-        const sorted_instance_fields = splitFields.instance_fields.sort(
-            (a, b) => tabOrder.indexOf(a[0]) - tabOrder.indexOf(b[0])
-        );
+        const { subscription_instance_id } = inst;
+        const { value_fields, instance_fields, tabName } = splitValueAndInstanceFields(inst);
 
-        const inst_owner_sub =
+        const sorted_instance_fields = instance_fields.sort((a, b) => tabOrder.indexOf(a[0]) - tabOrder.indexOf(b[0]));
+        if (instance_fields.some((instField) => tabOrder.includes(instField[0]))) {
+            console.log({ level, field, instance_fields, sorted_instance_fields });
+        }
+        const subBlock =
             sorted_instance_fields[0] && // sorted_instance_fields: [[label, subscription_instance[]], ...]
             sorted_instance_fields[0][1] && // sorted_instance_fields[0]: [label, subscription_instance[]]
-            sorted_instance_fields[0][1][0] && // sorted_instance_fields[0][1]: subscription_instance[]
-            sorted_instance_fields[0][1][0].owner_subscription_id;
+            sorted_instance_fields[0][1][0]; // sorted_instance_fields[0][1]: subscription_instance[]
+        const ownerSubscriptionIdSubBlock = subBlock && subBlock.owner_subscription_id;
+        const inUseByIdsSubBlock = subBlock && subBlock.in_use_by_ids;
 
-        const splitFieldInstanceValues = mapSplitFields(
-            instance.subscription_instance_id,
-            splitFields.value_fields,
-            inUseBySubscriptions
+        const isSubscriptionBlock = inst.owner_subscription_id === ownerSubscriptionIdSubBlock;
+        const subBlockContainsDataForCollapsedView = inUseByIdsSubBlock?.includes(subscription_instance_id);
+        const showSubBlock = isSubscriptionBlock || showRelatedBlocks || subBlockContainsDataForCollapsedView;
+
+        const visibleInstanceFields = getVisibleInstanceFields(
+            instance_fields,
+            showRelatedBlocks,
+            subBlockContainsDataForCollapsedView
         );
+        const subTabs: TabView[] = level < 4 ? parseToTabs(visibleInstanceFields, level + 1) : [];
 
-        const isSubscriptionBlock = instance.owner_subscription_id === inst_owner_sub;
-        const showBlock = isSubscriptionBlock || showRelatedBlocks;
+        const SplitFieldInstanceValues = mapSplitFields(subscription_instance_id, value_fields, inUseBySubscriptions);
 
         return {
-            id: `${field}-${instance_id}`,
-            name: splitFields.tabName,
+            id: `${field}-${subscription_instance_id}`,
+            name: tabName,
             disabled: false,
             content: (
                 <>
@@ -138,13 +168,17 @@ export function RenderServiceConfiguration({
                         <SubscriptionInstanceValue
                             key={`${inst.subscription_id}-instance-id`}
                             label={"Instance ID"}
-                            value={instance_id}
+                            value={subscription_instance_id}
                         />
-                        {splitFieldInstanceValues}
+                        {SplitFieldInstanceValues}
                     </table>
-                    {subTabs.length > 0 && showBlock && (
+                    {subTabs.length > 0 && showSubBlock && (
                         <div className="indented">
-                            <TabbedSection id={`${field}-${instance_id}-tabs`} tabs={subTabs} name={field} />
+                            <TabbedSection
+                                id={`${field}-${subscription_instance_id}-tabs`}
+                                tabs={subTabs}
+                                name={field}
+                            />
                         </div>
                     )}
                 </>
