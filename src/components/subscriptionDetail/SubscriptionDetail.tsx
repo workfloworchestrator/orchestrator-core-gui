@@ -36,8 +36,8 @@ import { useStorageState } from "react-storage-hooks";
 import ApplicationContext from "utils/ApplicationContext";
 import { enrichSubscription } from "utils/Lookups";
 import {
+    IS_EXPANDED_VIEW,
     Product,
-    SHOW_RELATED_BLOCKS_KEY,
     SUBSCRIPTION_BLOCK_VIEWTYPE_KEY,
     SUBSCRIPTION_VIEWTYPE_KEY,
     Subscription,
@@ -79,7 +79,7 @@ function SubscriptionDetail({ subscriptionId }: IProps) {
         SUBSCRIPTION_BLOCK_VIEWTYPE_KEY,
         "tabs"
     );
-    const [showRelatedBlocks, setShowRelatedBlocks] = useStorageState(localStorage, SHOW_RELATED_BLOCKS_KEY, false);
+    const [isExpandedView, setIsExpandedView] = useStorageState(localStorage, IS_EXPANDED_VIEW, false);
 
     useQuery<SubscriptionModel, Error>(
         ["subscription", { id: subscriptionId }],
@@ -269,12 +269,12 @@ function SubscriptionDetail({ subscriptionId }: IProps) {
                     <EuiFlexItem grow={false}>
                         <EuiButton
                             fill
-                            iconType={showRelatedBlocks ? "checkInCircleFilled" : "crossInACircleFilled"}
-                            iconSide="right"
+                            iconType={isExpandedView ? "arrowDown" : "arrowRight"}
+                            iconSide="left"
                             size="s"
-                            onClick={() => setShowRelatedBlocks(!showRelatedBlocks)}
+                            onClick={() => setIsExpandedView(!isExpandedView)}
                         >
-                            Show related blocks
+                            {isExpandedView ? "collapse" : "expand"}
                         </EuiButton>
                     </EuiFlexItem>
                 </SubscriptionDetailHeader>
@@ -292,7 +292,7 @@ function SubscriptionDetail({ subscriptionId }: IProps) {
                                         subscription_instance={entry[1]}
                                         field_name={entry[0]}
                                         inUseBySubscriptions={inUseBySubscriptions}
-                                        showRelatedBlocks={showRelatedBlocks}
+                                        showRelatedBlocks={isExpandedView}
                                     />
                                 ))}
                             </SubscriptionDetailSection>
@@ -304,7 +304,7 @@ function SubscriptionDetail({ subscriptionId }: IProps) {
                         subscriptionInstances={subscription_instances}
                         subscription_id={subscription.subscription_id}
                         inUseBySubscriptions={inUseBySubscriptions}
-                        showRelatedBlocks={showRelatedBlocks}
+                        showRelatedBlocks={isExpandedView}
                     />
                 )}
 
