@@ -65,6 +65,11 @@ export const mapSplitFields = (
         .filter((element) => element !== null) as JSX.Element[];
 };
 
+const getSubBlockFromInstanceFields = (instance_fields: [string, any][]) =>
+    instance_fields[0] && // instance_fields: [[label, subscription_instance[]], ...]
+    instance_fields[0][1] && // instance_fields[0]: [label, subscription_instance[]]
+    instance_fields[0][1][0]; // instance_fields[0][1]: subscription_instance[]
+
 const getVisibleInstanceFields = (
     instance_fields: [string, any][],
     showRelatedBlocks: boolean,
@@ -74,7 +79,7 @@ const getVisibleInstanceFields = (
         return [...instance_fields];
     }
 
-    const { owner_subscription_id, subscription_instance_id, name } = instance_fields[0][1][0];
+    const { owner_subscription_id, subscription_instance_id, name } = getSubBlockFromInstanceFields(instance_fields);
 
     return [
         [
@@ -137,10 +142,7 @@ export function RenderServiceConfiguration({
         if (instance_fields.some((instField) => tabOrder.includes(instField[0]))) {
             console.log({ level, field, instance_fields, sorted_instance_fields });
         }
-        const subBlock =
-            sorted_instance_fields[0] && // sorted_instance_fields: [[label, subscription_instance[]], ...]
-            sorted_instance_fields[0][1] && // sorted_instance_fields[0]: [label, subscription_instance[]]
-            sorted_instance_fields[0][1][0]; // sorted_instance_fields[0][1]: subscription_instance[]
+        const subBlock = getSubBlockFromInstanceFields(sorted_instance_fields);
         const ownerSubscriptionIdSubBlock = subBlock && subBlock.owner_subscription_id;
         const inUseByIdsSubBlock = subBlock && subBlock.in_use_by_ids;
 
