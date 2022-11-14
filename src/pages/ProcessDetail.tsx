@@ -18,6 +18,7 @@ import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import ProcessStateDetails from "components/ProcessStateDetails";
 import ConfirmationDialogContext from "contextProviders/ConfirmationDialogProvider";
 import RunningProcessesContext from "contextProviders/runningProcessesProvider";
+import { useLocalStorage } from "hooks/useLocalStorage";
 import { intl } from "locale/i18n";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
@@ -63,7 +64,7 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
     const [customerName, setCustomerName] = useState<string>("");
     const [isActionsMenuOnScreen, setIsActionsMenuOnScreen] = useState<boolean>(true);
     const [observer, setObserver] = useState<IntersectionObserver | undefined>(undefined);
-    const [autoScrollToLast, setAutoScrollToLast] = useState<boolean>(true);
+    const [autoScrollToLast, setAutoScrollToLast] = useLocalStorage("process-autoscroll", true);
 
     useQuery(["process"], () => apiClient.process(match.params.id), {
         onSuccess: (processInstance) => {
@@ -90,17 +91,25 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
         retry: false,
     });
 
-    // Todo: better to ad the ID to the cache
-    useQuery(["process_subscriptions"], () => apiClient.processSubscriptionsByProcessId(process!.id), {
-        enabled: !!process,
-        onSuccess: (res) => {
-            setSubscriptionProcesses(res);
-            setLoaded(true);
-            if (process!.step !== "Done") {
-                scrollToLast();
-            }
-        },
-    });
+    useQuery(
+        [`process_subscriptions-${match.params.id}`],
+        () => apiClient.processSubscriptionsByProcessId(match.params.id),
+        {
+            enabled: !!process,
+            onSuccess: (res) => {
+                setSubscriptionProcesses(res);
+                setLoaded(true);
+                if (process!.step !== "Done") {
+                }
+            },
+        }
+    );
+    const scrollToLast = () => {
+        // const finished_steps = process?.steps.filter((step) => step.status !== "pending");
+        // if (finished_steps) {
+        //     handleScrollTo(finished_steps.length - 1);
+        // }
+    };
 
     useEffect(() => {
         const el = actionsRef.current;
@@ -115,15 +124,18 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
             localObserver.observe(el);
         }
         setObserver(localObserver);
-    }, [observer]);
 
-    useEffect(() => {
-        return () => {
-            if (observer) {
-                observer.disconnect();
-            }
-        };
-    }, [observer]);
+        if (autoScrollToLast && loaded && process!.step !== "Done") {
+            scrollToLast();
+        }
+
+        // Cleanup at unmount
+        // return () => {
+        //     if (localObserver) {
+        //         localObserver.disconnect();
+        //     }
+        // }
+    }, [loaded, observer, tabs, selectedTab, process, autoScrollToLast, scrollToLast]);
 
     const handleUpdateProcess = (runningProcesses: WsProcessV2[]) => {
         const localProcess = runningProcesses.find((p) => p.pid === match.params.id);
@@ -253,20 +265,15 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
     };
 
     const handleScrollTo = (step: number) => {
-        const el = document.getElementById(`step-index-${step}`);
-        if (!el) {
-            return;
-        }
-
-        el.scrollIntoView();
-        setQuery({ scrollToStep: step }, "replaceIn");
-    };
-
-    const scrollToLast = () => {
-        const finished_steps = process?.steps.filter((step) => step.status !== "pending");
-        if (finished_steps) {
-            handleScrollTo(finished_steps.length - 1);
-        }
+        // const el = document.getElementById(`step-index-${step}`);
+        //
+        //
+        // // Todo: this function is called to early
+        // if (!el) {
+        //     return;
+        // }
+        // el?.scrollIntoView();
+        // setQuery({ scrollToStep: step }, "replaceIn");
     };
 
     const setIsAutoScrollToLast = (on: boolean) => {
@@ -289,7 +296,6 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
         if (!processParam.is_task) {
             options = options.filter((option) => option.label !== "delete");
         }
-
         return (
             <section ref={actionsRef} className="process-actions">
                 <EuiFlexGroup gutterSize="s" alignItems="center">
@@ -443,6 +449,7 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
     const renderContent = loaded && !notFound;
     handleUpdateProcess(runningProcesses);
 
+    console.log("Ref:", actionsRef.current);
     return (
         <EuiPage css={processDetailStyling}>
             <EuiPageBody component="div" className="mod-process-detail">
