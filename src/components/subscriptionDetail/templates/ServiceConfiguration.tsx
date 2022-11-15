@@ -73,9 +73,10 @@ const getSubBlockFromInstanceFields = (instance_fields: [string, any][]) =>
 const getVisibleInstanceFields = (
     instance_fields: [string, any][],
     showRelatedBlocks: boolean,
+    isSubscriptionBlock: boolean,
     subBlockContainsDataForCollapsedView: boolean
 ): [string, any][] => {
-    if (showRelatedBlocks || !subBlockContainsDataForCollapsedView) {
+    if (isSubscriptionBlock || showRelatedBlocks || !subBlockContainsDataForCollapsedView) {
         return [...instance_fields];
     }
 
@@ -139,20 +140,18 @@ export function RenderServiceConfiguration({
         const { value_fields, instance_fields, tabName } = splitValueAndInstanceFields(inst);
 
         const sorted_instance_fields = instance_fields.sort((a, b) => tabOrder.indexOf(a[0]) - tabOrder.indexOf(b[0]));
-        if (instance_fields.some((instField) => tabOrder.includes(instField[0]))) {
-            console.log({ level, field, instance_fields, sorted_instance_fields });
-        }
         const subBlock = getSubBlockFromInstanceFields(sorted_instance_fields);
         const ownerSubscriptionIdSubBlock = subBlock && subBlock.owner_subscription_id;
         const inUseByIdsSubBlock = subBlock && subBlock.in_use_by_ids;
 
-        const isSubscriptionBlock = inst.owner_subscription_id === ownerSubscriptionIdSubBlock;
         const subBlockContainsDataForCollapsedView = inUseByIdsSubBlock?.includes(subscription_instance_id);
+        const isSubscriptionBlock = inst.owner_subscription_id === ownerSubscriptionIdSubBlock;
         const showSubBlock = isSubscriptionBlock || showRelatedBlocks || subBlockContainsDataForCollapsedView;
 
         const visibleInstanceFields = getVisibleInstanceFields(
             instance_fields,
             showRelatedBlocks,
+            isSubscriptionBlock,
             subBlockContainsDataForCollapsedView
         );
         const subTabs: TabView[] = level < 4 ? parseToTabs(visibleInstanceFields, level + 1) : [];
