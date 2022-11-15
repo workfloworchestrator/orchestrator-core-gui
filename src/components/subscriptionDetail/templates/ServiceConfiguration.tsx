@@ -71,16 +71,34 @@ const getSubBlockFromInstanceFields = (instance_fields: [string, any][]) =>
     instance_fields[0][1][0]; // instance_fields[0][1]: subscription_instance[]
 
 const getVisibleInstanceFields = (
+    subscription_instance_id_parent: string,
     instance_fields: [string, any][],
     showRelatedBlocks: boolean,
     isSubscriptionBlock: boolean,
     subBlockContainsDataForCollapsedView: boolean
 ): [string, any][] => {
-    if (isSubscriptionBlock || showRelatedBlocks || !subBlockContainsDataForCollapsedView) {
+    const subBlock = getSubBlockFromInstanceFields(instance_fields);
+
+    if (!subBlock) {
         return [...instance_fields];
     }
 
-    const { owner_subscription_id, subscription_instance_id, name } = getSubBlockFromInstanceFields(instance_fields);
+    const { owner_subscription_id, subscription_instance_id, name, in_use_by_ids } = subBlock;
+    const filteredInUsedByIds = in_use_by_ids.filter((id: string) => id !== subscription_instance_id_parent);
+
+    if (isSubscriptionBlock || showRelatedBlocks || !subBlockContainsDataForCollapsedView) {
+        return [
+            [
+                instance_fields[0][0],
+                [
+                    {
+                        ...instance_fields[0][1][0],
+                        in_use_by_ids: filteredInUsedByIds,
+                    },
+                ],
+            ],
+        ];
+    }
 
     return [
         [
@@ -90,6 +108,7 @@ const getVisibleInstanceFields = (
                     owner_subscription_id,
                     subscription_instance_id,
                     name,
+                    in_use_by_ids: filteredInUsedByIds,
                 },
             ],
         ],
@@ -149,6 +168,7 @@ export function RenderServiceConfiguration({
         const showSubBlock = isSubscriptionBlock || showRelatedBlocks || subBlockContainsDataForCollapsedView;
 
         const visibleInstanceFields = getVisibleInstanceFields(
+            subscription_instance_id,
             instance_fields,
             showRelatedBlocks,
             isSubscriptionBlock,
