@@ -496,7 +496,7 @@ export interface ISubscriptionInstance {
 
 export const SUBSCRIPTION_VIEWTYPE_KEY = "subscription-viewtype";
 export const SUBSCRIPTION_BLOCK_VIEWTYPE_KEY = "subscription-block-viewtype";
-export const IS_EXPANDED_VIEW = "is-expanded-view";
+export const SHOW_RELATED_BLOCKS_KEY = "show-related-blocks";
 
 export interface TabView {
     id: string;
