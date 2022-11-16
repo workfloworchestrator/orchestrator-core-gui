@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [v10.5.0] - TBD
+- `#41` Converted most components to a Functions based approach
+- Selecting "auto scroll" on process detail page is now stored in localstorage
+- `#44` Include subscription description of first product block relation on Subscription detail page
 - Added button to restart CIM open relate step
 - `#42` Fix help button hidden on subscriptions page
 - `#141` Convert sass files to emotion 3
