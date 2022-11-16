@@ -105,10 +105,10 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
         }
     );
     const scrollToLast = () => {
-        // const finished_steps = process?.steps.filter((step) => step.status !== "pending");
-        // if (finished_steps) {
-        //     handleScrollTo(finished_steps.length - 1);
-        // }
+        const finished_steps = process?.steps.filter((step) => step.status !== "pending");
+        if (finished_steps) {
+            handleScrollTo(finished_steps.length - 1);
+        }
     };
 
     useEffect(() => {
@@ -126,16 +126,19 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
         setObserver(localObserver);
 
         if (autoScrollToLast && loaded && process!.step !== "Done") {
-            scrollToLast();
+            console.log("Auto scroll enabled; scrolling to last");
+            const finished_steps = process?.steps.filter((step) => step.status !== "pending");
+            if (finished_steps) {
+                // Handle the scroll on load here so the dependencies will be simpler
+                console.log("Found finished steps:", finished_steps);
+                const el = document.getElementById(`step-index-${finished_steps.length - 1}`);
+                if (!el) {
+                    return;
+                }
+                el?.scrollIntoView();
+            }
         }
-
-        // Cleanup at unmount
-        // return () => {
-        //     if (localObserver) {
-        //         localObserver.disconnect();
-        //     }
-        // }
-    }, [loaded, observer, tabs, selectedTab, process, autoScrollToLast, scrollToLast]);
+    }, [autoScrollToLast, loaded, observer, process]);
 
     const handleUpdateProcess = (runningProcesses: WsProcessV2[]) => {
         const localProcess = runningProcesses.find((p) => p.pid === match.params.id);
@@ -265,15 +268,13 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
     };
 
     const handleScrollTo = (step: number) => {
-        // const el = document.getElementById(`step-index-${step}`);
-        //
-        //
-        // // Todo: this function is called to early
-        // if (!el) {
-        //     return;
-        // }
-        // el?.scrollIntoView();
-        // setQuery({ scrollToStep: step }, "replaceIn");
+        const el = document.getElementById(`step-index-${step}`);
+
+        // Todo: this function is called to early
+        if (!el) {
+            return;
+        }
+        el?.scrollIntoView();
     };
 
     const setIsAutoScrollToLast = (on: boolean) => {
@@ -449,7 +450,6 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
     const renderContent = loaded && !notFound;
     handleUpdateProcess(runningProcesses);
 
-    console.log("Ref:", actionsRef.current);
     return (
         <EuiPage css={processDetailStyling}>
             <EuiPageBody component="div" className="mod-process-detail">
