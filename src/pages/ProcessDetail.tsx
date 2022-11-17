@@ -18,13 +18,13 @@ import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import ProcessStateDetails from "components/ProcessStateDetails";
 import ConfirmationDialogContext from "contextProviders/ConfirmationDialogProvider";
 import RunningProcessesContext from "contextProviders/runningProcessesProvider";
-import { useLocalStorage } from "hooks/useLocalStorage";
 import { intl } from "locale/i18n";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { useQuery } from "react-query";
 import { RouteComponentProps } from "react-router-dom";
 import ScrollUpButton from "react-scroll-up-button";
+import { useStorageState } from "react-storage-hooks";
 import { DecodedValueMap, NumberParam, QueryParamConfigMap, SetQuery, withQueryParams } from "use-query-params";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
@@ -64,7 +64,7 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
     const [customerName, setCustomerName] = useState<string>("");
     const [isActionsMenuOnScreen, setIsActionsMenuOnScreen] = useState<boolean>(true);
     const [observer, setObserver] = useState<IntersectionObserver | undefined>(undefined);
-    const [autoScrollToLast, setAutoScrollToLast] = useLocalStorage("process-autoscroll", true);
+    const [autoScrollToLast, setAutoScrollToLast] = useStorageState(localStorage, "process-autoscroll", true);
 
     useQuery(["process"], () => apiClient.process(match.params.id), {
         onSuccess: (processInstance) => {
