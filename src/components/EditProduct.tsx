@@ -13,20 +13,18 @@
  *
  */
 
-import { EuiButton, EuiPanel } from "@elastic/eui";
-import ConfirmationDialogContext, {
-    ConfirmDialogActions,
-    ShowConfirmDialogType,
-} from "contextProviders/ConfirmationDialogProvider";
+import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
+import ConfirmationDialogContext from "contextProviders/ConfirmationDialogProvider";
 import { isDate } from "date-fns";
 import { formDate, formInput, formSelect } from "forms/Builder";
-import React from "react";
+import { intl } from "locale/i18n";
+import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { RouteComponentProps } from "react-router";
 import { SingleValue } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
-import { Option, ProductBlock, Product as ProductData, Workflow } from "utils/types";
+import { Option, Product as ProductData } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
 import { editProductStyling } from "./EditProductStyling";
@@ -38,87 +36,88 @@ interface MatchParams {
 
 interface IProps extends Partial<RouteComponentProps<MatchParams>>, WrappedComponentProps {}
 
-interface IState {
-    errors: Partial<Record<keyof ProductData, boolean>>;
-    required: (keyof ProductData)[];
-    initial: boolean;
-    readOnly: boolean;
-    product?: ProductData;
-    processing: boolean;
-    productBlocks: ProductBlock[];
-    products: ProductData[];
-    workflows: Workflow[];
-    tags: string[];
-    types: string[];
-    statuses: string[];
-    duplicateName: boolean;
-    showConfirmDialog: ShowConfirmDialogType;
-    closeConfirmDialog: () => void;
-}
-
-class EditProduct extends React.Component<IProps, IState> {
-    static contextType = ApplicationContext;
-    context!: React.ContextType<typeof ApplicationContext>;
-    state: IState = {
-        errors: {},
-        required: ["name", "description", "status", "product_type", "tag"],
-        initial: true,
-        readOnly: false,
-        processing: false,
-        productBlocks: [],
-        products: [],
+function EditProduct({ match }: IProps) {
+    const { apiClient, redirect, allowed } = useContext(ApplicationContext);
+    const { showConfirmDialog, closeConfirmDialog } = useContext(ConfirmationDialogContext);
+    const [errors, setErrors] = useState<Partial<Record<keyof ProductData, boolean>>>({});
+    const [required] = useState<(keyof ProductData)[]>(["name", "description", "status", "product_type", "tag"]);
+    const [initial, setInitial] = useState<boolean>(true);
+    const [readOnly, setReadOnly] = useState<boolean>(false);
+    const [productLoaded, setProductLoaded] = useState(false);
+    const [product, setProduct] = useState<ProductData>({
+        create_subscription_workflow_key: "",
+        created_at: 0,
+        description: "",
+        end_date: 0,
+        fixed_inputs: [],
+        modify_subscription_workflow_key: "",
+        name: "",
+        product_blocks: [],
+        product_id: "",
+        product_type: "",
+        status: "",
+        tag: "",
+        terminate_subscription_workflow_key: "",
         workflows: [],
-        tags: [],
-        types: [],
-        statuses: [],
-        duplicateName: false,
-        showConfirmDialog: () => {},
-        closeConfirmDialog: () => {},
-    };
+    });
+    const [processing, setProcessing] = useState<boolean>(false);
+    const [products, setProducts] = useState<ProductData[]>([]);
+    const [statuses] = useState<string[]>([]);
+    const [duplicateName, setDuplicateName] = useState<boolean>(false);
 
-    componentDidMount() {
-        this.fetchProducts(this.props.match?.params.id);
-    }
-
-    fetchProducts = (product_id?: string) =>
-        this.context.apiClient.products().then((res: ProductData[]) => {
+    useEffect(() => {
+        let product_id = match?.params.id;
+        apiClient.products().then((res: ProductData[]) => {
             const product = res.find((value: ProductData) => value.product_id === product_id);
-            this.setState({
-                products: res,
-                product: product,
-            });
+            setProducts(res);
+            if (product) {
+                setProduct(product);
+                setProductLoaded(true);
+                setReadOnly(!allowed("/orchestrator/metadata/product/edit/" + product.product_id + "/"));
+            }
         });
+    }, [apiClient, match?.params.id, allowed]);
 
-    cancel = (e: React.MouseEvent<HTMLElement>) => {
+    const cancel = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
-        this.state.showConfirmDialog({
+        showConfirmDialog({
             question: "",
             confirmAction: () => {},
-            cancelAction: () => this.context.redirect("/metadata/products"),
+            cancelAction: () => redirect("/metadata/products"),
             leavePage: true,
         });
     };
 
-    handleDeleteProduct = (e: React.MouseEvent<HTMLElement>) => {
+    const isInvalid = (markErrors: boolean = false) => {
+        const hasErrors = (Object.keys(errors) as (keyof ProductData)[]).some((key) => errors[key]);
+        const requiredInputMissing = required.some((attr) => isEmpty(product![attr]));
+        if (markErrors) {
+            const missing = required.filter((attr) => isEmpty(product![attr]));
+            const newErrors = { ...errors };
+            missing.forEach((attr) => (newErrors[attr] = true));
+            setErrors(newErrors);
+        }
+        return hasErrors || requiredInputMissing || duplicateName;
+    };
+
+    const handleDeleteProduct = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
-        const { product } = this.state;
-        const { intl } = this.props;
         const question = intl.formatMessage(
             { id: "metadata.deleteConfirmation" },
             { type: "Product", name: product!.name }
         );
         const confirmAction = () =>
-            this.context.apiClient
+            apiClient
                 .deleteProduct(product!.product_id)
                 .then(() => {
-                    this.context.redirect("/metadata/products");
+                    redirect("/metadata/products");
                     setFlash(
                         intl.formatMessage({ id: "metadata.flash.delete" }, { name: product!.name, type: "Product" })
                     );
                 })
                 .catch((err: any) => {
                     if (err.response && err.response.status === 400) {
-                        this.state.closeConfirmDialog();
+                        closeConfirmDialog();
                         if (err.response.data) {
                             setFlash(err.response.data.error);
                         }
@@ -127,17 +126,16 @@ class EditProduct extends React.Component<IProps, IState> {
                     }
                 });
 
-        this.state.showConfirmDialog({ question, confirmAction });
+        showConfirmDialog({ question, confirmAction });
     };
-    submit = (e: React.MouseEvent<HTMLElement>) => {
+
+    const submit = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
-        const { product, processing } = this.state;
-        const { intl } = this.props;
-        const invalid = this.isInvalid(true) || processing;
+        const invalid = isInvalid(true) || processing;
         if (!invalid) {
-            this.setState({ processing: true });
-            this.context.apiClient.saveProduct(product!).then(() => {
-                this.context.redirect("/metadata/products");
+            setProcessing(true);
+            apiClient.saveProduct(product!).then(() => {
+                redirect("/metadata/products");
                 setFlash(
                     intl.formatMessage(
                         { id: product!.product_id ? "metadata.flash.updated" : "metadata.flash.created" },
@@ -146,60 +144,55 @@ class EditProduct extends React.Component<IProps, IState> {
                 );
             });
         } else {
-            this.setState({ initial: false });
+            setInitial(false);
         }
     };
-    renderButtons = (initial: boolean, product: ProductData) => {
-        const invalid = !initial && (this.isInvalid() || this.state.processing);
+
+    const renderButtons = (initial: boolean, product: ProductData) => {
+        const invalid = !initial && (isInvalid() || processing);
         return (
-            <section className="buttons">
-                <EuiButton className="button" onClick={this.cancel}>
-                    <FormattedMessage id="metadata.products.back" />
-                </EuiButton>
-                {this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id) && (
-                    <EuiButton
-                        tabIndex={0}
-                        className={`button ${invalid ? "grey disabled" : "blue"}`}
-                        onClick={this.submit}
-                    >
-                        <FormattedMessage id="metadata.products.submit" />
+            <EuiFlexGroup className="buttons">
+                <EuiFlexItem grow={false}>
+                    <EuiButton className="button" onClick={cancel}>
+                        <FormattedMessage id="metadata.products.back" />
                     </EuiButton>
+                </EuiFlexItem>
+                {allowed("/orchestrator/metadata/product/edit/" + product.product_id) && (
+                    <EuiFlexItem grow={false}>
+                        <EuiButton
+                            tabIndex={0}
+                            className={`button ${invalid ? "grey disabled" : "blue"}`}
+                            fill={true}
+                            onClick={submit}
+                        >
+                            <FormattedMessage id="metadata.products.submit" />
+                        </EuiButton>
+                    </EuiFlexItem>
                 )}
-                {this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id) &&
-                    product.product_id && (
-                        <EuiButton className="button red" onClick={this.handleDeleteProduct}>
+                {allowed("/orchestrator/metadata/product/edit/" + product.product_id) && product.product_id && (
+                    <EuiFlexItem grow={false}>
+                        <EuiButton color="danger" fill={true} onClick={handleDeleteProduct}>
                             <FormattedMessage id="metadata.products.delete" />
                         </EuiButton>
-                    )}
-            </section>
+                    </EuiFlexItem>
+                )}
+            </EuiFlexGroup>
         );
     };
-    isInvalid = (markErrors: boolean = false) => {
-        const { errors, required, product, duplicateName } = this.state;
-        const hasErrors = (Object.keys(errors) as (keyof ProductData)[]).some((key) => errors[key]);
-        const requiredInputMissing = required.some((attr) => isEmpty(product![attr]));
-        if (markErrors) {
-            const missing = required.filter((attr) => isEmpty(product![attr]));
-            const newErrors = { ...errors };
-            missing.forEach((attr) => (newErrors[attr] = true));
-            this.setState({ errors: newErrors });
-        }
-        return hasErrors || requiredInputMissing || duplicateName;
-    };
-    validateProperty = (name: keyof ProductData) => (e: React.FocusEvent<HTMLInputElement>) => {
+
+    const validateProperty = (name: keyof ProductData) => (e: React.FocusEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        const errors = { ...this.state.errors };
-        const { product } = this.state;
+        const oldProduct = products.find((p) => p.product_id === product.product_id);
         if (name === "name") {
-            const nbr = this.state.products.filter((p) => p.name === value).length;
-            const duplicate = product!.product_id ? nbr === 2 : nbr === 1;
-            errors[name] = duplicate;
-            this.setState({ duplicateName: duplicate });
+            const nbr = products.filter((p) => p.name === value).length;
+            let duplicate = product!.product_id ? nbr === 1 && product.name !== oldProduct!.name : nbr === 0;
+            setErrors({ ...errors, [name]: duplicate });
+            setDuplicateName(duplicate);
         }
-        errors[name] = isEmpty(value);
-        this.setState({ errors: errors });
+        setErrors({ ...errors, [name]: isEmpty(value) });
     };
-    changeProperty = (name: keyof ProductData) => (
+
+    const changeProperty = (name: keyof ProductData) => (
         e:
             | Date
             | React.MouseEvent<HTMLSpanElement | HTMLButtonElement>
@@ -207,7 +200,6 @@ class EditProduct extends React.Component<IProps, IState> {
             | React.ChangeEvent<HTMLInputElement>
             | SingleValue<Option>
     ) => {
-        const { product } = this.state;
         let value: any;
         if (isEmpty(e) || isDate(e)) {
             value = e;
@@ -215,45 +207,28 @@ class EditProduct extends React.Component<IProps, IState> {
             // @ts-ignore
             value = e.target ? e.target.value : e.value;
         }
-        // @ts-ignore
-        product![name] = value;
-        this.setState({ product: product });
+        setProduct({ ...product, [name]: value });
     };
 
-    addConfirmDialogActions = ({ showConfirmDialog, closeConfirmDialog }: ConfirmDialogActions) => {
-        if (this.state.showConfirmDialog !== showConfirmDialog) {
-            this.setState({ showConfirmDialog, closeConfirmDialog });
-        }
-        return <></>;
-    };
+    const endDate = !product.end_date
+        ? null
+        : isDate(product.end_date)
+        ? ((product.end_date as unknown) as Date)
+        : new Date(product.end_date * 1000);
 
-    render() {
-        const { product, duplicateName, initial, statuses } = this.state;
-        const { intl } = this.props;
-        if (!product) {
-            return null;
-        }
-        const readOnly = !this.context.allowed("/orchestrator/metadata/product/edit/" + product.product_id + "/");
-        const endDate = !product.end_date
-            ? null
-            : isDate(product.end_date)
-            ? ((product.end_date as unknown) as Date)
-            : new Date(product.end_date * 1000);
-        return (
-            <EuiPanel css={editProductStyling}>
+    return (
+        <EuiPanel css={editProductStyling}>
+            {productLoaded && (
                 <div className="mod-product">
-                    <ConfirmationDialogContext.Consumer>
-                        {(cdc) => this.addConfirmDialogActions(cdc)}
-                    </ConfirmationDialogContext.Consumer>
                     <section className="card">
                         {formInput(
                             "metadata.products.name",
                             "name",
-                            product.name || "",
+                            product!.name || "",
                             readOnly,
-                            this.state.errors,
-                            this.changeProperty("name"),
-                            this.validateProperty("name"),
+                            errors,
+                            changeProperty("name"),
+                            validateProperty("name"),
                             duplicateName ? intl.formatMessage({ id: "metadata.products.duplicate_name" }) : undefined
                         )}
                         {formInput(
@@ -261,13 +236,13 @@ class EditProduct extends React.Component<IProps, IState> {
                             "description",
                             product.description || "",
                             readOnly,
-                            this.state.errors,
-                            this.changeProperty("description"),
-                            this.validateProperty("description")
+                            errors,
+                            changeProperty("description"),
+                            validateProperty("description")
                         )}
                         {formSelect(
                             "metadata.products.status",
-                            this.changeProperty("status"),
+                            changeProperty("status"),
                             statuses,
                             readOnly,
                             product.status ?? "active"
@@ -278,13 +253,13 @@ class EditProduct extends React.Component<IProps, IState> {
                             true,
                             product.created_at ? new Date(product.created_at * 1000) : new Date()
                         )}
-                        {formDate("metadata.products.end_date", this.changeProperty("end_date"), readOnly, endDate)}
-                        {this.renderButtons(initial, product)}
+                        {formDate("metadata.products.end_date", changeProperty("end_date"), readOnly, endDate)}
+                        {renderButtons(initial, product)}
                     </section>
                 </div>
-            </EuiPanel>
-        );
-    }
+            )}
+        </EuiPanel>
+    );
 }
 
 export default injectIntl(EditProduct);

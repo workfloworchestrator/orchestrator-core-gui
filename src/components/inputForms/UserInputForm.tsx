@@ -15,10 +15,7 @@
 
 import { ButtonColor, EuiButton, EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
 import { SubscriptionsContextProvider } from "components/subscriptionContext";
-import ConfirmationDialogContext, {
-    ConfirmDialogActions,
-    ShowConfirmDialogType,
-} from "contextProviders/ConfirmationDialogProvider";
+import ConfirmationDialogContext from "contextProviders/ConfirmationDialogProvider";
 import { autoFieldFunction } from "custom/uniforms/AutoFieldLoader";
 import invariant from "invariant";
 import { JSONSchema6 } from "json-schema";
@@ -26,13 +23,12 @@ import { AutoFields } from "lib/uniforms-surfnet/src";
 import { intl } from "locale/i18n";
 import cloneDeep from "lodash/cloneDeep";
 import get from "lodash/get";
-import React from "react";
+import React, { useContext, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { RouteComponentProps, withRouter } from "react-router";
 import { filterDOMProps, joinName } from "uniforms";
 import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
 import { AutoField, AutoForm } from "uniforms-unstyled";
-import ApplicationContext from "utils/ApplicationContext";
 import { getQueryParameters } from "utils/QueryParameters";
 import { ValidationError } from "utils/types";
 
@@ -48,13 +44,6 @@ interface IProps extends RouteComponentProps {
     hasNext?: boolean;
     hasPrev?: boolean;
     userInput: {};
-}
-
-interface IState {
-    nrOfValidationErrors: number;
-    processing: boolean;
-    rootErrors: string[];
-    showConfirmDialog: ShowConfirmDialogType;
 }
 
 interface Buttons {
@@ -297,64 +286,58 @@ function fillPreselection(form: JSONSchema6, query: string) {
     }
     return form;
 }
+function UserInputForm({
+    stepUserInput,
+    validSubmit,
+    cancel,
+    previous = () => {},
+    hasNext = false,
+    hasPrev = false,
+    userInput,
+    location,
+}: IProps) {
+    const { showConfirmDialog } = useContext(ConfirmationDialogContext);
+    const [processing, setProcessing] = useState<boolean>(false);
+    const [nrOfValidationErrors, setNrOfValidationErrors] = useState<number>(0);
+    const [rootErrors, setRootErrors] = useState<string[]>([]);
 
-class UserInputForm extends React.Component<IProps, IState> {
-    context!: React.ContextType<typeof ApplicationContext>;
-    state: IState = {
-        processing: false,
-        nrOfValidationErrors: 0,
-        rootErrors: [],
-        showConfirmDialog: () => {},
-    };
-
-    public static defaultProps = {
-        previous: () => {},
-        hasPrev: false,
-        hasNext: false,
-    };
-
-    openDialog = (e: React.FormEvent) => {
-        this.state.showConfirmDialog({
+    const openDialog = (e: React.FormEvent) => {
+        showConfirmDialog({
             question: "",
             confirmAction: () => {},
-            cancelAction: this.props.cancel,
+            cancelAction: cancel,
             leavePage: true,
         });
     };
 
-    submit = async (userInput: any = {}) => {
-        const { processing } = this.state;
-
+    const submit = async (userInput: any = {}) => {
         if (!processing) {
-            this.setState({ processing: true });
+            setProcessing(true);
 
             try {
-                await this.props.validSubmit(userInput);
-                this.setState({ processing: false });
+                await validSubmit(userInput);
+                setProcessing(false);
                 return null;
             } catch (error) {
-                this.setState({ processing: false });
+                setProcessing(false);
 
                 // @ts-ignore
                 if (error.response.status === 400) {
                     // @ts-ignore
                     let json = error.response.data;
-
-                    this.setState({
-                        nrOfValidationErrors: json.validation_errors.length,
-                        rootErrors: json.validation_errors
+                    setNrOfValidationErrors(json.validation_errors.length);
+                    setRootErrors(
+                        json.validation_errors
                             .filter((e: ValidationError) => e.loc[0] === "__root__")
-                            .map((e: ValidationError) => e.msg),
-                    });
-
-                    // eslint-disable-next-line no-throw-literal
-                    throw {
+                            .map((e: ValidationError) => e.msg)
+                    );
+                    throw Object.assign(new Error(), {
                         details: json.validation_errors.map((e: ValidationError) => ({
                             message: e.msg,
                             params: e.ctx || {},
                             dataPath: "." + e.loc.join("."),
                         })),
-                    };
+                    });
                 }
 
                 // Let the error escape so it can be caught by our own onerror handler instead of being silenced by uniforms
@@ -363,7 +346,8 @@ class UserInputForm extends React.Component<IProps, IState> {
                 }, 0);
 
                 // The form will clear the errors so also remove the warning
-                this.setState({ nrOfValidationErrors: 0, rootErrors: [] });
+                setNrOfValidationErrors(0);
+                setRootErrors([]);
 
                 // The error we got contains no validation errors so don't send it to uniforms
                 return null;
@@ -371,7 +355,7 @@ class UserInputForm extends React.Component<IProps, IState> {
         }
     };
 
-    onButtonClick = (
+    const onButtonClick = (
         e: React.MouseEvent<HTMLButtonElement>,
         question: string | undefined,
         confirm: (e: React.MouseEvent<HTMLButtonElement>) => void
@@ -380,7 +364,7 @@ class UserInputForm extends React.Component<IProps, IState> {
             return confirm(e);
         }
 
-        this.state.showConfirmDialog({
+        showConfirmDialog({
             question: question,
             confirmAction: confirm,
             cancelAction: () => {},
@@ -388,16 +372,14 @@ class UserInputForm extends React.Component<IProps, IState> {
         });
     };
 
-    renderButtons = (buttons: Buttons) => {
-        const { hasNext, hasPrev } = this.props;
-
+    const renderButtons = (buttons: Buttons) => {
         const prevButton = hasPrev ? (
             <EuiButton
                 id="button-prev-form-submit"
                 fill
                 color={buttons.previous.color ?? "primary"}
                 onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                    this.onButtonClick(e, buttons.previous.dialog, this.props.previous);
+                    onButtonClick(e, buttons.previous.dialog, previous);
                 }}
             >
                 {buttons.previous.text ?? <FormattedMessage id="process.previous" />}
@@ -408,7 +390,7 @@ class UserInputForm extends React.Component<IProps, IState> {
                     id="button-cancel-form-submit"
                     color={buttons.previous.color ?? "warning"}
                     onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                        this.onButtonClick(e, buttons.previous.dialog, this.openDialog);
+                        onButtonClick(e, buttons.previous.dialog, openDialog);
                     }}
                 >
                     {buttons.previous.text ?? <FormattedMessage id="process.cancel" />}
@@ -422,7 +404,7 @@ class UserInputForm extends React.Component<IProps, IState> {
                 tabIndex={0}
                 fill
                 color={buttons.next.color ?? "primary"}
-                isLoading={this.state.processing}
+                isLoading={processing}
                 type="submit"
             >
                 {buttons.next.text ?? <FormattedMessage id="process.next" />}
@@ -433,7 +415,7 @@ class UserInputForm extends React.Component<IProps, IState> {
                 tabIndex={0}
                 fill
                 color={buttons.next.color ?? "primary"}
-                isLoading={this.state.processing}
+                isLoading={processing}
                 type="submit"
             >
                 {buttons.next.text ?? <FormattedMessage id="process.submit" />}
@@ -448,75 +430,58 @@ class UserInputForm extends React.Component<IProps, IState> {
         );
     };
 
-    addConfirmDialogActions = ({ showConfirmDialog }: ConfirmDialogActions) => {
-        if (this.state.showConfirmDialog !== showConfirmDialog) {
-            this.setState({ showConfirmDialog });
-        }
-        return <></>;
-    };
+    const prefilledForm = fillPreselection(stepUserInput, location.search);
+    const bridge = new CustomTitleJSONSchemaBridge(prefilledForm, () => {});
+    const AutoFieldProvider = AutoField.componentDetectorContext.Provider;
+    // @ts-ignore Get the Button config from the form default values, or default to empty config
+    const buttons: Buttons = stepUserInput.properties?.buttons?.default ?? { previous: {}, next: {} };
 
-    render() {
-        const { nrOfValidationErrors, rootErrors } = this.state;
-        const { stepUserInput, userInput, location } = this.props;
-        const prefilledForm = fillPreselection(stepUserInput, location.search);
-        const bridge = new CustomTitleJSONSchemaBridge(prefilledForm, () => {});
-
-        const AutoFieldProvider = AutoField.componentDetectorContext.Provider;
-
-        // @ts-ignore Get the Button config from the form default values, or default to empty config
-        const buttons: Buttons = stepUserInput.properties?.buttons?.default ?? { previous: {}, next: {} };
-        return (
-            <EuiPanel css={userInputFormStyling}>
-                <div className="user-input-form">
-                    <ConfirmationDialogContext.Consumer>
-                        {(cdc) => this.addConfirmDialogActions(cdc)}
-                    </ConfirmationDialogContext.Consumer>
-                    <section className="form-fieldset">
-                        {stepUserInput.title && stepUserInput.title !== "unknown" && <h3>{stepUserInput.title}</h3>}
-                        <SubscriptionsContextProvider>
-                            {/*
+    return (
+        <EuiPanel css={userInputFormStyling}>
+            <div className="user-input-form">
+                <section className="form-fieldset">
+                    {stepUserInput.title && stepUserInput.title !== "unknown" && <h3>{stepUserInput.title}</h3>}
+                    <SubscriptionsContextProvider>
+                        {/*
                             // @ts-ignore */}
-                            <AutoFieldProvider value={autoFieldFunction}>
-                                <AutoForm
-                                    schema={bridge}
-                                    onSubmit={this.submit}
-                                    showInlineError={true}
-                                    validate="onSubmit"
-                                    model={userInput}
-                                >
-                                    <AutoFields omitFields={["buttons"]} />
-                                    {/* Show top level validation info about backend validation */}
-                                    {nrOfValidationErrors > 0 && (
-                                        <section className="form-errors">
-                                            <em className="error backend-validation-metadata">
-                                                <FormattedMessage
-                                                    id="process.input_fields_have_validation_errors"
-                                                    values={{ nrOfValidationErrors: nrOfValidationErrors }}
-                                                />
-                                            </em>
-                                        </section>
-                                    )}
-                                    {rootErrors.length > 0 && (
-                                        <section className="form-errors">
-                                            <em className="error backend-validation-metadata">
-                                                {rootErrors.map((error) => (
-                                                    <div className="euiFormErrorText euiFormRow__text">{error}</div>
-                                                ))}
-                                            </em>
-                                        </section>
-                                    )}
+                        <AutoFieldProvider value={autoFieldFunction}>
+                            <AutoForm
+                                schema={bridge}
+                                onSubmit={submit}
+                                showInlineError={true}
+                                validate="onSubmit"
+                                model={userInput}
+                            >
+                                <AutoFields omitFields={["buttons"]} />
+                                {/* Show top level validation info about backend validation */}
+                                {nrOfValidationErrors > 0 && (
+                                    <section className="form-errors">
+                                        <em className="error backend-validation-metadata">
+                                            <FormattedMessage
+                                                id="process.input_fields_have_validation_errors"
+                                                values={{ nrOfValidationErrors: nrOfValidationErrors }}
+                                            />
+                                        </em>
+                                    </section>
+                                )}
+                                {rootErrors.length > 0 && (
+                                    <section className="form-errors">
+                                        <em className="error backend-validation-metadata">
+                                            {rootErrors.map((error) => (
+                                                <div className="euiFormErrorText euiFormRow__text">{error}</div>
+                                            ))}
+                                        </em>
+                                    </section>
+                                )}
 
-                                    {this.renderButtons(buttons)}
-                                </AutoForm>
-                            </AutoFieldProvider>
-                        </SubscriptionsContextProvider>
-                    </section>
-                </div>
-            </EuiPanel>
-        );
-    }
+                                {renderButtons(buttons)}
+                            </AutoForm>
+                        </AutoFieldProvider>
+                    </SubscriptionsContextProvider>
+                </section>
+            </div>
+        </EuiPanel>
+    );
 }
-
-UserInputForm.contextType = ApplicationContext;
 
 export default withRouter(UserInputForm);
