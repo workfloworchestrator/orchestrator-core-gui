@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [v10.5.0] - TBD
+- Fix impacted objects
 - Updated service ticket detail page to show "last_update_time"
 - `#41` Converted most components to a Functions based approach
 - Selecting "auto scroll" on process detail page is now stored in localstorage
