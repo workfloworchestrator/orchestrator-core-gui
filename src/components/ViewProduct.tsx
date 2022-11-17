@@ -26,13 +26,13 @@ import {
     EuiPanel,
     EuiSpacer,
 } from "@elastic/eui";
+import { intl } from "locale/i18n";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { RouteComponentProps } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
 import { FixedInput, Product, ProductBlock, ResourceType, Workflow } from "utils/types";
 
-import { intl } from "../locale/i18n";
 import { renderDateTime } from "../utils/Lookups";
 
 const I18N_KEY_PREFIX = "metadata.products.";

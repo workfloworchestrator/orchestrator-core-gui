@@ -26,16 +26,14 @@ interface IProps extends Partial<RouteComponentProps<MatchParams>> {
     subscriptionId?: string;
 }
 
-export default class SubscriptionDetailPage extends React.PureComponent<IProps> {
-    render() {
-        return (
-            <EuiPage>
-                <EuiPageBody component="div">
-                    <EuiPanel>
-                        <SubscriptionDetail subscriptionId={this.props.match!.params.id} />
-                    </EuiPanel>
-                </EuiPageBody>
-            </EuiPage>
-        );
-    }
+export default function SubscriptionDetailPage({ match }: IProps) {
+    return (
+        <EuiPage>
+            <EuiPageBody component="div">
+                <EuiPanel>
+                    <SubscriptionDetail subscriptionId={match!.params.id} />
+                </EuiPanel>
+            </EuiPageBody>
+        </EuiPage>
+    );
 }

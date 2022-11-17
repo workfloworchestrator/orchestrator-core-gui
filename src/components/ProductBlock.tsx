@@ -12,21 +12,18 @@
  * limitations under the License.
  *
  */
-
-import { EuiButton, EuiPanel } from "@elastic/eui";
-import ConfirmationDialogContext, {
-    ConfirmDialogActions,
-    ShowConfirmDialogType,
-} from "contextProviders/ConfirmationDialogProvider";
+import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
+import ConfirmationDialogContext from "contextProviders/ConfirmationDialogProvider";
 import { isDate } from "date-fns";
 import { formDate, formInput, formSelect } from "forms/Builder";
-import React from "react";
+import { intl } from "locale/i18n";
+import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import { RouteComponentProps } from "react-router";
 import { SingleValue } from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
-import { Option, ResourceType, ProductBlock as iProductBlock } from "utils/types";
+import { Option, ProductBlock as iProductBlock } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
 import { productBlockStyling } from "./ProductBlockStyling";
@@ -41,71 +38,76 @@ interface IProps extends Partial<RouteComponentProps<MatchParams>>, WrappedCompo
     subscriptionId?: string;
 }
 
-interface IState {
-    errors: Partial<Record<keyof iProductBlock, boolean>>;
-    required: Column[];
-    duplicateName: boolean;
-    initial: boolean;
-    isNew: boolean;
-    productBlock?: iProductBlock;
-    processing: boolean;
-    resourceTypes: ResourceType[];
-    productBlocks: iProductBlock[];
-    showConfirmDialog: ShowConfirmDialogType;
-    closeConfirmDialog: () => void;
-}
+function ProductBlock({ match }: IProps) {
+    const { apiClient, redirect, allowed } = useContext(ApplicationContext);
+    const { showConfirmDialog, closeConfirmDialog } = useContext(ConfirmationDialogContext);
+    const [errors, setErrors] = useState<Partial<Record<keyof iProductBlock, boolean>>>({});
+    const [required] = useState<Column[]>(["name", "description"]);
+    const [duplicateName, setDuplicateName] = useState<boolean>(false);
+    const [initial, setInitial] = useState<boolean>(true);
+    const [productBlock, setProductBlock] = useState<iProductBlock>({
+        created_at: 0,
+        description: "",
+        end_date: 0,
+        name: "",
+        parent_ids: [],
+        product_block_id: "",
+        resource_types: [],
+        status: "",
+        tag: "",
+    });
+    const [processing, setProcessing] = useState<boolean>(false);
+    const [productBlocks, setProductBlocks] = useState<iProductBlock[]>([]);
+    const [readOnly, setReadOnly] = useState<boolean>(false);
+    const [productBlockLoaded, setProductBlockLoaded] = useState(false);
 
-class ProductBlock extends React.Component<IProps, IState> {
-    static contextType = ApplicationContext;
-    context!: React.ContextType<typeof ApplicationContext>;
-    state: IState = {
-        errors: {},
-        required: ["name", "description"],
-        duplicateName: false,
-        initial: true,
-        isNew: true,
-        processing: false,
-        resourceTypes: [],
-        productBlocks: [],
-        showConfirmDialog: () => {},
-        closeConfirmDialog: () => {},
-    };
-
-    componentDidMount() {
-        const id = this.props.match?.params.id;
-        if (id !== "new") {
-            this.context.apiClient
-                .productBlockById(id!)
-                .then((res: iProductBlock) => this.setState({ productBlock: res, isNew: false }));
+    useEffect(() => {
+        const product_block_id = match?.params.id;
+        if (product_block_id !== "new") {
+            apiClient.productBlockById(product_block_id!).then((res: iProductBlock) => {
+                setProductBlock(res);
+                setReadOnly(!allowed("/orchestrator/metadata/product/edit/" + productBlock.product_block_id + "/"));
+                setProductBlockLoaded(true);
+            });
         }
-        Promise.all([this.context.apiClient.resourceTypes(), this.context.apiClient.productBlocks()]).then((res) =>
-            this.setState({ resourceTypes: res[0], productBlocks: res[1] })
-        );
-    }
+        Promise.all([apiClient.productBlocks()]).then((res) => {
+            setProductBlocks(res[0]);
+        });
+    }, [apiClient, match?.params.id, allowed, productBlock.product_block_id]);
 
-    cancel = (e: React.MouseEvent<HTMLElement>) => {
+    const cancel = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
-        this.state.showConfirmDialog({
+        showConfirmDialog({
             question: "",
             confirmAction: () => {},
-            cancelAction: () => this.context.redirect("/metadata/product_blocks"),
+            cancelAction: () => redirect("/metadata/product_blocks"),
             leavePage: true,
         });
     };
 
-    handleDeleteProductBlock = (e: React.MouseEvent<HTMLElement>) => {
+    const isInvalid = (markErrors: boolean = false) => {
+        const hasErrors = (Object.keys(errors) as (keyof iProductBlock)[]).some((key) => errors[key]);
+        const requiredInputMissing = required.some((attr) => isEmpty(productBlock![attr]));
+        if (markErrors) {
+            const missing = required.filter((attr) => isEmpty(productBlock![attr]));
+            const newErrors = { ...errors };
+            missing.forEach((attr) => (newErrors[attr] = true));
+            setErrors(newErrors);
+        }
+        return hasErrors || requiredInputMissing || duplicateName;
+    };
+
+    const handleDeleteProductBlock = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
-        const { productBlock } = this.state;
-        const { intl } = this.props;
         const question = intl.formatMessage(
             { id: "metadata.deleteConfirmation" },
             { type: "Product Block", name: productBlock!.name }
         );
         const confirmAction = () =>
-            this.context.apiClient
+            apiClient
                 .deleteProductBlock(productBlock!.product_block_id)
                 .then(() => {
-                    this.context.redirect("/metadata/product_blocks");
+                    redirect("/metadata/product_blocks");
                     setFlash(
                         intl.formatMessage(
                             { id: "metadata.flash.delete" },
@@ -115,7 +117,7 @@ class ProductBlock extends React.Component<IProps, IState> {
                 })
                 .catch((err: any) => {
                     if (err.response && err.response.status === 400) {
-                        this.state.closeConfirmDialog();
+                        closeConfirmDialog();
                         if (err.response.data) {
                             setFlash(err.response.data.error);
                         }
@@ -123,18 +125,17 @@ class ProductBlock extends React.Component<IProps, IState> {
                         throw err;
                     }
                 });
-        this.state.showConfirmDialog({ question, confirmAction });
+
+        showConfirmDialog({ question, confirmAction });
     };
 
-    submit = (e: React.MouseEvent<HTMLElement>) => {
+    const submit = (e: React.MouseEvent<HTMLElement>) => {
         stop(e);
-        const { productBlock, processing } = this.state;
-        const { intl } = this.props;
-        const invalid = this.isInvalid(true) || processing;
+        const invalid = isInvalid(true) || processing;
         if (!invalid) {
-            this.setState({ processing: true });
-            this.context.apiClient.saveProductBlock(productBlock!).then(() => {
-                this.context.redirect("/metadata/product_blocks");
+            setProcessing(true);
+            apiClient.saveProductBlock(productBlock!).then(() => {
+                redirect("/metadata/product_blocks");
                 setFlash(
                     intl.formatMessage(
                         { id: productBlock!.product_block_id ? "metadata.flash.updated" : "metadata.flash.created" },
@@ -143,69 +144,58 @@ class ProductBlock extends React.Component<IProps, IState> {
                 );
             });
         } else {
-            this.setState({ initial: false });
+            setInitial(false);
         }
     };
 
-    renderButtons = (initial: boolean, productBlock: iProductBlock) => {
-        const invalid = !initial && (this.isInvalid() || this.state.processing);
+    const renderButtons = (initial: boolean, productBlock: iProductBlock) => {
+        const invalid = !initial && (isInvalid() || processing);
         return (
-            <section className="buttons">
-                <EuiButton className="button" onClick={this.cancel}>
-                    <FormattedMessage id="metadata.productBlocks.back" />
-                </EuiButton>
-                {this.context.allowed(
-                    "/orchestrator/metadata/product-block/edit/" + productBlock.product_block_id + "/"
-                ) && (
-                    <EuiButton
-                        tabIndex={0}
-                        className={`button ${invalid ? "grey disabled" : "blue"}`}
-                        onClick={this.submit}
-                    >
-                        <FormattedMessage id="metadata.productBlocks.submit" />
+            <EuiFlexGroup className="buttons">
+                <EuiFlexItem grow={false}>
+                    <EuiButton className="button" onClick={cancel}>
+                        <FormattedMessage id="metadata.productBlocks.back" />
                     </EuiButton>
-                )}
-                {this.context.allowed(
-                    "/orchestrator/metadata/product-block/delete/" + productBlock.product_block_id + "/"
-                ) &&
-                    productBlock.product_block_id && (
-                        <EuiButton className="button red" onClick={this.handleDeleteProductBlock}>
-                            <FormattedMessage id="metadata.productBlocks.delete" />
+                </EuiFlexItem>
+                {allowed("/orchestrator/metadata/product-block/edit/" + productBlock.product_block_id + "/") && (
+                    <EuiFlexItem grow={false}>
+                        <EuiButton
+                            tabIndex={0}
+                            className={`button ${invalid ? "grey disabled" : "blue"}`}
+                            fill={true}
+                            onClick={submit}
+                        >
+                            <FormattedMessage id="metadata.productBlocks.submit" />
                         </EuiButton>
+                    </EuiFlexItem>
+                )}
+                {allowed("/orchestrator/metadata/product-block/delete/" + productBlock.product_block_id + "/") &&
+                    productBlock.product_block_id && (
+                        <EuiFlexItem grow={false}>
+                            <EuiButton color="danger" fill={true} onClick={handleDeleteProductBlock}>
+                                <FormattedMessage id="metadata.productBlocks.delete" />
+                            </EuiButton>
+                        </EuiFlexItem>
                     )}
-            </section>
+            </EuiFlexGroup>
         );
     };
 
-    isInvalid = (markErrors: boolean = false) => {
-        const { errors, required, productBlock, duplicateName } = this.state;
-        const hasErrors = (Object.keys(errors) as (keyof iProductBlock)[]).some((key) => errors[key]);
-        const requiredInputMissing = required.some((attr) => isEmpty(productBlock![attr]));
-        if (markErrors) {
-            const missing = required.filter((attr) => isEmpty(productBlock![attr]));
-            const newErrors = { ...errors };
-            missing.forEach((attr) => (newErrors[attr] = true));
-            this.setState({ errors: newErrors });
-        }
-
-        return hasErrors || requiredInputMissing || duplicateName;
-    };
-
-    validateProperty = (name: keyof iProductBlock) => (e: React.FocusEvent<HTMLInputElement>) => {
+    const validateProperty = (name: keyof iProductBlock) => (e: React.FocusEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        const errors = { ...this.state.errors };
-        const { productBlock } = this.state;
+        const oldProductBlock = productBlocks.find((p) => p.product_block_id === productBlock.product_block_id);
         if (name === "name") {
-            const nbr = this.state.productBlocks.filter((p) => p.name === value).length;
-            const duplicate = productBlock!.product_block_id ? nbr === 2 : nbr === 1;
-            errors[name] = duplicate;
-            this.setState({ duplicateName: duplicate });
+            const nbr = productBlocks.filter((p) => p.name === value).length;
+            let duplicate = productBlock!.product_block_id
+                ? nbr === 1 && productBlock.name !== oldProductBlock!.name
+                : nbr === 0;
+            setErrors({ ...errors, [name]: duplicate });
+            setDuplicateName(duplicate);
         }
-        errors[name] = isEmpty(value);
-        this.setState({ errors: errors });
+        setErrors({ ...errors, [name]: isEmpty(value) });
     };
 
-    changeProperty = (name: keyof iProductBlock) => (
+    const changeProperty = (name: keyof iProductBlock) => (
         e:
             | Date
             | React.MouseEvent<HTMLSpanElement | HTMLButtonElement>
@@ -213,59 +203,35 @@ class ProductBlock extends React.Component<IProps, IState> {
             | React.ChangeEvent<HTMLInputElement>
             | SingleValue<Option>
     ) => {
-        const { productBlock } = this.state;
-        let value;
+        let value: any;
         if (isEmpty(e) || isDate(e)) {
             value = e;
         } else {
             // @ts-ignore
             value = e.target ? e.target.value : e.value;
         }
-        // @ts-ignore
-        productBlock![name] = value;
-        this.setState({ productBlock: productBlock });
+        setProductBlock({ ...productBlock, [name]: value });
     };
 
-    addConfirmDialogActions = ({ showConfirmDialog, closeConfirmDialog }: ConfirmDialogActions) => {
-        if (this.state.showConfirmDialog !== showConfirmDialog) {
-            this.setState({ showConfirmDialog, closeConfirmDialog });
-        }
-        return <></>;
-    };
+    const endDate = isEmpty(productBlock.end_date)
+        ? null
+        : isDate(productBlock.end_date)
+        ? ((productBlock.end_date as unknown) as Date)
+        : new Date(productBlock.end_date * 1000);
 
-    render() {
-        const { productBlock, duplicateName, initial } = this.state;
-        const { intl } = this.props;
-
-        if (!productBlock) {
-            return null;
-        }
-
-        const endDate = isEmpty(productBlock.end_date)
-            ? null
-            : isDate(productBlock.end_date)
-            ? ((productBlock.end_date as unknown) as Date)
-            : new Date(productBlock.end_date * 1000);
-
-        const readOnly = !this.context.allowed(
-            "/orchestrator/metadata/product-block/edit/" + productBlock.product_block_id + "/"
-        );
-
-        return (
-            <EuiPanel css={productBlockStyling}>
+    return (
+        <EuiPanel css={productBlockStyling}>
+            {productBlockLoaded && (
                 <div className="mod-product-block">
-                    <ConfirmationDialogContext.Consumer>
-                        {(cdc) => this.addConfirmDialogActions(cdc)}
-                    </ConfirmationDialogContext.Consumer>
                     <section className="card">
                         {formInput(
                             "metadata.productBlocks.name",
                             "name",
                             productBlock.name || "",
                             readOnly,
-                            this.state.errors,
-                            this.changeProperty("name"),
-                            this.validateProperty("name"),
+                            errors,
+                            changeProperty("name"),
+                            validateProperty("name"),
                             duplicateName
                                 ? intl.formatMessage({ id: "metadata.productBlocks.duplicate_name" })
                                 : undefined
@@ -275,13 +241,13 @@ class ProductBlock extends React.Component<IProps, IState> {
                             "description",
                             productBlock.description || "",
                             readOnly,
-                            this.state.errors,
-                            this.changeProperty("description"),
-                            this.validateProperty("description")
+                            errors,
+                            changeProperty("description"),
+                            validateProperty("description")
                         )}
                         {formSelect(
                             "metadata.productBlocks.status",
-                            this.changeProperty("status"),
+                            changeProperty("status"),
                             ["active", "phase out", "pre production", "end of life"],
                             readOnly,
                             productBlock.status || "active"
@@ -292,18 +258,13 @@ class ProductBlock extends React.Component<IProps, IState> {
                             true,
                             productBlock.created_at ? new Date(productBlock.created_at * 1000) : new Date()
                         )}
-                        {formDate(
-                            "metadata.productBlocks.end_date",
-                            this.changeProperty("end_date"),
-                            readOnly,
-                            endDate
-                        )}
-                        {this.renderButtons(initial, productBlock)}
+                        {formDate("metadata.productBlocks.end_date", changeProperty("end_date"), readOnly, endDate)}
+                        {renderButtons(initial, productBlock)}
                     </section>
                 </div>
-            </EuiPanel>
-        );
-    }
+            )}
+        </EuiPanel>
+    );
 }
 
 export default injectIntl(ProductBlock);
