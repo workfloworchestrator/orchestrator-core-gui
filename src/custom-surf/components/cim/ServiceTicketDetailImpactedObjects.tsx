@@ -30,6 +30,7 @@ interface IProps extends WrappedComponentProps {
     ticket: ServiceTicketWithDetails;
     updateable: boolean;
     acceptImpactedObjects: () => void;
+    showImpactedObjectsWithSubscriptionInfo: boolean;
 }
 
 export interface ImpactedObject {
@@ -66,7 +67,12 @@ const sortColumnIcon = (name: string, sorted: SortOption) => {
     return <i />;
 };
 
-const ServiceTicketDetailImpactedObjects = ({ ticket, updateable, acceptImpactedObjects }: IProps) => {
+const ServiceTicketDetailImpactedObjects = ({
+    ticket,
+    updateable,
+    acceptImpactedObjects,
+    showImpactedObjectsWithSubscriptionInfo,
+}: IProps) => {
     const { theme, customApiClient, apiClient } = useContext(ApplicationContext);
     const [impactedObjects, setImpactedObjects] = useState<Array<ImpactedObject>>([]);
     const [editImpactedObject, setEditImpactedObject] = useState<ImpactedObject>();
@@ -226,7 +232,10 @@ const ServiceTicketDetailImpactedObjects = ({ ticket, updateable, acceptImpacted
             <EuiFlexGroup>
                 <EuiFlexItem grow={false}>
                     <EuiTitle size="m">
-                        <h1>Impacted objects</h1>
+                        <h1>
+                            Impacted objects {showImpactedObjectsWithSubscriptionInfo ? "with" : "without"}{" "}
+                            subscriptions
+                        </h1>
                     </EuiTitle>
                 </EuiFlexItem>
             </EuiFlexGroup>
