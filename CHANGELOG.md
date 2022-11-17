@@ -8,7 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [v10.5.0] - TBD
-
+-   Fix CIM impacted objects without a subscription ID
+-   Updated service ticket detail page to show "last_update_time"
 -   `#47` Fix subscription dropdowns to not resize when typing and fixes alignments with other input fields
 -   Added description text in Owner_Subscription_Id and added a copy-to-clipboard button
 -   Updated service ticket detail page to show "last_update_time"
