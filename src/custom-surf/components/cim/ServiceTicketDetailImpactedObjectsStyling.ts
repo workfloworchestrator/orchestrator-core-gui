@@ -73,27 +73,7 @@ export const tableImpactedObjects = css`
             }
         }
 
-        tr.Allocated {
-            &.light {
-                background-color: ${LIGHT_PRIMARY_COLOR};
-            }
-
-            &.dark {
-                background-color: ${DARKEST_PRIMARY_COLOR};
-            }
-
-            &:hover {
-                &.light {
-                    background-color: ${shadeColor(LIGHT_PRIMARY_COLOR, -10)};
-                }
-
-                &.dark {
-                    background-color: ${shadeColor(DARKEST_PRIMARY_COLOR, -10)};
-                }
-            }
-        }
-
-        tr.Planned {
+        tr.override {
             /* cursor: default; */
 
             &.light {
@@ -115,26 +95,6 @@ export const tableImpactedObjects = css`
             }
         }
 
-        tr.Free {
-            &.light {
-                background-color: ${LIGHT_SUCCESS_COLOR};
-            }
-
-            &.dark {
-                background-color: ${DARK_SUCCESS_COLOR};
-            }
-
-            &:hover {
-                &.light {
-                    background-color: ${shadeColor(LIGHT_SUCCESS_COLOR, -10)};
-                }
-
-                &.dark {
-                    background-color: ${shadeColor(DARK_SUCCESS_COLOR, -10)};
-                }
-            }
-        }
-
         th {
             padding: 5px 5px 10px 5px;
         }
@@ -142,16 +102,21 @@ export const tableImpactedObjects = css`
         th.customer {
             width: 15%;
         }
-
+        th.ims_circuit_id {
+            width: 100px;
+        }
+        th.type {
+            width: 100px;
+        }
         td.impact-override {
-            padding: 0 0 0 5px;
+            //padding: 100 0 0 5px;
 
             & div.impact-override__select {
-                max-width: 200px;
+                max-width: 170px;
             }
 
             & div.impact-override__text {
-                width: 170px;
+                width: 140px;
             }
         }
 
@@ -175,6 +140,7 @@ export const tableImpactedObjects = css`
                 word-break: break-word;
                 word-wrap: break-word;
                 padding: 15px 0 10px 5px;
+                vertical-align: top;
 
                 div.tool-tip {
                     span {

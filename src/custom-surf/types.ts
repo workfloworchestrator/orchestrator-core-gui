@@ -115,6 +115,7 @@ export interface ServiceTicketRelatedCustomer {
 
 export interface ServiceTicketImpactedObject {
     subscription_id: string;
+    product_type: string;
     logged_by: string;
     ims_circuits: ServiceTicketImpactedIMSCircuit[];
     owner_customer: ServiceTicketCustomer;

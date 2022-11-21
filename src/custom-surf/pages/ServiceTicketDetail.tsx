@@ -364,16 +364,18 @@ const ServiceTicketDetail = () => {
 
                         <ServiceTicketDetailImpactedObjects
                             ticket={ticket}
-                            updateable={isUpdateImpactActive}
+                            updateable={true}
                             acceptImpactedObjects={acceptImpactedObjects}
-                            showImpactedObjectsWithSubscriptionInfo={true}
+                            showAcceptButton={false}
+                            mode="withSubscriptions"
                         />
 
                         <ServiceTicketDetailImpactedObjects
                             ticket={ticket}
                             updateable={isUpdateImpactActive}
                             acceptImpactedObjects={acceptImpactedObjects}
-                            showImpactedObjectsWithSubscriptionInfo={true}
+                            showAcceptButton={true}
+                            mode="withoutSubscriptions"
                         />
                     </div>
                 </EuiPanel>

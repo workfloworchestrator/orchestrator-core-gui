@@ -24,13 +24,21 @@ import ApplicationContext from "utils/ApplicationContext";
 import { Option, SortOption, SubscriptionModel } from "utils/types";
 import { stop } from "utils/Utils";
 
-type Column = "customer" | "impact" | "type" | "subscription" | "impact_override";
+type Column =
+    | "customer"
+    | "impact"
+    | "type"
+    | "subscription"
+    | "ims_circuit_id"
+    | "ims_circuit_name"
+    | "impact_override";
 
 interface IProps extends WrappedComponentProps {
     ticket: ServiceTicketWithDetails;
     updateable: boolean;
     acceptImpactedObjects: () => void;
-    showImpactedObjectsWithSubscriptionInfo: boolean;
+    showAcceptButton: boolean;
+    mode: "withSubscriptions" | "withoutSubscriptions";
 }
 
 export interface ImpactedObject {
@@ -50,7 +58,15 @@ const options: Option[] = (Object.values(ServiceTicketImpactedObjectImpact) as s
     label: val,
 }));
 
-const columns: Column[] = ["customer", "impact", "type", "subscription", "impact_override"];
+const columns: Column[] = [
+    "customer",
+    "type",
+    "subscription",
+    "ims_circuit_id",
+    "ims_circuit_name",
+    "impact",
+    "impact_override",
+];
 
 const sortBy = (name: Column) => (a: ImpactedObject, b: ImpactedObject) => {
     const aSafe = a[name] || "";
@@ -71,48 +87,39 @@ const ServiceTicketDetailImpactedObjects = ({
     ticket,
     updateable,
     acceptImpactedObjects,
-    showImpactedObjectsWithSubscriptionInfo,
+    showAcceptButton,
+    mode,
 }: IProps) => {
-    const { theme, customApiClient, apiClient } = useContext(ApplicationContext);
+    const { theme } = useContext(ApplicationContext);
     const [impactedObjects, setImpactedObjects] = useState<Array<ImpactedObject>>([]);
     const [editImpactedObject, setEditImpactedObject] = useState<ImpactedObject>();
     const [sortOrder, setSortOrder] = useState<SortOption<Column>>({ name: "subscription", descending: false });
 
     const getImpactedObjects = async () => {
-        const subscriptions: Record<string, SubscriptionModel> = {};
-
-        // Retrieve each subscription once
-        for (const impacted of ticket.impacted_objects) {
-            if (impacted.subscription_id in subscriptions || !impacted.subscription_id) {
-                continue;
+        let newImpactedObjects: ImpactedObject[] = [];
+        for (const impactedObject of ticket.impacted_objects) {
+            if (mode === "withSubscriptions" && !impactedObject.subscription_id) {
+                break;
             }
-            subscriptions[impacted.subscription_id] = await apiClient.subscriptionsDetailWithModel(
-                impacted.subscription_id
-            );
+            if (mode === "withoutSubscriptions" && impactedObject.subscription_id === "") {
+                break;
+            }
+            for (const impactedCircuit of impactedObject.ims_circuits) {
+                const tempImpactedCircuit: ImpactedObject = {
+                    customer: impactedObject.owner_customer.customer_name,
+                    impact: impactedCircuit.impact,
+                    type: impactedObject.product_type,
+                    subscription: impactedObject.subscription_description,
+                    impact_override: impactedCircuit.impact_override,
+                    subscription_id: impactedObject.subscription_id,
+                    ims_circuit_id: impactedCircuit.ims_circuit_id,
+                    ims_circuit_name: impactedCircuit.ims_circuit_name,
+                    extra_information: impactedCircuit.extra_information,
+                };
+                newImpactedObjects.push(tempImpactedCircuit);
+            }
         }
-
-        const newImpactedObjects: ImpactedObject[] = ticket.impacted_objects
-            .map((impactedObject) => {
-                let subscription = subscriptions[impactedObject.subscription_id];
-                if (!subscription) {
-                    return [];
-                }
-
-                return impactedObject.ims_circuits.map((imsCircuit) => {
-                    return {
-                        customer: impactedObject.owner_customer.customer_name,
-                        impact: imsCircuit.impact,
-                        type: subscription.product.product_type,
-                        subscription: subscription.description,
-                        impact_override: imsCircuit.impact_override,
-                        subscription_id: impactedObject.subscription_id,
-                        ims_circuit_id: imsCircuit.ims_circuit_id,
-                        ims_circuit_name: imsCircuit.ims_circuit_name,
-                        extra_information: imsCircuit.extra_information,
-                    };
-                });
-            })
-            .reduce((a, b) => a.concat(b), []);
+        console.log(`Working mode: ${mode}. Filtered data: `, newImpactedObjects);
         setImpactedObjects(newImpactedObjects);
     };
 
@@ -134,12 +141,12 @@ const ServiceTicketDetailImpactedObjects = ({
     };
 
     const sumbitImpactOverride = async (impactedObject: ImpactedObject): Promise<void> => {
-        await customApiClient.cimPatchImpactedObject(
-            ticket._id,
-            impactedObject.subscription_id,
-            impactedObject.ims_circuit_id,
-            impactedObject
-        );
+        // await customApiClient.cimPatchImpactedObject(
+        //     ticket._id,
+        //     impactedObject?.subscription_id,
+        //     impactedObject.ims_circuit_id,
+        //     impactedObject
+        // );
     };
 
     const editImpact = (impactedObject: ImpactedObject): (() => void) => {
@@ -190,7 +197,7 @@ const ServiceTicketDetailImpactedObjects = ({
                 <>
                     <EuiFlexGroup gutterSize="s">
                         <EuiFlexItem grow={false} className="impact-override__text">
-                            {impact.impact_override && <EuiText> {impact.impact_override}</EuiText>}
+                            {impact.impact_override && <EuiText>{impact.impact_override}</EuiText>}
                         </EuiFlexItem>
                         <EuiButtonIcon iconType={"pencil"} size="s" aria-label={"edit"} onClick={editImpact(impact)} />
                     </EuiFlexGroup>
@@ -213,12 +220,19 @@ const ServiceTicketDetailImpactedObjects = ({
 
     const createImpactObjectValueRow = (item: ImpactedObject) => {
         return (
-            <tr key={`${item.subscription_id}-${item.ims_circuit_id}`} className={theme}>
+            <tr
+                key={`${item.subscription_id}-${item.ims_circuit_id}`}
+                className={`${theme}${item.impact_override ? " override" : ""}`}
+            >
                 <td className="customer">{item.customer}</td>
+                <td className="type">{item.type ? item.type : "N/A"}</td>
+                <td className="subscription">
+                    {item.subscription_id ? `${item.subscription_id.slice(0, 8)} ${item.subscription}` : "N/A"}
+                </td>
+                <td className="ims-id">{item.ims_circuit_id}</td>
+                <td className="ims-name">{item.ims_circuit_name}</td>
                 <td className="impact">{item.impact}</td>
-                <td className="type">{item.type}</td>
-                <td className="subscription">{item.subscription}</td>
-                <td className={"impact-override"}>{showImpact(item)}</td>
+                <td className="impact-override">{showImpact(item)}</td>
             </tr>
         );
     };
@@ -232,10 +246,7 @@ const ServiceTicketDetailImpactedObjects = ({
             <EuiFlexGroup>
                 <EuiFlexItem grow={false}>
                     <EuiTitle size="m">
-                        <h1>
-                            Impacted objects {showImpactedObjectsWithSubscriptionInfo ? "with" : "without"}{" "}
-                            subscriptions
-                        </h1>
+                        <h1>Impacted objects {mode === "withSubscriptions" ? "with" : "without"} subscriptions</h1>
                     </EuiTitle>
                 </EuiFlexItem>
             </EuiFlexGroup>
@@ -248,13 +259,15 @@ const ServiceTicketDetailImpactedObjects = ({
                 </table>
             </EuiFlexGroup>
             <EuiSpacer />
-            <EuiFlexGroup gutterSize="s" className="buttons">
-                <EuiFlexItem>
-                    <EuiButton onClick={acceptImpactedObjects} isDisabled={!updateable}>
-                        <FormattedMessage id="tickets.action.accept_impact" />
-                    </EuiButton>
-                </EuiFlexItem>
-            </EuiFlexGroup>
+            {showAcceptButton && (
+                <EuiFlexGroup gutterSize="s" className="buttons">
+                    <EuiFlexItem>
+                        <EuiButton onClick={acceptImpactedObjects} isDisabled={!updateable}>
+                            <FormattedMessage id="tickets.action.accept_impact" />
+                        </EuiButton>
+                    </EuiFlexItem>
+                </EuiFlexGroup>
+            )}
         </>
     );
 };
