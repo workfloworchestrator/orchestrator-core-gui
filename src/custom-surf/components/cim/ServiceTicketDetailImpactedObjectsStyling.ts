@@ -15,29 +15,29 @@ import { phoneMediaQuery } from "stylesheets/emotion/mediaQueries";
 import { shadeColor } from "stylesheets/emotion/utils";
 
 const table_phone = css`
-    thead {
-        display: none;
-    }
-    tr {
-        margin-bottom: 10px;
-        display: block;
-        border-bottom: 2px solid ${LIGHTER_GREY_COLOR};
-    }
-    td {
-        display: block;
-        text-align: right;
-        border-bottom: 1px dotted ${LIGHT_PRIMARY_COLOR};
-        padding: 8px 0;
-
-        &:before {
-            content: attr(data-label);
-            float: left;
-            text-transform: uppercase;
-            font-weight: bold;
-            font-size: 14px;
-            color: ${MEDIUM_GREY_COLOR};
-        }
-    }
+    // thead {
+    //     display: none;
+    // }
+    // tr {
+    //     margin-bottom: 10px;
+    //     display: block;
+    //     border-bottom: 2px solid ${LIGHTER_GREY_COLOR};
+    // }
+    // td {
+    //     display: block;
+    //     text-align: right;
+    //     border-bottom: 1px dotted ${LIGHT_PRIMARY_COLOR};
+    //     padding: 8px 0;
+    //
+    //     &:before {
+    //         content: attr(data-label);
+    //         float: left;
+    //         text-transform: uppercase;
+    //         font-weight: bold;
+    //         font-size: 14px;
+    //         color: ${MEDIUM_GREY_COLOR};
+    //     }
+    // }
 `;
 
 export const tableImpactedObjects = css`
@@ -119,14 +119,17 @@ export const tableImpactedObjects = css`
                 width: 140px;
             }
         }
-
-        span {
-            text-transform: uppercase;
-            font-weight: bold;
-            font-size: larger;
-            color: ${MEDIUM_GREY_COLOR};
-            padding: 7px 2px 7px 0;
+        td.ims-info {
+            width: 40%;
         }
+
+        // span {
+        //     text-transform: uppercase;
+        //     font-weight: bold;
+        //     font-size: larger;
+        //     color: ${MEDIUM_GREY_COLOR};
+        //     padding: 7px 2px 7px 0;
+        // }
 
         i.fa {
             float: right;

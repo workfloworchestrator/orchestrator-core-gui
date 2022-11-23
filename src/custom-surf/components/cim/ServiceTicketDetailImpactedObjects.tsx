@@ -24,14 +24,9 @@ import ApplicationContext from "utils/ApplicationContext";
 import { Option, SortOption, SubscriptionModel } from "utils/types";
 import { stop } from "utils/Utils";
 
-type Column =
-    | "customer"
-    | "impact"
-    | "type"
-    | "subscription"
-    | "ims_circuit_id"
-    | "ims_circuit_name"
-    | "impact_override";
+import ImsCircuitInfo from "./ImsCiruitInfo";
+
+type Column = "customer" | "impact" | "type" | "subscription" | "ims_info" | "impact_override";
 
 interface IProps extends WrappedComponentProps {
     ticket: ServiceTicketWithDetails;
@@ -41,6 +36,12 @@ interface IProps extends WrappedComponentProps {
     mode: "withSubscriptions" | "withoutSubscriptions";
 }
 
+export interface ImsInfo {
+    ims_circuit_id: number;
+    ims_circuit_name: string;
+    extra_information?: string;
+}
+
 export interface ImpactedObject {
     customer: string;
     impact: ServiceTicketImpactedObjectImpact;
@@ -48,9 +49,7 @@ export interface ImpactedObject {
     subscription: string;
     impact_override?: ServiceTicketImpactedObjectImpact;
     subscription_id: string;
-    ims_circuit_id: number;
-    ims_circuit_name: string;
-    extra_information?: string;
+    ims_info: ImsInfo[];
 }
 
 const options: Option[] = (Object.values(ServiceTicketImpactedObjectImpact) as string[]).map((val) => ({
@@ -58,22 +57,15 @@ const options: Option[] = (Object.values(ServiceTicketImpactedObjectImpact) as s
     label: val,
 }));
 
-const columns: Column[] = [
-    "customer",
-    "type",
-    "subscription",
-    "ims_circuit_id",
-    "ims_circuit_name",
-    "impact",
-    "impact_override",
-];
+const columns: Column[] = ["customer", "type", "subscription", "ims_info", "impact", "impact_override"];
 
 const sortBy = (name: Column) => (a: ImpactedObject, b: ImpactedObject) => {
     const aSafe = a[name] || "";
     const bSafe = b[name] || "";
     return typeof aSafe === "string" || typeof bSafe === "string"
         ? (aSafe as string).toLowerCase().localeCompare(bSafe.toString().toLowerCase())
-        : aSafe - bSafe;
+        : // @ts-ignore
+          aSafe - bSafe;
 };
 
 const sortColumnIcon = (name: string, sorted: SortOption) => {
@@ -104,20 +96,18 @@ const ServiceTicketDetailImpactedObjects = ({
             if (mode === "withoutSubscriptions" && impactedObject.subscription_id === "") {
                 break;
             }
-            for (const impactedCircuit of impactedObject.ims_circuits) {
-                const tempImpactedCircuit: ImpactedObject = {
-                    customer: impactedObject.owner_customer.customer_name,
-                    impact: impactedCircuit.impact,
-                    type: impactedObject.product_type,
-                    subscription: impactedObject.subscription_description,
-                    impact_override: impactedCircuit.impact_override,
-                    subscription_id: impactedObject.subscription_id,
-                    ims_circuit_id: impactedCircuit.ims_circuit_id,
-                    ims_circuit_name: impactedCircuit.ims_circuit_name,
-                    extra_information: impactedCircuit.extra_information,
-                };
-                newImpactedObjects.push(tempImpactedCircuit);
-            }
+
+            const tempImpactedCircuit: ImpactedObject = {
+                customer: impactedObject.owner_customer.customer_name,
+                impact: impactedObject.ims_circuits[0].impact,
+                type: impactedObject.product_type,
+                subscription: impactedObject.subscription_description,
+                impact_override: impactedObject.impact_override,
+                subscription_id: impactedObject.subscription_id,
+                ims_info: impactedObject.ims_circuits,
+            };
+            newImpactedObjects.push(tempImpactedCircuit);
+            // for (const impactedCircuit of impactedObject.ims_circuits) {
         }
         console.log(`Working mode: ${mode}. Filtered data: `, newImpactedObjects);
         setImpactedObjects(newImpactedObjects);
@@ -167,12 +157,12 @@ const ServiceTicketDetailImpactedObjects = ({
         }
         removeEdit();
         let updatedImpactedObject: ImpactedObject = { ...impactedObject, impact_override: value };
-        await sumbitImpactOverride(updatedImpactedObject);
-        setImpactedObjects(
-            impactedObjects.map((obj: ImpactedObject) =>
-                obj.ims_circuit_id === impactedObject.ims_circuit_id ? updatedImpactedObject : obj
-            )
-        );
+        // await sumbitImpactOverride(updatedImpactedObject);
+        // setImpactedObjects(
+        //     impactedObjects.map((obj: ImpactedObject) =>
+        //         obj.ims_circuit_id === impactedObject.ims_circuit_id ? updatedImpactedObject : obj
+        //     )
+        // );
     };
 
     const showImpact = (impact: ImpactedObject): any => {
@@ -219,18 +209,17 @@ const ServiceTicketDetailImpactedObjects = ({
     };
 
     const createImpactObjectValueRow = (item: ImpactedObject) => {
+        // Todo:
         return (
-            <tr
-                key={`${item.subscription_id}-${item.ims_circuit_id}`}
-                className={`${theme}${item.impact_override ? " override" : ""}`}
-            >
+            <tr key={`${item.subscription_id}`} className={`${theme}${item.impact_override ? " override" : ""}`}>
                 <td className="customer">{item.customer}</td>
                 <td className="type">{item.type ? item.type : "N/A"}</td>
                 <td className="subscription">
                     {item.subscription_id ? `${item.subscription_id.slice(0, 8)} ${item.subscription}` : "N/A"}
                 </td>
-                <td className="ims-id">{item.ims_circuit_id}</td>
-                <td className="ims-name">{item.ims_circuit_name}</td>
+                <td className="ims-info">
+                    <ImsCircuitInfo imsInfo={item.ims_info} />
+                </td>
                 <td className="impact">{item.impact}</td>
                 <td className="impact-override">{showImpact(item)}</td>
             </tr>

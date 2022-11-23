@@ -89,7 +89,6 @@ export interface ServiceTicketImpactedIMSCircuit {
     ims_circuit_id: number;
     ims_circuit_name: string;
     impact: ServiceTicketImpactedObjectImpact;
-    impact_override?: ServiceTicketImpactedObjectImpact;
     extra_information?: string;
 }
 
@@ -114,6 +113,7 @@ export interface ServiceTicketRelatedCustomer {
 }
 
 export interface ServiceTicketImpactedObject {
+    impact_override: ServiceTicketImpactedObjectImpact;
     subscription_id: string;
     product_type: string;
     logged_by: string;
