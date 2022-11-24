@@ -44,6 +44,7 @@ import { TabView } from "utils/types";
 
 import { intl } from "../../locale/i18n";
 import { setFlash } from "../../utils/Flash";
+import ImpactedObjects from "../components/cim/ImpactedObjects";
 
 interface IProps {
     id: string;
@@ -355,28 +356,14 @@ const ServiceTicketDetail = () => {
                                 name={<FormattedMessage id="tickets.logitems" />}
                             ></TabbedSection>
                         </div>
-
                         <EuiSpacer />
-
                         {renderLogItemActions(ticket, actions)}
-
                         <EuiSpacer />
-
-                        <ServiceTicketDetailImpactedObjects
-                            ticket={ticket}
-                            updateable={true}
-                            acceptImpactedObjects={acceptImpactedObjects}
-                            showAcceptButton={false}
-                            mode="withSubscriptions"
-                        />
-
-                        <ServiceTicketDetailImpactedObjects
-                            ticket={ticket}
-                            updateable={isUpdateImpactActive}
-                            acceptImpactedObjects={acceptImpactedObjects}
-                            showAcceptButton={true}
-                            mode="withoutSubscriptions"
-                        />
+                        <EuiSpacer size="s" />
+                        <ImpactedObjects ticket={ticket} mode="withSubscriptions" />
+                        <EuiSpacer />
+                        <EuiSpacer size="s" />
+                        <ImpactedObjects ticket={ticket} mode="withoutSubscriptions" />
                     </div>
                 </EuiPanel>
             </EuiPageBody>

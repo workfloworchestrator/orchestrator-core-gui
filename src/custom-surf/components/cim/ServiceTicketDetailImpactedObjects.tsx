@@ -37,18 +37,20 @@ interface IProps extends WrappedComponentProps {
 }
 
 export interface ImsInfo {
+    impact: ServiceTicketImpactedObjectImpact;
     ims_circuit_id: number;
     ims_circuit_name: string;
     extra_information?: string;
 }
 
 export interface ImpactedObject {
+    id: string;
     customer: string;
     impact: ServiceTicketImpactedObjectImpact;
     type: string;
     subscription: string;
     impact_override?: ServiceTicketImpactedObjectImpact;
-    subscription_id: string;
+    subscription_id: string | null;
     ims_info: ImsInfo[];
 }
 
@@ -89,6 +91,7 @@ const ServiceTicketDetailImpactedObjects = ({
 
     const getImpactedObjects = async () => {
         let newImpactedObjects: ImpactedObject[] = [];
+        let itemCounter = 0;
         for (const impactedObject of ticket.impacted_objects) {
             if (mode === "withSubscriptions" && !impactedObject.subscription_id) {
                 break;
@@ -98,6 +101,7 @@ const ServiceTicketDetailImpactedObjects = ({
             }
 
             const tempImpactedCircuit: ImpactedObject = {
+                id: `item-${itemCounter}`,
                 customer: impactedObject.owner_customer.customer_name,
                 impact: impactedObject.ims_circuits[0].impact,
                 type: impactedObject.product_type,
@@ -107,6 +111,7 @@ const ServiceTicketDetailImpactedObjects = ({
                 ims_info: impactedObject.ims_circuits,
             };
             newImpactedObjects.push(tempImpactedCircuit);
+            itemCounter += 1;
             // for (const impactedCircuit of impactedObject.ims_circuits) {
         }
         console.log(`Working mode: ${mode}. Filtered data: `, newImpactedObjects);
@@ -130,7 +135,7 @@ const ServiceTicketDetailImpactedObjects = ({
         return sorted;
     };
 
-    const sumbitImpactOverride = async (impactedObject: ImpactedObject): Promise<void> => {
+    const submitImpactOverride = async (impactedObject: ImpactedObject): Promise<void> => {
         // await customApiClient.cimPatchImpactedObject(
         //     ticket._id,
         //     impactedObject?.subscription_id,

@@ -13,17 +13,8 @@
  *
  */
 
-import {
-    EuiBasicTable,
-    EuiButton,
-    EuiButtonIcon,
-    EuiFlexGroup,
-    EuiFlexItem,
-    EuiSpacer,
-    EuiTable,
-    EuiText,
-    EuiTitle,
-} from "@elastic/eui";
+import { EuiPanel } from "@elastic/eui";
+import { tableImsCircuitInfo } from "custom/components/cim/ImsCircuitInfoStyling";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import Select from "react-select";
@@ -31,51 +22,48 @@ import ApplicationContext from "utils/ApplicationContext";
 import { Option, SortOption, SubscriptionModel } from "utils/types";
 import { stop } from "utils/Utils";
 
-import { ImsInfo } from "./ServiceTicketDetailImpactedObjects";
+import { ImpactedObject, ImsInfo } from "./ServiceTicketDetailImpactedObjects";
 
-type Column = "customer" | "impact" | "type" | "subscription" | "ims_info" | "impact_override";
+type Column = "ims_circuit_id" | "ims_circuit_name" | "extra_info" | "impact";
 
 interface IProps extends WrappedComponentProps {
     imsInfo: ImsInfo[];
 }
+const columns: Column[] = ["ims_circuit_id", "ims_circuit_name", "extra_info", "impact"];
 
 const ImsCircuitInfo = ({ imsInfo }: IProps) => {
     const { theme } = useContext(ApplicationContext);
-    const columns = [
-        {
-            field: "ims_circuit_id",
-            name: "IMS Id",
-            sortable: true,
-            truncateText: false,
-            width: "10%",
-            valign: "top",
-        },
-        {
-            field: "ims_circuit_name",
-            name: "Name",
-            sortable: true,
-            truncateText: false,
-            valign: "top",
-            // enlarge: true,
-        },
-        {
-            field: "extra_information",
-            name: "Extra info",
-            sortable: true,
-            truncateText: false,
-            valign: "top",
-            // enlarge: true,
-        },
-    ];
+
+    const th = (name: Column, index: number) => {
+        return (
+            <th key={index} className={name}>
+                <span>
+                    <FormattedMessage id={`tickets.impactedobject.${name}`} />
+                </span>
+            </th>
+        );
+    };
+
+    const createRow = (item: ImsInfo) => {
+        return (
+            <tr key={`${item.ims_circuit_id}`} className={`${theme}${item.impact ? " override" : ""}`}>
+                <td className="ims_circuit_id">{item.ims_circuit_id}</td>
+                <td className="ims_circuit_name">{item.ims_circuit_name}</td>
+                <td className="extra_information">{item.extra_information}</td>
+                <td className="impact">{item.impact}</td>
+            </tr>
+        );
+    };
+
     return (
-        <EuiBasicTable
-            compressed={true}
-            tableLayout={"fixed"}
-            tableCaption="Demo for EuiBasicTable with pagination"
-            items={imsInfo}
-            // @ts-ignore
-            columns={columns}
-        />
+        <EuiPanel css={tableImsCircuitInfo} hasBorder={false} hasShadow={false} color={"transparent"} paddingSize="s">
+            <table className="ims-circuit-info">
+                <thead>
+                    <tr>{columns.map((column, index) => th(column, index))}</tr>
+                </thead>
+                <tbody>{imsInfo.map(createRow)}</tbody>
+            </table>
+        </EuiPanel>
     );
 };
 

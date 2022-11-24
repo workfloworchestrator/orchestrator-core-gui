@@ -114,7 +114,7 @@ export interface ServiceTicketRelatedCustomer {
 
 export interface ServiceTicketImpactedObject {
     impact_override: ServiceTicketImpactedObjectImpact;
-    subscription_id: string;
+    subscription_id: string | null;
     product_type: string;
     logged_by: string;
     ims_circuits: ServiceTicketImpactedIMSCircuit[];
