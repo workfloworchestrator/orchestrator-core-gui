@@ -42,7 +42,6 @@ export const mapSplitFields = (
         .sort((entryA, entryB) => entryA[0].localeCompare(entryB[0]))
         .flatMap((entry) => entry[1].map((value: any) => [entry[0], value !== null ? value : "NULL"]))
         .map((entry, i) => {
-            console.log(`${i}`, entry);
             if (entry[0] === "in_use_by_ids") {
                 const value = inUseBySubscriptions.hasOwnProperty(entry[1]) ? inUseBySubscriptions[entry[1]] : entry[1];
                 if (!hasInUseByExpandableRow) {
@@ -99,15 +98,23 @@ export function RenderServiceConfiguration({
     // If we find instancefields, we'll create a tab for each instance
     // in a separate TabbedSection by calling this function again.
     // The result should be a nested list of tabs.
-    const parseToTabs = (instance_fields: [string, any][], level = 0): TabView[] => {
+    const parseToTabs = (
+        parentSubscriptionInstanceId: string,
+        instance_fields: [string, any][],
+        level = 0
+    ): TabView[] => {
         return instance_fields
             .sort((a, b) => tabOrder.indexOf(a[0]) - tabOrder.indexOf(b[0]))
-            .map(([field, instances]): TabView[] => instances.map(parseInstanceToTab(level, field)))
+            .map(([field, instances]): TabView[] =>
+                instances.map(parseInstanceToTab(parentSubscriptionInstanceId, level, field))
+            )
             .flat();
     };
 
     // Single Tab with valueFields and instanceFields
-    const parseInstanceToTab = (level: number, field: string) => (inst: ISubscriptionInstance): TabView => {
+    const parseInstanceToTab = (parentSubscriptionInstanceId: string, level: number, field: string) => (
+        inst: ISubscriptionInstance
+    ): TabView => {
         const { subscription_instance_id } = inst;
         const { value_fields, instance_fields, tabName } = splitValueAndInstanceFields(inst);
 
@@ -115,31 +122,32 @@ export function RenderServiceConfiguration({
 
         // Attempt to copy TreeView
         const isOutsideSubscriptionBoundary = subscription_id !== inst.owner_subscription_id;
-        const isFirstInstanceOutsideSubscriptionBoundary = isOutsideSubscriptionBoundary && !showRelatedBlocks; // var name is not right!!
-        const shouldRenderCurrentBlock =
-            showRelatedBlocks || !isOutsideSubscriptionBoundary || isFirstInstanceOutsideSubscriptionBoundary;
+        const isFirstInstanceOutsideSubscriptionBoundary = isOutsideSubscriptionBoundary && !showRelatedBlocks; // todo var name is not right!!
         const shouldRenderInstanceFields = showRelatedBlocks || !isFirstInstanceOutsideSubscriptionBoundary;
 
-        console.log(`${level} - ${field}`, {
-            inst,
-            showRelatedBlocks,
-            isOutsideSubscriptionBoundary,
-            isFirstInstanceOutsideSubscriptionBoundary,
-            shouldRenderCurrentBlock,
-            shouldRenderInstanceFields,
+        // Filtering out reference to parent:
+        const filteredValueFields = value_fields.map((field): [string, any] => {
+            const [fieldName, fieldValue] = field;
+            if (fieldName === "in_use_by_ids") {
+                const inUseByIdsWithoutParent = fieldValue.filter((id: string) => id !== parentSubscriptionInstanceId);
+                return [fieldName, inUseByIdsWithoutParent];
+            }
+            return field;
         });
 
         // Current level of the table
         const SplitFieldInstanceValues = mapSplitFields(
             subscription_instance_id,
-            value_fields,
+            filteredValueFields,
             inUseBySubscriptions,
             isFirstInstanceOutsideSubscriptionBoundary
         );
 
         // Child table
         const subTabs: TabView[] =
-            level < 4 && shouldRenderInstanceFields ? parseToTabs(sorted_instance_fields, level + 1) : [];
+            level < 4 && shouldRenderInstanceFields
+                ? parseToTabs(subscription_instance_id, sorted_instance_fields, level + 1)
+                : [];
 
         return {
             id: `${field}-${subscription_instance_id}`,
@@ -182,7 +190,7 @@ export function RenderServiceConfiguration({
     const InstanceValues = mapSplitFields(instance.subscription_instance_id, value_fields, inUseBySubscriptions);
 
     // Renders the child table
-    const tabs: TabView[] = parseToTabs(instance_fields);
+    const tabs: TabView[] = parseToTabs(instance.subscription_instance_id, instance_fields);
 
     // This is the Service config details
     return (
