@@ -203,7 +203,7 @@ export class ApiClient extends ApiClientInterface {
     //API
     subscriptionsDetailWithModel = (subscription_id: string): Promise<SubscriptionModel> => {
         return this.fetchJsonWithCustomErrorHandling<SubscriptionModel>(
-            `subscriptions/domain-model/${subscription_id}`
+            `subscriptions/domain-model/${subscription_id}?filter_owner_relations=false`
         );
     };
 
