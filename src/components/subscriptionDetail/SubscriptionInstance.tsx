@@ -33,13 +33,12 @@ const importantFields = ["owner_subscription_id"];
 const getNameFromField = (field: [string, any]): string => field[0];
 const getValueFromField = (field: [string, any]): any => field[1];
 
-// Todo remove comments
 export default function SubscriptionInstance({
-    subscription_instance, // Data to render (it includes ONE prop representing the child block: saps, port, node)
-    field_name, // Dot notation, full current path: vc.esis.saps.port
-    inUseBySubscriptions, // Detailed data for all IDs in all in_use_by_ids fields -- never gets mutated, just passed along for lookup purposes
-    subscription_id, // Current subscription id you are viewing (same as URL)
-    showRelatedBlocks, // Toggle collapsed/expanded view
+    subscription_instance,
+    field_name,
+    inUseBySubscriptions,
+    subscription_id,
+    showRelatedBlocks,
     parentSubscriptionInstanceId,
 }: IProps) {
     if (!subscription_instance) {
@@ -51,8 +50,6 @@ export default function SubscriptionInstance({
     const shouldRenderCurrentBlock =
         showRelatedBlocks || !isOutsideSubscriptionBoundary || isFirstInstanceOutsideSubscriptionBoundary;
 
-    // Typically in collapsed view: when the IDs differ we are at the port level (product block)
-    // Port is about to render, but this condition is true, therefore return null
     if (!shouldRenderCurrentBlock) {
         return null;
     }
@@ -66,14 +63,9 @@ export default function SubscriptionInstance({
             isArray(getValueFromField(field)) ? field : [getNameFromField(field), [getValueFromField(field)]]
         );
 
-    // Value fields: data fields used in the current level
-    // Instance fields: data for a sub table (child table)
-    // -- Tuple [fieldname, data] -- where data is {} or [{}, {}]: ANY
     const [value_fields, instance_fields] = partition(fields, (entry) => typeof entry[1][0] !== "object");
 
     const shouldRenderInstanceFields = !isFirstInstanceOutsideSubscriptionBoundary;
-    console.log(`Field ${field_name}`, { value_fields, subscription_id });
-    // Todo filter in_use_by_ids from the value_fields: remove subscription_instance_id
     const updatedValueFields: [string, any][] = value_fields.map((valueField) => {
         const fieldName = getNameFromField(valueField);
         if (fieldName === "in_use_by_ids") {
@@ -81,11 +73,6 @@ export default function SubscriptionInstance({
             const filteredInUseByIds: string[] = inUseByIds.filter(
                 (value: string) => value !== parentSubscriptionInstanceId
             );
-            console.log("Found an in_use_by_ids", {
-                value: valueField[1],
-                removeThisFromList: parentSubscriptionInstanceId,
-                filteredInUseByIds,
-            });
 
             return [fieldName, [...filteredInUseByIds]];
         }
@@ -105,7 +92,6 @@ export default function SubscriptionInstance({
             {subscription_instance.label && <p className="label">{`Label: ${subscription_instance.label}`}</p>}
             <p className="label">{`Instance ID: ${subscription_instance.subscription_instance_id}`}</p>
 
-            {/* Renders the current table: */}
             <table className="detail-block multiple-tbody">
                 <thead />
                 {mapSplitFields(
@@ -115,7 +101,6 @@ export default function SubscriptionInstance({
                 )}
             </table>
 
-            {/* Renders the child table: */}
             {shouldRenderInstanceFields &&
                 instance_fields
                     .flatMap((field) => getValueFromField(field).map((value: any) => [getNameFromField(field), value]))
