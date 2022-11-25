@@ -4,6 +4,8 @@ import {
     EuiButton,
     EuiButtonIcon,
     EuiDescriptionList,
+    EuiFlexGrid,
+    EuiFlexItem,
     EuiHealth,
     EuiLink,
     EuiPanel,
@@ -108,23 +110,6 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
         } else {
             // @ts-ignore
             itemIdToExpandedRowMapValues[item.id] = <ImsCircuitInfo imsInfo={item.ims_info}></ImsCircuitInfo>;
-            // const { nationality, online } = item;
-            // const country = store.getCountry(nationality);
-            // const color = online ? 'success' : 'danger';
-            // const label = online ? 'Online' : 'Offline';
-            // const listItems = [
-            //     {
-            //         title: 'Nationality',
-            //         description: `${country.flag} ${country.name}`,
-            //     },
-            //     {
-            //         title: 'Online',
-            //         description: <EuiHealth color={color}>{label}</EuiHealth>,
-            //     },
-            // ];
-            // itemIdToExpandedRowMapValues[item.id] = (
-            //     <EuiDescriptionList listItems={listItems} />
-            // );
         }
         setItemIdToExpandedRowMap(itemIdToExpandedRowMapValues);
     };
@@ -215,14 +200,21 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
     return (
         <Fragment>
             {deleteButton}
-            <EuiTitle>
-                <h2>
-                    {mode === "withSubscriptions"
-                        ? "Impact on subscriptions"
-                        : "Impact on services without subscriptions"}
-                </h2>
-            </EuiTitle>
-            <EuiButton onClick={() => setItemIdToExpandedRowMap({})}>^</EuiButton>
+            <EuiFlexGrid>
+                <EuiFlexItem>
+                    <EuiTitle>
+                        <h2>
+                            {mode === "withSubscriptions"
+                                ? "Impact on subscriptions"
+                                : "Impact on services without subscriptions"}
+                        </h2>
+                    </EuiTitle>
+                </EuiFlexItem>
+                <EuiFlexItem>
+                    <EuiButtonIcon onClick={() => setItemIdToExpandedRowMap({})} iconType={"arrowUp"}></EuiButtonIcon>
+                </EuiFlexItem>
+            </EuiFlexGrid>
+
             <EuiBasicTable
                 tableCaption={`Impacted objects table ${mode}`}
                 items={data}
