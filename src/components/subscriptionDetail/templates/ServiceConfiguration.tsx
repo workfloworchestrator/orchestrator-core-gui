@@ -65,15 +65,15 @@ export const mapSplitFields = (
         .filter((element) => element !== null) as JSX.Element[];
 };
 
-// Entry point!
 export function RenderServiceConfiguration({
-    subscriptionInstances, // Data in this shape: ['vc', {...}]
-    subscription_id, // Current subscription id you are viewing (same as URL)
-    inUseBySubscriptions, // Detailed data for all IDs in all in_use_by_ids fields -- never gets mutated, just passed along for lookup purposes
-    showRelatedBlocks = false, // Toggle collapsed/expanded view
+    subscriptionInstances,
+    subscription_id,
+    inUseBySubscriptions,
+    showRelatedBlocks = false,
 }: IProps) {
     // Todo: remove surf specific code
     const tabOrder = ["ip_gw_endpoint", "l3_endpoints", "l2_endpoints"];
+    const importantFields = ["owner_subscription_id"];
 
     const splitValueAndInstanceFields = (instance: ISubscriptionInstance) => {
         const fields = Object.entries(instance)
@@ -107,7 +107,6 @@ export function RenderServiceConfiguration({
             .flat();
     };
 
-    // Single Tab with valueFields and instanceFields
     const parseInstanceToTab = (parentSubscriptionInstanceId: string, level: number, field: string) => (
         inst: ISubscriptionInstance
     ): TabView => {
@@ -116,13 +115,10 @@ export function RenderServiceConfiguration({
 
         const sorted_instance_fields = instance_fields.sort((a, b) => tabOrder.indexOf(a[0]) - tabOrder.indexOf(b[0]));
 
-        // Attempt to copy TreeView
         const isOutsideSubscriptionBoundary = subscription_id !== inst.owner_subscription_id;
         const shouldOnlyRenderImportantValueFields = isOutsideSubscriptionBoundary && !showRelatedBlocks;
         const shouldRenderInstanceFields = showRelatedBlocks || !shouldOnlyRenderImportantValueFields;
 
-        // Filtering out reference to parent:
-        const importantFields = ["owner_subscription_id"];
         const filteredValueFields = value_fields
             .filter((valueField) => !shouldOnlyRenderImportantValueFields || importantFields.includes(valueField[0]))
             .map((valueField): [string, any] => {
@@ -136,14 +132,12 @@ export function RenderServiceConfiguration({
                 return valueField;
             });
 
-        // Current level of the table
         const SplitFieldInstanceValues = mapSplitFields(
             subscription_instance_id,
             filteredValueFields,
             inUseBySubscriptions
         );
 
-        // Child table
         const subTabs: TabView[] =
             level < 4 && shouldRenderInstanceFields
                 ? parseToTabs(subscription_instance_id, sorted_instance_fields, level + 1)
@@ -180,24 +174,18 @@ export function RenderServiceConfiguration({
         };
     };
 
-    // in case of ['vc', {...}] getting the object --> which is a ISubscriptionInstance
     const instance = subscriptionInstances[0][1] as ISubscriptionInstance;
 
     // initiate first run to map all product blocks into a tab list.
     const { value_fields, instance_fields } = splitValueAndInstanceFields(instance);
 
-    // Renders the current level of the table
     const InstanceValues = mapSplitFields(instance.subscription_instance_id, value_fields, inUseBySubscriptions);
-
-    // Renders the child table
     const tabs: TabView[] = parseToTabs(instance.subscription_instance_id, instance_fields);
 
-    // This is the Service config details
     return (
         <div className="mod-subscription-detail">
             <table className="detail-block multiple-tbody">
                 <thead />
-                {/* Current level table */}
                 <SubscriptionInstanceValue
                     key={`${instance.subscription_id}-instance-id`}
                     label={"Instance ID"}
@@ -205,7 +193,6 @@ export function RenderServiceConfiguration({
                 />
                 {InstanceValues}
             </table>
-            {/* Sub tables */}
             {tabs.length > 0 && (
                 <TabbedSection id="subscription-configuration-tabs" tabs={tabs} name="Subscription Configuration" />
             )}
