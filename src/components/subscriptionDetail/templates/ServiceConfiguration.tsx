@@ -31,14 +31,10 @@ interface IProps {
 export const mapSplitFields = (
     instance_id: string,
     value_fields: [string, any][],
-    inUseBySubscriptions: Record<string, any>,
-    onlyImportantFields?: boolean
+    inUseBySubscriptions: Record<string, any>
 ) => {
-    const importantFields = ["owner_subscription_id"];
-
     let hasInUseByExpandableRow = false;
     return value_fields
-        .filter((entry) => !onlyImportantFields || importantFields.includes(entry[0]))
         .sort((entryA, entryB) => entryA[0].localeCompare(entryB[0]))
         .flatMap((entry) => entry[1].map((value: any) => [entry[0], value !== null ? value : "NULL"]))
         .map((entry, i) => {
@@ -122,25 +118,29 @@ export function RenderServiceConfiguration({
 
         // Attempt to copy TreeView
         const isOutsideSubscriptionBoundary = subscription_id !== inst.owner_subscription_id;
-        const isFirstInstanceOutsideSubscriptionBoundary = isOutsideSubscriptionBoundary && !showRelatedBlocks; // todo var name is not right!!
-        const shouldRenderInstanceFields = showRelatedBlocks || !isFirstInstanceOutsideSubscriptionBoundary;
+        const shouldOnlyRenderImportantValueFields = isOutsideSubscriptionBoundary && !showRelatedBlocks;
+        const shouldRenderInstanceFields = showRelatedBlocks || !shouldOnlyRenderImportantValueFields;
 
         // Filtering out reference to parent:
-        const filteredValueFields = value_fields.map((field): [string, any] => {
-            const [fieldName, fieldValue] = field;
-            if (fieldName === "in_use_by_ids") {
-                const inUseByIdsWithoutParent = fieldValue.filter((id: string) => id !== parentSubscriptionInstanceId);
-                return [fieldName, inUseByIdsWithoutParent];
-            }
-            return field;
-        });
+        const importantFields = ["owner_subscription_id"];
+        const filteredValueFields = value_fields
+            .filter((valueField) => !shouldOnlyRenderImportantValueFields || importantFields.includes(valueField[0]))
+            .map((valueField): [string, any] => {
+                const [fieldName, fieldValue] = valueField;
+                if (fieldName === "in_use_by_ids") {
+                    const inUseByIdsWithoutParent = fieldValue.filter(
+                        (id: string) => id !== parentSubscriptionInstanceId
+                    );
+                    return [fieldName, inUseByIdsWithoutParent];
+                }
+                return valueField;
+            });
 
         // Current level of the table
         const SplitFieldInstanceValues = mapSplitFields(
             subscription_instance_id,
             filteredValueFields,
-            inUseBySubscriptions,
-            isFirstInstanceOutsideSubscriptionBoundary
+            inUseBySubscriptions
         );
 
         // Child table
@@ -157,7 +157,7 @@ export function RenderServiceConfiguration({
                 <>
                     <table className="detail-block multiple-tbody">
                         <thead />
-                        {!isFirstInstanceOutsideSubscriptionBoundary && (
+                        {!shouldOnlyRenderImportantValueFields && (
                             <SubscriptionInstanceValue
                                 key={`${inst.subscription_id}-instance-id`}
                                 label={"Instance ID"}
