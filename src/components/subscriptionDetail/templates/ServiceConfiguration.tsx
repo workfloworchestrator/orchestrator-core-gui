@@ -25,7 +25,7 @@ interface IProps {
     subscriptionInstances: any[][];
     subscription_id: string;
     inUseBySubscriptions: Record<string, any>;
-    showRelatedBlocks?: boolean;
+    isExpandedView?: boolean;
 }
 
 export const mapSplitFields = (
@@ -69,7 +69,7 @@ export function RenderServiceConfiguration({
     subscriptionInstances,
     subscription_id,
     inUseBySubscriptions,
-    showRelatedBlocks = false,
+    isExpandedView = false,
 }: IProps) {
     // Todo: remove surf specific code
     const tabOrder = ["ip_gw_endpoint", "l3_endpoints", "l2_endpoints"];
@@ -116,8 +116,8 @@ export function RenderServiceConfiguration({
         const sorted_instance_fields = instance_fields.sort((a, b) => tabOrder.indexOf(a[0]) - tabOrder.indexOf(b[0]));
 
         const isOutsideSubscriptionBoundary = subscription_id !== inst.owner_subscription_id;
-        const shouldOnlyRenderImportantValueFields = isOutsideSubscriptionBoundary && !showRelatedBlocks;
-        const shouldRenderInstanceFields = showRelatedBlocks || !shouldOnlyRenderImportantValueFields;
+        const shouldOnlyRenderImportantValueFields = isOutsideSubscriptionBoundary && !isExpandedView;
+        const shouldRenderInstanceFields = isExpandedView || !shouldOnlyRenderImportantValueFields;
 
         const filteredValueFields = value_fields
             .filter((valueField) => !shouldOnlyRenderImportantValueFields || importantFields.includes(valueField[0]))

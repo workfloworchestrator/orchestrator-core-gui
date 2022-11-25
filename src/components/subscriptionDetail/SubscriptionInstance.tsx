@@ -24,7 +24,7 @@ interface IProps {
     subscription_instance: ISubscriptionInstance;
     field_name?: string;
     inUseBySubscriptions: {};
-    showRelatedBlocks?: boolean;
+    isExpandedView?: boolean;
     parentSubscriptionInstanceId?: string;
 }
 
@@ -38,7 +38,7 @@ export default function SubscriptionInstance({
     field_name,
     inUseBySubscriptions,
     subscription_id,
-    showRelatedBlocks,
+    isExpandedView,
     parentSubscriptionInstanceId,
 }: IProps) {
     if (!subscription_instance) {
@@ -46,9 +46,9 @@ export default function SubscriptionInstance({
     }
 
     const isOutsideSubscriptionBoundary = subscription_id !== subscription_instance.owner_subscription_id;
-    const isFirstInstanceOutsideSubscriptionBoundary = isOutsideSubscriptionBoundary && !showRelatedBlocks;
+    const isFirstInstanceOutsideSubscriptionBoundary = isOutsideSubscriptionBoundary && !isExpandedView;
     const shouldRenderCurrentBlock =
-        showRelatedBlocks || !isOutsideSubscriptionBoundary || isFirstInstanceOutsideSubscriptionBoundary;
+        isExpandedView || !isOutsideSubscriptionBoundary || isFirstInstanceOutsideSubscriptionBoundary;
 
     if (!shouldRenderCurrentBlock) {
         return null;
@@ -116,7 +116,7 @@ export default function SubscriptionInstance({
                                 subscription_instance={subscriptionInstance}
                                 field_name={fieldName}
                                 inUseBySubscriptions={inUseBySubscriptions}
-                                showRelatedBlocks={showRelatedBlocks}
+                                isExpandedView={isExpandedView}
                                 parentSubscriptionInstanceId={subscriptionInstanceId}
                             />
                         );
