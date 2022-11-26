@@ -130,6 +130,14 @@ export enum ServiceTicketType {
     INCIDENT = "incident",
 }
 
+export interface BackgroundJobLog {
+    message: string;
+    customer_id?: string;
+    subscription_id?: string;
+    entry_time: string;
+    process_state: string;
+}
+
 export interface ServiceTicketWithDetails extends ServiceTicket {
     transitioning_state: any;
     end_date: string;
@@ -137,4 +145,5 @@ export interface ServiceTicketWithDetails extends ServiceTicket {
     type: ServiceTicketType;
     logs: ServiceTicketLog[];
     impacted_objects: ServiceTicketImpactedObject[];
+    background_logs: BackgroundJobLog[];
 }

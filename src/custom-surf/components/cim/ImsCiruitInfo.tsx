@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiPanel } from "@elastic/eui";
+import { EuiLink, EuiPanel } from "@elastic/eui";
 import { tableImsCircuitInfo } from "custom/components/cim/ImsCircuitInfoStyling";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
@@ -22,6 +22,7 @@ import ApplicationContext from "utils/ApplicationContext";
 import { Option, SortOption, SubscriptionModel } from "utils/types";
 import { stop } from "utils/Utils";
 
+import { ENV } from "../../../env";
 import { ImpactedObject, ImsInfo } from "./ServiceTicketDetailImpactedObjects";
 
 type Column = "ims_circuit_id" | "ims_circuit_name" | "extra_info" | "impact";
@@ -47,7 +48,11 @@ const ImsCircuitInfo = ({ imsInfo }: IProps) => {
     const createRow = (item: ImsInfo) => {
         return (
             <tr key={`${item.ims_circuit_id}`} className={`${theme}${item.impact ? " override" : ""}`}>
-                <td className="ims_circuit_id">{item.ims_circuit_id}</td>
+                <td className="ims_circuit_id">
+                    <EuiLink href={ENV.IMS_URL.concat("circuit", "/", item.ims_circuit_id.toString())} target="_blank">
+                        {item.ims_circuit_id}
+                    </EuiLink>
+                </td>
                 <td className="ims_circuit_name">{item.ims_circuit_name}</td>
                 <td className="extra_information">{item.extra_information}</td>
                 <td className="impact">{item.impact}</td>

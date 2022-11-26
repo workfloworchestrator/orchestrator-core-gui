@@ -5,21 +5,37 @@ import {
     EuiButtonIcon,
     EuiDescriptionList,
     EuiFlexGrid,
+    EuiFlexGroup,
     EuiFlexItem,
+    EuiForm,
     EuiHealth,
     EuiLink,
+    EuiModal,
+    EuiModalBody,
+    EuiModalFooter,
+    EuiModalHeader,
+    EuiModalHeaderTitle,
     EuiPanel,
     EuiScreenReaderOnly,
+    EuiText,
     EuiTitle,
     RIGHT_ALIGNMENT,
     formatDate,
 } from "@elastic/eui";
+import { isDate } from "lodash";
 import React, { Fragment, useEffect, useState } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
+import Select from "react-select";
 
 import impactedObjects from "../../../custom/components/cim/ImpactedObjects";
+import { Option } from "../../../utils/types";
 import { isEmpty } from "../../../utils/Utils";
-import { ServiceTicketImpactedIMSCircuit, ServiceTicketWithDetails } from "../../types";
+import {
+    ServiceTicketImpactedIMSCircuit,
+    ServiceTicketImpactedObjectImpact,
+    ServiceTicketWithDetails,
+} from "../../types";
+import BackgroundJobLogs from "./BackgroundJobLogs";
 import ImsCircuitInfo from "./ImsCiruitInfo";
 import { ImpactedObject, ImsInfo } from "./ServiceTicketDetailImpactedObjects";
 
@@ -31,10 +47,20 @@ interface IProps extends WrappedComponentProps {
     mode: "withSubscriptions" | "withoutSubscriptions";
 }
 
+const options: Option[] = (Object.values(ServiceTicketImpactedObjectImpact) as string[]).map((val) => ({
+    value: val,
+    label: val,
+}));
+
 const ImpactedObjects = ({ ticket, mode }: IProps) => {
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const closeModal = () => setIsModalVisible(false);
+    const showModal = () => setIsModalVisible(true);
     const [sortField, setSortField] = useState("firstName");
     const [sortDirection, setSortDirection] = useState("asc");
     const [selectedItems, setSelectedItems] = useState([]);
+    const [editImpactedObject, setEditImpactedObject] = useState<ImpactedObject>();
+    const [itemIdToExpandedRowMap, setItemIdToExpandedRowMap] = useState({});
 
     let data: ImpactedObject[] = [];
     let itemCounter = 0;
@@ -59,9 +85,10 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
         };
         data.push(tempImpactedCircuit);
         itemCounter += 1;
-        // for (const impactedCircuit of impactedObject.ims_circuits) {
     }
     console.log(`Working mode: ${mode}. Filtered data: `, data);
+
+    const [items, setItems] = useState(data);
 
     let allExpandedRows = {};
     for (const item of data) {
@@ -69,7 +96,13 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
         allExpandedRows[item.id] = <ImsCircuitInfo imsInfo={item.ims_info}></ImsCircuitInfo>;
     }
 
-    const [itemIdToExpandedRowMap, setItemIdToExpandedRowMap] = useState(allExpandedRows);
+    const toggleExpandAll = () => {
+        if (!isEmpty(itemIdToExpandedRowMap)) {
+            setItemIdToExpandedRowMap({});
+        } else {
+            setItemIdToExpandedRowMap(allExpandedRows);
+        }
+    };
 
     const onTableChange = ({ page = {}, sort = {} }) => {
         // const { index: pageIndex, size: pageSize } = page;
@@ -116,6 +149,55 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
 
     const deleteButton = renderDeleteButton();
 
+    const editImpact = (impactedObject: ImpactedObject): (() => void) => {
+        debugger;
+        // return () => updateable && setItems(impactedObject);
+        return () => setEditImpactedObject(impactedObject);
+    };
+
+    const removeEdit = (): void => {
+        setEditImpactedObject(undefined);
+    };
+
+    const onChangeImpactOverride = (impactedObject: ImpactedObject) => async (e: any): Promise<void> => {
+        let value: any;
+        if (isEmpty(e) || isDate(e)) {
+            value = e;
+        } else {
+            // @ts-ignore
+            value = e.target ? e.target.value : e.value;
+        }
+        removeEdit();
+        let updatedImpactedObject: ImpactedObject = { ...impactedObject, impact_override: value };
+        // await sumbitImpactOverride(updatedImpactedObject);
+        setItems(
+            items.map((obj: ImpactedObject) =>
+                obj.subscription_id === impactedObject.subscription_id ? updatedImpactedObject : obj
+            )
+        );
+        closeModal();
+    };
+
+    const showImpact = (impact: ImpactedObject): any => {
+        return (
+            <EuiForm component="form">
+                <Select<Option>
+                    className="impact-override__select"
+                    onChange={onChangeImpactOverride(impact)}
+                    // onBlur={removeEdit}
+                    options={options}
+                    isSearchable={false}
+                    value={options.filter(
+                        (option) => impact?.impact_override && option["value"] === impact.impact_override
+                    )}
+                    isClearable={true}
+                    defaultMenuIsOpen={true}
+                    autoFocus
+                />
+            </EuiForm>
+        );
+    };
+
     let columns = [
         {
             field: "customer",
@@ -130,9 +212,9 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
             // schema: 'date',
             // render: (date) => formatDate(date, 'dobLong'),
             sortable: true,
-            render: (name: string, data: any) =>
-                data.subscription_id ? (
-                    <EuiLink href={`/subscriptions/${data.subscription_id}`} target="_blank">
+            render: (name: string, record: any) =>
+                record.subscription_id ? (
+                    <EuiLink href={`/subscriptions/${record.subscription_id}`} target="_blank">
                         {name}
                     </EuiLink>
                 ) : (
@@ -149,28 +231,39 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
         {
             field: "id",
             name: "Affected services",
-            render: (id: string, data: any) => <EuiBadge>{data.ims_info.length}</EuiBadge>,
+            render: (id: string, record: any) => <EuiBadge>{record.ims_info.length}</EuiBadge>,
             width: 150,
         },
         {
-            align: RIGHT_ALIGNMENT,
             field: "impact",
             name: "Impact",
             truncateText: true,
+            width: 120,
         },
         {
-            align: RIGHT_ALIGNMENT,
             name: "Impact override",
+            field: "impact_override",
+            render: (id: string, record: any) => (record?.impact_override ? record.impact_override : "-"),
+            width: 120,
+        },
+        {
+            field: "impact_override",
+            // render: (id: string, record: any) => mode === "withSubscriptions" && record ? showImpact(record) : "-",
             actions: [
                 {
                     name: "Clone",
                     description: "Clone this person",
                     type: "icon",
-                    icon: "copy",
-                    onClick: () => "",
+                    icon: "pencil",
+                    onClick: (record: any) => {
+                        setEditImpactedObject(record);
+                        showModal();
+                    },
                 },
             ],
+            width: 30,
         },
+
         {
             align: RIGHT_ALIGNMENT,
             width: "40px",
@@ -192,14 +285,31 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
         },
     ];
 
-    // Hide subscription column when not needed
+    // Hide subscription and product type column when not needed
     if (mode === "withoutSubscriptions") {
-        columns = columns.filter((c) => c.field !== "subscription");
+        columns = columns.filter(
+            (c) => c.field !== "subscription" && c.field !== "type" && c.field !== "impact_override"
+        );
     }
 
     return (
         <Fragment>
             {deleteButton}
+            {isModalVisible && (
+                <EuiModal style={{ height: 400 }} onClose={closeModal}>
+                    <EuiModalHeader>
+                        <EuiModalHeaderTitle>
+                            <h1>Override impact</h1>
+                        </EuiModalHeaderTitle>
+                    </EuiModalHeader>
+                    <EuiModalBody>{editImpactedObject && showImpact(editImpactedObject)}</EuiModalBody>
+                    <EuiModalFooter>
+                        <EuiButton onClick={closeModal} fill>
+                            Close
+                        </EuiButton>
+                    </EuiModalFooter>
+                </EuiModal>
+            )}
             <EuiFlexGrid>
                 <EuiFlexItem>
                     <EuiTitle>
@@ -211,13 +321,17 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
                     </EuiTitle>
                 </EuiFlexItem>
                 <EuiFlexItem>
-                    <EuiButtonIcon onClick={() => setItemIdToExpandedRowMap({})} iconType={"arrowUp"}></EuiButtonIcon>
+                    <EuiButtonIcon
+                        size="m"
+                        onClick={toggleExpandAll}
+                        iconType={!isEmpty(itemIdToExpandedRowMap) ? "arrowUp" : "arrowDown"}
+                    ></EuiButtonIcon>
                 </EuiFlexItem>
             </EuiFlexGrid>
 
             <EuiBasicTable
                 tableCaption={`Impacted objects table ${mode}`}
-                items={data}
+                items={items}
                 itemId="id"
                 itemIdToExpandedRowMap={itemIdToExpandedRowMap}
                 isExpandable={true}

@@ -16,12 +16,11 @@
 import { EuiButton, EuiButtonIcon, EuiFlexGroup, EuiFlexItem, EuiSpacer, EuiText, EuiTitle } from "@elastic/eui";
 import { tableImpactedObjects } from "custom/components/cim/ServiceTicketDetailImpactedObjectsStyling";
 import { ServiceTicketImpactedObjectImpact, ServiceTicketWithDetails } from "custom/types";
-import { isDate, isEmpty } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
 import Select from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
-import { Option, SortOption, SubscriptionModel } from "utils/types";
+import { Option, SortOption } from "utils/types";
 import { stop } from "utils/Utils";
 
 import ImsCircuitInfo from "./ImsCiruitInfo";
@@ -135,14 +134,14 @@ const ServiceTicketDetailImpactedObjects = ({
         return sorted;
     };
 
-    const submitImpactOverride = async (impactedObject: ImpactedObject): Promise<void> => {
-        // await customApiClient.cimPatchImpactedObject(
-        //     ticket._id,
-        //     impactedObject?.subscription_id,
-        //     impactedObject.ims_circuit_id,
-        //     impactedObject
-        // );
-    };
+    // const submitImpactOverride = async (impactedObject: ImpactedObject): Promise<void> => {
+    //     // await customApiClient.cimPatchImpactedObject(
+    //     //     ticket._id,
+    //     //     impactedObject?.subscription_id,
+    //     //     impactedObject.ims_circuit_id,
+    //     //     impactedObject
+    //     // );
+    // };
 
     const editImpact = (impactedObject: ImpactedObject): (() => void) => {
         return () => updateable && setEditImpactedObject(impactedObject);
@@ -153,15 +152,12 @@ const ServiceTicketDetailImpactedObjects = ({
     };
 
     const onChangeImpactOverride = (impactedObject: ImpactedObject) => async (e: any): Promise<void> => {
-        let value: any;
-        if (isEmpty(e) || isDate(e)) {
-            value = e;
-        } else {
-            // @ts-ignore
-            value = e.target ? e.target.value : e.value;
-        }
+        // let value: any;
+        // if (isEmpty(e) || isDate(e)) {
+        //     value = e;
+        // }
         removeEdit();
-        let updatedImpactedObject: ImpactedObject = { ...impactedObject, impact_override: value };
+        // let updatedImpactedObject: ImpactedObject = { ...impactedObject, impact_override: value };
         // await sumbitImpactOverride(updatedImpactedObject);
         // setImpactedObjects(
         //     impactedObjects.map((obj: ImpactedObject) =>

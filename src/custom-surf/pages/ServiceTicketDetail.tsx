@@ -15,10 +15,16 @@
 
 import {
     EuiButton,
+    EuiButtonIcon,
     EuiFacetButton,
     EuiFlexGroup,
     EuiFlexItem,
     EuiHorizontalRule,
+    EuiModal,
+    EuiModalBody,
+    EuiModalFooter,
+    EuiModalHeader,
+    EuiModalHeaderTitle,
     EuiPage,
     EuiPageBody,
     EuiPanel,
@@ -26,7 +32,6 @@ import {
     EuiTitle,
 } from "@elastic/eui";
 import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
-import ServiceTicketDetailImpactedObjects from "custom/components/cim/ServiceTicketDetailImpactedObjects";
 import { ticketDetail } from "custom/pages/ServiceTicketDetailStyling";
 import {
     ServiceTicketLog,
@@ -44,6 +49,7 @@ import { TabView } from "utils/types";
 
 import { intl } from "../../locale/i18n";
 import { setFlash } from "../../utils/Flash";
+import BackgroundJobLogs from "../components/cim/BackgroundJobLogs";
 import ImpactedObjects from "../components/cim/ImpactedObjects";
 
 interface IProps {
@@ -77,8 +83,10 @@ const ServiceTicketDetail = () => {
     const { id } = useParams<IProps>();
     const [ticket, setTicket] = useState<ServiceTicketWithDetails>();
     const [notFound, setNotFound] = useState(false);
-
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const { theme, customApiClient, redirect } = useContext(ApplicationContext);
+    const closeModal = () => setIsModalVisible(false);
+    const showModal = () => setIsModalVisible(true);
 
     useInterval(async () => {
         if (ticket?.transition_action) {
@@ -225,6 +233,25 @@ const ServiceTicketDetail = () => {
     return (
         <EuiPage css={ticketDetail}>
             <EuiPageBody component="div">
+                {isModalVisible && (
+                    <EuiModal style={{ minWidth: 1024 }} onClose={closeModal}>
+                        <EuiModalHeader>
+                            <EuiModalHeaderTitle>
+                                <h1>Background job logs</h1>
+                            </EuiModalHeaderTitle>
+                        </EuiModalHeader>
+
+                        <EuiModalBody>
+                            <BackgroundJobLogs data={ticket.background_logs} />
+                        </EuiModalBody>
+
+                        <EuiModalFooter>
+                            <EuiButton onClick={closeModal} fill>
+                                Close
+                            </EuiButton>
+                        </EuiModalFooter>
+                    </EuiModal>
+                )}
                 <EuiPanel>
                     <div className="mod-ticket">
                         <EuiFlexGroup>
@@ -233,11 +260,20 @@ const ServiceTicketDetail = () => {
                                     <h1>Service ticket</h1>
                                 </EuiTitle>
                             </EuiFlexItem>
-                            <EuiFlexItem grow={false} style={{ minWidth: 90 }}>
+                            <EuiFlexItem grow={false} style={{ width: 20 }}>
+                                <EuiButtonIcon
+                                    style={{ marginTop: -3 }}
+                                    size="m"
+                                    iconType="apmTrace"
+                                    onClick={showModal}
+                                ></EuiButtonIcon>
+                            </EuiFlexItem>
+                            <EuiFlexItem grow={false} style={{ minWidth: 140 }}>
                                 <EuiFacetButton quantity={ticket?.transition_action ? 1 : 0}>
                                     active background job(s)
                                 </EuiFacetButton>
                             </EuiFlexItem>
+
                             {ticket?.transition_action === null && ticket?.process_state === "initial" && (
                                 <EuiFlexItem grow={false} style={{ minWidth: 200 }}>
                                     <EuiButton
@@ -364,6 +400,11 @@ const ServiceTicketDetail = () => {
                         <EuiSpacer />
                         <EuiSpacer size="s" />
                         <ImpactedObjects ticket={ticket} mode="withoutSubscriptions" />
+                        {isUpdateImpactActive && (
+                            <EuiButton type={"submit"} onClick={acceptImpactedObjects}>
+                                Accept impact
+                            </EuiButton>
+                        )}
                     </div>
                 </EuiPanel>
             </EuiPageBody>
