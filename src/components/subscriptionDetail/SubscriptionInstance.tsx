@@ -33,6 +33,33 @@ const importantFields = ["owner_subscription_id"];
 const getNameFromField = (field: [string, any]): string => field[0];
 const getValueFromField = (field: [string, any]): any => field[1];
 
+const mapInstanceFields = (
+    instance_fields: [string, any][],
+    subscription_id: string,
+    inUseBySubscriptions: {},
+    isExpandedView?: boolean,
+    subscriptionInstanceId?: string,
+    field_name?: string
+) => {
+    return instance_fields
+        .flatMap((field) => getValueFromField(field).map((value: any) => [getNameFromField(field), value]))
+        .map((field: [string, ISubscriptionInstance], i: number) => {
+            const subscriptionInstance = getValueFromField(field);
+            const fieldName = field_name ? `${field_name}.${getNameFromField(field)}` : getNameFromField(field);
+            return (
+                <SubscriptionInstance
+                    key={i}
+                    subscription_id={subscription_id}
+                    subscription_instance={subscriptionInstance}
+                    field_name={fieldName}
+                    inUseBySubscriptions={inUseBySubscriptions}
+                    isExpandedView={isExpandedView}
+                    parentSubscriptionInstanceId={subscriptionInstanceId}
+                />
+            );
+        });
+};
+
 export default function SubscriptionInstance({
     subscription_instance,
     field_name,
@@ -102,25 +129,14 @@ export default function SubscriptionInstance({
             </table>
 
             {shouldRenderInstanceFields &&
-                instance_fields
-                    .flatMap((field) => getValueFromField(field).map((value: any) => [getNameFromField(field), value]))
-                    .map((field: [string, ISubscriptionInstance], i: number) => {
-                        const subscriptionInstance = getValueFromField(field);
-                        const fieldName = field_name
-                            ? `${field_name}.${getNameFromField(field)}`
-                            : getNameFromField(field);
-                        return (
-                            <SubscriptionInstance
-                                key={i}
-                                subscription_id={subscription_id}
-                                subscription_instance={subscriptionInstance}
-                                field_name={fieldName}
-                                inUseBySubscriptions={inUseBySubscriptions}
-                                isExpandedView={isExpandedView}
-                                parentSubscriptionInstanceId={subscriptionInstanceId}
-                            />
-                        );
-                    })}
+                mapInstanceFields(
+                    instance_fields,
+                    subscription_id,
+                    inUseBySubscriptions,
+                    isExpandedView,
+                    subscriptionInstanceId,
+                    field_name
+                )}
         </section>
     );
 }
