@@ -3,41 +3,29 @@ import {
     EuiBasicTable,
     EuiButton,
     EuiButtonIcon,
-    EuiDescriptionList,
     EuiFlexGrid,
-    EuiFlexGroup,
     EuiFlexItem,
     EuiForm,
-    EuiHealth,
     EuiLink,
     EuiModal,
     EuiModalBody,
     EuiModalFooter,
     EuiModalHeader,
     EuiModalHeaderTitle,
-    EuiPanel,
     EuiScreenReaderOnly,
-    EuiText,
     EuiTitle,
     RIGHT_ALIGNMENT,
-    formatDate,
 } from "@elastic/eui";
 import { isDate } from "lodash";
 import React, { Fragment, useEffect, useState } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import Select from "react-select";
 
-import impactedObjects from "../../../custom/components/cim/ImpactedObjects";
 import { Option } from "../../../utils/types";
 import { isEmpty } from "../../../utils/Utils";
-import {
-    ServiceTicketImpactedIMSCircuit,
-    ServiceTicketImpactedObjectImpact,
-    ServiceTicketWithDetails,
-} from "../../types";
-import BackgroundJobLogs from "./BackgroundJobLogs";
+import { ServiceTicketImpactedObjectImpact, ServiceTicketWithDetails } from "../../types";
 import ImsCircuitInfo from "./ImsCiruitInfo";
-import { ImpactedObject, ImsInfo } from "./ServiceTicketDetailImpactedObjects";
+import { ImpactedObject } from "./ServiceTicketDetailImpactedObjects";
 
 interface IProps extends WrappedComponentProps {
     ticket: ServiceTicketWithDetails;
@@ -56,8 +44,6 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const closeModal = () => setIsModalVisible(false);
     const showModal = () => setIsModalVisible(true);
-    const [sortField, setSortField] = useState("firstName");
-    const [sortDirection, setSortDirection] = useState("asc");
     const [selectedItems, setSelectedItems] = useState([]);
     const [editImpactedObject, setEditImpactedObject] = useState<ImpactedObject>();
     const [itemIdToExpandedRowMap, setItemIdToExpandedRowMap] = useState({});
@@ -113,9 +99,9 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
         // setSortDirection(sortDirection);
     };
 
-    const onSelectionChange = (selectedItems: any) => {
-        setSelectedItems(selectedItems);
-    };
+    // const onSelectionChange = (selectedItems: any) => {
+    //     setSelectedItems(selectedItems);
+    // };
 
     const onClickDelete = () => {
         // store.deleteUsers(...selectedItems.map((user) => user.id));
@@ -149,11 +135,11 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
 
     const deleteButton = renderDeleteButton();
 
-    const editImpact = (impactedObject: ImpactedObject): (() => void) => {
-        debugger;
-        // return () => updateable && setItems(impactedObject);
-        return () => setEditImpactedObject(impactedObject);
-    };
+    // const editImpact = (impactedObject: ImpactedObject): (() => void) => {
+    //     debugger;
+    //     // return () => updateable && setItems(impactedObject);
+    //     return () => setEditImpactedObject(impactedObject);
+    // };
 
     const removeEdit = (): void => {
         setEditImpactedObject(undefined);
