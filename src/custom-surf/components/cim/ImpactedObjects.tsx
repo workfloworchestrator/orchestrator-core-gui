@@ -16,16 +16,16 @@ import {
     EuiTitle,
     RIGHT_ALIGNMENT,
 } from "@elastic/eui";
+import ImsCircuitInfo from "custom/components/cim/ImsCiruitInfo";
+import { ImpactedObject } from "custom/components/cim/ServiceTicketDetailImpactedObjects";
+import { ServiceTicketImpactedObjectImpact, ServiceTicketWithDetails } from "custom/types";
 import { isDate } from "lodash";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import Select from "react-select";
-
-import { Option } from "../../../utils/types";
-import { isEmpty } from "../../../utils/Utils";
-import { ServiceTicketImpactedObjectImpact, ServiceTicketWithDetails } from "../../types";
-import ImsCircuitInfo from "./ImsCiruitInfo";
-import { ImpactedObject } from "./ServiceTicketDetailImpactedObjects";
+import ApplicationContext from "utils/ApplicationContext";
+import { Option } from "utils/types";
+import { isEmpty } from "utils/Utils";
 
 interface IProps extends WrappedComponentProps {
     ticket: ServiceTicketWithDetails;
@@ -41,6 +41,7 @@ const options: Option[] = (Object.values(ServiceTicketImpactedObjectImpact) as s
 }));
 
 const ImpactedObjects = ({ ticket, mode }: IProps) => {
+    const { theme, customApiClient } = useContext(ApplicationContext);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const closeModal = () => setIsModalVisible(false);
     const showModal = () => setIsModalVisible(true);
@@ -153,15 +154,18 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
             // @ts-ignore
             value = e.target ? e.target.value : e.value;
         }
+        let index = Number(impactedObject.id.replace("item-", ""));
+
         removeEdit();
         let updatedImpactedObject: ImpactedObject = { ...impactedObject, impact_override: value };
-        // await sumbitImpactOverride(updatedImpactedObject);
-        setItems(
-            items.map((obj: ImpactedObject) =>
-                obj.subscription_id === impactedObject.subscription_id ? updatedImpactedObject : obj
-            )
-        );
+        // Todo: use the ID in ImpactedObject to facilitate next call
+        await submitImpactOverride(index, value);
+        setItems(items.map((obj: ImpactedObject) => (obj.id === impactedObject.id ? updatedImpactedObject : obj)));
         closeModal();
+    };
+
+    const submitImpactOverride = async (index: number, impact: string): Promise<void> => {
+        await customApiClient.cimPatchImpactedObject(ticket._id, index, impact);
     };
 
     const showImpact = (impact: ImpactedObject): any => {
@@ -271,7 +275,7 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
         },
     ];
 
-    // Hide subscription and product type column when not needed
+    // Hide subscription and other columns when not needed
     if (mode === "withoutSubscriptions") {
         columns = columns.filter(
             (c) => c.field !== "subscription" && c.field !== "type" && c.field !== "impact_override"
