@@ -22,10 +22,12 @@ import { ServiceTicketImpactedObjectImpact, ServiceTicketWithDetails } from "cus
 import { isDate } from "lodash";
 import React, { Fragment, useContext, useState } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
-import Select from "react-select";
+import ReactSelect from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
 import { Option } from "utils/types";
 import { isEmpty } from "utils/Utils";
+
+import { getReactSelectTheme } from "../../../stylesheets/emotion/utils";
 
 interface IProps extends WrappedComponentProps {
     ticket: ServiceTicketWithDetails;
@@ -48,6 +50,7 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
     const [selectedItems, setSelectedItems] = useState([]);
     const [editImpactedObject, setEditImpactedObject] = useState<ImpactedObject>();
     const [itemIdToExpandedRowMap, setItemIdToExpandedRowMap] = useState({});
+    const customStyles = getReactSelectTheme(theme);
 
     let data: ImpactedObject[] = [];
     let itemCounter = 0;
@@ -171,7 +174,7 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
     const showImpact = (impact: ImpactedObject): any => {
         return (
             <EuiForm component="form">
-                <Select<Option>
+                <ReactSelect<Option>
                     className="impact-override__select"
                     onChange={onChangeImpactOverride(impact)}
                     // onBlur={removeEdit}
@@ -183,6 +186,7 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
                     isClearable={true}
                     defaultMenuIsOpen={true}
                     autoFocus
+                    styles={customStyles}
                 />
             </EuiForm>
         );

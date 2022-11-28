@@ -3,7 +3,6 @@ import {
     OpenServiceTicketPayload,
     ServiceTicket,
     ServiceTicketBackgroundJobCount,
-    ServiceTicketImpactedIMSCircuit,
     ServiceTicketProcessState,
     ServiceTicketWithDetails,
 } from "custom/types";

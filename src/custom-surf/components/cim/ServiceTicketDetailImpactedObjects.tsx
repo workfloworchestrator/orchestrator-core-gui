@@ -14,6 +14,7 @@
  */
 
 import { EuiButton, EuiButtonIcon, EuiFlexGroup, EuiFlexItem, EuiSpacer, EuiText, EuiTitle } from "@elastic/eui";
+import ImsCircuitInfo from "custom/components/cim/ImsCiruitInfo";
 import { tableImpactedObjects } from "custom/components/cim/ServiceTicketDetailImpactedObjectsStyling";
 import { ServiceTicketImpactedObjectImpact, ServiceTicketWithDetails } from "custom/types";
 import React, { useContext, useEffect, useState } from "react";
@@ -22,8 +23,6 @@ import Select from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
 import { Option, SortOption } from "utils/types";
 import { stop } from "utils/Utils";
-
-import ImsCircuitInfo from "./ImsCiruitInfo";
 
 type Column = "customer" | "impact" | "type" | "subscription" | "ims_info" | "impact_override";
 

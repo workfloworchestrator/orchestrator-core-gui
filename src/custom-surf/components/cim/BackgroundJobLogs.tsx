@@ -1,9 +1,8 @@
 import { EuiBasicTable } from "@elastic/eui";
+import { BackgroundJobLog } from "custom/types";
+import { renderStringAsDateTime } from "custom/Utils";
 import React, { Fragment } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
-
-import { BackgroundJobLog } from "../../types";
-import { renderStringAsDateTime } from "../../Utils";
 
 interface IProps extends WrappedComponentProps {
     data: BackgroundJobLog[];

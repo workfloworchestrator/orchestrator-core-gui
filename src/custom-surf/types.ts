@@ -85,6 +85,7 @@ export enum ServiceTicketImpactedObjectImpact {
     RESILIENCE_LOSS = "resilience_loss",
 }
 
+// Todo: remove when
 export interface ServiceTicketImpactedIMSCircuit {
     ims_circuit_id: number;
     ims_circuit_name: string;
