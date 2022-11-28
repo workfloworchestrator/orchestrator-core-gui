@@ -15,15 +15,12 @@
 
 import { EuiLink, EuiPanel } from "@elastic/eui";
 import { tableImsCircuitInfo } from "custom/components/cim/ImsCircuitInfoStyling";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
-import Select from "react-select";
 import ApplicationContext from "utils/ApplicationContext";
-import { Option, SortOption, SubscriptionModel } from "utils/types";
-import { stop } from "utils/Utils";
 
 import { ENV } from "../../../env";
-import { ImpactedObject, ImsInfo } from "./ServiceTicketDetailImpactedObjects";
+import { ImsInfo } from "./ServiceTicketDetailImpactedObjects";
 
 type Column = "ims_circuit_id" | "ims_circuit_name" | "extra_info" | "impact";
 
