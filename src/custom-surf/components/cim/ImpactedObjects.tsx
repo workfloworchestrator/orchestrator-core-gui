@@ -158,7 +158,6 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
 
         removeEdit();
         let updatedImpactedObject: ImpactedObject = { ...impactedObject, impact_override: value };
-        // Todo: use the ID in ImpactedObject to facilitate next call
         await submitImpactOverride(index, value);
         setItems(items.map((obj: ImpactedObject) => (obj.id === impactedObject.id ? updatedImpactedObject : obj)));
         closeModal();
@@ -174,7 +173,6 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
                 <ReactSelect<Option>
                     className="impact-override__select"
                     onChange={onChangeImpactOverride(impact)}
-                    // onBlur={removeEdit}
                     options={options}
                     isSearchable={false}
                     value={options.filter(
