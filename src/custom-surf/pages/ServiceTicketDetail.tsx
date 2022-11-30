@@ -396,15 +396,29 @@ const ServiceTicketDetail = () => {
                         {renderLogItemActions(ticket, actions)}
                         <EuiSpacer />
                         <EuiSpacer size="s" />
-                        <ImpactedObjects ticket={ticket} mode="withSubscriptions" />
+                        <ImpactedObjects ticket={ticket} mode="withSubscriptions" updateable={isUpdateImpactActive} />
                         <EuiSpacer />
+                        <EuiFlexGroup gutterSize="s" className="buttons">
+                            <EuiFlexItem>
+                                <EuiButton onClick={acceptImpactedObjects} isDisabled={!isUpdateImpactActive}>
+                                    <FormattedMessage id="tickets.action.accept_impact" />
+                                </EuiButton>
+                            </EuiFlexItem>
+                        </EuiFlexGroup>
                         <EuiSpacer size="s" />
-                        <ImpactedObjects ticket={ticket} mode="withoutSubscriptions" />
-                        {isUpdateImpactActive && (
-                            <EuiButton type={"submit"} onClick={acceptImpactedObjects}>
-                                Accept impact
-                            </EuiButton>
-                        )}
+                        <ImpactedObjects
+                            ticket={ticket}
+                            mode="withoutSubscriptions"
+                            updateable={isUpdateImpactActive}
+                        />
+                        <EuiSpacer />
+                        <EuiFlexGroup gutterSize="s" className="buttons">
+                            <EuiFlexItem>
+                                <EuiButton onClick={acceptImpactedObjects} isDisabled={!isUpdateImpactActive}>
+                                    <FormattedMessage id="tickets.action.accept_impact" />
+                                </EuiButton>
+                            </EuiFlexItem>
+                        </EuiFlexGroup>
                     </div>
                 </EuiPanel>
             </EuiPageBody>

@@ -23,17 +23,14 @@ import { isDate } from "lodash";
 import React, { Fragment, useContext, useState } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import ReactSelect from "react-select";
+import { getReactSelectTheme } from "stylesheets/emotion/utils";
 import ApplicationContext from "utils/ApplicationContext";
 import { Option } from "utils/types";
 import { isEmpty } from "utils/Utils";
 
-import { getReactSelectTheme } from "../../../stylesheets/emotion/utils";
-
 interface IProps extends WrappedComponentProps {
     ticket: ServiceTicketWithDetails;
-    // updateable: boolean;
-    // acceptImpactedObjects: () => void;
-    // showAcceptButton: boolean;
+    updateable: boolean;
     mode: "withSubscriptions" | "withoutSubscriptions";
 }
 
@@ -242,11 +239,10 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
         },
         {
             field: "impact_override",
-            // render: (id: string, record: any) => mode === "withSubscriptions" && record ? showImpact(record) : "-",
             actions: [
                 {
-                    name: "Clone",
-                    description: "Clone this person",
+                    name: "Edit impact",
+                    description: "Override the impact level",
                     type: "icon",
                     icon: "pencil",
                     onClick: (record: any) => {
