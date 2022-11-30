@@ -15,6 +15,7 @@
 
 import {
     EuiButton,
+    EuiButtonIcon,
     EuiConfirmModal,
     EuiCopy,
     EuiFlexGroup,
@@ -157,30 +158,24 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                             <FormattedMessage id="subscriptions.id" />
                         </td>
                         <td id="subscriptions-id-v">
-                            <EuiFlexGroup>
-                                <EuiFlexItem grow={false}>
-                                    <a
-                                        href={`/subscriptions/${subscription.subscription_id}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        {subscription.subscription_id}
-                                    </a>
-                                </EuiFlexItem>
-                                <EuiFlexItem grow={false}>
-                                    <EuiCopy textToCopy={subscription.subscription_id}>
-                                        {(copy) => (
-                                            <EuiButton
-                                                fill
-                                                id="subscriptions-copy-button"
-                                                iconType="copyClipboard"
-                                                size="s"
-                                                onClick={copy}
+                            <EuiFlexGroup justifyContent={"spaceBetween"}>
+                                <EuiFlexItem>
+                                    <EuiFlexGroup alignItems={"center"}>
+                                        <EuiFlexItem grow={false}>
+                                            <a
+                                                href={`/subscriptions/${subscription.subscription_id}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
                                             >
-                                                Copy ID
-                                            </EuiButton>
-                                        )}
-                                    </EuiCopy>
+                                                {subscription.subscription_id}
+                                            </a>
+                                        </EuiFlexItem>
+                                        <EuiFlexItem grow={false}>
+                                            <EuiCopy textToCopy={subscription.subscription_id}>
+                                                {(copy) => <EuiButtonIcon iconType={"copyClipboard"} onClick={copy} />}
+                                            </EuiCopy>
+                                        </EuiFlexItem>
+                                    </EuiFlexGroup>
                                 </EuiFlexItem>
                                 <EuiFlexItem grow={false}>
                                     <EuiButton

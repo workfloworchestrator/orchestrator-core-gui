@@ -13,6 +13,7 @@
  *
  */
 
+import { EuiButtonIcon, EuiCopy, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import React, { useContext, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useQuery } from "react-query";
@@ -62,9 +63,16 @@ function SubscriptionInstanceValueRow({
                             <i className={`fa fa-${icon}-circle`} onClick={toggleCollapsed} />
                         )}
                         {isSubscriptionValue && (
-                            <a target="_blank" rel="noopener noreferrer" href={`/subscriptions/${value}`}>
-                                {subscriptionLink}
-                            </a>
+                            <EuiFlexGroup alignItems={"center"}>
+                                <EuiFlexItem grow={false}>
+                                    <a target="_blank" rel="noopener noreferrer" href={`/subscriptions/${value}`}>
+                                        {subscriptionLink}
+                                    </a>
+                                </EuiFlexItem>
+                                <EuiCopy textToCopy={value}>
+                                    {(copy) => <EuiButtonIcon iconType={"copyClipboard"} onClick={copy} />}
+                                </EuiCopy>
+                            </EuiFlexGroup>
                         )}
 
                         {!isSubscriptionValue && <span>{value.toString()}</span>}
