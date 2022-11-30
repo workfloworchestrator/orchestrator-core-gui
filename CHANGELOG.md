@@ -8,69 +8,71 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [v10.5.0] - TBD
-- Updated service ticket detail page to show "last_update_time"
-- `#41` Converted most components to a Functions based approach
-- Selecting "auto scroll" on process detail page is now stored in localstorage
-- `#44` Include subscription description of first product block relation on Subscription detail page
-- Added button to restart CIM open relate step
-- `#42` Fix help button hidden on subscriptions page
-- `#141` Convert sass files to emotion 3
-- `#157` Redirect workflow submit to process detail
-- `#158` Add auto scrolling to last finished step in process details, a button to turn auto scrolling off or on and add fixed top menu when scrolling past actions on the page.
-- `#161` Scroll to last step in process details when page is loaded except when process is done and fix summaryfield error.
-- `#164` Update SubscriptionDetail with toggleable show related subscriptions.
-- `#166` Fix snapshot difference of standalone and SURF version. (moved to their own folder)
+
+-   Added description text in Owner_Subscription_Id and added a copy-to-clipboard button
+-   Updated service ticket detail page to show "last_update_time"
+-   `#41` Converted most components to a Functions based approach
+-   Selecting "auto scroll" on process detail page is now stored in localstorage
+-   `#44` Include subscription description of first product block relation on Subscription detail page
+-   Added button to restart CIM open relate step
+-   `#42` Fix help button hidden on subscriptions page
+-   `#141` Convert sass files to emotion 3
+-   `#157` Redirect workflow submit to process detail
+-   `#158` Add auto scrolling to last finished step in process details, a button to turn auto scrolling off or on and add fixed top menu when scrolling past actions on the page.
+-   `#161` Scroll to last step in process details when page is loaded except when process is done and fix summaryfield error.
+-   `#164` Update SubscriptionDetail with toggleable show related subscriptions.
+-   `#166` Fix snapshot difference of standalone and SURF version. (moved to their own folder)
 
 Surf specific:
-- `#155` cim: Check if impacted service has subscription id before calling api
-- `#156` cim: Add html parser to form summary field for email examples
-- `#170, #171, #172` Fix topology diagrams, #172 updates react-network-diagrams package.
+
+-   `#155` cim: Check if impacted service has subscription id before calling api
+-   `#156` cim: Add html parser to form summary field for email examples
+-   `#170, #171, #172` Fix topology diagrams, #172 updates react-network-diagrams package.
 
 ## [v10.4.0] - 2022-08-30
 
-- `#134` Replace SCSS with Emotion CSS
-- `#138` Improve getting subs with inUseByIds by making the list unique
-- `#143` Allow overriding Button text, dialog and color in the FormWizard; Order custompages consistently
-- `#147` Upgrade React 17, fixes to storybook styling and mock data
-- `#149` Fix "new task" button triggering an unexpected error
-- `#150` Fix form inputs to use translation before the label
-- `#154` Fix number of failed tasks displayed by FailedTaskBanner
-
+-   `#134` Replace SCSS with Emotion CSS
+-   `#138` Improve getting subs with inUseByIds by making the list unique
+-   `#143` Allow overriding Button text, dialog and color in the FormWizard; Order custompages consistently
+-   `#147` Upgrade React 17, fixes to storybook styling and mock data
+-   `#149` Fix "new task" button triggering an unexpected error
+-   `#150` Fix form inputs to use translation before the label
+-   `#154` Fix number of failed tasks displayed by FailedTaskBanner
 
 Surf specific:
-- `#139` cim: update impact override
-- `#142` cim: serviceticket abort
-- `#143` cim#10: serviceticket open
-- `#150` cim: remove trailing slash in api call
-- `#153` cim: hide servicetickets from menu bar
 
+-   `#139` cim: update impact override
+-   `#142` cim: serviceticket abort
+-   `#143` cim#10: serviceticket open
+-   `#150` cim: remove trailing slash in api call
+-   `#153` cim: hide servicetickets from menu bar
 
 ## [v10.3.0] - 2022-07-04
 
-- `#135` Allow user to specify label for dynamic form field
+-   `#135` Allow user to specify label for dynamic form field
 
 Surf specific:
-- `#130` cim#4: serviceticket details
-- `#132` cim: ticket forms and form generator
 
+-   `#130` cim#4: serviceticket details
+-   `#132` cim: ticket forms and form generator
 
 ...
 
 ## [7.5.0] - unreleased
 
-- `#orchestrator:1044` Show subscription description on subscription detail page for resource types
-- Added react-query to easily cache double REST calls to endpoints and used it on the subscription detail page
+-   `#orchestrator:1044` Show subscription description on subscription detail page for resource types
+-   Added react-query to easily cache double REST calls to endpoints and used it on the subscription detail page
 
 ## [7.4.0] - 2020-08-05
 
-- `#231` Moved LIR Prefix page to dynamically loaded route
-- `#231` Moved the SURF links on the subscription detail page to plugins
-- `#231` Moved the Network diagrams on the subscription detail page to plugins
-- `#231` Moved SURF specific GUI functionality to an own git [repo](https://git.ia.surfsara.nl/netdev/automation/projects/orchestrator-client-surf)
-- `#231` Published the GUI code to a public git [repo](https://github.com/workfloworchestrator/orchestrator-client)
-- Simplified and fixed L2VPN network diagram in the GUI
-- Improved error handling in the GUI for network diagrams when not all external resource types can be found
-- Added Grafana link for SN8 nodes on subscription detail page
+-   `#231` Moved LIR Prefix page to dynamically loaded route
+-   `#231` Moved the SURF links on the subscription detail page to plugins
+-   `#231` Moved the Network diagrams on the subscription detail page to plugins
+-   `#231` Moved SURF specific GUI functionality to an own git [repo](https://git.ia.surfsara.nl/netdev/automation/projects/orchestrator-client-surf)
+-   `#231` Published the GUI code to a public git [repo](https://github.com/workfloworchestrator/orchestrator-client)
+-   Simplified and fixed L2VPN network diagram in the GUI
+-   Improved error handling in the GUI for network diagrams when not all external resource types can be found
+-   Added Grafana link for SN8 nodes on subscription detail page
 
 ## [v7.3.1]
 
