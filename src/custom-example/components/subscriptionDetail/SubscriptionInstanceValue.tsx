@@ -15,6 +15,7 @@
 
 import React, { useContext, useState } from "react";
 import { FormattedMessage } from "react-intl";
+import { useQuery } from "react-query";
 import ApplicationContext from "utils/ApplicationContext";
 
 function SubscriptionInstanceValueRow({
@@ -36,7 +37,20 @@ function SubscriptionInstanceValueRow({
     type: string;
 }>) {
     const icon = children ? "minus" : "plus";
-    const { theme } = useContext(ApplicationContext);
+    const { apiClient, theme } = useContext(ApplicationContext);
+
+    const { isLoading: subscriptionIsLoading, error: subscriptionError, data: subscriptionData } = useQuery(
+        ["subscription", { id: isSubscriptionValue ? value : "disabled" }],
+        () => apiClient.subscriptionsDetailWithModel(value),
+        {
+            enabled: isSubscriptionValue,
+        }
+    );
+
+    const subscriptionLink =
+        isSubscriptionValue && !subscriptionIsLoading && !subscriptionError
+            ? `${subscriptionData?.description} (${value})`
+            : value;
 
     return (
         <tbody className={theme}>
@@ -49,7 +63,7 @@ function SubscriptionInstanceValueRow({
                         )}
                         {isSubscriptionValue && (
                             <a target="_blank" rel="noopener noreferrer" href={`/subscriptions/${value}`}>
-                                {value}
+                                {subscriptionLink}
                             </a>
                         )}
 
