@@ -292,7 +292,7 @@ function SubscriptionDetail({ subscriptionId }: IProps) {
                                         subscription_instance={entry[1]}
                                         field_name={entry[0]}
                                         inUseBySubscriptions={inUseBySubscriptions}
-                                        showRelatedBlocks={isExpandedView}
+                                        isExpandedView={isExpandedView}
                                     />
                                 ))}
                             </SubscriptionDetailSection>
@@ -304,7 +304,7 @@ function SubscriptionDetail({ subscriptionId }: IProps) {
                         subscriptionInstances={subscription_instances}
                         subscription_id={subscription.subscription_id}
                         inUseBySubscriptions={inUseBySubscriptions}
-                        showRelatedBlocks={isExpandedView}
+                        isExpandedView={isExpandedView}
                     />
                 )}
 

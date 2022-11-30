@@ -25,7 +25,7 @@ interface IProps {
     subscriptionInstances: any[][];
     subscription_id: string;
     inUseBySubscriptions: Record<string, any>;
-    showRelatedBlocks?: boolean;
+    isExpandedView?: boolean;
 }
 
 export const mapSplitFields = (
@@ -65,44 +65,15 @@ export const mapSplitFields = (
         .filter((element) => element !== null) as JSX.Element[];
 };
 
-const getSubBlockFromInstanceFields = (instance_fields: [string, any][]) =>
-    instance_fields[0] && // instance_fields: [[label, subscription_instance[]], ...]
-    instance_fields[0][1] && // instance_fields[0]: [label, subscription_instance[]]
-    instance_fields[0][1][0]; // instance_fields[0][1]: subscription_instance[]
-
-const getVisibleInstanceFields = (
-    instance_fields: [string, any][],
-    showRelatedBlocks: boolean,
-    subBlockContainsDataForCollapsedView: boolean
-): [string, any][] => {
-    if (showRelatedBlocks || !subBlockContainsDataForCollapsedView) {
-        return [...instance_fields];
-    }
-
-    const { owner_subscription_id, subscription_instance_id, name } = getSubBlockFromInstanceFields(instance_fields);
-
-    return [
-        [
-            instance_fields[0][0],
-            [
-                {
-                    owner_subscription_id,
-                    subscription_instance_id,
-                    name,
-                },
-            ],
-        ],
-    ];
-};
-
 export function RenderServiceConfiguration({
     subscriptionInstances,
     subscription_id,
     inUseBySubscriptions,
-    showRelatedBlocks = false,
+    isExpandedView = false,
 }: IProps) {
     // Todo: remove surf specific code
     const tabOrder = ["ip_gw_endpoint", "l3_endpoints", "l2_endpoints"];
+    const importantFields = ["owner_subscription_id"];
 
     const splitValueAndInstanceFields = (instance: ISubscriptionInstance) => {
         const fields = Object.entries(instance)
@@ -119,45 +90,58 @@ export function RenderServiceConfiguration({
         return { value_fields, instance_fields, tabName: tabName.length > 0 ? tabName[0][1] : "-" };
     };
 
-    const instance = subscriptionInstances[0][1] as ISubscriptionInstance;
-
     // Prepare a list of tabs for this product.
     // If we find instancefields, we'll create a tab for each instance
     // in a separate TabbedSection by calling this function again.
     // The result should be a nested list of tabs.
-    const parseToTabs = (instance_fields: [string, any][], level = 0): TabView[] => {
+    const parseToTabs = (
+        parentSubscriptionInstanceId: string,
+        instance_fields: [string, any][],
+        level = 0
+    ): TabView[] => {
         return instance_fields
             .sort((a, b) => tabOrder.indexOf(a[0]) - tabOrder.indexOf(b[0]))
-            .map(([field, instances]): TabView[] => {
-                return instances.map(parseInstanceToTab(level, field));
-            })
+            .map(([field, instances]): TabView[] =>
+                instances.map(parseInstanceToTab(parentSubscriptionInstanceId, level, field))
+            )
             .flat();
     };
 
-    const parseInstanceToTab = (level: number, field: string) => (inst: ISubscriptionInstance): TabView => {
+    const parseInstanceToTab = (parentSubscriptionInstanceId: string, level: number, field: string) => (
+        inst: ISubscriptionInstance
+    ): TabView => {
         const { subscription_instance_id } = inst;
         const { value_fields, instance_fields, tabName } = splitValueAndInstanceFields(inst);
 
         const sorted_instance_fields = instance_fields.sort((a, b) => tabOrder.indexOf(a[0]) - tabOrder.indexOf(b[0]));
-        if (instance_fields.some((instField) => tabOrder.includes(instField[0]))) {
-            console.log({ level, field, instance_fields, sorted_instance_fields });
-        }
-        const subBlock = getSubBlockFromInstanceFields(sorted_instance_fields);
-        const ownerSubscriptionIdSubBlock = subBlock && subBlock.owner_subscription_id;
-        const inUseByIdsSubBlock = subBlock && subBlock.in_use_by_ids;
 
-        const isSubscriptionBlock = inst.owner_subscription_id === ownerSubscriptionIdSubBlock;
-        const subBlockContainsDataForCollapsedView = inUseByIdsSubBlock?.includes(subscription_instance_id);
-        const showSubBlock = isSubscriptionBlock || showRelatedBlocks || subBlockContainsDataForCollapsedView;
+        const isOutsideSubscriptionBoundary = subscription_id !== inst.owner_subscription_id;
+        const shouldOnlyRenderImportantValueFields = isOutsideSubscriptionBoundary && !isExpandedView;
+        const shouldRenderInstanceFields = isExpandedView || !shouldOnlyRenderImportantValueFields;
 
-        const visibleInstanceFields = getVisibleInstanceFields(
-            instance_fields,
-            showRelatedBlocks,
-            subBlockContainsDataForCollapsedView
+        const filteredValueFields = value_fields
+            .filter((valueField) => !shouldOnlyRenderImportantValueFields || importantFields.includes(valueField[0]))
+            .map((valueField): [string, any] => {
+                const [fieldName, fieldValue] = valueField;
+                if (fieldName === "in_use_by_ids") {
+                    const inUseByIdsWithoutParent = fieldValue.filter(
+                        (id: string) => id !== parentSubscriptionInstanceId
+                    );
+                    return [fieldName, inUseByIdsWithoutParent];
+                }
+                return valueField;
+            });
+
+        const SplitFieldInstanceValues = mapSplitFields(
+            subscription_instance_id,
+            filteredValueFields,
+            inUseBySubscriptions
         );
-        const subTabs: TabView[] = level < 4 ? parseToTabs(visibleInstanceFields, level + 1) : [];
 
-        const SplitFieldInstanceValues = mapSplitFields(subscription_instance_id, value_fields, inUseBySubscriptions);
+        const subTabs: TabView[] =
+            level < 4 && shouldRenderInstanceFields
+                ? parseToTabs(subscription_instance_id, sorted_instance_fields, level + 1)
+                : [];
 
         return {
             id: `${field}-${subscription_instance_id}`,
@@ -167,14 +151,16 @@ export function RenderServiceConfiguration({
                 <>
                     <table className="detail-block multiple-tbody">
                         <thead />
-                        <SubscriptionInstanceValue
-                            key={`${inst.subscription_id}-instance-id`}
-                            label={"Instance ID"}
-                            value={subscription_instance_id}
-                        />
+                        {!shouldOnlyRenderImportantValueFields && (
+                            <SubscriptionInstanceValue
+                                key={`${inst.subscription_id}-instance-id`}
+                                label={"Instance ID"}
+                                value={subscription_instance_id}
+                            />
+                        )}
                         {SplitFieldInstanceValues}
                     </table>
-                    {subTabs.length > 0 && showSubBlock && (
+                    {subTabs.length > 0 && (
                         <div className="indented">
                             <TabbedSection
                                 id={`${field}-${subscription_instance_id}-tabs`}
@@ -188,16 +174,13 @@ export function RenderServiceConfiguration({
         };
     };
 
+    const instance = subscriptionInstances[0][1] as ISubscriptionInstance;
+
     // initiate first run to map all product blocks into a tab list.
-    const inUseByInstanceSplitFields = splitValueAndInstanceFields(instance);
+    const { value_fields, instance_fields } = splitValueAndInstanceFields(instance);
 
-    const tabs: TabView[] = parseToTabs(inUseByInstanceSplitFields.instance_fields);
-
-    const InstanceValues = mapSplitFields(
-        instance.subscription_instance_id,
-        inUseByInstanceSplitFields.value_fields,
-        inUseBySubscriptions
-    );
+    const InstanceValues = mapSplitFields(instance.subscription_instance_id, value_fields, inUseBySubscriptions);
+    const tabs: TabView[] = parseToTabs(instance.subscription_instance_id, instance_fields);
 
     return (
         <div className="mod-subscription-detail">

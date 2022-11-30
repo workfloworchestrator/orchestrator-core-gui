@@ -147,7 +147,7 @@ describe("RenderServiceConfiguration", () => {
                         subscription_id={data.subscriptionId}
                         subscriptionInstances={data.subscriptionInstances}
                         inUseBySubscriptions={data.inUseBySubscriptions}
-                        showRelatedBlocks={true}
+                        isExpandedView={true}
                     />
                 )
             )
