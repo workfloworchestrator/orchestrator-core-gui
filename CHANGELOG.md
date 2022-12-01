@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [v10.5.0] - TBD
 
+-   `#47` Fix subscription dropdowns to not resize when typing and fixes alignments with other input fields
 -   Added description text in Owner_Subscription_Id and added a copy-to-clipboard button
 -   Updated service ticket detail page to show "last_update_time"
 -   `#41` Converted most components to a Functions based approach
