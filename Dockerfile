@@ -15,6 +15,7 @@ FROM base AS builder
 RUN apt update  && apt install git -y
 RUN yarn --network-concurrency 1 --frozen-lockfile
 COPY . .
+RUN (rm -rf src/custom && cd src && ln -s custom-example custom)
 RUN yarn build
 
 ########################
