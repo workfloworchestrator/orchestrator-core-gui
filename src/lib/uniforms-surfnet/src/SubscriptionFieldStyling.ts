@@ -13,7 +13,6 @@ export const subscriptionFieldStyling = css`
 
         .euiFormRow > .euiFormRow__fieldWrapper > div {
             display: flex;
-            margin-top: 5px;
         }
     }
 

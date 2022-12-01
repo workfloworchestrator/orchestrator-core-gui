@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiButtonIcon, EuiFlexItem, EuiFormRow, EuiModal, EuiOverlayMask, EuiText } from "@elastic/eui";
+import { EuiButtonIcon, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiModal, EuiOverlayMask, EuiText } from "@elastic/eui";
 import ServicePortSelectorModal from "components/modals/ServicePortSelectorModal";
 import { SubscriptionsContext } from "components/subscriptionContext";
 import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
@@ -237,7 +237,7 @@ function Subscription({
     const customStyles = getReactSelectTheme(theme);
 
     return (
-        <EuiFlexItem css={subscriptionFieldStyling}>
+        <EuiFlexItem css={subscriptionFieldStyling} grow={1}>
             <section
                 {...filterDOMProps(props)}
                 className={`${className} subscription-field${disabled ? "-disabled" : ""}`}
@@ -252,7 +252,7 @@ function Subscription({
                 >
                     <div>
                         {!disabled && (
-                            <>
+                            <EuiFlexGroup alignItems={"center"} gutterSize={"none"} responsive={false}>
                                 <EuiButtonIcon
                                     className="reload-subscriptions-icon-button"
                                     id={`refresh-icon-${id}`}
@@ -278,7 +278,7 @@ function Subscription({
                                         iconSize="l"
                                     />
                                 )}
-                            </>
+                            </EuiFlexGroup>
                         )}
 
                         {isModalVisible && (
