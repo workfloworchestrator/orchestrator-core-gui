@@ -32,6 +32,8 @@ import {
     EuiTitle,
 } from "@elastic/eui";
 import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
+import BackgroundJobLogs from "custom/components/cim/BackgroundJobLogs";
+import ImpactedObjects from "custom/components/cim/ImpactedObjects";
 import { ticketDetail } from "custom/pages/ServiceTicketDetailStyling";
 import {
     ServiceTicketLog,
@@ -41,16 +43,13 @@ import {
 } from "custom/types";
 import { renderStringAsDateTime } from "custom/Utils";
 import useInterval from "hooks/useInterval";
+import { intl } from "locale/i18n";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
 import { TabView } from "utils/types";
-
-import { intl } from "../../locale/i18n";
-import { setFlash } from "../../utils/Flash";
-import BackgroundJobLogs from "../components/cim/BackgroundJobLogs";
-import ImpactedObjects from "../components/cim/ImpactedObjects";
 
 interface IProps {
     id: string;

@@ -16,11 +16,11 @@ import {
     EuiTitle,
     RIGHT_ALIGNMENT,
 } from "@elastic/eui";
+import { HorizontalAlignment } from "@elastic/eui/src/services/alignment";
 import ImsCircuitInfo from "custom/components/cim/ImsCiruitInfo";
-import { ImpactedObject } from "custom/components/cim/ServiceTicketDetailImpactedObjects";
-import { ServiceTicketImpactedObjectImpact, ServiceTicketWithDetails } from "custom/types";
+import { ImpactedObject, ServiceTicketImpactedObjectImpact, ServiceTicketWithDetails } from "custom/types";
 import { isDate } from "lodash";
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, ReactNode, useContext, useState } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import ReactSelect from "react-select";
 import { getReactSelectTheme } from "stylesheets/emotion/utils";
@@ -39,14 +39,13 @@ const options: Option[] = (Object.values(ServiceTicketImpactedObjectImpact) as s
     label: val,
 }));
 
-const ImpactedObjects = ({ ticket, mode }: IProps) => {
+const ImpactedObjects = ({ ticket, updateable, mode }: IProps) => {
     const { theme, customApiClient } = useContext(ApplicationContext);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const closeModal = () => setIsModalVisible(false);
     const showModal = () => setIsModalVisible(true);
-    const [selectedItems, setSelectedItems] = useState([]);
     const [editImpactedObject, setEditImpactedObject] = useState<ImpactedObject>();
-    const [itemIdToExpandedRowMap, setItemIdToExpandedRowMap] = useState({});
+    const [itemIdToExpandedRowMap, setItemIdToExpandedRowMap] = useState<{ [key: string]: ReactNode }>({});
     const customStyles = getReactSelectTheme(theme);
 
     let data: ImpactedObject[] = [];
@@ -77,9 +76,8 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
 
     const [items, setItems] = useState(data);
 
-    let allExpandedRows = {};
+    let allExpandedRows: { [key: string]: ReactNode } = {};
     for (const item of data) {
-        // @ts-ignore
         allExpandedRows[item.id] = <ImsCircuitInfo imsInfo={item.ims_info}></ImsCircuitInfo>;
     }
 
@@ -91,56 +89,15 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
         }
     };
 
-    const onTableChange = ({ page = {}, sort = {} }) => {
-        // const { index: pageIndex, size: pageSize } = page;
-        //
-        // const { field: sortField, direction: sortDirection } = sort;
-        //
-        // setSortField(sortField);
-        // setSortDirection(sortDirection);
-    };
-
-    // const onSelectionChange = (selectedItems: any) => {
-    //     setSelectedItems(selectedItems);
-    // };
-
-    const onClickDelete = () => {
-        // store.deleteUsers(...selectedItems.map((user) => user.id));
-
-        setSelectedItems([]);
-    };
-
-    const renderDeleteButton = () => {
-        if (selectedItems.length === 0) {
-            return;
-        }
-        return (
-            <EuiButton color="danger" iconType="trash" onClick={onClickDelete}>
-                Delete {selectedItems.length} Users
-            </EuiButton>
-        );
-    };
-
     const toggleDetails = (item: ImpactedObject) => {
         const itemIdToExpandedRowMapValues = { ...itemIdToExpandedRowMap };
-        // @ts-ignore
         if (itemIdToExpandedRowMapValues[item.id]) {
-            // @ts-ignore
             delete itemIdToExpandedRowMapValues[item.id];
         } else {
-            // @ts-ignore
             itemIdToExpandedRowMapValues[item.id] = <ImsCircuitInfo imsInfo={item.ims_info}></ImsCircuitInfo>;
         }
         setItemIdToExpandedRowMap(itemIdToExpandedRowMapValues);
     };
-
-    const deleteButton = renderDeleteButton();
-
-    // const editImpact = (impactedObject: ImpactedObject): (() => void) => {
-    //     debugger;
-    //     // return () => updateable && setItems(impactedObject);
-    //     return () => setEditImpactedObject(impactedObject);
-    // };
 
     const removeEdit = (): void => {
         setEditImpactedObject(undefined);
@@ -151,7 +108,6 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
         if (isEmpty(e) || isDate(e)) {
             value = e;
         } else {
-            // @ts-ignore
             value = e.target ? e.target.value : e.value;
         }
         let index = Number(impactedObject.id.replace("item-", ""));
@@ -187,6 +143,7 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
         );
     };
 
+    const align_right: HorizontalAlignment = RIGHT_ALIGNMENT;
     let columns = [
         {
             field: "customer",
@@ -198,8 +155,6 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
         {
             field: "subscription",
             name: "Subscription",
-            // schema: 'date',
-            // render: (date) => formatDate(date, 'dobLong'),
             sortable: true,
             render: (name: string, record: any) =>
                 record.subscription_id ? (
@@ -215,28 +170,29 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
             field: "type",
             name: "Product type",
             truncateText: true,
-            width: 100,
+            width: "100",
         },
         {
             field: "id",
             name: "Affected services",
             render: (id: string, record: any) => <EuiBadge>{record.ims_info.length}</EuiBadge>,
-            width: 150,
+            width: "150",
         },
         {
             field: "impact",
             name: "Impact",
             truncateText: true,
-            width: 120,
+            width: "120",
         },
         {
             name: "Impact override",
             field: "impact_override",
             render: (id: string, record: any) => (record?.impact_override ? record.impact_override : "-"),
-            width: 120,
+            width: "120",
         },
         {
-            field: "impact_override",
+            name: "",
+            field: "edit_impact_override",
             actions: [
                 {
                     name: "Edit impact",
@@ -249,11 +205,10 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
                     },
                 },
             ],
-            width: 30,
+            width: "30",
         },
-
         {
-            align: RIGHT_ALIGNMENT,
+            align: align_right,
             width: "40px",
             isExpander: true,
             name: (
@@ -264,9 +219,7 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
             render: (item: ImpactedObject) => (
                 <EuiButtonIcon
                     onClick={() => toggleDetails(item)}
-                    // @ts-ignore
                     aria-label={itemIdToExpandedRowMap[item.id] ? "Collapse" : "Expand"}
-                    // @ts-ignore
                     iconType={itemIdToExpandedRowMap[item.id] ? "arrowUp" : "arrowDown"}
                 />
             ),
@@ -276,13 +229,21 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
     // Hide subscription and other columns when not needed
     if (mode === "withoutSubscriptions") {
         columns = columns.filter(
-            (c) => c.field !== "subscription" && c.field !== "type" && c.field !== "impact_override"
+            (c) =>
+                c.field !== "subscription" &&
+                c.field !== "type" &&
+                c.field !== "impact_override" &&
+                c.field !== "edit_impact_override"
         );
+    }
+
+    // Hide impact override when needed
+    if (!updateable) {
+        columns = columns.filter((c) => c.field !== "edit_impact_override");
     }
 
     return (
         <Fragment>
-            {deleteButton}
             {isModalVisible && (
                 <EuiModal style={{ height: 400 }} onClose={closeModal}>
                     <EuiModalHeader>
@@ -324,12 +285,8 @@ const ImpactedObjects = ({ ticket, mode }: IProps) => {
                 itemIdToExpandedRowMap={itemIdToExpandedRowMap}
                 isExpandable={true}
                 hasActions={true}
-                // @ts-ignore
                 columns={columns}
-                // sorting={sorting}
-                isSelectable={true}
-                // selection={selection}
-                onChange={onTableChange}
+                isSelectable={false}
             />
         </Fragment>
     );

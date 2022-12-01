@@ -893,6 +893,9 @@ I18n.translations.en = {
         backendProblem: "Couldn't query CIM backend",
         flash: {
             create_ticket_form: "Create ticket form submitted",
+            open_ticket_form: "Open ticket form submitted",
+            update_ticket_form: "Update ticket form submitted",
+            close_ticket_form: "Close ticket form submitted",
         },
     },
 };

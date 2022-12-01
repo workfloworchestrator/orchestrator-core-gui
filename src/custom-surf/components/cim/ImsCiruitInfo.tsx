@@ -15,7 +15,7 @@
 
 import { EuiLink, EuiPanel } from "@elastic/eui";
 import { tableImsCircuitInfo } from "custom/components/cim/ImsCircuitInfoStyling";
-import { ImsInfo } from "custom/components/cim/ServiceTicketDetailImpactedObjects";
+import { ImsInfo } from "custom/types";
 import { ENV } from "env";
 import React, { useContext } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
