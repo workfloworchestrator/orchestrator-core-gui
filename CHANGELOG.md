@@ -7,16 +7,24 @@ reference the gitlab/github issue that is related to the change.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [v10.5.0] - TBD
--   Fix CIM impacted objects without a subscription ID
--   Updated service ticket detail page to show "last_update_time"
+## [v10.6.0] - TBD
+
 -   `#47` Fix subscription dropdowns to not resize when typing and fixes alignments with other input fields
 -   Added description text in Owner_Subscription_Id and added a copy-to-clipboard button
--   Updated service ticket detail page to show "last_update_time"
 -   `#41` Converted most components to a Functions based approach
 -   Selecting "auto scroll" on process detail page is now stored in localstorage
 -   `#44` Include subscription description of first product block relation on Subscription detail page
+
+Surf specific:
+
+-   Added a log viewer to Service ticket detail
+-   Refactored Impacted objects tables to also show IMS Circuits
+-   Fix CIM impacted objects without a subscription ID
+-   Updated service ticket detail page to show "last_update_time"
 -   Added button to restart CIM open relate step
+
+## [v10.5.0] - 2022-10-24
+
 -   `#42` Fix help button hidden on subscriptions page
 -   `#141` Convert sass files to emotion 3
 -   `#157` Redirect workflow submit to process detail
