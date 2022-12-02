@@ -1,6 +1,6 @@
 {
     "name": "workflow-client",
-    "version": "1.0.0",
+    "version": "10.6.0",
     "private": false,
     "license": "Apache-2.0",
     "proxy": "http://localhost:8080",
@@ -15,8 +15,8 @@
         "storybook": "start-storybook -p 9009 -s ./public",
         "storybook-build": "build-storybook -s ./public",
         "storybook-deploy": "PUBLIC_URL=https://workfloworchestrator.github.io/orchestrator-core-gui gh-pages -d storybook-static",
-        "prettier": "prettier -c \"{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}\"",
-        "prettier-fix": "prettier --write \"{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}\"",
+        "prettier": "prettier -c \"{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html,*.md}\"",
+        "prettier-fix": "prettier --write \"{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html,*.md}\"",
         "extract": "formatjs extract",
         "compile": "formatjs compile"
     },

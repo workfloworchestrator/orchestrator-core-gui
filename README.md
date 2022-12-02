@@ -143,11 +143,11 @@ seems to fix that issue, whilst keeping hot reload intact. So try adding this to
 To run the storybook, do: `yarn storybook`.
 Your browser should open to http://localhost:9009/?path=/story/welcome--to-storybook.
 
-
 ## Actions and page views depending on who you are.
+
 The orchestrator client can be configured to allow access to a page or to buttons in the client. The react app
 consumes a webassembly OPA policy and evaluates if the user has the correct claims to view certain resources.
-The function that gets called is the ```allowed()``` function in `src/utils/policy.ts`. The implementation of `allowed()`
+The function that gets called is the `allowed()` function in `src/utils/policy.ts`. The implementation of `allowed()`
 is done as follows:
 
 ```typescript jsx
@@ -163,58 +163,54 @@ Basically it boils down to: when a call to `allowed` returns true the component 
 **When no policy is found, the orchestrator-client will allow access to the resource.
 Any real access must be enforced by the API. The client only disables features with the `allowed` function**
 
-
 ### Pages
 
 These are the pages in the orchestrator client and how the resources can be viewed. In the implementation we only disable
 menu items, not the actual pages. If a user has a direct url they will still be able to access the resource.
 
-|Page|Resource name|
-|---|---|
-|Processes Pages|`/orchestrator/processes/`|
-|Subscriptions Pages|`/orchestrator/subscriptions/`|
-|Metadata Pages|`/orchestrator/metadata/`|
-|Tasks Pages|`/orchestrator/tasks/`|
-|Settings Pages|`/orchestrator/settings/`|
+| Page                | Resource name                  |
+| ------------------- | ------------------------------ |
+| Processes Pages     | `/orchestrator/processes/`     |
+| Subscriptions Pages | `/orchestrator/subscriptions/` |
+| Metadata Pages      | `/orchestrator/metadata/`      |
+| Tasks Pages         | `/orchestrator/tasks/`         |
+| Settings Pages      | `/orchestrator/settings/`      |
 
 If you would like to add an extra menu item you are free to name it as you wish. It is defined in the `allowed` function.
 
 ### Actions
+
 Actions are disabled in the same manner as menu items. The following actions are configurable:
 
-|Action|Location|Resource name| Explanation|
-|---|---|---|---|
-|Modify a subscription|Subscription detail page action menu|`/orchestrator/subscriptions/modify/*`|This resource can be configured per workflow|
-|Terminate a subscription| "    "|`/orchestrator/subscriptions/terminate/*`|With this resource you can terminate a subscription|
-|Validate a subscription|"   "|`/orchestrator/subscriptions/validate/*`|With this resource you can validate a certain subscription|
-|View a subscription from the process detail page|The process detail page|`/orchestrator/subscriptions/view/from-process`|Interact with a subscription from the process detail page|
-|Abort a process|" " |`/orchestrator/processes/abort/*`| The ability to abort a process|
-|Delete a process|" "|`/orchestrator/processes/delete/*`| The ability to delete a process, this is always disabled for processes not for tasks|
-|Retry a process|" "|`/orchestrator/processes/retry/*`| The ability to retry a failed process or task|
-|View a subscription from a process|" "|`/orchestrator/subscriptons/view/from-process` |This enables the link towards the subscription detail page|
-|View a process detail page| The process list page| `/orchestrator/processes/details/*`| The allows the person to visit a process detail page|
-|Retry all tasks| The tasks list page|`/orchestrator/processes/all-tasks/retry`| The Retry all tasks button|
-|Create a task| The tasks list page|`/orchestrator/processes/create/task`| Create a task|
-|Create a new subscription|The new process button|`/orchestrator/processes/create/process/menu`||
-|Render a user_input_form|Allow access to input steps| `/orchestrator/processes/user_inout/*`|Allow access to input_steps|
-|Allow deletion of product blocks| Product block detail page|`/orchestrator/metadata/product-block/delete/*`||
-|Edit a product block| "  "|`/orchestrator/metadata/product-block/edit/*`||
-|View a product block|Product block list page|`/orchestrator/metadata/prodcut-block/view/*`||
-|View a product|Product list page|`/orchestrator/metadata/product/view/*`||
-|Edit a product|Product detail page|`/orchestrator/metadata/product/edit/*`||
-|Delete a product|Product detail page|`/orchestrator/metadata/product/delete/*`||
+| Action                                           | Location                             | Resource name                                   | Explanation                                                                          |
+| ------------------------------------------------ | ------------------------------------ | ----------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Modify a subscription                            | Subscription detail page action menu | `/orchestrator/subscriptions/modify/*`          | This resource can be configured per workflow                                         |
+| Terminate a subscription                         | " "                                  | `/orchestrator/subscriptions/terminate/*`       | With this resource you can terminate a subscription                                  |
+| Validate a subscription                          | " "                                  | `/orchestrator/subscriptions/validate/*`        | With this resource you can validate a certain subscription                           |
+| View a subscription from the process detail page | The process detail page              | `/orchestrator/subscriptions/view/from-process` | Interact with a subscription from the process detail page                            |
+| Abort a process                                  | " "                                  | `/orchestrator/processes/abort/*`               | The ability to abort a process                                                       |
+| Delete a process                                 | " "                                  | `/orchestrator/processes/delete/*`              | The ability to delete a process, this is always disabled for processes not for tasks |
+| Retry a process                                  | " "                                  | `/orchestrator/processes/retry/*`               | The ability to retry a failed process or task                                        |
+| View a subscription from a process               | " "                                  | `/orchestrator/subscriptons/view/from-process`  | This enables the link towards the subscription detail page                           |
+| View a process detail page                       | The process list page                | `/orchestrator/processes/details/*`             | The allows the person to visit a process detail page                                 |
+| Retry all tasks                                  | The tasks list page                  | `/orchestrator/processes/all-tasks/retry`       | The Retry all tasks button                                                           |
+| Create a task                                    | The tasks list page                  | `/orchestrator/processes/create/task`           | Create a task                                                                        |
+| Create a new subscription                        | The new process button               | `/orchestrator/processes/create/process/menu`   |                                                                                      |
+| Render a user_input_form                         | Allow access to input steps          | `/orchestrator/processes/user_inout/*`          | Allow access to input_steps                                                          |
+| Allow deletion of product blocks                 | Product block detail page            | `/orchestrator/metadata/product-block/delete/*` |                                                                                      |
+| Edit a product block                             | " "                                  | `/orchestrator/metadata/product-block/edit/*`   |                                                                                      |
+| View a product block                             | Product block list page              | `/orchestrator/metadata/prodcut-block/view/*`   |                                                                                      |
+| View a product                                   | Product list page                    | `/orchestrator/metadata/product/view/*`         |                                                                                      |
+| Edit a product                                   | Product detail page                  | `/orchestrator/metadata/product/edit/*`         |                                                                                      |
+| Delete a product                                 | Product detail page                  | `/orchestrator/metadata/product/delete/*`       |                                                                                      |
 
 New actions or other actions can be enabled or disabled in the same way as menu items, by adding an arbitrary resource
 to the project.
-
 
 ## Development tips
 
 ### IDE plugins
 
-
 **Visual Studio Code**
 
-* [vscode-styled-components](https://marketplace.visualstudio.com/items?itemName=styled-components.vscode-styled-components) for syntax highlighting `emotion/css`
-
-
+-   [vscode-styled-components](https://marketplace.visualstudio.com/items?itemName=styled-components.vscode-styled-components) for syntax highlighting `emotion/css`

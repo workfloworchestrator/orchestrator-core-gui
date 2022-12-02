@@ -3,12 +3,10 @@ import {
     DARKEST_PRIMARY_COLOR,
     DARK_GOLD_COlOR,
     DARK_GREY_COLOR,
-    DARK_SUCCESS_COLOR,
     LIGHTER_GREY_COLOR,
     LIGHT_GOLD_COLOR,
     LIGHT_GREY_COLOR,
     LIGHT_PRIMARY_COLOR,
-    LIGHT_SUCCESS_COLOR,
     MEDIUM_GREY_COLOR,
 } from "stylesheets/emotion/colors";
 import { phoneMediaQuery } from "stylesheets/emotion/mediaQueries";
@@ -34,17 +32,16 @@ const table_phone = css`
             float: left;
             text-transform: uppercase;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 12px;
             color: ${MEDIUM_GREY_COLOR};
         }
     }
 `;
 
-export const tableImpactedObjects = css`
-    table.ticket-impacted-objects {
+export const tableImsCircuitInfo = css`
+    table.ims-circuit-info {
         width: 100%;
         word-break: break-all;
-        margin: 10px;
 
         td,
         th {
@@ -53,14 +50,12 @@ export const tableImpactedObjects = css`
         }
 
         tr {
-            cursor: pointer;
-
             &.light {
-                border-bottom: 1px solid ${LIGHT_GREY_COLOR};
+                border-top: 1px solid ${LIGHT_GREY_COLOR};
             }
 
             &.dark {
-                border-bottom: 1px solid ${DARK_GREY_COLOR};
+                border-top: 1px solid ${DARK_GREY_COLOR};
             }
 
             &:hover {
@@ -73,27 +68,7 @@ export const tableImpactedObjects = css`
             }
         }
 
-        tr.Allocated {
-            &.light {
-                background-color: ${LIGHT_PRIMARY_COLOR};
-            }
-
-            &.dark {
-                background-color: ${DARKEST_PRIMARY_COLOR};
-            }
-
-            &:hover {
-                &.light {
-                    background-color: ${shadeColor(LIGHT_PRIMARY_COLOR, -10)};
-                }
-
-                &.dark {
-                    background-color: ${shadeColor(DARKEST_PRIMARY_COLOR, -10)};
-                }
-            }
-        }
-
-        tr.Planned {
+        tr.down {
             /* cursor: default; */
 
             &.light {
@@ -115,66 +90,41 @@ export const tableImpactedObjects = css`
             }
         }
 
-        tr.Free {
-            &.light {
-                background-color: ${LIGHT_SUCCESS_COLOR};
-            }
-
-            &.dark {
-                background-color: ${DARK_SUCCESS_COLOR};
-            }
-
-            &:hover {
-                &.light {
-                    background-color: ${shadeColor(LIGHT_SUCCESS_COLOR, -10)};
-                }
-
-                &.dark {
-                    background-color: ${shadeColor(DARK_SUCCESS_COLOR, -10)};
-                }
-            }
-        }
-
         th {
-            padding: 5px 5px 10px 5px;
+            padding: 0 5px 0 5px;
         }
 
         th.customer {
             width: 15%;
         }
-
-        td.impact-override {
-            padding: 0 0 0 5px;
-
-            & div.impact-override__select {
-                max-width: 200px;
-            }
-
-            & div.impact-override__text {
-                width: 170px;
-            }
+        th.ims_circuit_id {
+            width: 100px;
+        }
+        td.ims-info {
+            width: 40%;
         }
 
         span {
             text-transform: uppercase;
             font-weight: bold;
-            font-size: larger;
             color: ${MEDIUM_GREY_COLOR};
-            padding: 7px 2px 7px 0;
+            padding: 7px 2px 0 0;
         }
 
         i.fa {
             float: right;
             margin-right: 15px;
             color: ${MEDIUM_GREY_COLOR};
-            font-size: 18px;
+            font-size: 15px;
         }
 
         tbody {
             td {
                 word-break: break-word;
                 word-wrap: break-word;
-                padding: 15px 0 10px 5px;
+                padding: 5px 0 10px 5px;
+                vertical-align: top;
+                font-size: 12px;
 
                 div.tool-tip {
                     span {

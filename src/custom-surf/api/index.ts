@@ -3,7 +3,6 @@ import {
     OpenServiceTicketPayload,
     ServiceTicket,
     ServiceTicketBackgroundJobCount,
-    ServiceTicketImpactedIMSCircuit,
     ServiceTicketProcessState,
     ServiceTicketWithDetails,
 } from "custom/types";
@@ -72,9 +71,8 @@ abstract class CustomApiClientInterface extends BaseApiClient {
     abstract cimTicketById: (ticket_id: string) => Promise<ServiceTicketWithDetails>;
     abstract cimPatchImpactedObject: (
         ticket_id: string,
-        subscription_id: string,
-        circuit_id: number,
-        impactedObject: ServiceTicketImpactedIMSCircuit
+        index: number,
+        impact: string
     ) => Promise<ServiceTicketWithDetails>;
 }
 
@@ -280,15 +278,10 @@ export class CustomApiClient extends CustomApiClientInterface {
         );
     };
 
-    cimPatchImpactedObject = (
-        ticket_id: string,
-        subscription_id: string,
-        circuit_id: number,
-        impactedObject: ServiceTicketImpactedIMSCircuit
-    ): Promise<ServiceTicketWithDetails> => {
+    cimPatchImpactedObject = (ticket_id: string, index: number, impact: string): Promise<ServiceTicketWithDetails> => {
         return this.postPutJson(
-            prefix_cim_dev_uri(`surf/cim/objects/${ticket_id}/subscription/${subscription_id}/circuit/${circuit_id}`),
-            impactedObject,
+            prefix_cim_dev_uri(`surf/cim/objects/${ticket_id}/${index}`),
+            { impact_override: impact },
             "patch",
             true,
             false

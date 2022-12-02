@@ -89,7 +89,6 @@ export interface ServiceTicketImpactedIMSCircuit {
     ims_circuit_id: number;
     ims_circuit_name: string;
     impact: ServiceTicketImpactedObjectImpact;
-    impact_override?: ServiceTicketImpactedObjectImpact;
     extra_information?: string;
 }
 
@@ -114,7 +113,9 @@ export interface ServiceTicketRelatedCustomer {
 }
 
 export interface ServiceTicketImpactedObject {
-    subscription_id: string;
+    impact_override: ServiceTicketImpactedObjectImpact;
+    subscription_id: string | null;
+    product_type: string;
     logged_by: string;
     ims_circuits: ServiceTicketImpactedIMSCircuit[];
     owner_customer: ServiceTicketCustomer;
@@ -129,6 +130,14 @@ export enum ServiceTicketType {
     INCIDENT = "incident",
 }
 
+export interface BackgroundJobLog {
+    message: string;
+    customer_id?: string;
+    subscription_id?: string;
+    entry_time: string;
+    process_state: string;
+}
+
 export interface ServiceTicketWithDetails extends ServiceTicket {
     transitioning_state: any;
     end_date: string;
@@ -136,4 +145,23 @@ export interface ServiceTicketWithDetails extends ServiceTicket {
     type: ServiceTicketType;
     logs: ServiceTicketLog[];
     impacted_objects: ServiceTicketImpactedObject[];
+    background_logs: BackgroundJobLog[];
+}
+
+export interface ImsInfo {
+    impact: ServiceTicketImpactedObjectImpact;
+    ims_circuit_id: number;
+    ims_circuit_name: string;
+    extra_information?: string;
+}
+
+export interface ImpactedObject {
+    id: string;
+    customer: string;
+    impact: ServiceTicketImpactedObjectImpact;
+    type: string;
+    subscription: string;
+    impact_override?: ServiceTicketImpactedObjectImpact;
+    subscription_id: string | null;
+    ims_info: ImsInfo[];
 }

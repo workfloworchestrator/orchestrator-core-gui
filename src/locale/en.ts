@@ -534,7 +534,10 @@ I18n.translations.en = {
             impact: "Impact",
             type: "Type",
             subscription: "Subscription",
-            impact_override: "Impact override",
+            ims_circuit_name: "IMS Name",
+            ims_circuit_id: "ID",
+            extra_information: "Extra info",
+            impact_override: "Override",
             impact_override_info: "Use this to override the impact, or clear to remove override",
         },
     },
@@ -890,6 +893,9 @@ I18n.translations.en = {
         backendProblem: "Couldn't query CIM backend",
         flash: {
             create_ticket_form: "Create ticket form submitted",
+            open_ticket_form: "Open ticket form submitted",
+            update_ticket_form: "Update ticket form submitted",
+            close_ticket_form: "Close ticket form submitted",
         },
     },
 };
