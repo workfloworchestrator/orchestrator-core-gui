@@ -18,7 +18,12 @@ import {
 } from "@elastic/eui";
 import { HorizontalAlignment } from "@elastic/eui/src/services/alignment";
 import ImsCircuitInfo from "custom/components/cim/ImsCiruitInfo";
-import { ImpactedObject, ServiceTicketImpactedObjectImpact, ServiceTicketWithDetails } from "custom/types";
+import {
+    ImpactedObject,
+    ServiceTicketImpactedObject,
+    ServiceTicketImpactedObjectImpact,
+    ServiceTicketWithDetails,
+} from "custom/types";
 import { isDate } from "lodash";
 import React, { Fragment, ReactNode, useContext, useState } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
@@ -31,7 +36,7 @@ import { isEmpty } from "utils/Utils";
 interface IProps extends WrappedComponentProps {
     ticket: ServiceTicketWithDetails;
     updateable: boolean;
-    mode: "withSubscriptions" | "withoutSubscriptions";
+    withSubscriptions: boolean;
 }
 
 const options: Option[] = (Object.values(ServiceTicketImpactedObjectImpact) as string[]).map((val) => ({
@@ -39,28 +44,18 @@ const options: Option[] = (Object.values(ServiceTicketImpactedObjectImpact) as s
     label: val,
 }));
 
-const ImpactedObjects = ({ ticket, updateable, mode }: IProps) => {
-    const { theme, customApiClient } = useContext(ApplicationContext);
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const closeModal = () => setIsModalVisible(false);
-    const showModal = () => setIsModalVisible(true);
-    const [editImpactedObject, setEditImpactedObject] = useState<ImpactedObject>();
-    const [itemIdToExpandedRowMap, setItemIdToExpandedRowMap] = useState<{ [key: string]: ReactNode }>({});
-    const customStyles = getReactSelectTheme(theme);
-
-    let data: ImpactedObject[] = [];
-    let itemCounter = 0;
-    for (const impactedObject of ticket.impacted_objects) {
-        if (mode === "withoutSubscriptions" && impactedObject.subscription_id) {
-            console.log("Skipping", impactedObject.subscription_id);
+const getFilteredImpactedObjects = (impactedObjects: ServiceTicketImpactedObject[], withSubscriptions: boolean) => {
+    let result: ImpactedObject[] = [];
+    for (const [index, impactedObject] of impactedObjects.entries()) {
+        if (!withSubscriptions && impactedObject.subscription_id) {
             continue;
         }
-        if (mode === "withSubscriptions" && !impactedObject.subscription_id) {
+        if (withSubscriptions && !impactedObject.subscription_id) {
             continue;
         }
 
         const tempImpactedCircuit: ImpactedObject = {
-            id: `item-${itemCounter}`,
+            id: `item-${index}`,
             customer: impactedObject.owner_customer.customer_name,
             impact: impactedObject.ims_circuits[0].impact,
             type: impactedObject.product_type,
@@ -69,10 +64,21 @@ const ImpactedObjects = ({ ticket, updateable, mode }: IProps) => {
             subscription_id: impactedObject.subscription_id,
             ims_info: impactedObject.ims_circuits,
         };
-        data.push(tempImpactedCircuit);
-        itemCounter += 1;
+        result.push(tempImpactedCircuit);
     }
-    console.log(`Working mode: ${mode}. Filtered data: `, data);
+    return result;
+};
+
+const ImpactedObjects = ({ ticket, updateable, withSubscriptions }: IProps) => {
+    const { theme, customApiClient } = useContext(ApplicationContext);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const closeModal = () => setIsModalVisible(false);
+    const showModal = () => setIsModalVisible(true);
+    const [editImpactedObject, setEditImpactedObject] = useState<ImpactedObject>();
+    const [itemIdToExpandedRowMap, setItemIdToExpandedRowMap] = useState<{ [key: string]: ReactNode }>({});
+    const customStyles = getReactSelectTheme(theme);
+
+    const data = getFilteredImpactedObjects(ticket.impacted_objects, withSubscriptions);
 
     const [items, setItems] = useState(data);
 
@@ -227,7 +233,7 @@ const ImpactedObjects = ({ ticket, updateable, mode }: IProps) => {
     ];
 
     // Hide subscription and other columns when not needed
-    if (mode === "withoutSubscriptions") {
+    if (!withSubscriptions) {
         columns = columns.filter(
             (c) =>
                 c.field !== "subscription" &&
@@ -263,9 +269,7 @@ const ImpactedObjects = ({ ticket, updateable, mode }: IProps) => {
                 <EuiFlexItem>
                     <EuiTitle>
                         <h2>
-                            {mode === "withSubscriptions"
-                                ? "Impact on subscriptions"
-                                : "Impact on services without subscriptions"}
+                            {withSubscriptions ? "Impact on subscriptions" : "Impact on services without subscriptions"}
                         </h2>
                     </EuiTitle>
                 </EuiFlexItem>
@@ -279,7 +283,9 @@ const ImpactedObjects = ({ ticket, updateable, mode }: IProps) => {
             </EuiFlexGrid>
 
             <EuiBasicTable
-                tableCaption={`Impacted objects table ${mode}`}
+                tableCaption={`Impacted objects table ${
+                    withSubscriptions ? "with subscriptions" : "without subscriptions"
+                }`}
                 items={items}
                 itemId="id"
                 itemIdToExpandedRowMap={itemIdToExpandedRowMap}

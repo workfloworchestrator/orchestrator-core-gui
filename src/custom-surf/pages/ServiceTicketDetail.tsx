@@ -395,7 +395,7 @@ const ServiceTicketDetail = () => {
                         {renderLogItemActions(ticket, actions)}
                         <EuiSpacer />
                         <EuiSpacer size="s" />
-                        <ImpactedObjects ticket={ticket} mode="withSubscriptions" updateable={isUpdateImpactActive} />
+                        <ImpactedObjects ticket={ticket} withSubscriptions={true} updateable={isUpdateImpactActive} />
                         <EuiSpacer />
                         <EuiFlexGroup gutterSize="s" className="buttons">
                             <EuiFlexItem>
@@ -405,11 +405,7 @@ const ServiceTicketDetail = () => {
                             </EuiFlexItem>
                         </EuiFlexGroup>
                         <EuiSpacer size="s" />
-                        <ImpactedObjects
-                            ticket={ticket}
-                            mode="withoutSubscriptions"
-                            updateable={isUpdateImpactActive}
-                        />
+                        <ImpactedObjects ticket={ticket} withSubscriptions={false} updateable={isUpdateImpactActive} />
                         <EuiSpacer />
                         <EuiFlexGroup gutterSize="s" className="buttons">
                             <EuiFlexItem>
