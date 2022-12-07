@@ -195,7 +195,7 @@ const ServiceTicketDetail = () => {
         redirect(`/tickets/${ticket._id}/close`);
     };
 
-    const actions: Action[] = [
+    let actions: Action[] = [
         {
             translation: "tickets.action.opening",
             onClick: openTicket,
@@ -226,6 +226,16 @@ const ServiceTicketDetail = () => {
             ],
         },
     ];
+
+    actions.splice(1, 0, {
+        translation: "tickets.action.open_and_close",
+        onClick: () => {},
+        requiredState: [
+            ServiceTicketProcessState.OPEN_RELATED,
+            ServiceTicketProcessState.OPEN,
+            ServiceTicketProcessState.UPDATED,
+        ],
+    });
 
     const isUpdateImpactActive = [
         ServiceTicketProcessState.OPEN_ACCEPTED,
