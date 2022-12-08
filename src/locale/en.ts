@@ -149,6 +149,14 @@ I18n.translations.en = {
                     "VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports.",
             },
         },
+        fields: {
+            title_nl: "Title in Dutch",
+            description_nl: "Description in Dutch",
+            title_en: "Title in English",
+            description_en: "Description in English",
+            title_nl_ro: "Title in Dutch - readonly",
+            description_nl_ro: "Description in Dutch - readonly",
+        },
     },
     process: {
         cancel: "Cancel",
