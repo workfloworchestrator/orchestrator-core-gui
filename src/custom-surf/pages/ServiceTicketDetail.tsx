@@ -138,7 +138,14 @@ const ServiceTicketDetail = () => {
             id: "mod-ticket-logitem-0",
             name: "description",
             disabled: false,
-            content: <EuiPanel hasBorder={true} hasShadow={false} borderRadius="none"></EuiPanel>,
+            content: (
+                <EuiPanel
+                    hasBorder={true}
+                    hasShadow={false}
+                    borderRadius="none"
+                    style={{ minHeight: "150px" }}
+                ></EuiPanel>
+            ),
         },
     ];
     if (ticket.logs.length > 0) {
@@ -337,16 +344,17 @@ const ServiceTicketDetail = () => {
                                         </td>
                                         <td className={valueRowClass}>{renderStringAsDateTime(ticket.end_date)}</td>
                                     </tr>
-                                </tbody>
-                            </table>
-                            <table className={`detail-block`}>
-                                <thead />
-                                <tbody>
                                     <tr className={theme}>
                                         <td className={keyRowClass}>
                                             <FormattedMessage id="tickets.table.opened_by" />
                                         </td>
                                         <td className={valueRowClass}>{ticket.opened_by}</td>
+                                    </tr>
+                                    <tr className={theme}>
+                                        <td className={keyRowClass}>
+                                            <FormattedMessage id="tickets.table.create_date" />
+                                        </td>
+                                        <td className={valueRowClass}>{renderStringAsDateTime(ticket.create_date)}</td>
                                     </tr>
                                     <tr className={theme}>
                                         <td className={keyRowClass}>
