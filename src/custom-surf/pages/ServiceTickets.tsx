@@ -353,16 +353,16 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                         {renderStringAsDateTime(ticket.start_date, true)}
                                     </td>
                                     <td
-                                        data-label={intl.formatMessage({ id: "tickets.table.last_update_time" })}
-                                        className="updated_on"
-                                    >
-                                        {renderStringAsDateTime(ticket.last_update_time, true)}
-                                    </td>
-                                    <td
                                         data-label={intl.formatMessage({ id: "tickets.table.create_date" })}
                                         className="create_date"
                                     >
                                         {renderStringAsDateTime(ticket.create_date, true)}
+                                    </td>
+                                    <td
+                                        data-label={intl.formatMessage({ id: "tickets.table.last_update_time" })}
+                                        className="updated_on"
+                                    >
+                                        {renderStringAsDateTime(ticket.last_update_time, true)}
                                     </td>
                                 </tr>
                             ))}
