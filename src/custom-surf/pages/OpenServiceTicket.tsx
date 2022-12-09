@@ -26,9 +26,28 @@ interface IProps {
     id: string;
 }
 
+function FormHeader() {
+    const [showExplanation, setShowExplanation] = useState(false);
+
+    return (
+        <>
+            <EuiPageHeader
+                pageTitle="Prepare to send OPEN email to institutes"
+                rightSideItems={[
+                    <section className="explain">
+                        <i className="fa fa-question-circle" onClick={() => setShowExplanation(true)} />
+                    </section>,
+                ]}
+            />
+            <Explain close={() => setShowExplanation(false)} isVisible={showExplanation} title="What is this?">
+                <p>This wizard will guide you through the process of sending the OPEN email to institutes.</p>
+            </Explain>
+        </>
+    );
+}
+
 export default function OpenServiceTicket() {
     const { id } = useParams<IProps>();
-    const [showExplanation, setShowExplanation] = useState(false);
     const { redirect, customApiClient } = useContext(ApplicationContext);
 
     const handleSubmit = (userInputs: any) => {
@@ -50,17 +69,7 @@ export default function OpenServiceTicket() {
     return (
         <EuiPage css={formStyling}>
             <EuiPageBody component="div">
-                <EuiPageHeader
-                    pageTitle="Prepare to send OPEN email to institutes"
-                    rightSideItems={[
-                        <section className="explain">
-                            <i className="fa fa-question-circle" onClick={() => setShowExplanation(true)} />
-                        </section>,
-                    ]}
-                />
-                <Explain close={() => setShowExplanation(false)} isVisible={showExplanation} title="What is this?">
-                    <p>This wizard will guide you through the process of sending the OPEN email to institutes.</p>
-                </Explain>
+                <FormHeader />
                 <OpenForm
                     formKey="open_ticket_form"
                     handleSubmit={handleSubmit}
