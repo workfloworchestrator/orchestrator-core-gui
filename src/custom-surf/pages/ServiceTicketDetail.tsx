@@ -231,7 +231,7 @@ const ServiceTicketDetail = () => {
         translation: "tickets.action.open_and_close",
         onClick: () => {},
         requiredState: [
-            ServiceTicketProcessState.OPEN_RELATED,
+            ServiceTicketProcessState.OPEN_ACCEPTED,
             ServiceTicketProcessState.OPEN,
             ServiceTicketProcessState.UPDATED,
         ],
