@@ -46,7 +46,8 @@ function UserInputFormWizard({ hasNext = false, stepUserInput, validSubmit, canc
 
     const previous = (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
-        setForms(forms.filter((item) => item !== forms.pop()));
+        const current = forms.pop();
+        setForms(forms.filter((item) => item !== current));
     };
 
     const submit = (currentFormData: {}) => {
