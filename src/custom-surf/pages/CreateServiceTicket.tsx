@@ -18,7 +18,7 @@ import CreateForm from "custom/components/cim/CreateForm";
 import FormHeader from "custom/components/FormHeader";
 import { formStyling } from "custom/pages/FormStyling";
 import { CreateServiceTicketPayload } from "custom/types";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import ApplicationContext from "utils/ApplicationContext";
 
 export default function CreateServiceTicket() {

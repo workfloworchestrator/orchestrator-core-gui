@@ -18,7 +18,7 @@ import OpenForm from "custom/components/cim/OpenForm";
 import FormHeader from "custom/components/FormHeader";
 import { formStyling } from "custom/pages/FormStyling";
 import { CloseServiceTicketPayload } from "custom/types";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
 
