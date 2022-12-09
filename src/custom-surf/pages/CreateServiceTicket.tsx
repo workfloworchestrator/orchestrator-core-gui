@@ -13,16 +13,15 @@
  *
  */
 
-import { EuiPage, EuiPageBody, EuiPageHeader } from "@elastic/eui";
-import Explain from "components/Explain";
+import { EuiPage, EuiPageBody } from "@elastic/eui";
 import CreateForm from "custom/components/cim/CreateForm";
+import FormHeader from "custom/components/FormHeader";
 import { formStyling } from "custom/pages/FormStyling";
 import { CreateServiceTicketPayload } from "custom/types";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import ApplicationContext from "utils/ApplicationContext";
 
 export default function CreateServiceTicket() {
-    const [showExplanation, setShowExplanation] = useState(false);
     const { redirect, customApiClient } = useContext(ApplicationContext);
 
     const handleSubmit = (userInputs: any) => {
@@ -38,21 +37,13 @@ export default function CreateServiceTicket() {
     return (
         <EuiPage css={formStyling}>
             <EuiPageBody component="div">
-                <EuiPageHeader
-                    pageTitle="Create ticket"
-                    rightSideItems={[
-                        <section className="explain">
-                            <i className="fa fa-question-circle" onClick={() => setShowExplanation(true)} />
-                        </section>,
-                    ]}
+                <FormHeader
+                    title="Create ticket"
+                    explainTitle="How to create a CIM ticket"
+                    explainDescription={
+                        <p>Starting a ticket will execute a state machine that guides you through the process.</p>
+                    }
                 />
-                <Explain
-                    close={() => setShowExplanation(false)}
-                    isVisible={showExplanation}
-                    title="How to create a CIM ticket"
-                >
-                    <p>Starting a ticket will execute a state machine that guides you through the process.</p>
-                </Explain>
                 <CreateForm formKey="create_ticket_form" handleSubmit={handleSubmit} />
             </EuiPageBody>
         </EuiPage>
