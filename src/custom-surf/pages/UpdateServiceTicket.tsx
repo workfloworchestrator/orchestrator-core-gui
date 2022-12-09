@@ -13,12 +13,12 @@
  *
  */
 
-import { EuiPage, EuiPageBody, EuiPageHeader } from "@elastic/eui";
-import Explain from "components/Explain";
+import { EuiPage, EuiPageBody } from "@elastic/eui";
 import OpenForm from "custom/components/cim/OpenForm";
+import FormHeader from "custom/components/FormHeader";
 import { formStyling } from "custom/pages/FormStyling";
 import { UpdateServiceTicketPayload } from "custom/types";
-import React, { useContext, useState } from "react";
+import { useContext } from "react";
 import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
 
@@ -28,7 +28,6 @@ interface IProps {
 
 export default function UpdateServiceTicket() {
     const { id } = useParams<IProps>();
-    const [showExplanation, setShowExplanation] = useState(false);
     const { redirect, customApiClient } = useContext(ApplicationContext);
 
     const handleSubmit = (userInputs: any) => {
@@ -53,17 +52,13 @@ export default function UpdateServiceTicket() {
     return (
         <EuiPage css={formStyling}>
             <EuiPageBody component="div">
-                <EuiPageHeader
-                    pageTitle="Prepare to send UPDATE email to institutes"
-                    rightSideItems={[
-                        <section className="explain">
-                            <i className="fa fa-question-circle" onClick={() => setShowExplanation(true)} />
-                        </section>,
-                    ]}
+                <FormHeader
+                    title="Prepare to send UPDATE email to institutes"
+                    explainTitle="What is this?"
+                    explainDescription={
+                        <p>This wizard will guide you through the process of sending the UPDATE email to institutes.</p>
+                    }
                 />
-                <Explain close={() => setShowExplanation(false)} isVisible={showExplanation} title="What is this?">
-                    <p>This wizard will guide you through the process of sending the UPDATE email to institutes.</p>
-                </Explain>
                 <OpenForm
                     formKey="update_ticket_form"
                     handleSubmit={handleSubmit}

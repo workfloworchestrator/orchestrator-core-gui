@@ -13,37 +13,17 @@
  *
  */
 
-import { EuiPage, EuiPageBody, EuiPageHeader } from "@elastic/eui";
-import Explain from "components/Explain";
+import { EuiPage, EuiPageBody } from "@elastic/eui";
 import OpenForm from "custom/components/cim/OpenForm";
+import FormHeader from "custom/components/FormHeader";
 import { formStyling } from "custom/pages/FormStyling";
 import { OpenServiceTicketPayload } from "custom/types";
-import React, { useContext, useState } from "react";
+import { useContext } from "react";
 import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
 
 interface IProps {
     id: string;
-}
-
-function FormHeader() {
-    const [showExplanation, setShowExplanation] = useState(false);
-
-    return (
-        <>
-            <EuiPageHeader
-                pageTitle="Prepare to send OPEN email to institutes"
-                rightSideItems={[
-                    <section className="explain">
-                        <i className="fa fa-question-circle" onClick={() => setShowExplanation(true)} />
-                    </section>,
-                ]}
-            />
-            <Explain close={() => setShowExplanation(false)} isVisible={showExplanation} title="What is this?">
-                <p>This wizard will guide you through the process of sending the OPEN email to institutes.</p>
-            </Explain>
-        </>
-    );
 }
 
 export default function OpenServiceTicket() {
@@ -69,7 +49,13 @@ export default function OpenServiceTicket() {
     return (
         <EuiPage css={formStyling}>
             <EuiPageBody component="div">
-                <FormHeader />
+                <FormHeader
+                    title="Prepare to send OPEN email to institutes"
+                    explainTitle="What is this?"
+                    explainDescription={
+                        <p>This wizard will guide you through the process of sending the OPEN email to institutes.</p>
+                    }
+                />
                 <OpenForm
                     formKey="open_ticket_form"
                     handleSubmit={handleSubmit}
