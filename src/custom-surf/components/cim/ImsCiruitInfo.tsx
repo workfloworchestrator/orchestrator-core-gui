@@ -63,9 +63,7 @@ const ImsCircuitInfo = ({ imsInfo, ownerCustomerContacts, relatedCustomers }: IP
             <EuiFlexItem>
                 <EuiCard titleSize={"xs"} title={`Contact person ${index + 1}`} description={c.name}>
                     <EuiIcon type={"email"} style={{ marginTop: "-3px" }}></EuiIcon>&nbsp;
-                    <a href={c.email} target="_blank">
-                        {c.email}
-                    </a>
+                    <a href={c.email}>{c.email}</a>
                 </EuiCard>
             </EuiFlexItem>
         ));
