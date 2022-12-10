@@ -164,4 +164,6 @@ export interface ImpactedObject {
     impact_override?: ServiceTicketImpactedObjectImpact;
     subscription_id: string | null;
     ims_info: ImsInfo[];
+    owner_customer_contacts: ServiceTicketContact[];
+    related_customers: ServiceTicketRelatedCustomer[];
 }

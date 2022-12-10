@@ -13,9 +13,9 @@
  *
  */
 
-import { EuiLink, EuiPanel } from "@elastic/eui";
+import { EuiCard, EuiFlexGrid, EuiFlexItem, EuiIcon, EuiLink, EuiPanel, EuiSpacer } from "@elastic/eui";
 import { tableImsCircuitInfo } from "custom/components/cim/ImsCircuitInfoStyling";
-import { ImsInfo } from "custom/types";
+import { ImsInfo, ServiceTicketContact, ServiceTicketRelatedCustomer } from "custom/types";
 import { ENV } from "env";
 import React, { useContext } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
@@ -25,10 +25,12 @@ type Column = "ims_circuit_id" | "ims_circuit_name" | "extra_info" | "impact";
 
 interface IProps extends WrappedComponentProps {
     imsInfo: ImsInfo[];
+    ownerCustomerContacts: ServiceTicketContact[];
+    relatedCustomers: ServiceTicketRelatedCustomer[];
 }
 const columns: Column[] = ["ims_circuit_id", "ims_circuit_name", "extra_info", "impact"];
 
-const ImsCircuitInfo = ({ imsInfo }: IProps) => {
+const ImsCircuitInfo = ({ imsInfo, ownerCustomerContacts, relatedCustomers }: IProps) => {
     const { theme } = useContext(ApplicationContext);
 
     const th = (name: Column, index: number) => {
@@ -56,6 +58,19 @@ const ImsCircuitInfo = ({ imsInfo }: IProps) => {
         );
     };
 
+    const renderContacts = () => {
+        return ownerCustomerContacts.map((c, index) => (
+            <EuiFlexItem>
+                <EuiCard titleSize={"xs"} title={`Contact person ${index + 1}`} description={c.name}>
+                    <EuiIcon type={"email"} style={{ marginTop: "-3px" }}></EuiIcon>&nbsp;
+                    <a href={c.email} target="_blank">
+                        {c.email}
+                    </a>
+                </EuiCard>
+            </EuiFlexItem>
+        ));
+    };
+
     return (
         <EuiPanel css={tableImsCircuitInfo} hasBorder={false} hasShadow={false} color={"transparent"} paddingSize="s">
             <table className="ims-circuit-info">
@@ -64,6 +79,9 @@ const ImsCircuitInfo = ({ imsInfo }: IProps) => {
                 </thead>
                 <tbody>{imsInfo.map(createRow)}</tbody>
             </table>
+
+            <EuiSpacer></EuiSpacer>
+            <EuiFlexGrid columns={3}>{renderContacts()}</EuiFlexGrid>
         </EuiPanel>
     );
 };

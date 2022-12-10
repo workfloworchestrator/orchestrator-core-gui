@@ -63,6 +63,8 @@ const getFilteredImpactedObjects = (impactedObjects: ServiceTicketImpactedObject
             impact_override: impactedObject.impact_override,
             subscription_id: impactedObject.subscription_id,
             ims_info: impactedObject.ims_circuits,
+            owner_customer_contacts: impactedObject.owner_customer_contacts,
+            related_customers: impactedObject.related_customers,
         };
         result.push(tempImpactedCircuit);
     }
@@ -84,7 +86,13 @@ const ImpactedObjects = ({ ticket, updateable, withSubscriptions }: IProps) => {
 
     let allExpandedRows: { [key: string]: ReactNode } = {};
     for (const item of data) {
-        allExpandedRows[item.id] = <ImsCircuitInfo imsInfo={item.ims_info}></ImsCircuitInfo>;
+        allExpandedRows[item.id] = (
+            <ImsCircuitInfo
+                imsInfo={item.ims_info}
+                ownerCustomerContacts={item.owner_customer_contacts}
+                relatedCustomers={item.related_customers}
+            ></ImsCircuitInfo>
+        );
     }
 
     const toggleExpandAll = () => {
@@ -100,7 +108,13 @@ const ImpactedObjects = ({ ticket, updateable, withSubscriptions }: IProps) => {
         if (itemIdToExpandedRowMapValues[item.id]) {
             delete itemIdToExpandedRowMapValues[item.id];
         } else {
-            itemIdToExpandedRowMapValues[item.id] = <ImsCircuitInfo imsInfo={item.ims_info}></ImsCircuitInfo>;
+            itemIdToExpandedRowMapValues[item.id] = (
+                <ImsCircuitInfo
+                    imsInfo={item.ims_info}
+                    ownerCustomerContacts={item.owner_customer_contacts}
+                    relatedCustomers={item.related_customers}
+                ></ImsCircuitInfo>
+            );
         }
         setItemIdToExpandedRowMap(itemIdToExpandedRowMapValues);
     };
