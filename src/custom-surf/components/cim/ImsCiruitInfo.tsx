@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiCard, EuiFlexGrid, EuiFlexItem, EuiIcon, EuiLink, EuiPanel, EuiSpacer } from "@elastic/eui";
+import { EuiCard, EuiFlexGrid, EuiFlexItem, EuiIcon, EuiLink, EuiPanel, EuiSpacer, EuiText } from "@elastic/eui";
 import { tableImsCircuitInfo } from "custom/components/cim/ImsCircuitInfoStyling";
 import { ImsInfo, ServiceTicketContact, ServiceTicketRelatedCustomer } from "custom/types";
 import { ENV } from "env";
@@ -58,8 +58,8 @@ const ImsCircuitInfo = ({ imsInfo, ownerCustomerContacts, relatedCustomers }: IP
         );
     };
 
-    const renderContacts = () => {
-        return ownerCustomerContacts.map((c, index) => (
+    const renderContacts = (contacts: ServiceTicketContact[]) => {
+        return contacts.map((c, index) => (
             <EuiFlexItem>
                 <EuiCard titleSize={"xs"} title={`Contact person ${index + 1}`} description={c.name}>
                     <EuiIcon type={"email"} style={{ marginTop: "-3px" }}></EuiIcon>&nbsp;
@@ -69,8 +69,23 @@ const ImsCircuitInfo = ({ imsInfo, ownerCustomerContacts, relatedCustomers }: IP
         ));
     };
 
+    const renderSubscriptionRelatedContacts = () => {
+        console.log(relatedCustomers);
+        return relatedCustomers.map((c) => (
+            <>
+                <EuiText>
+                    <h4>{c.customer.customer_name}</h4>
+                </EuiText>
+                <EuiFlexGrid columns={4}>{renderContacts(c.contacts)}</EuiFlexGrid>
+            </>
+        ));
+    };
+
     return (
         <EuiPanel css={tableImsCircuitInfo} hasBorder={false} hasShadow={false} color={"transparent"} paddingSize="s">
+            <EuiText>
+                <h4>Impacted IMS services</h4>
+            </EuiText>
             <table className="ims-circuit-info">
                 <thead>
                     <tr>{columns.map((column, index) => th(column, index))}</tr>
@@ -79,7 +94,26 @@ const ImsCircuitInfo = ({ imsInfo, ownerCustomerContacts, relatedCustomers }: IP
             </table>
 
             <EuiSpacer></EuiSpacer>
-            <EuiFlexGrid columns={3}>{renderContacts()}</EuiFlexGrid>
+
+            {ownerCustomerContacts.length !== 0 && (
+                <>
+                    <EuiText>
+                        <h4>Subscription owner contacts</h4>
+                    </EuiText>
+                    <EuiFlexGrid columns={4}>{renderContacts(ownerCustomerContacts)}</EuiFlexGrid>
+                </>
+            )}
+
+            <EuiSpacer></EuiSpacer>
+
+            {relatedCustomers.length !== 0 && (
+                <>
+                    <EuiText>
+                        <h4>Related customer contacts</h4>
+                    </EuiText>
+                    {renderSubscriptionRelatedContacts()}
+                </>
+            )}
         </EuiPanel>
     );
 };
