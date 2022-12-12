@@ -39,6 +39,7 @@ import {
     ServiceTicketLog,
     ServiceTicketLogType,
     ServiceTicketProcessState,
+    ServiceTicketType,
     ServiceTicketWithDetails,
 } from "custom/types";
 import { renderStringAsDateTime } from "custom/Utils";
@@ -194,6 +195,9 @@ const ServiceTicketDetail = () => {
     const closeTicket = () => {
         redirect(`/tickets/${ticket._id}/close`);
     };
+    const openAndCloseTicket = () => {
+        redirect(`/tickets/${ticket._id}/open-and-close`);
+    };
 
     let actions: Action[] = [
         {
@@ -227,15 +231,17 @@ const ServiceTicketDetail = () => {
         },
     ];
 
-    actions.splice(1, 0, {
-        translation: "tickets.action.open_and_close",
-        onClick: () => {},
-        requiredState: [
-            ServiceTicketProcessState.OPEN_ACCEPTED,
-            ServiceTicketProcessState.OPEN,
-            ServiceTicketProcessState.UPDATED,
-        ],
-    });
+    if (ticket.type === ServiceTicketType.INCIDENT) {
+        actions.splice(1, 0, {
+            translation: "tickets.action.open_and_close",
+            onClick: openAndCloseTicket,
+            requiredState: [
+                ServiceTicketProcessState.OPEN_ACCEPTED,
+                ServiceTicketProcessState.OPEN,
+                ServiceTicketProcessState.UPDATED,
+            ],
+        });
+    }
 
     const isUpdateImpactActive = [
         ServiceTicketProcessState.OPEN_ACCEPTED,
