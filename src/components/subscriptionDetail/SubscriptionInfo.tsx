@@ -54,7 +54,7 @@ export default function SubscriptionInfo({ label, value }: IProps) {
                                 <EuiDescriptionListDescription>{value.status}</EuiDescriptionListDescription>
                                 <EuiDescriptionListTitle>Subscription ID</EuiDescriptionListTitle>
                                 <EuiDescriptionListDescription>
-                                    <EuiLink href={`/subscriptions/${value.subscription_id}`}>
+                                    <EuiLink href={`/subscriptions/${value.subscription_id}`} target="_blank">
                                         {value.subscription_id?.slice(0, 8)}
                                     </EuiLink>
                                 </EuiDescriptionListDescription>
