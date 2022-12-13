@@ -33,6 +33,22 @@ export const mapSplitFields = (
     value_fields: [string, any][],
     inUseBySubscriptions: Record<string, any>
 ) => {
+    const renderInUseByIds = (key: string, values: any) =>
+        values.length > 0 ? (
+            <ExpandableRow
+                title="USED_BY_SUBSCRIPTIONS"
+                text="Show info about subscriptions that use this product block"
+                key={`expandable-${instance_id}-${key}`}
+            >
+                {values.map((value: any) => {
+                    const subscription = inUseBySubscriptions.hasOwnProperty(value)
+                        ? inUseBySubscriptions[value]
+                        : value;
+                    return <SubscriptionInfo key={value} label="used_by_subscription" value={subscription} />;
+                })}
+            </ExpandableRow>
+        ) : null;
+
     return value_fields
         .sort((valueFieldLeft, valueFieldRight) => valueFieldLeft[0].localeCompare(valueFieldRight[0]))
         .map(([key, values]) => {
@@ -42,26 +58,13 @@ export const mapSplitFields = (
 
             return [key, values[0]];
         })
-        .map(([key, values], i) => {
+        .map(([key, values]) => {
             if (key === "in_use_by_ids" && values) {
-                return (
-                    <ExpandableRow
-                        title="USED_BY_SUBSCRIPTIONS"
-                        text="Show info about subscriptions that use this product block"
-                        key={`expandable-${instance_id}-${i}`}
-                    >
-                        {values.map((value: any) => {
-                            const subscription = inUseBySubscriptions.hasOwnProperty(value)
-                                ? inUseBySubscriptions[value]
-                                : value;
-                            return <SubscriptionInfo key={value} label="used_by_subscription" value={subscription} />;
-                        })}
-                    </ExpandableRow>
-                );
+                return renderInUseByIds(key, values);
             }
             return (
                 <SubscriptionInstanceValue
-                    key={`${instance_id}.${i}`}
+                    key={`${instance_id}.${key}`}
                     label={key}
                     value={values !== null ? values : "null"}
                 />
@@ -128,7 +131,7 @@ export function RenderServiceConfiguration({
             .filter((valueField) => !shouldOnlyRenderImportantValueFields || importantFields.includes(valueField[0]))
             .map((valueField): [string, any] => {
                 const [fieldName, fieldValue] = valueField;
-                if (fieldName === "in_use_by_ids") {
+                if (fieldName === "in_use_by_ids" && !isOutsideSubscriptionBoundary) {
                     const inUseByIdsWithoutParent = fieldValue.filter(
                         (id: string) => id !== parentSubscriptionInstanceId
                     );
