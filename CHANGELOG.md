@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Surf specific:
 
+-   Show subscription owner contacts & related customer contacts
+-   Added ability to OPEN & CLOSE incident tickets with one form
 -   Added a log viewer to Service ticket detail
 -   Refactored Impacted objects tables to also show IMS Circuits
 -   Fix CIM impacted objects without a subscription ID
