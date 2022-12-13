@@ -14,7 +14,7 @@
  */
 
 import { EuiCard, EuiFlexGrid, EuiFlexItem, EuiIcon, EuiLink, EuiPanel, EuiSpacer, EuiText } from "@elastic/eui";
-import { tableImsCircuitInfo } from "custom-surf/components/cim/ImpactedObjectDetailsStyling";
+import { tableImsCircuitInfo } from "custom/components/cim/ImpactedObjectDetailsStyling";
 import { ImsInfo, ServiceTicketContact, ServiceTicketRelatedCustomer } from "custom/types";
 import { ENV } from "env";
 import React, { useContext } from "react";
