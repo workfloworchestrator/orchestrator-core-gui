@@ -17,7 +17,7 @@ import {
     RIGHT_ALIGNMENT,
 } from "@elastic/eui";
 import { HorizontalAlignment } from "@elastic/eui/src/services/alignment";
-import ImsCircuitInfo from "custom-surf/components/cim/ImpactedObjectDetails";
+import ImpactedObjectDetails from "custom/components/cim/ImpactedObjectDetails";
 import {
     ImpactedObject,
     ServiceTicketImpactedObject,
@@ -87,11 +87,11 @@ const ImpactedObjects = ({ ticket, updateable, withSubscriptions }: IProps) => {
     let allExpandedRows: { [key: string]: ReactNode } = {};
     for (const item of data) {
         allExpandedRows[item.id] = (
-            <ImsCircuitInfo
+            <ImpactedObjectDetails
                 imsInfo={item.ims_info}
                 ownerCustomerContacts={item.owner_customer_contacts}
                 relatedCustomers={item.related_customers}
-            ></ImsCircuitInfo>
+            />
         );
     }
 
@@ -109,11 +109,11 @@ const ImpactedObjects = ({ ticket, updateable, withSubscriptions }: IProps) => {
             delete itemIdToExpandedRowMapValues[item.id];
         } else {
             itemIdToExpandedRowMapValues[item.id] = (
-                <ImsCircuitInfo
+                <ImpactedObjectDetails
                     imsInfo={item.ims_info}
                     ownerCustomerContacts={item.owner_customer_contacts}
                     relatedCustomers={item.related_customers}
-                ></ImsCircuitInfo>
+                />
             );
         }
         setItemIdToExpandedRowMap(itemIdToExpandedRowMapValues);
