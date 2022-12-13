@@ -37,6 +37,13 @@
             "showInMenu": false
         },
         {
+            "name": "tickets/:id/open-and-close",
+            "path": "pages",
+            "file": "OpenAndCloseServiceTicket",
+            "component": "OpenAndCloseServiceTicket",
+            "showInMenu": false
+        },
+        {
             "name": "tickets/:id/update",
             "path": "pages",
             "file": "UpdateServiceTicket",

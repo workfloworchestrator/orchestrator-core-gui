@@ -530,6 +530,7 @@ I18n.translations.en = {
         action: {
             background_job_restarted: "Restarted background job",
             restart_open_relate: "Restart open relate",
+            open_and_close: "Send OPEN & CLOSE email",
             opening: "Send OPEN email",
             updating: "Send UPDATE email",
             closing: "Send CLOSE email",

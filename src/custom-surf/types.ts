@@ -104,12 +104,13 @@ export interface ServiceTicketBackgroundJobCount {
 export interface ServiceTicketContact {
     name: string;
     email: string;
+    // Todo: add phone?
 }
 
 export interface ServiceTicketRelatedCustomer {
     customer: ServiceTicketCustomer;
     customer_subscription_description?: string;
-    contact: ServiceTicketContact[];
+    contacts: ServiceTicketContact[];
 }
 
 export interface ServiceTicketImpactedObject {
@@ -164,4 +165,6 @@ export interface ImpactedObject {
     impact_override?: ServiceTicketImpactedObjectImpact;
     subscription_id: string | null;
     ims_info: ImsInfo[];
+    owner_customer_contacts: ServiceTicketContact[];
+    related_customers: ServiceTicketRelatedCustomer[];
 }

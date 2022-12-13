@@ -13,9 +13,9 @@
  *
  */
 
-import { EuiLink, EuiPanel } from "@elastic/eui";
-import { tableImsCircuitInfo } from "custom/components/cim/ImsCircuitInfoStyling";
-import { ImsInfo } from "custom/types";
+import { EuiCard, EuiFlexGrid, EuiFlexItem, EuiIcon, EuiLink, EuiPanel, EuiSpacer, EuiText } from "@elastic/eui";
+import { tableImsCircuitInfo } from "custom/components/cim/ImpactedObjectDetailsStyling";
+import { ImsInfo, ServiceTicketContact, ServiceTicketRelatedCustomer } from "custom/types";
 import { ENV } from "env";
 import React, { useContext } from "react";
 import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl";
@@ -25,10 +25,12 @@ type Column = "ims_circuit_id" | "ims_circuit_name" | "extra_info" | "impact";
 
 interface IProps extends WrappedComponentProps {
     imsInfo: ImsInfo[];
+    ownerCustomerContacts: ServiceTicketContact[];
+    relatedCustomers: ServiceTicketRelatedCustomer[];
 }
 const columns: Column[] = ["ims_circuit_id", "ims_circuit_name", "extra_info", "impact"];
 
-const ImsCircuitInfo = ({ imsInfo }: IProps) => {
+const ImsCircuitInfo = ({ imsInfo, ownerCustomerContacts, relatedCustomers }: IProps) => {
     const { theme } = useContext(ApplicationContext);
 
     const th = (name: Column, index: number) => {
@@ -56,14 +58,61 @@ const ImsCircuitInfo = ({ imsInfo }: IProps) => {
         );
     };
 
+    const renderContacts = (contacts: ServiceTicketContact[]) => {
+        return contacts.map((c, index) => (
+            <EuiFlexItem>
+                <EuiCard titleSize={"xs"} title={`Contact person ${index + 1}`} description={c.name}>
+                    <EuiIcon type={"email"} style={{ marginTop: "-3px" }}></EuiIcon>&nbsp;
+                    <a href={c.email}>{c.email}</a>
+                </EuiCard>
+            </EuiFlexItem>
+        ));
+    };
+
+    const renderSubscriptionRelatedContacts = () => {
+        return relatedCustomers.map((c) => (
+            <>
+                <EuiText>
+                    <h4>{c.customer.customer_name}</h4>
+                </EuiText>
+                <EuiFlexGrid columns={4}>{renderContacts(c.contacts)}</EuiFlexGrid>
+            </>
+        ));
+    };
+
     return (
         <EuiPanel css={tableImsCircuitInfo} hasBorder={false} hasShadow={false} color={"transparent"} paddingSize="s">
+            <EuiText>
+                <h4>Impacted IMS services</h4>
+            </EuiText>
             <table className="ims-circuit-info">
                 <thead>
                     <tr>{columns.map((column, index) => th(column, index))}</tr>
                 </thead>
                 <tbody>{imsInfo.map(createRow)}</tbody>
             </table>
+
+            <EuiSpacer></EuiSpacer>
+
+            {ownerCustomerContacts.length !== 0 && (
+                <>
+                    <EuiText>
+                        <h4>Subscription owner contacts</h4>
+                    </EuiText>
+                    <EuiFlexGrid columns={4}>{renderContacts(ownerCustomerContacts)}</EuiFlexGrid>
+                </>
+            )}
+
+            <EuiSpacer></EuiSpacer>
+
+            {relatedCustomers.length !== 0 && (
+                <>
+                    <EuiText>
+                        <h4>Related customer contacts</h4>
+                    </EuiText>
+                    {renderSubscriptionRelatedContacts()}
+                </>
+            )}
         </EuiPanel>
     );
 };
