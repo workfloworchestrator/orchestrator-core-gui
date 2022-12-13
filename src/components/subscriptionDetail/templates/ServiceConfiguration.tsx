@@ -33,32 +33,37 @@ export const mapSplitFields = (
     value_fields: [string, any][],
     inUseBySubscriptions: Record<string, any>
 ) => {
-    let hasInUseByExpandableRow = false;
     return value_fields
-        .sort((entryA, entryB) => entryA[0].localeCompare(entryB[0]))
-        .flatMap((entry) => entry[1].map((value: any) => [entry[0], value !== null ? value : "NULL"]))
-        .map((entry, i) => {
-            if (entry[0] === "in_use_by_ids") {
-                const value = inUseBySubscriptions.hasOwnProperty(entry[1]) ? inUseBySubscriptions[entry[1]] : entry[1];
-                if (!hasInUseByExpandableRow) {
-                    hasInUseByExpandableRow = true;
-                    return (
-                        <ExpandableRow
-                            title="USED_BY_SUBSCRIPTIONS"
-                            text="Show info about subscriptions that use this product block"
-                            key={`expandable-${instance_id}-${i}`}
-                        >
-                            <SubscriptionInfo label="used_by_subscription" value={value} />
-                        </ExpandableRow>
-                    );
-                }
-                return null;
+        .sort((valueFieldLeft, valueFieldRight) => valueFieldLeft[0].localeCompare(valueFieldRight[0]))
+        .map(([key, values]) => {
+            if (key === "in_use_by_ids") {
+                return [key, values];
+            }
+
+            return [key, values[0]];
+        })
+        .map(([key, values], i) => {
+            if (key === "in_use_by_ids" && values) {
+                return (
+                    <ExpandableRow
+                        title="USED_BY_SUBSCRIPTIONS"
+                        text="Show info about subscriptions that use this product block"
+                        key={`expandable-${instance_id}-${i}`}
+                    >
+                        {values.map((value: any) => {
+                            const subscription = inUseBySubscriptions.hasOwnProperty(value)
+                                ? inUseBySubscriptions[value]
+                                : value;
+                            return <SubscriptionInfo key={value} label="used_by_subscription" value={subscription} />;
+                        })}
+                    </ExpandableRow>
+                );
             }
             return (
                 <SubscriptionInstanceValue
                     key={`${instance_id}.${i}`}
-                    label={entry[0]}
-                    value={entry[1] !== null ? entry[1] : "null"}
+                    label={key}
+                    value={values !== null ? values : "null"}
                 />
             );
         })
