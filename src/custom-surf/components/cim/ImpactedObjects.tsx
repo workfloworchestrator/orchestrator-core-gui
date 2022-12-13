@@ -17,7 +17,7 @@ import {
     RIGHT_ALIGNMENT,
 } from "@elastic/eui";
 import { HorizontalAlignment } from "@elastic/eui/src/services/alignment";
-import ImsCircuitInfo from "custom/components/cim/ImsCiruitInfo";
+import ImsCircuitInfo from "custom-surf/components/cim/ImpactedObjectDetails";
 import {
     ImpactedObject,
     ServiceTicketImpactedObject,
