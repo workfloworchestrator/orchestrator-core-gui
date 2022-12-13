@@ -43,7 +43,7 @@ export default function SubscriptionInfo({ label, value }: IProps) {
                                 <EuiDescriptionListTitle>Description</EuiDescriptionListTitle>
                                 <EuiDescriptionListDescription>{value.description}</EuiDescriptionListDescription>
                                 <EuiDescriptionListTitle>Product</EuiDescriptionListTitle>
-                                <EuiDescriptionListDescription>
+                                <EuiDescriptionListDescription style={{ marginTop: "16px" }}>
                                     {value.product?.description}
                                 </EuiDescriptionListDescription>
                             </EuiDescriptionList>
@@ -53,7 +53,7 @@ export default function SubscriptionInfo({ label, value }: IProps) {
                                 <EuiDescriptionListTitle>Status</EuiDescriptionListTitle>
                                 <EuiDescriptionListDescription>{value.status}</EuiDescriptionListDescription>
                                 <EuiDescriptionListTitle>Subscription ID</EuiDescriptionListTitle>
-                                <EuiDescriptionListDescription>
+                                <EuiDescriptionListDescription style={{ marginTop: "16px" }}>
                                     <EuiLink href={`/subscriptions/${value.subscription_id}`} target="_blank">
                                         {value.subscription_id?.slice(0, 8)}
                                     </EuiLink>
