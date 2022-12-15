@@ -13,14 +13,7 @@
  *
  */
 
-import {
-    EuiDescriptionList,
-    EuiDescriptionListDescription,
-    EuiDescriptionListTitle,
-    EuiFlexGroup,
-    EuiFlexItem,
-    EuiLink,
-} from "@elastic/eui";
+import { EuiDescriptionList, EuiDescriptionListDescription, EuiDescriptionListTitle, EuiLink } from "@elastic/eui";
 import React, { useContext } from "react";
 import ApplicationContext from "utils/ApplicationContext";
 
@@ -28,6 +21,18 @@ interface IProps {
     label: string;
     value: any;
 }
+
+interface SubscriptionInfoRowProps {
+    title: string;
+    children: React.ReactNode;
+}
+
+const SubscriptionInfoRow: React.FC<SubscriptionInfoRowProps> = ({ title, children }) => (
+    <EuiDescriptionList>
+        <EuiDescriptionListTitle>{title}</EuiDescriptionListTitle>
+        <EuiDescriptionListDescription>{children}</EuiDescriptionListDescription>
+    </EuiDescriptionList>
+);
 
 export default function SubscriptionInfo({ label, value }: IProps) {
     const { theme } = useContext(ApplicationContext);
@@ -37,30 +42,14 @@ export default function SubscriptionInfo({ label, value }: IProps) {
             <tr>
                 <td>{label.toUpperCase()}</td>
                 <td colSpan={2}>
-                    <EuiFlexGroup wrap={true}>
-                        <EuiFlexItem style={{ minWidth: "400px" }}>
-                            <EuiDescriptionList>
-                                <EuiDescriptionListTitle>Description</EuiDescriptionListTitle>
-                                <EuiDescriptionListDescription>{value.description}</EuiDescriptionListDescription>
-                                <EuiDescriptionListTitle>Product</EuiDescriptionListTitle>
-                                <EuiDescriptionListDescription style={{ marginTop: "16px" }}>
-                                    {value.product?.description}
-                                </EuiDescriptionListDescription>
-                            </EuiDescriptionList>
-                        </EuiFlexItem>
-                        <EuiFlexItem style={{ minWidth: "400px" }}>
-                            <EuiDescriptionList>
-                                <EuiDescriptionListTitle>Status</EuiDescriptionListTitle>
-                                <EuiDescriptionListDescription>{value.status}</EuiDescriptionListDescription>
-                                <EuiDescriptionListTitle>Subscription ID</EuiDescriptionListTitle>
-                                <EuiDescriptionListDescription style={{ marginTop: "16px" }}>
-                                    <EuiLink href={`/subscriptions/${value.subscription_id}`} target="_blank">
-                                        {value.subscription_id?.slice(0, 8)}
-                                    </EuiLink>
-                                </EuiDescriptionListDescription>
-                            </EuiDescriptionList>
-                        </EuiFlexItem>
-                    </EuiFlexGroup>
+                    <SubscriptionInfoRow title="Description">{value.description}</SubscriptionInfoRow>
+                    <SubscriptionInfoRow title="Product">{value.product?.description}</SubscriptionInfoRow>
+                    <SubscriptionInfoRow title="Status">{value.status}</SubscriptionInfoRow>
+                    <SubscriptionInfoRow title="Subscription ID">
+                        <EuiLink href={`/subscriptions/${value.subscription_id}`} target="_blank">
+                            {value.subscription_id?.slice(0, 8)}
+                        </EuiLink>
+                    </SubscriptionInfoRow>
                 </td>
             </tr>
         </tbody>
