@@ -33,32 +33,40 @@ export const mapSplitFields = (
     value_fields: [string, any][],
     inUseBySubscriptions: Record<string, any>
 ) => {
-    let hasInUseByExpandableRow = false;
+    const renderInUseByIds = (key: string, values: any) =>
+        values.length > 0 ? (
+            <ExpandableRow
+                title="USED_BY_SUBSCRIPTIONS"
+                text="Show info about subscriptions that use this product block"
+                key={`expandable-${instance_id}-${key}`}
+            >
+                {values.map((value: any) => {
+                    const subscription = inUseBySubscriptions.hasOwnProperty(value)
+                        ? inUseBySubscriptions[value]
+                        : value;
+                    return <SubscriptionInfo key={value} label="used_by_subscription" value={subscription} />;
+                })}
+            </ExpandableRow>
+        ) : null;
+
     return value_fields
-        .sort((entryA, entryB) => entryA[0].localeCompare(entryB[0]))
-        .flatMap((entry) => entry[1].map((value: any) => [entry[0], value !== null ? value : "NULL"]))
-        .map((entry, i) => {
-            if (entry[0] === "in_use_by_ids") {
-                const value = inUseBySubscriptions.hasOwnProperty(entry[1]) ? inUseBySubscriptions[entry[1]] : entry[1];
-                if (!hasInUseByExpandableRow) {
-                    hasInUseByExpandableRow = true;
-                    return (
-                        <ExpandableRow
-                            title="USED_BY_SUBSCRIPTIONS"
-                            text="Show info about subscriptions that use this product block"
-                            key={`expandable-${instance_id}-${i}`}
-                        >
-                            <SubscriptionInfo label="used_by_subscription" value={value} />
-                        </ExpandableRow>
-                    );
-                }
-                return null;
+        .sort((valueFieldLeft, valueFieldRight) => valueFieldLeft[0].localeCompare(valueFieldRight[0]))
+        .map(([key, values]) => {
+            if (key === "in_use_by_ids") {
+                return [key, values];
+            }
+
+            return [key, values[0]];
+        })
+        .map(([key, values]) => {
+            if (key === "in_use_by_ids" && values) {
+                return renderInUseByIds(key, values);
             }
             return (
                 <SubscriptionInstanceValue
-                    key={`${instance_id}.${i}`}
-                    label={entry[0]}
-                    value={entry[1] !== null ? entry[1] : "null"}
+                    key={`${instance_id}.${key}`}
+                    label={key}
+                    value={values !== null ? values : "null"}
                 />
             );
         })
@@ -119,16 +127,29 @@ export function RenderServiceConfiguration({
         const shouldOnlyRenderImportantValueFields = isOutsideSubscriptionBoundary && !isExpandedView;
         const shouldRenderInstanceFields = isExpandedView || !shouldOnlyRenderImportantValueFields;
 
+        const filterInUseByIds = (inUseByIds: string[]) => {
+            const nonTerminatedSubscriptions = inUseByIds.filter(
+                (id) => !inUseBySubscriptions.hasOwnProperty(id) || inUseBySubscriptions[id].status !== "terminated"
+            );
+
+            if (isOutsideSubscriptionBoundary) {
+                return nonTerminatedSubscriptions;
+            }
+
+            return nonTerminatedSubscriptions.filter((id: string) => id !== parentSubscriptionInstanceId);
+        };
+
         const filteredValueFields = value_fields
             .filter((valueField) => !shouldOnlyRenderImportantValueFields || importantFields.includes(valueField[0]))
             .map((valueField): [string, any] => {
                 const [fieldName, fieldValue] = valueField;
+
                 if (fieldName === "in_use_by_ids") {
-                    const inUseByIdsWithoutParent = fieldValue.filter(
-                        (id: string) => id !== parentSubscriptionInstanceId
-                    );
-                    return [fieldName, inUseByIdsWithoutParent];
+                    const filteredInUseByIds = filterInUseByIds(fieldValue);
+
+                    return [fieldName, filteredInUseByIds];
                 }
+
                 return valueField;
             });
 
