@@ -127,16 +127,29 @@ export function RenderServiceConfiguration({
         const shouldOnlyRenderImportantValueFields = isOutsideSubscriptionBoundary && !isExpandedView;
         const shouldRenderInstanceFields = isExpandedView || !shouldOnlyRenderImportantValueFields;
 
+        const filterInUseByIds = (inUseByIds: string[]) => {
+            const nonTerminatedSubscriptions = inUseByIds.filter(
+                (id) => !inUseBySubscriptions.hasOwnProperty(id) || inUseBySubscriptions[id].status !== "terminated"
+            );
+
+            if (isOutsideSubscriptionBoundary) {
+                return nonTerminatedSubscriptions;
+            }
+
+            return nonTerminatedSubscriptions.filter((id: string) => id !== parentSubscriptionInstanceId);
+        };
+
         const filteredValueFields = value_fields
             .filter((valueField) => !shouldOnlyRenderImportantValueFields || importantFields.includes(valueField[0]))
             .map((valueField): [string, any] => {
                 const [fieldName, fieldValue] = valueField;
-                if (fieldName === "in_use_by_ids" && !isOutsideSubscriptionBoundary) {
-                    const inUseByIdsWithoutParent = fieldValue.filter(
-                        (id: string) => id !== parentSubscriptionInstanceId
-                    );
-                    return [fieldName, inUseByIdsWithoutParent];
+
+                if (fieldName === "in_use_by_ids") {
+                    const filteredInUseByIds = filterInUseByIds(fieldValue);
+
+                    return [fieldName, filteredInUseByIds];
                 }
+
                 return valueField;
             });
 
