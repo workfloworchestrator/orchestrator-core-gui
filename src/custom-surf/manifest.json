@@ -30,6 +30,13 @@
             "showInMenu": false
         },
         {
+            "name": "tickets/:id/mails",
+            "path": "pages",
+            "file": "ServiceTicketMails",
+            "component": "ServiceTicketMails",
+            "showInMenu": false
+        },
+        {
             "name": "tickets/:id/open",
             "path": "pages",
             "file": "OpenServiceTicket",

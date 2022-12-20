@@ -198,6 +198,9 @@ const ServiceTicketDetail = () => {
     const openAndCloseTicket = () => {
         redirect(`/tickets/${ticket._id}/open-and-close`);
     };
+    const viewLastSentMails = () => {
+        redirect(`/tickets/${ticket._id}/mails`);
+    };
 
     let actions: Action[] = [
         {
@@ -222,7 +225,7 @@ const ServiceTicketDetail = () => {
         },
         {
             translation: "tickets.action.show",
-            onClick: () => {},
+            onClick: viewLastSentMails,
             requiredState: [
                 ServiceTicketProcessState.OPEN,
                 ServiceTicketProcessState.UPDATED,
