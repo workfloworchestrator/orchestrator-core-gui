@@ -235,7 +235,7 @@ const ServiceTicketDetail = () => {
     ];
 
     if (ticket.type === ServiceTicketType.INCIDENT) {
-        actions.splice(1, 0, {
+        actions.splice(2, 0, {
             translation: "tickets.action.open_and_close",
             onClick: openAndCloseTicket,
             requiredState: [

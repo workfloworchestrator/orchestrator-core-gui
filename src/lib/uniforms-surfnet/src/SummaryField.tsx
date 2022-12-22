@@ -42,7 +42,11 @@ function Summary({ id, name, label, description, onChange, data, ...props }: Sum
         <tr key={index}>
             {labels && <td className={`label ${theme}`}>{labels[index]}</td>}
             <td className={`value ${theme}`}>
-                {typeof row == "string" && row.includes("<!doctype html>") ? ReactHtmlParser(row) : row}
+                {typeof row == "string" && row.includes("<!doctype html>") ? (
+                    <div className="emailMessage">{ReactHtmlParser(row)}</div>
+                ) : (
+                    row
+                )}
             </td>
             {extra_columns_data &&
                 extra_columns_data.map((cell, idx) => (

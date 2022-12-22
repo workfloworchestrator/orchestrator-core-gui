@@ -35,7 +35,7 @@ const EmailMessages = ({ emails, showHtml }: IProps) => {
                     <div>CC: {c.cc.map((r) => renderContact(r))}</div>
                     <div>BCC: {c.bcc.map((r) => renderContact(r))}</div>
                     <div>{`Language: ${c.language}`}</div>
-                    <div className="message">{ReactHtmlParser(c.message)}</div>
+                    <div className="emailMessage">{ReactHtmlParser(c.message)}</div>
                 </EuiPanel>
             </EuiFlexItem>
         ));

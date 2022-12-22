@@ -1,5 +1,4 @@
 import { css } from "@emotion/core";
-
 import {
     DARKEST_GREY,
     DARKEST_PRIMARY_COLOR,
@@ -7,15 +6,28 @@ import {
     LIGHT_GREY_COLOR,
     LIGHT_PRIMARY_COLOR,
     PRIMARY_COLOR,
-} from "../../../stylesheets/emotion/colors";
+} from "stylesheets/emotion/colors";
 
 export const summaryFieldStyling = css`
+    div.emailMessage {
+        td {
+            color: black;
+        }
+        p {
+            color: black;
+        }
+        html {
+            margin-left: -10px;
+        }
+    }
+
     section.table-summary {
         margin-top: 20px;
         width: 100%;
 
         td {
             padding: 10px;
+            vertical-align: top;
         }
 
         td:not(:first-child):not(:last-child) {

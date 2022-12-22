@@ -9,7 +9,7 @@ import {
 } from "stylesheets/emotion/colors";
 
 export const emailMessagesStyling = css`
-    div.message {
+    div.emailMessage {
         td {
             color: black;
         }
