@@ -83,7 +83,7 @@ const ImsCircuitInfo = ({ imsInfo, ownerCustomerContacts, relatedCustomers }: IP
     return (
         <EuiPanel css={tableImsCircuitInfo} hasBorder={false} hasShadow={false} color={"transparent"} paddingSize="s">
             <EuiText>
-                <h4>Impacted IMS services</h4>
+                <h3>Impacted IMS services</h3>
             </EuiText>
             <table className="ims-circuit-info">
                 <thead>
@@ -97,7 +97,7 @@ const ImsCircuitInfo = ({ imsInfo, ownerCustomerContacts, relatedCustomers }: IP
             {ownerCustomerContacts.length !== 0 && (
                 <>
                     <EuiText>
-                        <h4>Subscription owner contacts</h4>
+                        <h3>Subscription owner contacts</h3>
                     </EuiText>
                     <EuiFlexGrid columns={4}>{renderContacts(ownerCustomerContacts)}</EuiFlexGrid>
                 </>
@@ -108,7 +108,7 @@ const ImsCircuitInfo = ({ imsInfo, ownerCustomerContacts, relatedCustomers }: IP
             {relatedCustomers.length !== 0 && (
                 <>
                     <EuiText>
-                        <h4>Related customer contacts</h4>
+                        <h3>Related customer contacts</h3>
                     </EuiText>
                     {renderSubscriptionRelatedContacts()}
                 </>

@@ -16,9 +16,8 @@
 import {
     EuiBadge,
     EuiBasicTable,
+    EuiButton,
     EuiButtonIcon,
-    EuiFilterButton,
-    EuiFilterGroup,
     EuiFlexGroup,
     EuiFlexItem,
     EuiPage,
@@ -50,7 +49,7 @@ interface EmailLogWithId extends EmailLog {
 const ServiceTicketMails = () => {
     const { id } = useParams<IProps>();
     const [itemIdToExpandedRowMap, setItemIdToExpandedRowMap] = useState<{ [key: string]: ReactNode }>({});
-    const [showHtml] = useState(true);
+    const [showHtml, setShowHtml] = useState(true);
 
     const [items, setItems] = useState<EmailLogWithId[]>([]);
     const [ticket, setTicket] = useState<ServiceTicketWithDetails>();
@@ -60,9 +59,9 @@ const ServiceTicketMails = () => {
         ["ticket", { id: id }],
         () => customApiClient.cimTicketById(id),
         {
-            onSuccess: (temp) => {
-                const newItems = temp.email_logs.reverse();
-                setTicket(temp);
+            onSuccess: (data) => {
+                const newItems = data.email_logs.reverse();
+                setTicket(data);
                 setItems(newItems.map((i, index) => ({ id: `item-${index}`, ...i })));
             },
         }
@@ -157,32 +156,15 @@ const ServiceTicketMails = () => {
                         </EuiFlexItem>
 
                         <EuiFlexItem grow={false} style={{ minWidth: 140 }}>
-                            <EuiFilterGroup>
-                                <EuiFilterButton
-                                    hasActiveFilters={true}
-                                    isSelected={true}
-                                    onClick={() => console.log("Filter button!")}
-                                >
-                                    No HTML
-                                </EuiFilterButton>
-                                <EuiFilterButton
-                                    hasActiveFilters={false}
-                                    withNext={true}
-                                    onClick={() => console.log("Filter button!")}
-                                >
-                                    OPEN
-                                </EuiFilterButton>
-                                <EuiFilterButton
-                                    hasActiveFilters={false}
-                                    withNext={true}
-                                    onClick={() => console.log("Filter button!")}
-                                >
-                                    UPDATE
-                                </EuiFilterButton>
-                                <EuiFilterButton hasActiveFilters={false} onClick={() => console.log("Filter button!")}>
-                                    CLOSE
-                                </EuiFilterButton>
-                            </EuiFilterGroup>
+                            <EuiButton
+                                isSelected={!showHtml}
+                                onClick={() => {
+                                    setShowHtml(!showHtml);
+                                    setItemIdToExpandedRowMap({});
+                                }}
+                            >
+                                {showHtml ? "No" : "Show"} HTML
+                            </EuiButton>
                         </EuiFlexItem>
                     </EuiFlexGroup>
                     <EuiSpacer />
