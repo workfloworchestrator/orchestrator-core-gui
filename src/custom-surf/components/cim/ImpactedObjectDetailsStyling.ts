@@ -40,6 +40,7 @@ const table_phone = css`
 
 export const tableImsCircuitInfo = css`
     table.ims-circuit-info {
+        margin-bottom: -20px;
         width: 100%;
         word-break: break-all;
 

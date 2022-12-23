@@ -74,7 +74,7 @@ export interface ServiceTicketLog {
     entry_time: string;
     update_nl: string;
     update_en: string;
-    logtype: ServiceTicketLogType;
+    log_type: ServiceTicketLogType;
     logged_by: string;
 }
 
@@ -139,6 +139,21 @@ export interface BackgroundJobLog {
     process_state: string;
 }
 
+export interface Email {
+    customer: ServiceTicketCustomer;
+    message: string;
+    to: ServiceTicketContact[];
+    cc: ServiceTicketContact[];
+    bcc: ServiceTicketContact[];
+    language: string;
+}
+
+export interface EmailLog {
+    entry_time: string;
+    log_type: string;
+    emails: any;
+}
+
 export interface ServiceTicketWithDetails extends ServiceTicket {
     transitioning_state: any;
     end_date: string;
@@ -147,6 +162,7 @@ export interface ServiceTicketWithDetails extends ServiceTicket {
     logs: ServiceTicketLog[];
     impacted_objects: ServiceTicketImpactedObject[];
     background_logs: BackgroundJobLog[];
+    email_logs: EmailLog[];
 }
 
 export interface ImsInfo {

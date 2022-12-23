@@ -8,7 +8,7 @@ import {
     PRIMARY_COLOR,
 } from "stylesheets/emotion/colors";
 
-export const summaryFieldStyling = css`
+export const emailMessagesStyling = css`
     div.emailMessage {
         td {
             color: black;
@@ -16,18 +16,13 @@ export const summaryFieldStyling = css`
         p {
             color: black;
         }
-        html {
-            margin-left: -10px;
-        }
     }
-
     section.table-summary {
         margin-top: 20px;
         width: 100%;
 
         td {
             padding: 10px;
-            vertical-align: top;
         }
 
         td:not(:first-child):not(:last-child) {

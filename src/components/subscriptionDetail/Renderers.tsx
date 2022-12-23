@@ -1,4 +1,4 @@
-import { EuiCallOut, EuiCheckbox, EuiFlexGroup, EuiFlexItem, EuiSwitch } from "@elastic/eui";
+import { EuiCallOut, EuiCheckbox, EuiFlexGroup, EuiFlexItem, EuiSpacer, EuiSwitch } from "@elastic/eui";
 import { SubscriptionDetailSection } from "components/subscriptionDetail/SubscriptionDetailSection";
 import ConfirmationDialogContext from "contextProviders/ConfirmationDialogProvider";
 import React, { useContext, useState } from "react";
@@ -425,12 +425,10 @@ export function RenderSubscriptions({ inUseBySubscriptions }: { inUseBySubscript
         >
             {!filteredSubscriptions ||
                 (filteredSubscriptions.length === 0 && (
-                    <EuiCallOut
-                        style={{ marginLeft: "-25px" }}
-                        size="m"
-                        title="No related subscriptions found"
-                        iconType="alert"
-                    />
+                    <>
+                        <EuiSpacer />
+                        <EuiCallOut size="m" title="No related subscriptions found" iconType="alert" />
+                    </>
                 ))}
             {filteredSubscriptions && filteredSubscriptions.length > 0 && (
                 <table className="subscriptions">
