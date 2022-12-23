@@ -3,6 +3,14 @@ import { DARKER_PRIMARY, DARK_GREY_COLOR, LIGHT_GREY_COLOR, PRIMARY_COLOR } from
 
 export const processDetailStyling = css`
     .mod-process-detail {
+        div.emailMessage {
+            td {
+                color: black;
+            }
+            p {
+                color: black;
+            }
+        }
         section.not-found {
             h1 {
                 font-size: 24px;

@@ -127,11 +127,11 @@ const ServiceTicketDetail = () => {
     );
 
     let num_updates = 0;
-    const format_logtype = (logtype: ServiceTicketLogType): string => {
-        if (logtype === ServiceTicketLogType.UPDATE) {
-            return `${logtype} #${++num_updates}`;
+    const format_log_type = (log_type: ServiceTicketLogType): string => {
+        if (log_type === ServiceTicketLogType.UPDATE) {
+            return `${log_type} #${++num_updates}`;
         }
-        return logtype.toString();
+        return log_type.toString();
     };
 
     let logitem_tabs: TabView[] = [
@@ -152,7 +152,7 @@ const ServiceTicketDetail = () => {
     if (ticket.logs.length > 0) {
         logitem_tabs = ticket.logs.map((logitem: ServiceTicketLog, index: number) => ({
             id: `mod-ticket-logitem-${index}`,
-            name: format_logtype(logitem.logtype),
+            name: format_log_type(logitem.log_type),
             disabled: false,
             content: (
                 <EuiPanel hasBorder={true} hasShadow={false} borderRadius="none">

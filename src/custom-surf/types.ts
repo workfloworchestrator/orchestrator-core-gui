@@ -74,7 +74,7 @@ export interface ServiceTicketLog {
     entry_time: string;
     update_nl: string;
     update_en: string;
-    logtype: ServiceTicketLogType;
+    log_type: ServiceTicketLogType;
     logged_by: string;
 }
 

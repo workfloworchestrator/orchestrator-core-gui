@@ -86,7 +86,7 @@ function StateChanges({
                 <h4>Subject</h4>
                 <p>{value.subject}</p>
                 <h4>Message</h4>
-                <div dangerouslySetInnerHTML={{ __html: value.message }}></div>
+                <div className="emailMessage" dangerouslySetInnerHTML={{ __html: value.message }}></div>
             </EuiText>
         );
     };
