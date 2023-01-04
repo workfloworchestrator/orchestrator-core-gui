@@ -41,13 +41,23 @@ export enum ServiceTicketState {
 }
 
 export enum ServiceTicketProcessState {
-    INITIAL = "initial",
+    NEW = "new",
     OPEN = "open",
     OPEN_RELATED = "open_related",
     OPEN_ACCEPTED = "open_accepted",
     UPDATED = "updated",
     ABORTED = "aborted",
     CLOSED = "closed",
+}
+
+export enum ServiceTicketTransition {
+    RELATING = "relating",
+    ACCEPTING = "accepting",
+    ABORTING = "aborting",
+    OPENING = "opening",
+    UPDATING = "updating",
+    CLOSING = "closing",
+    CLEANING = "cleaning",
 }
 
 export interface ServiceTicket {

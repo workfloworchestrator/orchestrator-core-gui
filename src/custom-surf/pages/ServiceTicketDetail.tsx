@@ -32,6 +32,7 @@ import {
     EuiTitle,
 } from "@elastic/eui";
 import { TabbedSection } from "components/subscriptionDetail/TabbedSection";
+import ConfirmationDialogContext from "contextProviders/ConfirmationDialogProvider";
 import BackgroundJobLogs from "custom/components/cim/BackgroundJobLogs";
 import ImpactedObjects from "custom/components/cim/ImpactedObjects";
 import { ticketDetail } from "custom/pages/ServiceTicketDetailStyling";
@@ -39,6 +40,7 @@ import {
     ServiceTicketLog,
     ServiceTicketLogType,
     ServiceTicketProcessState,
+    ServiceTicketTransition,
     ServiceTicketType,
     ServiceTicketWithDetails,
 } from "custom/types";
@@ -59,18 +61,34 @@ interface IProps {
 interface Action {
     translation: string;
     onClick: () => void;
-    requiredState: ServiceTicketProcessState[];
+    transition?: ServiceTicketTransition;
+    requiredStates?: ServiceTicketProcessState[];
 }
 
-const renderLogItemActions = (ticket: ServiceTicketWithDetails, actions: Action[]) => {
+const renderLogItemActions = (
+    ticket: ServiceTicketWithDetails,
+    allowedTransitions: ServiceTicketTransition[],
+    actions: Action[]
+) => {
+    const enabled = (action: Action) => {
+        if (action.transition) {
+            if (ticket.transition_action) {
+                // There is an ongoing transition -> hide actions that would try (but fail) to start a transition
+                return false;
+            }
+            return allowedTransitions.includes(action.transition);
+        }
+        if (action.requiredStates) {
+            return action.requiredStates.includes(ticket.process_state);
+        }
+        return true;
+    };
+
     return (
         <EuiFlexGroup gutterSize="s" className="buttons">
             {actions.map((action: Action, index: number) => (
                 <EuiFlexItem key={index}>
-                    <EuiButton
-                        onClick={() => action.onClick()}
-                        isDisabled={!action.requiredState.includes(ticket.process_state)}
-                    >
+                    <EuiButton onClick={() => action.onClick()} isDisabled={!enabled(action)}>
                         <FormattedMessage id={action.translation} />
                     </EuiButton>
                 </EuiFlexItem>
@@ -82,18 +100,18 @@ const renderLogItemActions = (ticket: ServiceTicketWithDetails, actions: Action[
 const ServiceTicketDetail = () => {
     const { id } = useParams<IProps>();
     const [ticket, setTicket] = useState<ServiceTicketWithDetails>();
+    const [allowedTransitions, setAllowedTransitions] = useState<ServiceTicketTransition[]>([]);
     const [notFound, setNotFound] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const { theme, customApiClient, redirect } = useContext(ApplicationContext);
+    const { showConfirmDialog } = useContext(ConfirmationDialogContext);
     const closeModal = () => setIsModalVisible(false);
     const showModal = () => setIsModalVisible(true);
 
     useInterval(async () => {
-        if (ticket?.transition_action) {
-            console.log("Refreshing");
-            const ticket = await customApiClient.cimTicketById(id);
-            setTicket(ticket);
-        }
+        console.log("Refreshing");
+        const ticket = await customApiClient.cimTicketById(id);
+        setTicket(ticket);
     }, 5000);
 
     useEffect(() => {
@@ -111,6 +129,12 @@ const ServiceTicketDetail = () => {
                 }
             });
     }, [id, customApiClient]);
+
+    useEffect(() => {
+        customApiClient.cimGetAllowedTransitions(id).then((res) => {
+            setAllowedTransitions(res);
+        });
+    }, [id, customApiClient, ticket]);
 
     if (notFound) {
         return (
@@ -166,25 +190,11 @@ const ServiceTicketDetail = () => {
         }));
     }
 
-    const changeTicketState = (state: ServiceTicketProcessState) => {
-        customApiClient
-            .cimChangeTicketStateById(id, state)
-            .then((res) => {
-                setTicket(res);
-            })
-            .catch((err) => {
-                if (err.response && err.response.status === 404) {
-                    setNotFound(true);
-                } else {
-                    throw err;
-                }
-            });
-    };
     const acceptImpactedObjects = () => {
-        changeTicketState(ServiceTicketProcessState.OPEN_ACCEPTED);
+        customApiClient.cimAcceptTicket(id).then((res) => setTicket(res));
     };
     const abortTicket = () => {
-        changeTicketState(ServiceTicketProcessState.ABORTED);
+        customApiClient.cimAbortTicket(id).then((res) => setTicket(res));
     };
     const openTicket = () => {
         redirect(`/tickets/${ticket._id}/open`);
@@ -202,31 +212,40 @@ const ServiceTicketDetail = () => {
         redirect(`/tickets/${ticket._id}/mails`);
     };
 
+    const onButtonClick = (question: string, confirm: (e: React.MouseEvent<HTMLButtonElement>) => void) => {
+        showConfirmDialog({
+            question: question,
+            confirmAction: confirm,
+            cancelAction: () => {},
+            leavePage: false,
+        });
+    };
+
     let actions: Action[] = [
         {
             translation: "tickets.action.opening",
             onClick: openTicket,
-            requiredState: [ServiceTicketProcessState.OPEN_ACCEPTED],
+            transition: ServiceTicketTransition.OPENING,
         },
         {
             translation: "tickets.action.updating",
             onClick: updateTicket,
-            requiredState: [ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED],
+            transition: ServiceTicketTransition.UPDATING,
         },
         {
             translation: "tickets.action.closing",
             onClick: closeTicket,
-            requiredState: [ServiceTicketProcessState.OPEN, ServiceTicketProcessState.UPDATED],
+            transition: ServiceTicketTransition.CLOSING,
         },
         {
             translation: "tickets.action.aborting",
-            onClick: abortTicket,
-            requiredState: [ServiceTicketProcessState.OPEN_ACCEPTED, ServiceTicketProcessState.OPEN_RELATED],
+            onClick: () => onButtonClick("Aborting the ticket is irreversible. Are you sure?", abortTicket),
+            transition: ServiceTicketTransition.ABORTING,
         },
         {
             translation: "tickets.action.show",
             onClick: viewLastSentMails,
-            requiredState: [
+            requiredStates: [
                 ServiceTicketProcessState.OPEN,
                 ServiceTicketProcessState.UPDATED,
                 ServiceTicketProcessState.CLOSED,
@@ -238,7 +257,8 @@ const ServiceTicketDetail = () => {
         actions.splice(2, 0, {
             translation: "tickets.action.open_and_close",
             onClick: openAndCloseTicket,
-            requiredState: [
+            // TODO cim#18: refactor open_and_close to be its own transition
+            requiredStates: [
                 ServiceTicketProcessState.OPEN_ACCEPTED,
                 ServiceTicketProcessState.OPEN,
                 ServiceTicketProcessState.UPDATED,
@@ -246,10 +266,7 @@ const ServiceTicketDetail = () => {
         });
     }
 
-    const isUpdateImpactActive = [
-        ServiceTicketProcessState.OPEN_ACCEPTED,
-        ServiceTicketProcessState.OPEN_RELATED,
-    ].includes(ticket.process_state);
+    const isUpdateImpactActive = allowedTransitions.includes(ServiceTicketTransition.ACCEPTING);
 
     console.log("Rendering the ServiceTicketDetail page with ticket;", ticket);
 
@@ -299,29 +316,30 @@ const ServiceTicketDetail = () => {
                                 </EuiFacetButton>
                             </EuiFlexItem>
 
-                            {ticket?.transition_action === null && ticket?.process_state === "initial" && (
-                                <EuiFlexItem grow={false} style={{ minWidth: 200 }}>
-                                    <EuiButton
-                                        color={"danger"}
-                                        iconType="refresh"
-                                        isDisabled={false}
-                                        size="m"
-                                        fill
-                                        onClick={() =>
-                                            customApiClient.cimRestartOpenRelate(ticket._id).then(() => {
-                                                setFlash(
-                                                    intl.formatMessage({
-                                                        id: "tickets.action.background_job_restarted",
-                                                    })
-                                                );
-                                                redirect("/tickets");
-                                            })
-                                        }
-                                    >
-                                        {intl.formatMessage({ id: "tickets.action.restart_open_relate" })}
-                                    </EuiButton>
-                                </EuiFlexItem>
-                            )}
+                            {ticket?.transition_action === null &&
+                                ticket?.process_state === ServiceTicketProcessState.NEW && (
+                                    <EuiFlexItem grow={false} style={{ minWidth: 200 }}>
+                                        <EuiButton
+                                            color={"danger"}
+                                            iconType="refresh"
+                                            isDisabled={false}
+                                            size="m"
+                                            fill
+                                            onClick={() =>
+                                                customApiClient.cimRestartOpenRelate(ticket._id).then(() => {
+                                                    setFlash(
+                                                        intl.formatMessage({
+                                                            id: "tickets.action.background_job_restarted",
+                                                        })
+                                                    );
+                                                    redirect("/tickets");
+                                                })
+                                            }
+                                        >
+                                            {intl.formatMessage({ id: "tickets.action.restart_open_relate" })}
+                                        </EuiButton>
+                                    </EuiFlexItem>
+                                )}
                         </EuiFlexGroup>
                         <div className="mod-ticket-detail">
                             <table className={`detail-block`}>
@@ -419,7 +437,7 @@ const ServiceTicketDetail = () => {
                             ></TabbedSection>
                         </div>
                         <EuiSpacer />
-                        {renderLogItemActions(ticket, actions)}
+                        {renderLogItemActions(ticket, allowedTransitions, actions)}
                         <EuiSpacer />
                         <EuiSpacer size="s" />
                         <ImpactedObjects ticket={ticket} withSubscriptions={true} updateable={isUpdateImpactActive} />

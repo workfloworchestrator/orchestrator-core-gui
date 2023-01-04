@@ -3,7 +3,7 @@ import {
     OpenServiceTicketPayload,
     ServiceTicket,
     ServiceTicketBackgroundJobCount,
-    ServiceTicketProcessState,
+    ServiceTicketTransition,
     ServiceTicketWithDetails,
 } from "custom/types";
 import { intl } from "locale/i18n";
@@ -230,6 +230,14 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.postPutJson(prefix_cim_dev_uri("surf/cim/tickets"), ticket, "post", false, true);
     };
 
+    cimAcceptTicket = (ticket_id: string): Promise<ServiceTicketWithDetails> => {
+        return this.postPutJson(prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/accept`), {}, "post", false);
+    };
+
+    cimAbortTicket = (ticket_id: string): Promise<ServiceTicketWithDetails> => {
+        return this.postPutJson(prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/abort`), {}, "post", false);
+    };
+
     cimOpenTicket = (payload: OpenServiceTicketPayload): Promise<{ id: string }> => {
         return this.postPutJson(
             prefix_cim_dev_uri(`surf/cim/tickets/${payload.cim_ticket_id}/open`),
@@ -277,13 +285,9 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.fetchJson<ServiceTicketWithDetails>(prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}`));
     };
 
-    // todo cim#18
-    cimChangeTicketStateById = (
-        ticket_id: string,
-        state: ServiceTicketProcessState
-    ): Promise<ServiceTicketWithDetails> => {
-        return this.fetchJson<ServiceTicketWithDetails>(
-            prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/state/${state}`)
+    cimGetAllowedTransitions = (ticket_id: string): Promise<ServiceTicketTransition[]> => {
+        return this.fetchJson<ServiceTicketTransition[]>(
+            prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/transitions`)
         );
     };
 

@@ -16,7 +16,7 @@ import {
 } from "@elastic/eui";
 import ServiceTicketFilter from "custom/components/ServiceTicketFilter";
 import { tableTickets } from "custom/pages/ServiceTicketsStyling";
-import { ServiceTicket, ServiceTicketProcessState } from "custom/types";
+import { ServiceTicket, ServiceTicketProcessState, ServiceTicketTransition } from "custom/types";
 import { renderStringAsDateTime } from "custom/Utils";
 import { intl } from "locale/i18n";
 import debounce from "lodash/debounce";
@@ -311,19 +311,20 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                         data-label={intl.formatMessage({ id: "tickets.table.jira_ticket_id" })}
                                         className="jira_ticket_id"
                                     >
-                                        {ticket.process_state === "initial" && !ticket.transition_action && (
-                                            <EuiIconTip
-                                                aria-label="Warning"
-                                                size="l"
-                                                type="alert"
-                                                color="warning"
-                                                content={intl.formatMessage({
-                                                    id: "tickets.table.background_job_warning",
-                                                })}
-                                            />
-                                        )}
-                                        {ticket.process_state === "initial" &&
-                                            ticket.transition_action === "relating" && (
+                                        {ticket.process_state === ServiceTicketProcessState.NEW &&
+                                            !ticket.transition_action && (
+                                                <EuiIconTip
+                                                    aria-label="Warning"
+                                                    size="l"
+                                                    type="alert"
+                                                    color="warning"
+                                                    content={intl.formatMessage({
+                                                        id: "tickets.table.background_job_warning",
+                                                    })}
+                                                />
+                                            )}
+                                        {ticket.process_state === ServiceTicketProcessState.NEW &&
+                                            ticket.transition_action === ServiceTicketTransition.RELATING && (
                                                 <EuiLoadingSpinner size="s" style={{ marginRight: "9px" }} />
                                             )}
                                         <Link to={`/tickets/${ticket._id}`}>{ticket.jira_ticket_id}</Link>
