@@ -48,6 +48,7 @@ export enum ServiceTicketTransition {
     ACCEPTING = "accepting",
     ABORTING = "aborting",
     OPENING = "opening",
+    OPEN_AND_CLOSE = "open_and_close",
     UPDATING = "updating",
     CLOSING = "closing",
     CLEANING = "cleaning",

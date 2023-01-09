@@ -257,12 +257,7 @@ const ServiceTicketDetail = () => {
         actions.splice(2, 0, {
             translation: "tickets.action.open_and_close",
             onClick: openAndCloseTicket,
-            // TODO cim#18: refactor open_and_close to be its own transition
-            requiredStates: [
-                ServiceTicketProcessState.OPEN_ACCEPTED,
-                ServiceTicketProcessState.OPEN,
-                ServiceTicketProcessState.UPDATED,
-            ],
+            transition: ServiceTicketTransition.OPEN_AND_CLOSE,
         });
     }
 
