@@ -13,6 +13,7 @@
  *
  */
 
+import { useAuth } from "oidc-react";
 import { useEffect, useState } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 
@@ -22,15 +23,6 @@ const isSecure = !!ENV.BACKEND_URL.includes("https");
 
 const wsProtocol = isSecure ? "wss" : "ws";
 const websocketUrl = `${wsProtocol}${ENV.BACKEND_URL.replace(/(^\w+|^)/, "")}`;
-
-class WebsocketToken {
-    token = "";
-
-    setToken = (token: string | undefined | null) => {
-        this.token = token ?? "";
-    };
-}
-export const websocketToken = new WebsocketToken();
 
 export interface SurfWebSocket {
     lastMessage: MessageEvent<any> | null;
@@ -45,9 +37,10 @@ const websocketSettings = {
     share: true,
 };
 
-const useWebsocketService = (endpoint: string): SurfWebSocket => {
+const useWebsocketServiceWithAuth = (endpoint: string): SurfWebSocket => {
+    const auth = useAuth();
     const baseUrl = `${websocketUrl}/${endpoint}?token=`;
-    const [url, setUrl] = useState<string>(!ENV.OAUTH2_ENABLED ? baseUrl : "");
+    const [url, setUrl] = useState<string>("");
 
     const { lastMessage, readyState } = useWebSocket(url, websocketSettings, !!url);
     const [useFallback, setUsefallback] = useState<boolean>(false);
@@ -61,10 +54,28 @@ const useWebsocketService = (endpoint: string): SurfWebSocket => {
     }, [readyState]);
 
     useEffect(() => {
-        setUrl(`${baseUrl}${websocketToken.token}`);
-    }, [baseUrl, websocketToken.token]);
+        setUrl(`${baseUrl}${auth.userData?.access_token}`);
+    }, [baseUrl, auth.userData?.access_token]);
 
     return { lastMessage, readyState, useFallback };
 };
+
+const useWebsocketServiceWithoutAuth = (endpoint: string): SurfWebSocket => {
+    const baseUrl = `${websocketUrl}/${endpoint}?token=`;
+    const { lastMessage, readyState } = useWebSocket(baseUrl, websocketSettings);
+    const [useFallback, setUsefallback] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (readyState === ReadyState.CLOSED) {
+            setUsefallback(true);
+        } else {
+            setUsefallback(false);
+        }
+    }, [readyState]);
+
+    return { lastMessage, readyState, useFallback };
+};
+
+const useWebsocketService = ENV.OAUTH2_ENABLED ? useWebsocketServiceWithAuth : useWebsocketServiceWithoutAuth;
 
 export default useWebsocketService;
