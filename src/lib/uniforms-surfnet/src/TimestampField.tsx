@@ -56,6 +56,7 @@ function TimestampField({
                 fullWidth
             >
                 <EuiDatePicker
+                    disabled={disabled}
                     selected={value ? moment.unix(value) : null}
                     // @ts-ignore
                     value={value ? moment.unix(value) : undefined}
