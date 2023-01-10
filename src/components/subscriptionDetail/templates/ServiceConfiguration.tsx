@@ -49,7 +49,11 @@ export const mapSplitFields = (
             >
                 <>
                     {uniqueSubscriptions.map((subscription: any) => (
-                        <SubscriptionInfo key={subscription.subscription_id} label="used_by_subscription" subscription={subscription} />
+                        <SubscriptionInfo
+                            key={subscription.subscription_id}
+                            label="used_by_subscription"
+                            subscription={subscription}
+                        />
                     ))}
                 </>
             </ExpandableRow>
