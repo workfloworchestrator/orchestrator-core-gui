@@ -42,13 +42,17 @@ export default function OpenForm({ formKey, ticketId, handleSubmit, handleCancel
                     setFlash(intl.formatMessage({ id: `cim.flash.${formKey}` }));
                 },
                 (e) => {
+                    if (e.response.status === 400 && e.response.data?.title === "Invalid statemachine transition") {
+                        setFlash(e.response.data.title, "error");
+                        redirect(`/tickets/${ticketId}`) ;
+                    }
                     throw e;
                 }
             );
 
             return customApiClient.catchErrorStatus<any>(promise, 503, (json) => {
-                setFlash(intl.formatMessage({ id: `cim.backendProblem` }), "error");
                 redirect("/tickets");
+                setFlash(intl.formatMessage({ id: `cim.backendProblem` }), "error");
             });
         },
         [redirect, intl, customApiClient, formKey, ticketId, handleSubmit]
