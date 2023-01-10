@@ -33,21 +33,28 @@ export const mapSplitFields = (
     value_fields: [string, any][],
     inUseBySubscriptions: Record<string, any>
 ) => {
-    const renderInUseByIds = (key: string, values: any) =>
-        values.length > 0 ? (
+    const renderInUseByIds = (key: string, inUseByIds: string[]) => {
+        const valuesMap: Map<string, any> = inUseByIds
+            .filter((instanceId: string) => inUseBySubscriptions.hasOwnProperty(instanceId))
+            .map((instanceId: string) => inUseBySubscriptions[instanceId])
+            .reduce((acc: Map<string, any>, curr: any) => acc.set(curr.subscription_id, curr), new Map<string, any>());
+
+        const uniqueSubscriptions: any[] = Array.from(valuesMap.values());
+
+        return inUseByIds.length > 0 ? (
             <ExpandableRow
                 title="USED_BY_SUBSCRIPTIONS"
                 text="Show info about subscriptions that use this product block"
                 key={`expandable-${instance_id}-${key}`}
             >
-                {values.map((value: any) => {
-                    const subscription = inUseBySubscriptions.hasOwnProperty(value)
-                        ? inUseBySubscriptions[value]
-                        : value;
-                    return <SubscriptionInfo key={value} label="used_by_subscription" value={subscription} />;
-                })}
+                <>
+                    {uniqueSubscriptions.map((subscription: any) => (
+                        <SubscriptionInfo key={subscription.subscription_id} label="used_by_subscription" subscription={subscription} />
+                    ))}
+                </>
             </ExpandableRow>
         ) : null;
+    };
 
     return value_fields
         .sort((valueFieldLeft, valueFieldRight) => valueFieldLeft[0].localeCompare(valueFieldRight[0]))
