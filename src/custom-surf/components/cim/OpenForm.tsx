@@ -14,7 +14,6 @@
  */
 
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
-import { ServiceTicketProcessState } from "custom/types";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
@@ -36,8 +35,7 @@ export default function OpenForm({ formKey, ticketId, handleSubmit, handleCancel
 
     const submit = useCallback(
         (userInputs: {}[]) => {
-            // Pass the ticket id and next process state. Backend validates the state transition.
-            userInputs = [{ ticket_id: ticketId, next_process_state: ServiceTicketProcessState.OPEN }, ...userInputs];
+            userInputs = [{ ticket_id: ticketId }, ...userInputs];
             let promise = customApiClient.cimStartForm(formKey, userInputs).then(
                 (form) => {
                     handleSubmit(form);

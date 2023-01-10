@@ -33,21 +33,25 @@ export interface CloseServiceTicketPayload extends OpenServiceTicketPayload {
     end_date?: string;
 }
 
-export enum ServiceTicketState {
-    INITIAL = "initial",
-    ACTIVE = "active",
-    ABORTED = "aborted",
-    CLOSED = "closed",
-}
-
 export enum ServiceTicketProcessState {
-    INITIAL = "initial",
+    NEW = "new",
     OPEN = "open",
     OPEN_RELATED = "open_related",
     OPEN_ACCEPTED = "open_accepted",
     UPDATED = "updated",
     ABORTED = "aborted",
     CLOSED = "closed",
+}
+
+export enum ServiceTicketTransition {
+    RELATING = "relating",
+    ACCEPTING = "accepting",
+    ABORTING = "aborting",
+    OPENING = "opening",
+    OPEN_AND_CLOSE = "open_and_close",
+    UPDATING = "updating",
+    CLOSING = "closing",
+    CLEANING = "cleaning",
 }
 
 export interface ServiceTicket {
