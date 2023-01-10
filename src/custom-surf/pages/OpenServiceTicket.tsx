@@ -18,7 +18,7 @@ import OpenForm from "custom/components/cim/OpenForm";
 import FormHeader from "custom/components/FormHeader";
 import { formStyling } from "custom/pages/FormStyling";
 import { OpenServiceTicketPayload } from "custom/types";
-import { useContext } from "react";
+import { useContext, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
 
@@ -29,6 +29,12 @@ interface IProps {
 export default function OpenServiceTicket() {
     const { id } = useParams<IProps>();
     const { redirect, customApiClient } = useContext(ApplicationContext);
+    const [ ticketName, setTicketName ] = useState<string>("ticket");
+
+    useMemo(async () => {
+        let ticket_meta = await customApiClient.cimGetTicketMetadata(id);
+        setTicketName(ticket_meta.ims_pw_id);
+    }, [id, customApiClient]);
 
     const handleSubmit = (userInputs: any) => {
         const payload: OpenServiceTicketPayload = {
@@ -50,7 +56,7 @@ export default function OpenServiceTicket() {
         <EuiPage css={formStyling}>
             <EuiPageBody component="div">
                 <FormHeader
-                    title="Prepare to send OPEN email to institutes"
+                    title={`Prepare to send ${ticketName} OPEN email to institutes`}
                     explainTitle="What is this?"
                     explainDescription={
                         <p>This wizard will guide you through the process of sending the OPEN email to institutes.</p>

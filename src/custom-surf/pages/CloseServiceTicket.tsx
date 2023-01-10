@@ -18,7 +18,7 @@ import OpenForm from "custom/components/cim/OpenForm";
 import FormHeader from "custom/components/FormHeader";
 import { formStyling } from "custom/pages/FormStyling";
 import { CloseServiceTicketPayload } from "custom/types";
-import { useContext } from "react";
+import { useContext, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
 
@@ -29,6 +29,12 @@ interface IProps {
 export default function CloseServiceTicket() {
     const { id } = useParams<IProps>();
     const { redirect, customApiClient } = useContext(ApplicationContext);
+    const [ ticketName, setTicketName ] = useState<string>("ticket");
+
+    useMemo(async () => {
+        let ticket_meta = await customApiClient.cimGetTicketMetadata(id);
+        setTicketName(ticket_meta.ims_pw_id);
+    }, [id, customApiClient]);
 
     const handleSubmit = (userInputs: any) => {
         const payload: CloseServiceTicketPayload = {
@@ -51,7 +57,7 @@ export default function CloseServiceTicket() {
         <EuiPage css={formStyling}>
             <EuiPageBody component="div">
                 <FormHeader
-                    title="Prepare to send CLOSE email to institutes"
+                    title={`Prepare to send ${ticketName} CLOSE email to institutes`}
                     explainTitle="What is this?"
                     explainDescription={
                         <p>
