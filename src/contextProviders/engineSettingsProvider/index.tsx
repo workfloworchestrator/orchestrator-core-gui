@@ -17,11 +17,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from "rea
 import ApplicationContext from "utils/ApplicationContext";
 import { EngineStatus } from "utils/types";
 import useHttpIntervalFallback from "utils/useHttpIntervalFallback";
-import useWebsocket from "websocketService/useWebsocket";
-
-interface WebSocketMessageData {
-    "engine-status": EngineStatus;
-}
+import useWebsocketService from "websocketService";
 
 export interface EngineSettingsContextData {
     engineStatus: EngineStatus;
@@ -44,7 +40,7 @@ export default EngineSettingsContext;
 
 export function EngineSettingsContextWrapper({ children }: any) {
     const { apiClient } = useContext(ApplicationContext);
-    const { message, useFallback } = useWebsocket<WebSocketMessageData>("api/settings/ws-status/");
+    const { lastMessage, useFallback } = useWebsocketService("api/settings/ws-status/");
     const [engineStatus, setEngineStatus] = useState<EngineStatus>({
         global_lock: false,
         running_processes: 0,
@@ -60,10 +56,11 @@ export function EngineSettingsContextWrapper({ children }: any) {
     useHttpIntervalFallback(useFallback, getEngineStatus);
 
     useEffect(() => {
-        if (message["engine-status"]) {
-            setEngineStatus(message["engine-status"]);
+        const engineStatus = lastMessage?.data["engine-status"];
+        if (engineStatus) {
+            setEngineStatus(engineStatus);
         }
-    }, [message]);
+    }, [lastMessage]);
 
     return <RunningProcessesProvider value={{ engineStatus, useFallback }}>{children}</RunningProcessesProvider>;
 }

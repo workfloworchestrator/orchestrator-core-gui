@@ -15,8 +15,7 @@
 
 import { useEffect, useState } from "react";
 import { ProcessStatus, Step, WsProcessV2 } from "utils/types";
-
-import useWebsocket from "../useWebsocket";
+import useWebsocketService from "websocketService";
 
 export interface FailedProcess {
     pid: string;
@@ -36,7 +35,7 @@ export interface RunningProcesses {
 }
 
 const useRunningProcesses = (): RunningProcesses => {
-    const { message, useFallback } = useWebsocket<WebSocketMessageData>("api/processes/all/");
+    const { lastMessage, useFallback } = useWebsocketService("api/processes/all/");
     const [runningProcesses, setRunningProcesses] = useState<WsProcessV2[]>([]);
     const [completedProcessIds, setCompletedProcessIds] = useState<string[]>([]);
 
@@ -54,8 +53,10 @@ const useRunningProcesses = (): RunningProcesses => {
     };
 
     useEffect(() => {
-        handleProcessUpdate(message);
-    }, [message]); // eslint-disable-line react-hooks/exhaustive-deps
+        if (lastMessage) {
+            handleProcessUpdate(lastMessage?.data);
+        }
+    }, [lastMessage]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return { runningProcesses, completedProcessIds, useFallback };
 };

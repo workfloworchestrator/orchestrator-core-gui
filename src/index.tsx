@@ -22,7 +22,6 @@ import { AuthContext, AuthProvider } from "oidc-react";
 import App, { history } from "pages/App";
 import ReactDOM from "react-dom";
 import { apiClient } from "utils/ApplicationContext";
-import { websocketService } from "websocketService";
 
 const appElement = document.getElementById("app");
 
@@ -69,7 +68,6 @@ if (ENV.OAUTH2_ENABLED) {
         onSignIn: (user: Oidc.User | null) => {
             if (user !== null) {
                 setUser(user);
-                websocketService.setToken(user.access_token);
 
                 if (user.profile.email) {
                     // Todo: remove this ugliness
@@ -85,7 +83,6 @@ if (ENV.OAUTH2_ENABLED) {
         },
         onSignOut: () => {
             setUser(null);
-            websocketService.setToken(null);
 
             window.location.assign("/");
 
@@ -99,8 +96,6 @@ if (ENV.OAUTH2_ENABLED) {
                 {(props) => {
                     // @ts-ignore
                     setUser(props.userData || null);
-                    websocketService.setToken(props?.userData?.access_token);
-
                     // @ts-ignore
                     if (props.userData && !props.userData.expired) {
                         return (

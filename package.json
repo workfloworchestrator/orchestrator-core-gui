@@ -3,7 +3,6 @@
     "version": "10.6.0",
     "private": false,
     "license": "Apache-2.0",
-    "proxy": "http://localhost:8080",
     "scripts": {
         "analyze": "source-map-explorer build/static/js/main.*",
         "clear-cache": "rm -rf node_modules/.cache",
@@ -61,6 +60,7 @@
         "react-storage-hooks": "^4.0.1",
         "react-table": "^7.7.0",
         "react-tooltip": "^4.2.13",
+        "react-use-websocket": "3.0.0",
         "reactjs-popup": "^2.0.4",
         "scroll-into-view": "^1.16.0",
         "spin.js": "^4.0.0",
