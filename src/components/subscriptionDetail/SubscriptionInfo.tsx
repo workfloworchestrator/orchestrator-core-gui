@@ -19,7 +19,7 @@ import ApplicationContext from "utils/ApplicationContext";
 
 interface IProps {
     label: string;
-    value: any;
+    subscription: any;
 }
 
 interface SubscriptionInfoRowProps {
@@ -34,7 +34,7 @@ const SubscriptionInfoRow: React.FC<SubscriptionInfoRowProps> = ({ title, childr
     </EuiDescriptionList>
 );
 
-export default function SubscriptionInfo({ label, value }: IProps) {
+export default function SubscriptionInfo({ label, subscription }: IProps) {
     const { theme } = useContext(ApplicationContext);
 
     return (
@@ -42,12 +42,12 @@ export default function SubscriptionInfo({ label, value }: IProps) {
             <tr>
                 <td>{label.toUpperCase()}</td>
                 <td colSpan={2}>
-                    <SubscriptionInfoRow title="Description">{value.description}</SubscriptionInfoRow>
-                    <SubscriptionInfoRow title="Product">{value.product?.description}</SubscriptionInfoRow>
-                    <SubscriptionInfoRow title="Status">{value.status}</SubscriptionInfoRow>
+                    <SubscriptionInfoRow title="Description">{subscription.description}</SubscriptionInfoRow>
+                    <SubscriptionInfoRow title="Product">{subscription.product?.description}</SubscriptionInfoRow>
+                    <SubscriptionInfoRow title="Status">{subscription.status}</SubscriptionInfoRow>
                     <SubscriptionInfoRow title="Subscription ID">
-                        <EuiLink href={`/subscriptions/${value.subscription_id}`} target="_blank">
-                            {value.subscription_id?.slice(0, 8)}
+                        <EuiLink href={`/subscriptions/${subscription.subscription_id}`} target="_blank">
+                            {subscription.subscription_id?.slice(0, 8)}
                         </EuiLink>
                     </SubscriptionInfoRow>
                 </td>
