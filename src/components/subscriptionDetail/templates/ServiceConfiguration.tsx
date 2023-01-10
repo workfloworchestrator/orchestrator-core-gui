@@ -34,12 +34,12 @@ export const mapSplitFields = (
     inUseBySubscriptions: Record<string, any>
 ) => {
     const renderInUseByIds = (key: string, inUseByIds: string[]) => {
-        const valuesMap: Map<string, any> = inUseByIds
+        const uniqueSubscriptionsMap: Map<string, any> = inUseByIds
             .filter((instanceId: string) => inUseBySubscriptions.hasOwnProperty(instanceId))
             .map((instanceId: string) => inUseBySubscriptions[instanceId])
             .reduce((acc: Map<string, any>, curr: any) => acc.set(curr.subscription_id, curr), new Map<string, any>());
 
-        const uniqueSubscriptions: any[] = Array.from(valuesMap.values());
+        const uniqueSubscriptions: any[] = Array.from(uniqueSubscriptionsMap.values());
 
         return inUseByIds.length > 0 ? (
             <ExpandableRow
