@@ -2,7 +2,7 @@ import { EuiDatePicker, EuiFormRow, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import moment from "moment";
 /*
- * Copyright 2019-2022 SURF.
+ * Copyright 2019-2023 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at

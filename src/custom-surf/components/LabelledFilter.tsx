@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2022 SURF.
+ * Copyright 2019-2023 SURF.
  */
 
 import { EuiComboBox, EuiSpacer, EuiText } from "@elastic/eui";
