@@ -46,11 +46,7 @@ const useWebsocketServiceWithAuth = (endpoint: string): SurfWebSocket => {
     const [useFallback, setUsefallback] = useState<boolean>(false);
 
     useEffect(() => {
-        if (readyState === ReadyState.CLOSED) {
-            setUsefallback(true);
-        } else {
-            setUsefallback(false);
-        }
+        setUsefallback(readyState === ReadyState.CLOSED);
     }, [readyState]);
 
     useEffect(() => {
