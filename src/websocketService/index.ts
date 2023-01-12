@@ -24,8 +24,8 @@ const isSecure = !!ENV.BACKEND_URL.includes("https");
 const wsProtocol = isSecure ? "wss" : "ws";
 const websocketUrl = `${wsProtocol}${ENV.BACKEND_URL.replace(/(^\w+|^)/, "")}`;
 
-export interface SurfWebSocket {
-    lastMessage: MessageEvent<any> | null;
+export interface SurfWebSocket<T> {
+    lastMessage: T | null;
     readyState: ReadyState;
     useFallback: boolean;
 }
@@ -37,12 +37,12 @@ const websocketSettings = {
     share: true,
 };
 
-const useWebsocketServiceWithAuth = (endpoint: string): SurfWebSocket => {
+const useWebsocketServiceWithAuth = <T extends object>(endpoint: string): SurfWebSocket<T> => {
     const auth = useAuth();
     const baseUrl = `${websocketUrl}/${endpoint}?token=`;
     const [url, setUrl] = useState<string>("");
 
-    const { lastMessage, readyState } = useWebSocket(url, websocketSettings, !!url);
+    const { lastJsonMessage, readyState } = useWebSocket(url, websocketSettings, !!url);
     const [useFallback, setUsefallback] = useState<boolean>(false);
 
     useEffect(() => {
@@ -53,12 +53,12 @@ const useWebsocketServiceWithAuth = (endpoint: string): SurfWebSocket => {
         setUrl(`${baseUrl}${auth.userData?.access_token}`);
     }, [baseUrl, auth.userData?.access_token]);
 
-    return { lastMessage, readyState, useFallback };
+    return { lastMessage: lastJsonMessage, readyState, useFallback };
 };
 
-const useWebsocketServiceWithoutAuth = (endpoint: string): SurfWebSocket => {
+const useWebsocketServiceWithoutAuth = <T extends object>(endpoint: string): SurfWebSocket<T> => {
     const baseUrl = `${websocketUrl}/${endpoint}?token=`;
-    const { lastMessage, readyState } = useWebSocket(baseUrl, websocketSettings);
+    const { lastJsonMessage, readyState } = useWebSocket(baseUrl, websocketSettings);
     const [useFallback, setUsefallback] = useState<boolean>(false);
 
     useEffect(() => {
@@ -69,7 +69,7 @@ const useWebsocketServiceWithoutAuth = (endpoint: string): SurfWebSocket => {
         }
     }, [readyState]);
 
-    return { lastMessage, readyState, useFallback };
+    return { lastMessage: lastJsonMessage, readyState, useFallback };
 };
 
 const useWebsocketService = ENV.OAUTH2_ENABLED ? useWebsocketServiceWithAuth : useWebsocketServiceWithoutAuth;

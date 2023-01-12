@@ -24,6 +24,10 @@ export interface EngineSettingsContextData {
     useFallback: boolean;
 }
 
+interface WsEngineStatus {
+    "engine-status": EngineStatus;
+}
+
 const defaultEngineSettings: EngineStatus = {
     global_lock: false,
     running_processes: 0,
@@ -40,7 +44,7 @@ export default EngineSettingsContext;
 
 export function EngineSettingsContextWrapper({ children }: any) {
     const { apiClient } = useContext(ApplicationContext);
-    const { lastMessage, useFallback } = useWebsocketService("api/settings/ws-status/");
+    const { lastMessage, useFallback } = useWebsocketService<WsEngineStatus>("api/settings/ws-status/");
     const [engineStatus, setEngineStatus] = useState<EngineStatus>({
         global_lock: false,
         running_processes: 0,
@@ -56,9 +60,11 @@ export function EngineSettingsContextWrapper({ children }: any) {
     useHttpIntervalFallback(useFallback, getEngineStatus);
 
     useEffect(() => {
-        const engineStatus = lastMessage?.data["engine-status"];
-        if (engineStatus) {
-            setEngineStatus(engineStatus);
+        if (lastMessage) {
+            const engineStatus = lastMessage["engine-status"];
+            if (engineStatus) {
+                setEngineStatus(engineStatus);
+            }
         }
     }, [lastMessage]);
 

@@ -54,7 +54,7 @@ const useRunningProcesses = (): RunningProcesses => {
 
     useEffect(() => {
         if (lastMessage) {
-            handleProcessUpdate(lastMessage?.data);
+            handleProcessUpdate(lastMessage);
         }
     }, [lastMessage]); // eslint-disable-line react-hooks/exhaustive-deps
 
