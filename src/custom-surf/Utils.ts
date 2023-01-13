@@ -23,7 +23,7 @@ function renderMoment(utc_moment: Moment, short: boolean) {
     const local_moment = utc_moment.tz(LOCAL_TZ);
 
     // Format UTC time with date/month if it falls on a different day, otherwise use short format
-    const utc = _utc.date() == local_moment.date() ? _utc.format(UTC_DATETIME_SHORT) : _utc.format(UTC_DATETIME_LONG);
+    const utc = _utc.date() === local_moment.date() ? _utc.format(UTC_DATETIME_SHORT) : _utc.format(UTC_DATETIME_LONG);
     return `${local_moment.format(MOMENTJS_DATETIME_LONG)} (${utc})`;
 }
 

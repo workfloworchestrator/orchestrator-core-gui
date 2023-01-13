@@ -18,11 +18,9 @@ import OpenForm from "custom/components/cim/OpenForm";
 import FormHeader from "custom/components/FormHeader";
 import { formStyling } from "custom/pages/FormStyling";
 import { UpdateServiceTicketPayload } from "custom/types";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
-
-import { ServiceTicket } from "../types";
 
 interface IProps {
     id: string;
