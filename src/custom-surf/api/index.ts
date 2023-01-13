@@ -270,10 +270,8 @@ export class CustomApiClient extends CustomApiClientInterface {
     };
 
     cimGetTicketMetadata = (ticket_id: string): Promise<ServiceTicket> => {
-        return this.fetchJson<ServiceTicket>(prefix_cim_dev_uri(
-            `surf/cim/tickets/${ticket_id}/metadata`
-        ));
-    } ;
+        return this.fetchJson<ServiceTicket>(prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/metadata`));
+    };
 
     cimCloseTicket = (payload: OpenServiceTicketPayload): Promise<{ id: string }> => {
         return this.postPutJson(

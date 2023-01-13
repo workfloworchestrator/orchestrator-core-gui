@@ -29,7 +29,7 @@ interface IProps {
 export default function CloseServiceTicket() {
     const { id } = useParams<IProps>();
     const { redirect, customApiClient } = useContext(ApplicationContext);
-    const [ ticketName, setTicketName ] = useState<string>("ticket");
+    const [ticketName, setTicketName] = useState<string>("ticket");
 
     useMemo(async () => {
         let ticket_meta = await customApiClient.cimGetTicketMetadata(id);

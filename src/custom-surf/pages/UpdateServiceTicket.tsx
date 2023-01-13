@@ -21,6 +21,7 @@ import { UpdateServiceTicketPayload } from "custom/types";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
+
 import { ServiceTicket } from "../types";
 
 interface IProps {
@@ -30,13 +31,12 @@ interface IProps {
 export default function UpdateServiceTicket() {
     const { id } = useParams<IProps>();
     const { redirect, customApiClient } = useContext(ApplicationContext);
-    const [ ticketName, setTicketName ] = useState<string>("ticket");
+    const [ticketName, setTicketName] = useState<string>("ticket");
 
     useMemo(async () => {
         let ticket_meta = await customApiClient.cimGetTicketMetadata(id);
         setTicketName(ticket_meta.ims_pw_id);
     }, [id, customApiClient]);
-
 
     const handleSubmit = (userInputs: any) => {
         const payload: UpdateServiceTicketPayload = {

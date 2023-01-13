@@ -44,7 +44,7 @@ export default function OpenForm({ formKey, ticketId, handleSubmit, handleCancel
                 (e) => {
                     if (e.response.status === 400 && e.response.data?.title === "Invalid statemachine transition") {
                         setFlash(e.response.data.title, "error");
-                        redirect(`/tickets/${ticketId}`) ;
+                        redirect(`/tickets/${ticketId}`);
                     }
                     throw e;
                 }
