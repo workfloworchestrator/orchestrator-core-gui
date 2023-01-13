@@ -135,7 +135,7 @@ function SubscriptionInstanceValueRow({
                                 {value}
                             </a>
                         )}
-                        {!(isSubscriptionValue || imsLink) && <span>{value.toString()}</span>}
+                        {!(isSubscriptionValue || imsLink) && <span>{value?.toString()}</span>}
                     </div>
                 </td>
                 {isDeleted && (
