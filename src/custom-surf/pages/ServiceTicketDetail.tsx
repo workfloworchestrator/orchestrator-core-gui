@@ -44,7 +44,7 @@ import {
     ServiceTicketType,
     ServiceTicketWithDetails,
 } from "custom/types";
-import { renderStringAsDateTime } from "custom/Utils";
+import { renderIsoDatetime } from "custom/Utils";
 import useInterval from "hooks/useInterval";
 import { intl } from "locale/i18n";
 import React, { useContext, useEffect, useState } from "react";
@@ -184,7 +184,7 @@ const ServiceTicketDetail = () => {
                     <EuiHorizontalRule margin="m"></EuiHorizontalRule>
                     {logitem.update_en}
                     <EuiHorizontalRule margin="m"></EuiHorizontalRule>
-                    Logged by {logitem.logged_by}, {renderStringAsDateTime(logitem.entry_time)}
+                    Logged by {logitem.logged_by}, {renderIsoDatetime(logitem.entry_time)}
                 </EuiPanel>
             ),
         }));
@@ -267,6 +267,11 @@ const ServiceTicketDetail = () => {
 
     const keyRowClass = "key-row";
     const valueRowClass = "value-row";
+
+    let endDate = "Not set";
+    if (ticket.end_date) {
+        endDate = renderIsoDatetime(ticket.end_date);
+    }
     return (
         <EuiPage css={ticketDetail}>
             <EuiPageBody component="div">
@@ -368,13 +373,13 @@ const ServiceTicketDetail = () => {
                                         <td className={keyRowClass}>
                                             <FormattedMessage id="tickets.table.start_date" />
                                         </td>
-                                        <td className={valueRowClass}>{renderStringAsDateTime(ticket.start_date)}</td>
+                                        <td className={valueRowClass}>{renderIsoDatetime(ticket.start_date)}</td>
                                     </tr>
                                     <tr className={theme}>
                                         <td className={keyRowClass}>
                                             <FormattedMessage id="tickets.table.end_date" />
                                         </td>
-                                        <td className={valueRowClass}>{renderStringAsDateTime(ticket.end_date)}</td>
+                                        <td className={valueRowClass}>{endDate}</td>
                                     </tr>
                                     <tr className={theme}>
                                         <td className={keyRowClass}>
@@ -386,15 +391,13 @@ const ServiceTicketDetail = () => {
                                         <td className={keyRowClass}>
                                             <FormattedMessage id="tickets.table.create_date" />
                                         </td>
-                                        <td className={valueRowClass}>{renderStringAsDateTime(ticket.create_date)}</td>
+                                        <td className={valueRowClass}>{renderIsoDatetime(ticket.create_date)}</td>
                                     </tr>
                                     <tr className={theme}>
                                         <td className={keyRowClass}>
                                             <FormattedMessage id="tickets.table.last_update_time" />
                                         </td>
-                                        <td className={valueRowClass}>
-                                            {renderStringAsDateTime(ticket.last_update_time)}
-                                        </td>
+                                        <td className={valueRowClass}>{renderIsoDatetime(ticket.last_update_time)}</td>
                                     </tr>
                                     {ticket?.transition_action && (
                                         <tr className={theme}>

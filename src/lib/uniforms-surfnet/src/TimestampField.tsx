@@ -1,4 +1,5 @@
 import { EuiDatePicker, EuiFormRow, EuiText } from "@elastic/eui";
+import { localMomentToUtcTimestamp, utcTimestampToLocalMoment } from "custom/Utils";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import moment from "moment";
 /*
@@ -57,11 +58,11 @@ function TimestampField({
             >
                 <EuiDatePicker
                     disabled={disabled}
-                    selected={value ? moment.unix(value) : null}
+                    selected={value ? utcTimestampToLocalMoment(value) : null}
                     // @ts-ignore
-                    value={value ? moment.unix(value) : undefined}
+                    value={value ? utcTimestampToLocalMoment(value) : undefined}
                     onChange={(event) => {
-                        onChange(event?.unix());
+                        onChange(event ? localMomentToUtcTimestamp(event) : undefined);
                     }}
                     showTimeSelect={showTimeSelect}
                     dateFormat={dateFormat ? dateFormat : undefined}
