@@ -9,14 +9,6 @@ const MOMENTJS_DATETIME_SHORT = "DD-MM-YYYY HH:mm"; // 12-05-2022 00:00
 const UTC_DATETIME_SHORT = "HH:mm z"; // 22:00 UTC
 const UTC_DATETIME_LONG = "DD-MMM HH:mm z"; // 11-May 22:00 UTC
 
-export function utcTimestampToLocalMoment(utc_timestamp: number) {
-    return moment.unix(utc_timestamp).tz(LOCAL_TZ);
-}
-
-export function localMomentToUtcTimestamp(local_moment: Moment) {
-    return local_moment.unix();
-}
-
 function renderMoment(utc_moment: Moment, short: boolean) {
     /** Render Moment object as a datetime string.
      *

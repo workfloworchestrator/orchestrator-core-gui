@@ -1,5 +1,4 @@
 import { EuiDatePicker, EuiFormRow, EuiText } from "@elastic/eui";
-import { localMomentToUtcTimestamp, utcTimestampToLocalMoment } from "custom/Utils";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import moment from "moment";
 /*
@@ -16,8 +15,8 @@ import moment from "moment";
  * limitations under the License.
  *
  */
-import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
+import { localMomentToUtcTimestamp, utcTimestampToLocalMoment } from "utils/Time";
 
 export type TimestampFieldProps = FieldProps<
     number,
