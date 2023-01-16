@@ -33,9 +33,7 @@ import { setFlash } from "utils/Flash";
 import { descriptionStyle } from "./SettingsStyling";
 
 enum Cache {
-    ims = "ims",
     crm = "crm",
-    api = "api",
     all = "all",
 }
 
@@ -43,7 +41,7 @@ interface IProps {}
 
 export const Settings: FunctionComponent = (props: IProps) => {
     const intl = useIntl();
-    const [cache, setCache] = useState<Cache>(Cache.ims);
+    const [cache, setCache] = useState<Cache>(Cache.crm);
     const { apiClient } = useContext(ApplicationContext);
     const { engineStatus } = useContext(EngineSettingsContext);
 
