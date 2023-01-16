@@ -736,9 +736,7 @@ I18n.translations.en = {
     settings: {
         cache: {
             name: {
-                ims: "IMS locations",
-                crm: "CRM organisations, contacts and locations",
-                api: "Workflow endpoints (combined caches)",
+                crm: "CRM organisations, contacts and locations + IMS location_codes",
                 all: "All caches",
             },
             remove: "Flush Settings",

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [v10.6.0] - TBD
 
+-   Removed "api" and "ims" from the cache invalidation selection list
 -   `#49` Listing all non-terminated subscriptions and style update in the Used_By_Subscriptions field
 -   `#47` Fix subscription dropdowns to not resize when typing and fixes alignments with other input fields
 -   Added description text in Owner_Subscription_Id and added a copy-to-clipboard button
