@@ -15,8 +15,8 @@ import moment from "moment";
  * limitations under the License.
  *
  */
-import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
+import { localMomentToUtcTimestamp, utcTimestampToLocalMoment } from "utils/Time";
 
 export type TimestampFieldProps = FieldProps<
     number,
@@ -56,11 +56,12 @@ function TimestampField({
                 fullWidth
             >
                 <EuiDatePicker
-                    selected={value ? moment.unix(value) : null}
+                    disabled={disabled}
+                    selected={value ? utcTimestampToLocalMoment(value) : null}
                     // @ts-ignore
-                    value={value ? moment.unix(value) : undefined}
+                    value={value ? utcTimestampToLocalMoment(value) : undefined}
                     onChange={(event) => {
-                        onChange(event?.unix());
+                        onChange(event ? localMomentToUtcTimestamp(event) : undefined);
                     }}
                     showTimeSelect={showTimeSelect}
                     dateFormat={dateFormat ? dateFormat : undefined}

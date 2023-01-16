@@ -1,6 +1,6 @@
 import { EuiBasicTable } from "@elastic/eui";
 import { BackgroundJobLog } from "custom/types";
-import { renderStringAsDateTime } from "custom/Utils";
+import { renderIsoDatetime } from "custom/Utils";
 import React, { Fragment } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 
@@ -13,7 +13,7 @@ const BackgroundJobLogs = ({ data }: IProps) => {
         {
             field: "entry_time",
             name: "Date",
-            render: (entry_time: string, data: any) => renderStringAsDateTime(data.entry_time),
+            render: (entry_time: string, data: any) => renderIsoDatetime(data.entry_time, true),
             width: 200,
             schema: "date",
         },

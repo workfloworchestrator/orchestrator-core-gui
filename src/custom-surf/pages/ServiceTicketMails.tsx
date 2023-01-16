@@ -31,7 +31,7 @@ import {
 import { HorizontalAlignment } from "@elastic/eui/src/services/alignment";
 import EmailMessages from "custom/components/cim/EmailMessages";
 import { EmailLog, ServiceTicketWithDetails } from "custom/types";
-import { renderStringAsDateTime } from "custom/Utils";
+import { renderIsoDatetime } from "custom/Utils";
 import React, { ReactNode, useContext, useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router";
@@ -114,7 +114,7 @@ const ServiceTicketMails = () => {
             field: "entry_time",
             name: "Entry time",
             sortable: true,
-            render: (entry_time: string, record: any) => renderStringAsDateTime(record.entry_time),
+            render: (entry_time: string, record: any) => renderIsoDatetime(record.entry_time),
             width: "30%",
         },
         {
