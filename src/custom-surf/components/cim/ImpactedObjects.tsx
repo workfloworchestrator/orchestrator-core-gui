@@ -248,13 +248,7 @@ const ImpactedObjects = ({ ticket, updateable, withSubscriptions }: IProps) => {
 
     // Hide subscription and other columns when not needed
     if (!withSubscriptions) {
-        columns = columns.filter(
-            (c) =>
-                c.field !== "subscription" &&
-                c.field !== "type" &&
-                c.field !== "impact_override" &&
-                c.field !== "edit_impact_override"
-        );
+        columns = columns.filter((c) => c.field !== "subscription" && c.field !== "type");
     }
 
     // Hide impact override when needed
