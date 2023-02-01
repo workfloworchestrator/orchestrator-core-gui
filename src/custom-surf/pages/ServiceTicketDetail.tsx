@@ -15,11 +15,11 @@
 
 import {
     EuiButton,
-    EuiButtonIcon,
     EuiFacetButton,
     EuiFlexGroup,
     EuiFlexItem,
     EuiHorizontalRule,
+    EuiIcon,
     EuiModal,
     EuiModalBody,
     EuiModalFooter,
@@ -65,6 +65,17 @@ interface Action {
     requiredStates?: ServiceTicketProcessState[];
 }
 
+const getUnfinishedInformLog = (ticket: ServiceTicketWithDetails): ServiceTicketLog | undefined => {
+    const unfinished = ticket.logs.filter((log) => log.completed === false);
+    if (unfinished) {
+        return unfinished[0];
+    }
+};
+
+const ticketHasUnfinishedInform = (ticket: ServiceTicketWithDetails): boolean => {
+    return getUnfinishedInformLog(ticket) !== undefined;
+};
+
 const renderLogItemActions = (
     ticket: ServiceTicketWithDetails,
     allowedTransitions: ServiceTicketTransition[],
@@ -72,6 +83,8 @@ const renderLogItemActions = (
 ) => {
     const enabled = (action: Action) => {
         if (action.transition) {
+            if (ticketHasUnfinishedInform(ticket)) return false;
+
             if (ticket.transition_action) {
                 // There is an ongoing transition -> hide actions that would try (but fail) to start a transition
                 return false;
@@ -111,8 +124,8 @@ const ServiceTicketDetail = () => {
     useInterval(async () => {
         try {
             const ticket = await customApiClient.cimTicketByIdNoErrorDialog(id);
-        console.log("Refreshing");
-        setTicket(ticket);
+            console.log("Refreshing");
+            setTicket(ticket);
         } catch (err) {
             /* Suppress any errors during refresh */
         }
@@ -267,8 +280,6 @@ const ServiceTicketDetail = () => {
 
     const isUpdateImpactActive = allowedTransitions.includes(ServiceTicketTransition.ACCEPTING);
 
-    console.log("Rendering the ServiceTicketDetail page with ticket;", ticket);
-
     const keyRowClass = "key-row";
     const valueRowClass = "value-row";
 
@@ -276,6 +287,7 @@ const ServiceTicketDetail = () => {
     if (ticket.end_date) {
         endDate = renderIsoDatetime(ticket.end_date);
     }
+
     return (
         <EuiPage css={ticketDetail}>
             <EuiPageBody component="div">
@@ -306,16 +318,21 @@ const ServiceTicketDetail = () => {
                                     <h1>Service ticket</h1>
                                 </EuiTitle>
                             </EuiFlexItem>
-                            <EuiFlexItem grow={false} style={{ width: 20 }}>
-                                <EuiButtonIcon
+                            <EuiFlexItem grow={false} style={{ minWidth: 100 }}>
+                                <EuiFacetButton
                                     style={{ marginTop: -3 }}
-                                    size="m"
-                                    iconType="apmTrace"
+                                    icon={<EuiIcon type="apmTrace" />}
                                     onClick={showModal}
-                                ></EuiButtonIcon>
+                                    quantity={ticket?.background_logs.length}
+                                >
+                                    background job logs
+                                </EuiFacetButton>
                             </EuiFlexItem>
                             <EuiFlexItem grow={false} style={{ minWidth: 140 }}>
-                                <EuiFacetButton quantity={ticket?.transition_action ? 1 : 0}>
+                                <EuiFacetButton
+                                    quantity={ticket?.transition_action ? 1 : 0}
+                                    isSelected={ticket?.transition_action ? true : false}
+                                >
                                     active background job(s)
                                 </EuiFacetButton>
                             </EuiFlexItem>
@@ -336,7 +353,7 @@ const ServiceTicketDetail = () => {
                                                             id: "tickets.action.background_job_restarted",
                                                         })
                                                     );
-                                                    redirect("/tickets");
+                                                    redirect(`/tickets/${ticket._id}`);
                                                 })
                                             }
                                         >
@@ -344,7 +361,42 @@ const ServiceTicketDetail = () => {
                                         </EuiButton>
                                     </EuiFlexItem>
                                 )}
+
+                            {ticket?.transition_action === null && ticketHasUnfinishedInform(ticket) && (
+                                <EuiFlexItem grow={false} style={{ minWidth: 200 }}>
+                                    <EuiButton
+                                        color={"danger"}
+                                        iconType="refresh"
+                                        isDisabled={false}
+                                        size="m"
+                                        fill
+                                        onClick={() =>
+                                            customApiClient
+                                                .cimRestartInform(ticket._id)
+                                                .then(() => {
+                                                    setFlash(
+                                                        intl.formatMessage({
+                                                            id: "tickets.action.inform_job_restarted",
+                                                        })
+                                                    );
+                                                    redirect(`/tickets/${ticket._id}`);
+                                                })
+                                                .catch((err) => {
+                                                    if (err.response && err.response.status === 400) {
+                                                        setFlash(err.response.data.detail, "error");
+                                                    }
+                                                })
+                                        }
+                                    >
+                                        {intl.formatMessage(
+                                            { id: "tickets.action.restart_inform_job" },
+                                            { inform_job: getUnfinishedInformLog(ticket)?.log_type.toUpperCase() }
+                                        )}
+                                    </EuiButton>
+                                </EuiFlexItem>
+                            )}
                         </EuiFlexGroup>
+
                         <div className="mod-ticket-detail">
                             <table className={`detail-block`}>
                                 <thead />

@@ -327,6 +327,15 @@ export class CustomApiClient extends CustomApiClientInterface {
             true
         );
     };
+    cimRestartInform = (ticket_id: string): Promise<{ id: string }> => {
+        return this.postPutJson(
+            prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/restart-inform`),
+            {},
+            "post",
+            false,
+            true
+        );
+    };
     cimBackgroundJobCount = (): Promise<ServiceTicketBackgroundJobCount> => {
         return this.fetchJson<ServiceTicketBackgroundJobCount>(
             prefix_cim_dev_uri("surf/cim/tickets/active-background-jobs")

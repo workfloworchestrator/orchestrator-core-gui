@@ -80,6 +80,8 @@ export interface ServiceTicketLog {
     update_en: string;
     log_type: ServiceTicketLogType;
     logged_by: string;
+    transition: ServiceTicketTransition;
+    completed: boolean;
 }
 
 export enum ServiceTicketImpactedObjectImpact {
