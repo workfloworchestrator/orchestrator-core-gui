@@ -141,6 +141,7 @@ export interface BackgroundJobLog {
     subscription_id?: string;
     entry_time: string;
     process_state: string;
+    context: object;
 }
 
 export interface Email {
