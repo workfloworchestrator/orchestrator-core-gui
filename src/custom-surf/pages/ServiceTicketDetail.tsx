@@ -109,9 +109,13 @@ const ServiceTicketDetail = () => {
     const showModal = () => setIsModalVisible(true);
 
     useInterval(async () => {
+        try {
+            const ticket = await customApiClient.cimTicketByIdNoErrorDialog(id);
         console.log("Refreshing");
-        const ticket = await customApiClient.cimTicketById(id);
         setTicket(ticket);
+        } catch (err) {
+            /* Suppress any errors during refresh */
+        }
     }, 5000);
 
     useEffect(() => {

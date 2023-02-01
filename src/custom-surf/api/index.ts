@@ -287,8 +287,19 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.fetchJson<ServiceTicket[]>(prefix_cim_dev_uri("surf/cim/tickets"));
     };
 
+    _cimTicketById = (ticket_id: string, show_error_dialog: boolean): Promise<ServiceTicketWithDetails> => {
+        return this.fetchJson<ServiceTicketWithDetails>(
+            prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}`),
+            {},
+            {},
+            show_error_dialog
+        );
+    };
     cimTicketById = (ticket_id: string): Promise<ServiceTicketWithDetails> => {
-        return this.fetchJson<ServiceTicketWithDetails>(prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}`));
+        return this._cimTicketById(ticket_id, true);
+    };
+    cimTicketByIdNoErrorDialog = (ticket_id: string): Promise<ServiceTicketWithDetails> => {
+        return this._cimTicketById(ticket_id, false);
     };
 
     cimGetAllowedTransitions = (ticket_id: string): Promise<ServiceTicketTransition[]> => {
