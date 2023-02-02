@@ -80,6 +80,8 @@ export interface ServiceTicketLog {
     update_en: string;
     log_type: ServiceTicketLogType;
     logged_by: string;
+    transition: ServiceTicketTransition;
+    completed: boolean;
 }
 
 export enum ServiceTicketImpactedObjectImpact {
@@ -141,6 +143,7 @@ export interface BackgroundJobLog {
     subscription_id?: string;
     entry_time: string;
     process_state: string;
+    context: object;
 }
 
 export interface Email {

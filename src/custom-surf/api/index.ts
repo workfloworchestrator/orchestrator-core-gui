@@ -232,14 +232,17 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.postPutJson(prefix_cim_dev_uri("surf/cim/tickets"), ticket, "post", false, true);
     };
 
+    /* TODO cim#50 reduce api boilerplate */
     cimAcceptTicket = (ticket_id: string): Promise<ServiceTicketWithDetails> => {
         return this.postPutJson(prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/accept`), {}, "post", false);
     };
 
+    /* TODO cim#50 reduce api boilerplate */
     cimAbortTicket = (ticket_id: string): Promise<ServiceTicketWithDetails> => {
         return this.postPutJson(prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/abort`), {}, "post", false);
     };
 
+    /* TODO cim#50 reduce api boilerplate */
     cimOpenTicket = (payload: OpenServiceTicketPayload): Promise<{ id: string }> => {
         return this.postPutJson(
             prefix_cim_dev_uri(`surf/cim/tickets/${payload.cim_ticket_id}/open`),
@@ -249,6 +252,7 @@ export class CustomApiClient extends CustomApiClientInterface {
             true
         );
     };
+    /* TODO cim#50 reduce api boilerplate */
     cimOpenAndCloseTicket = (payload: OpenServiceTicketPayload): Promise<{ id: string }> => {
         return this.postPutJson(
             prefix_cim_dev_uri(`surf/cim/tickets/${payload.cim_ticket_id}/open-and-close`),
@@ -259,6 +263,7 @@ export class CustomApiClient extends CustomApiClientInterface {
         );
     };
 
+    /* TODO cim#50 reduce api boilerplate */
     cimUpdateTicket = (payload: OpenServiceTicketPayload): Promise<{ id: string }> => {
         return this.postPutJson(
             prefix_cim_dev_uri(`surf/cim/tickets/${payload.cim_ticket_id}/update`),
@@ -273,6 +278,7 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.fetchJson<ServiceTicket>(prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/metadata`));
     };
 
+    /* TODO cim#50 reduce api boilerplate */
     cimCloseTicket = (payload: OpenServiceTicketPayload): Promise<{ id: string }> => {
         return this.postPutJson(
             prefix_cim_dev_uri(`surf/cim/tickets/${payload.cim_ticket_id}/close`),
@@ -287,8 +293,19 @@ export class CustomApiClient extends CustomApiClientInterface {
         return this.fetchJson<ServiceTicket[]>(prefix_cim_dev_uri("surf/cim/tickets"));
     };
 
+    _cimTicketById = (ticket_id: string, show_error_dialog: boolean): Promise<ServiceTicketWithDetails> => {
+        return this.fetchJson<ServiceTicketWithDetails>(
+            prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}`),
+            {},
+            {},
+            show_error_dialog
+        );
+    };
     cimTicketById = (ticket_id: string): Promise<ServiceTicketWithDetails> => {
-        return this.fetchJson<ServiceTicketWithDetails>(prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}`));
+        return this._cimTicketById(ticket_id, true);
+    };
+    cimTicketByIdNoErrorDialog = (ticket_id: string): Promise<ServiceTicketWithDetails> => {
+        return this._cimTicketById(ticket_id, false);
     };
 
     cimGetAllowedTransitions = (ticket_id: string): Promise<ServiceTicketTransition[]> => {
@@ -310,6 +327,15 @@ export class CustomApiClient extends CustomApiClientInterface {
     cimRestartOpenRelate = (ticket_id: string): Promise<{ id: string }> => {
         return this.postPutJson(
             prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/restart-open-relate-job`),
+            {},
+            "post",
+            false,
+            true
+        );
+    };
+    cimRestartInform = (ticket_id: string): Promise<{ id: string }> => {
+        return this.postPutJson(
+            prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/restart-inform`),
             {},
             "post",
             false,

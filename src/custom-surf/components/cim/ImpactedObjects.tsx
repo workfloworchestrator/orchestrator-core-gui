@@ -267,7 +267,7 @@ const ImpactedObjects = ({ ticket, updateable, withSubscriptions }: IProps) => {
                     </EuiModalHeader>
                     <EuiModalBody>{editImpactedObject && showImpact(editImpactedObject)}</EuiModalBody>
                     <EuiModalFooter>
-                        <EuiButton onClick={closeModal} fill>
+                        <EuiButton onClick={closeModal} aria-label="Close modal" fill>
                             Close
                         </EuiButton>
                     </EuiModalFooter>
@@ -286,6 +286,7 @@ const ImpactedObjects = ({ ticket, updateable, withSubscriptions }: IProps) => {
                         size="m"
                         onClick={toggleExpandAll}
                         iconType={!isEmpty(itemIdToExpandedRowMap) ? "arrowUp" : "arrowDown"}
+                        aria-label={!isEmpty(itemIdToExpandedRowMap) ? "Collapse" : "Expand"}
                     ></EuiButtonIcon>
                 </EuiFlexItem>
             </EuiFlexGrid>

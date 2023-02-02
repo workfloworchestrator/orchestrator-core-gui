@@ -42,8 +42,13 @@ export default function OpenForm({ formKey, ticketId, handleSubmit, handleCancel
                     setFlash(intl.formatMessage({ id: `cim.flash.${formKey}` }));
                 },
                 (e) => {
-                    if (e.response.status === 400 && e.response.data?.title === "Invalid statemachine transition") {
-                        setFlash(e.response.data.title, "error");
+                    if (
+                        e.response.status === 400 &&
+                        ["invalid statemachine transition", "unfinished inform"].includes(
+                            e.response.data?.title.toLowerCase()
+                        )
+                    ) {
+                        setFlash(e.response.data.detail, "error");
                         redirect(`/tickets/${ticketId}`);
                     }
                     throw e;
