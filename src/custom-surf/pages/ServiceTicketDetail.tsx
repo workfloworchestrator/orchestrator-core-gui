@@ -212,6 +212,33 @@ const ServiceTicketDetail = () => {
     const viewLastSentMails = () => {
         redirect(`/tickets/${ticket_id}/mails`);
     };
+    const restartOpenRelate = () => {
+        customApiClient.cimRestartOpenRelate(ticket_id).then(() => {
+            setFlash(
+                intl.formatMessage({
+                    id: "tickets.action.background_job_restarted",
+                })
+            );
+            redirect(`/tickets/${ticket_id}`);
+        });
+    };
+    const restartInformJob = () => {
+        customApiClient
+            .cimRestartInform(ticket_id)
+            .then(() => {
+                setFlash(
+                    intl.formatMessage({
+                        id: "tickets.action.inform_job_restarted",
+                    })
+                );
+                redirect(`/tickets/${ticket_id}`);
+            })
+            .catch((err) => {
+                if (err.response && err.response.status === 400) {
+                    setFlash(err.response.data.detail, "error");
+                }
+            });
+    };
 
     const onButtonClick = (question: string, confirm: (e: React.MouseEvent<HTMLButtonElement>) => void) => {
         showConfirmDialog({
@@ -330,16 +357,7 @@ const ServiceTicketDetail = () => {
                                             isDisabled={false}
                                             size="m"
                                             fill
-                                            onClick={() =>
-                                                customApiClient.cimRestartOpenRelate(ticket._id).then(() => {
-                                                    setFlash(
-                                                        intl.formatMessage({
-                                                            id: "tickets.action.background_job_restarted",
-                                                        })
-                                                    );
-                                                    redirect(`/tickets/${ticket._id}`);
-                                                })
-                                            }
+                                            onClick={restartOpenRelate}
                                         >
                                             {intl.formatMessage({ id: "tickets.action.restart_open_relate" })}
                                         </EuiButton>
@@ -354,23 +372,7 @@ const ServiceTicketDetail = () => {
                                         isDisabled={false}
                                         size="m"
                                         fill
-                                        onClick={() =>
-                                            customApiClient
-                                                .cimRestartInform(ticket._id)
-                                                .then(() => {
-                                                    setFlash(
-                                                        intl.formatMessage({
-                                                            id: "tickets.action.inform_job_restarted",
-                                                        })
-                                                    );
-                                                    redirect(`/tickets/${ticket._id}`);
-                                                })
-                                                .catch((err) => {
-                                                    if (err.response && err.response.status === 400) {
-                                                        setFlash(err.response.data.detail, "error");
-                                                    }
-                                                })
-                                        }
+                                        onClick={restartInformJob}
                                     >
                                         {intl.formatMessage(
                                             { id: "tickets.action.restart_inform_job" },
