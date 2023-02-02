@@ -45,10 +45,11 @@ import {
     ServiceTicketWithDetails,
 } from "custom/types";
 import { renderIsoDatetime } from "custom/Utils";
-import useInterval from "hooks/useInterval";
 import { intl } from "locale/i18n";
+import _ from "lodash";
 import React, { useContext, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
+import { useQuery } from "react-query";
 import { useParams } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
@@ -66,10 +67,7 @@ interface Action {
 }
 
 const getUnfinishedInformLog = (ticket: ServiceTicketWithDetails): ServiceTicketLog | undefined => {
-    const unfinished = ticket.logs.filter((log) => log.completed === false);
-    if (unfinished) {
-        return unfinished[0];
-    }
+    return _.find(ticket.logs, (log) => log.completed === false);
 };
 
 const ticketHasUnfinishedInform = (ticket: ServiceTicketWithDetails): boolean => {
@@ -111,7 +109,7 @@ const renderLogItemActions = (
 };
 
 const ServiceTicketDetail = () => {
-    const { id } = useParams<IProps>();
+    const { id: ticket_id } = useParams<IProps>();
     const [ticket, setTicket] = useState<ServiceTicketWithDetails>();
     const [allowedTransitions, setAllowedTransitions] = useState<ServiceTicketTransition[]>([]);
     const [notFound, setNotFound] = useState(false);
@@ -121,37 +119,23 @@ const ServiceTicketDetail = () => {
     const closeModal = () => setIsModalVisible(false);
     const showModal = () => setIsModalVisible(true);
 
-    useInterval(async () => {
-        try {
-            const ticket = await customApiClient.cimTicketByIdNoErrorDialog(id);
-            console.log("Refreshing");
-            setTicket(ticket);
-        } catch (err) {
-            /* Suppress any errors during refresh */
-        }
-    }, 5000);
+    useQuery(["ticket", { id: ticket_id }], () => customApiClient.cimTicketByIdNoErrorDialog(ticket_id), {
+        onSuccess: (res) => {
+            setTicket(res);
+        },
+        onError: (err: any) => {
+            if (err.response && err.response.status === 404) {
+                setNotFound(true);
+            }
+        },
+        refetchInterval: 5000,
+    });
 
     useEffect(() => {
-        customApiClient
-            .cimTicketById(id)
-            .then((res) => {
-                console.log("setTicket from useEffect");
-                setTicket(res);
-            })
-            .catch((err) => {
-                if (err.response && err.response.status === 404) {
-                    setNotFound(true);
-                } else {
-                    throw err;
-                }
-            });
-    }, [id, customApiClient]);
-
-    useEffect(() => {
-        customApiClient.cimGetAllowedTransitions(id).then((res) => {
+        customApiClient.cimGetAllowedTransitions(ticket_id).then((res) => {
             setAllowedTransitions(res);
         });
-    }, [id, customApiClient, ticket]);
+    }, [ticket_id, customApiClient, ticket]);
 
     if (notFound) {
         return (
@@ -208,25 +192,25 @@ const ServiceTicketDetail = () => {
     }
 
     const acceptImpactedObjects = () => {
-        customApiClient.cimAcceptTicket(id).then((res) => setTicket(res));
+        customApiClient.cimAcceptTicket(ticket_id).then((res) => setTicket(res));
     };
     const abortTicket = () => {
-        customApiClient.cimAbortTicket(id).then((res) => setTicket(res));
+        customApiClient.cimAbortTicket(ticket_id).then((res) => setTicket(res));
     };
     const openTicket = () => {
-        redirect(`/tickets/${ticket._id}/open`);
+        redirect(`/tickets/${ticket_id}/open`);
     };
     const updateTicket = () => {
-        redirect(`/tickets/${ticket._id}/update`);
+        redirect(`/tickets/${ticket_id}/update`);
     };
     const closeTicket = () => {
-        redirect(`/tickets/${ticket._id}/close`);
+        redirect(`/tickets/${ticket_id}/close`);
     };
     const openAndCloseTicket = () => {
-        redirect(`/tickets/${ticket._id}/open-and-close`);
+        redirect(`/tickets/${ticket_id}/open-and-close`);
     };
     const viewLastSentMails = () => {
-        redirect(`/tickets/${ticket._id}/mails`);
+        redirect(`/tickets/${ticket_id}/mails`);
     };
 
     const onButtonClick = (question: string, confirm: (e: React.MouseEvent<HTMLButtonElement>) => void) => {
