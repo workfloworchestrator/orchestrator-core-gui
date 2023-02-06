@@ -67,7 +67,7 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
     const [observer, setObserver] = useState<IntersectionObserver | undefined>(undefined);
     const [autoScrollToLast, setAutoScrollToLast] = useStorageState(localStorage, "process-autoscroll", true);
 
-    const processQuery = useQuery(["process"], () => apiClient.process(match.params.id), {
+    const processQuery = useQuery(["process", match.params.id], () => apiClient.process(match.params.id), {
         onSuccess: (processInstance) => processInstance,
         onError: (error: any) => error,
         retry: false,
