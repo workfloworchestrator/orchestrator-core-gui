@@ -31,6 +31,7 @@ import { setFlash } from "utils/Flash";
 import { organisationNameByUuid, productNameById } from "utils/Lookups";
 import { CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
 import { InputForm, ProcessSubscription, ProcessWithDetails, Step, WsProcessV2 } from "utils/types";
+import useHttpIntervalFallback from "utils/useHttpIntervalFallback";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
 
@@ -49,7 +50,7 @@ interface IProps extends RouteComponentProps<MatchParams>, WrappedComponentProps
 function ProcessDetail({ match, query, setQuery }: IProps) {
     const actionsRef = useRef(null);
     const { apiClient, redirect, allowed, organisations, products } = useContext(ApplicationContext);
-    const { runningProcesses } = useContext(RunningProcessesContext);
+    const { runningProcesses, useFallback } = useContext(RunningProcessesContext);
     const { showConfirmDialog } = useContext(ConfirmationDialogContext);
 
     const [process, setProcess] = useState<ProcessWithDetails | undefined>(undefined);
@@ -66,30 +67,28 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
     const [observer, setObserver] = useState<IntersectionObserver | undefined>(undefined);
     const [autoScrollToLast, setAutoScrollToLast] = useStorageState(localStorage, "process-autoscroll", true);
 
-    useQuery(["process"], () => apiClient.process(match.params.id), {
-        onSuccess: (processInstance) => {
-            let enrichedProcess = processInstance as ProcessWithDetails;
-            const localStepUserInput: InputForm | undefined = enrichedProcess.form;
-            const localTabs = localStepUserInput ? tabs : ["process"];
-            const localSelectedTab = localStepUserInput ? "user_input" : "process";
-
-            setProductName(productNameById(enrichedProcess.product, products));
-            setCustomerName(organisationNameByUuid(enrichedProcess.customer, organisations));
-            setProcess(enrichedProcess);
-            setStepUserInput(localStepUserInput);
-            setTabs(localTabs);
-            setSelectedTab(localSelectedTab);
-        },
-        onError: (err: any) => {
-            if (err.response.status === 404) {
-                setNotFound(true);
-                setLoaded(true);
-            } else {
-                throw err;
-            }
-        },
+    const processQuery = useQuery(["process", match.params.id], () => apiClient.process(match.params.id), {
+        onSuccess: (processInstance) => processInstance,
+        onError: (error: any) => error,
         retry: false,
     });
+
+    const handleUpdateProcess = (processInstance: ProcessWithDetails) => {
+        const localStepUserInput: InputForm | undefined = processInstance.form;
+        const localTabs = localStepUserInput ? ["user_input", "process"] : ["process"];
+        const localSelectedTab = localStepUserInput ? "user_input" : "process";
+
+        setProductName(productNameById(processInstance.product, products));
+        setCustomerName(organisationNameByUuid(processInstance.customer, organisations));
+        setProcess(processInstance);
+        setStepUserInput(localStepUserInput);
+        setTabs(localTabs);
+        setSelectedTab(localSelectedTab);
+
+        if (autoScrollToLast) {
+            scrollToLast();
+        }
+    };
 
     useQuery(
         [`process_subscriptions-${match.params.id}`],
@@ -104,6 +103,7 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
             },
         }
     );
+
     const scrollToLast = () => {
         const finished_steps = process?.steps.filter((step) => step.status !== "pending");
         if (finished_steps) {
@@ -111,6 +111,31 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
         }
     };
 
+    const handleUpdateWebsocketProcess = (runningProcesses: WsProcessV2[]) => {
+        const localProcess = runningProcesses.find((p) => p.pid === match.params.id);
+        if (wsProcess === localProcess || !localProcess) {
+            return;
+        }
+        setWsProcess(localProcess);
+        const enrichedProcess = { ...(process as ProcessWithDetails), ...localProcess };
+        handleUpdateProcess(enrichedProcess);
+    };
+
+    useHttpIntervalFallback(useFallback, () => processQuery.refetch());
+    // eslint-disable-next-line
+    useEffect(() => processQuery.data && handleUpdateProcess(processQuery.data), [processQuery.data]);
+    // eslint-disable-next-line
+    useEffect(() => handleUpdateWebsocketProcess(runningProcesses), [runningProcesses]);
+    useEffect(() => {
+        if (processQuery.error) {
+            if (processQuery.error.response.status === 404) {
+                setNotFound(true);
+                setLoaded(true);
+            } else {
+                throw processQuery.error;
+            }
+        }
+    }, [processQuery.error]);
     useEffect(() => {
         const el = actionsRef.current;
         if (observer || !actionsRef.current) {
@@ -139,28 +164,6 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
             }
         }
     }, [autoScrollToLast, loaded, observer, process]);
-
-    const handleUpdateProcess = (runningProcesses: WsProcessV2[]) => {
-        const localProcess = runningProcesses.find((p) => p.pid === match.params.id);
-        if (wsProcess === localProcess || !localProcess) {
-            return <></>;
-        }
-        const enrichedProcess = { ...(process as ProcessWithDetails), ...localProcess };
-        const localStepUserInput: InputForm | undefined = localProcess.form;
-        const localTabs = localStepUserInput ? ["user_input", "process"] : ["process"];
-        const localSelectedTab = localStepUserInput ? "user_input" : "process";
-
-        setWsProcess(localProcess);
-        setProcess(enrichedProcess);
-        setStepUserInput(localStepUserInput);
-        setTabs(localTabs);
-        setSelectedTab(localSelectedTab);
-
-        if (autoScrollToLast) {
-            scrollToLast();
-        }
-        return <></>;
-    };
 
     const confirmation = (question: string, confirmAction: (e: React.MouseEvent) => void) =>
         showConfirmDialog({ question, confirmAction });
@@ -448,7 +451,6 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
     const step = process.steps.find((step: Step) => step.status === "pending");
     const renderNotFound = loaded && notFound;
     const renderContent = loaded && !notFound;
-    handleUpdateProcess(runningProcesses);
 
     return (
         <EuiPage css={processDetailStyling}>
