@@ -744,7 +744,7 @@ I18n.translations.en = {
             remove: "Flush Settings",
             remove_info: "Select settings to flush",
             clear: "Flush",
-            flushed: "Settings {{name}} was flushed",
+            flushed: "Settings {{name}} was flushed (deleted: {{count}})",
         },
         status: {
             info: "Modify the engine settings",

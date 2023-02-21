@@ -332,7 +332,11 @@ export class ApiClient extends ApiClientInterface {
         return this.postPutJson("user/error", error, "post", false);
     };
 
-    clearCache = (name: string) => {
+    getCacheNames = (): Promise<Record<string, string>> => {
+        return this.fetchJson("settings/cache-names");
+    };
+
+    clearCache = (name: string): Promise<number | null> => {
         return this.postPutJson(`settings/cache/${name}`, {}, "delete", true, false);
     };
 

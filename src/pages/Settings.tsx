@@ -27,21 +27,23 @@ import {
 import EngineSettingsContext from "contextProviders/engineSettingsProvider";
 import { FunctionComponent, useContext, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
+import { useQuery } from "react-query";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 
 import { descriptionStyle } from "./SettingsStyling";
 
-enum Cache {
-    crm = "crm",
-    all = "all",
+interface CacheOption {
+    value: string;
+    text: string;
 }
 
 interface IProps {}
 
 export const Settings: FunctionComponent = (props: IProps) => {
     const intl = useIntl();
-    const [cache, setCache] = useState<Cache>(Cache.crm);
+    const [selectedCacheOption, setSelectedCacheOption] = useState<CacheOption | undefined>();
+    const [cacheOptions, setCacheOptions] = useState<Record<string, CacheOption> | undefined>();
     const { apiClient } = useContext(ApplicationContext);
     const { engineStatus } = useContext(EngineSettingsContext);
 
@@ -70,36 +72,32 @@ export const Settings: FunctionComponent = (props: IProps) => {
     ];
 
     const flushCache = () => {
-        apiClient.clearCache(cache).then(() => {
+        if (!selectedCacheOption) {
+            return;
+        }
+        apiClient.clearCache(selectedCacheOption.value).then((count) => {
             setFlash(
-                intl.formatMessage(
-                    { id: "settings.cache.flushed" },
-                    { name: intl.formatMessage({ id: `settings.cache.name.${cache}` }) }
-                )
+                intl.formatMessage({ id: "settings.cache.flushed" }, { name: selectedCacheOption.text, count: count })
             );
         });
     };
 
-    const handleCacheChange = (newCache: Cache) => {
-        setCache(newCache);
-    };
-
-    const getCacheOptions = () => {
-        const cacheOptions = [];
-
-        for (const cacheOption in Cache) {
-            if (isNaN(Number(cacheOption))) {
-                cacheOptions.push({
-                    value: cacheOption,
-                    text: intl.formatMessage({ id: `settings.cache.name.${cacheOption}` }),
-                });
-            }
+    const handleCacheChange = (key: string) => {
+        if (!cacheOptions) {
+            return;
         }
-
-        return cacheOptions;
+        setSelectedCacheOption(cacheOptions[key]);
     };
 
-    const cacheOptions = getCacheOptions();
+    useQuery<Record<string, string>, Error>(["cache-names"], () => apiClient.getCacheNames(), {
+        onSuccess: (data) => {
+            setCacheOptions(
+                Object.fromEntries(
+                    Object.entries(data).map(([key, description]) => [key, { value: key, text: description }])
+                )
+            );
+        },
+    });
     const isRunning = engineStatus?.global_status === "RUNNING";
 
     return (
@@ -116,9 +114,9 @@ export const Settings: FunctionComponent = (props: IProps) => {
                 >
                     <EuiSelect
                         id="selectCache"
-                        options={cacheOptions}
-                        value={cache}
-                        onChange={(e) => handleCacheChange(e.target.value as Cache)}
+                        options={cacheOptions && Object.values(cacheOptions)}
+                        value={selectedCacheOption?.value}
+                        onChange={(e) => handleCacheChange(e.target.value)}
                         aria-label="Select cache to clear"
                     />
                     <EuiSpacer />
