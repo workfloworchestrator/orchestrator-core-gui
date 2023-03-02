@@ -15,7 +15,9 @@
 
 import { useEffect, useState } from "react";
 
-const useHttpIntervalFallback = (useFallback: boolean, fn: () => void) => {
+
+
+const useHttpIntervalFallback = <T>(useFallback: boolean, fn: () => void, depArray: T[] = []) => {
     const [httpInterval, setHttpInterval] = useState<NodeJS.Timeout | undefined>();
 
     useEffect(() => {
@@ -24,8 +26,11 @@ const useHttpIntervalFallback = (useFallback: boolean, fn: () => void) => {
         } else if (!useFallback && httpInterval) {
             clearInterval(httpInterval);
             setHttpInterval(undefined);
+        } else if (useFallback && httpInterval) {
+            clearInterval(httpInterval);
+            setHttpInterval(setInterval(fn, 3000));
         }
-    }, [useFallback]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [useFallback, ...depArray]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         return () => httpInterval && clearInterval(httpInterval);

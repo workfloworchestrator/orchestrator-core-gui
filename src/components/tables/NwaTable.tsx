@@ -289,7 +289,10 @@ export function NwaTable<T extends object>({
         previousPage,
         setPageSize,
     };
-    useHttpIntervalFallback(useFallback, () => fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy));
+    useHttpIntervalFallback(
+        useFallback, () => fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy),
+        [fetchData, dispatch, pageIndex, pageSize, sortBy, filterBy]
+    );
 
     // Update localStorage
     useEffect(() => {
@@ -301,14 +304,10 @@ export function NwaTable<T extends object>({
         persistSettings({ pageSize, pageIndex, filterBy, sortBy, refresh, minimized });
     }, [persistSettings, pageSize, pageIndex, filterBy, sortBy, refresh, minimized]);
 
-    // fetch new data whenever page index, size sort or filter changes
+    // fetch new data whenever page index, size sort, filter or runningProcesses changes
     useEffect(() => {
         fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
-    }, [fetchData, dispatch, pageIndex, pageSize, sortBy, filterBy]);
-
-    useEffect(() => {
-        fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
-    }, [runningProcesses]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [fetchData, dispatch, pageIndex, pageSize, sortBy, filterBy, runningProcesses]);
 
     return (
         <EuiPanel
