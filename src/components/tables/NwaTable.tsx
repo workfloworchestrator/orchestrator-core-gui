@@ -289,10 +289,14 @@ export function NwaTable<T extends object>({
         previousPage,
         setPageSize,
     };
-    useHttpIntervalFallback(
-        useFallback, () => fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy),
-        [fetchData, dispatch, pageIndex, pageSize, sortBy, filterBy]
-    );
+    useHttpIntervalFallback(useFallback, () => fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy), [
+        fetchData,
+        dispatch,
+        pageIndex,
+        pageSize,
+        sortBy,
+        filterBy,
+    ]);
 
     // Update localStorage
     useEffect(() => {
