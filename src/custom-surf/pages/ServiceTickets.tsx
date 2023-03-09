@@ -61,14 +61,13 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
         serviceTickets: [],
         query: "",
         searchResults: [],
-        sortOrder: { name: "jira_ticket_id", descending: false },
+        sortOrder: { name: "last_update_time", descending: true },
         filterAttributes: {
             state: Object.values(ServiceTicketProcessState)
                 .filter((s) => s)
                 .map((state) => ({
                     name: state ?? "",
-                    // selected: state === ServiceTicketProcessState.OPEN,
-                    selected: false,
+                    selected: ![ServiceTicketProcessState.ABORTED, ServiceTicketProcessState.CLOSED].includes(state),
                     count: 0,
                 })),
         },
