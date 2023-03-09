@@ -549,6 +549,7 @@ I18n.translations.en = {
             ims_circuit_name: "IMS Name",
             ims_circuit_id: "ID",
             extra_information: "Extra info",
+            extra_info: "Extra info",
             impact_override: "Override",
             impact_override_info: "Use this to override the impact, or clear to remove override",
         },
