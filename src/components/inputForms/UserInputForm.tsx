@@ -191,7 +191,7 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
         let props = super.getProps(name);
         const translation_key = name.replace(/\.\d+(.\d+)*/, "_fields");
         const translation_intl_key = `forms.fields.${translation_key}`;
-        const translation = intl.formatMessage({ id: translation_intl_key });
+        const translation = intl.formatMessage({ id: translation_intl_key, defaultMessage: translation_intl_key });
         let label = translation !== translation_intl_key ? translation : props.label;
 
         // Mark required inputs. Might be delegated to the form components itself in the future.
