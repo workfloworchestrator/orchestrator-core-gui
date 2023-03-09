@@ -526,6 +526,7 @@ I18n.translations.en = {
             last_update_time: "Updated on",
             type: "Type",
             transition_action: "Transitioning",
+            delete: "Delete ticket",
         },
         action: {
             background_job_restarted: "Restarted background job",
