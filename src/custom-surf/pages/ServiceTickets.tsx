@@ -5,6 +5,7 @@
 
 import {
     EuiButton,
+    EuiButtonIcon,
     EuiFacetButton,
     EuiFlexGroup,
     EuiFlexItem,
@@ -25,6 +26,7 @@ import { FormattedMessage, WrappedComponentProps, injectIntl } from "react-intl"
 import { Link } from "react-router-dom";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
 import { Filter, SortOption } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
@@ -59,14 +61,13 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
         serviceTickets: [],
         query: "",
         searchResults: [],
-        sortOrder: { name: "jira_ticket_id", descending: false },
+        sortOrder: { name: "last_update_time", descending: true },
         filterAttributes: {
             state: Object.values(ServiceTicketProcessState)
                 .filter((s) => s)
                 .map((state) => ({
                     name: state ?? "",
-                    // selected: state === ServiceTicketProcessState.OPEN,
-                    selected: false,
+                    selected: ![ServiceTicketProcessState.ABORTED, ServiceTicketProcessState.CLOSED].includes(state),
                     count: 0,
                 })),
         },
@@ -234,6 +235,19 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
         return <i />;
     };
 
+    deleteTicket = async (ticket_id: string) => {
+        try {
+            await this.context.customApiClient.cimDeleteTicket(ticket_id);
+        } catch (error: any) {
+            if (error.response.status === 400) {
+                setFlash(error.response.data.detail, "error");
+            } else {
+                throw error;
+            }
+        }
+        this.refreshData();
+    };
+
     render() {
         const columns: Column[] = [
             "jira_ticket_id",
@@ -364,6 +378,17 @@ class ServiceTickets extends React.PureComponent<IProps, IState> {
                                         className="updated_on"
                                     >
                                         {renderIsoDatetime(ticket.last_update_time, true)}
+                                    </td>
+                                    <td>
+                                        {ticket.process_state === ServiceTicketProcessState.NEW &&
+                                            !ticket.transition_action && (
+                                                <EuiButtonIcon
+                                                    id={`tickets.table.${ticket._id}.delete`}
+                                                    iconType="trash"
+                                                    aria-label={intl.formatMessage({ id: "tickets.table.delete" })}
+                                                    onClick={() => this.deleteTicket(ticket._id)}
+                                                />
+                                            )}
                                     </td>
                                 </tr>
                             ))}
