@@ -74,6 +74,7 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
     });
 
     const handleUpdateProcess = (processInstance: ProcessWithDetails) => {
+        if (stepUserInput) return;
         const localStepUserInput: InputForm | undefined = processInstance.form;
         const localTabs = localStepUserInput ? ["user_input", "process"] : ["process"];
         const localSelectedTab = localStepUserInput ? "user_input" : "process";
@@ -353,6 +354,7 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
         }
 
         return apiClient.resumeProcess(process.id, processInput).then(() => {
+            setStepUserInput(undefined);
             setFlash(
                 intl.formatMessage(
                     { id: `${process.is_task ? "task" : "process"}.flash.update` },
