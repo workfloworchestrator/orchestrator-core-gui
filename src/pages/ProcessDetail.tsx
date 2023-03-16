@@ -74,8 +74,8 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
     });
 
     const handleUpdateProcess = (processInstance: ProcessWithDetails) => {
-        if (stepUserInput) return;
         const localStepUserInput: InputForm | undefined = processInstance.form;
+        if (stepUserInput && localStepUserInput) return;
         const localTabs = localStepUserInput ? ["user_input", "process"] : ["process"];
         const localSelectedTab = localStepUserInput ? "user_input" : "process";
 
