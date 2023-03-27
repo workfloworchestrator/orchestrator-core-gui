@@ -87,10 +87,11 @@ export default function SubscriptionsPage(props: IProps) {
                         <i>"d253130e"</i> would probably yield the same results.
                     </p>
                     <p>
-                        One can also use the keywords <i>and</i> and <i>or</i>. And one can use <i>-</i> to exclude a
-                        keyword. To make sure all words in the search are found in matching order use quotes <i>"</i>{" "}
-                        around the sentence. Example: <i>(star wars) or "luke skywalker" -scotty</i> searches for star
-                        and wars or luke but excluding scotty.
+                        If multiple keywords are entered, the results will be filtered by subscriptions with all
+                        keywords matching. One can also use the keyword <i>or</i> to form a disjunctive query. And one
+                        can use <i>-</i> to exclude a keyword. To make sure all words in the search are found in
+                        matching order use quotes <i>"</i> around the sentence. Example: <i>"luke skywalker" -scotty</i>{" "}
+                        searches for "luke skywalker" but excluding scotty.
                     </p>
                     <p>
                         The full text search can contain multiple search criteria that will AND-ed together. For example
@@ -101,6 +102,8 @@ export default function SubscriptionsPage(props: IProps) {
                     </p>
                     <h1>Patterns</h1>
                     <p>
+                        <b>by product tag:</b> tag:str
+                        <br />
                         <b>by customer:</b> customer_id:uuid
                         <br />
                         <b>by ims_circuit_id:</b> ims_circuit_id:int

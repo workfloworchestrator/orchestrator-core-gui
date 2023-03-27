@@ -345,7 +345,7 @@ I18n.translations.en = {
         name: "Product name",
         no_found: "No subscriptions",
         searchPlaceHolder: "Search for subscriptions...",
-        advancedSearchPlaceHolder: "Search on resource types",
+        advancedSearchPlaceHolder: "Search subscriptions by name, product, resource type, tag, etc...",
         submitSearch: "Search",
         fixedInputs: "Fixed Inputs",
         productBlocks: "Product Blocks",
