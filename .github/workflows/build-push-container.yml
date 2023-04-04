@@ -19,6 +19,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
       - name: Log in to the container registry
         uses: docker/login-action@v2
         with:
@@ -31,11 +34,26 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          # Override latest tag to make it so that:
+          # 'latest' -> last release
+          # 'edge'   -> last release or pre-release
+          flavor: |
+            latest=false
+          tags: |
+            type=schedule,pattern=nightly,priority=1000
+            type=ref,event=branch,priority=600
+            type=ref,event=tag,priority=600
+            type=ref,event=pr,prefix=pr-,priority=600
+            type=raw,value=latest,enable=${{ github.event.release.prerelease == false }},priority=410
+            type=raw,value=edge,enable=true,priority=400
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
