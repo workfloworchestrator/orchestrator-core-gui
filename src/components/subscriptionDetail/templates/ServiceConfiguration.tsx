@@ -67,7 +67,7 @@ export const mapSplitFields = (
                 return [key, values];
             }
 
-            return [key, values[0]];
+            return [key, values.join(", ")];
         })
         .map(([key, values]) => {
             if (key === "in_use_by_ids" && values) {
