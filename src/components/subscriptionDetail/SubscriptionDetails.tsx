@@ -41,12 +41,15 @@ function renderFailedTask(subscriptionProcesses: SubscriptionProcesses[]) {
         .filter((process) => process.last_status !== "completed")
         .sort((a, b) => b.started_at - a.started_at);
 
-    if (failed_tasks.length)
+    if (failed_tasks.length) {
+        let process = failed_tasks[0];
+        let url = process.is_task ? `/task/${process.pid}` : `/process/${process.pid}`;
         return (
-            <a target="_blank" rel="noopener noreferrer" href={`/task/${failed_tasks[0].pid}`}>
-                <FormattedMessage id="subscriptions.failed_task" values={failed_tasks[0] as any} />
+            <a target="_blank" rel="noopener noreferrer" href={url}>
+                <FormattedMessage id="subscriptions.failed_task" values={process as any} />
             </a>
         );
+    }
 }
 
 function renderLastRunTask(subscriptionProcesses: SubscriptionProcesses[]) {
