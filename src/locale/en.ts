@@ -274,6 +274,7 @@ I18n.translations.en = {
         completed: "Completed",
         suspended: "Suspended",
         running: "Running",
+        resumed: "Resumed",
         failed: "Failed",
         api_unavailable: "API Unavailable",
         inconsistent_data: "Inconsistent Data",
@@ -838,6 +839,7 @@ I18n.translations.en = {
         tasks: "Tasks",
         expanded_row: {
             running: "Currently processing step `{{step}}`.",
+            resumed: "Resumed and going to process step `{{step}}`.",
             suspended: "Suspended and waiting for input at step `{{step}}`.",
             waiting: "Waiting on resolution for step `{{step}}`.",
             aborted: "Aborted on step `{{step}}`.",
@@ -874,6 +876,7 @@ I18n.translations.en = {
     process_statuses: {
         created: "Created",
         running: "Running",
+        resumed: "Resumed",
         suspended: "Suspended",
         waiting: "Waiting",
         aborted: "Aborted",

@@ -96,6 +96,7 @@ function Processes() {
         "table.processes.active",
         initialProcessesFilterAndSort(false, [
             ProcessStatus.RUNNING,
+            ProcessStatus.RESUMED,
             ProcessStatus.SUSPENDED,
             ProcessStatus.FAILED,
             ProcessStatus.CREATED,
