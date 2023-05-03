@@ -67,16 +67,29 @@ function Tasks() {
 
     const handleAbortProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
         stop(e);
-        const product_name = process.subscriptions[0].product.name;
-        const customer_name = organisationNameByUuid(process.subscriptions[0].customer_id, organisations);
-        showConfirmDialog({
-            question: intl.formatMessage(
+        let message: string;
+        let workflow_name: string;
+        if (!process.is_task) {
+            workflow_name = process.subscriptions[0].product.name;
+            const customer_name = organisationNameByUuid(process.subscriptions[0].customer_id, organisations);
+            message = intl.formatMessage(
                 { id: "processes.abortConfirmation" },
-                { name: product_name, customer: customer_name }
-            ),
+                { name: workflow_name, customer: customer_name }
+            );
+        } else {
+            workflow_name = process.workflow;
+            message = intl.formatMessage({ id: "tasks.abortConfirmation" }, { name: workflow_name });
+        }
+        showConfirmDialog({
+            question: message,
             confirmAction: () =>
                 apiClient.abortProcess(process.pid).then(() => {
-                    setFlash(intl.formatMessage({ id: "processes.flash.abort" }, { name: product_name }));
+                    setFlash(
+                        intl.formatMessage(
+                            { id: `${process.is_task ? "tasks" : "processes"}.flash.abort` },
+                            { name: workflow_name }
+                        )
+                    );
                 }),
         });
     };
@@ -95,16 +108,29 @@ function Tasks() {
 
     const handleRetryProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
         stop(e);
-        const product_name = process.subscriptions[0].product.name;
-        const customer_name = organisationNameByUuid(process.subscriptions[0].customer_id, organisations);
-        showConfirmDialog({
-            question: intl.formatMessage(
+        let message: string;
+        let workflow_name: string;
+        if (!process.is_task) {
+            workflow_name = process.subscriptions[0].product.name;
+            const customer_name = organisationNameByUuid(process.subscriptions[0].customer_id, organisations);
+            message = intl.formatMessage(
                 { id: "processes.retryConfirmation" },
-                { name: product_name, customer: customer_name }
-            ),
+                { name: workflow_name, customer: customer_name }
+            );
+        } else {
+            workflow_name = process.workflow;
+            message = intl.formatMessage({ id: "tasks.retryConfirmation" }, { name: workflow_name });
+        }
+        showConfirmDialog({
+            question: message,
             confirmAction: () =>
                 apiClient.retryProcess(process.pid).then(() => {
-                    setFlash(intl.formatMessage({ id: "processes.flash.retry" }, { name: product_name }));
+                    setFlash(
+                        intl.formatMessage(
+                            { id: `${process.is_task ? "tasks" : "processes"}.flash.retry` },
+                            { name: workflow_name }
+                        )
+                    );
                 }),
         });
     };
