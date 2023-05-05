@@ -114,6 +114,7 @@ export const processStateDetailsStyling = css`
                                 width: 800px;
                                 min-width: 550px;
                                 padding-left: 20px;
+                                white-space: pre-wrap;
                             }
                             pre {
                                 margin-left: -10px;
