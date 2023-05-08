@@ -20,6 +20,7 @@ export type Theme = "light" | "dark";
 export enum ProcessStatus {
     "CREATED" = "created",
     "RUNNING" = "running",
+    "RESUMED" = "resumed",
     "SUSPENDED" = "suspended",
     "WAITING" = "waiting",
     "ABORTED" = "aborted",

@@ -86,8 +86,11 @@ export function actionOptions(
                 options.push(_delete);
             }
             break;
-        case "running": //??
+        case "running":
             options = [details, abort];
+            break;
+        case "resumed":
+            options = [details];
             break;
         case "completed":
             options = [details];
