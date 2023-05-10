@@ -771,7 +771,7 @@ I18n.translations.en = {
             number_of_workers_online: "# workers online:",
             number_of_running_jobs: "# running jobs:",
             number_of_queued_jobs: "# queued jobs:",
-        }
+        },
     },
     error_dialog: {
         title: "Unexpected error",
