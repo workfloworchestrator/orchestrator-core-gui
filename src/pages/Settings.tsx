@@ -25,11 +25,12 @@ import {
     EuiSpacer,
 } from "@elastic/eui";
 import EngineSettingsContext from "contextProviders/engineSettingsProvider";
-import { FunctionComponent, useContext, useState } from "react";
+import { FunctionComponent, useContext, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useQuery } from "react-query";
 import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
+import { WorkerStatus } from "utils/types";
 
 import { descriptionStyle } from "./SettingsStyling";
 
@@ -40,13 +41,19 @@ interface CacheOption {
 
 interface IProps {}
 
+const defaultWorkerStatus: WorkerStatus = {
+    executor_type: "...",
+    number_of_workers_online: 0,
+    number_of_queued_jobs: 0,
+    number_of_running_jobs: 0,
+};
 export const Settings: FunctionComponent = (props: IProps) => {
     const intl = useIntl();
     const [selectedCacheOption, setSelectedCacheOption] = useState<CacheOption | undefined>();
     const [cacheOptions, setCacheOptions] = useState<Record<string, CacheOption> | undefined>();
     const { apiClient } = useContext(ApplicationContext);
     const { engineStatus } = useContext(EngineSettingsContext);
-
+    const [workerStatus, setWorkerStatus] = useState<WorkerStatus>(defaultWorkerStatus);
     const lockEngine = (isLocked: boolean) => {
         apiClient.setGlobalStatus(isLocked).then(() => {
             setFlash(intl.formatMessage({ id: `settings.status.engine.${isLocked ? "pausing" : "restarted"}` }));
@@ -68,6 +75,25 @@ export const Settings: FunctionComponent = (props: IProps) => {
             ) : (
                 ""
             ),
+        },
+    ];
+
+    const workerStatusDescription = [
+        {
+            title: intl.formatMessage({ id: "settings.worker_status.executor_type" }),
+            description: workerStatus?.executor_type || "...",
+        },
+        {
+            title: intl.formatMessage({ id: "settings.worker_status.number_of_workers_online" }),
+            description: workerStatus?.number_of_workers_online,
+        },
+        {
+            title: intl.formatMessage({ id: "settings.worker_status.number_of_queued_jobs" }),
+            description: workerStatus?.number_of_queued_jobs,
+        },
+        {
+            title: intl.formatMessage({ id: "settings.worker_status.number_of_running_jobs" }),
+            description: workerStatus?.number_of_running_jobs,
         },
     ];
 
@@ -98,6 +124,11 @@ export const Settings: FunctionComponent = (props: IProps) => {
             );
         },
     });
+
+    useEffect(() => {
+        apiClient.getWorkerStatus().then(setWorkerStatus);
+    }, [apiClient]);
+
     const isRunning = engineStatus?.global_status === "RUNNING";
 
     return (
@@ -148,6 +179,23 @@ export const Settings: FunctionComponent = (props: IProps) => {
                         css={descriptionStyle}
                         type="column"
                         listItems={engineDescription}
+                        style={{ maxWidth: "400px" }}
+                    />
+                </EuiCard>
+                <EuiSpacer />
+                <EuiCard
+                    textAlign="left"
+                    title={<FormattedMessage id="settings.worker_status.info" />}
+                    description={
+                        <span>
+                            <FormattedMessage id="settings.worker_status.info_detail" />
+                        </span>
+                    }
+                >
+                    <EuiHorizontalRule margin="l" />
+                    <EuiDescriptionList
+                        type="column"
+                        listItems={workerStatusDescription}
                         style={{ maxWidth: "400px" }}
                     />
                 </EuiCard>

@@ -24,6 +24,7 @@ import {
     Subscription,
     SubscriptionModel,
     SubscriptionProcesses,
+    WorkerStatus,
     Workflow,
     WorkflowReasons,
     WorkflowWithProductTags,
@@ -346,6 +347,10 @@ export class ApiClient extends ApiClientInterface {
 
     setGlobalStatus = (new_global_lock: boolean) => {
         return this.postPutJson("settings/status", { global_lock: new_global_lock }, "put");
+    };
+
+    getWorkerStatus = (): Promise<WorkerStatus> => {
+        return this.fetchJson("settings/worker-status", {}, {}, false);
     };
 
     logUserInfo = (username: string, message: string) => {

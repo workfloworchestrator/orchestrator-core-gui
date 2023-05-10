@@ -28,14 +28,14 @@ interface WsEngineStatus {
     "engine-status": EngineStatus;
 }
 
-const defaultEngineSettings: EngineStatus = {
+const defaultEngineStatus: EngineStatus = {
     global_lock: false,
     running_processes: 0,
     global_status: "RUNNING",
 };
 
 const EngineSettingsContext = createContext<EngineSettingsContextData>({
-    engineStatus: defaultEngineSettings,
+    engineStatus: defaultEngineStatus,
     useFallback: false,
 });
 
@@ -45,11 +45,7 @@ export default EngineSettingsContext;
 export function EngineSettingsContextWrapper({ children }: any) {
     const { apiClient } = useContext(ApplicationContext);
     const { lastMessage, useFallback } = useWebsocketService<WsEngineStatus>("api/settings/ws-status/");
-    const [engineStatus, setEngineStatus] = useState<EngineStatus>({
-        global_lock: false,
-        running_processes: 0,
-        global_status: "RUNNING",
-    });
+    const [engineStatus, setEngineStatus] = useState<EngineStatus>(defaultEngineStatus);
 
     const getEngineStatus = useCallback(() => {
         apiClient.getGlobalStatus().then((newEngineStatus) => {

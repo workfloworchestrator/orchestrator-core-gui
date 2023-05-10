@@ -144,10 +144,13 @@ export interface SubscriptionWithDetails extends Subscription {
     customer_descriptions: CustomerDescription[];
     tag: string;
 }
+
 export interface SubscriptionModel extends Subscription {
     customer_descriptions: CustomerDescription[];
+
     [index: string]: any;
 }
+
 export interface IpPrefixSubscription extends Subscription {
     id: number;
     prefix: string;
@@ -315,6 +318,7 @@ export interface Workflow {
 export interface WorkflowWithProductTags extends Workflow {
     product_tags: string[];
 }
+
 export interface CodedWorkflow {
     name: string;
     implementation: string;
@@ -374,6 +378,7 @@ export interface IMSEndpoint {
     port: string;
     status: string;
 }
+
 export interface IMSService {
     id: number;
     customer_id: string;
@@ -417,6 +422,13 @@ export interface WorkflowReasons {
 }
 
 export type GlobalStatus = "RUNNING" | "PAUSED" | "PAUSING";
+
+export interface WorkerStatus {
+    executor_type: string;
+    number_of_workers_online: number;
+    number_of_queued_jobs: number;
+    number_of_running_jobs: number;
+}
 
 export interface EngineStatus {
     global_lock: boolean;
@@ -491,6 +503,7 @@ export interface ISubscriptionInstance {
     owner_subscription_id: string;
     name: string;
     label?: string;
+
     [index: string]: any;
 }
 
