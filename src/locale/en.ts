@@ -765,6 +765,14 @@ I18n.translations.en = {
                 restarted: "The engine has been restarted",
             },
         },
+        worker_status: {
+            info: "Worker status:",
+            info_detail: "Info on workers and jobs:",
+            executor_type: "Executor type:",
+            number_of_workers_online: "# workers online:",
+            number_of_running_jobs: "# running jobs:",
+            number_of_queued_jobs: "# queued jobs:",
+        },
     },
     error_dialog: {
         title: "Unexpected error",
