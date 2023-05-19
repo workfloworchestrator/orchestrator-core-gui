@@ -27,7 +27,7 @@ const useHttpIntervalFallback = <T>(useFallback: boolean, fn: () => void, depArr
 
     useEffect(() => {
         return () => httpInterval && clearInterval(httpInterval);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [httpInterval]);
 };
 
 export default useHttpIntervalFallback;
