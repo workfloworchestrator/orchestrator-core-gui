@@ -25,7 +25,7 @@ import {
     ServiceTicketWithDetails,
 } from "custom/types";
 import { isDate } from "lodash";
-import React, { Fragment, ReactNode, useContext, useState } from "react";
+import React, { Fragment, ReactNode, useContext, useEffect, useState } from "react";
 import { WrappedComponentProps, injectIntl } from "react-intl";
 import ReactSelect from "react-select";
 import { getReactSelectTheme } from "stylesheets/emotion/utils";
@@ -83,6 +83,10 @@ const ImpactedObjects = ({ ticket, updateable, withSubscriptions }: IProps) => {
     const data = getFilteredImpactedObjects(ticket.impacted_objects, withSubscriptions);
 
     const [items, setItems] = useState(data);
+
+    useEffect(() => {
+        setItems(getFilteredImpactedObjects(ticket.impacted_objects, withSubscriptions));
+    }, [ticket, withSubscriptions]);
 
     let allExpandedRows: { [key: string]: ReactNode } = {};
     for (const item of data) {
