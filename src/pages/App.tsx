@@ -378,14 +378,16 @@ class App extends React.PureComponent<IProps, IState> {
                                                     )}
 
                                                     {!isEmpty(importedModules) &&
-                                                        importedModules.map(({ path, name, Component }) => (
-                                                            <Route
-                                                                key={path}
-                                                                exact
-                                                                path={`/${name}`}
-                                                                component={Component}
-                                                            />
-                                                        ))}
+                                                        importedModules
+                                                            .sort((a, b) => a.page_order - b.page_order) // Ensure page-routes are matched in same order as manifest
+                                                            .map(({ path, name, Component }) => (
+                                                                <Route
+                                                                    key={path}
+                                                                    exact
+                                                                    path={`/${name}`}
+                                                                    component={Component}
+                                                                />
+                                                            ))}
 
                                                     <ProtectedRoute path="/new-task" render={() => <NewTask />} />
 
