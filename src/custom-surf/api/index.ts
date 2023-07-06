@@ -313,7 +313,10 @@ export class CustomApiClient extends CustomApiClientInterface {
 
     cimGetAllowedTransitions = (ticket_id: string): Promise<ServiceTicketTransition[]> => {
         return this.fetchJson<ServiceTicketTransition[]>(
-            prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/transitions`)
+            prefix_cim_dev_uri(`surf/cim/tickets/${ticket_id}/transitions`),
+            {},
+            {},
+            false
         );
     };
 

@@ -121,6 +121,7 @@ const ServiceTicketDetail = () => {
 
     useQuery(["ticket", { id: ticket_id }], () => customApiClient.cimTicketByIdNoErrorDialog(ticket_id), {
         onSuccess: (res) => {
+            setNotFound(false);
             setTicket(res);
         },
         onError: (err: any) => {
@@ -129,13 +130,25 @@ const ServiceTicketDetail = () => {
             }
         },
         refetchInterval: 5000,
+        retry: false, // Not needed when using refetchInterval. This was also delaying the 'Not found' message from showing up.
     });
 
     useEffect(() => {
-        customApiClient.cimGetAllowedTransitions(ticket_id).then((res) => {
-            setAllowedTransitions(res);
-        });
-    }, [ticket_id, customApiClient, ticket]);
+        if (notFound) {
+            return;
+        }
+        customApiClient
+            .cimGetAllowedTransitions(ticket_id)
+            .then((res) => {
+                setAllowedTransitions(res);
+            })
+            .catch((err: any) => {
+                if (err.response && err.response.status === 404) {
+                    return;
+                }
+                throw err;
+            });
+    }, [notFound, ticket_id, customApiClient, ticket]);
 
     if (notFound) {
         return (

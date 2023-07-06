@@ -53,7 +53,7 @@ const ServiceTicketMails = () => {
 
     const [items, setItems] = useState<EmailLogWithId[]>([]);
     const [ticket, setTicket] = useState<ServiceTicketWithDetails>();
-    const { customApiClient } = useContext(ApplicationContext);
+    const { customApiClient, redirect } = useContext(ApplicationContext);
 
     const { isLoading, error } = useQuery<ServiceTicketWithDetails, Error>(
         ["ticket", { id: id }],
@@ -155,6 +155,11 @@ const ServiceTicketMails = () => {
                             ></EuiButtonIcon>
                         </EuiFlexItem>
 
+                        <EuiFlexItem grow={false}>
+                            <EuiButton size="m" onClick={() => redirect(`/tickets/${id}`)} iconType="editorUndo">
+                                Back
+                            </EuiButton>
+                        </EuiFlexItem>
                         <EuiFlexItem grow={false} style={{ minWidth: 140 }}>
                             <EuiButton
                                 isSelected={!showHtml}

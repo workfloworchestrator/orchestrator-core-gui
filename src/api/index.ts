@@ -47,6 +47,7 @@ export class BaseApiClient {
             .then((res) => res.data)
             .catch((err) => {
                 if (showErrorDialog) {
+                    console.debug(`Show error dialog for GET ${path} returning ${err?.response?.status}`);
                     setTimeout(() => {
                         throw err;
                     }, 250);
