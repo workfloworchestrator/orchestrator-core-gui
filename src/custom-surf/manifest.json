@@ -68,6 +68,11 @@
     "disabledRoutes": ["/YOUR_DISABLED_ROUTE_HERE"],
     "disabledMenuItems": [],
     "plugins": {
-        "subscriptionDetailPlugins": ["RenderDiagram", "RenderExternalLinks", "RenderDienstafname"]
+        "subscriptionDetailPlugins": [
+            "RenderSubscriptionReferences",
+            "RenderDiagram",
+            "RenderExternalLinks",
+            "RenderDienstafname"
+        ]
     }
 }
