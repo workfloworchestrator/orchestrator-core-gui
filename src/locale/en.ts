@@ -349,6 +349,7 @@ I18n.translations.en = {
         advancedSearchPlaceHolder: "Search subscriptions by name, product, resource type, tag, etc...",
         submitSearch: "Search",
         fixedInputs: "Fixed Inputs",
+        referencesAndPermissions: "References and permissions",
         productBlocks: "Product Blocks",
         noop: "",
         deleteConfirmation: "Are you sure you want to delete {{name}} subscription for {{customer}}?",

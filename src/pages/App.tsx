@@ -68,6 +68,7 @@ export const history = createBrowserHistory();
 interface IProps {
     user?: Partial<Oidc.Profile> & { [index: string]: any };
 }
+
 interface IState {
     loading: boolean;
     loaded: boolean;
@@ -79,6 +80,7 @@ interface IState {
     errorDialogAction: () => void;
     intl?: IntlShape;
 }
+
 const queryClient = new QueryClient();
 
 class App extends React.PureComponent<IProps, IState> {
@@ -212,8 +214,6 @@ class App extends React.PureComponent<IProps, IState> {
 
         const filteredProducts = (allProducts || []).sort((a, b) => a.name.localeCompare(b.name));
 
-        console.log("Theme before load: ", this.state.applicationContext.theme);
-
         this.setState({
             loading: false,
             loaded: true,
@@ -243,7 +243,6 @@ class App extends React.PureComponent<IProps, IState> {
         if (loading || !intl) {
             return null; // render null when app is not ready yet for static mySpinner
         }
-        console.log(applicationContext.theme);
         return (
             <QueryClientProvider client={queryClient}>
                 <EuiProvider colorMode={applicationContext.theme}>

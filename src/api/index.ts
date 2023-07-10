@@ -251,6 +251,10 @@ export class ApiClient extends ApiClientInterface {
         );
     };
 
+    subscriptionMetadata = (subscriptionId: string): Promise<any> => {
+        return this.fetchJson(`subscriptions/${subscriptionId}/metadata`);
+    };
+
     processSubscriptionsBySubscriptionId = (subscriptionId: string): Promise<SubscriptionProcesses[]> => {
         return this.fetchJsonWithCustomErrorHandling<SubscriptionProcesses[]>(
             `processes/process-subscriptions-by-subscription-id/${subscriptionId}`
