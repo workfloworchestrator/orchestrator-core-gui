@@ -14,12 +14,12 @@
  */
 
 import { EuiListGroup } from "@elastic/eui";
+import ProcessTableModal from "components/modals/ProcessTableCellModal";
 import { intl } from "locale/i18n";
 import uniq from "lodash/uniq";
 import { Link } from "react-router-dom";
 import { Cell } from "react-table";
 import { Organization, Product, Subscription } from "utils/types";
-import ProcessTableModal from "components/modals/ProcessTableCellModal";
 
 const LIST_MAX_LENGTH = 3; // Max length of lists before they're converted to modals
 
@@ -31,64 +31,60 @@ const LIST_MAX_LENGTH = 3; // Max length of lists before they're converted to mo
  * @returns a properly formatted title
  */
 const _formatModalButtonTitle = (title: string) => {
-  return `${title.replace("(s)", "")}(s)`;
+    return `${title.replace("(s)", "")}(s)`;
 };
 
 export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
-  const subscriptions: Subscription[] = cell.value;
-  const { Header } = cell?.column;
-  const subscriptionList = (
-    <EuiListGroup
-      listItems={subscriptions.map((subscription: Subscription) => {
-        return {
-          label: subscription.description,
-          href: `/subscriptions/${subscription.subscription_id}`,
-        };
-      })}
-      color="primary"
-      size="s"
-    />
-  );
+    const subscriptions: Subscription[] = cell.value;
+    const { Header } = cell?.column;
+    const subscriptionList = (
+        <EuiListGroup
+            listItems={subscriptions.map((subscription: Subscription) => {
+                return {
+                    label: subscription.description,
+                    href: `/subscriptions/${subscription.subscription_id}`,
+                };
+            })}
+            color="primary"
+            size="s"
+        />
+    );
 
-  return subscriptions.length > LIST_MAX_LENGTH ? (
-    <ProcessTableModal
-      title={`${Header}`}
-      buttonTitle={_formatModalButtonTitle(
-        `Show ${subscriptions.length} ${Header}`
-      )}
-    >
-      {subscriptionList}
-    </ProcessTableModal>
-  ) : (
-    <>{subscriptionList}</>
-  );
+    return subscriptions.length > LIST_MAX_LENGTH ? (
+        <ProcessTableModal
+            title={`${Header}`}
+            buttonTitle={_formatModalButtonTitle(`Show ${subscriptions.length} ${Header}`)}
+        >
+            {subscriptionList}
+        </ProcessTableModal>
+    ) : (
+        <>{subscriptionList}</>
+    );
 }
 
 export function renderProductsCell({ cell }: { cell: Cell }) {
-  const subscriptions: Subscription[] = cell.value;
-  const { Header } = cell?.column;
-  const productNames = uniq(
-    subscriptions.map((subscription: Subscription) => subscription.product.name)
-  ).map((product_name, idx) => {
-    return {
-      label: product_name,
-    };
-  });
+    const subscriptions: Subscription[] = cell.value;
+    const { Header } = cell?.column;
+    const productNames = uniq(subscriptions.map((subscription: Subscription) => subscription.product.name)).map(
+        (product_name, idx) => {
+            return {
+                label: product_name,
+            };
+        }
+    );
 
-  const productNamesList = <EuiListGroup listItems={productNames} size="s" />;
+    const productNamesList = <EuiListGroup listItems={productNames} size="s" />;
 
-  return productNames.length > LIST_MAX_LENGTH ? (
-    <ProcessTableModal
-      title={`${Header}`}
-      buttonTitle={_formatModalButtonTitle(
-        `Show ${productNames.length} ${Header}`
-      )}
-    >
-      {productNamesList}
-    </ProcessTableModal>
-  ) : (
-    <>{productNamesList}</>
-  );
+    return productNames.length > LIST_MAX_LENGTH ? (
+        <ProcessTableModal
+            title={`${Header}`}
+            buttonTitle={_formatModalButtonTitle(`Show ${productNames.length} ${Header}`)}
+        >
+            {productNamesList}
+        </ProcessTableModal>
+    ) : (
+        <>{productNamesList}</>
+    );
 }
 
 export function renderSubscriptionProductsCell({ cell }: { cell: Cell }) {
@@ -97,52 +93,42 @@ export function renderSubscriptionProductsCell({ cell }: { cell: Cell }) {
 }
 
 export function renderCustomersCell(organisations: Organization[] | null | undefined, abbreviate: boolean) {
-  function lookup(uuid: string) {
-    if (organisations === null || organisations === undefined) {
-      return intl.formatMessage({
-        id: abbreviate ? "unavailable_abbreviated" : "unavailable",
-      });
+    function lookup(uuid: string) {
+        if (organisations === null || organisations === undefined) {
+            return intl.formatMessage({
+                id: abbreviate ? "unavailable_abbreviated" : "unavailable",
+            });
+        }
+        const organisation: Organization | undefined = organisations.find((org) => org.uuid === uuid);
+        return organisation ? (abbreviate ? organisation.abbr : organisation.name) : uuid;
     }
-    const organisation: Organization | undefined = organisations.find(
-      (org) => org.uuid === uuid
-    );
-    return organisation
-      ? abbreviate
-        ? organisation.abbr
-        : organisation.name
-      : uuid;
-  }
 
-  return function doRenderCustomersCell({ cell }: { cell: Cell }) {
-    const subscriptions: Subscription[] = cell.value;
-    const { Header } = cell?.column;
-    const customerIds = uniq(
-      subscriptions.map((subscription) => subscription.customer_id)
-    ).map(lookup);
-    const customerIdsList = (
-      <EuiListGroup
-        listItems={customerIds.map((customerId) => {
-          return {
-            label: customerId,
-          };
-        })}
-        size="s"
-      />
-    );
+    return function doRenderCustomersCell({ cell }: { cell: Cell }) {
+        const subscriptions: Subscription[] = cell.value;
+        const { Header } = cell?.column;
+        const customerIds = uniq(subscriptions.map((subscription) => subscription.customer_id)).map(lookup);
+        const customerIdsList = (
+            <EuiListGroup
+                listItems={customerIds.map((customerId) => {
+                    return {
+                        label: customerId,
+                    };
+                })}
+                size="s"
+            />
+        );
 
-    return customerIds.length > LIST_MAX_LENGTH ? (
-      <ProcessTableModal
-        title={`${Header}`}
-        buttonTitle={_formatModalButtonTitle(
-          `Show ${customerIds.length} ${Header}`
-        )}
-      >
-        {customerIdsList}
-      </ProcessTableModal>
-    ) : (
-      <>{customerIdsList}</>
-    );
-  };
+        return customerIds.length > LIST_MAX_LENGTH ? (
+            <ProcessTableModal
+                title={`${Header}`}
+                buttonTitle={_formatModalButtonTitle(`Show ${customerIds.length} ${Header}`)}
+            >
+                {customerIdsList}
+            </ProcessTableModal>
+        ) : (
+            <>{customerIdsList}</>
+        );
+    };
 }
 
 export function renderSubscriptionCustomersCell(organisations: Organization[] | null | undefined, abbreviate: boolean) {
