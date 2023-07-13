@@ -14,8 +14,8 @@
  */
 
 import { EuiListGroup } from "@elastic/eui";
-import { ENV } from "env";
 import { intl } from "locale/i18n";
+import moment from "moment-timezone";
 import uniq from "lodash/uniq";
 import { Link } from "react-router-dom";
 import { Cell } from "react-table";
@@ -169,28 +169,14 @@ export function renderTimestampCell({ cell }: { cell: Cell }) : string | null {
     if (!cell.value) {
         return null;
     }
-    const utc_timestamp: number = cell.value;
-    const PFX = "locale.options.";
-    const options: Record<string, string | boolean> = {"hour12": false};
+    // get milliseconds for unix timestamp
+    const time = moment(cell.value * 1000);
+    // get timezone from translations object
+    const timezone = intl.formatMessage({id: "locale.timezone"});
+    // if time is more than 24hr ago, show only date string
+    const format = moment().diff(time, "hours") >= 24 ? "y-MM-DD" : "y-MM-DD HH:mm:ss z";
 
-    // map all locale.options into an object to pass to Date()
-    ["timeZone", "timeZoneName", "hour", "minute", "second"].forEach((key) => {
-            options[key] = intl.formatMessage({id: PFX + key})
-        }
-    )
-
-    const datetime = new Date(utc_timestamp * 1000);
-    const dateString = datetime.toISOString().split("T")[0];
-    const today = new Date();
-    if (
-        datetime.getFullYear() === today.getFullYear() &&
-        datetime.getMonth() === today.getMonth() &&
-        datetime.getDay() === today.getDay()
-    ) {
-        return dateString + " " + datetime.toLocaleTimeString(ENV.LOCALE, options)
-    } else {
-        return dateString
-    }
+    return time.tz(timezone).format(format)
 }
 
 export function renderPidCell({ cell }: { cell: Cell }) {

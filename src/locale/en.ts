@@ -922,14 +922,7 @@ I18n.translations.en = {
         },
     },
     locale: {
-        options: {
-            timeZone: "Europe/Amsterdam",
-            timeZoneName: "short",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: false,
-        }
+        timezone: "Europe/Amsterdam",
     }
 };
 
