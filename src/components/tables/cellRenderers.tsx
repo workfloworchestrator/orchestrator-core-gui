@@ -14,6 +14,7 @@
  */
 
 import { EuiListGroup } from "@elastic/eui";
+import { ENV } from "env";
 import { intl } from "locale/i18n";
 import uniq from "lodash/uniq";
 import { Link } from "react-router-dom";
@@ -160,22 +161,35 @@ export function renderSubscriptionCustomersCell(organisations: Organization[] | 
     };
 }
 
-export function renderTimestampCell({ cell }: { cell: Cell }) {
+export function renderTimestampCell({ cell }: { cell: Cell }) : string | null {
+    // Convert timestamp to ISO8601-like format.
+    // Example:
+    //   2023-07-12 15:16:32 CEST
+    // if the date is in the past, only the ISO date string will be returned.
     if (!cell.value) {
         return null;
     }
-    const timestamp: number = cell.value;
+    const utc_timestamp: number = cell.value;
+    const PFX = "locale.options.";
+    const options: Record<string, string | boolean> = {"hour12": false};
 
-    const datetime = new Date(timestamp * 1000);
+    // map all locale.options into an object to pass to Date()
+    ["timeZone", "timeZoneName", "hour", "minute", "second"].forEach((key) => {
+            options[key] = intl.formatMessage({id: PFX + key})
+        }
+    )
+
+    const datetime = new Date(utc_timestamp * 1000);
+    const dateString = datetime.toISOString().split("T")[0];
     const today = new Date();
     if (
         datetime.getFullYear() === today.getFullYear() &&
         datetime.getMonth() === today.getMonth() &&
         datetime.getDay() === today.getDay()
     ) {
-        return datetime.toLocaleTimeString("nl-NL").substring(0, 5) + " CET";
+        return dateString + " " + datetime.toLocaleTimeString(ENV.LOCALE, options)
     } else {
-        return datetime.toLocaleDateString("nl-NL");
+        return dateString
     }
 }
 

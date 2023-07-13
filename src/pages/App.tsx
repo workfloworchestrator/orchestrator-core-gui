@@ -208,11 +208,11 @@ class App extends React.PureComponent<IProps, IState> {
             this.state.applicationContext.apiClient.products(),
             this.state.applicationContext.apiClient.assignees(),
             this.state.applicationContext.apiClient.processStatuses(),
-            setLocale("en-GB"),
+            setLocale(intl.locale),
             createPolicyCheck(this.props.user),
         ]);
 
-        const filteredProducts = (allProducts || []).sort((a, b) => a.name.localeCompare(b.name));
+        const filteredProducts = (allProducts || []).sort((a: { name: string; }, b: { name: any; }) => a.name.localeCompare(b.name));
 
         this.setState({
             loading: false,

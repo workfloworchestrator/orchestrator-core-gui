@@ -921,6 +921,16 @@ I18n.translations.en = {
             close_ticket_form: "Close ticket form submitted",
         },
     },
+    locale: {
+        options: {
+            timeZone: "Europe/Amsterdam",
+            timeZoneName: "short",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false,
+        }
+    }
 };
 
 export default I18n.translations.en;
