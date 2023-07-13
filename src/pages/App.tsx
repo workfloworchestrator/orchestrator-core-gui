@@ -212,7 +212,9 @@ class App extends React.PureComponent<IProps, IState> {
             createPolicyCheck(this.props.user),
         ]);
 
-        const filteredProducts = (allProducts || []).sort((a: { name: string; }, b: { name: any; }) => a.name.localeCompare(b.name));
+        const filteredProducts = (allProducts || []).sort((a: { name: string }, b: { name: any }) =>
+            a.name.localeCompare(b.name)
+        );
 
         this.setState({
             loading: false,

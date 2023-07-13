@@ -1,5 +1,5 @@
-import en from "locale/en";
 import { ENV } from "env";
+import en from "locale/en";
 import { merge } from "lodash";
 import { createIntl, createIntlCache } from "react-intl";
 import { apiClient } from "utils/ApplicationContext";
@@ -45,7 +45,7 @@ function parse_from_object(
         } else if (typeof msg == "string") {
             results[prefixed_id] = msg.replace(/\{\{/g, "{").replace(/\}\}/g, "}");
         } else {
-            results[prefixed_id] = msg
+            results[prefixed_id] = msg;
         }
     }
 }

@@ -923,7 +923,7 @@ I18n.translations.en = {
     },
     locale: {
         timezone: "Europe/Amsterdam",
-    }
+    },
 };
 
 export default I18n.translations.en;
