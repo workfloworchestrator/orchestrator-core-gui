@@ -230,11 +230,30 @@ export function renderInsyncCell({ cell }: { cell: Cell }) {
 
 export function renderProductTagCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;
-    return uniq(
+    const { Header } = cell?.column;
+    const tags = uniq(
         subscriptions.map((subscription: Subscription) => {
             return subscription.product.tag;
         })
-    ).join(", ");
+    );
+    const tagsList = (
+        <EuiListGroup
+            listItems={tags.map((tag) => {
+                return {
+                    label: tag,
+                };
+            })}
+            size="s"
+        />
+    );
+
+    return tags.length > LIST_MAX_LENGTH ? (
+        <ProcessTableModal title={`${Header}`} buttonTitle={_formatModalButtonTitle(`Show ${tags.length} ${Header}`)}>
+            {tagsList}
+        </ProcessTableModal>
+    ) : (
+        <>{tagsList}</>
+    );
 }
 
 export function renderSubscriptionTagCell({ cell }: { cell: Cell }) {
