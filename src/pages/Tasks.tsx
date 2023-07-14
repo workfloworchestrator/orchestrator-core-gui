@@ -161,7 +161,7 @@ function Tasks() {
 
     const tasksSettings = initialProcessTableSettings(
         "table.tasks",
-        initialProcessesFilterAndSort(true, ["running", "failed", "api_unavailable", "inconsistent_data"]),
+        initialProcessesFilterAndSort(true, ["running", "resumed", "failed", "api_unavailable", "inconsistent_data"]),
         ["abbrev", "customer", "pid", "product", "target", "tag"],
         { refresh: true }
     );
