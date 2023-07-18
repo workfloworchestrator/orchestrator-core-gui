@@ -32,6 +32,7 @@ interface Env {
     CI_MERGE_REQUEST_IID: string;
     GITLAB_URL: string;
     CI_PROJECT_PATH: string;
+    LOCALE: string;
 }
 
 // We normally load env from window.__env__ as defined in public/env.js which
@@ -61,4 +62,5 @@ export const ENV: Env = window.__env__ || {
     CI_MERGE_REQUEST_IID: process.env.REACT_APP_CI_MERGE_REQUEST_IID,
     GITLAB_URL: process.env.REACT_APP_GITLAB_URL,
     CI_PROJECT_PATH: process.env.REACT_APP_CI_PROJECT_PATH,
+    LOCALE: process.env.REACT_APP_LOCALE || "en-GB",
 };

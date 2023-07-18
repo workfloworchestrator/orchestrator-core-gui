@@ -13,40 +13,79 @@
  *
  */
 
-import { EuiFlexGroup } from "@elastic/eui";
+import { EuiListGroup } from "@elastic/eui";
+import ProcessTableModal from "components/modals/ProcessTableCellModal";
 import { intl } from "locale/i18n";
 import uniq from "lodash/uniq";
-import { Fragment } from "react";
+import moment from "moment-timezone";
 import { Link } from "react-router-dom";
 import { Cell } from "react-table";
 import { Organization, Product, Subscription } from "utils/types";
 
-import { cellRenderersStyling } from "./cellRenderersStyling";
+const LIST_MAX_LENGTH = 3; // Max length of lists before they're converted to modals
+
+/**
+ * _formatModalButtonTitle - Formats the button title properly
+ * adding (s) for pluralization.
+ *
+ * @param title {string} the modal button title
+ * @returns a properly formatted title
+ */
+const _formatModalButtonTitle = (title: string) => {
+    return `${title.replace("(s)", "")}(s)`;
+};
 
 export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;
-    const children = subscriptions.map((subscription: Subscription, index: number) => {
-        return (
-            <Fragment key={`${subscription.subscription_id}-${index}`}>
-                {index !== 0 && <span className={"subscriptions__description-spacer"}>/</span>}
-                <Link
-                    key={subscription.subscription_id}
-                    onClick={(e) => e.stopPropagation()}
-                    to={`/subscriptions/${subscription.subscription_id}`}
-                >
-                    {subscription.description}
-                </Link>
-            </Fragment>
-        );
-    });
-    return <EuiFlexGroup css={cellRenderersStyling}>{children}</EuiFlexGroup>;
+    const { Header } = cell?.column;
+    const subscriptionList = (
+        <EuiListGroup
+            listItems={subscriptions.map((subscription: Subscription) => {
+                return {
+                    label: subscription.description,
+                    href: `/subscriptions/${subscription.subscription_id}`,
+                };
+            })}
+            color="primary"
+            size="s"
+        />
+    );
+
+    return subscriptions.length > LIST_MAX_LENGTH ? (
+        <ProcessTableModal
+            title={`${Header}`}
+            buttonTitle={_formatModalButtonTitle(`Show ${subscriptions.length} ${Header}`)}
+        >
+            {subscriptionList}
+        </ProcessTableModal>
+    ) : (
+        <>{subscriptionList}</>
+    );
 }
 
 export function renderProductsCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;
-    return uniq(
-        subscriptions.map((subscription: Subscription) => subscription.product.name)
-    ).map((product_name, idx) => <p key={`product_${idx}`}>{product_name}</p>);
+    const { Header } = cell?.column;
+    const productNames = uniq(subscriptions.map((subscription: Subscription) => subscription.product.name)).map(
+        (product_name, idx) => {
+            return {
+                label: product_name,
+            };
+        }
+    );
+
+    const productNamesList = <EuiListGroup listItems={productNames} size="s" />;
+
+    return productNames.length > LIST_MAX_LENGTH ? (
+        <ProcessTableModal
+            title={`${Header}`}
+            buttonTitle={_formatModalButtonTitle(`Show ${productNames.length} ${Header}`)}
+        >
+            {productNamesList}
+        </ProcessTableModal>
+    ) : (
+        <>{productNamesList}</>
+    );
 }
 
 export function renderSubscriptionProductsCell({ cell }: { cell: Cell }) {
@@ -57,7 +96,9 @@ export function renderSubscriptionProductsCell({ cell }: { cell: Cell }) {
 export function renderCustomersCell(organisations: Organization[] | null | undefined, abbreviate: boolean) {
     function lookup(uuid: string) {
         if (organisations === null || organisations === undefined) {
-            return intl.formatMessage({ id: abbreviate ? "unavailable_abbreviated" : "unavailable" });
+            return intl.formatMessage({
+                id: abbreviate ? "unavailable_abbreviated" : "unavailable",
+            });
         }
         const organisation: Organization | undefined = organisations.find((org) => org.uuid === uuid);
         return organisation ? (abbreviate ? organisation.abbr : organisation.name) : uuid;
@@ -65,9 +106,29 @@ export function renderCustomersCell(organisations: Organization[] | null | undef
 
     return function doRenderCustomersCell({ cell }: { cell: Cell }) {
         const subscriptions: Subscription[] = cell.value;
-        return uniq(subscriptions.map((subscription) => subscription.customer_id))
-            .map(lookup)
-            .join(", ");
+        const { Header } = cell?.column;
+        const customerIds = uniq(subscriptions.map((subscription) => subscription.customer_id)).map(lookup);
+        const customerIdsList = (
+            <EuiListGroup
+                listItems={customerIds.map((customerId) => {
+                    return {
+                        label: customerId,
+                    };
+                })}
+                size="s"
+            />
+        );
+
+        return customerIds.length > LIST_MAX_LENGTH ? (
+            <ProcessTableModal
+                title={`${Header}`}
+                buttonTitle={_formatModalButtonTitle(`Show ${customerIds.length} ${Header}`)}
+            >
+                {customerIdsList}
+            </ProcessTableModal>
+        ) : (
+            <>{customerIdsList}</>
+        );
     };
 }
 
@@ -86,23 +147,22 @@ export function renderSubscriptionCustomersCell(organisations: Organization[] | 
     };
 }
 
-export function renderTimestampCell({ cell }: { cell: Cell }) {
+export function renderTimestampCell({ cell }: { cell: Cell }): string | null {
+    // Convert timestamp to ISO8601-like format.
+    // Example:
+    //   2023-07-12 15:16:32 CEST
+    // if the date is in the past, only the ISO date string will be returned.
     if (!cell.value) {
         return null;
     }
-    const timestamp: number = cell.value;
+    // get milliseconds for unix timestamp
+    const time = moment(cell.value * 1000);
+    // get timezone from translations object
+    const timezone = intl.formatMessage({ id: "locale.timezone" });
+    // if time is more than 24hr ago, show only date string
+    const format = moment().diff(time, "hours") >= 24 ? "y-MM-DD" : "y-MM-DD HH:mm:ss z";
 
-    const datetime = new Date(timestamp * 1000);
-    const today = new Date();
-    if (
-        datetime.getFullYear() === today.getFullYear() &&
-        datetime.getMonth() === today.getMonth() &&
-        datetime.getDay() === today.getDay()
-    ) {
-        return datetime.toLocaleTimeString("nl-NL").substring(0, 5) + " CET";
-    } else {
-        return datetime.toLocaleDateString("nl-NL");
-    }
+    return time.tz(timezone).format(format);
 }
 
 export function renderPidCell({ cell }: { cell: Cell }) {
@@ -170,11 +230,30 @@ export function renderInsyncCell({ cell }: { cell: Cell }) {
 
 export function renderProductTagCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;
-    return uniq(
+    const { Header } = cell?.column;
+    const tags = uniq(
         subscriptions.map((subscription: Subscription) => {
             return subscription.product.tag;
         })
-    ).join(", ");
+    );
+    const tagsList = (
+        <EuiListGroup
+            listItems={tags.map((tag) => {
+                return {
+                    label: tag,
+                };
+            })}
+            size="s"
+        />
+    );
+
+    return tags.length > LIST_MAX_LENGTH ? (
+        <ProcessTableModal title={`${Header}`} buttonTitle={_formatModalButtonTitle(`Show ${tags.length} ${Header}`)}>
+            {tagsList}
+        </ProcessTableModal>
+    ) : (
+        <>{tagsList}</>
+    );
 }
 
 export function renderSubscriptionTagCell({ cell }: { cell: Cell }) {
