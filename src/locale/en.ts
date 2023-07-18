@@ -921,6 +921,9 @@ I18n.translations.en = {
             close_ticket_form: "Close ticket form submitted",
         },
     },
+    locale: {
+        timezone: "Europe/Amsterdam",
+    },
 };
 
 export default I18n.translations.en;

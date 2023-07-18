@@ -17,6 +17,7 @@ import { EuiListGroup } from "@elastic/eui";
 import ProcessTableModal from "components/modals/ProcessTableCellModal";
 import { intl } from "locale/i18n";
 import uniq from "lodash/uniq";
+import moment from "moment-timezone";
 import { Link } from "react-router-dom";
 import { Cell } from "react-table";
 import { Organization, Product, Subscription } from "utils/types";
@@ -146,23 +147,22 @@ export function renderSubscriptionCustomersCell(organisations: Organization[] | 
     };
 }
 
-export function renderTimestampCell({ cell }: { cell: Cell }) {
+export function renderTimestampCell({ cell }: { cell: Cell }): string | null {
+    // Convert timestamp to ISO8601-like format.
+    // Example:
+    //   2023-07-12 15:16:32 CEST
+    // if the date is in the past, only the ISO date string will be returned.
     if (!cell.value) {
         return null;
     }
-    const timestamp: number = cell.value;
+    // get milliseconds for unix timestamp
+    const time = moment(cell.value * 1000);
+    // get timezone from translations object
+    const timezone = intl.formatMessage({ id: "locale.timezone" });
+    // if time is more than 24hr ago, show only date string
+    const format = moment().diff(time, "hours") >= 24 ? "y-MM-DD" : "y-MM-DD HH:mm:ss z";
 
-    const datetime = new Date(timestamp * 1000);
-    const today = new Date();
-    if (
-        datetime.getFullYear() === today.getFullYear() &&
-        datetime.getMonth() === today.getMonth() &&
-        datetime.getDay() === today.getDay()
-    ) {
-        return datetime.toLocaleTimeString("nl-NL").substring(0, 5) + " CET";
-    } else {
-        return datetime.toLocaleDateString("nl-NL");
-    }
+    return time.tz(timezone).format(format);
 }
 
 export function renderPidCell({ cell }: { cell: Cell }) {

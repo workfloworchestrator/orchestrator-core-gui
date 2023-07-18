@@ -1,3 +1,4 @@
+import { ENV } from "env";
 import en from "locale/en";
 import { merge } from "lodash";
 import { createIntl, createIntlCache } from "react-intl";
@@ -26,7 +27,7 @@ async function loadLocaleData(locale: string): Promise<Record<string, string>> {
             break;
     }
 
-    messages = merge(backend_messages, messages);
+    messages = merge(messages, backend_messages);
 
     return parse_translations_dict(messages);
 }
@@ -41,8 +42,10 @@ function parse_from_object(
 
         if (typeof msg === "object" && msg !== null) {
             parse_from_object(results, prefixed_id, msg);
-        } else {
+        } else if (typeof msg == "string") {
             results[prefixed_id] = msg.replace(/\{\{/g, "{").replace(/\}\}/g, "}");
+        } else {
+            results[prefixed_id] = msg;
         }
     }
 }
@@ -63,7 +66,7 @@ const cache = createIntlCache();
 export let intl = createIntl(
     {
         // Locale of the application
-        locale: "en-GB",
+        locale: ENV.LOCALE,
         // Locale of the fallback defaultMessage
         defaultLocale: "en-GB",
         messages: parse_translations_dict(en),
@@ -76,7 +79,7 @@ export async function setLocale(locale: string) {
     intl = createIntl(
         {
             // Locale of the application
-            locale: locale,
+            locale: ENV.LOCALE,
             // Locale of the fallback defaultMessage
             defaultLocale: "en-GB",
             messages: await loadLocaleData(locale),
