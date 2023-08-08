@@ -4,40 +4,24 @@ import React, { useContext } from "react";
 import { FormattedMessage } from "react-intl";
 import { useQuery } from "react-query";
 import ApplicationContext from "utils/ApplicationContext";
-import { organisationNameByUuid } from "utils/Lookups";
 import { SubscriptionModel } from "utils/types";
 
-interface IExternalServiceId {
-    customer_id: string;
-    third_party_service_id: string;
-}
-
-interface IFreeformExternalServiceId {
-    customer_name: string;
-    third_party_service_id: string;
+interface ISubscriptionReference {
+    name: string;
+    external_id: string;
 }
 
 interface ISubscriptionReferences {
-    external_service_ids?: IExternalServiceId[];
-    freeform_external_service_ids?: IFreeformExternalServiceId[];
-    customer_permissions?: string[];
+    references?: ISubscriptionReference[];
+    permissions?: string[];
 }
 
 const RenderSubscriptionMetadata = ({ metadata }: { metadata?: ISubscriptionReferences }) => {
-    const { theme, organisations } = useContext(ApplicationContext);
-    const externalServiceIds = metadata?.external_service_ids ?? [];
-    const freeformExternalServiceIds = metadata?.freeform_external_service_ids ?? [];
-    const customerPermissions = metadata?.customer_permissions ?? [];
+    const { theme } = useContext(ApplicationContext);
+    const references = metadata?.references ?? [];
+    const customerPermissions = metadata?.permissions ?? [];
 
-    const externalIdsData = [
-        ...externalServiceIds.map(
-            ({ customer_id, third_party_service_id }) =>
-                `${organisationNameByUuid(customer_id, organisations)} : ${third_party_service_id}`
-        ),
-        ...freeformExternalServiceIds.map(
-            ({ customer_name, third_party_service_id }) => `${customer_name} : ${third_party_service_id}`
-        ),
-    ];
+    const externalIdsData = [...references.map(({ name, external_id }) => `${name} : ${external_id}`)];
 
     if (externalIdsData.length + customerPermissions.length === 0) {
         return (
