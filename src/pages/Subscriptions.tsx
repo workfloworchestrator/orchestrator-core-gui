@@ -100,25 +100,6 @@ export default function SubscriptionsPage(props: IProps) {
                         to how full text search works that query could be simplified to:{" "}
                         <i>"d253130e active ip_prefix"</i>.
                     </p>
-                    <h1>Patterns</h1>
-                    <p>
-                        <b>by product tag:</b> tag:str
-                        <br />
-                        <b>by customer:</b> customer_id:uuid
-                        <br />
-                        <b>by ims_circuit_id:</b> ims_circuit_id:int
-                        <br />
-                        <b>by ipam_prefix_id:</b> ipam_prefix_id:int
-                        <br />
-                        <b>by nso_service_id:</b> nso_service_ud:int
-                        <br />
-                        <b>by service_speed:</b> nso_service_ud:int
-                        <br />
-                        <b>by asn:</b> asn:int
-                        <br />
-                        <b>by crm_port_id:</b> crm_port_id:int
-                        <br />
-                    </p>
                 </Explain>
                 <div className="actions">{renderExplain()}</div>
                 <SubscriptionsTable
