@@ -87,6 +87,7 @@ export function actionOptions(
             }
             break;
         case "running":
+        case "awaiting_callback":
             options = [details, abort];
             break;
         case "resumed":

@@ -1,7 +1,7 @@
 import { css } from "@emotion/core";
 import {
     DARKEST_PRIMARY_COLOR,
-    DARK_GOLD_COlOR,
+    DARK_GOLD_COLOR,
     DARK_GREY_COLOR,
     LIGHTER_GREY_COLOR,
     LIGHT_GOLD_COLOR,
@@ -77,7 +77,7 @@ export const tableImsCircuitInfo = css`
             }
 
             &.dark {
-                background-color: ${DARK_GOLD_COlOR};
+                background-color: ${DARK_GOLD_COLOR};
             }
 
             &:hover {
@@ -86,7 +86,7 @@ export const tableImsCircuitInfo = css`
                 }
 
                 &.dark {
-                    background-color: ${shadeColor(DARK_GOLD_COlOR, -10)};
+                    background-color: ${shadeColor(DARK_GOLD_COLOR, -10)};
                 }
             }
         }

@@ -23,6 +23,7 @@ export enum ProcessStatus {
     "RESUMED" = "resumed",
     "SUSPENDED" = "suspended",
     "WAITING" = "waiting",
+    "AWAITING_CALLBACK" = "awaiting_callback",
     "ABORTED" = "aborted",
     "FAILED" = "failed",
     "API_UNAVAILABLE" = "api_unavailable",

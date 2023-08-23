@@ -102,6 +102,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
     const [filterQ, setFilterQ] = useQueryParam(queryNameSpace + "Filter", CommaSeparatedStringArrayParam);
     const { organisations, products, assignees, processStatuses } = useContext(ApplicationContext);
 
+    console.log("FILTERQ", filterQ);
     const initialize = useMemo(
         () =>
             function (current: TableSettings<ProcessV2>): TableState<ProcessV2> {
