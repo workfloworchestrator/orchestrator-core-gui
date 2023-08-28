@@ -43,7 +43,7 @@ function renderFailedTask(subscriptionProcesses: SubscriptionProcesses[]) {
 
     if (failed_tasks.length) {
         let process = failed_tasks[0];
-        let url = process.is_task ? `/task/${process.pid}` : `/process/${process.pid}`;
+        let url = process.is_task ? `/task/${process.process_id}` : `/process/${process.process_id}`;
         return (
             <a target="_blank" rel="noopener noreferrer" href={url}>
                 <FormattedMessage id="subscriptions.failed_task" values={process as any} />

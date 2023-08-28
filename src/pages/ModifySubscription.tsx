@@ -31,7 +31,7 @@ interface IProps extends RouteComponentProps, WrappedComponentProps {
 
 interface IState {
     stepUserInput?: InputForm;
-    pid?: string;
+    processId?: string;
 }
 
 class ModifySubscription extends React.Component<IProps, IState> {
@@ -46,7 +46,7 @@ class ModifySubscription extends React.Component<IProps, IState> {
         let promise = this.context.apiClient
             .startProcess(workflowName, [{ subscription_id: subscriptionId }])
             .then((res: { id: string }) => {
-                this.setState({ pid: res.id });
+                this.setState({ processId: res.id });
             });
         // @ts-ignore
         this.context.apiClient.catchErrorStatus<FormNotCompleteResponse>(promise, 510, (json) => {
@@ -64,26 +64,26 @@ class ModifySubscription extends React.Component<IProps, IState> {
         return this.context.apiClient
             .startProcess(workflowName, [{ subscription_id: subscriptionId }, ...processInput])
             .then((res: { id: string }) => {
-                this.setState({ pid: res.id });
+                this.setState({ processId: res.id });
             });
     };
 
     render() {
-        const { stepUserInput, pid } = this.state;
+        const { stepUserInput, processId } = this.state;
         const { subscriptionId, workflowName, intl } = this.props;
 
-        if (pid) {
+        if (processId) {
             setFlash(
                 intl.formatMessage(
                     { id: "process.flash.create_modify" },
                     {
                         name: intl.formatMessage({ id: `workflow.${workflowName}` }),
                         subscriptionId: subscriptionId,
-                        pid: pid,
+                        processId: processId,
                     }
                 )
             );
-            return <Redirect to={`/processes/${pid}`} />;
+            return <Redirect to={`/processes/${processId}`} />;
         }
 
         if (!stepUserInput) {

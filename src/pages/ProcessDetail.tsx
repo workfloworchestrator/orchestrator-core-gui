@@ -99,7 +99,7 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
             onSuccess: (res) => {
                 setSubscriptionProcesses(res);
                 setLoaded(true);
-                if (process!.step !== "Done") {
+                if (process!.last_step !== "Done") {
                 }
             },
         }
@@ -113,7 +113,7 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
     };
 
     const handleUpdateWebsocketProcess = (runningProcesses: WsProcessV2[]) => {
-        const localProcess = runningProcesses.find((p) => p.pid === match.params.id);
+        const localProcess = runningProcesses.find((p) => p.process_id === match.params.id);
         if (wsProcess === localProcess || !localProcess) {
             return;
         }
@@ -151,7 +151,7 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
         }
         setObserver(localObserver);
 
-        if (autoScrollToLast && loaded && process!.step !== "Done") {
+        if (autoScrollToLast && loaded && process!.last_step !== "Done") {
             console.log("Auto scroll enabled; scrolling to last");
             const finished_steps = process?.steps.filter((step) => step.status !== "pending");
             if (finished_steps) {
@@ -412,7 +412,7 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
                             <EuiText>
                                 <h3>
                                     <FormattedMessage
-                                        id={`${processParam.is_task ? "task" : "process"}.workflow`}
+                                        id={`${processParam.is_task ? "task" : "process"}.workflow_name`}
                                         values={{ name: processParam.workflow_name }}
                                     />
                                     <br />

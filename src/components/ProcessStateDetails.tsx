@@ -277,11 +277,11 @@ function ProcessStateDetails({
     };
 
     const summaryKeys: (keyof ProcessWithDetails)[] = [
-        "status",
+        "last_status",
         isProcess ? "assignee" : "created_by",
-        "step",
-        "started",
-        "last_modified",
+        "last_step",
+        "started_at",
+        "last_modified_at",
     ];
     const renderSummaryValue = (value: string | number | any) =>
         typeof value === "string" ? capitalize(value) : typeof value === "number" ? renderDateTime(value) : value;

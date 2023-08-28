@@ -16,9 +16,6 @@ import { Action, Process, ProcessV2, ProcessWithDetails } from "utils/types";
 
 type ProcessWithStatus = Process | ProcessWithDetails | ProcessV2;
 
-const isProcessWithDetails = (process: any): process is ProcessWithDetails =>
-    (process as ProcessWithDetails).status !== undefined;
-
 export function actionOptions(
     allowed: (resource: string) => boolean,
     process: ProcessWithStatus,
@@ -61,14 +58,8 @@ export function actionOptions(
         danger: true,
     };
     let options = [];
-    let status = "";
-    if (isProcessWithDetails(process)) {
-        status = process.status;
-    } else {
-        status = process.last_status;
-    }
 
-    switch (status) {
+    switch (process.last_status) {
         case "failed":
         case "api_unavailable":
         case "inconsistent_data":
@@ -110,11 +101,11 @@ export function actionOptions(
             }
             break;
         default:
-            throw new Error(`Unknown status: ${status}`);
+            throw new Error(`Unknown status: ${process.last_status}`);
     }
 
     //@ts-ignore
-    const process_id = process.id ?? process.pid;
+    const process_id = process.id ?? process.process_id;
 
     options = options.filter((option) => allowed("/orchestrator/processes/" + option.label + "/" + process_id + "/"));
 
