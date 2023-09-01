@@ -413,7 +413,7 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
                                 <h3>
                                     <FormattedMessage
                                         id={`${processParam.is_task ? "task" : "process"}.workflow`}
-                                        values={{ name: processParam.workflow_name }}
+                                        values={{ name: intl.formatMessage({ id: `workflow.${processParam.workflow_name}`}) }}
                                     />
                                     <br />
                                     <FormattedMessage
