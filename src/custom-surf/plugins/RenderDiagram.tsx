@@ -1,7 +1,6 @@
 import { EuiCallOut, EuiPanel } from "@elastic/eui";
 import { ErrorBoundary } from "@sentry/react";
 import NetworkDiagram from "custom/components/subscriptionDetail/NetworkDiagram";
-import TopologyDiagram from "custom/components/subscriptionDetail/TopologyDiagram";
 import React, { useContext } from "react";
 import { FormattedMessage } from "react-intl";
 import ApplicationContext from "utils/ApplicationContext";
@@ -43,22 +42,6 @@ function RenderDiagram({ subscription }: { subscription: SubscriptionModel }) {
                         fallback={() => <ErrorFallback componentName="NetworkDiagram" />}
                     >
                         <NetworkDiagram type="patchpanel" subscription={enrichedSubscription} />
-                    </ErrorBoundary>
-                </EuiPanel>
-            </div>
-        );
-    } else if (["L2VPN", "IP"].includes(subscription.product.product_type)) {
-        return (
-            <div>
-                {header}
-                <EuiPanel hasShadow={false} paddingSize="l">
-                    <ErrorBoundary
-                        beforeCapture={(scope) => {
-                            scope.setTag("component", "TopologyDiagram");
-                        }}
-                        fallback={() => <ErrorFallback componentName="TopologyDiagram" />}
-                    >
-                        <TopologyDiagram subscription={subscription} />
                     </ErrorBoundary>
                 </EuiPanel>
             </div>
