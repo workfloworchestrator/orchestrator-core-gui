@@ -17,7 +17,7 @@ import { EuiPanel } from "@elastic/eui";
 import ActionContainer from "components/ActionContainer";
 import {
     renderCustomersCell,
-    renderPidCell,
+    renderProcessIdCell,
     renderProductTagCell,
     renderProductsCell,
     renderSubscriptionsCell,
@@ -153,11 +153,11 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
 
     const extraRowPropGetter: RowPropGetter<ProcessV2> = useCallback(
         (props: any, { row }: any) => {
-            const highlighted = row.values.pid === highlightQ ? " highlighted" : "";
+            const highlighted = row.values.processId === highlightQ ? " highlighted" : "";
             return {
                 ...props,
-                id: row.values.pid,
-                className: `${row.values.last_status}${highlighted}`,
+                id: row.values.processId,
+                className: `${row.values.lastStatus}${highlighted}`,
             };
         },
         [highlightQ]
@@ -188,11 +188,11 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                     <i className="fa fa-arrows-alt-v" onClick={() => toggleAllRowsExpanded()} />
                 ),
                 Cell: ({ row }: { row: Row; cell: Cell }) => {
-                    const caret = row.values.process_id === highlightQ ? <i className={"fa fa-caret-right"} /> : null;
+                    const caret = row.values.processId === highlightQ ? <i className={"fa fa-caret-right"} /> : null;
                     const button = row.isExpanded ? (
-                        <i className={`fa fa-minus-circle ${row.values.last_status}`} />
+                        <i className={`fa fa-minus-circle ${row.values.lastStatus}`} />
                     ) : (
-                        <i className={`fa fa-plus-circle ${row.values.last_status}`} />
+                        <i className={`fa fa-plus-circle ${row.values.lastStatus}`} />
                     );
                     return (
                         <div
@@ -214,7 +214,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                 accessor: "process_id",
                 disableSortBy: true,
                 disableFilters: true,
-                Cell: renderPidCell,
+                Cell: renderProcessIdCell,
             },
             {
                 Header: "Assignee",
@@ -306,7 +306,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
             {
                 Header: "Modified",
                 id: "lastModifiedAt",
-                accessor: "last_lastModifiedAt_at",
+                accessor: "last_modified_at",
                 Cell: renderTimestampCell,
                 disableFilters: true,
             },

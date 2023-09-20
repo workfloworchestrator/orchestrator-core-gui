@@ -165,7 +165,7 @@ export function renderTimestampCell({ cell }: { cell: Cell }): string | null {
     return time.tz(timezone).format(format);
 }
 
-export function renderPidCell({ cell }: { cell: Cell }) {
+export function renderProcessIdCell({ cell }: { cell: Cell }) {
     const processId: string = cell.value;
     return (
         <Link key={processId} onClick={(e) => e.stopPropagation()} to={`/processes/${processId}`} title={processId}>

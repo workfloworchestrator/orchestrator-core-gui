@@ -263,7 +263,7 @@ export class ApiClient extends ApiClientInterface {
 
     processSubscriptionsByProcessId = (processId: string): Promise<ProcessSubscription[]> => {
         return this.fetchJsonWithCustomErrorHandling<ProcessSubscription[]>(
-            `processes/process-subscriptions-by-pid/${processId}`
+            `processes/process-subscriptions-by-process_id/${processId}`
         ).catch((err) => []);
     };
 
