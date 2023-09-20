@@ -1,15 +1,5 @@
 import { css } from "@emotion/core";
-import {
-    DANGER,
-    DARK_GOLD_COLOR,
-    DARK_SUCCESS_COLOR,
-    GOLD,
-    LIGHT_GOLD_COLOR,
-    LIGHT_SUCCESS_COLOR,
-    PRIMARY_COLOR,
-    SUCCESS,
-    WARNING,
-} from "stylesheets/emotion/colors";
+import { DANGER, DARK_GOLD_COLOR, GOLD, PRIMARY_COLOR, SUCCESS, WARNING } from "stylesheets/emotion/colors";
 
 export const processesStyling = css`
     table.nwa-table {
