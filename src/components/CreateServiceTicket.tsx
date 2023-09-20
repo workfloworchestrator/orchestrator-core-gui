@@ -124,7 +124,6 @@ function CreateServiceTicket() {
 
     useEffect(() => {
         //get labels from ticket objects for combobox
-        console.log("useEffect");
         setJiraTicketsLabels(getLabels(jiraTickets));
         setImsTicketsLabels(getLabels(imsTickets));
     }, [selectedOptionsIMS, selectedOptionsJira, imsTickets, jiraTickets]);
