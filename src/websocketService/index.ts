@@ -15,7 +15,7 @@
 
 import { useAuth } from "oidc-react";
 import { useEffect, useState } from "react";
-import useWebSocket, { ReadyState } from "react-use-websocket";
+import useWebSocket, { Options, ReadyState } from "react-use-websocket";
 
 import { ENV } from "../env";
 
@@ -30,10 +30,14 @@ export interface SurfWebSocket<T> {
     useFallback: boolean;
 }
 
-const websocketSettings = {
+const websocketSettings: Options = {
     retryOnError: true,
     reconnectAttempts: 10,
     reconnectInterval: 3000,
+    shouldReconnect: (closeEvent: any) => {
+        console.log(closeEvent);
+        return true;
+    },
     share: true,
 };
 
@@ -62,6 +66,7 @@ const useWebsocketServiceWithoutAuth = <T extends object>(endpoint: string): Sur
     const [useFallback, setUsefallback] = useState<boolean>(false);
 
     useEffect(() => {
+        console.log(readyState);
         if (readyState === ReadyState.CLOSED) {
             setUsefallback(true);
         } else {

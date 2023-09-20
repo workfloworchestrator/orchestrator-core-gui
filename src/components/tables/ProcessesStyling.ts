@@ -33,7 +33,7 @@ export const processesStyling = css`
                     }
                 }
             }
-            td.step {
+            td.last_step {
                 width: 15%;
             }
             td.actions {
@@ -42,7 +42,7 @@ export const processesStyling = css`
                 font-size: 18px;
                 position: relative;
             }
-            td.pid {
+            td.process_id {
                 width: 80px;
             }
         }

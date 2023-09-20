@@ -165,25 +165,25 @@ export function renderTimestampCell({ cell }: { cell: Cell }): string | null {
     return time.tz(timezone).format(format);
 }
 
-export function renderPidCell({ cell }: { cell: Cell }) {
-    const pid: string = cell.value;
+export function renderProcessIdCell({ cell }: { cell: Cell }) {
+    const processId: string = cell.value;
     return (
-        <Link key={pid} onClick={(e) => e.stopPropagation()} to={`/processes/${pid}`} title={pid}>
-            {pid.slice(0, 8)}
+        <Link key={processId} onClick={(e) => e.stopPropagation()} to={`/processes/${processId}`} title={processId}>
+            {processId.slice(0, 8)}
         </Link>
     );
 }
 
 export function renderWorkflowNameCell({ cell }: { cell: Cell }) {
     const name: string = cell.value;
-    const pid: string = cell.row.values.hasOwnProperty("pid") ? cell.row.values.pid : undefined;
+    const processId: string = cell.row.values.hasOwnProperty("processId") ? cell.row.values.processId : undefined;
 
     return (
         <Link
-            id={`process-detail-${pid}`}
-            key={pid}
+            id={`process-detail-${processId}`}
+            key={processId}
             onClick={(e) => e.stopPropagation()}
-            to={`/processes/${pid}`}
+            to={`/processes/${processId}`}
             title={name}
         >
             {name}

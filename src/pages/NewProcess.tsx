@@ -62,7 +62,7 @@ export default function NewProcess(props: IProps) {
                     setFlash(
                         intl.formatMessage(
                             { id: "process.flash.create_create" },
-                            { name: product.name, pid: process.id }
+                            { name: product.name, process_id: process.id }
                         )
                     );
                 },

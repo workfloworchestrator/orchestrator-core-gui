@@ -77,13 +77,13 @@ function Tasks() {
                 { name: workflow_name, customer: customer_name }
             );
         } else {
-            workflow_name = process.workflow;
+            workflow_name = process.workflow_name;
             message = intl.formatMessage({ id: "tasks.abortConfirmation" }, { name: workflow_name });
         }
         showConfirmDialog({
             question: message,
             confirmAction: () =>
-                apiClient.abortProcess(process.pid).then(() => {
+                apiClient.abortProcess(process.process_id).then(() => {
                     setFlash(
                         intl.formatMessage(
                             { id: `${process.is_task ? "tasks" : "processes"}.flash.abort` },
@@ -96,11 +96,11 @@ function Tasks() {
 
     const handleDeleteProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
         stop(e);
-        const workflow_name = process.workflow;
+        const workflow_name = process.workflow_name;
         showConfirmDialog({
             question: intl.formatMessage({ id: "tasks.deleteConfirmation" }, { name: workflow_name }),
             confirmAction: () =>
-                apiClient.deleteProcess(process.pid).then(() => {
+                apiClient.deleteProcess(process.process_id).then(() => {
                     setFlash(intl.formatMessage({ id: "tasks.flash.delete" }, { name: workflow_name }));
                 }),
         });
@@ -118,13 +118,13 @@ function Tasks() {
                 { name: workflow_name, customer: customer_name }
             );
         } else {
-            workflow_name = process.workflow;
+            workflow_name = process.workflow_name;
             message = intl.formatMessage({ id: "tasks.retryConfirmation" }, { name: workflow_name });
         }
         showConfirmDialog({
             question: message,
             confirmAction: () =>
-                apiClient.retryProcess(process.pid).then(() => {
+                apiClient.retryProcess(process.process_id).then(() => {
                     setFlash(
                         intl.formatMessage(
                             { id: `${process.is_task ? "tasks" : "processes"}.flash.retry` },
@@ -136,7 +136,7 @@ function Tasks() {
     };
 
     const showProcess = (process: ProcessV2) => () => {
-        redirect("/task/" + process.pid);
+        redirect("/task/" + process.process_id);
     };
 
     const renderActions = (process: ProcessV2) => {
@@ -162,7 +162,7 @@ function Tasks() {
     const tasksSettings = initialProcessTableSettings(
         "table.tasks",
         initialProcessesFilterAndSort(true, ["running", "resumed", "failed", "api_unavailable", "inconsistent_data"]),
-        ["abbrev", "customer", "pid", "product", "target", "tag"],
+        ["abbrev", "customer", "process_id", "product", "target", "tag"],
         { refresh: true }
     );
 

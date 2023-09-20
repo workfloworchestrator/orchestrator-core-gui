@@ -44,18 +44,18 @@ export const Subscription: ComponentStory<typeof SubscriptionDetailPage> = () =>
     mock.reset();
 
     // Coredb calls
-    mock.onGet("subscriptions/domain-model/pid").reply(200, DOMAIN_MODEL_JSON);
+    mock.onGet("subscriptions/domain-model/processId").reply(200, DOMAIN_MODEL_JSON);
     mock.onGet("subscriptions/domain-model/1254f249-a798-42e8-9a8b-58e4a784e869").reply(
         200,
         DOMAIN_MODEL_IPPREFIX_1254f249
     );
-    mock.onGet("processes/process-subscriptions-by-subscription-id/pid").reply(200, SUBSCRIPTION_PROCESSES_JSON);
+    mock.onGet("processes/process-subscriptions-by-subscription-id/processId").reply(200, SUBSCRIPTION_PROCESSES_JSON);
     mock.onGet("processes/statuses").reply(200, PROCESS_STATUSES_JSON);
     mock.onGet("processes/assignees").reply(200, PROCESS_ASSIGNEES_JSON);
     mock.onGet("products").reply(200, PRODUCTS_JSON);
-    mock.onGet("subscriptions/workflows/pid").reply(200, WORKFLOWS_JSON);
-    mock.onGet("subscriptions/in_use_by/pid").reply(200, IN_USE_BY_JSON);
-    mock.onGet("subscriptions/parent_subscriptions/pid").reply(200, IN_USE_BY_JSON); // Deprecated
+    mock.onGet("subscriptions/workflows/processId").reply(200, WORKFLOWS_JSON);
+    mock.onGet("subscriptions/in_use_by/processId").reply(200, IN_USE_BY_JSON);
+    mock.onGet("subscriptions/parent_subscriptions/processId").reply(200, IN_USE_BY_JSON); // Deprecated
 
     mock.onPost("subscriptions/subscriptions_for_in_used_by_ids", ["cbf30313-a490-4f06-ac8a-7e07face0280"]).reply(200, {
         "cbf30313-a490-4f06-ac8a-7e07face0280": {
@@ -101,5 +101,5 @@ export const Subscription: ComponentStory<typeof SubscriptionDetailPage> = () =>
     mock.onGet("surf/ipam/prefix_by_id/83138").reply(200, IPAM_83138_JSON);
 
     //@ts-ignore
-    return <SubscriptionDetailPage match={{ params: { id: "pid" } }} />;
+    return <SubscriptionDetailPage match={{ params: { id: "processId" } }} />;
 };

@@ -2,7 +2,7 @@
     {
         "created_at": 1646755064.37432,
         "id": "c7548066-a4d7-492b-b58f-b86bad74bc94",
-        "pid": "173b0283-dee7-4367-bd99-6f30ff9e476a",
+        "process_id": "173b0283-dee7-4367-bd99-6f30ff9e476a",
         "process": {
             "assignee": "SYSTEM",
             "created_by": "SYSTEM",
@@ -11,10 +11,10 @@
             "last_modified_at": 1646755090.415583,
             "last_status": "completed",
             "last_step": "Done",
-            "pid": "173b0283-dee7-4367-bd99-6f30ff9e476a",
+            "process_id": "173b0283-dee7-4367-bd99-6f30ff9e476a",
             "started_at": 1646755064.057587,
             "traceback": null,
-            "workflow": "create_sn8_ip_bgp"
+            "workflow_name": "create_sn8_ip_bgp"
         },
         "subscription_id": "358d5a85-49c2-46e2-ac5c-f55601957282",
         "workflow_target": "CREATE"

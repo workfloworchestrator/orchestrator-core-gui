@@ -316,7 +316,7 @@ export function RenderProduct({ product }: { product?: Product }) {
 
 export function RenderProcesses({ subscriptionProcesses }: { subscriptionProcesses: SubscriptionProcesses[] }) {
     const { theme } = useContext(ApplicationContext);
-    const columns = ["target", "name", "id", "status", "started_at", "modified_at"];
+    const columns = ["target", "name", "id", "status", "started_at", "last_modified_at"];
 
     const th = (index: number) => {
         const name = columns[index];
@@ -344,10 +344,10 @@ export function RenderProcesses({ subscriptionProcesses }: { subscriptionProcess
                     {subscriptionProcesses.map((ps, index) => (
                         <tr key={index} className={theme}>
                             <td>{ps.workflow_target}</td>
-                            <td>{ps.process.workflow}</td>
+                            <td>{ps.process.workflow_name}</td>
                             <td>
-                                <a target="_blank" rel="noopener noreferrer" href={`/processes/${ps.pid}`}>
-                                    {ps.pid}
+                                <a target="_blank" rel="noopener noreferrer" href={`/processes/${ps.process_id}`}>
+                                    {ps.process_id}
                                 </a>
                             </td>
                             <td>{ps.process.last_status}</td>

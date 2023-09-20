@@ -49,7 +49,7 @@ function Processes() {
         confirmation(
             intl.formatMessage({ id: "processes.abortConfirmation" }, { name: product_name, customer: customer_name }),
             () =>
-                apiClient.abortProcess(process.pid).then(() => {
+                apiClient.abortProcess(process.process_id).then(() => {
                     setFlash(intl.formatMessage({ id: "processes.flash.abort" }, { name: product_name }));
                 })
         );
@@ -62,14 +62,14 @@ function Processes() {
         confirmation(
             intl.formatMessage({ id: "processes.retryConfirmation" }, { name: product_name, customer: customer_name }),
             () =>
-                apiClient.retryProcess(process.pid).then(() => {
+                apiClient.retryProcess(process.process_id).then(() => {
                     setFlash(intl.formatMessage({ id: "processes.flash.retry" }, { name: product_name }));
                 })
         );
     };
 
     const showProcess = (process: ProcessV2) => () => {
-        redirect("/processes/" + process.pid);
+        redirect("/processes/" + process.process_id);
     };
 
     const renderActions = (process: ProcessV2) => {
@@ -103,13 +103,13 @@ function Processes() {
             ProcessStatus.WAITING,
             ProcessStatus.AWAITING_CALLBACK,
         ]),
-        ["pid", "assignee", "tag", "creator", "customer", "product"],
+        ["process_id", "assignee", "tag", "creator", "customer", "product"],
         { showSettings: false, pageSize: 10, refresh: false }
     );
     const completedSettings = initialProcessTableSettings(
         "table.processes.completed",
         initialProcessesFilterAndSort(false, [ProcessStatus.COMPLETED]),
-        ["pid", "step", "status", "assignee", "creator", "started", "abbrev"],
+        ["process_id", "last_step", "last_status", "assignee", "creator", "started_at", "abbrev"],
         { showSettings: false, pageSize: 5, refresh: false }
     );
 

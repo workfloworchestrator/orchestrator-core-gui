@@ -17,7 +17,7 @@ import { EuiPanel } from "@elastic/eui";
 import ActionContainer from "components/ActionContainer";
 import {
     renderCustomersCell,
-    renderPidCell,
+    renderProcessIdCell,
     renderProductTagCell,
     renderProductsCell,
     renderSubscriptionsCell,
@@ -53,9 +53,9 @@ import { ProcessV2 } from "utils/types";
 export function initialProcessesFilterAndSort(showTasks: boolean, statuses: string[]) {
     const initialFilterBy = [
         { id: "isTask", values: [`${showTasks ? "true" : "false"}`] },
-        { id: "status", values: statuses },
+        { id: "lastStatus", values: statuses },
     ];
-    const initialSortBy = [{ id: "modified", desc: true }];
+    const initialSortBy = [{ id: "lastModifiedAt", desc: true }];
     return { filterBy: initialFilterBy, sortBy: initialSortBy };
 }
 
@@ -153,22 +153,22 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
 
     const extraRowPropGetter: RowPropGetter<ProcessV2> = useCallback(
         (props: any, { row }: any) => {
-            const highlighted = row.values.pid === highlightQ ? " highlighted" : "";
+            const highlighted = row.values.processId === highlightQ ? " highlighted" : "";
             return {
                 ...props,
-                id: row.values.pid,
-                className: `${row.values.status}${highlighted}`,
+                id: row.values.processId,
+                className: `${row.values.lastStatus}${highlighted}`,
             };
         },
         [highlightQ]
     );
 
     const renderSubComponent = useCallback(({ row }: { row: Row<ProcessV2> }) => {
-        const { status, step, info } = row.values;
+        const { last_status, last_step, info } = row.values;
         return (
             <div className={"expanded-row"}>
                 <h2>
-                    <FormattedMessage id={`table.expanded_row.${status}`} values={{ step: step }} />
+                    <FormattedMessage id={`table.expanded_row.${last_status}`} values={{ step: last_step }} />
                 </h2>
                 <pre>{info}</pre>
             </div>
@@ -188,11 +188,11 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                     <i className="fa fa-arrows-alt-v" onClick={() => toggleAllRowsExpanded()} />
                 ),
                 Cell: ({ row }: { row: Row; cell: Cell }) => {
-                    const caret = row.values.pid === highlightQ ? <i className={"fa fa-caret-right"} /> : null;
+                    const caret = row.values.processId === highlightQ ? <i className={"fa fa-caret-right"} /> : null;
                     const button = row.isExpanded ? (
-                        <i className={`fa fa-minus-circle ${row.values.status}`} />
+                        <i className={`fa fa-minus-circle ${row.values.lastStatus}`} />
                     ) : (
-                        <i className={`fa fa-plus-circle ${row.values.status}`} />
+                        <i className={`fa fa-plus-circle ${row.values.lastStatus}`} />
                     );
                     return (
                         <div
@@ -210,10 +210,11 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
             },
             {
                 Header: "pid",
-                accessor: "pid",
+                id: "processId",
+                accessor: "process_id",
                 disableSortBy: true,
                 disableFilters: true,
-                Cell: renderPidCell,
+                Cell: renderProcessIdCell,
             },
             {
                 Header: "Assignee",
@@ -222,14 +223,14 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
             },
             {
                 Header: "Last step",
-                id: "step",
+                id: "lastStep",
                 accessor: "last_step",
                 disableSortBy: true,
                 disableFilters: true,
             },
             {
-                Header: "Status",
-                id: "status",
+                Header: "Last status",
+                id: "lastStatus",
                 accessor: "last_status",
                 Filter: renderMultiSelectFilter.bind(null, processStatuses, "process_statuses"),
                 Cell: ({ cell }: { cell: Cell }) => {
@@ -238,7 +239,8 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
             },
             {
                 Header: "Workflow",
-                accessor: "workflow",
+                id: "workflowName",
+                accessor: "workflow_name",
                 Filter: renderILikeFilter,
                 Cell: renderWorkflowNameCell,
             },
@@ -275,7 +277,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
             },
             {
                 Header: "Tag(s)",
-                id: "tag",
+                id: "productTag",
                 accessor: "subscriptions",
                 disableSortBy: true,
                 Cell: renderProductTagCell,
@@ -290,20 +292,20 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
             },
             {
                 Header: "Created by",
-                id: "creator",
+                id: "createdBy",
                 accessor: "created_by",
                 Filter: renderILikeFilter,
             },
             {
                 Header: "Started",
-                id: "started",
+                id: "startedAt",
                 accessor: "started_at",
                 Cell: renderTimestampCell,
                 disableFilters: true,
             },
             {
                 Header: "Modified",
-                id: "modified",
+                id: "lastModifiedAt",
                 accessor: "last_modified_at",
                 Cell: renderTimestampCell,
                 disableFilters: true,
@@ -347,7 +349,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
         [name, setFilterQ, setPageQ, setSortQ]
     );
 
-    const excludeInFilter = ["info", "workflow"];
+    const excludeInFilter = ["info", "workflow_name"];
     return (
         <div key={name}>
             <EuiPanel css={processesStyling} className="nwa-table" id={`${name}-processes`}>

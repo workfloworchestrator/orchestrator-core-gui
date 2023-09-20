@@ -128,10 +128,10 @@
         }
     },
     "id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
-    "last_modified": 1573576181,
+    "last_modified_at": 1573576181,
     "product": "99e527b2-7424-48eb-9015-6f46e8a40923",
-    "started": 1573576172,
-    "status": "suspended",
+    "started_at": 1573576172,
+    "last_status": "suspended",
     "step": "Select new SAP to migrate to",
     "steps": [
         {

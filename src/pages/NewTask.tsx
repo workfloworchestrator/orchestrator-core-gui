@@ -64,7 +64,7 @@ class NewTask extends React.Component<WrappedComponentProps, IState> {
             setFlash(
                 intl.formatMessage(
                     { id: "task.flash.create" },
-                    { name: intl.formatMessage({ id: `workflow.${select_task}` }), pid: process.id }
+                    { name: intl.formatMessage({ id: `workflow.${select_task}` }), process_id: process.id }
                 )
             );
         });

@@ -62,7 +62,7 @@ export interface FixedInput {
 }
 
 export interface SubscriptionProcesses {
-    pid: string;
+    process_id: string;
     subscription_id: string;
     workflow_target: string;
     process: Process;
@@ -217,13 +217,13 @@ export interface FormNotCompleteResponse {
 export type Assignee = "NOC" | "CHANGES" | "SYSTEM" | "KLANT_SUPPORT";
 
 export interface Process {
-    pid: string;
-    workflow: string;
+    process_id: string;
+    workflow_name: string;
     assignee: Assignee;
     last_status: string;
     failed_reason: string;
     traceback: string;
-    step: string;
+    last_step: string;
     created_by: string;
     started_at: number;
     last_modified_at: number;
@@ -236,13 +236,13 @@ export interface ProcessWithDetails {
     product: string;
     customer: string;
     assignee: Assignee;
-    status: string;
+    last_status: string;
+    last_step: string;
     failed_reason: string;
     traceback: string;
-    step: string;
     created_by: string;
-    started: number;
-    last_modified: number;
+    started_at: number;
+    last_modified_at: number;
     is_task: boolean;
     current_state: any;
     steps: Step[];
@@ -251,7 +251,7 @@ export interface ProcessWithDetails {
 
 export interface ProcessSubscription {
     id: string;
-    pid: string;
+    process_id: string;
     subscription_id: string;
     created_at: number;
     workflow_target: string;
@@ -263,27 +263,27 @@ export interface ProcessStatusCounts {
 }
 
 export interface ProcessV2 {
-    pid: string;
+    process_id: string;
     assignee: Assignee;
     created_by: string;
     failed_reason: string;
-    last_modified_at: string;
-    started_at: string;
+    last_modified_at: number;
+    started_at: number;
     last_status: string;
     last_step: string;
     subscriptions: Array<Subscription>;
-    workflow: string;
+    workflow_name: string;
     workflow_target: string;
     is_task: boolean;
 }
 
 export interface WsProcessV2 extends ProcessV2 {
     id: string;
-    status: ProcessStatus;
+    last_status: ProcessStatus;
     form: InputForm;
     steps: Step[];
     traceback: string;
-    step: string;
+    last_step: string;
 }
 
 export interface Step {

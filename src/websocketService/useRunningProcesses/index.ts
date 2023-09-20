@@ -18,7 +18,7 @@ import { ProcessStatus, Step, WsProcessV2 } from "utils/types";
 import useWebsocketService from "websocketService";
 
 export interface FailedProcess {
-    pid: string;
+    process_id: string;
     last_status: string;
 }
 
@@ -44,10 +44,10 @@ const useRunningProcesses = (): RunningProcesses => {
             return;
         }
 
-        setRunningProcesses([...runningProcesses.filter((p) => p.pid !== process.id), process]);
+        setRunningProcesses([...runningProcesses.filter((p) => p.process_id !== process.id), process]);
 
-        if (process.status === ProcessStatus.COMPLETED || process.status === ProcessStatus.ABORTED) {
-            setTimeout(() => setRunningProcesses(runningProcesses.filter((p) => p.pid !== process.id)), 100);
+        if (process.last_status === ProcessStatus.COMPLETED || process.last_status === ProcessStatus.ABORTED) {
+            setTimeout(() => setRunningProcesses(runningProcesses.filter((p) => p.process_id !== process.id)), 100);
             setCompletedProcessIds([...completedProcessIds, process.id]);
         }
     };

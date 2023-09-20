@@ -32,7 +32,7 @@ interface IProps extends RouteComponentProps, WrappedComponentProps {
 interface IState {
     product?: Product;
     stepUserInput?: InputForm;
-    pid?: string;
+    process_id?: string;
 }
 
 function getTerminateWorkflow(product: Product) {
@@ -53,7 +53,7 @@ class TerminateSubscription extends React.Component<IProps, IState> {
                 let promise = this.context.apiClient
                     .startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }])
                     .then((res: { id: string }) => {
-                        this.setState({ pid: res.id, product: product });
+                        this.setState({ process_id: res.id, product: product });
                     });
                 // @ts-ignore
                 this.context.apiClient.catchErrorStatus<FormNotCompleteResponse>(promise, 510, (json) => {
@@ -75,13 +75,13 @@ class TerminateSubscription extends React.Component<IProps, IState> {
         return this.context.apiClient
             .startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }, ...processInput])
             .then((res: { id: string }) => {
-                this.setState({ pid: res.id });
+                this.setState({ process_id: res.id });
             });
     };
 
     render() {
         const { subscriptionId, intl } = this.props;
-        const { stepUserInput, product, pid } = this.state;
+        const { stepUserInput, product, process_id } = this.state;
 
         if (!product) {
             return null;
@@ -89,18 +89,18 @@ class TerminateSubscription extends React.Component<IProps, IState> {
 
         const terminate_workflow = getTerminateWorkflow(product);
 
-        if (pid) {
+        if (process_id) {
             setFlash(
                 intl.formatMessage(
                     { id: "process.flash.create_modify" },
                     {
                         name: intl.formatMessage({ id: `workflow.${terminate_workflow.name}` }),
                         subscriptionId: subscriptionId,
-                        pid: pid,
+                        process_id: process_id,
                     }
                 )
             );
-            return <Redirect to={`/processes/${pid}`} />;
+            return <Redirect to={`/processes/${process_id}`} />;
         }
 
         if (!stepUserInput) {

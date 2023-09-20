@@ -18,7 +18,7 @@ import RunningProcessesContext from "contextProviders/runningProcessesProvider";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
-import { Process, ProcessStatus, ProcessStatusCounts } from "utils/types";
+import { ProcessStatusCounts } from "utils/types";
 import useHttpIntervalFallback from "utils/useHttpIntervalFallback";
 
 import { failedTaskBannerStyling } from "./FailedTaskBannerStyling";
@@ -26,10 +26,6 @@ import { failedTaskBannerStyling } from "./FailedTaskBannerStyling";
 enum CheckboxStatus {
     "OK" = "ok",
     "FAILED" = "failed",
-}
-export interface ProcessData extends Process {
-    id: string;
-    status: ProcessStatus;
 }
 
 interface CountFailedTasks {

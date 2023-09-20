@@ -62,10 +62,10 @@
     "customer": "6a608b90-0c11-e511-80d0-005056956c1a",
     "failed_reason": "[Errno 111] Connection refused",
     "id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
-    "last_modified": 1574096538,
+    "last_modified_at": 1574096538,
     "product": "99e527b2-7424-48eb-9015-6f46e8a40923",
-    "started": 1573817793,
-    "status": "failed",
+    "started_at": 1573817793,
+    "last_status": "failed",
     "step": "Send confirmation mail to customer",
     "steps": [
         {
