@@ -1,7 +1,7 @@
 import { css } from "@emotion/core";
 import {
     DARKEST_PRIMARY_COLOR,
-    DARK_GOLD_COlOR,
+    DARK_GOLD_COLOR,
     DARK_GREY_COLOR,
     DARK_SUCCESS_COLOR,
     LIGHTER_GREY_COLOR,
@@ -89,7 +89,7 @@ export const tablePrefixes = css`
             }
 
             &.dark {
-                background-color: ${DARK_GOLD_COlOR};
+                background-color: ${DARK_GOLD_COLOR};
             }
 
             &:hover {
@@ -98,7 +98,7 @@ export const tablePrefixes = css`
                 }
 
                 &.dark {
-                    background-color: ${shadeColor(DARK_GOLD_COlOR, -10)};
+                    background-color: ${shadeColor(DARK_GOLD_COLOR, -10)};
                 }
             }
         }

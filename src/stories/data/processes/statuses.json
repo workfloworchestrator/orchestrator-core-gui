@@ -4,6 +4,7 @@
     "resumed",
     "suspended",
     "waiting",
+    "awaiting_callback",
     "aborted",
     "failed",
     "api_unavailable",

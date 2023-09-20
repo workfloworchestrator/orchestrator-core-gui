@@ -187,7 +187,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                 Filter: ({ toggleAllRowsExpanded }: FilterParams) => (
                     <i className="fa fa-arrows-alt-v" onClick={() => toggleAllRowsExpanded()} />
                 ),
-                Cell: ({ row, cell }: { row: Row; cell: Cell }) => {
+                Cell: ({ row }: { row: Row; cell: Cell }) => {
                     const caret = row.values.pid === highlightQ ? <i className={"fa fa-caret-right"} /> : null;
                     const button = row.isExpanded ? (
                         <i className={`fa fa-minus-circle ${row.values.status}`} />
@@ -310,7 +310,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
             },
             {
                 Header: "",
-                accessor: (originalRow: ProcessV2, index: number) => originalRow,
+                accessor: (originalRow: ProcessV2) => originalRow,
                 id: "actions",
                 Cell: ({ cell }: { cell: Cell }) => (
                     <ActionContainer
@@ -323,7 +323,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                                 </span>
                             );
                         }}
-                        renderContent={(disabled) => renderActions(cell.value)}
+                        renderContent={() => renderActions(cell.value)}
                     />
                 ),
                 disableFilters: true,

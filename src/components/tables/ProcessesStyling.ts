@@ -1,5 +1,5 @@
 import { css } from "@emotion/core";
-import { DANGER, GOLD, PRIMARY_COLOR, SUCCESS, WARNING } from "stylesheets/emotion/colors";
+import { DANGER, DARK_GOLD_COLOR, GOLD, PRIMARY_COLOR, SUCCESS, WARNING } from "stylesheets/emotion/colors";
 
 export const processesStyling = css`
     table.nwa-table {
@@ -24,6 +24,9 @@ export const processesStyling = css`
                     }
                     &.waiting {
                         color: ${WARNING};
+                    }
+                    &.awaiting_callback {
+                        color: ${DARK_GOLD_COLOR};
                     }
                     &.failed {
                         color: ${DANGER};

@@ -101,6 +101,7 @@ function Processes() {
             ProcessStatus.FAILED,
             ProcessStatus.CREATED,
             ProcessStatus.WAITING,
+            ProcessStatus.AWAITING_CALLBACK,
         ]),
         ["pid", "assignee", "tag", "creator", "customer", "product"],
         { showSettings: false, pageSize: 10, refresh: false }

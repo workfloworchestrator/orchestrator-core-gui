@@ -115,6 +115,7 @@ function StateChanges({
             break;
         case "failed":
         case "waiting":
+        case "awaiting_callback":
             json = step.state;
             break;
         case "success":
@@ -138,7 +139,11 @@ function StateChanges({
     if (isEmpty(json)) {
         return null;
     }
-    const iconName = index === 0 || steps[index - 1].status === "suspend" ? "user" : "pipelineApp";
+    const iconName = (() => {
+        if (index === 0 || steps[index - 1].status === "suspend") return "user";
+        if (steps[index - 1].status === "awaiting_callback") return "timelineWithArrow";
+        return "pipelineApp";
+    })();
     let data = Object.keys(json);
     if (!showHiddenKeys) {
         data = data.filter((key) => !HIDDEN_KEYS.some((word) => key.startsWith(word)));
