@@ -7,7 +7,7 @@ export async function createPolicyCheck(user?: Partial<Oidc.Profile>) {
         return () => true;
     }
     const policyResult = await fetch(
-        ENV.OAUTH2_OPENID_CONNECT_URL.replace("auth", "opa") + "/public-bundle/" + ENV.OAUTH2_CLIENT_ID
+        ENV.OAUTH2_OPENID_CONNECT_URL.replace("/auth", "/opa") + "/public-bundle/" + ENV.OAUTH2_CLIENT_ID
     );
     const policyWasm = await policyResult.arrayBuffer();
     try {
