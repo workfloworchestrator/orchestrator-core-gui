@@ -17,6 +17,7 @@ import { EuiPanel } from "@elastic/eui";
 import SubscriptionDetail from "components/subscriptionDetail/SubscriptionDetail";
 import {
     renderInsyncCell,
+    renderReferencesCell,
     renderSubscriptionCustomersCell,
     renderSubscriptionDescriptionCell,
     renderSubscriptionIdCell,
@@ -273,6 +274,15 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                     accessor: "note",
                     // @ts-ignore Filter isn't recognized as valid property
                     Filter: renderILikeFilter,
+                },
+                {
+                    Header: "References",
+                    id: "references",
+                    accessor: "metadata",
+                    // @ts-ignore Filter isn't recognized as valid property
+                    disableFilters: true,
+                    disableSortBy: true,
+                    Cell: renderReferencesCell,
                 },
             ] as Column<Subscription>[],
         [organisations, products]

@@ -19,7 +19,7 @@ import { intl } from "locale/i18n";
 import uniq from "lodash/uniq";
 import moment from "moment-timezone";
 import { Link } from "react-router-dom";
-import { Cell } from "react-table";
+import { Cell, CellProps } from "react-table";
 import { Organization, Product, Subscription } from "utils/types";
 
 const LIST_MAX_LENGTH = 3; // Max length of lists before they're converted to modals
@@ -163,6 +163,25 @@ export function renderTimestampCell({ cell }: { cell: Cell }): string | null {
     const format = moment().diff(time, "hours") >= 24 ? "y-MM-DD" : "y-MM-DD HH:mm:ss z";
 
     return time.tz(timezone).format(format);
+}
+
+interface ISubscriptionReference {
+    name: string;
+    external_id: string;
+}
+
+export function renderReferencesCell(props: CellProps<Subscription>) {
+    const references: ISubscriptionReference[] = props.value?.references;
+    if (!references) {
+        return null;
+    }
+    return (
+        <ul>
+            {(references || []).map((r, i) => (
+                <li key={i}>{`${r.name} : ${r.external_id}`}</li>
+            ))}
+        </ul>
+    );
 }
 
 export function renderProcessIdCell({ cell }: { cell: Cell }) {
