@@ -46,13 +46,13 @@ export default function SubscriptionsPage(props: IProps) {
     const completeSettings = initialSubscriptionTableSettings(
         "table.subscriptions.complete",
         initialSubscriptionsFilterAndSort(false, ["active"]),
-        ["product", "customer"],
+        ["product", "customer", "references"],
         { showSettings: false, refresh: false, pageSize: 10 }
     );
     const provisioningSettings = initialSubscriptionTableSettings(
         "table.subscriptions.provisioning",
         initialSubscriptionsFilterAndSort(false, ["provisioning", "initial", "terminated"]),
-        ["start_date", "customer", "end_date", "insync"],
+        ["start_date", "customer", "end_date", "insync", "references"],
         { showSettings: false, refresh: false, pageSize: 5 }
     );
 

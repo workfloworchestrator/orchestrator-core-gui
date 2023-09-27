@@ -115,6 +115,7 @@ export interface Subscription {
     start_date: number;
     end_date: number;
     note: string;
+    metadata?: object;
 }
 
 export interface CustomerDescription {

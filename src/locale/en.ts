@@ -883,6 +883,7 @@ I18n.translations.en = {
             target: "workflow target...",
             subscription_id: "id",
             insync: "yes or no",
+            references: "references...",
         },
         filter_button: {
             on: "on",
