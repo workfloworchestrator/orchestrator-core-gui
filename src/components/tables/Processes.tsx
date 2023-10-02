@@ -164,11 +164,11 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
     );
 
     const renderSubComponent = useCallback(({ row }: { row: Row<ProcessV2> }) => {
-        const { last_status, last_step, info } = row.values;
+        const { lastStatus, lastStep, info } = row.values;
         return (
             <div className={"expanded-row"}>
                 <h2>
-                    <FormattedMessage id={`table.expanded_row.${last_status}`} values={{ step: last_step }} />
+                    <FormattedMessage id={`table.expanded_row.${lastStatus}`} values={{ step: lastStep }} />
                 </h2>
                 <pre>{info}</pre>
             </div>
