@@ -9,6 +9,8 @@ name: Lint and test the SURF version
 
 on:
   push:
+    branches:
+      - main
   workflow_call:
   pull_request:
 
