@@ -9,7 +9,13 @@ name: Lint and test the SURF version
 
 on:
   push:
+    branches:
+      - main
+  create:
+    tags:
+      - '*'
   workflow_call:
+  pull_request:
 
 jobs:
   build:

@@ -7,7 +7,13 @@ name: Lint and test the GPL version
 
 on:
   push:
+    branches:
+      - main
+  create:
+    tags:
+      - '*'
   workflow_call:
+  pull_request:
 
 jobs:
   build:
