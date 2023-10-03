@@ -10,6 +10,7 @@ name: Lint and test the SURF version
 on:
   push:
   workflow_call:
+  pull_request:
 
 jobs:
   build:

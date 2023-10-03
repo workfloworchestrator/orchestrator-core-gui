@@ -8,6 +8,7 @@ name: Lint and test the GPL version
 on:
   push:
   workflow_call:
+  pull_request:
 
 jobs:
   build:
