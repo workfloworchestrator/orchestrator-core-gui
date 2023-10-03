@@ -24,6 +24,7 @@ import ReactDOM from "react-dom";
 import { apiClient } from "utils/ApplicationContext";
 
 const appElement = document.getElementById("app");
+const test = 'fork PR';
 
 if (ENV.TRACING_ENABLED) {
     console.log("Initialized Sentry");
