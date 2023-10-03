@@ -78,10 +78,12 @@ function ProcessDetail({ match, query, setQuery }: IProps) {
         if (stepUserInput && localStepUserInput) return;
         const localTabs = localStepUserInput ? ["user_input", "process"] : ["process"];
         const localSelectedTab = localStepUserInput ? "user_input" : "process";
-        const getProductId = (product: string | { product_id: string }) =>
-            typeof product === "object" ? product.product_id : product;
+        const getProductId = (product: string | { product_id: string } | null) =>
+            product && typeof product === "object" ? product.product_id : product;
         const product_id = getProductId(processInstance.product);
-        setProductName(productNameById(product_id, products));
+        if (product_id) {
+            setProductName(productNameById(product_id, products));
+        }
         setCustomerName(organisationNameByUuid(processInstance.customer, organisations));
         setProcess(processInstance);
         setStepUserInput(localStepUserInput);

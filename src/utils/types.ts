@@ -234,7 +234,7 @@ export interface Process {
 export interface ProcessWithDetails {
     id: string;
     workflow_name: string;
-    product: string | { product_id: string };
+    product: string | { product_id: string } | null;
     customer: string;
     assignee: Assignee;
     last_status: string;
