@@ -2,6 +2,7 @@
 ### BASE LAYER FOR IMAGES BELOW
 FROM node:14.21.1-slim AS base
 
+
 ENV CI=true
 
 WORKDIR /app
