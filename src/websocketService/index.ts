@@ -1,18 +1,3 @@
-/*
- * Copyright 2019-2023 SURF.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 import { useAuth } from "oidc-react";
 import { useEffect, useState } from "react";
 import useWebSocket, { Options, ReadyState } from "react-use-websocket";
@@ -20,7 +5,6 @@ import useWebSocket, { Options, ReadyState } from "react-use-websocket";
 import { ENV } from "../env";
 
 const isSecure = !!ENV.BACKEND_URL.includes("https");
-
 const wsProtocol = isSecure ? "wss" : "ws";
 const websocketUrl = `${wsProtocol}${ENV.BACKEND_URL.replace(/(^\w+|^)/, "")}`;
 
@@ -29,6 +13,8 @@ export interface SurfWebSocket<T> {
     readyState: ReadyState;
     useFallback: boolean;
 }
+
+const pingMessage = "__ping__";
 
 const websocketSettings: Options = {
     retryOnError: true,
@@ -46,7 +32,7 @@ const useWebsocketServiceWithAuth = <T extends object>(endpoint: string): SurfWe
     const baseUrl = `${websocketUrl}/${endpoint}?token=`;
     const [url, setUrl] = useState<string>("");
 
-    const { lastJsonMessage, readyState } = useWebSocket(url, websocketSettings, !!url);
+    const { lastJsonMessage, readyState, sendMessage, lastMessage } = useWebSocket(url, websocketSettings, !!url);
     const [useFallback, setUsefallback] = useState<boolean>(false);
 
     useEffect(() => {
@@ -57,22 +43,43 @@ const useWebsocketServiceWithAuth = <T extends object>(endpoint: string): SurfWe
         setUrl(`${baseUrl}${auth.userData?.access_token}`);
     }, [baseUrl, auth.userData?.access_token]);
 
+    useEffect(() => {
+        const pingInterval = setInterval(() => sendMessage(pingMessage), ENV.WS_PING_INTERVAL_IN_SECONDS);
+        return () => clearInterval(pingInterval);
+    }, [sendMessage]);
+
+    useEffect(() => {
+        if (lastMessage && lastMessage.data === "__pong__") {
+            // handle pong...
+        }
+    }, [lastMessage]);
+
     return { lastMessage: lastJsonMessage, readyState, useFallback };
 };
 
 const useWebsocketServiceWithoutAuth = <T extends object>(endpoint: string): SurfWebSocket<T> => {
     const baseUrl = `${websocketUrl}/${endpoint}?token=`;
-    const { lastJsonMessage, readyState } = useWebSocket(baseUrl, websocketSettings);
+    const { lastJsonMessage, readyState, sendMessage, lastMessage } = useWebSocket(baseUrl, websocketSettings);
     const [useFallback, setUsefallback] = useState<boolean>(false);
 
     useEffect(() => {
-        console.log(readyState);
         if (readyState === ReadyState.CLOSED) {
             setUsefallback(true);
         } else {
             setUsefallback(false);
         }
     }, [readyState]);
+
+    useEffect(() => {
+        const pingInterval = setInterval(() => sendMessage(pingMessage), ENV.WS_PING_INTERVAL_IN_SECONDS);
+        return () => clearInterval(pingInterval);
+    }, [sendMessage]);
+
+    useEffect(() => {
+        if (lastMessage && lastMessage.data === "__pong__") {
+            // handle pong...
+        }
+    }, [lastMessage]);
 
     return { lastMessage: lastJsonMessage, readyState, useFallback };
 };
