@@ -34,6 +34,7 @@ import { ENV } from "env";
 import { createBrowserHistory } from "history";
 import { intl, setLocale } from "locale/i18n";
 import { memoize } from "lodash";
+import FormTest from "pages/FormTest";
 import MetaData from "pages/MetaData";
 import ModifySubscription from "pages/ModifySubscription";
 import NewProcess from "pages/NewProcess";
@@ -406,6 +407,7 @@ class App extends React.PureComponent<IProps, IState> {
                                                         path="/styleguide"
                                                         render={(props) => <StyleGuide {...props} />}
                                                     />
+                                                    <Route path="/form-test" render={(props) => <FormTest />} />
                                                     <Route component={NotFound} />
                                                 </Switch>
                                             </div>
