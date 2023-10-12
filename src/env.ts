@@ -64,5 +64,5 @@ export const ENV: Env = window.__env__ || {
     GITLAB_URL: process.env.REACT_APP_GITLAB_URL,
     CI_PROJECT_PATH: process.env.REACT_APP_CI_PROJECT_PATH,
     LOCALE: process.env.REACT_APP_LOCALE || "en-GB",
-    WS_PING_INTERVAL_IN_SECONDS: parseInt(process.env.WS_PING_INTERVAL_IN_SECONDS || "30000"),
+    WS_PING_INTERVAL_IN_SECONDS: parseInt(process.env.WS_PING_INTERVAL_IN_SECONDS || "30"),
 };

@@ -15,6 +15,7 @@ export interface SurfWebSocket<T> {
 }
 
 const pingMessage = "__ping__";
+const pingintervalInMilliseconds = ENV.WS_PING_INTERVAL_IN_SECONDS * 1000;
 
 const websocketSettings: Options = {
     retryOnError: true,
@@ -44,7 +45,7 @@ const useWebsocketServiceWithAuth = <T extends object>(endpoint: string): SurfWe
     }, [baseUrl, auth.userData?.access_token]);
 
     useEffect(() => {
-        const pingInterval = setInterval(() => sendMessage(pingMessage), ENV.WS_PING_INTERVAL_IN_SECONDS);
+        const pingInterval = setInterval(() => sendMessage(pingMessage), pingintervalInMilliseconds);
         return () => clearInterval(pingInterval);
     }, [sendMessage]);
 
@@ -71,7 +72,7 @@ const useWebsocketServiceWithoutAuth = <T extends object>(endpoint: string): Sur
     }, [readyState]);
 
     useEffect(() => {
-        const pingInterval = setInterval(() => sendMessage(pingMessage), ENV.WS_PING_INTERVAL_IN_SECONDS);
+        const pingInterval = setInterval(() => sendMessage(pingMessage), pingintervalInMilliseconds);
         return () => clearInterval(pingInterval);
     }, [sendMessage]);
 
