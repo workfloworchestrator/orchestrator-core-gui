@@ -33,6 +33,7 @@ interface Env {
     GITLAB_URL: string;
     CI_PROJECT_PATH: string;
     LOCALE: string;
+    WS_PING_INTERVAL_IN_SECONDS: number;
 }
 
 // We normally load env from window.__env__ as defined in public/env.js which
@@ -63,4 +64,5 @@ export const ENV: Env = window.__env__ || {
     GITLAB_URL: process.env.REACT_APP_GITLAB_URL,
     CI_PROJECT_PATH: process.env.REACT_APP_CI_PROJECT_PATH,
     LOCALE: process.env.REACT_APP_LOCALE || "en-GB",
+    WS_PING_INTERVAL_IN_SECONDS: parseInt(process.env.WS_PING_INTERVAL_IN_SECONDS || "30"),
 };
