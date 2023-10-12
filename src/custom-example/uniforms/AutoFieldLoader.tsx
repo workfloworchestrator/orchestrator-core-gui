@@ -2,6 +2,7 @@ import {
     AcceptField,
     BoolField,
     DateField,
+    DividerField,
     LabelField,
     ListField,
     LocationCodeField,
@@ -49,6 +50,8 @@ export function autoFieldFunction(props: GuaranteedProps<unknown> & Record<strin
                     return LongTextField;
                 case "label":
                     return LabelField;
+                case "divider":
+                    return DividerField;
                 case "summary":
                     return SummaryField;
                 case "subscription":
