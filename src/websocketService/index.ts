@@ -15,7 +15,7 @@ export interface SurfWebSocket<T> {
 }
 
 const pingMessage = "__ping__";
-const pingintervalInMilliseconds = ENV.WS_PING_INTERVAL_IN_SECONDS * 1000;
+const pingintervalInMilliseconds = 30000;
 
 const websocketSettings: Options = {
     retryOnError: true,
