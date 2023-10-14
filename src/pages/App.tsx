@@ -29,7 +29,6 @@ import ProductBlock from "components/ProductBlock";
 import ProtectedRoute from "components/ProtectedRoute";
 import ViewProduct from "components/ViewProduct";
 import GlobalContextProviders from "contextProviders/globalContextProviders";
-import FormTest from "custom-surf/pages/FormTest";
 import manifest from "custom/manifest.json";
 import { ENV } from "env";
 import { createBrowserHistory } from "history";
@@ -407,7 +406,6 @@ class App extends React.PureComponent<IProps, IState> {
                                                         path="/styleguide"
                                                         render={(props) => <StyleGuide {...props} />}
                                                     />
-                                                    <Route path="/form-test" render={(props) => <FormTest />} />
                                                     <Route component={NotFound} />
                                                 </Switch>
                                             </div>
