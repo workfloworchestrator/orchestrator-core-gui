@@ -14,8 +14,8 @@
  */
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
-import CreateForm from "components/CreateForm";
-import FormHeader from "components/FormHeader";
+import CreateTestForm from "custom/components/CreateTestForm";
+import FormHeader from "custom/components/FormHeader";
 import { formStyling } from "custom/pages/FormStyling";
 import React from "react";
 
@@ -32,7 +32,7 @@ export default function FormTest() {
                     explainTitle="A form that uses all available form elements"
                     explainDescription={<p>Nothing will happen when you submit. This is a test form after all.</p>}
                 />
-                <CreateForm formKey="all_form_fields" handleSubmit={handleSubmit} />
+                <CreateTestForm formKey="all_form_fields" handleSubmit={handleSubmit} />
             </EuiPageBody>
         </EuiPage>
     );

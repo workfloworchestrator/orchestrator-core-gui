@@ -26,7 +26,7 @@ interface IProps {
     handleSubmit: (userInputs: any) => void;
 }
 
-export default function CreateForm(props: IProps) {
+export default function CreateTestForm(props: IProps) {
     const intl = useIntl();
     const { preselectedInput, formKey, handleSubmit } = props;
     const { redirect, customApiClient } = useContext(ApplicationContext);
