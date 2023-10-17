@@ -67,6 +67,8 @@ abstract class CustomApiClientInterface extends BaseApiClient {
     abstract free_subnets: (subnet: string, netmask: number, prefixlen: number) => Promise<string[]>;
     abstract contacts: (organisationId: string) => Promise<ContactPerson[]>;
     abstract dienstafnameBySubscription: (subscriptionId: string) => Promise<Dienstafname | undefined>;
+    abstract showForms: () => Promise<string[]>;
+    abstract startForm: (formKey: string, userInputs: {}[]) => Promise<any>;
     abstract cimShowForms: () => Promise<string[]>;
     abstract cimStartForm: (formKey: string, userInputs: {}[]) => Promise<any>;
     abstract cimTickets: () => Promise<ServiceTicket[]>;
@@ -226,6 +228,14 @@ export class CustomApiClient extends CustomApiClientInterface {
 
     cimStartForm = (formKey: string, userInputs: {}[]): Promise<{ id: string }> => {
         return this.postPutJson(prefix_cim_dev_uri("surf/cim/forms/" + formKey), userInputs, "post", false, true);
+    };
+
+    showForms = (): Promise<string[]> => {
+        return this.fetchJson("surf/forms");
+    };
+
+    startForm = (formKey: string, userInputs: {}[]): Promise<{ id: string }> => {
+        return this.postPutJson("surf/forms/" + formKey, userInputs, "post", false, true);
     };
 
     cimCreateTicket = (ticket: CreateServiceTicketPayload): Promise<{ id: string }> => {

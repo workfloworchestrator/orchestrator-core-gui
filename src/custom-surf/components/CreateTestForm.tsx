@@ -26,10 +26,10 @@ interface IProps {
     handleSubmit: (userInputs: any) => void;
 }
 
-export default function CreateForm(props: IProps) {
+export default function CreateTestForm(props: IProps) {
     const intl = useIntl();
     const { preselectedInput, formKey, handleSubmit } = props;
-    const { products, redirect, customApiClient } = useContext(ApplicationContext);
+    const { redirect, customApiClient } = useContext(ApplicationContext);
     const [form, setForm] = useState<Form>({});
     const { stepUserInput, hasNext } = form;
 
@@ -39,7 +39,7 @@ export default function CreateForm(props: IProps) {
             // Todo: decide if we want to implement pre-selections and design a way to do it generic
             //     userInputs = [{ preselectedInput }, ...userInputs];
             // }
-            const promise = customApiClient.cimStartForm(formKey, userInputs).then(
+            const promise = customApiClient.startForm(formKey, userInputs).then(
                 (form) => {
                     handleSubmit(form);
                     setFlash(intl.formatMessage({ id: `cim.flash.${formKey}` }));
@@ -66,7 +66,7 @@ export default function CreateForm(props: IProps) {
                 });
             });
         }
-    }, [formKey, products, submit, preselectedInput, intl, customApiClient]);
+    }, [formKey, submit, preselectedInput, intl, customApiClient]);
 
     return (
         <div>

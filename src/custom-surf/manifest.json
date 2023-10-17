@@ -63,6 +63,13 @@
             "file": "CloseServiceTicket",
             "component": "CloseServiceTicket",
             "showInMenu": false
+        },
+        {
+            "name": "form-test",
+            "path": "pages",
+            "file": "FormTest",
+            "component": "FormTest",
+            "showInMenu": false
         }
     ],
     "disabledRoutes": ["/YOUR_DISABLED_ROUTE_HERE"],
