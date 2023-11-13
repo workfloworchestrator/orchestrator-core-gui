@@ -20,7 +20,7 @@ const pingintervalInMilliseconds = 30000;
 const websocketSettings: Options = {
     retryOnError: true,
     reconnectAttempts: 10,
-    reconnectInterval: 3000,
+    reconnectInterval: 10000,
     shouldReconnect: (closeEvent: any) => {
         console.log(closeEvent);
         return true;
@@ -45,9 +45,17 @@ const useWebsocketServiceWithAuth = <T extends object>(endpoint: string): SurfWe
     }, [baseUrl, auth.userData?.access_token]);
 
     useEffect(() => {
-        const pingInterval = setInterval(() => sendMessage(pingMessage), pingintervalInMilliseconds);
-        return () => clearInterval(pingInterval);
-    }, [sendMessage]);
+        let pingInterval: NodeJS.Timeout | undefined = undefined;
+
+        if (readyState === ReadyState.OPEN) {
+            pingInterval = setInterval(() => sendMessage(pingMessage), pingintervalInMilliseconds);
+        } else {
+            pingInterval && clearInterval(pingInterval);
+            pingInterval = undefined;
+        }
+
+        return () => pingInterval && clearInterval(pingInterval);
+    }, [sendMessage, readyState]);
 
     useEffect(() => {
         if (lastMessage && lastMessage.data === "__pong__") {
@@ -64,17 +72,21 @@ const useWebsocketServiceWithoutAuth = <T extends object>(endpoint: string): Sur
     const [useFallback, setUsefallback] = useState<boolean>(false);
 
     useEffect(() => {
-        if (readyState === ReadyState.CLOSED) {
-            setUsefallback(true);
-        } else {
-            setUsefallback(false);
-        }
+        setUsefallback(readyState === ReadyState.CLOSED);
     }, [readyState]);
 
     useEffect(() => {
-        const pingInterval = setInterval(() => sendMessage(pingMessage), pingintervalInMilliseconds);
-        return () => clearInterval(pingInterval);
-    }, [sendMessage]);
+        let pingInterval: NodeJS.Timeout | undefined = undefined;
+
+        if (readyState === ReadyState.OPEN) {
+            pingInterval = setInterval(() => sendMessage(pingMessage), pingintervalInMilliseconds);
+        } else {
+            pingInterval && clearInterval(pingInterval);
+            pingInterval = undefined;
+        }
+
+        return () => pingInterval && clearInterval(pingInterval);
+    }, [sendMessage, readyState]);
 
     useEffect(() => {
         if (lastMessage && lastMessage.data === "__pong__") {
