@@ -40,8 +40,8 @@ export default function CreateForm(props: IProps) {
             //     userInputs = [{ preselectedInput }, ...userInputs];
             // }
             const promise = customApiClient.cimStartForm(formKey, userInputs).then(
-                (form) => {
-                    handleSubmit(form);
+                async (form) => {
+                    await handleSubmit(form);
                     setFlash(intl.formatMessage({ id: `cim.flash.${formKey}` }));
                 },
                 (e) => {

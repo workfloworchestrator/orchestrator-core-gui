@@ -24,14 +24,16 @@ import ApplicationContext from "utils/ApplicationContext";
 export default function CreateServiceTicket() {
     const { redirect, customApiClient } = useContext(ApplicationContext);
 
-    const handleSubmit = (userInputs: any) => {
+    const handleSubmit = async (userInputs: any) => {
         const ticket: CreateServiceTicketPayload = {
             ims_pw_id: userInputs.ims_ticket.name,
             jira_ticket_id: userInputs.jira_ticket.ticket_id,
             title_nl: userInputs.jira_ticket.summary,
             type: userInputs.ticket_type,
         };
-        customApiClient.cimCreateTicket(ticket).then((_) => redirect("/tickets"));
+        return customApiClient.cimCreateTicket(ticket).then((_) => {
+            redirect("/tickets");
+        });
     };
 
     return (
