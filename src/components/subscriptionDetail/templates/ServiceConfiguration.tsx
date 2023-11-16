@@ -98,6 +98,7 @@ export function RenderServiceConfiguration({
         const fields = Object.entries(instance)
             .filter(([key]) => !["label", "subscription_instance_id", "name"].includes(key))
             .filter(([key, value]) => (key === "owner_subscription_id" ? value !== subscription_id : true))
+            .filter(([key, value]) => key !== "in_use_by_relations")
             .map<[string, any]>(([key, value]) => {
                 return isArray(value) ? [key, value] : [key, [value]];
             });
