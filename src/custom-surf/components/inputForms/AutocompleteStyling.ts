@@ -8,7 +8,6 @@ export const autocompleteStyling = css`
     }
 
     section.autocomplete {
-        position: absolute;
         z-index: 2000;
         top: 100%;
         width: 100%;
