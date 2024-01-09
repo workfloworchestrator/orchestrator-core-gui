@@ -12,7 +12,7 @@ export const autocompleteStyling = css`
         top: 100%;
         width: 100%;
         border-radius: ${SIZE_BORDER_RADIUS};
-        background-color: #787878;
+        background-color: #e0e0e0;
         margin-bottom: 25px;
 
         div.no-results {
