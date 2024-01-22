@@ -112,7 +112,8 @@ function Select({
                         name={name}
                         onChange={(option) => {
                             if (!readOnly) {
-                                onChange(option?.value);
+                                // @ts-ignore
+                                onChange(option?.value ?? null);
                             }
                         }}
                         styles={customStyles}
