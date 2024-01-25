@@ -6,6 +6,7 @@ import VlanField from "custom/uniforms/VlanField";
 import {
     AcceptField,
     BoolField,
+    CustomerField,
     DateField,
     DividerField,
     LabelField,
@@ -59,6 +60,8 @@ export function autoFieldFunction(props: GuaranteedProps<unknown> & Record<strin
                     return LocationCodeField;
                 case "organisationId":
                     return OrganisationField;
+                case "customerId":
+                    return CustomerField;
                 case "contactPersonName":
                     return ContactPersonNameField;
                 case "vlan":
