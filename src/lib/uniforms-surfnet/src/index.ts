@@ -43,4 +43,5 @@ export { default as SummaryField } from "lib/uniforms-surfnet/src/SummaryField";
 
 export { default as LocationCodeField } from "lib/uniforms-surfnet/src/logic/LocationCodeField";
 export { default as OrganisationField } from "lib/uniforms-surfnet/src/logic/OrganisationField";
+export { default as CustomerField } from "lib/uniforms-surfnet/src/logic/CustomerField";
 export { default as ProductField } from "lib/uniforms-surfnet/src/logic/ProductField";
