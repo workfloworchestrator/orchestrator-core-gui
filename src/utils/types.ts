@@ -168,6 +168,7 @@ export interface IpPrefixSubscription extends Subscription {
 
 export interface ServicePortSubscription extends Subscription {
     port_mode?: string;
+    title?: string;
 }
 
 export interface ServicePort {
