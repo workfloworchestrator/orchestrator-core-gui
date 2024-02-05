@@ -1,6 +1,7 @@
 import {
     AcceptField,
     BoolField,
+    CustomerField,
     DateField,
     DividerField,
     LabelField,
@@ -44,6 +45,8 @@ export function autoFieldFunction(props: GuaranteedProps<unknown> & Record<strin
                     return ProductField;
                 case "locationCode":
                     return LocationCodeField;
+                case "customerId":
+                    return CustomerField;
                 case "organisationId":
                     return OrganisationField;
                 case "long":

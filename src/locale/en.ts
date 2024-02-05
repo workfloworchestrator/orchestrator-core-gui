@@ -107,6 +107,9 @@ I18n.translations.en = {
             organisation: {
                 placeholder: "Search and select a customer...",
             },
+            customer: {
+                placeholder: "Search and select a customer...",
+            },
             product: {
                 placeholder: "Search and select a product...",
             },

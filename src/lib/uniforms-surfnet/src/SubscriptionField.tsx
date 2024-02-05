@@ -33,8 +33,8 @@ import { filterProductsByBandwidth } from "validations/Products";
 import { subscriptionFieldStyling } from "./SubscriptionFieldStyling";
 
 export function makeLabel(subscription: iSubscription, products: Product[], organisations?: Organization[]) {
-    const organisation = organisations && organisations.find((org) => org.uuid === subscription.customer_id);
-    const organisationName = organisation ? organisation.name : subscription.customer_id.substring(0, 8);
+    const customer = organisations && organisations.find((org) => org.uuid === subscription.customer_id);
+    const customerName = customer ? customer.name : subscription.customer_id.substring(0, 8);
     const product = subscription.product || productById(subscription.product_id!, products);
     const description =
         subscription.description || intl.formatMessage({ id: "forms.widgets.subscription.missingDescription" });
@@ -47,7 +47,7 @@ export function makeLabel(subscription: iSubscription, products: Product[], orga
     } else if (["SP", "SPNL", "AGGSP", "AGGSPNL", "MSC", "MSCNL", "IRBSP"].includes(product.tag)) {
         let portSubscription = subscription as ServicePortSubscription;
         const portMode = getPortMode(portSubscription, products);
-        return `${subscription_substring} ${portMode.toUpperCase()} ${description.trim()} ${organisationName}`;
+        return `${subscription_substring} ${portMode.toUpperCase()} ${description.trim()} ${customerName}`;
     } else {
         return description.trim();
     }
@@ -62,6 +62,8 @@ export function getPortMode(subscription: ServicePortSubscription, products: Pro
 declare module "uniforms" {
     interface FilterDOMProps {
         excludedSubscriptionIds: never;
+        customerId: never;
+        customerKey: never;
         organisationId: never;
         organisationKey: never;
         visiblePortMode: never;
@@ -74,6 +76,8 @@ declare module "uniforms" {
 filterDOMProps.register(
     "productIds",
     "excludedSubscriptionIds",
+    "customerId",
+    "customerKey",
     "organisationId",
     "organisationKey",
     "visiblePortMode",
@@ -88,6 +92,8 @@ export type SubscriptionFieldProps = FieldProps<
     {
         productIds?: string[];
         excludedSubscriptionIds?: string[];
+        customerId?: string;
+        customerKey?: string;
         organisationId?: string;
         organisationKey?: string;
         visiblePortMode?: string;
@@ -117,6 +123,8 @@ function Subscription({
     className = "",
     productIds,
     excludedSubscriptionIds,
+    customerId,
+    customerKey,
     organisationId,
     organisationKey,
     visiblePortMode = "all",
@@ -128,6 +136,13 @@ function Subscription({
     intl,
     ...props
 }: SubscriptionFieldProps) {
+    if (organisationId) {
+        customerId = organisationId;
+    }
+    if (organisationKey) {
+        customerKey = organisationKey;
+    }
+
     const { theme, organisations, products: allProducts, apiClient, customApiClient } = useContext(ApplicationContext);
     const { getSubscriptions, clearSubscriptions } = useContext(SubscriptionsContext);
 
@@ -154,10 +169,8 @@ function Subscription({
 
     const usedBandwidth = bandwidth || bandwithFromField;
 
-    // Get value from org field if organisationKey is set.
-    const usedOrganisationId = organisationKey
-        ? get(model, organisationKey, "nonExistingOrgToFilterEverything")
-        : organisationId;
+    // Get value from org field if customerKey is set.
+    const usedOrganisationId = customerKey ? get(model, customerKey, "nonExistingOrgToFilterEverything") : customerId;
 
     const filteredProductIds = useMemo(() => {
         let products = allProducts;
