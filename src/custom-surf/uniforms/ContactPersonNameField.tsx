@@ -25,15 +25,20 @@ import ApplicationContext from "utils/ApplicationContext";
 import { ContactPerson } from "utils/types";
 import { stop } from "utils/Utils";
 
-export type ContactPersonNameFieldProps = FieldProps<string, { organisationId?: string; organisationKey?: string }>;
+export type ContactPersonNameFieldProps = FieldProps<
+    string,
+    { customerId?: string; customerKey?: string; organisationId?: string; organisationKey?: string }
+>;
 
 declare module "uniforms" {
     interface FilterDOMProps {
-        organisationId: never;
-        organisationKey: never;
+        customerId: never;
+        customerKey: never;
+        organistionId: never;
+        organistionKey: never;
     }
 }
-filterDOMProps.register("organisationId", "organisationKey");
+filterDOMProps.register("customerId", "customerKey", "organistionId", "organistionKey");
 
 function ContactPersonName({
     disabled,
@@ -49,10 +54,19 @@ function ContactPersonName({
     error,
     showInlineError,
     errorMessage,
+    customerId,
+    customerKey,
     organisationId,
     organisationKey,
     ...props
 }: ContactPersonNameFieldProps) {
+    if (organisationId) {
+        customerId = organisationId;
+    }
+    if (organisationKey) {
+        customerKey = organisationKey;
+    }
+
     const intl = useIntl();
     const { customApiClient } = useContext(ApplicationContext);
     const { model, onChange: formOnChange, schema } = useForm();
@@ -67,19 +81,17 @@ function ContactPersonName({
     const useFieldName = contactsPersonFieldNameArray.length ? contactsFieldName : name;
     const contactsField = useField(useFieldName, {}, { absoluteName: true })[0];
 
-    const organisationFieldName = organisationKey || contactsField.field.organisationKey || "organisation";
+    const customerFieldName = customerKey || contactsField.field.customerKey || "customer_id";
 
     // Get initial value for org field if it exists (we cant really test)
-    let organisationInitialValue;
+    let customerInitialValue;
     try {
-        organisationInitialValue = schema.getInitialValue(organisationFieldName, {});
+        customerInitialValue = schema.getInitialValue(customerFieldName, {});
     } catch {
-        organisationInitialValue = "";
+        customerInitialValue = "";
     }
-    const organisationIdValue =
-        organisationId ||
-        contactsField.field.organisationId ||
-        get(model, organisationFieldName, organisationInitialValue);
+    const customerIdValue =
+        customerId || contactsField.field.customerId || get(model, customerFieldName, customerInitialValue);
 
     let [displayAutocomplete, setDisplayAutocomplete] = useState(false);
     let [contactPersons, setContactPersons] = useState<ContactPerson[]>([]);
@@ -92,12 +104,12 @@ function ContactPersonName({
         : [];
 
     useEffect(() => {
-        if (organisationIdValue) {
-            customApiClient.contacts(organisationIdValue).then((contactPersons) => {
+        if (customerIdValue) {
+            customApiClient.contacts(customerIdValue).then((contactPersons) => {
                 setContactPersons(contactPersons);
             });
         }
-    }, [organisationIdValue, customApiClient]);
+    }, [customerIdValue, customApiClient]);
 
     useEffect(() => {
         // Set focus to the last name component to be created
