@@ -47,6 +47,9 @@ export function makeLabel(subscription: iSubscription, products: Product[], orga
     } else if (["SP", "SPNL", "AGGSP", "AGGSPNL", "MSC", "MSCNL", "IRBSP"].includes(product.tag)) {
         let portSubscription = subscription as ServicePortSubscription;
         const portMode = getPortMode(portSubscription, products);
+        if (portSubscription.title) {
+            return `${subscription_substring} - ${description.trim()} - ${portSubscription.title.trim()}`;
+        }
         return `${subscription_substring} ${portMode.toUpperCase()} ${description.trim()} ${customerName}`;
     } else {
         return description.trim();
