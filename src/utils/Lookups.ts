@@ -1,3 +1,5 @@
+import { intl } from "locale/i18n";
+import moment from "moment-timezone";
 /*
  * Copyright 2019-2023 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,13 +49,35 @@ export function productById(id: string, products: Product[]): Product {
 }
 
 export function renderDateTime(epoch: number) {
-    // Todo: locale should be configurable for GPL
-    return isEmpty(epoch) ? "" : new Date(epoch * 1000).toLocaleString("nl-NL");
+    // Convert timestamp to ISO8601-like format.
+    // Example:
+    //   2023-07-12 15:16:32 CEST
+    if (!epoch) {
+        return "";
+    }
+    // get milliseconds for unix timestamp
+    const time = moment(epoch * 1000);
+    // get timezone from translations object
+    const timezone = intl.formatMessage({ id: "locale.timezone" });
+    const format = "y-MM-DD HH:mm:ss z";
+
+    return time.tz(timezone).format(format);
 }
 
 export function renderDate(epoch: number) {
-    // Todo: locale should be configurable for GPL
-    return isEmpty(epoch) ? "" : new Date(epoch * 1000).toLocaleDateString("nl-NL");
+    // Convert timestamp to ISO8601 Date string
+    // Example:
+    //   2023-07-12
+    if (!epoch) {
+        return "";
+    }
+    // get milliseconds for unix timestamp
+    const time = moment(epoch * 1000);
+    // get timezone from translations object
+    const timezone = intl.formatMessage({ id: "locale.timezone" });
+    const format = "y-MM-DD";
+
+    return time.tz(timezone).format(format);
 }
 
 export function capitalize(s: string) {
