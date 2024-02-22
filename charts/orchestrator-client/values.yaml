@@ -9,7 +9,7 @@ image:
   setTag: true
   tag: latest
   secrets:
-    - name: gitlab-registry-orchestrator-client
+    - name: gitlab-registry
 
 configMapName: "orchestrator-client-configuration"
 
