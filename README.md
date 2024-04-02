@@ -1,4 +1,4 @@
-# :warning: This project is nolonger maintained. It will be archived in the near future. Please migrate to the new [frontend](https://github.com/workfloworchestrator/orchestrator-ui-library) :warning:
+# :warning: This project is nolonger maintained. Please migrate to the new [frontend](https://github.com/workfloworchestrator/orchestrator-ui-library) :warning:
 
 
 
